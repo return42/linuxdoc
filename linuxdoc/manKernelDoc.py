@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0330, R0903, R0912, C0410
 
 u"""
     kernel-doc-man
@@ -59,7 +58,8 @@ u"""
 # imports
 # ==============================================================================
 
-import sys, re, collections
+import re
+import collections
 from os import path
 
 from docutils.io import FileOutput
@@ -67,15 +67,15 @@ from docutils.frontend import OptionParser
 from docutils import nodes
 from docutils.utils import new_document
 from docutils.parsers.rst import Directive
+from docutils.transforms import Transform
 
 from sphinx import addnodes
 from sphinx.util.nodes import inline_all_toctrees
-from sphinx.util.console import bold, darkgreen
+from sphinx.util.console import bold, darkgreen     # pylint: disable=E0611
 from sphinx.writers.manpage import ManualPageWriter
 
 from sphinx.builders.manpage import ManualPageBuilder
 
-from docutils.transforms import Transform
 
 from .kernel_doc import Container
 
@@ -88,14 +88,6 @@ DEFAULT_MAN_SECT  = 9
 # The version numbering follows numbering of the specification
 # (Documentation/books/kernel-doc-HOWTO).
 __version__  = '1.0'
-
-PY3 = sys.version_info[0] == 3
-PY2 = sys.version_info[0] == 2
-
-if PY3:
-    # pylint: disable=C0103, W0622
-    unicode     = str
-    basestring  = str
 
 # ==============================================================================
 def setup(app):
@@ -333,14 +325,22 @@ class KernelDocManBuilder(ManualPageBuilder):
     def init(self):
         pass
 
-    def is_manpage(self, node):
+    def is_manpage(self, node):               # pylint: disable=R0201
         if isinstance(node, nodes.section):
             return bool(Section2Manpage.getFirstChild(
             node, kernel_doc_man) is not None)
         else:
             return False
 
-    def get_partial_document(self, children):
+    def prepare_writing(self, docnames):
+        """A place where you can add logic before :meth:`write_doc` is run"""
+        pass
+
+    def write_doc(self, docname, doctree):
+        """Where you actually write something to the filesystem."""
+        pass
+
+    def get_partial_document(self, children): # pylint: disable=R0201
         doc_tree =  new_document('<output>')
         doc_tree += children
         return doc_tree

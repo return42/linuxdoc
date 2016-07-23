@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0330, R0903, R0912
+# pylint: disable=R0912
 
 u"""
     flat-table
@@ -42,8 +41,6 @@ u"""
 # imports
 # ==============================================================================
 
-import sys
-
 from docutils import nodes
 from docutils.parsers.rst import directives, roles
 from docutils.parsers.rst.directives.tables import Table
@@ -57,14 +54,6 @@ from docutils.utils import SystemMessagePropagation
 # (Documentation/books/kernel-doc-HOWTO).
 __version__  = '1.0'
 
-PY3 = sys.version_info[0] == 3
-PY2 = sys.version_info[0] == 2
-
-if PY3:
-    # pylint: disable=C0103, W0622
-    unicode     = str
-    basestring  = str
-
 # ==============================================================================
 def setup(app):
 # ==============================================================================
@@ -74,9 +63,8 @@ def setup(app):
     roles.register_local_role('rspan', r_span)
 
 # ==============================================================================
-def c_span(name, rawtext, text, lineno, inliner, options=None, content=None):
+def c_span(_name, _rawtext, text, _lineno, _inliner, options=None, content=None):
 # ==============================================================================
-    # pylint: disable=W0613
 
     options  = options if options is not None else {}
     content  = content if content is not None else []
@@ -85,9 +73,8 @@ def c_span(name, rawtext, text, lineno, inliner, options=None, content=None):
     return nodelist, msglist
 
 # ==============================================================================
-def r_span(name, rawtext, text, lineno, inliner, options=None, content=None):
+def r_span(_name, _rawtext, text, _lineno, _inliner, options=None, content=None):
 # ==============================================================================
-    # pylint: disable=W0613
 
     options  = options if options is not None else {}
     content  = content if content is not None else []
@@ -97,8 +84,10 @@ def r_span(name, rawtext, text, lineno, inliner, options=None, content=None):
 
 
 # ==============================================================================
-class rowSpan(nodes.General, nodes.Element): pass # pylint: disable=C0103,C0321
-class colSpan(nodes.General, nodes.Element): pass # pylint: disable=C0103,C0321
+class rowSpan(nodes.General, nodes.Element): # pylint: disable=C0103
+    pass
+class colSpan(nodes.General, nodes.Element): # pylint: disable=C0103
+    pass
 # ==============================================================================
 
 # ==============================================================================
@@ -186,7 +175,7 @@ class ListTableBuilder(object):
             tbody += self.buildTableRowNode(row)
         return table
 
-    def buildTableRowNode(self, row_data, classes=None):
+    def buildTableRowNode(self, row_data, classes=None): # pylint: disable=R0201
         classes = [] if classes is None else classes
         row = nodes.row()
         for cell in row_data:
@@ -289,7 +278,7 @@ class ListTableBuilder(object):
                     cspan, rspan, content = row[-1]
                     row[-1] = (cspan + x, rspan, content)
             elif x and fill_cells:
-                for i in range(x):
+                for _i in range(x):
                     row.append( (0, 0, nodes.comment()) )
 
     def pprint(self):
@@ -347,7 +336,7 @@ class ListTableBuilder(object):
             row.append( (cspan, rspan, cellElements) )
         return row
 
-    def parseCellItem(self, cellItem):
+    def parseCellItem(self, cellItem): # pylint: disable=R0201
         # search and remove cspan, rspan colspec from the first element in
         # this listItem (field).
         cspan = rspan = 0

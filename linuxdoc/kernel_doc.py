@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable= C0330, C0103, C0410, R0903, R0913, R0912, R0914, R0915, C0302
+# pylint: disable=C0103,C0302,R0912,R0914,R0915
 
 u"""
     kernel_doc
@@ -61,8 +61,16 @@ u"""
 # imports
 # ==============================================================================
 
-import sys, os, argparse, codecs, collections, textwrap
-import re, copy
+import argparse
+import codecs
+import collections
+import copy
+import os
+import re
+import sys
+import textwrap
+
+from fspath import OS_ENV
 
 # ==============================================================================
 # common globals
@@ -76,7 +84,6 @@ PY3 = sys.version_info[0] == 3
 PY2 = sys.version_info[0] == 2
 
 if PY3:
-    # pylint: disable=C0103, W0622
     unicode     = str
     basestring  = str
 
@@ -266,21 +273,13 @@ def readFile(fname, encoding="utf-8", errors="strict"):
         return f.read()
 
 class Container(dict):
-    # pylint: disable=C0321
     @property
-    def __dict__(self):               return self
-    def __getattr__(self, attr):      return self[attr]
-    def __setattr__(self, attr, val): self[attr] = val
-
-class OS_ENV(dict):
-    # pylint: disable=C0321
-    @property
-    def __dict__(self):                return os.environ
-    def __getattr__(self, attr):       return os.environ[attr]
-    def __setattr__(self, attr, val):  os.environ[attr] = val
-    def get(self, attr, default=None): return os.environ.get(attr, default)
-
-OS_ENV = OS_ENV()
+    def __dict__(self):
+        return self
+    def __getattr__(self, attr):
+        return self[attr]
+    def __setattr__(self, attr, val):
+        self[attr] = val
 
 KBUILD_VERBOSE = int(OS_ENV.get("KBUILD_VERBOSE", "0"))
 KERNELVERSION  = OS_ENV.get("KERNELVERSION", "unknown kernel version")
@@ -432,6 +431,7 @@ def main():
         opts.set_defaults()
 
         if CMD.list_exports or CMD.list_internals:
+            # pylint: disable=R0204
             translator = ListTranslator(CMD.list_exports, CMD.list_internals)
             opts.gather_context = True
 
@@ -634,16 +634,25 @@ class NullTranslator(TranslatorAPI):
     """
     HIGHLIGHT_MAP = []
     LINE_COMMENT = ("", "")
-    # pylint: disable=C0321
-    def output_preamble(self, *args, **kwargs):      pass
-    def output_epilog(self, *args, **kwargs):        pass
-    def output_DOC(self, *args, **kwargs):   pass
-    def output_function_decl(self, *args, **kwargs): pass
-    def output_struct_decl(self, *args, **kwargs):   pass
-    def output_union_decl(self, *args, **kwargs):    pass
-    def output_enum_decl(self, *args, **kwargs):     pass
-    def output_typedef_decl(self, *args, **kwargs):  pass
-    def eof(self):                                   pass
+
+    def output_preamble(self, *args, **kwargs):
+        pass
+    def output_epilog(self, *args, **kwargs):
+        pass
+    def output_DOC(self, *args, **kwargs):
+        pass
+    def output_function_decl(self, *args, **kwargs):
+        pass
+    def output_struct_decl(self, *args, **kwargs):
+        pass
+    def output_union_decl(self, *args, **kwargs):
+        pass
+    def output_enum_decl(self, *args, **kwargs):
+        pass
+    def output_typedef_decl(self, *args, **kwargs):
+        pass
+    def eof(self):
+        pass
 
 # ------------------------------------------------------------------------------
 class ListTranslator(TranslatorAPI):
@@ -956,8 +965,6 @@ class ReSTTranslator(TranslatorAPI):
                 , sec_level = 3
                 , ID = function + "." + header)
 
-        # INSPECT and CONSOLE() # pylint: disable=W0106
-
     def output_struct_decl(
             self
             , decl_name        = None # ctx.decl_name
@@ -1046,8 +1053,6 @@ class ReSTTranslator(TranslatorAPI):
                 , sec_level = 3
                 , ID = decl_name + "." + header)
 
-        # INSPECT and CONSOLE() # pylint: disable=W0106
-
     def output_enum_decl(
             self
             , enum             = None # ctx.decl_name
@@ -1110,8 +1115,6 @@ class ReSTTranslator(TranslatorAPI):
                 , sec_level = 3
                 , ID = enum + "." + header)
 
-        # INSPECT and CONSOLE() # pylint: disable=W0106
-
     def output_typedef_decl(
             self
             , typedef          = None # ctx.decl_name
@@ -1138,9 +1141,6 @@ class ReSTTranslator(TranslatorAPI):
                 , content or "???"
                 , sec_level = 3
                 , ID = typedef + "." + header)
-
-        # INSPECT and CONSOLE() # pylint: disable=W0106
-
 
 # ------------------------------------------------------------------------------
 class ParseOptions(Container):
@@ -1260,10 +1260,8 @@ class ParseOptions(Container):
 
     def add_filters(self, parse_options):
 
-        # pylint: disable=W0613, W0603
-
-        def setINSPECT(name, val):
-            global INSPECT
+        def setINSPECT(name, val): # pylint: disable=W0613
+            global INSPECT         # pylint: disable=W0603
             INSPECT = bool(val == "on")
 
         _actions = dict(
@@ -1617,7 +1615,7 @@ class Parser(SimpleLog):
             self.warn("total errors: %(errors)s / total warnings: %(warnings)s"
                       , errors=self.errors, warnings=self.warnings)
             self.warnings -= 1
-        global INSPECT
+        global INSPECT # pylint: disable=W0603
         INSPECT = False
 
     def feed(self, data, eof=False):
@@ -1656,7 +1654,7 @@ class Parser(SimpleLog):
             state = getattr(self, "state_%s" % self.state)
             try:
                 state(l)
-            except Exception as exc:
+            except Exception as _exc:
                 self.warn("total errors: %(errors)s / warnings: %(warnings)s"
                            , errors=self.errors, warnings=self.warnings)
                 self.warnings -= 1
@@ -2073,7 +2071,7 @@ class Parser(SimpleLog):
         if TP_PROTO.search(prototype):
             tp_args = TP_PROTO[0]
 
-        if (not tp_name.strip() or not tp_args.strip()):
+        if not tp_name.strip() or not tp_args.strip():
             self.warn("Unrecognized tracepoint format: %(prototype)s"
                       , prototype=prototype)
         else:
@@ -2730,8 +2728,8 @@ class Parser(SimpleLog):
 # ==============================================================================
 
 def CONSOLE(arround=5, frame=None):
+    # pylint: disable=C0321,C0410
     import inspect, code, linecache
-    # pylint: disable=C0321
     sys.stderr.flush()
     sys.stdout.flush()
 

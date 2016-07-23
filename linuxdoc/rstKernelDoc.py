@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0330, R0903, R0914, R0912, R0915
+# pylint: disable=R0912,R0915
 
 u"""
     rstKernelDoc
@@ -160,15 +159,19 @@ u"""
 # imports
 # ==============================================================================
 
-import sys
 import glob
 from os import path
 from io import StringIO
+
+import six
+
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
 from docutils.utils import SystemMessage
 from docutils.statemachine import ViewList
+
 from sphinx.ext.autodoc import AutodocReporter
+
 from . import kernel_doc as kerneldoc
 
 # ==============================================================================
@@ -178,14 +181,6 @@ from . import kernel_doc as kerneldoc
 # The version numbering follows numbering of the specification
 # (Documentation/books/kernel-doc-HOWTO).
 __version__  = '1.0'
-
-PY3 = sys.version_info[0] == 3
-PY2 = sys.version_info[0] == 2
-
-if PY3:
-    # pylint: disable=C0103, W0622
-    unicode     = str
-    basestring  = str
 
 PARSER_CACHE = dict()
 
@@ -385,7 +380,7 @@ class KernelDoc(Directive):
         return opts
 
     def errMsg(self, msg):
-        msg = unicode(msg)
+        msg = six.text_type(msg)
         error = self.state_machine.reporter.error(
             msg
             , nodes.literal_block(self.block_text, self.block_text)
@@ -426,6 +421,7 @@ class KernelDoc(Directive):
 
     def run(self):
 
+        # pylint: disable=W0201
         self.parser = None
         self.doc    = self.state.document
         self.env    = self.doc.settings.env
@@ -483,7 +479,7 @@ class KernelDoc(Directive):
                 lines = code_block + "\n\n"
 
         else:
-            self.parser.options.out = content
+            self.parser.options.out = content  # pylint: disable=R0204
             self.parser.parse_dump_storage(translator=translator)
 
         # check translation
@@ -546,6 +542,6 @@ class WriterList(ViewList):
         self.line_buffer += cont
 
     def flush(self):
-        for i, l in enumerate(self.line_buffer.split("\n")):
+        for _i, l in enumerate(self.line_buffer.split("\n")):
             self.append(l, self.parser.options.fname, self.last_offset)
         self.line_buffer = ""

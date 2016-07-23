@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=R0903, C0330, R0914, R0912, E0401
-
+# pylint: disable=R0914,R0912,R0915
 u"""
     kernel-include
     ~~~~~~~~~~~~~~
@@ -50,6 +49,14 @@ class KernelInclude(Include):
 # ==============================================================================
 
     u"""KernelInclude (``kernel-include``) directive"""
+
+    def prepare_writing(self, docnames):
+        """A place where you can add logic before :meth:`write_doc` is run"""
+        pass
+
+    def write_doc(self, docname, doctree):
+        """Where you actually write something to the filesystem."""
+        pass
 
     def run(self):
         path = os.path.realpath(
