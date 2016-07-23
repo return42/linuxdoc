@@ -1,8 +1,11 @@
 # -*- coding: utf-8; mode: makefile-gmake -*-
 
-PYTHON ?= python3
-PYLINT ?= pylint3
-PIP    ?= pip3
+PYTHON   ?= python3
+PYLINT   ?= pylint3
+PIP      ?= pip3
+
+PYDIST  = py_dist
+PYBUILD = py_build
 
 # ------------------------------------------------------------------------------
 # requirements
@@ -46,12 +49,12 @@ endif
 # commands
 # ------------------------------------------------------------------------------
 
-quiet_cmd_pybuild     = BUILD     $@
-      cmd_pybuild     = $(PYTHON) setup.py build
-
 # $2 path to folder with setup.py
 quiet_cmd_pyinstall   = INSTALL   $@
-      cmd_pyinstall   = $(PIP) install -r requirements.txt --user -v -e $2
+      cmd_pyinstall   = $(PIP) install --user -e $2
+
+# Uninstall the package. Since pip does not uninstall the no longer needed
+# depencies (something like autoremove) the depencies remain.
 
 # $2 package name to uninstall
 quiet_cmd_pyuninstall = UNINSTALL $@
@@ -64,4 +67,43 @@ quiet_cmd_pylint      = LINT      $@
 quiet_cmd_test        = TEST      $@
       cmd_test        = cd tests; $(PYTHON) run.py -I py35 -d -m '^[tT]est' $(TEST)
 
+# setuptools, pip, easy_install its a mess full of cracks, a documentation hell
+# and broken by design ... all sucks, I really, really hate all this ... aaargh!
 
+# sdist: https://packaging.python.org/distributing/#source-distributions
+# bdist_wheel: https://packaging.python.org/distributing/#pure-python-wheels
+quiet_cmd_pybuild     = BUILD     $@
+      cmd_pybuild     = $(PYTHON) setup.py \
+			sdist -d $(PYDIST)  \
+			bdist_wheel --bdist-dir $(PYBUILD) -d $(PYDIST)
+
+quiet_cmd_pyclean     = CLEAN     $@
+# remove 'build' folder since bdist_wheel does not care the --bdist-dir
+      cmd_pyclean     = \
+	rm -rf $(PYDIST) build *.egg-info          ;\
+	find . -name '*.pyc' -exec rm -f {} +      ;\
+	find . -name '*.pyo' -exec rm -f {} +      ;\
+	find . -name __pycache__ -exec rm -rf {} +
+
+PHONY += pybuild pyclean upload-pypi
+pybuild:
+	$(call cmd,pybuild)
+
+pyclean:
+	$(call cmd,pyclean)
+
+# With 'dependency_links=' setuptools supports dependencies on packages hosted
+# on other reposetories then PyPi, see "Packages Not On PyPI" [1].  The big
+# drawback is, due to security reasons (I don't know where the security gate on
+# PyPi is), this feature is not supported by pip [2]. Thats why an upload to
+# PyPi is required and since uploads via setuptools is not recommended, we have
+# to imstall / use twine ... its really a mess.
+#
+# [1] http://python-packaging.readthedocs.io/en/latest/dependencies.html#packages-not-on-pypi
+# [2] https://github.com/pypa/pip/pull/1519
+
+# https://github.com/pypa/twine
+upload-pypi: pyclean pybuild
+	twine upload $(PYDIST)/*
+
+.PHONY: $(PHONY)

@@ -4,7 +4,6 @@ include utils/makefile.include
 include utils/makefile.python
 include utils/makefile.sphinx
 
-PHONY   =
 GIT_URL = https://github.com/return42/linuxdoc.git
 
 DOCS_DIST = gh-pages
@@ -29,7 +28,7 @@ help-rqmts: msg-sphinx-builder msg-pylint-exe msg-pip-exe
 PHONY += help
 help:
 	@echo  '  un/install	- install/uninstall project in editable mode'
-	@echo  '  build		- build packages'
+	@echo  '  pybuild	- build python packages'
 	@echo  '  docs		- build documentation'
 	@echo  '  clean		- remove most generated files'
 	@echo  '  pylint	- run pylint *linting*'
@@ -41,12 +40,9 @@ help:
 	@echo  '  make PYTHON=python2 use special python interpreter'
 
 
-quiet_cmd_clean = CLEAN  $@
+quiet_cmd_clean = CLEAN     $@
       cmd_clean = \
-	rm -rf build tests/build ;\
-	find . -name '*.pyc' -exec rm -f {} +      ;\
-	find . -name '*.pyo' -exec rm -f {} +      ;\
-	find . -name __pycache__ -exec rm -rf {} + ;\
+	rm -rf tests/build ;\
 	find . -name '*.orig' -exec rm -f {} +     ;\
 	find . -name '*.rej' -exec rm -f {} +      ;\
 	find . -name '*~' -exec rm -f {} +         ;\
@@ -58,10 +54,6 @@ install: pip-exe
 uninstall: pip-exe
 	$(call cmd,pyuninstall,linuxdoc)
 
-PHONY += build
-build:
-	$(call cmd,pybuild)
-
 PHONY += docs
 docs:  sphinx-builder
 	$(call cmd,sphinx,html,docs,docs)
@@ -71,7 +63,7 @@ docs-clean:
 	$(call cmd,sphinx_clean)
 
 PHONY += clean
-clean: docs-clean
+clean: docs-clean pyclean
 	$(call cmd,clean)
 
 PHONY += pylint

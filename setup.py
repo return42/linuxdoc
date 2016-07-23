@@ -21,7 +21,6 @@ setup(
     , keywords         = "linux kernel-doc"
     , packages         = find_packages(exclude=['docs', 'tests'])
     , install_requires = install_requires
-    , dependency_links = dependency_links
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     , classifiers = [
