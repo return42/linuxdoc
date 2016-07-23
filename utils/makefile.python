@@ -1,0 +1,67 @@
+# -*- coding: utf-8; mode: makefile-gmake -*-
+
+PYTHON ?= python3
+PYLINT ?= pylint3
+PIP    ?= pip3
+
+# ------------------------------------------------------------------------------
+# requirements
+# ------------------------------------------------------------------------------
+
+PHONY += msg-pylint-exe pylint-exe
+
+msg-pylint-exe:
+	@echo "\n  $(PYLINT) is required\n\n\
+  Make sure you have an updated pylint installed, grab it from\n\
+  https://www.pylint.org or install it from your package\n\
+  manager. On debian based OS these requirements are\n\
+  installed by::\n\n\
+    sudo apt-get install pylint\n" | $(FMT)
+
+ifeq ($(shell which $(PYLINT) >/dev/null 2>&1; echo $$?), 1)
+pylint-exe: msg-pylint-exe
+	$(error The '$(PYLINT)' command was not found)
+else
+pylint-exe:
+	@:
+endif
+
+msg-pip-exe:
+	@echo "\n  $(PIP) is required\n\n\
+  Make sure you have an updated pip installed, grab it from\n\
+  https://pip.pypa.io or install it from your package\n\
+  manager. On debian based OS these requirements are\n\
+  installed by::\n\n\
+    sudo apt-get install pip\n" | $(FMT)
+
+ifeq ($(shell which $(PIP) >/dev/null 2>&1; echo $$?), 1)
+pip-exe: msg-pip-exe
+	$(error The '$(PIP)' command was not found)
+else
+pip-exe:
+	@:
+endif
+
+# ------------------------------------------------------------------------------
+# commands
+# ------------------------------------------------------------------------------
+
+quiet_cmd_pybuild     = BUILD     $@
+      cmd_pybuild     = $(PYTHON) setup.py build
+
+# $2 path to folder with setup.py
+quiet_cmd_pyinstall   = INSTALL   $@
+      cmd_pyinstall   = $(PIP) install -r requirements.txt --user -v -e $2
+
+# $2 package name to uninstall
+quiet_cmd_pyuninstall = UNINSTALL $@
+      cmd_pyuninstall = $(PIP) uninstall $2
+
+# $2 path to lint
+quiet_cmd_pylint      = LINT      $@
+      cmd_pylint      = $(PYLINT) --rcfile utils/pylintrc $2
+
+quiet_cmd_test        = TEST      $@
+      cmd_test        = cd tests; $(PYTHON) run.py -I py35 -d -m '^[tT]est' $(TEST)
+
+
