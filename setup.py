@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8; mode: python -*-
 
+# http://python-packaging.readthedocs.io
+
 from setuptools import setup, find_packages
 import linuxdoc
 
 install_requires = [
     'fspath' ]
-
-dependency_links=[
-    'git+http://github.com/return42/fspath.git' ]
 
 setup(
     name               = "linuxdoc"
