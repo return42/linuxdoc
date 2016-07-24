@@ -4,6 +4,14 @@ make-help:
 	@echo  '  make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build'
 	@echo  '  make V=2   [targets] 2 => give reason for rebuild of target'
 
+quiet_cmd_common_clean = CLEAN     $@
+      cmd_common_clean = \
+	rm -rf tests/build ;\
+	find . -name '*.orig' -exec rm -f {} +     ;\
+	find . -name '*.rej' -exec rm -f {} +      ;\
+	find . -name '*~' -exec rm -f {} +         ;\
+	find . -name '*.bak' -exec rm -f {} +      ;\
+
 FMT = cat
 ifeq ($(shell which fmt >/dev/null 2>&1; echo $$?), 0)
 FMT = fmt

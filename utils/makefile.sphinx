@@ -1,10 +1,16 @@
 # -*- coding: utf-8; mode: makefile-gmake -*-
 
 # You can set these variables from the command line.
-SPHINXOPTS   =
-SPHINXBUILD  = sphinx-build
-DOCS_BUILD   = build/docs
-DOCS_DIST    = dist/docs
+SPHINXOPTS  ?=
+SPHINXBUILD ?= sphinx-build
+DOCS_BUILD  ?= build/docs
+GH_PAGES    ?= gh-pages
+DOCS_DIST   ?= $(GH_PAGES)
+
+docs-help:
+	@echo  'makefile.docs:'
+	@echo  '  docs-clean	- clean intermediate doc objects'
+	@echo  '  $(GH_PAGES)	- create & upload github pages'
 
 # ------------------------------------------------------------------------------
 # requirements
@@ -13,7 +19,7 @@ DOCS_DIST    = dist/docs
 PHONY += msg-sphinx-doc sphinx-doc
 
 msg-sphinx-doc:
-	@echo "\n  sphinx-doc isrequired\n\n\
+	@echo "\n  sphinx-doc is required\n\n\
   Make sure you have an updated Sphinx installed, grab it from\n\
   http://sphinx-doc.org or install it from the python package\n\
   manager (pip). On debian based OS these requirements are\n\
@@ -45,4 +51,27 @@ quiet_cmd_sphinx = SPHINX  $@ --> file://$(abspath $(DOCS_DIST)/$5)
 quiet_cmd_sphinx_clean = CLEAN     $@
       cmd_sphinx_clean = rm -rf $(DOCS_BUILD) $(DOCS_DIST)
 
+# ------------------------------------------------------------------------------
+# targets
+# ------------------------------------------------------------------------------
+
+PHONY += sphinx-clean
+docs-clean:
+	$(call cmd,sphinx_clean)
+
+$(GH_PAGES):
+	git clone $(GIT_URL) $(GH_PAGES)
+	cd $(GH_PAGES);\
+		git push origin :gh-pages ;\
+		git checkout --orphan gh-pages;\
+		git rm -rf .
+	$(call cmd,sphinx,html,docs,docs)
+	cd $(GH_PAGES);\
+	        touch .nojekyll ;\
+		git add --all . ;\
+		git commit -m "gh-pages: updated" ;\
+		git push origin gh-pages
+
+
 .PHONY: $(PHONY)
+

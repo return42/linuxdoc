@@ -1,24 +1,29 @@
 # -*- coding: utf-8; mode: makefile-gmake -*-
 
 # list of python packages (folders) or modules (files) of this build
-PYOBJECTS  =
+PYOBJECTS ?=
+
 # folder where the python distribution takes place
-PYDIST     ?= py_dist
+PYDIST   ?= py_dist
 # folder where the python intermediate build files take place
-PYBUILD    ?= py_build
+PYBUILD  ?= py_build
 # python version to use
 PY       ?=3
 PYTHON   ?= python$(PY)
 PIP      ?= pip$(PY)
-PYLINT   ?= pylint$(PY)
+PYLINT   ?= pylint
 
 python-help::
 	@echo  'makefile.python:'
-	@echo  '  pylint	- run pylint *linting*'
-	@echo  '  pybuild	- build python packages'
+	@echo  '  pylint        - run pylint *linting*'
+	@echo  '  pytest	- run nose test on python objects'
+	@echo  '  pybuild       - build python packages'
+	@echo  '  pyclean       - clean intermediate python objects'
+	@echo  '  py[un]install - [un]install python objects in editable mode'
+	@echo  '  upload-pypi   - upload $(PYDIST)/* files to PyPi'
 	@echo  ''
 	@echo  '  make PY=2  [targets] => to eval targets with python 2 (default 3)'
-	@echo  '  make PYLINT=pylint   => to use pylint (default pylint$(PY))'
+	@echo  '  make PYLINT=pylint3  => to use pylint3 (default is standard pylint)'
 
 
 # ------------------------------------------------------------------------------
@@ -33,7 +38,7 @@ msg-pylint-exe:
   https://www.pylint.org or install it from your package\n\
   manager. On debian based OS these requirements are\n\
   installed by::\n\n\
-    sudo apt-get install pylint\n" | $(FMT)
+    sudo apt-get install pylint$(PY)\n" | $(FMT)
 
 ifeq ($(shell which $(PYLINT) >/dev/null 2>&1; echo $$?), 1)
 pylint-exe: msg-pylint-exe
@@ -49,7 +54,7 @@ msg-pip-exe:
   https://pip.pypa.io or install it from your package\n\
   manager. On debian based OS these requirements are\n\
   installed by::\n\n\
-    sudo apt-get install pip\n" | $(FMT)
+    sudo apt-get install python$(PY)-pip\n" | $(FMT)
 
 ifeq ($(shell which $(PIP) >/dev/null 2>&1; echo $$?), 1)
 pip-exe: msg-pip-exe
@@ -78,8 +83,8 @@ quiet_cmd_pyuninstall = UNINSTALL $@
 quiet_cmd_pylint      = LINT      $@
       cmd_pylint      = $(PYLINT) --rcfile utils/pylintrc $2
 
-quiet_cmd_test        = TEST      $@
-      cmd_test        = cd tests; $(PYTHON) run.py -I py35 -d -m '^[tT]est' $(TEST)
+quiet_cmd_pytest      = TEST      $@
+      cmd_pytest      = cd tests; $(PYTHON) run.py -I py35 -d -m '^[tT]est' $(TEST)
 
 # setuptools, pip, easy_install its a mess full of cracks, a documentation hell
 # and broken by design ... all sucks, I really, really hate all this ... aaargh!
@@ -107,12 +112,22 @@ PHONY += pybuild pyclean upload-pypi
 pybuild:
 	$(call cmd,pybuild)
 
+PHONY += pytest
+pytest:
+	$(call cmd,pytest)
+
 pyclean:
 	$(call cmd,pyclean)
 
 PHONY += pylint
 pylint: pylint-exe
 	$(call cmd,pylint,$(PYOBJECTS))
+
+PHONY += pyinstall pyuninstall
+pyinstall: pip-exe
+	$(call cmd,pyinstall,.)
+pyuninstall: pip-exe
+	$(call cmd,pyuninstall,$(PYOBJECTS))
 
 
 # With 'dependency_links=' setuptools supports dependencies on packages hosted
