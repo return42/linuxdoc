@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=R0912,R0915
+# pylint: disable=R0912,R0914,R0915
 
 u"""
     rstKernelDoc

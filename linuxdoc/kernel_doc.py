@@ -67,6 +67,8 @@ import re
 import sys
 import textwrap
 
+import six
+
 from fspath import OS_ENV
 
 # ==============================================================================
@@ -76,13 +78,6 @@ from fspath import OS_ENV
 # The version numbering follows numbering of the specification
 # (Documentation/books/kernel-doc-HOWTO).
 __version__  = '1.0'
-
-PY3 = sys.version_info[0] == 3
-PY2 = sys.version_info[0] == 2
-
-if PY3:
-    unicode     = str
-    basestring  = str
 
 # ==============================================================================
 # regular expresssions and helper used by the parser and the translator
@@ -550,13 +545,13 @@ class TranslatorAPI(object):
             content to write.
         """
         for obj in objects:
-            cont = unicode(obj)
+            cont = six.text_type(obj)
             self.options.out.write(cont)
 
     def write_comment(self, *objects):
         u"""Write *objects* as comments to stream."""
         for obj in objects:
-            cont = unicode(obj)
+            cont = six.text_type(obj)
             self.write(self.comment(cont))
 
     def eof(self):
@@ -1412,9 +1407,9 @@ class Parser(SimpleLog):
     Split Doc States:
 
     * 0 - Invalid (Before start or after finish)
-    * 1 - Is started (the /\*\* was found inside a struct)
+    * 1 - Is started (the /\\*\\* was found inside a struct)
     * 2 - The @parameter header was found, start accepting multi paragraph text.
-    * 3 - Finished (the \*/ was found)
+    * 3 - Finished (the \\*/ was found)
     * 4 - Error: Comment without header was found. Spit a error as it's not
           proper kernel-doc and ignore the rest.
     """
@@ -2773,4 +2768,3 @@ if __name__ == "__main__":
 else:
     # FIXME: just for testing
     __builtins__["CONSOLE"] = CONSOLE
-

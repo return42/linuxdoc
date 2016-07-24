@@ -116,9 +116,10 @@ class KernelInclude(Include):
         startline = self.options.get('start-line', None)
         endline = self.options.get('end-line', None)
         try:
+            rawtext = u''
             if startline or (endline is not None):
                 lines = include_file.readlines()
-                rawtext = ''.join(lines[startline:endline])
+                rawtext = u''.join(lines[startline:endline])
             else:
                 rawtext = include_file.read()
         except UnicodeError as error:
