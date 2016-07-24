@@ -26,20 +26,21 @@ u"""
 
         $ sphinx-build -b kernel-doc-man
 
-    rest-Markup entry (e.g):
+    rest-Markup entry (e.g)::
 
         .. kernel-doc-man::  manpage-name.9
 
-
-    Since the ``kernel-doc-man`` is an extension of the common sphinx *man*
-    builder [2]_, it is also a full replacement, building booth, the common
-    sphinx man-pages and those marked with the ``.. kernel-doc-man::``
-    directive.
+    Since the ``kernel-doc-man`` is an extension of the common `sphinx *man*
+    builder
+    <http://www.sphinx-doc.org/en/stable/config.html#confval-man_pages>`_, it is
+    also a full replacement, building booth, the common sphinx man-pages and
+    those marked with the ``.. kernel-doc-man::`` directive.
 
     Mostly authors will use this feature in their reST documents in conjunction
-    with the ``.. kernel-doc::`` directive [1]_, to create man pages from
-    kernel-doc comments.  This could be done, by setting the man section number
-    with the option ``man-sect``, e.g.::
+    with the ``.. kernel-doc::`` :ref:`directive
+    <kernel-doc:kernel-doc-directive>`, to create man pages from kernel-doc
+    comments.  This could be done, by setting the man section number with the
+    option ``man-sect``, e.g.::
 
       .. kernel-doc:: include/linux/debugobjects.h
           :man-sect: 9
@@ -48,9 +49,6 @@ u"""
     With this ``:man-sect: 9`` option, the kernel-doc parser will insert a
     ``.. kernel-doc-man:: <declaration-name>.<man-sect no>`` directive in the
     reST output, for every section describing a function, union etc.
-
-    _[1] http://return42.github.io/sphkerneldoc/books/kernel-doc-HOWTO/kernel-doc-directive.html
-    _[2] http://www.sphinx-doc.org/en/stable/config.html#confval-man_pages
 
 """
 

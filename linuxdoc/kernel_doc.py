@@ -12,7 +12,7 @@ u"""
     :license:    GPL Version 2, June 1991 see linux/COPYING for details.
 
     The kernel-doc parser extracts documention from linux kernel's source code
-    comments. This implements the kernel-doc-HOWTO [1]_.
+    comments. This implements the :ref:`kernel-doc:kernel-doc-HOWTO`.
 
     This module provides an API -- which could be used by a sphinx-doc generator
     extension -- and a commandline interface, see ``--help``::
@@ -52,9 +52,6 @@ u"""
     (e.g. with the ReSTTranslator) and the option container.
 
     With parsing the source files only once, the building time is reduced n-times.
-
-    .. [1] http://return42.github.io/sphkerneldoc/books/kernel-doc-HOWTO
-
 """
 
 # ==============================================================================
@@ -474,8 +471,8 @@ class TranslatorAPI(object):
     u"""
     Abstract kernel-doc translator.
 
-    :cvar list HIGHLIGHT_MAP:  highlight mapping
-    :cvar tuple LINE_COMMENT:  tuple with start-/end- comment tags
+    :cvar list cls.HIGHLIGHT_MAP:  highlight mapping
+    :cvar tuple cls.LINE_COMMENT:  tuple with start-/end- comment tags
     """
 
     HIGHLIGHT_MAP = [
@@ -549,7 +546,7 @@ class TranslatorAPI(object):
 
         Write unicode-values of the *objects* to :py:attr:``self.options.out``.
 
-        :param *objects: The positional arguments are the objects with the
+        :param objects: The positional arguments are the objects with the
             content to write.
         """
         for obj in objects:
@@ -1415,9 +1412,9 @@ class Parser(SimpleLog):
     Split Doc States:
 
     * 0 - Invalid (Before start or after finish)
-    * 1 - Is started (the /** was found inside a struct)
+    * 1 - Is started (the /\*\* was found inside a struct)
     * 2 - The @parameter header was found, start accepting multi paragraph text.
-    * 3 - Finished (the */ was found)
+    * 3 - Finished (the \*/ was found)
     * 4 - Error: Comment without header was found. Spit a error as it's not
           proper kernel-doc and ignore the rest.
     """
@@ -1538,7 +1535,7 @@ class Parser(SimpleLog):
         * ``MODULE_DESCRIPTION("...")``: A concatenated string in
           :py:attr:`ParserContext.mod_descr`
 
-        * ``MODULE_LICENSE``("..."): String with comma seprated licences in
+        * ``MODULE_LICENSE("...")``: String with comma seprated licences in
           :py:attr:`ParserContext.mod_license`.
 
         .. hint::

@@ -107,6 +107,8 @@ u"""
 
     An other example is to use only one function description.
 
+    .. code-block:: rst
+
         .. kernel-doc::  include/media/i2c/tvp7002.h
             :functions:  tvp7002_config
             :module:     tvp7002

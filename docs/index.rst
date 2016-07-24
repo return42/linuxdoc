@@ -40,3 +40,10 @@ Source Code Documentation
 
    linuxdoc/linuxdoc
 
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
