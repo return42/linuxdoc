@@ -4,6 +4,7 @@
 
 import re
 import linuxdoc
+import sphinx_rtd_theme
 
 master_doc = 'index'
 templates_path = ['_templates']
@@ -27,3 +28,9 @@ extensions = [
     , 'sphinx.ext.viewcode'
     , 'sphinx.ext.intersphinx'
 ]
+
+html_theme = "sphinx_rtd_theme"
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+intersphinx_mapping = {}
+intersphinx_mapping['kernel-doc'] = ('http://return42.github.io/sphkerneldoc/books/kernel-doc-HOWTO/', None)
