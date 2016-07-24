@@ -412,7 +412,7 @@ class KernelDoc(Directive):
 
         if parser is None:
             self.env.note_dependency(opts.fname)
-            self.env.app.info("parse kernel-doc comments from: %s" % opts.fname)
+            #self.env.app.info("parse kernel-doc comments from: %s" % opts.fname)
             parser = KernelDocParser(self.env.app, opts, kerneldoc.NullTranslator())
             parser.parse()
             PARSER_CACHE[opts.fname] = parser
