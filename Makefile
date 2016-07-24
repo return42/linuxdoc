@@ -5,6 +5,7 @@ include utils/makefile.python
 include utils/makefile.sphinx
 
 GIT_URL = https://github.com/return42/linuxdoc.git
+PYOBJECTS = linuxdoc
 
 DOCS_DIST = gh-pages
 $(DOCS_DIST):
@@ -23,22 +24,20 @@ $(DOCS_DIST):
 all: clean docs build pylint
 
 PHONY += help-rqmts
-help-rqmts: msg-sphinx-builder msg-pylint-exe msg-pip-exe
+help-rqmts: msg-sphinx-doc msg-pylint-exe msg-pip-exe
 
 PHONY += help
 help:
+	@echo  'Makefile:'
 	@echo  '  un/install	- install/uninstall project in editable mode'
-	@echo  '  pybuild	- build python packages'
 	@echo  '  docs		- build documentation'
 	@echo  '  clean		- remove most generated files'
-	@echo  '  pylint	- run pylint *linting*'
 	@echo  '  test		- run nose test'
 	@echo  '  help-rqmts 	- info about build requirements'
 	@echo  ''
-	@echo  '  make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build'
-	@echo  '  make V=2   [targets] 2 => give reason for rebuild of target'
-	@echo  '  make PYTHON=python2 use special python interpreter'
-
+	@$(MAKE) -s -f utils/makefile.include make-help
+	@echo  ''
+	@$(MAKE) -s -f utils/makefile.python python-help
 
 quiet_cmd_clean = CLEAN     $@
       cmd_clean = \
@@ -55,7 +54,7 @@ uninstall: pip-exe
 	$(call cmd,pyuninstall,linuxdoc)
 
 PHONY += docs
-docs:  sphinx-builder
+docs:  sphinx-doc
 	$(call cmd,sphinx,html,docs,docs)
 
 PHONY += docs-clean
@@ -65,10 +64,6 @@ docs-clean:
 PHONY += clean
 clean: docs-clean pyclean
 	$(call cmd,clean)
-
-PHONY += pylint
-pylint: pylint-exe
-	$(call cmd,pylint,linuxdoc)
 
 PHONY += test
 test:

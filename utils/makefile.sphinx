@@ -10,9 +10,9 @@ DOCS_DIST    = dist/docs
 # requirements
 # ------------------------------------------------------------------------------
 
-PHONY += msg-sphinx-builder sphinx-builder
+PHONY += msg-sphinx-doc sphinx-doc
 
-msg-sphinx-builder:
+msg-sphinx-doc:
 	@echo "\n  sphinx-doc isrequired\n\n\
   Make sure you have an updated Sphinx installed, grab it from\n\
   http://sphinx-doc.org or install it from the python package\n\
@@ -22,10 +22,10 @@ msg-sphinx-builder:
     pip install Sphinx\n" | $(FMT)
 
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
-sphinx-builder: msg-sphinx-builder
+sphinx-doc: msg-sphinx-doc
 	$(error The '$(SPHINXBUILD)' command was not found)
 else
-sphinx-builder:
+sphinx-doc:
 	@:
 endif
 

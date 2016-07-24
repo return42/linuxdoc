@@ -1,5 +1,9 @@
 # -*- coding: utf-8; mode: makefile-gmake -*-
 
+make-help:
+	@echo  '  make V=0|1 [targets] 0 => quiet build (default), 1 => verbose build'
+	@echo  '  make V=2   [targets] 2 => give reason for rebuild of target'
+
 FMT = cat
 ifeq ($(shell which fmt >/dev/null 2>&1; echo $$?), 0)
 FMT = fmt

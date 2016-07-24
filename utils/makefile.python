@@ -1,11 +1,25 @@
 # -*- coding: utf-8; mode: makefile-gmake -*-
 
-PYTHON   ?= python3
-PYLINT   ?= pylint3
-PIP      ?= pip3
+# list of python packages (folders) or modules (files) of this build
+PYOBJECTS  =
+# folder where the python distribution takes place
+PYDIST     ?= py_dist
+# folder where the python intermediate build files take place
+PYBUILD    ?= py_build
+# python version to use
+PY       ?=3
+PYTHON   ?= python$(PY)
+PIP      ?= pip$(PY)
+PYLINT   ?= pylint$(PY)
 
-PYDIST  = py_dist
-PYBUILD = py_build
+python-help::
+	@echo  'makefile.python:'
+	@echo  '  pylint	- run pylint *linting*'
+	@echo  '  pybuild	- build python packages'
+	@echo  ''
+	@echo  '  make PY=2  [targets] => to eval targets with python 2 (default 3)'
+	@echo  '  make PYLINT=pylint   => to use pylint (default pylint$(PY))'
+
 
 # ------------------------------------------------------------------------------
 # requirements
@@ -85,12 +99,21 @@ quiet_cmd_pyclean     = CLEAN     $@
 	find . -name '*.pyo' -exec rm -f {} +      ;\
 	find . -name __pycache__ -exec rm -rf {} +
 
+# ------------------------------------------------------------------------------
+# targets
+# ------------------------------------------------------------------------------
+
 PHONY += pybuild pyclean upload-pypi
 pybuild:
 	$(call cmd,pybuild)
 
 pyclean:
 	$(call cmd,pyclean)
+
+PHONY += pylint
+pylint: pylint-exe
+	$(call cmd,pylint,$(PYOBJECTS))
+
 
 # With 'dependency_links=' setuptools supports dependencies on packages hosted
 # on other reposetories then PyPi, see "Packages Not On PyPI" [1].  The big
