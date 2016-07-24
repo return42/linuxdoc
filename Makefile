@@ -11,9 +11,9 @@ all: clean pylint pytest build docs
 
 PHONY += help
 help:
-	@echo  '  docs            - build documentation'
-	@echo  '  clean           - remove most generated files'
-	@echo  '  rqmts           - info about build requirements'
+	@echo  '  docs	- build documentation'
+	@echo  '  clean	- remove most generated files'
+	@echo  '  rqmts	- info about build requirements'
 	@echo  ''
 	@$(MAKE) -s -f utils/makefile.include make-help
 	@echo  ''
