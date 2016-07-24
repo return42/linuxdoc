@@ -22,6 +22,12 @@ setup(
     , packages         = find_packages(exclude=['docs', 'tests'])
     , install_requires = install_requires
 
+    , entry_points={
+        'console_scripts': [
+            'kernel-doc = linuxdoc.kernel_doc:main'
+            , ]
+        , }
+
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     , classifiers = [
         "Development Status :: 5 - Production/Stable"
