@@ -1,5 +1,7 @@
 .. -*- coding: utf-8; mode: rst -*-
 
+.. include:: refs.txt
+
 ========
 LinuxDoc
 ========
@@ -13,18 +15,27 @@ LinuxDoc
 * reposetory:    `github return42/fspath <https://github.com/return42/linuxdoc>`_
 * Author e-mail: *markus.heiser*\ *@*\ *darmarIT.de*
 
+Examples which use the linuxdoc lib to extract kernel-doc comments and build
+HTML documentation:
+
+* http://return42.github.io/sphkerneldoc/
+* http://return42.github.io/sphkerneldoc/linux_src_doc/index.html
+
+
 Installing
 ==========
 
-Install bleading edge::
+Install bleading edge.::
 
   pip install [--user] git+http://github.com/return42/linuxdoc.git
 
-Update regualar with::
+As the linuxdoc lib constantly evolving, an update should be carried out
+regularly.::
 
   pip install --upgrade git+http://github.com/return42/linuxdoc.git
 
-If you are a developer, fork on github or clone and install::
+If you are a developer and like to contribute to the linuxdoc lib, fork on
+github or clone and make a developer install::
 
   git clone https://github.com/return42/linuxdoc
   cd linuxdoc
@@ -34,11 +45,28 @@ If you are a developer, fork on github or clone and install::
 Linux Kernel Documentation
 ==========================
 
-In the 4.8 kernel and beyond a sphinx-doc build is available, if you like to see
-how (fast) *linuxdoc* builds your kernel documentation, add the following patch
-to the ``conf.py``. The patch deactivates the sphinx extensions from the kernel
-source tree and activates linuxdoc sphinx extensions. Currently (Jul 2016) there
-is a dump "man_pages" setting wich has to be deactivated.
+Starting with Linux Kernel v4.8 a `sphinx-doc`_ build is available to build
+formats like HTML from reStructuredText (`reST`_) markup. E.g. with::
+
+  make IGNORE_DOCBOOKS=1 htmldocs
+
+the sphinx build produce a HTML representation of the reST files in and below
+``Documentation/``. The sphinx extensions for this build, which are shiped by
+the kernel source tree are placed in the ``Documentation/sphinx`` folder.
+
+If you like to see how (fast) *linuxdoc* builds your kernel documentation,
+install *linuxdoc*::
+
+  pip install [--user] git+http://github.com/return42/linuxdoc.git
+
+and add the following patch to the linux source tree:
+
+* :download:`linux docs-next patch <downloads/patch_linux.patch>`
+
+In the ``conf.py`` (`sphinx config`_), the patch deactivates the sphinx
+extensions from the kernel source tree and activates linuxdoc sphinx
+extensions. Currently (in Jul 2016) there is also a dump "man_pages" setting
+which must be disabled.
 
 .. code-block:: diff
 
@@ -98,9 +126,10 @@ is a dump "man_pages" setting wich has to be deactivated.
     +kernel_doc_raise_error = False
     +kernel_doc_mode = "reST"
 
-The next patch adds a list of TODO entries with kernel-doc *Oops*. The *Oops*
-entries are generated if the kernel-doc parser can't generate requested
-documentation. For more details see: :ref:`kernel-doc:kernel-doc-directive`.
+In the ``index.rst``, the patch adds a list of TODO entries with kernel-doc
+*Oops*. The *Oops* entries are generated if the kernel-doc parser can't generate
+requested documentation. For more details see:
+:ref:`kernel-doc:kernel-doc-directive`.
 
 .. code-block:: diff
 
@@ -114,8 +143,8 @@ documentation. For more details see: :ref:`kernel-doc:kernel-doc-directive`.
     +
      Nothing for you to see here *yet*. Please move along.
 
-To get in use of kernel-doc-man pages, apply the following diff to the
-Makefile.sphinx.
+In the ``Makefile.sphinx``, the patch adds a target to build man pages from
+kernel-doc comments.
 
 .. code-block:: diff
 
@@ -129,14 +158,14 @@ Makefile.sphinx.
      psdocs:
     +
      mandocs:
-    +	$(MAKE) BUILDDIR=$(BUILDDIR) -f $(srctree)/Documentation/media/Makefile htmldocs
-    +	$(call cmd,sphinx,kernel-doc-man)
+    +        $(MAKE) BUILDDIR=$(BUILDDIR) -f $(srctree)/Documentation/media/Makefile htmldocs
+    +	     $(call cmd,sphinx,kernel-doc-man)
     +
      installmandocs:
      cleanmediadocs:
 
 To get man pages from kernel-doc comments add the ``:man-sect:`` option to your
-kernel-doc directive::
+kernel-doc directives::
 
     .. kernel-doc:: drivers/media/dvb-core/dvb_math.h
        :man-sect: 9

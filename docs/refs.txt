@@ -1,0 +1,8 @@
+.. -*- coding: utf-8; mode: rst -*-
+..
+..  common hyperlink targets
+
+.. _`COPYING`: https://github.com/torvalds/linux/blob/master/COPYING
+.. _`reST`: http://www.sphinx-doc.org/en/stable/rest.html
+.. _`sphinx config`: http://www.sphinx-doc.org/en/stable/config.html
+.. _`sphinx-doc`: http://www.sphinx-doc.org/
