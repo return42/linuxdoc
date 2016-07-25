@@ -12,7 +12,7 @@ LinuxDoc
     :show-inheritance:
 
 * documentation: http://return42.github.io/linuxdoc
-* reposetory:    `github return42/fspath <https://github.com/return42/linuxdoc>`_
+* reposetory:    `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
 * Author e-mail: *markus.heiser*\ *@*\ *darmarIT.de*
 
 Examples which use the linuxdoc lib to extract kernel-doc comments and build
