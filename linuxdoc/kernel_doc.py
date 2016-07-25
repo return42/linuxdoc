@@ -333,10 +333,15 @@ def main():
 
     global VERBOSE, DEBUG # pylint: disable=W0603
 
+    epilog = (u"This implementation of uses the kernel-doc parser"
+              " from the linuxdoc extension, for detail informations read"
+              " http://return42.github.io/sphkerneldoc/books/kernel-doc-HOWTO")
+
     CLI = argparse.ArgumentParser(
         description = (
             "Parse *kernel-doc* comments from source code"
             " and print them (with reST markup) to stdout." )
+        , epilog = epilog
         , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     CLI.add_argument(

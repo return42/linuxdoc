@@ -41,6 +41,18 @@ github or clone and make a developer install::
   cd linuxdoc
   make install
 
+This will install the linuxdoc lib and the following commands:
+
+* ``kernel-lintdoc``: lint your kernel-doc comments
+
+* ``kernel-autodoc``: create a documentation tree with reST files from source
+  tree.
+
+* ``kernel-doc``: creat reST file from source code file (just for testing,
+  normally you use the kernel-doc directive in your documentation).
+
+On the command line, use ``kernel-<cmd> --help`` for details.
+
 
 Linux Kernel Documentation
 ==========================
@@ -169,6 +181,10 @@ kernel-doc directives::
 
     .. kernel-doc:: drivers/media/dvb-core/dvb_math.h
        :man-sect: 9
+
+To create man pages call the mandocs target::
+
+    make IGNORE_DOCBOOKS=1 mandocs
 
 
 Source Code Documentation

@@ -25,6 +25,8 @@ setup(
     , entry_points={
         'console_scripts': [
             'kernel-doc = linuxdoc.kernel_doc:main'
+            , 'kernel-autodoc = linuxdoc.autodoc:main'
+            , 'kernel-lintdoc = linuxdoc.lint:main'
             , ]
         , }
 
