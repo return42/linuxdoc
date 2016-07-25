@@ -17,7 +17,7 @@ u"""
     This module provides an API -- which could be used by a sphinx-doc generator
     extension -- and a commandline interface, see ``--help``::
 
-        $ scripts/site-python/linuxdoc/kernel_doc.py --help
+        $ kernel-doc --help
 
     But, the commandline is only for test, normaly you don't need it.
 
