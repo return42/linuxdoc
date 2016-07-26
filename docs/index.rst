@@ -13,7 +13,7 @@ LinuxDoc
 
 * documentation: http://return42.github.io/linuxdoc
 * reposetory:    `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
-* Author e-mail: *markus.heiser*\ *@*\ *darmarIT.de*
+* author e-mail: *markus.heiser*\ *@*\ *darmarIT.de*
 
 Examples which use the linuxdoc lib to extract kernel-doc comments and build
 HTML documentation:
@@ -25,11 +25,11 @@ HTML documentation:
 Installing
 ==========
 
-Install bleading edge.::
+Install bleeding edge.::
 
   pip install [--user] git+http://github.com/return42/linuxdoc.git
 
-As the linuxdoc lib constantly evolving, an update should be carried out
+As the linuxdoc lib evolving constantly, an update should be carried out
 regularly.::
 
   pip install --upgrade git+http://github.com/return42/linuxdoc.git
@@ -51,7 +51,15 @@ This will install the linuxdoc lib and the following commands:
 * ``kernel-doc``: creat reST file from source code file (just for testing,
   normally you use the kernel-doc directive in your documentation).
 
-On the command line, use ``kernel-<cmd> --help`` for details.
+On the command line, use ``kernel-<cmd> --help`` for details.  Below you see how
+to integrate the linuxdoc sphinx extensions into your sphinx build process. In
+the ``conf.py`` (`sphinx config`_) add the linuxdoc extensions:
+
+.. code-block:: python
+
+   extensions = [ 'linuxdoc.rstKernelDoc', 'linuxdoc.rstFlatTable'
+                  , 'linuxdoc.kernel_include', 'linuxdoc.manKernelDoc' ]
+
 
 
 Linux Kernel Documentation
@@ -62,12 +70,12 @@ formats like HTML from reStructuredText (`reST`_) markup. E.g. with::
 
   make IGNORE_DOCBOOKS=1 htmldocs
 
-the sphinx build produce a HTML representation of the reST files in and below
-``Documentation/``. The sphinx extensions for this build, which are shiped by
-the kernel source tree are placed in the ``Documentation/sphinx`` folder.
-
-If you like to see how (fast) *linuxdoc* builds your kernel documentation,
-install *linuxdoc*::
+the sphinx build produce a HTML representation of the reST files *in and below*
+the ``Documentation/`` folder. The sphinx extensions for this build, which are
+shipped by the kernel source tree, are placed in the ``Documentation/sphinx``
+folder.  If you like to see how (fast) the *linuxdoc* extensions build your
+kernel documentation, install *linuxdoc* and replace the extensions in the
+conf.py. In more detail ...::
 
   pip install [--user] git+http://github.com/return42/linuxdoc.git
 
@@ -77,7 +85,7 @@ and add the following patch to the linux source tree:
 
 In the ``conf.py`` (`sphinx config`_), the patch deactivates the sphinx
 extensions from the kernel source tree and activates linuxdoc sphinx
-extensions. Currently (in Jul 2016) there is also a dump "man_pages" setting
+extensions. At this time (in Jul 2016) there is also a dump "man_pages" setup
 which must be disabled.
 
 .. code-block:: diff
@@ -139,7 +147,7 @@ which must be disabled.
     +kernel_doc_mode = "reST"
 
 In the ``index.rst``, the patch adds a list of TODO entries with kernel-doc
-*Oops*. The *Oops* entries are generated if the kernel-doc parser can't generate
+*Oops*. A *Oops* entrie is generated when the kernel-doc parser can't parse
 requested documentation. For more details see:
 :ref:`kernel-doc:kernel-doc-directive`.
 
@@ -177,7 +185,9 @@ kernel-doc comments.
      cleanmediadocs:
 
 To get man pages from kernel-doc comments add the ``:man-sect:`` option to your
-kernel-doc directives::
+kernel-doc directives, e,g.
+
+.. code-block:: rst
 
     .. kernel-doc:: drivers/media/dvb-core/dvb_math.h
        :man-sect: 9
