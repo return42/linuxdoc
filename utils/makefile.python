@@ -70,7 +70,7 @@ endif
 
 # $2 path to folder with setup.py
 quiet_cmd_pyinstall   = INSTALL   $@
-      cmd_pyinstall   = $(PIP) install --user -e $2
+      cmd_pyinstall   = $(PIP) install -e $2
 
 # Uninstall the package. Since pip does not uninstall the no longer needed
 # depencies (something like autoremove) the depencies remain.

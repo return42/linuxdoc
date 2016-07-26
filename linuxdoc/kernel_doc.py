@@ -144,11 +144,11 @@ doc_sect_reST = RE(doc_com_section.pattern
                + r":(.*?)\s*$"    # this matches also strings like "http://..." (doc_sect_except)
                , flags = re.IGNORECASE)
 
-reST_sect = RE(doc_com_section.pattern
-               + r"("
-               r"\w[\w\s]+\w"
-               + r")"
-               + r":\s*$")
+#reST_sect = RE(doc_com_section.pattern
+#               + r"("
+#               r"\w[\w\s]+\w"
+#               + r")"
+#               + r":\s*$")
 
 doc_content      = RE(doc_com_body.pattern + r"(.*)")
 doc_block        = RE(doc_com.pattern + r"DOC:\s*(.*)?")
@@ -1777,10 +1777,10 @@ class Parser(SimpleLog):
                     # section "Context: lorem", "Return: lorem" etc.
                     new_sect = self.sect_title(doc_sect_reST[0].strip())
                     new_cont = doc_sect_reST[1].strip()
-                elif reST_sect.match(line):
-                    # this is a line with a section definition "Section name:\n"
-                    new_sect = self.sect_title(reST_sect[0].strip())
-                    new_cont = ""
+                #elif reST_sect.match(line):
+                #    # this is a line with a section definition "Section name:\n"
+                #    new_sect = self.sect_title(reST_sect[0].strip())
+                #    new_cont = ""
             else:  # kernel-doc vintage mode
                 if doc_sect.match(line):
                     # this is a line with a parameter or section definition
