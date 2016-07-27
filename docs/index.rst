@@ -48,7 +48,7 @@ This will install the linuxdoc lib and the following commands:
 * ``kernel-autodoc``: create a documentation tree with reST files from source
   tree.
 
-* ``kernel-doc``: creat reST file from source code file (just for testing,
+* ``kernel-doc``: create reST file from source code file (just for testing,
   normally you use the kernel-doc directive in your documentation).
 
 On the command line, use ``kernel-<cmd> --help`` for details.  Below you see how

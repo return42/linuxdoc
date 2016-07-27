@@ -15,11 +15,20 @@ help:
 	@echo  '  clean	- remove most generated files'
 	@echo  '  rqmts	- info about build requirements'
 	@echo  ''
+	@echo  '  install   - developer install'
+	@echo  '  uninstall - developer uninstall'
+	@echo  ''
 	@$(MAKE) -s -f utils/makefile.include make-help
 	@echo  ''
 	@$(MAKE) -s -f utils/makefile.python python-help
 	@echo  ''
 	@$(MAKE) -s -f utils/makefile.sphinx docs-help
+
+PHONY += install
+install: pyinstall
+
+PHONY += uninstall
+install: pyuninstall
 
 PHONY += docs
 docs:  sphinx-doc
