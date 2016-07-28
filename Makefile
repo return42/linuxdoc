@@ -28,7 +28,7 @@ PHONY += install
 install: pyinstall
 
 PHONY += uninstall
-install: pyuninstall
+uninstall: pyuninstall
 
 PHONY += docs
 docs:  sphinx-doc

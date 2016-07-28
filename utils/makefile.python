@@ -34,13 +34,29 @@ python-help::
 
 PHONY += msg-pylint-exe pylint-exe
 
+msg-python-exe:
+	@echo "\n  $(PYTHON) is required\n\n\
+  Make sure you have an $(PYTHON) installed, grab it from\n\
+  https://www.python.org or install it from your package\n\
+  manager. On debian based OS these requirements are\n\
+  installed by::\n\n\
+    sudo apt-get install $(PYTHON)\n" | $(FMT)
+
+ifeq ($(shell which $(PYTHON) >/dev/null 2>&1; echo $$?), 1)
+python-exe: msg-python-exe
+	$(error The '$(PYTHON)' command was not found)
+else
+python-exe:
+	@:
+endif
+
 msg-pylint-exe:
 	@echo "\n  $(PYLINT) is required\n\n\
   Make sure you have an updated pylint installed, grab it from\n\
   https://www.pylint.org or install it from your package\n\
   manager. On debian based OS these requirements are\n\
   installed by::\n\n\
-    sudo apt-get install pylint$(PY)\n" | $(FMT)
+    sudo apt-get install pylint\n" | $(FMT)
 
 ifeq ($(shell which $(PYLINT) >/dev/null 2>&1; echo $$?), 1)
 pylint-exe: msg-pylint-exe
@@ -111,14 +127,14 @@ quiet_cmd_pyclean     = CLEAN     $@
 # ------------------------------------------------------------------------------
 
 PHONY += pybuild pyclean upload-pypi
-pybuild:
+pybuild: python-exe
 	$(call cmd,pybuild)
 
 PHONY += pytest
-pytest:
+pytest: python-exe
 	$(call cmd,pytest)
 
-pyclean:
+pyclean: python-exe
 	$(call cmd,pyclean)
 
 PHONY += pylint

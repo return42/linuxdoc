@@ -55,7 +55,7 @@ quiet_cmd_sphinx_clean = CLEAN     $@
 # targets
 # ------------------------------------------------------------------------------
 
-PHONY += sphinx-clean
+PHONY += docs-clean
 docs-clean:
 	$(call cmd,sphinx_clean)
 
