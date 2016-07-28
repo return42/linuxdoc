@@ -15,11 +15,15 @@ LinuxDoc
 * reposetory:    `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
 * author e-mail: *markus.heiser*\ *@*\ *darmarIT.de*
 
-Examples which use the linuxdoc lib to extract kernel-doc comments and build
-HTML documentation:
+Examples which make use of the linuxdoc lib to extract kernel-doc comments and
+build HTML documentation:
 
 * http://return42.github.io/sphkerneldoc/
 * http://return42.github.io/sphkerneldoc/linux_src_doc/index.html
+
+Additional documentation:
+
+* :ref:`kernel-doc:kernel-doc-directive`
 
 
 Installing

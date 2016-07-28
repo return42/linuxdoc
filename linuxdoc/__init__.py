@@ -12,7 +12,10 @@ while linuxdoc brings a python module with a kernel-doc parser. With this, the
 documentation build becomes much more clear and flexible (and faster).
 
 :copyright:  Copyright (C) 2016 Markus Heiser
+:e-mail:     *markus.heiser*\ *@*\ *darmarIT.de*
 :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+:docs:       http://return42.github.io/linuxdoc
+:repository: `github return42/fspath <https://github.com/return42/linuxdoc>`_
 
 """
 

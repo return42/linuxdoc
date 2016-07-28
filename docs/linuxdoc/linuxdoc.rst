@@ -7,6 +7,7 @@ linuxdoc package
     :show-inheritance:
 
 .. toctree::
+   :maxdepth: 1
 
    linuxdoc.kernel_doc
    linuxdoc.kernel_include

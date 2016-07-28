@@ -19,9 +19,12 @@ documentation build becomes much more clear and flexible (and faster).
 If you like to see how (fast) *linuxdoc* builds your kernel documentation,
 follow the more detailed installation instruction in the documentation.
 
-* documentation: http://return42.github.io/linuxdoc
-* reposetory:    `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
-* author e-mail: *markus.heiser*\ *@*\ *darmarIT.de*
+:copyright:  Copyright (C) 2016 Markus Heiser
+:e-mail:     *markus.heiser*\ *@*\ *darmarIT.de*
+:license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+:docs:       http://return42.github.io/linuxdoc
+:repository: `github return42/fspath <https://github.com/return42/linuxdoc>`_
+
 
 Installing
 ==========
