@@ -9,9 +9,9 @@ u"""
     Implementation of the ``kernel-autodoc`` command.
 
     :copyright:  Copyright (C) 2016  Markus Heiser
-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
+    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
-    The ``kernel-autodoc`` command extracts documention from linux kernel's
+    The ``kernel-autodoc`` command extracts documentation from Linux kernel's
     source code comments, see ``--help``::
 
         $ kernel-autodoc --help
@@ -19,7 +19,7 @@ u"""
     .. note::
 
        The kernel-autodoc command is under construction, no stable release
-       yet. The commandline arguments might be changed/extended in the near
+       yet. The command line arguments might be changed/extended in the near
        future."""
 
 # ------------------------------------------------------------------------------

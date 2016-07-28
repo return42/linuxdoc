@@ -3,16 +3,16 @@ u"""
 The *linuxdoc* lib contains python extensions related to the build process of
 the Linux-Kernel documentation.
 
-It is a straight forward implementation in pure python (no perl script or other
+It is a straight forward implementation in pure python (no Perl script or other
 executable calls). Some of theses extensions are already a part of the kernel
 source others not (yet). E.g. the Sphinx-doc extensions ``flat-table`` and
 ``kernel-include`` are merged into the kernel source tree. On the other side,
-e.g. for parsing kernel-doc comments, the linux kernel build uses a perl scripts
+e.g. for parsing kernel-doc comments, the Linux kernel build uses a Perl scripts
 while linuxdoc brings a python module with a kernel-doc parser. With this, the
 documentation build becomes much more clear and flexible (and faster).
 
 :copyright:  Copyright (C) 2016 Markus Heiser
-:license:    GPL Version 2, June 1991 see linux/COPYING for details.
+:license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
 """
 

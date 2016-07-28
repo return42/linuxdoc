@@ -8,9 +8,9 @@ u"""
     Implementation of the ``kernel-doc`` reST-directive.
 
     :copyright:  Copyright (C) 2016  Markus Heiser
-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
+    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
-    The ``kernel-doc`` (:py:class:`KernelDoc`) directive includes contens from
+    The ``kernel-doc`` (:py:class:`KernelDoc`) directive includes contend from
     linux kernel source code comments.
 
     Here is a short overview of the options:
@@ -31,7 +31,7 @@ u"""
             :debug:
 
     The argument ``<src-filename>`` is required, it points to a source file in the
-    kernel source tree. The pathname is relativ to kernel's root folder.  The
+    kernel source tree. The pathname is relative to kernel's root folder.  The
     options have the following meaning, but be aware that not all combinations of
     these options make sense:
 
@@ -42,9 +42,9 @@ u"""
         The next option make only sense in conjunction with option ``doc``:
 
         ``no-header``
-            Do not output DOC: section's title. Usefull, if the surrounding context
+            Do not output DOC: section's title. Useful, if the surrounding context
             already has a heading, and the DOC: section title is only used as an
-            identifier. Take in mind, that this option will not supress any native
+            identifier. Take in mind, that this option will not suppress any native
             reST heading markup in the comment (:ref:`reST-section-structure`).
 
     ``export [<src-fname-pattern> [, ...]]``
@@ -89,12 +89,12 @@ u"""
             Set line numbers in the snippet code-block.
 
     ``debug``
-        Inserts a code-block with the generated reST source. This might somtimes
+        Inserts a code-block with the generated reST source. This might sometimes
         helpful to see how the kernel-doc parser transforms the kernel-doc markup to
         reST markup.
 
-    The following example shows how to insert documention from the source file
-    ``/drivers/gpu/drm/drm_drv.c``. In this example the documention from the
+    The following example shows how to insert documentation from the source file
+    ``/drivers/gpu/drm/drm_drv.c``. In this example the documentation from the
     ``DOC:`` section with the title "driver instance overview" and the
     documentation of all exported symbols (EXPORT_SYMBOL) is included in the
     reST tree.
@@ -113,7 +113,7 @@ u"""
             :functions:  tvp7002_config
             :module:     tvp7002
 
-    This will produce the follwing reST markup to include:
+    This will produce the following reST markup to include:
 
     .. code-block:: rst
 

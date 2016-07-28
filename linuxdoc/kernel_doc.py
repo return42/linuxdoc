@@ -9,20 +9,20 @@ u"""
     Implementation of the ``kernel-doc`` parser.
 
     :copyright:  Copyright (C) 2016  Markus Heiser
-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
+    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
-    The kernel-doc parser extracts documention from linux kernel's source code
+    The kernel-doc parser extracts documentation from Linux kernel's source code
     comments. This implements the :ref:`kernel-doc:kernel-doc-HOWTO`.
 
     This module provides an API -- which could be used by a sphinx-doc generator
-    extension -- and a commandline interface, see ``--help``::
+    extension -- and a command-line interface, see ``--help``::
 
         $ kernel-doc --help
 
-    But, the commandline is only for test, normaly you don't need it.
+    But, the command-line is only for test, normally you don't need it.
 
-    Compared with the perl kernel-doc script, this implementation has additional
-    features like *parse options* for a smooth integration of restructuredText
+    Compared with the Perl kernel-doc script, this implementation has additional
+    features like *parse options* for a smooth integration of reStructuredText
     (reST) markup in the kernel's source code comments. In addition, this
     rewrite brings the functionalities, which has been spread in *docproc* and
     make files (e.g. working with *EXPORTED_SYMBOLS*) back to the kernel-doc
@@ -33,7 +33,7 @@ u"""
     The architecture is simple and consists of three types of objects (three
     classes).
 
-    * class Parser: The parser parses the sourcefile and dumps extracted
+    * class Parser: The parser parses the source-file and dumps extracted
       kernel-doc data.
 
     * subclasses of class TranslatorAPI: to translate the dumped kernel-doc data
@@ -84,7 +84,7 @@ __version__  = '1.0'
 # ==============================================================================
 
 class RE(object):
-    u"""regexp that stores last match (like perl's ``=~`` operator)"""
+    u"""regular expression that stores last match (like Perl's ``=~`` operator)"""
 
     def __init__(self, *args, **kwargs):
         self.re = re.compile(*args, **kwargs)
@@ -544,7 +544,7 @@ class TranslatorAPI(object):
     def write(self, *objects):
         u"""Write *objects* to stream.
 
-        Write unicode-values of the *objects* to :py:attr:``self.options.out``.
+        Write Unicode-values of the *objects* to :py:attr:``self.options.out``.
 
         :param objects: The positional arguments are the objects with the
             content to write.
@@ -730,9 +730,9 @@ class ReSTTranslator(TranslatorAPI):
     u"""
     Translate kernel-doc to reST markup.
 
-    :cvar list HIGHLIGHT_map: Escape common reST (inline) markups.  Classic
+    :cvar list HIGHLIGHT_map: Escape common reST (in-line) markups.  Classic
         kernel-doc comments contain characters and strings like ``*`` or
-        trailing ``_``, which are inline markups in reST. These special strings
+        trailing ``_``, which are in-line markups in reST. These special strings
         has to be masked in reST.
 
     """
@@ -1169,16 +1169,16 @@ class ParseOptions(Container):
         self.fname          = ""      # absolute pathname
 
         # self.encoding: the input encoding (encoding of the parsed source
-        # file), the output encoding could be seeked from the file-descriptor at
+        # file), the output encoding could be seek from the file-descriptor at
         # self.out.
 
         self.encoding       = "utf-8"
-        self.tab_width      = 8  # tabstops every n chars
+        self.tab_width      = 8  # tab-stops every n chars
 
         # control which content to print
 
-        self.use_names     = []    # positiv list of names to print / empty list means "print all"
-        self.skip_names    = []    # negativ list of names (not to print)
+        self.use_names     = []    # positive list of names to print / empty list means "print all"
+        self.skip_names    = []    # negative list of names (not to print)
         self.use_all_docs  = False # True/False print all "DOC:" sections
         self.no_header     = False # skip section header
         self.error_missing = True  # report missing names as errors / else warning
@@ -1315,7 +1315,7 @@ class ParserContext(Container):
         self.last_identifier   = ""
 
         # self.parameterlist: ordered list of the parameters as they appear in
-        # the source. The parameterlist is set by Parser.push_parameter and
+        # the source. The parameter-list is set by Parser.push_parameter and
         # Parser.dump_enum
         self.parameterlist     = []
 
@@ -1375,11 +1375,11 @@ class ParserBuggy(RuntimeError):
     u"""Exception raised when the parser implementation seems buggy.
 
     The parser implementation perform some integrity tests at runtime.  This
-    exception type mainly exitst to improve the regualar expressions which are
+    exception type mainly exists to improve the regular expressions which are
     used to parse and analyze the kernels source code.
 
     In the exception message the last position the parser parsed is stored, this
-    positon may, but does not need to be related with the exception (it is only
+    position may, but does not need to be related with the exception (it is only
     an additional information which might help).
 
     Under normal circumstances, exceptions of this type should never arise,
@@ -1535,7 +1535,7 @@ class Parser(SimpleLog):
         * ``MODULE_DESCRIPTION("...")``: A concatenated string in
           :py:attr:`ParserContext.mod_descr`
 
-        * ``MODULE_LICENSE("...")``: String with comma seprated licences in
+        * ``MODULE_LICENSE("...")``: String with comma separated licenses in
           :py:attr:`ParserContext.mod_license`.
 
         .. hint::

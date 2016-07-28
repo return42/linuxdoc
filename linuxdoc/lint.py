@@ -9,9 +9,9 @@ u"""
     Implementation of the ``kernel-lintdoc`` command.
 
     :copyright:  Copyright (C) 2016  Markus Heiser
-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
+    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
-    The ``kernel-doclint`` command *lints* documention from linux kernel's
+    The ``kernel-doclint`` command *lints* documentation from Linux kernel's
     source code comments, see ``--help``::
 
         $ kernel-lintdoc --help
@@ -19,7 +19,7 @@ u"""
     .. note::
 
        The kernel-lintdoc command is under construction, no stable release
-       yet. The commandline arguments might be changed/extended in the near
+       yet. The command-line arguments might be changed/extended in the near
        future."""
 
 # ------------------------------------------------------------------------------

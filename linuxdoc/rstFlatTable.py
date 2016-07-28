@@ -8,7 +8,7 @@ u"""
     Implementation of the ``flat-table`` reST-directive.
 
     :copyright:  Copyright (C) 2016  Markus Heiser
-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
+    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
     The ``flat-table`` (:py:class:`FlatTable`) is a double-stage list similar to
     the ``list-table`` with some additional features:
@@ -21,7 +21,7 @@ u"""
 
     * *auto span* rightmost cell of a table row over the missing cells on the
       right side of that table-row.  With Option ``:fill-cells:`` this behavior
-      can changed from *auto span* to *auto fill*, which automaticly inserts
+      can changed from *auto span* to *auto fill*, which automatically inserts
       (empty) cells instead of spanning the last cell.
 
     Options:
@@ -29,7 +29,7 @@ u"""
     * header-rows:   [int] count of header rows
     * stub-columns:  [int] count of stub columns
     * widths:        [[int] [int] ... ] widths of columns
-    * fill-cells:    instead of autospann missing cells, insert missing cells
+    * fill-cells:    instead of auto-span missing cells, insert missing cells
 
     roles:
 
@@ -151,10 +151,10 @@ class ListTableBuilder(object):
         for colwidth in colwidths:
             colspec = nodes.colspec(colwidth=colwidth)
             # FIXME: It seems, that the stub method only works well in the
-            # absence of rowspan (observed by the html buidler, the docutils-xml
+            # absence of row-span (observed by the html builder, the docutils-xml
             # build seems OK).  This is not extraordinary, because there exists
             # no table directive (except *this* flat-table) which allows to
-            # define coexistent of rowspan and stubs (there was no use-case
+            # define coexistent of row-span and stubs (there was no use-case
             # before flat-table). This should be reviewed (later).
             if stub_columns:
                 colspec.attributes['stub'] = 1

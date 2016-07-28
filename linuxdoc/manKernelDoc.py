@@ -8,7 +8,7 @@ u"""
     Implementation of the ``kernel-doc-man`` builder.
 
     :copyright:  Copyright (C) 2016  Markus Heiser
-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
+    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
     The ``kernel-doc-man`` (:py:class:`KernelDocManBuilder`) produces manual
     pages in the groff format. It is a *man* page sphinx-builder mainly written
@@ -128,7 +128,7 @@ class Section2Manpage(Transform):
     u"""Transforms a *section* tree into an *manpage* tree.
 
     The structural layout of a man-page differs from the one produced, by the
-    kernel-doc parser. The kernel-doc parser produce reST wich fits to *normal*
+    kernel-doc parser. The kernel-doc parser produce reST which fits to *normal*
     documentation, e.g. the declaration of a function in reST is like.
 
     .. code-block:: rst
