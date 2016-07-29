@@ -407,6 +407,13 @@ def main():
         , help    = ("print documentation of all symbols that are documented,"
                      " but not exported" ))
 
+    CLI.add_argument(
+        "--markup"
+        , choices = ["reST", "kernel-doc"]
+        , default = "reST"
+        , help    = (
+            "Markup of the comments. Change this option only if you know"
+            " what you do. New comments must be marked up with reST!"))
 
     CMD     = CLI.parse_args()
     VERBOSE = CMD.verbose
@@ -424,6 +431,7 @@ def main():
             , skip_preamble = CMD.skip_preamble
             , skip_epilog   = CMD.skip_epilog
             , out           = STREAM.appl_out
+            , markup        = CMD.markup
             ,)
         opts.set_defaults()
 

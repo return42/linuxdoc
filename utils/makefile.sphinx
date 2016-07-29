@@ -5,7 +5,7 @@ SPHINXOPTS  ?=
 SPHINXBUILD ?= sphinx-build
 DOCS_BUILD  ?= build/docs
 GH_PAGES    ?= gh-pages
-DOCS_DIST   ?= $(GH_PAGES)
+DOCS_DIST   ?= dist/docs
 
 docs-help:
 	@echo  'makefile.docs:'
@@ -59,19 +59,19 @@ PHONY += docs-clean
 docs-clean:
 	$(call cmd,sphinx_clean)
 
+PHONY += $(GH_PAGES)
 $(GH_PAGES):
-	git clone $(GIT_URL) $(GH_PAGES)
+	$(MAKE) docs
+	[ -d "gh-pages/.git" ] || git clone $(GIT_URL) gh-pages
+	-cd $(GH_PAGES); git checkout --orphan gh-pages
+	rm -rf $(GH_PAGES)/*
+	touch $(GH_PAGES)/.nojekyll ;\
+	cp -r $(DOCS_DIST)/* $(GH_PAGES)/
+	-cd $(GH_PAGES); git push origin :gh-pages
 	cd $(GH_PAGES);\
-		git push origin :gh-pages ;\
-		git checkout --orphan gh-pages;\
-		git rm -rf .
-	$(call cmd,sphinx,html,docs,docs)
-	cd $(GH_PAGES);\
-	        touch .nojekyll ;\
 		git add --all . ;\
 		git commit -m "gh-pages: updated" ;\
 		git push origin gh-pages
-
 
 .PHONY: $(PHONY)
 
