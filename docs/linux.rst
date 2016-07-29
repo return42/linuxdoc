@@ -14,7 +14,14 @@ formats like HTML from reStructuredText (`reST`_) markup. E.g. with::
 the sphinx build produce a HTML representation of the reST files *in and below*
 the ``Documentation/`` folder. The sphinx extensions for this build, which are
 shipped by the kernel source tree, are placed in the ``Documentation/sphinx``
-folder.  If you like to see how (fast) the *linuxdoc* extensions build your
+folder.
+
+.. hint::
+
+  Since the kernel-doc parser of the linuxdoc library is more strict than the
+  one shipped with the kernel source tree, you might see warnings logged.
+
+If you like to see how (fast) the *linuxdoc* extensions build your
 kernel documentation, install *linuxdoc* and replace the extensions in the
 conf.py. In more detail ...::
 
