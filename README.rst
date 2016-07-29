@@ -9,7 +9,7 @@ the Linux-Kernel documentation.
 :e-mail:     *markus.heiser*\ *@*\ *darmarIT.de*
 :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 :docs:       http://return42.github.io/linuxdoc
-:repository: `github return42/fspath <https://github.com/return42/linuxdoc>`_
+:repository: `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
 
 It is a straight forward implementation in pure python (no perl script or other
 executable calls). Some of theses extensions are already a part of the kernel

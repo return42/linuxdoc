@@ -7,7 +7,7 @@ the Linux-Kernel documentation.
 :e-mail:     *markus.heiser*\ *@*\ *darmarIT.de*
 :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 :docs:       http://return42.github.io/linuxdoc
-:repository: `github return42/fspath <https://github.com/return42/linuxdoc>`_
+:repository: `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
 """
 
 __version__     = "20160723"
