@@ -28,6 +28,7 @@ u"""
 
 import sys
 import argparse
+import multiprocessing
 
 import six
 
@@ -61,9 +62,13 @@ epilog = u"""This implementation of uses the kernel-doc parser
 from the linuxdoc extension, for detail informations read
 http://return42.github.io/sphkerneldoc/books/kernel-doc-HOWTO"""
 
+CMD = None
+
 # ------------------------------------------------------------------------------
 def main():
 # ------------------------------------------------------------------------------
+
+    global CMD
 
     CLI = argparse.ArgumentParser(
         description = ("Parse *kernel-doc* comments from source code")
@@ -91,6 +96,12 @@ def main():
         , help    = "Don't stop if doctree exists.")
 
     CLI.add_argument(
+        "--threads"
+        , type    =  int
+        , default = multiprocessing.cpu_count()
+        , help    = "Use up to n threads.")
+
+    CLI.add_argument(
         "--markup"
         , choices = ["reST", "kernel-doc"]
         , default = "reST"
@@ -112,15 +123,24 @@ def main():
         ERR("%s is in the way, remove it first" % CMD.doctree)
         sys.exit(42)
 
-    for fname in CMD.srctree.reMatchFind(r"^.*\.[ch]$"):
-        if fname.startswith(CMD.srctree/"Documentation"):
-            continue
-        autodoc_file(fname, CMD)
+    pool = multiprocessing.Pool(CMD.threads)
+    pool.map(autodoc_file, gather_filenames(CMD))
+    pool.close()
+    pool.join()
 
     insert_index_files(CMD.doctree)
 
 # ------------------------------------------------------------------------------
-def autodoc_file(fname, CMD):
+def gather_filenames(CMD):
+# ------------------------------------------------------------------------------
+
+    for fname in CMD.srctree.reMatchFind(r"^.*\.[ch]$"):
+        if fname.startswith(CMD.srctree/"Documentation"):
+            continue
+        yield fname
+
+# ------------------------------------------------------------------------------
+def autodoc_file(fname):
 # ------------------------------------------------------------------------------
 
     fname = fname.relpath(CMD.srctree)
