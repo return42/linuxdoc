@@ -185,6 +185,7 @@ C_TYPEDEF        = RE(r"typedef.*\s+(\w+)\s*;")
 
 # typedef of a function pointer
 C_FUNC_TYPEDEF   = RE(r"typedef\s+(\w+)\s*\(\*\s*(\w\S+)\s*\)\s*\((.*)\);")
+C_FUNC_TYPEDEF_2 = RE(r"typedef\s+(\w+)\s*\s*(\w\S+)\s*\((.*)\);")
 
 MACRO            = RE(r"^#")
 MACRO_define     = RE(r"^#\s*define\s+")
@@ -1898,6 +1899,10 @@ class Parser(SimpleLog):
     def state_3(self, line):
         u"""state: 3 - scanning prototype."""
 
+        if line.startswith('typedef'):
+            self.ctx.decl_type = 'typedef'
+            self.warn("typedef of function pointer not marked as typdef, use: '%s %s' in the comment."
+                      % (self.ctx.decl_type, self.ctx.last_identifier))
         if doc_state5_start.match(line):
             self.debug("FLAG: split_doc_state=1 / switch state 3 --> 5")
             self.state = 5
@@ -1906,7 +1911,7 @@ class Parser(SimpleLog):
                 self.error("odd construct, gathering documentation of a function"
                            " outside of the main block?!?")
 
-        elif self.ctx.decl_type == 'function':
+        elif (self.ctx.decl_type == 'function'):
             self.process_state3_function(line)
         else:
             self.process_state3_type(line)
@@ -2455,14 +2460,21 @@ class Parser(SimpleLog):
 
         proto = C89_comments.sub("", proto)
 
+        matchExpr = None
         if C_FUNC_TYPEDEF.search(proto):
+            matchExpr = C_FUNC_TYPEDEF
+        elif C_FUNC_TYPEDEF_2.search(proto):
+            self.warn("typedef of function pointer used uncommon code style: '%s'" % proto)
+            matchExpr = C_FUNC_TYPEDEF_2
+
+        if matchExpr:
             # Parse function prototypes
 
-            self.ctx.return_type = C_FUNC_TYPEDEF[0]
-            self.ctx.decl_name   = C_FUNC_TYPEDEF[1]
+            self.ctx.return_type = matchExpr[0]
+            self.ctx.decl_name   = matchExpr[1]
             self.check_return_section(self.ctx.decl_name, self.ctx.return_type)
 
-            f_args = C_FUNC_TYPEDEF[2]
+            f_args = matchExpr[2]
             self.create_parameterlist(f_args, ',')
 
             if self.ctx.last_identifier != self.ctx.decl_name:
