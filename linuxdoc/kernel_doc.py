@@ -185,7 +185,7 @@ C_TYPEDEF        = RE(r"typedef.*\s+(\w+)\s*;")
 
 # typedef of a function pointer
 C_FUNC_TYPEDEF   = RE(r"typedef\s+(\w+)\s*\(\*\s*(\w\S+)\s*\)\s*\((.*)\);")
-C_FUNC_TYPEDEF_2 = RE(r"typedef\s+(\w+)\s*(\w\S+)\s*\((.*)\);")
+C_FUNC_TYPEDEF_2 = RE(r"typedef\s+(\w+)\s+(\w\S+)\s*\((.*)\);")
 
 MACRO            = RE(r"^#")
 MACRO_define     = RE(r"^#\s*define\s+")
