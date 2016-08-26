@@ -274,6 +274,12 @@ class Container(dict):
     def __setattr__(self, attr, val):
         self[attr] = val
 
+class DevNull(object):
+    """A dev/null file descriptor."""
+    def write(self, *args, **kwargs):
+        pass
+DevNull = DevNull()
+
 KBUILD_VERBOSE = int(OS_ENV.get("KBUILD_VERBOSE", "0"))
 KERNELVERSION  = OS_ENV.get("KERNELVERSION", "unknown kernel version")
 SRCTREE        = OS_ENV.get("srctree", "")
@@ -371,6 +377,11 @@ def main():
         , help    = "debug messages to stderr" )
 
     CLI.add_argument(
+        "--quiet", "-q"
+        , action  = "store_true"
+        , help    = "no messages to stderr" )
+
+    CLI.add_argument(
         "--skip-preamble"
         , action  = "store_true"
         , help    = "skip preamble in the output" )
@@ -419,6 +430,9 @@ def main():
     CMD     = CLI.parse_args()
     VERBOSE = CMD.verbose
     DEBUG   = CMD.debug
+
+    if CMD.quiet:
+        STREAM.log_out = DevNull
 
     LOG.debug(u"CMD: %(CMD)s", CMD=CMD)
 
@@ -720,7 +734,7 @@ class ListTranslator(TranslatorAPI):
                     self.parser.warn("exported symbol '%(name)s' is undocumented"
                                      , name = name)
                     t = "undocumented"
-                self.write("[exported %-10s] %s \n" % (t, name))
+                self.write("[exported %-14s] %s \n" % (t, name))
 
         if self.list_internal_types:
             self.parser.info("list internal names")
@@ -1612,6 +1626,8 @@ class Parser(SimpleLog):
             # the NullTranslator does not translate / translated_names is
             # empty
             pass
+        elif isinstance(self.translator, ListTranslator):
+            self.parse_dump_storage()
         else:
             for name in self.options.use_names:
                 if name not in self.translator.translated_names:
