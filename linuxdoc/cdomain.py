@@ -29,8 +29,13 @@ u"""
 
 from docutils.parsers.rst import directives
 
+import sphinx
 from sphinx.domains.c import CObject as Base_CObject
 from sphinx.domains.c import CDomain as Base_CDomain
+
+
+# Get Sphinx version
+major, minor, patch = map(int, sphinx.__version__.split("."))
 
 __version__  = '1.0'
 
@@ -55,7 +60,7 @@ class CObject(Base_CObject):
 
     def handle_signature(self, sig, signode):
         """Transform a C signature into RST nodes."""
-
+        fullname = super(CObject, self).handle_signature(sig, signode)
         if "name" in self.options:
             if self.objtype == 'function':
                 fullname = self.options["name"]
@@ -85,8 +90,14 @@ class CObject(Base_CObject):
 
         indextext = self.get_index_text(name)
         if indextext:
-            self.indexnode['entries'].append(('single', indextext,
-                                              targetname, '', None))
+            if major >= 1 and minor < 4:
+                # indexnode's tuple changed in 1.4
+                # https://github.com/sphinx-doc/sphinx/commit/e6a5a3a92e938fcd75866b4227db9e0524d58f7c
+                self.indexnode['entries'].append(
+                    ('single', indextext, targetname, ''))
+            else:
+                self.indexnode['entries'].append(
+                    ('single', indextext, targetname, '', None))
 
 class CDomain(Base_CDomain):
 
