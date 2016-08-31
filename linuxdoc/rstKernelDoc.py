@@ -195,6 +195,12 @@ def setup(app):
     app.add_config_value('kernel_doc_mode', "reST", 'env')
     app.add_directive("kernel-doc", KernelDoc)
 
+    return dict(
+        version = __version__
+        , parallel_read_safe = True
+        , parallel_write_safe = True
+    )
+
 # ==============================================================================
 class KernelDocParser(kerneldoc.Parser):
 # ==============================================================================

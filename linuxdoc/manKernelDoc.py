@@ -101,6 +101,12 @@ def setup(app):
                  , text    = (skip_kernel_doc_man, None)
                  , man     = (skip_kernel_doc_man, None) )
 
+    return dict(
+        version = __version__
+        , parallel_read_safe = True
+        , parallel_write_safe = True
+    )
+
 # ==============================================================================
 class kernel_doc_man(nodes.Invisible, nodes.Element):    # pylint: disable=C0103
 # ==============================================================================
