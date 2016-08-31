@@ -29,6 +29,8 @@ extensions:
 
 .. code-block:: python
 
-   extensions = [ 'linuxdoc.rstKernelDoc', 'linuxdoc.rstFlatTable'
-                  , 'linuxdoc.kernel_include', 'linuxdoc.manKernelDoc' ]
+    extensions = [
+        'linuxdoc.rstKernelDoc', 'linuxdoc.rstFlatTable'
+        , 'linuxdoc.kernel_include', 'linuxdoc.manKernelDoc'
+        , 'linuxdoc.cdomain' ]
 
