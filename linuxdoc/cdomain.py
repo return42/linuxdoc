@@ -27,7 +27,7 @@ u"""
           * :c:func:`VIDIOC_LOG_STATUS` or
           * :any:`VIDIOC_LOG_STATUS` (``:any:`` needs sphinx 1.3)
 
-     * Handles signatures of function-like macros well. Don't try to deduce
+     * Handle signatures of function-like macros well. Don't try to deduce
        arguments types of function-like macros.
 
 """
@@ -37,14 +37,15 @@ from docutils.parsers.rst import directives
 
 import sphinx
 from sphinx import addnodes
+from sphinx.locale import _
 from sphinx.domains.c import c_funcptr_sig_re, c_sig_re
 from sphinx.domains.c import CObject as Base_CObject
 from sphinx.domains.c import CDomain as Base_CDomain
 
+__version__  = '1.0'
+
 # Get Sphinx version
 major, minor, patch = map(int, sphinx.__version__.split("."))
-
-__version__  = '1.0'
 
 def setup(app):
 
@@ -65,6 +66,8 @@ class CObject(Base_CObject):
         "name" : directives.unchanged
     }
 
+    is_function_like_macro = False
+
     def handle_func_like_macro(self, sig, signode):
         u"""Handles signatures of function-like macros.
 
@@ -78,14 +81,15 @@ class CObject(Base_CObject):
         m = c_funcptr_sig_re.match(sig)
         if m is None:
             m = c_sig_re.match(sig)
-        if m is None:
-            raise ValueError('no match')
+            if m is None:
+                raise ValueError('no match')
 
         rettype, fullname, arglist, _const = m.groups()
-        if rettype or not arglist.strip():
+        arglist = arglist.strip()
+        if rettype or not arglist:
             return False
 
-        arglist = arglist.replace('`', '').replace('\\ ', '').strip()  # remove markup
+        arglist = arglist.replace('`', '').replace('\\ ', '') # remove markup
         arglist = [a.strip() for a in arglist.split(",")]
 
         # has the first argument a type?
@@ -103,6 +107,7 @@ class CObject(Base_CObject):
             param += nodes.emphasis(argname, argname)
             paramlist += param
 
+        self.is_function_like_macro = True
         return fullname
 
     def handle_signature(self, sig, signode):
@@ -141,7 +146,7 @@ class CObject(Base_CObject):
 
         indextext = self.get_index_text(name)
         if indextext:
-            if major >= 1 and minor < 4:
+            if major == 1 and minor < 4:
                 # indexnode's tuple changed in 1.4
                 # https://github.com/sphinx-doc/sphinx/commit/e6a5a3a92e938fcd75866b4227db9e0524d58f7c
                 self.indexnode['entries'].append(
@@ -149,6 +154,12 @@ class CObject(Base_CObject):
             else:
                 self.indexnode['entries'].append(
                     ('single', indextext, targetname, '', None))
+
+    def get_index_text(self, name):
+        if self.is_function_like_macro:
+            return _('%s (C macro)') % name
+        else:
+            return super(CObject, self).get_index_text(name)
 
 class CDomain(Base_CDomain):
 
