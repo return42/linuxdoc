@@ -934,7 +934,7 @@ class ReSTTranslator(TranslatorAPI):
 
             if self.FUNC_PTR.search(p_type):
                 # pointer to function
-                p_list.append("%s) %s (%s"
+                p_list.append("%s%s)(%s)"
                               % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1]))
             elif p_type.endswith("*"):
                 # pointer
@@ -961,7 +961,7 @@ class ReSTTranslator(TranslatorAPI):
             param = ""
             if self.FUNC_PTR.search(p_type):
                 # pointer to function
-                param = ":param (%s) %s (%s):" % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1])
+                param = ":param %s%s)(%s):" % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1])
             elif p_type.endswith("*"):
                 # pointer & pointer to pointer
                 param = ":param %s%s:" % (p_type, p_name)
@@ -1028,7 +1028,7 @@ class ReSTTranslator(TranslatorAPI):
                 # pointer to function
                 self.write(
                     self.INDENT * 2
-                    , "%s %s) (%s);\n" % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1]))
+                    , "%s%s)(%s);\n" % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1]))
 
             elif self.BITFIELD.match(p_type):
                 self.write(
