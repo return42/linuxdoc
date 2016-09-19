@@ -2283,7 +2283,7 @@ class Parser(SimpleLog):
             for regexp in FUNC_PROTOTYPES:
                 if regexp.match(proto):
                     matchExpr = regexp
-                    self.debug("dump_function(): (matchExpr = %(pattern)s) '%(proto)s'"
+                    self.debug("dump_function(): matchExpr = '%(pattern)s' // '%(proto)s'"
                                , pattern = matchExpr.pattern, proto=proto)
                     break
 
@@ -2549,6 +2549,7 @@ class Parser(SimpleLog):
         if parameter.endswith(splitchar):
             parameter = parameter[:-1]
 
+        self.debug("create_parameterlist(): params='%(y)s'", y=parameter)
         for c, p in enumerate(parameter.split(splitchar)):
 
             p = C99_comments.sub("", p)
@@ -2665,7 +2666,7 @@ class Parser(SimpleLog):
             self.anon_struct_union = True
 
         self.debug(
-            "push_parameter(): (2) p_name='%(p_name)s' /  p_type='%(p_type)s'"
+            "push_parameter(): (2) p_name='%(p_name)s' / p_type='%(p_type)s'"
             , p_name=p_name, p_type=p_type)
 
         # strip array from paramater name / e.g. p_name is "modes[]" from a
@@ -2694,7 +2695,7 @@ class Parser(SimpleLog):
                 self.ctx.parameterdescs[p_name] = Parser.undescribed
 
         self.debug(
-            "push_parameter(): (3) p_name='%(p_name)s' /  p_type='%(p_type)s'"
+            "push_parameter(): (3) p_name='%(p_name)s' / p_type='%(p_type)s'"
             , p_name=p_name, p_type=p_type)
 
         self.ctx.parameterlist.append(p_name)
