@@ -221,7 +221,7 @@ includes.
 
 To create man pages call the mandocs target::
 
-    make DOCBOOKS=1 mandocs
+    make DOCBOOKS= mandocs
 
 or alternatively compile only the sub-folder::
 
