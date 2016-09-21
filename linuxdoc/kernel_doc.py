@@ -129,6 +129,7 @@ doc_sect_except  = RE(doc_com.pattern + r"[^\s@](.*)?:[^\s]")
 doc_sect  = RE(doc_com_section.pattern
                + r"("
                + r"@\w[^:]*"                                 # "@foo: lorem" or
+               + r"|" + r"@\w[.\w]+[^:]*"                    # "@foo.bar: lorem" or
                + r"|" + r"\@\.\.\."                          # ellipsis "@...: lorem" or
                + r"|" + r"\w[\w\s]+\w"                       # e.g. "Return: lorem"
                + r")"
@@ -137,6 +138,7 @@ doc_sect  = RE(doc_com_section.pattern
 doc_sect_reST = RE(doc_com_section.pattern
                + r"("
                + r"@\w[^:]*"                                 # "@foo: lorem" or
+               + r"|" + r"@\w[.\w]+[^:]*"                    # "@foo.bar: lorem" or
                + r"|" + r"\@\.\.\."                          # ellipsis "@...: lorem" or
                # a tribute to vintage markups, when in reST mode ...
                + r"|description|context|returns?|notes?|examples?|introduction|intro"
@@ -975,6 +977,14 @@ class ReSTTranslator(TranslatorAPI):
 
             self.write_func_param(param, p_desc)
 
+            # print all the @foo.bar sub-descriptions
+            sub_descr = [x for x in parameterdescs.keys() if x.startswith(p_name + ".")]
+            for p_name in sub_descr:
+                p_desc = parameterdescs.get(p_name, None)
+                self.parser.ctx.offset = parameterdescs.offsets.get(
+                    p_name, self.parser.ctx.offset)
+                self.write_definition(p_name, p_desc)
+
         # sections
 
         for header, content in sections.items():
@@ -1057,11 +1067,19 @@ class ReSTTranslator(TranslatorAPI):
                 continue
             p_name = re.sub(r"\[.*", "", p_name)
             p_desc = parameterdescs.get(p_name, None)
-            if p_desc is None:
-                continue
-            self.parser.ctx.offset = parameterdescs.offsets.get(
-                p_name, self.parser.ctx.offset)
-            self.write_definition(p_name, p_desc)
+
+            if p_desc is not None:
+                self.parser.ctx.offset = parameterdescs.offsets.get(
+                    p_name, self.parser.ctx.offset)
+                self.write_definition(p_name, p_desc)
+
+            # print all the @foo.bar sub-descriptions
+            sub_descr = [x for x in parameterdescs.keys() if x.startswith(p_name + ".")]
+            for p_name in sub_descr:
+                p_desc = parameterdescs.get(p_name, None)
+                self.parser.ctx.offset = parameterdescs.offsets.get(
+                    p_name, self.parser.ctx.offset)
+                self.write_definition(p_name, p_desc)
 
         # sections
 
@@ -2193,7 +2211,7 @@ class Parser(SimpleLog):
         #                   , name = name)
         #    self.ctx.constants[name] = cont
 
-        _type_param  = RE(r"\@(\w+)")
+        _type_param  = RE(r"\@(\w[.\w]*)")  # match @foo and @foo.bar
         if _type_param.match(name):   # '@parameter' - name of a parameter
             name = _type_param[0]
             self.debug("parameter definition '%(name)s'", name = name)
@@ -2717,11 +2735,12 @@ class Parser(SimpleLog):
                    , n=decl_name, t=decl_type, sc=sectcheck, pl=parameterlist, nested=nested)
 
         for sect in sectcheck:
+            sub_sect = re.sub(r"\..*", "", sect) # take @foo.bar sections as "foo" sub-section
             err = True
             for para in parameterlist:
                 para = re.sub(r"\[.*\]", "", para)
                 #para = re.sub(r"/__attribute__\s*\(\([A-Za-z,_\*\s\(\)]*\)\)/", "", para)
-                if para == sect:
+                if para == sub_sect:
                     err = False
                     break
             if err:
