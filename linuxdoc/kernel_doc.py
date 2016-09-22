@@ -374,6 +374,11 @@ def main():
         , help    = "verbose output with log messages to stderr" )
 
     CLI.add_argument(
+        "--sloppy"
+        , action  = "store_true"
+        , help    = "Sloppy linting, reports only severe errors.")
+
+    CLI.add_argument(
         "--debug"
         , action  = "store_true"
         , help    = "debug messages to stderr" )
@@ -449,6 +454,7 @@ def main():
             , skip_epilog   = CMD.skip_epilog
             , out           = STREAM.appl_out
             , markup        = CMD.markup
+            , verbose_warn  = not (CMD.sloppy)
             ,)
         opts.set_defaults()
 
