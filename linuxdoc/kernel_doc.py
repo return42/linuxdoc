@@ -2479,6 +2479,12 @@ class Parser(SimpleLog):
                           % (self.ctx.last_identifier, self.ctx.decl_name)
                           , line_no = self.ctx.decl_offset)
 
+            self.check_sections(self.ctx.decl_name
+                                , self.ctx.decl_type
+                                , self.ctx.sectcheck
+                                , self.ctx.parameterlist
+                                , "")
+
             self.output_decl(
                 self.ctx.decl_name, "enum_decl"
                 , enum             = self.ctx.decl_name
@@ -2517,6 +2523,11 @@ class Parser(SimpleLog):
                           % (self.ctx.last_identifier, self.ctx.decl_name)
                           , line_no = self.ctx.decl_offset)
 
+            self.check_sections(self.ctx.decl_name
+                                , self.ctx.decl_type
+                                , self.ctx.sectcheck
+                                , self.ctx.parameterlist
+                                , "")
             self.output_decl(
                 self.ctx.decl_name, "function_decl"
                 , function         = self.ctx.decl_name
@@ -2545,6 +2556,11 @@ class Parser(SimpleLog):
                               % (self.ctx.last_identifier, self.ctx.decl_name)
                               , line_no = self.ctx.decl_offset)
 
+                self.check_sections(self.ctx.decl_name
+                                    , self.ctx.decl_type
+                                    , self.ctx.sectcheck
+                                    , self.ctx.parameterlist
+                                    , "")
                 self.output_decl(
                     self.ctx.decl_name, "typedef_decl"
                         , typedef   = self.ctx.decl_name
