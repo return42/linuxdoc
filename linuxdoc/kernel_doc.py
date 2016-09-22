@@ -1466,7 +1466,7 @@ class Parser(SimpleLog):
           proper kernel-doc and ignore the rest.
     """
 
-    LOG_FORMAT = "%(fname)s:%(line_no)s :%(logclass)s: %(message)s\n"
+    LOG_FORMAT = "%(fname)s:%(line_no)s: :%(logclass)s: %(message)s\n"
 
     # DOC_TYPES: types of documentation gathered by the parser
     DOC_TYPES      = ["DOC", "function", "struct", "union", "enum", "typedef"]
