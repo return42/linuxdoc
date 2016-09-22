@@ -1937,8 +1937,9 @@ class Parser(SimpleLog):
             if not self.ctx.decl_type == 'typedef':
                 self.warn(
                     "typedef of function pointer not marked"
-                    " as typdef, use: '%s %s' in the comment."
-                    % (self.ctx.decl_type, self.ctx.last_identifier))
+                    " as typdef, use: 'typedef %s' in the comment."
+                    % (self.ctx.last_identifier)
+                    , line_no = self.ctx.decl_offset)
             self.ctx.decl_type = 'typedef'
         if doc_state5_start.match(line):
             self.debug("FLAG: split_doc_state=1 / switch state 3 --> 5")
