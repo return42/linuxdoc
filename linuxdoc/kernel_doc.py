@@ -1834,9 +1834,9 @@ class Parser(SimpleLog):
                     new_sect = self.sect_title(doc_sect_reST[0].strip())
                     new_cont = doc_sect_reST[1].strip()
                 elif reST_sect.match(line):
-                   # this is a line with a section definition "Section name:\n"
-                   new_sect = self.sect_title(reST_sect[0].strip())
-                   new_cont = ""
+                    # this is a line with a section definition "Section name:\n"
+                    new_sect = self.sect_title(reST_sect[0].strip())
+                    new_cont = ""
 
                 # Sub-sections in parameter descriptions are not provided,
                 # with the exception of special_sections names. To allow
