@@ -73,7 +73,19 @@ def main():
             "Markup of the comments. Change this option only if you know"
             " what you do. New comments must be marked up with reST!"))
 
+    CLI.add_argument(
+        "--verbose", "-v"
+        , action  = "store_true"
+        , help    = "verbose output with log messages to stderr" )
+
+    CLI.add_argument(
+        "--debug"
+        , action  = "store_true"
+        , help    = "debug messages to stderr" )
+
     CMD = CLI.parse_args()
+    kerneldoc.DEBUG = CMD.debug
+    kerneldoc.VERBOSE = CMD.verbose
 
     if not CMD.srctree.EXISTS:
         ERR("%s does not exists or is not a folder" % CMD.srctree)
