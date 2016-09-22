@@ -2744,7 +2744,7 @@ class Parser(SimpleLog):
             for para in parameterlist:
                 para = re.sub(r"\[.*\]", "", para)
                 #para = re.sub(r"/__attribute__\s*\(\([A-Za-z,_\*\s\(\)]*\)\)/", "", para)
-                if para == sub_sect:
+                if para == sub_sect or para == sect:
                     err = False
                     break
             if err:
