@@ -1476,6 +1476,13 @@ class Parser(SimpleLog):
     section_return    = "Return"
     section_default   = section_descr
 
+    special_sections  = [ section_descr
+                          , section_def
+                          , section_members
+                          , section_constants
+                          , section_context
+                          , section_return ]
+
     def __init__(self, options, translator):
         super(Parser, self).__init__()
 
@@ -1824,6 +1831,18 @@ class Parser(SimpleLog):
                    # this is a line with a section definition "Section name:\n"
                    new_sect = self.sect_title(reST_sect[0].strip())
                    new_cont = ""
+
+                # Sub-sections in parameter descriptions are not provided,
+                # with the exception of special_sections names. To allow
+                # comments like:
+                #   * @arg: lorem
+                #   * Return: foo
+                if (self.ctx.section.startswith("@")
+                    and not new_sect.startswith("@")
+                    and not new_sect in self.special_sections ):
+                    new_sect = ""
+                    new_cont = ""
+
             else:  # kernel-doc vintage mode
                 if doc_sect.match(line):
                     # this is a line with a parameter or section definition
