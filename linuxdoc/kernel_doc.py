@@ -1843,7 +1843,8 @@ class Parser(SimpleLog):
                 # comments like:
                 #   * @arg: lorem
                 #   * Return: foo
-                if (self.ctx.section.startswith("@")
+                if (new_sect
+                    and self.ctx.section.startswith("@")
                     and not new_sect.startswith("@")
                     and not new_sect in self.special_sections ):
                     new_sect = ""
@@ -1955,6 +1956,11 @@ class Parser(SimpleLog):
                     # whitespaces in parameter description, but *over all* we
                     # get better reST output.
                     cont_line = cont_line.strip()
+                    # Sub-sections in parameter descriptions are not provided,
+                    # but if this is a "lorem:\n" line create a new paragraph.
+                    if reST_sect.match(line) and not doc_sect_except.match(line):
+                        cont_line = "\n" + cont_line + "\n"
+
                 self.ctx.contents += cont_line + "\n"
 
         else:
