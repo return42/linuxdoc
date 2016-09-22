@@ -1943,6 +1943,12 @@ class Parser(SimpleLog):
                 else:
                     self.ctx.decl_purpose = cont_line.strip()
             else:
+                if (self.options.markup == "reST"
+                    and self.ctx.section.startswith("@")):
+                    # FIXME: I doubt if it is a good idea to strip leading
+                    # whitespaces in parameter description, but *over all* we
+                    # get better reST output.
+                    cont_line = cont_line.strip()
                 self.ctx.contents += cont_line + "\n"
 
         else:
