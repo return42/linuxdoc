@@ -2224,7 +2224,6 @@ class Parser(SimpleLog):
                            , name = name, line_no = self.ctx.last_offset )
             self.ctx.parameterdescs[name] = cont
             self.ctx.parameterdescs.offsets[name] = self.ctx.last_offset
-            self.ctx.last_offset = 0
             self.ctx.sectcheck.append(name)
 
         elif name == "@...":
@@ -2235,7 +2234,6 @@ class Parser(SimpleLog):
                            , line_no = self.ctx.last_offset )
             self.ctx.parameterdescs[name] = cont
             self.ctx.parameterdescs.offsets[name] = self.ctx.last_offset
-            self.ctx.last_offset = 0
             self.ctx.sectcheck.append(name)
         else:
             self.debug("other section '%(name)s'", name = name)
@@ -2246,7 +2244,6 @@ class Parser(SimpleLog):
             else:
                 self.ctx.sections[name] = cont
             self.ctx.sections.offsets[name] = self.ctx.last_offset
-            self.ctx.last_offset = 0
 
     def dump_function(self, proto):
         self.debug("dump_function(): (1) '%(proto)s'", proto=proto)
@@ -2752,12 +2749,12 @@ class Parser(SimpleLog):
                     self.warn(
                         "excess function parameter '%(sect)s' description in '%(decl_name)s'"
                         , sect = sect, decl_name = decl_name
-                        , line_no = self.ctx.last_offset )
+                        , line_no = self.ctx.decl_offset )
                 elif not re.search(r"\b(" + sect + ")[^a-zA-Z0-9]", nested):
                     self.warn(
                         "excess %(decl_type)s member '%(sect)s' description in '%(decl_name)s'"
                         , decl_type = decl_type, decl_name = decl_name, sect = sect
-                        , line_no = self.ctx.last_offset )
+                        , line_no = self.ctx.decl_offset )
             else:
                 self.debug("check_sections(): parameter '%(sect)s': description exists / OK"
                            , sect=sect)
@@ -2775,7 +2772,7 @@ class Parser(SimpleLog):
 
         if self.options.verbose_warn and not self.ctx.sections.get(self.section_return, None):
             self.warn("no description found for return-value of function '%(func)s()'"
-                      , func = decl_name, line_no = self.ctx.last_offset)
+                      , func = decl_name, line_no = self.ctx.decl_offset)
         else:
             self.debug("check_return_section(): return-value of %(func)s() OK"
                       , func = decl_name)
