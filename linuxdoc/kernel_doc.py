@@ -2461,7 +2461,7 @@ class Parser(SimpleLog):
 
             # replace DECLARE_BITMAP
             members = re.sub(r"DECLARE_BITMAP\s*\(([^,)]+), ([^,)]+)\)"
-                             , r"unsigned long \1\[BITS_TO_LONGS(\2)\]"
+                             , r"unsigned long \1[BITS_TO_LONGS(\2)]"
                              , members )
 
             self.create_parameterlist(members, ';')
