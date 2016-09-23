@@ -27,6 +27,7 @@ setup(
             'kernel-doc = linuxdoc.kernel_doc:main'
             , 'kernel-autodoc = linuxdoc.autodoc:main'
             , 'kernel-lintdoc = linuxdoc.lint:main'
+            , 'kernel-grepdoc = linuxdoc.grep_doc:main'
             , ]
         , }
 
