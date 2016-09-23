@@ -109,6 +109,13 @@ def main():
             "Markup of the comments. Change this option only if you know"
             " what you do. New comments must be marked up with reST!"))
 
+    CLI.add_argument(
+        "--rst-files"
+        , type    = lambda x: FSPath(x).ABSPATH
+        , help    = (
+            "File that list source files, which has comments in reST markup."
+            " Use kernel-grepdoc command to generate those file."))
+
     CMD = CLI.parse_args()
 
     if not CMD.srctree.EXISTS:
@@ -122,6 +129,11 @@ def main():
     if not CMD.force and CMD.doctree.EXISTS:
         ERR("%s is in the way, remove it first" % CMD.doctree)
         sys.exit(42)
+
+    if CMD.markup == "kernel-doc" and CMD.rst_files:
+        CMD.rst_files = CMD.rst_files.readFile().splitlines()
+    else:
+        CMD.rst_files = []
 
     pool = multiprocessing.Pool(CMD.threads)
     pool.map(autodoc_file, gather_filenames(CMD))
@@ -143,12 +155,17 @@ def gather_filenames(CMD):
 def autodoc_file(fname):
 # ------------------------------------------------------------------------------
 
-    fname = fname.relpath(CMD.srctree)
+    fname  = fname.relpath(CMD.srctree)
+    markup = CMD.markup
+
+    if CMD.markup == "kernel-doc" and fname in CMD.rst_files:
+        markup = "reST"
+
     opts = kerneldoc.ParseOptions(
         rel_fname       = fname
         , src_tree      = CMD.srctree
         , verbose_warn  = not (CMD.sloppy)
-        , markup        = CMD.markup )
+        , markup        = markup )
 
     parser = kerneldoc.Parser(opts, kerneldoc.NullTranslator())
     try:
