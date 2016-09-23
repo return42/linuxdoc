@@ -1038,7 +1038,7 @@ class ReSTTranslator(TranslatorAPI):
             p_type = parametertypes[p_name]
 
             if MACRO.match(p_name):
-                self.write(self.INDENT * 2, "%s\n" % p_name)
+                self.write(self.INDENT, "%s\n" % p_name)
 
             elif self.FUNC_PTR.search(p_type):
                 # pointer to function
@@ -1131,7 +1131,10 @@ class ReSTTranslator(TranslatorAPI):
         e_list = parameterlist[:]
         while e_list:
             e = e_list.pop(0)
-            self.write("\n", self.INDENT *2, e)
+            if MACRO.match(e):
+                self.write("\n", self.INDENT, e)
+            else:
+                self.write("\n", self.INDENT * 2, e)
             if e_list:
                 self.write(",")
         self.write("\n", self.INDENT, "};\n")
