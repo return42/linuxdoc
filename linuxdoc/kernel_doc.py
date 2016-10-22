@@ -44,8 +44,8 @@ u"""
       - class ReSTTranslator(TranslatorAPI): translates dumped kernel-doc data
         to reST markup.
 
-      - class ParseOptions: a container full with options to control parsing an
-        translation.
+    * class ParseOptions: a container full with options to control parsing an
+      translation.
 
     With the NullTranslator a source file is parsed only once while different
     output could be generated (multiple times) just by changing the Translator
