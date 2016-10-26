@@ -10,7 +10,7 @@ the Linux-Kernel documentation.
 :repository: `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
 """
 
-__version__     = "20160723"
+__version__     = "20161026"
 __copyright__   = "2016 Markus Heiser"
 __url__         = "https://github.com/return42/linuxdoc"
 __description__ = "python extensions related to the Linux-Kernel documentation build"
