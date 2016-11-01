@@ -161,17 +161,17 @@ doc_state5_sect  = RE(r"\s*\*\s*(@[\w\s]+):(.*)")
 doc_state5_end   = RE(r"^\s*\*/\s*$")
 
 # match expressions used to find embedded type information
-type_enum_full    = RE(r"(?<!\\)\&(enum)\s*([_\w]+)")
-type_struct_full  = RE(r"(?<!\\)\&(struct)\s*([_\w]+)")
-type_typedef_full = RE(r"(?<!\\)\&(typedef)\s*([_\w]+)")
-type_union_full   = RE(r"(?<!\\)\&(union)\s*([_\w]+)")
-type_member       = RE(r"(?<!\\)\&([_\w]+)((\.|->)[_\w]+)")
+type_enum_full    = RE(r"(?<=\s)\&(enum)\s*([_\w]+)")
+type_struct_full  = RE(r"(?<=\s)\&(struct)\s*([_\w]+)")
+type_typedef_full = RE(r"(?<=\s)\&(typedef)\s*([_\w]+)")
+type_union_full   = RE(r"(?<=\s)\&(union)\s*([_\w]+)")
+type_member       = RE(r"(?<=\s)\&([_\w]+)((\.|->)[_\w]+)")
 type_member_func  = RE(type_member.pattern + r"\(\)")
-type_func         = RE(r"(\w+)(?<!\\)\(\)")
-type_constant     = RE(r"(?<!\\)\%([-_\w]+)")
-type_param        = RE(r"(?<!\\)\@(\w+)")
-type_env          = RE(r"(?<!\\)(\$\w+)")
-type_struct       = RE(r"(?<!\\)\&((struct\s*)*[_\w]+)")
+type_func         = RE(r"(?<=\s)(\w+)(?<!\\)\(\)")
+type_constant     = RE(r"(?<=\s)\%([-_\w]+)")
+type_param        = RE(r"(?<=\s)\@(\w+)")
+type_env          = RE(r"(?<=\s)(\$\w+)")
+type_struct       = RE(r"(?<=\s)\&((struct\s*)*[_\w]+)")
 
 esc_type_prefix  = RE(r"\\([\@\%\&\$\(])")
 
@@ -782,7 +782,7 @@ class ReSTTranslator(TranslatorAPI):
         , ( type_constant    , r"\ ``\1``\ " )
         , ( type_param       , r"\ ``\1``\ " )
         , ( type_env         , r"\ ``\1``\ " )
-        , ( type_struct      , r"\ :c:type:`struct \1 <\1>`")
+        , ( type_struct      , r"\ :c:type:`struct \1 <\1>`\ ")
         # at least replace escaped %, & and $
         , ( esc_type_prefix  , r"\1")
         , ]
