@@ -159,6 +159,7 @@ doc_block        = RE(doc_com.pattern + r"DOC:\s*(.*)?")
 doc_state5_start = RE(r"^\s*/\*\*\s*$")
 doc_state5_sect  = RE(r"\s*\*\s*(@[\w\s]+):(.*)")
 doc_state5_end   = RE(r"^\s*\*/\s*$")
+doc_state5_oneline = RE(r"^\s*/\*\*\s*(@[\w\s]+):\s*(.*)\s*\*/\s*$");
 
 # match expressions used to find embedded type information
 type_enum_full    = RE(r"(?<=\s)\&(enum)\s*([_\w]+)")
@@ -1981,7 +1982,18 @@ class Parser(SimpleLog):
                     % (self.ctx.last_identifier)
                     , line_no = self.ctx.decl_offset)
             self.ctx.decl_type = 'typedef'
-        if doc_state5_start.match(line):
+
+        if doc_state5_oneline.match(line):
+            sect = doc_state5_oneline[0].strip()
+            cont = doc_state5_oneline[1].strip()
+            if cont and sect:
+                self.ctx.section  = self.sect_title(sect)
+                self.ctx.contents = cont
+                self.dump_section(self.ctx.section, self.ctx.contents)
+                self.ctx.section  = self.section_default
+                self.ctx.contents = ""
+
+        elif doc_state5_start.match(line):
             self.debug("FLAG: split_doc_state=1 / switch state 3 --> 5")
             self.state = 5
             self.split_doc_state = 1
