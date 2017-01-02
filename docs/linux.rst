@@ -68,86 +68,94 @@ The ``KERNELDOC_CONF`` is droped, since it is not needed by *linuxdoc*.
 
 .. code-block:: diff
 
-   --- a/Documentation/Makefile.sphinx
-   +++ b/Documentation/Makefile.sphinx
-   @@ -35,8 +35,7 @@ HAVE_PDFLATEX := $(shell if which xelatex >/dev/null 2>&1; then echo 1; else ech
-    PAPEROPT_a4     = -D latex_paper_size=a4
-    PAPEROPT_letter = -D latex_paper_size=letter
-    KERNELDOC       = $(srctree)/scripts/kernel-doc
-   -KERNELDOC_CONF  = -D kerneldoc_srctree=$(srctree) -D kerneldoc_bin=$(KERNELDOC)
-   -ALLSPHINXOPTS   =  $(KERNELDOC_CONF) $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
-   +ALLSPHINXOPTS   =  $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
-    # the i18n builder cannot share the environment and doctrees with the others
-    I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
+    diff --git a/Documentation/Makefile.sphinx b/Documentation/Makefile.sphinx
+    index 707c653..b9eea4c 100644
+    --- a/Documentation/Makefile.sphinx
+    +++ b/Documentation/Makefile.sphinx
+    @@ -37,8 +37,7 @@ HAVE_PDFLATEX := $(shell if which $(PDFLATEX) >/dev/null 2>&1; then echo 1; else
+     PAPEROPT_a4     = -D latex_paper_size=a4
+     PAPEROPT_letter = -D latex_paper_size=letter
+     KERNELDOC       = $(srctree)/scripts/kernel-doc
+    -KERNELDOC_CONF  = -D kerneldoc_srctree=$(srctree) -D kerneldoc_bin=$(KERNELDOC)
+    -ALLSPHINXOPTS   =  $(KERNELDOC_CONF) $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
+    +ALLSPHINXOPTS   =  $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
+     # the i18n builder cannot share the environment and doctrees with the others
+     I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
-   @@ -88,9 +87,11 @@ xmldocs:
-    # no-ops for the Sphinx toolchain
-    sgmldocs:
-    psdocs:
-   -mandocs:
-    installmandocs:
+    @@ -93,9 +92,12 @@ xmldocs:
+     # no-ops for the Sphinx toolchain
+     sgmldocs:
+     psdocs:
+    -mandocs:
+     installmandocs:
 
-   +mandocs:
-   +	@$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,kernel-doc-man,$(var),man,$(var)))
-   +
-
+    +mandocs:
+    +	@$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,kernel-doc-man,$(var),man,$(var)))
+    +
+    +
+     cleandocs:
+            $(Q)rm -rf $(BUILDDIR)
+            $(Q)$(MAKE) BUILDDIR=$(abspath $(BUILDDIR)) -C Documentation/media clean
 
 In the ``conf.py`` (`sphinx config`_), the patch deactivates the sphinx
 extensions from the kernel source tree and activates *linuxdoc* sphinx
-extensions. At this time (in Sept. 2016) there is also a dump "man_pages" setup
+extensions. At this time (in Jan. 2017) there is also a dump "man_pages" setup
 which must be disabled.
 
 .. code-block:: diff
 
-   diff --git a/Documentation/conf.py b/Documentation/conf.py
-   index 46e69db..9e457b6 100644
-   --- a/Documentation/conf.py
-   +++ b/Documentation/conf.py
-   @@ -34,7 +34,13 @@ from load_config import loadConfig
-    # Add any Sphinx extension module names here, as strings. They can be
-    # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-    # ones.
-   -extensions = ['kernel-doc', 'rstFlatTable', 'kernel_include', 'cdomain']
-   +extensions = [
-   +    'linuxdoc.rstKernelDoc'
-   +    , 'linuxdoc.rstFlatTable'
-   +    , 'linuxdoc.kernel_include'
-   +    , 'linuxdoc.manKernelDoc'
-   +    , 'linuxdoc.cdomain'
-   +    , 'sphinx.ext.todo' ]
+    diff --git a/Documentation/conf.py b/Documentation/conf.py
+    index 1ac958c..b5903c6 100644
+    --- a/Documentation/conf.py
+    +++ b/Documentation/conf.py
+    @@ -34,7 +34,13 @@ from load_config import loadConfig
+     # Add any Sphinx extension module names here, as strings. They can be
+     # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+     # ones.
+    -extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain']
+    +extensions = [
+    +    'linuxdoc.rstKernelDoc',
+    +    'linuxdoc.rstFlatTable',
+    +    'linuxdoc.kernel_include',
+    +    'linuxdoc.manKernelDoc',
+    +    'linuxdoc.cdomain',
+    +    'sphinx.ext.todo', ]
 
-    # The name of the math extension changed on Sphinx 1.4
-    if minor > 3:
-   @@ -133,7 +139,7 @@ pygments_style = 'sphinx'
-    #keep_warnings = False
+     # The name of the math extension changed on Sphinx 1.4
+     if major == 1 and minor > 3:
+    @@ -133,7 +139,7 @@ pygments_style = 'sphinx'
+     #keep_warnings = False
 
-    # If true, `todo` and `todoList` produce output, else they produce nothing.
-   -todo_include_todos = False
-   +todo_include_todos = True
+     # If true, `todo` and `todoList` produce output, else they produce nothing.
+    -todo_include_todos = False
+    +todo_include_todos = True
 
-    primary_domain = 'C'
-    highlight_language = 'guess'
-   @@ -367,10 +373,7 @@ latex_documents = [
+     primary_domain = 'C'
+     highlight_language = 'none'
+    @@ -385,10 +391,7 @@ latex_documents = [
 
-    # One entry per manual page. List of tuples
-    # (source start file, name, description, authors, manual section).
-   -man_pages = [
-   -    (master_doc, 'thelinuxkernel', 'The Linux Kernel Documentation',
-   -     [author], 1)
-   -]
-   +man_pages = []
+     # One entry per manual page. List of tuples
+     # (source start file, name, description, authors, manual section).
+    -man_pages = [
+    -    (master_doc, 'thelinuxkernel', 'The Linux Kernel Documentation',
+    -     [author], 1)
+    -]
+    +man_pages = []
 
-    # If true, show URL addresses after external links.
-    #man_show_urls = False
-   @@ -487,8 +490,9 @@ pdf_documents = [
-    # kernel-doc extension configuration for running Sphinx directly (e.g. by Read
-    # the Docs). In a normal build, these are supplied from the Makefile via command
-    # line arguments.
-   -kerneldoc_bin = '../scripts/kernel-doc'
-   -kerneldoc_srctree = '..'
-   +kernel_doc_verbose_warn = False
-   +kernel_doc_raise_error = False
-   +kernel_doc_mode = "reST"
+     # If true, show URL addresses after external links.
+     #man_show_urls = False
+    @@ -505,8 +508,9 @@ pdf_documents = [
+     # kernel-doc extension configuration for running Sphinx directly (e.g. by Read
+     # the Docs). In a normal build, these are supplied from the Makefile via command
+     # line arguments.
+    -kerneldoc_bin = '../scripts/kernel-doc'
+    -kerneldoc_srctree = '..'
+    +kernel_doc_verbose_warn = False
+    +kernel_doc_raise_error = False
+    +kernel_doc_mode = "reST"
+
+     # ------------------------------------------------------------------------------
+     # Since loadConfig overwrites settings from the global namespace, it has to be
 
 In the ``index.rst``, the patch adds a list of TODO entries with kernel-doc
 *Oops*. A *Oops* entrie is generated when the kernel-doc parser can't parse
@@ -156,16 +164,16 @@ requested documentation. For more details see *kernel-doc-HOWTO* at :ref:`[ref]
 
 .. code-block:: diff
 
-   --- a/Documentation/index.rst
-   +++ b/Documentation/index.rst
-   @@ -21,3 +21,7 @@ Indices and tables
-    ==================
+    diff --git a/Documentation/index.rst b/Documentation/index.rst
+    index cb5d776..066104e 100644
+    --- a/Documentation/index.rst
+    +++ b/Documentation/index.rst
+    @@ -72,3 +72,5 @@ Indices and tables
+     ==================
 
-    * :ref:`genindex`
-   +
-   +
-   +.. todolist::
-   +
+     * :ref:`genindex`
+    +
+    +.. todolist::
 
 Build the HTML documentation::
 

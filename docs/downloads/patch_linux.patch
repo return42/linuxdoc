@@ -1,8 +1,8 @@
 diff --git a/Documentation/Makefile.sphinx b/Documentation/Makefile.sphinx
-index 92deea3..26b807c5 100644
+index 707c653..b9eea4c 100644
 --- a/Documentation/Makefile.sphinx
 +++ b/Documentation/Makefile.sphinx
-@@ -35,8 +35,7 @@ HAVE_PDFLATEX := $(shell if which xelatex >/dev/null 2>&1; then echo 1; else ech
+@@ -37,8 +37,7 @@ HAVE_PDFLATEX := $(shell if which $(PDFLATEX) >/dev/null 2>&1; then echo 1; else
  PAPEROPT_a4     = -D latex_paper_size=a4
  PAPEROPT_letter = -D latex_paper_size=letter
  KERNELDOC       = $(srctree)/scripts/kernel-doc
@@ -12,7 +12,7 @@ index 92deea3..26b807c5 100644
  # the i18n builder cannot share the environment and doctrees with the others
  I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
  
-@@ -88,9 +87,11 @@ xmldocs:
+@@ -93,9 +92,12 @@ xmldocs:
  # no-ops for the Sphinx toolchain
  sgmldocs:
  psdocs:
@@ -22,28 +22,29 @@ index 92deea3..26b807c5 100644
 +mandocs:
 +	@$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,kernel-doc-man,$(var),man,$(var)))
 +
++
  cleandocs:
  	$(Q)rm -rf $(BUILDDIR)
- 
+ 	$(Q)$(MAKE) BUILDDIR=$(abspath $(BUILDDIR)) -C Documentation/media clean
 diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 46e69db..9e457b6 100644
+index 1ac958c..b5903c6 100644
 --- a/Documentation/conf.py
 +++ b/Documentation/conf.py
 @@ -34,7 +34,13 @@ from load_config import loadConfig
  # Add any Sphinx extension module names here, as strings. They can be
  # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
  # ones.
--extensions = ['kernel-doc', 'rstFlatTable', 'kernel_include', 'cdomain']
+-extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain']
 +extensions = [
-+    'linuxdoc.rstKernelDoc'
-+    , 'linuxdoc.rstFlatTable'
-+    , 'linuxdoc.kernel_include'
-+    , 'linuxdoc.manKernelDoc'
-+    , 'linuxdoc.cdomain'
-+    , 'sphinx.ext.todo' ]
++    'linuxdoc.rstKernelDoc',
++    'linuxdoc.rstFlatTable',
++    'linuxdoc.kernel_include',
++    'linuxdoc.manKernelDoc',
++    'linuxdoc.cdomain',
++    'sphinx.ext.todo', ]
  
  # The name of the math extension changed on Sphinx 1.4
- if minor > 3:
+ if major == 1 and minor > 3:
 @@ -133,7 +139,7 @@ pygments_style = 'sphinx'
  #keep_warnings = False
  
@@ -52,8 +53,8 @@ index 46e69db..9e457b6 100644
 +todo_include_todos = True
  
  primary_domain = 'C'
- highlight_language = 'guess'
-@@ -367,10 +373,7 @@ latex_documents = [
+ highlight_language = 'none'
+@@ -385,10 +391,7 @@ latex_documents = [
  
  # One entry per manual page. List of tuples
  # (source start file, name, description, authors, manual section).
@@ -65,7 +66,7 @@ index 46e69db..9e457b6 100644
  
  # If true, show URL addresses after external links.
  #man_show_urls = False
-@@ -487,8 +490,9 @@ pdf_documents = [
+@@ -505,8 +508,9 @@ pdf_documents = [
  # kernel-doc extension configuration for running Sphinx directly (e.g. by Read
  # the Docs). In a normal build, these are supplied from the Makefile via command
  # line arguments.
@@ -78,14 +79,12 @@ index 46e69db..9e457b6 100644
  # ------------------------------------------------------------------------------
  # Since loadConfig overwrites settings from the global namespace, it has to be
 diff --git a/Documentation/index.rst b/Documentation/index.rst
-index 9fe5e0c..7fd8877 100644
+index cb5d776..066104e 100644
 --- a/Documentation/index.rst
 +++ b/Documentation/index.rst
-@@ -21,3 +21,7 @@ Indices and tables
+@@ -72,3 +72,5 @@ Indices and tables
  ==================
  
  * :ref:`genindex`
 +
-+
 +.. todolist::
-+
