@@ -2317,7 +2317,15 @@ class Parser(SimpleLog):
         define = bool(MACRO_define.match(proto))
         proto = MACRO_define.sub("", proto )
 
-        proto = re.sub( r"__attribute__\s*\(\([a-z,]*\)\)" , "", proto )
+        proto = re.sub( r"__attribute__\s*\(\("
+                        r"(?:"
+                        r"[\w\s]+"          # attribute name
+                        r"(?:\([^)]*\))?"   # attribute arguments
+                        r"\s*,?"            # optional comma at the end
+                        r")+"
+                        r"\)\)\s+"
+                        , ""
+                        , proto)
 
         # Yes, this truly is vile.  We are looking for:
         # 1. Return type (may be nothing if we're looking at a macro)
