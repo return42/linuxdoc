@@ -56,12 +56,12 @@ Examples
 Examples which make use of the linuxdoc lib extracting kernel-doc comments and
 build HTML documentation.:
 
-* Kernel documents: http://return42.github.io/sphkerneldoc/
+* Kernel documents: https://h2626237.stratoserver.net/kernel/docs.html#linux-kernel-s-documentation-docbook
 
     Include the DocBook-XML books which has been migrated with the
     :ref:`DocBook-XML to reST project <dbxml2rst:dbxml2rst>`.
 
-* Kernel-Doc source tree: http://return42.github.io/sphkerneldoc/linux_src_doc/index.html
+* Kernel-Doc source tree: https://h2626237.stratoserver.net/kernel/linux_src_doc
 
     Full scan of the kernel source tree with the command-line tool
     :ref:`kernel-autodoc`. The scan gather all kernel-doc comments and builds a
