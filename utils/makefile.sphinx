@@ -2,7 +2,7 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS  ?=
-SPHINXBUILD ?= sphinx-build
+SPHINXBUILD ?= $(PY_ENV_BIN)/sphinx-build
 DOCS_BUILD  ?= build/docs
 GH_PAGES    ?= gh-pages
 DOCS_DIST   ?= dist/docs
@@ -16,24 +16,8 @@ docs-help:
 # requirements
 # ------------------------------------------------------------------------------
 
-PHONY += msg-sphinx-doc sphinx-doc
-
-msg-sphinx-doc:
-	@echo "\n  sphinx-doc is required\n\n\
-  Make sure you have an updated Sphinx installed, grab it from\n\
-  http://sphinx-doc.org or install it from the python package\n\
-  manager (pip). On debian based OS these requirements are\n\
-  installed by::\n\n\
-    sudo apt-get install pip\n\n\
-    pip install Sphinx\n" | $(FMT)
-
-ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
-sphinx-doc: msg-sphinx-doc
-	$(error The '$(SPHINXBUILD)' command was not found)
-else
-sphinx-doc:
-	@:
-endif
+sphinx-doc: $(PY_ENV)
+	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) Sphinx
 
 # ------------------------------------------------------------------------------
 # commands
@@ -63,8 +47,8 @@ PHONY += $(GH_PAGES)
 $(GH_PAGES):
 	$(MAKE) docs
 	[ -d "gh-pages/.git" ] || git clone $(GIT_URL) gh-pages
-	-cd $(GH_PAGES); git checkout --orphan gh-pages
-	rm -rf $(GH_PAGES)/*
+	-cd $(GH_PAGES); git checkout --orphan gh-pages || exit 0
+	rm -rf $(GH_PAGES)/* $(GH_PAGES)/.gitignore
 	touch $(GH_PAGES)/.nojekyll ;\
 	cp -r $(DOCS_DIST)/* $(GH_PAGES)/
 	-cd $(GH_PAGES); git push origin :gh-pages
