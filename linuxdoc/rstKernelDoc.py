@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=R0912,R0914,R0915
+# pylint: disable=R0912,R0914,R0915,W0221
 
 u"""
     rstKernelDoc
@@ -492,7 +492,7 @@ class KernelDoc(Directive):
                 lines = code_block + "\n\n"
 
         else:
-            self.parser.options.out = content  # pylint: disable=R0204
+            self.parser.options.out = content
             self.parser.parse_dump_storage(translator=translator)
 
         # check translation

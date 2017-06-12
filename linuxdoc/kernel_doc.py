@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0103,C0302,R0912,R0914,R0915
+# pylint: disable=C0103,C0302,C0325,R0912,R0914,R0915,W0221
 
 u"""
     kernel_doc
@@ -159,7 +159,7 @@ doc_block        = RE(doc_com.pattern + r"DOC:\s*(.*)?")
 doc_state5_start = RE(r"^\s*/\*\*\s*$")
 doc_state5_sect  = RE(r"\s*\*\s*(@[\w\s]+):(.*)")
 doc_state5_end   = RE(r"^\s*\*/\s*$")
-doc_state5_oneline = RE(r"^\s*/\*\*\s*(@[\w\s]+):\s*(.*)\s*\*/\s*$");
+doc_state5_oneline = RE(r"^\s*/\*\*\s*(@[\w\s]+):\s*(.*)\s*\*/\s*$")
 
 # match expressions used to find embedded type information
 type_enum_full    = RE(r"(?<=\s)\&(enum)\s*([_\w]+)")
@@ -440,7 +440,7 @@ def main():
     DEBUG   = CMD.debug
 
     if CMD.quiet:
-        STREAM.log_out = DevNull
+        STREAM.log_out = DevNull # pylint: disable=W0201
 
     LOG.debug(u"CMD: %(CMD)s", CMD=CMD)
 
@@ -460,7 +460,6 @@ def main():
         opts.set_defaults()
 
         if CMD.list_exports or CMD.list_internals:
-            # pylint: disable=R0204
             translator = ListTranslator(CMD.list_exports, CMD.list_internals)
             opts.gather_context = True
 
@@ -986,11 +985,11 @@ class ReSTTranslator(TranslatorAPI):
 
             # print all the @foo.bar sub-descriptions
             sub_descr = [x for x in parameterdescs.keys() if x.startswith(p_name + ".")]
-            for p_name in sub_descr:
-                p_desc = parameterdescs.get(p_name, None)
+            for _p_name in sub_descr:
+                p_desc = parameterdescs.get(_p_name, None)
                 self.parser.ctx.offset = parameterdescs.offsets.get(
-                    p_name, self.parser.ctx.offset)
-                self.write_definition(p_name, p_desc)
+                    _p_name, self.parser.ctx.offset)
+                self.write_definition(_p_name, p_desc)
 
         # sections
 
@@ -1082,11 +1081,11 @@ class ReSTTranslator(TranslatorAPI):
 
             # print all the @foo.bar sub-descriptions
             sub_descr = [x for x in parameterdescs.keys() if x.startswith(p_name + ".")]
-            for p_name in sub_descr:
-                p_desc = parameterdescs.get(p_name, None)
+            for _p_name in sub_descr:
+                p_desc = parameterdescs.get(_p_name, None)
                 self.parser.ctx.offset = parameterdescs.offsets.get(
-                    p_name, self.parser.ctx.offset)
-                self.write_definition(p_name, p_desc)
+                    _p_name, self.parser.ctx.offset)
+                self.write_definition(_p_name, p_desc)
 
         # sections
 
@@ -1631,8 +1630,8 @@ class Parser(SimpleLog):
             for line in src:
                 self.feed(line)
         else:
-            with openTextFile(self.options.fname, encoding=self.options.encoding) as src:
-                for line in src:
+            with openTextFile(self.options.fname, encoding=self.options.encoding) as srcFile:
+                for line in srcFile:
                     self.feed(line)
         self.dump_epilog()
         self.translator.eof()

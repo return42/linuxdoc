@@ -118,4 +118,3 @@ def lintdoc_file(fname, CMD):
     except Exception: # pylint: disable=W0703
         FATAL("kernel-doc comments markup of %s seems buggy / can't parse" % opts.fname)
         return
-

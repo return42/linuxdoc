@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
+# pylint: disable=C1801
 
 u"""
     kernel-doc-man
@@ -331,10 +332,10 @@ class KernelDocManBuilder(ManualPageBuilder):
 
     def is_manpage(self, node):               # pylint: disable=R0201
         if isinstance(node, nodes.section):
-            return bool(Section2Manpage.getFirstChild(
-            node, kernel_doc_man) is not None)
-        else:
-            return False
+            return bool(
+                Section2Manpage.getFirstChild(
+                node, kernel_doc_man) is not None)
+        return False
 
     def prepare_writing(self, docnames):
         """A place where you can add logic before :meth:`write_doc` is run"""

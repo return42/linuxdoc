@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0103
+# pylint: disable=C0103,C0410
 
 u"""
     grep_doc

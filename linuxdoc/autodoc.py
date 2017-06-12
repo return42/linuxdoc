@@ -68,7 +68,7 @@ CMD = None
 def main():
 # ------------------------------------------------------------------------------
 
-    global CMD
+    global CMD  # pylint: disable=W0603
 
     CLI = argparse.ArgumentParser(
         description = ("Parse *kernel-doc* comments from source code")
@@ -143,10 +143,10 @@ def main():
     insert_index_files(CMD.doctree)
 
 # ------------------------------------------------------------------------------
-def gather_filenames(CMD):
+def gather_filenames(cmd):
 # ------------------------------------------------------------------------------
 
-    for fname in CMD.srctree.reMatchFind(r"^.*\.[ch]$"):
+    for fname in cmd.srctree.reMatchFind(r"^.*\.[ch]$"):
         if fname.startswith(CMD.srctree/"Documentation"):
             continue
         yield fname
@@ -201,10 +201,10 @@ def autodoc_file(fname):
         return
 
 # ------------------------------------------------------------------------------
-def insert_index_files(folder):
+def insert_index_files(root_folder):
 # ------------------------------------------------------------------------------
 
-    for folder, dirnames, filenames in folder.walk():
+    for folder, dirnames, filenames in root_folder.walk():
         ctx = Container( title = folder.FILENAME )
         dirnames.sort()
         filenames.sort()

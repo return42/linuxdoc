@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=R0912
+# pylint: disable=R0912,C1801
 
 u"""
     flat-table

@@ -4,7 +4,7 @@ The *linuxdoc* lib contains python extensions related to the build process of
 the Linux-Kernel documentation.
 
 :copyright:  Copyright (C) 2016 Markus Heiser
-:e-mail:     *markus.heiser*\ *@*\ *darmarIT.de*
+:e-mail:     markus.heiser@darmarIT.de
 :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 :docs:       http://return42.github.io/linuxdoc
 :repository: `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
