@@ -1,5 +1,5 @@
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=W0141,C0113,C0103,C0325
+# pylint: disable=C0113,C0103,C0325
 u"""
     cdomain
     ~~~~~~~
@@ -45,7 +45,7 @@ from sphinx.domains.c import CDomain as Base_CDomain
 __version__  = '1.0'
 
 # Get Sphinx version
-major, minor, patch = map(int, sphinx.__version__.split("."))
+major, minor, patch = sphinx.version_info[:3]
 
 def setup(app):
 

@@ -8,7 +8,7 @@ u"""
     Implementation of the ``kernel-include`` reST-directive.
 
     :copyright:  Copyright (C) 2016  Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
 
     The ``kernel-include`` reST-directive is a replacement for the ``include``
     directive. The ``kernel-include`` directive expand environment variables in
@@ -18,7 +18,7 @@ u"""
 
       Including files from arbitrary locations (e.g. from ``/etc``) is a
       security risk for builders. This is why the ``include`` directive from
-      docutils *prohibit* pathnames pointing to locations *above* the file-system
+      docutils *prohibit* pathnames pointing to locations *above* the filesystem
       tree where the reST document with the include directive is placed.
 
     Substrings of the form $name or ${name} are replaced by the value of
@@ -46,9 +46,9 @@ def setup(app):
 
     app.add_directive("kernel-include", KernelInclude)
     return dict(
-        version = __version__
-        , parallel_read_safe = True
-        , parallel_write_safe = True
+        version = __version__,
+        parallel_read_safe = True,
+        parallel_write_safe = True
     )
 
 # ==============================================================================
@@ -56,14 +56,6 @@ class KernelInclude(Include):
 # ==============================================================================
 
     u"""KernelInclude (``kernel-include``) directive"""
-
-    def prepare_writing(self, docnames):
-        """A place where you can add logic before :meth:`write_doc` is run"""
-        pass
-
-    def write_doc(self, docname, doctree):
-        """Where you actually write something to the filesystem."""
-        pass
 
     def run(self):
         path = os.path.realpath(
@@ -83,10 +75,10 @@ class KernelInclude(Include):
     def _run(self):
         """Include a file as part of the content of this reST file."""
 
-        # HINT: I had to copy&paste the whole Include.run method. I'm not happy
+        # HINT: I had to copy&paste the whole Include.run method. I'am not happy
         # with this, but due to security reasons, the Include.run method does
         # not allow absolute or relative pathnames pointing to locations *above*
-        # the file-system tree where the reST document is placed.
+        # the filesystem tree where the reST document is placed.
 
         if not self.state.document.settings.file_insertion_enabled:
             raise self.warning('"%s" directive disabled.' % self.name)

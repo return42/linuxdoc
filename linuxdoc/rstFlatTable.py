@@ -8,7 +8,7 @@ u"""
     Implementation of the ``flat-table`` reST-directive.
 
     :copyright:  Copyright (C) 2016  Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
 
     The ``flat-table`` (:py:class:`FlatTable`) is a double-stage list similar to
     the ``list-table`` with some additional features:
@@ -21,7 +21,7 @@ u"""
 
     * *auto span* rightmost cell of a table row over the missing cells on the
       right side of that table-row.  With Option ``:fill-cells:`` this behavior
-      can changed from *auto span* to *auto fill*, which automatically inserts
+      can changed from *auto span* to *auto fill*, which automaticly inserts
       (empty) cells instead of spanning the last cell.
 
     Options:
@@ -29,7 +29,7 @@ u"""
     * header-rows:   [int] count of header rows
     * stub-columns:  [int] count of stub columns
     * widths:        [[int] [int] ... ] widths of columns
-    * fill-cells:    instead of auto-span missing cells, insert missing cells
+    * fill-cells:    instead of autospann missing cells, insert missing cells
 
     roles:
 
@@ -40,6 +40,8 @@ u"""
 # ==============================================================================
 # imports
 # ==============================================================================
+
+import sys
 
 from docutils import nodes
 from docutils.parsers.rst import directives, roles
@@ -54,6 +56,14 @@ from docutils.utils import SystemMessagePropagation
 # (Documentation/books/kernel-doc-HOWTO).
 __version__  = '1.0'
 
+PY3 = sys.version_info[0] == 3
+PY2 = sys.version_info[0] == 2
+
+if PY3:
+    # pylint: disable=C0103, W0622
+    unicode     = str
+    basestring  = str
+
 # ==============================================================================
 def setup(app):
 # ==============================================================================
@@ -63,14 +73,15 @@ def setup(app):
     roles.register_local_role('rspan', r_span)
 
     return dict(
-        version = __version__
-        , parallel_read_safe = True
-        , parallel_write_safe = True
+        version = __version__,
+        parallel_read_safe = True,
+        parallel_write_safe = True
     )
 
 # ==============================================================================
-def c_span(_name, _rawtext, text, _lineno, _inliner, options=None, content=None):
+def c_span(name, rawtext, text, lineno, inliner, options=None, content=None):
 # ==============================================================================
+    # pylint: disable=W0613
 
     options  = options if options is not None else {}
     content  = content if content is not None else []
@@ -79,8 +90,9 @@ def c_span(_name, _rawtext, text, _lineno, _inliner, options=None, content=None)
     return nodelist, msglist
 
 # ==============================================================================
-def r_span(_name, _rawtext, text, _lineno, _inliner, options=None, content=None):
+def r_span(name, rawtext, text, lineno, inliner, options=None, content=None):
 # ==============================================================================
+    # pylint: disable=W0613
 
     options  = options if options is not None else {}
     content  = content if content is not None else []
@@ -90,10 +102,8 @@ def r_span(_name, _rawtext, text, _lineno, _inliner, options=None, content=None)
 
 
 # ==============================================================================
-class rowSpan(nodes.General, nodes.Element): # pylint: disable=C0103
-    pass
-class colSpan(nodes.General, nodes.Element): # pylint: disable=C0103
-    pass
+class rowSpan(nodes.General, nodes.Element): pass # pylint: disable=C0103,C0321
+class colSpan(nodes.General, nodes.Element): pass # pylint: disable=C0103,C0321
 # ==============================================================================
 
 # ==============================================================================
@@ -146,6 +156,11 @@ class ListTableBuilder(object):
     def buildTableNode(self):
 
         colwidths    = self.directive.get_column_widths(self.max_cols)
+        if isinstance(colwidths, tuple):
+            # Since docutils 0.13, get_column_widths returns a (widths,
+            # colwidths) tuple, where widths is a string (i.e. 'auto').
+            # See https://sourceforge.net/p/docutils/patches/120/.
+            colwidths = colwidths[1]
         stub_columns = self.directive.options.get('stub-columns', 0)
         header_rows  = self.directive.options.get('header-rows', 0)
 
@@ -157,10 +172,10 @@ class ListTableBuilder(object):
         for colwidth in colwidths:
             colspec = nodes.colspec(colwidth=colwidth)
             # FIXME: It seems, that the stub method only works well in the
-            # absence of row-span (observed by the html builder, the docutils-xml
+            # absence of rowspan (observed by the html buidler, the docutils-xml
             # build seems OK).  This is not extraordinary, because there exists
             # no table directive (except *this* flat-table) which allows to
-            # define coexistent of row-span and stubs (there was no use-case
+            # define coexistent of rowspan and stubs (there was no use-case
             # before flat-table). This should be reviewed (later).
             if stub_columns:
                 colspec.attributes['stub'] = 1
@@ -223,15 +238,16 @@ class ListTableBuilder(object):
     def roundOffTableDefinition(self):
         u"""Round off the table definition.
 
-        This method rounds off the table definition in :py:attr:`rows`.
+        This method rounds off the table definition in :py:member:`rows`.
 
         * This method inserts the needed ``None`` values for the missing cells
-          arising from spanning cells over rows and/or columns.
+        arising from spanning cells over rows and/or columns.
 
-        * recount the :py:attr:`max_cols`
+        * recount the :py:member:`max_cols`
 
-        * Autospan or fill (option ``:fill-cells:``) missing cells on the right
-          side of the table-row """
+        * Autospan or fill (option ``fill-cells``) missing cells on the right
+          side of the table-row
+        """
 
         y = 0
         while y < len(self.rows):
@@ -283,7 +299,7 @@ class ListTableBuilder(object):
                     cspan, rspan, content = row[-1]
                     row[-1] = (cspan + x, rspan, content)
             elif x and fill_cells:
-                for _i in range(x):
+                for i in range(x):
                     row.append( (0, 0, nodes.comment()) )
 
     def pprint(self):
@@ -341,7 +357,7 @@ class ListTableBuilder(object):
             row.append( (cspan, rspan, cellElements) )
         return row
 
-    def parseCellItem(self, cellItem): # pylint: disable=R0201
+    def parseCellItem(self, cellItem):
         # search and remove cspan, rspan colspec from the first element in
         # this listItem (field).
         cspan = rspan = 0
