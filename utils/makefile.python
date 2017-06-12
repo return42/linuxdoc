@@ -12,6 +12,9 @@ PY       ?=3
 PYTHON   ?= python$(PY)
 PIP_INST ?=
 PYLINT   ?= pylint
+PYDEBUG  ?= --pdb
+
+TEST_FOLDER  ?= ./tests
 
 VIRTUALENV   = virtualenv --python=$(PYTHON)
 VTENV_OPTS   = "--no-site-packages"
@@ -29,16 +32,22 @@ endif
 python-help::
 	@echo  'makefile.python:'
 	@echo  '  pylint        - run pylint *linting*'
-	@echo  '  pytest	- run nose test on python objects'
+	@echo  '  pytest	- run *tox* test on python objects'
+	@echo  '  pydebug       - run tests within a PDB debug session'
 	@echo  '  pybuild       - build python packages'
 	@echo  '  pyclean       - clean intermediate python objects'
 	@echo  '  py[un]install - [un]install python objects in editable mode'
 	@echo  '  upload-pypi   - upload $(PYDIST)/* files to PyPi'
-	@echo  ''
+	@echo  'options:'
 	@echo  '  make PY=2  [targets] => to eval targets with python 2 (default 3)'
 	@echo  '  make PYLINT=pylint3  => to use pylint3 (default is standard pylint)'
 	@echo  '  make PIP_INST=...    => to set/unset pip install options'
-
+	@echo  '  make TEST=.          =>  choose test from $(TEST_FOLDER) (default "." runs all)'
+	@echo  '  make DEBUG=          =>  target "debug": do not invoke PDB on errors'
+	@echo  'When using target "debug", set breakpoints within py-source by adding::'
+	@echo  '    ...'
+	@echo  '    DEBUG()'
+	@echo  '    ...'
 
 # ------------------------------------------------------------------------------
 # requirements
@@ -126,7 +135,7 @@ quiet_cmd_pybuild     = BUILD     $@
 quiet_cmd_pyclean     = CLEAN     $@
 # remove 'build' folder since bdist_wheel does not care the --bdist-dir
       cmd_pyclean     = \
-	rm -rf $(PYDIST) $(PYBUILD) ./local *.egg-info     ;\
+	rm -rf $(PYDIST) $(PYBUILD) ./local ./.tox *.egg-info     ;\
 	find . -name '*.pyc' -exec rm -f {} +      ;\
 	find . -name '*.pyo' -exec rm -f {} +      ;\
 	find . -name __pycache__ -exec rm -rf {} +
@@ -136,14 +145,23 @@ quiet_cmd_pyclean     = CLEAN     $@
 # ------------------------------------------------------------------------------
 
 PHONY += pybuild pyclean upload-pypi
-pybuild: python-exe
+pybuild: $(PY_ENV)
 	$(call cmd,pybuild)
 
 PHONY += pytest
-pytest: python-exe
+pytest: $(PY_ENV)
 	$(call cmd,pytest)
 
-pyclean: python-exe
+# set breakpoint with:
+#    DEBUG()
+# e.g. to run tests in debug mode in emacs use:
+#   'M-x pdb' ... 'make pydebug'
+
+PHONY += pydebug
+pydebug: $(PY_ENV)
+	DEBUG=$(DEBUG) $(PY_ENV_BIN)/pytest $(DEBUG) -v $(TEST_FOLDER)/$(TEST)
+
+pyclean:
 	$(call cmd,pyclean)
 
 PHONY += pylint
@@ -172,6 +190,6 @@ $(PY_ENV): virtualenv-exe python-exe
 
 # https://github.com/pypa/twine
 upload-pypi: pyclean pybuild
-	twine upload $(PYDIST)/*
+	@$(PY_ENV_BIN)/twine upload $(PYDIST)/*
 
 .PHONY: $(PHONY)

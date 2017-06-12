@@ -1,4 +1,26 @@
+# --------
+# requires
+# --------
+
+fspath
+
+# --------------
+# tests_requires
+# --------------
+
+pip
+tox
+pytest
+pytest-cov
+pylint
+
+# -------
+# develop
+# -------
+
 Sphinx
 sphinx_rtd_theme
-nose
-fspath
+pip
+#twine
+#wheel
+#mock
