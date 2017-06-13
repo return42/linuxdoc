@@ -2773,6 +2773,10 @@ class Parser(SimpleLog):
 
             p_name = re.sub(r"[\*\(\)]", "", p_name)
 
+        self.debug(
+            "push_parameter(): (3) p_name='%(p_name)s' / p_type='%(p_type)s'"
+            , p_name=p_name, p_type=p_type)
+
         # warn if parameter has no description (but ignore ones starting with
         # '#' as these are not parameters but inline preprocessor statements);
         # also ignore unnamed structs/unions;
@@ -2792,10 +2796,6 @@ class Parser(SimpleLog):
                     self.warn("no description found for parameter '%(p_name)s'"
                               , p_name = p_name, line_no = self.ctx.decl_offset)
                 self.ctx.parameterdescs[p_name] = Parser.undescribed
-
-        self.debug(
-            "push_parameter(): (3) p_name='%(p_name)s' / p_type='%(p_type)s'"
-            , p_name=p_name, p_type=p_type)
 
         self.ctx.parameterlist.append(p_name)
         self.ctx.parametertypes[p_name] = p_type.strip()
