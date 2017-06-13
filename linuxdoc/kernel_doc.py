@@ -2195,6 +2195,8 @@ class Parser(SimpleLog):
 
         while True:
             if m.search(line):
+                if self.ctx.prototype:
+                    self.ctx.prototype += " "
                 self.ctx.prototype += m[0] + m[1]
                 if m[1] == "{":
                     self.brcount += 1
