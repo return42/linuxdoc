@@ -2763,10 +2763,15 @@ class Parser(SimpleLog):
             "push_parameter(): (2) p_name='%(p_name)s' / p_type='%(p_type)s'"
             , p_name=p_name, p_type=p_type)
 
-        # strip array from paramater name / e.g. p_name is "modes[]" from a
-        # parmeter defined by: "const char * const modes[]"
+        if not p_name.startswith("#"):
+            # strip array from paramater name / e.g. p_name is "modes[]" from a
+            # parmeter defined by: "const char * const modes[]"
 
-        p_name_doc = re.sub(r"\[.*", "", p_name)
+            p_name = re.sub(r"\[.*", "", p_name)
+
+            # strip parentheses and pointers, e.g.: (*foo) --> foo
+
+            p_name = re.sub(r"[\*\(\)]", "", p_name)
 
         # warn if parameter has no description (but ignore ones starting with
         # '#' as these are not parameters but inline preprocessor statements);
@@ -2774,7 +2779,7 @@ class Parser(SimpleLog):
 
         if not self.anon_struct_union:
 
-            if (not self.ctx.parameterdescs.get(p_name_doc, None)
+            if (not self.ctx.parameterdescs.get(p_name, None)
                 and not p_name.startswith("#")):
 
                 if p_type == "function" or p_type == "enum":
