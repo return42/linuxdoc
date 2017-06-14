@@ -169,6 +169,7 @@ def autodoc_file(fname):
         rel_fname       = fname
         , src_tree      = CMD.srctree
         , verbose_warn  = not (CMD.sloppy)
+        , use_all_docs  = True
         , markup        = markup )
 
     parser = kerneldoc.Parser(opts, kerneldoc.NullTranslator())
