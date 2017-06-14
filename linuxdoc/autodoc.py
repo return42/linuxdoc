@@ -135,10 +135,14 @@ def main():
     else:
         CMD.rst_files = []
 
-    pool = multiprocessing.Pool(CMD.threads)
-    pool.map(autodoc_file, gather_filenames(CMD))
-    pool.close()
-    pool.join()
+    if CMD.threads > 1:
+        pool = multiprocessing.Pool(CMD.threads)
+        pool.map(autodoc_file, gather_filenames(CMD))
+        pool.close()
+        pool.join()
+    else:
+        for fname in gather_filenames(CMD):
+            autodoc_file(fname)
 
     insert_index_files(CMD.doctree)
 
