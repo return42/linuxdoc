@@ -10,11 +10,12 @@ PYBUILD  ?= py_build
 # python version to use
 PY       ?=3
 PYTHON   ?= python$(PY)
-PIP_INST ?=
-PYLINT   ?= pylint
+PIP      ?= pip$(PY)
+PIP_INST ?= --user
 PYDEBUG  ?= --pdb
 
 TEST_FOLDER  ?= ./tests
+TEST         ?= .
 
 VIRTUALENV   = virtualenv --python=$(PYTHON)
 VTENV_OPTS   = "--no-site-packages"
@@ -39,18 +40,17 @@ python-help::
 	@echo  '  py[un]install - [un]install python objects in editable mode'
 	@echo  '  upload-pypi   - upload $(PYDIST)/* files to PyPi'
 	@echo  'options:'
-	@echo  '  make PY=2  [targets] => to eval targets with python 2 (default 3)'
-	@echo  '  make PYLINT=pylint3  => to use pylint3 (default is standard pylint)'
-	@echo  '  make PIP_INST=...    => to set/unset pip install options'
-	@echo  '  make TEST=.          =>  choose test from $(TEST_FOLDER) (default "." runs all)'
-	@echo  '  make DEBUG=          =>  target "debug": do not invoke PDB on errors'
-	@echo  'When using target "debug", set breakpoints within py-source by adding::'
+	@echo  '  make PY=2  [targets] => to eval targets with python 2 ($(PY))'
+	@echo  '  make PIP_INST=       => to set/unset pip install options ($(PIP_INST))'
+	@echo  '  make TEST=.          => choose test from $(TEST_FOLDER) (default "." runs all)'
+	@echo  '  make DEBUG=          => target "debug": do not invoke PDB on errors'
+	@echo  'when using target "pydebug", set breakpoints within py-source by adding::'
 	@echo  '    ...'
 	@echo  '    DEBUG()'
 	@echo  '    ...'
 
 # ------------------------------------------------------------------------------
-# requirements
+# OS requirements
 # ------------------------------------------------------------------------------
 
 PHONY += msg-python-exe python-exe
@@ -70,6 +70,22 @@ python-exe:
 	@:
 endif
 
+msg-pip-exe:
+	@echo "\n  $(PIP) is required\n\n\
+  Make sure you have an updated pip installed, grab it from\n\
+  https://pip.pypa.io or install it from your package\n\
+  manager. On debian based OS these requirements are\n\
+  installed by::\n\n\
+    sudo apt-get install python$(PY)-pip\n" | $(FMT)
+
+ifeq ($(shell which $(PIP) >/dev/null 2>&1; echo $$?), 1)
+pip-exe: msg-pip-exe
+	$(error The '$(PIP)' command was not found)
+else
+pip-exe:
+	@:
+endif
+
 PHONY += msg-virtualenv-exe virtualenv-exe
 msg-virtualenv-exe:
 	@echo "\n  virtualenv is required\n\n\
@@ -86,13 +102,20 @@ virtualenv-exe:
 	@:
 endif
 
-PHONY += pylint-exe
-pylint-exe: $(PY_ENV)
-	$(PY_ENV_BIN)/pip $(PIP_VERBOSE) install $(PYLINT)
-
 # ------------------------------------------------------------------------------
 # commands
 # ------------------------------------------------------------------------------
+
+# $2 path to folder with setup.py, this uses pip from the OS
+quiet_cmd_pyinstall   = INSTALL   $@
+      cmd_pyinstall   = $(PIP) $(PIP_VERBOSE) install $(PIP_INST) -e $2
+
+# Uninstall the package. Since pip does not uninstall the no longer needed
+# depencies (something like autoremove) the depencies remain.
+
+# $2 package name to uninstall, this uses pip from the OS.
+quiet_cmd_pyuninstall = UNINSTALL $@
+      cmd_pyuninstall = $(PIP) $(PIP_VERBOSE) uninstall --yes $2
 
 # $2 path to folder where virtualenv take place
 quiet_cmd_virtualenv  = PYENV     $@
@@ -103,21 +126,9 @@ quiet_cmd_virtualenv  = PYENV     $@
 		echo "using virtualenv from $2";                        \
         fi
 
-
-# $2 path to folder with setup.py
-quiet_cmd_pyinstall   = INSTALL   $@
-      cmd_pyinstall   = $(PY_ENV_BIN)/pip $(PIP_VERBOSE) install $(PIP_INST) -e $2
-
-# Uninstall the package. Since pip does not uninstall the no longer needed
-# depencies (something like autoremove) the depencies remain.
-
-# $2 package name to uninstall
-quiet_cmd_pyuninstall = UNINSTALL $@
-      cmd_pyuninstall = $(PY_ENV_BIN)/pip $(PIP_VERBOSE) uninstall --yes $2
-
 # $2 path to lint
 quiet_cmd_pylint      = LINT      $@
-      cmd_pylint      = $(PY_ENV_BIN)/$(PYLINT) --rcfile utils/pylintrc $2
+      cmd_pylint      = $(PY_ENV_BIN)/pylint --rcfile utils/pylintrc $2
 
 quiet_cmd_pytest      = TEST      $@
       cmd_pytest      = $(PY_ENV_BIN)/tox -vv
@@ -144,7 +155,33 @@ quiet_cmd_pyclean     = CLEAN     $@
 # targets
 # ------------------------------------------------------------------------------
 
-PHONY += pybuild pyclean upload-pypi
+# for installation use the pip from the OS!
+PHONY += pyinstall
+pyinstall: pip-exe
+	$(call cmd,pyinstall,.)
+
+PHONY += pyuninstall
+pyuninstall: pip-exe
+	$(call cmd,pyuninstall,$(PYOBJECTS))
+
+PHONY += pyclean
+pyclean:
+	$(call cmd,pyclean)
+
+# to build *local* environment, python and virtualenv from the OS is needed!
+$(PY_ENV): virtualenv-exe python-exe
+	$(call cmd,virtualenv,$(PY_ENV))
+	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) -r requirements.txt
+
+PHONY += pylint-exe
+pylint-exe: $(PY_ENV)
+	$(PY_ENV_BIN)/pip $(PIP_VERBOSE) install pylint
+
+PHONY += pylint
+pylint: pylint-exe
+	$(call cmd,pylint,$(PYOBJECTS))
+
+PHONY += pybuild
 pybuild: $(PY_ENV)
 	$(call cmd,pybuild)
 
@@ -152,31 +189,13 @@ PHONY += pytest
 pytest: $(PY_ENV)
 	$(call cmd,pytest)
 
+PHONY += pydebug
 # set breakpoint with:
 #    DEBUG()
 # e.g. to run tests in debug mode in emacs use:
 #   'M-x pdb' ... 'make pydebug'
-
-PHONY += pydebug
 pydebug: $(PY_ENV)
 	DEBUG=$(DEBUG) $(PY_ENV_BIN)/pytest $(DEBUG) -v $(TEST_FOLDER)/$(TEST)
-
-pyclean:
-	$(call cmd,pyclean)
-
-PHONY += pylint
-pylint: pylint-exe
-	$(call cmd,pylint,$(PYOBJECTS))
-
-PHONY += pyinstall pyuninstall
-pyinstall:
-	$(call cmd,pyinstall,.)
-pyuninstall:
-	$(call cmd,pyuninstall,$(PYOBJECTS))
-
-$(PY_ENV): virtualenv-exe python-exe
-	$(call cmd,virtualenv,$(PY_ENV))
-	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) -r requirements.txt
 
 # With 'dependency_links=' setuptools supports dependencies on packages hosted
 # on other reposetories then PyPi, see "Packages Not On PyPI" [1].  The big
@@ -189,6 +208,7 @@ $(PY_ENV): virtualenv-exe python-exe
 # [2] https://github.com/pypa/pip/pull/1519
 
 # https://github.com/pypa/twine
+PHONY += upload-pypi
 upload-pypi: pyclean pybuild
 	@$(PY_ENV_BIN)/twine upload $(PYDIST)/*
 
