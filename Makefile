@@ -30,8 +30,14 @@ install: pyinstall
 PHONY += uninstall
 uninstall: pyuninstall
 
+PHONY += api-doc
+api-doc: $(PY_ENV)
+	rm -rf docs/linuxdoc-api
+	$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o docs/linuxdoc-api linuxdoc
+	rm -f docs/linuxdoc-api/modules.rst
+
 PHONY += docs
-docs:  sphinx-doc
+docs:  sphinx-doc api-doc
 	$(call cmd,sphinx,html,docs,docs)
 
 PHONY += clean
@@ -40,6 +46,7 @@ clean: pyclean docs-clean
 
 PHONY += help-rqmts
 rqmts: msg-sphinx-doc msg-pylint-exe msg-pip-exe
+
 
 .PHONY: $(PHONY)
 

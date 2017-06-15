@@ -84,7 +84,7 @@ def which(cmd):
     """Searches the ``cmd`` in the ``PATH`` enviroment.
 
     This *which* searches the PATH for executable ``cmd`` . First match is
-    returned, if nothing is found, ``None` is returned.
+    returned, if nothing is found, ``None`` is returned.
     """
     envpath = os.environ.get('PATH', None) or os.defpath
     for folder in envpath.split(os.pathsep):

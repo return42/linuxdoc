@@ -47,16 +47,10 @@ Source Code Documentation
 .. toctree::
    :maxdepth: 2
 
-   linuxdoc/linuxdoc
+   linuxdoc-api/linuxdoc
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
-
-
-.. automodule:: linuxdoc
-    :members:
-    :undoc-members:
-    :show-inheritance:
