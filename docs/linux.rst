@@ -2,32 +2,34 @@
 
 .. include:: refs.txt
 
-==========================
-Linux Kernel Documentation
-==========================
+.. _patch-linux-kernel:
+
+================================
+Patch Linux Kernel Documentation
+================================
 
 Starting with Linux Kernel v4.8 a `sphinx-doc`_ build is available to build
 formats like HTML from reStructuredText (`reST`_) markup. E.g. with::
 
-  make DOCBOOKS= htmldocs
+  make SPHINXDIRS="driver-api" htmldocs
 
-the sphinx build produce a HTML representation of the reST files *in and below*
-the ``Documentation/`` folder. The sphinx extensions for this build, which are
-shipped by the kernel source tree, are placed in the ``Documentation/sphinx``
-folder.
+the HTML of *The Linux driver implementer's API guide* is build.  The sphinx
+extensions for this build, which are shipped by the kernel source tree, are
+placed in the ``Documentation/sphinx`` folder.
 
-If you like to see how (and how fast) the *linuxdoc* extensions build your
-kernel documentation, install *linuxdoc* and replace the extensions in the
+If you like to see how the *linuxdoc* extensions build your kernel documentation
+(HTML, man, ...) install *linuxdoc* and replace the extensions in the
 ``conf.py``.
 
 .. hint::
 
    From the user's scope of view, most of the extensions work like the one from
    the kernel source tree. Mainly the ``kernel-doc`` extension from source tree
-   is replaced by the ``rstKernelDoc`` extension.
+   is replaced by the ``rstKernelDoc`` extension and a *man page* builder is
+   added.
 
    The ``rstKernelDoc`` replacement is a *superset* with additional options
-   :ref:`[ref] <kernel-doc:kernel-doc-directive>`. The ``rstKernelDoc``
+   :ref:`[ref] <kernel-doc-directive>`. The ``rstKernelDoc``
    extension uses a the kernel-doc parser from the *linuxdoc* project.  Compared
    to the kernel-doc Perl script from the kernel's source tree, especially the
    sectioning of the reST output is different and the ERROR/WARNING log is more
@@ -35,7 +37,7 @@ kernel documentation, install *linuxdoc* and replace the extensions in the
 
 To get *linuxdoc* into your kernel-build install it::
 
-  pip install [--user] git+http://github.com/return42/linuxdoc.git
+  pip install --user git+http://github.com/return42/linuxdoc.git
 
 and add the following patch to the Linux source tree:
 
@@ -47,191 +49,42 @@ and add the following patch to the Linux source tree:
 .. hint::
 
    ATM the linux documentation build is heavily WIP, with hope the patch above
-   should fit on Jon's doc-next (see DOCUMENTATION at MAINTAINERS-file)::
+   should fit on Jon's docs-next (see DOCUMENTATION at MAINTAINERS-file)::
 
      git://git.lwn.net/linux.git docs-next
 
-   If the patch file won't work for you, below you will find the description of
-   the patch, so you should be able to patch your kernel build files manually.
+ Its also recommended to install a sticky Sphinx version::
 
+   pip install --user Sphinx==1.5.6
 
-Patch linux Documentation build
-===============================
+With the patched kernel sources, you are able to build the HTML and *man
+pages* e.g.  of *The Linux driver implementer's API guide*::
 
-In the ``Makefile.sphinx``, the patch adds a target to build man pages from
-kernel-doc comments. For building man pages the ``kernel-doc-man`` builder from
-the *linuxdoc* project is used (part of ``linuxdoc.manKernelDoc``), but be
-aware: for creating man pages, you have to define the content for, read section
-:ref:`create-manpages`.
+  make SPHINXDIRS="driver-api" htmldocs mandocs
 
-The ``KERNELDOC_CONF`` is droped, since it is not needed by *linuxdoc*.
+ATM the PDF build is fragile and mostly broken. Both, the *linux kernel
+documentation* and the *linuxdoc* have problems to build PDF. If you give it a
+try use target ``pdfdocs``.
 
-.. code-block:: diff
+The build shows much more log messages, particularly the *kernel-doc* parser is
+more strict and spits out a lot of warnings and errors to improve your
+kernel-doc comments in the source code.
 
-    diff --git a/Documentation/Makefile.sphinx b/Documentation/Makefile.sphinx
-    index 707c653..b9eea4c 100644
-    --- a/Documentation/Makefile.sphinx
-    +++ b/Documentation/Makefile.sphinx
-    @@ -37,8 +37,7 @@ HAVE_PDFLATEX := $(shell if which $(PDFLATEX) >/dev/null 2>&1; then echo 1; else
-     PAPEROPT_a4     = -D latex_paper_size=a4
-     PAPEROPT_letter = -D latex_paper_size=letter
-     KERNELDOC       = $(srctree)/scripts/kernel-doc
-    -KERNELDOC_CONF  = -D kerneldoc_srctree=$(srctree) -D kerneldoc_bin=$(KERNELDOC)
-    -ALLSPHINXOPTS   =  $(KERNELDOC_CONF) $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
-    +ALLSPHINXOPTS   =  $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
-     # the i18n builder cannot share the environment and doctrees with the others
-     I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
-
-    @@ -93,9 +92,12 @@ xmldocs:
-     # no-ops for the Sphinx toolchain
-     sgmldocs:
-     psdocs:
-    -mandocs:
-     installmandocs:
-
-    +mandocs:
-    +	@$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,kernel-doc-man,$(var),man,$(var)))
-    +
-    +
-     cleandocs:
-            $(Q)rm -rf $(BUILDDIR)
-            $(Q)$(MAKE) BUILDDIR=$(abspath $(BUILDDIR)) -C Documentation/media clean
-
-In the ``conf.py`` (`sphinx config`_), the patch deactivates the sphinx
-extensions from the kernel source tree and activates *linuxdoc* sphinx
-extensions. At this time (in Jan. 2017) there is also a dump "man_pages" setup
-which must be disabled.
+A *Oops* entrie is inserted in the output (e.g. HTML) when the kernel-doc parser
+can't parse requested documentation. For more details see *kernel-doc-HOWTO* at
+:ref:`[ref] <kernel-doc-directive>`. If you want to refer all *Oops*
+messages in front of the document add the *todolist* directive to your ``index.rst``
+file. E.g. for driver-api:
 
 .. code-block:: diff
 
-    diff --git a/Documentation/conf.py b/Documentation/conf.py
-    index 1ac958c..b5903c6 100644
-    --- a/Documentation/conf.py
-    +++ b/Documentation/conf.py
-    @@ -34,7 +34,13 @@ from load_config import loadConfig
-     # Add any Sphinx extension module names here, as strings. They can be
-     # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-     # ones.
-    -extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain']
-    +extensions = [
-    +    'linuxdoc.rstKernelDoc',
-    +    'linuxdoc.rstFlatTable',
-    +    'linuxdoc.kernel_include',
-    +    'linuxdoc.manKernelDoc',
-    +    'linuxdoc.cdomain',
-    +    'sphinx.ext.todo', ]
+   diff --git a/Documentation/driver-api/index.rst b/Documentation/driver-api/index.rst
+   index 3cf1ace..5aa6f87 100644
+   --- a/Documentation/driver-api/index.rst
+   +++ b/Documentation/driver-api/index.rst
+   @@ -51,3 +51,5 @@ available subsections can be seen below.
+       =======
 
-     # The name of the math extension changed on Sphinx 1.4
-     if major == 1 and minor > 3:
-    @@ -133,7 +139,7 @@ pygments_style = 'sphinx'
-     #keep_warnings = False
-
-     # If true, `todo` and `todoList` produce output, else they produce nothing.
-    -todo_include_todos = False
-    +todo_include_todos = True
-
-     primary_domain = 'C'
-     highlight_language = 'none'
-    @@ -385,10 +391,7 @@ latex_documents = [
-
-     # One entry per manual page. List of tuples
-     # (source start file, name, description, authors, manual section).
-    -man_pages = [
-    -    (master_doc, 'thelinuxkernel', 'The Linux Kernel Documentation',
-    -     [author], 1)
-    -]
-    +man_pages = []
-
-     # If true, show URL addresses after external links.
-     #man_show_urls = False
-    @@ -505,8 +508,9 @@ pdf_documents = [
-     # kernel-doc extension configuration for running Sphinx directly (e.g. by Read
-     # the Docs). In a normal build, these are supplied from the Makefile via command
-     # line arguments.
-    -kerneldoc_bin = '../scripts/kernel-doc'
-    -kerneldoc_srctree = '..'
-    +kernel_doc_verbose_warn = False
-    +kernel_doc_raise_error = False
-    +kernel_doc_mode = "reST"
-
-     # ------------------------------------------------------------------------------
-     # Since loadConfig overwrites settings from the global namespace, it has to be
-
-In the ``index.rst``, the patch adds a list of TODO entries with kernel-doc
-*Oops*. A *Oops* entrie is generated when the kernel-doc parser can't parse
-requested documentation. For more details see *kernel-doc-HOWTO* at :ref:`[ref]
-<kernel-doc:kernel-doc-directive>`.
-
-.. code-block:: diff
-
-    diff --git a/Documentation/index.rst b/Documentation/index.rst
-    index cb5d776..066104e 100644
-    --- a/Documentation/index.rst
-    +++ b/Documentation/index.rst
-    @@ -72,3 +72,5 @@ Indices and tables
-     ==================
-
-     * :ref:`genindex`
-    +
-    +.. todolist::
-
-Build the HTML documentation::
-
-  make DOCBOOKS= htmldocs
-
-and scroll to the bottom of the ``index.html``, there you will find the TODO
-entries generated by *Oops*.  If you want to add this *Oops* feature to your
-sub-folder build, add the following to your sub-folder's index file
-(e.g. ``media/index.rst``).
-
-.. code-block:: rst
-
-   .. only::  subproject
-
-      .. todolist::
-
-Build HTML of your sub-folder (e.g. media)::
-
-    make SPHINXDIRS=media htmldocs
-
-If kernel-doc get some *Oops* for your sub-folder, you will find them in the
-bottom of your ``index.html`` file.
-
-.. _create-manpages:
-
-Create man pages
-================
-
-To get man pages from kernel-doc comments, add the ``:man-sect:`` option to your
-kernel-doc directives. E.g. to build all man pages of the media's remote control
-(file ``media/kapi/rc-core.rst``) add ``:man-sect: 9`` to all the kernel-doc
-includes.
-
-.. code-block:: rst
-
-  Remote Controller devices
-  =========================
-
-  Remote Controller core
-  ----------------------
-
-  .. kernel-doc:: include/media/rc-core.h
-     :man-sect: 9
-
-  .. kernel-doc:: include/media/rc-map.h
-     :man-sect: 9
-
-  LIRC
-  ----
-
-  .. kernel-doc:: include/media/lirc_dev.h
-     :man-sect: 9
-
-To create man pages call the mandocs target::
-
-    make DOCBOOKS= mandocs
-
-or alternatively compile only the sub-folder::
-
-    make SPHINXDIRS=media mandocs
-
+       * :ref:`genindex`
+   +
+   +   .. todolist::

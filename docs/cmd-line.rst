@@ -30,7 +30,7 @@ of the source tree, e.g. the include folder::
 The option ``--markup kernel-doc`` is a tribute to the historical fact, that
 most of the kernel-doc comments are old and not reST compliant. This
 circumstance is also described in the kernel-doc-HOWTO (
-:ref:`kernel-doc:vintage-kernel-doc-mode`)
+:ref:`vintage-kernel-doc-mode`)
 
 .. _kernel-lintdoc:
 
@@ -54,9 +54,9 @@ include folder::
 
 Parse kernel-doc comments from source code and print the reST to stdout.  This
 command exits, to see the generated reST, normally you use the :ref:`kernel-doc
-directive <kernel-doc:kernel-doc-directive>` in your reST documentation.::
+directive <kernel-doc-directive>` in your reST documentation.::
 
   $ kernel-doc /share/linux/include/media/lirc_dev.h
 
-To see the difference between :ref:`kernel-doc:vintage-kernel-doc-mode` and
-:ref:`kernel-doc:reST-kernel-doc-mode` use the option ``--markup kernel-doc``.
+To see the difference between :ref:`vintage-kernel-doc-mode` and
+:ref:`reST-kernel-doc-mode` use the option ``--markup kernel-doc``.

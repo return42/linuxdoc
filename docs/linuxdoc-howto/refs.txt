@@ -1,0 +1,23 @@
+.. _`reST (spec)`: http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
+.. _`reST (quickref)`: http://docutils.sourceforge.net/docs/user/rst/quickref.html
+.. _`reST include directive`: http://docutils.sourceforge.net/docs/ref/rst/directives.html#including-an-external-document-fragment
+
+.. _`reST`: http://www.sphinx-doc.org/en/stable/rest.html
+.. _`Sphinx markup constructs`: http://www.sphinx-doc.org/en/stable/markup/index.html
+.. _`sphinx-doc`: http://www.sphinx-doc.org/
+.. _`sphinx-doc FAQ`: http://www.sphinx-doc.org/en/stable/faq.html
+.. _`sphinx domains`: http://www.sphinx-doc.org/en/stable/domains.html
+.. _`sphinx cross references`: http://www.sphinx-doc.org/en/stable/markup/inline.html#cross-referencing-arbitrary-locations
+.. _`sphinx.ext.intersphinx`: http://www.sphinx-doc.org/en/stable/ext/intersphinx.html#module-sphinx.ext.intersphinx
+.. _`intersphinx`: http://www.sphinx-doc.org/en/stable/ext/intersphinx.html
+.. _`sphinx config`: http://www.sphinx-doc.org/en/stable/config.html
+.. _`Sphinx's autodoc`: http://www.sphinx-doc.org/en/stable/ext/autodoc.html
+.. _`Python domain`: http://www.sphinx-doc.org/en/stable/domains.html#the-python-domain
+.. _`C domain`: http://www.sphinx-doc.org/en/stable/domains.html#cross-referencing-c-constructs
+
+.. _`docutils`: http://docutils.sourceforge.net/docs/index.html
+.. _`docutils FAQ`: http://docutils.sourceforge.net/FAQ.html
+
+.. _`Kernel's Source code documentation`: https://h2626237.stratoserver.net/kernel/linux_src_doc/index.html
+.. _`nitpick_ignore`: http://www.sphinx-doc.org/en/stable/config.html#confval-nitpick_ignore
+.. _`nitpicky`: http://www.sphinx-doc.org/en/stable/config.html#confval-nitpicky

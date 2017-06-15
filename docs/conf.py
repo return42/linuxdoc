@@ -17,14 +17,16 @@ release   = linuxdoc.__version__
 show_authors = True
 
 extensions = [
-    'sphinx.ext.autodoc'
+    'linuxdoc.rstFlatTable'      # Implementation of the 'flat-table' reST-directive.
+    , 'linuxdoc.rstKernelDoc'    # Implementation of the 'kernel-doc' reST-directive.
+    , 'linuxdoc.kernel_include'  # Implementation of the 'kernel-include' reST-directive.
+    , 'linuxdoc.manKernelDoc'    # Implementation of the 'kernel-doc-man' builder
+    , 'linuxdoc.cdomain'         # Replacement for the sphinx c-domain.
+    , 'linuxdoc.kfigure'         # Sphinx extension which implements scalable image handling.
+    , 'sphinx.ext.autodoc'
     , 'sphinx.ext.extlinks'
-    #, 'sphinx.ext.autosummary'
-    #, 'sphinx.ext.doctest'
     , 'sphinx.ext.todo'
     , 'sphinx.ext.coverage'
-    #, 'sphinx.ext.pngmath'
-    #, 'sphinx.ext.mathjax'
     , 'sphinx.ext.viewcode'
     , 'sphinx.ext.intersphinx'
 ]
@@ -38,11 +40,55 @@ html_context = {
     ],
 }
 
-
+# since https://h2626237.stratoserver.net/ is self-signed, disable tls verify
+tls_verify = False
 intersphinx_mapping = {}
-#intersphinx_mapping['linux'] = ('https://return42.github.io/sphkerneldoc/linux_src_doc/', None)
-intersphinx_mapping['kernel-doc'] = ('https://return42.github.io/sphkerneldoc/books/kernel-doc-HOWTO/', None)
-#intersphinx_mapping['template-book'] = ('http://return42.github.io/sphkerneldoc/books/template-book/', None)
-#intersphinx_mapping['linuxdoc'] =  ('http://return42.github.io/linuxdoc', None)
-intersphinx_mapping['dbxml2rst'] =  ('http://return42.github.io/dbxml2rst', None)
+intersphinx_mapping['template-book'] = ('https://h2626237.stratoserver.net/kernel/books/template-book/', None)
+intersphinx_mapping['process'] = ('https://h2626237.stratoserver.net/kernel/books/process/', None)
+#intersphinx_mapping['linux'] = ('https://h2626237.stratoserver.net/kernel/linux_src_doc/', None)
+
+# ------------------------------------------------------------------------------
+# Options of the kernel-doc parser
+# ------------------------------------------------------------------------------
+
+# If true, fatal errors (like missing function descripions) raise an error. If
+# false, insert Oops messages for fatal errors.  Default: True
+kernel_doc_raise_error = False
+
+# Oops messages are Sphinx ``.. todo::`` directives. To inster the Oops messages
+# from the kernel-doc parser we have to active todo_include_todos also.
+todo_include_todos = True
+
+# If true, more warnings will be logged. E.g. a missing description of a
+# function's return value will be logged.
+# Default: True
+kernel_doc_verbose_warn = False
+
+# Set parser's default kernel-doc mode ``reST|kernel-doc``.
+# Default: "reST"
+kernel_doc_mode = "reST"
+
+# Global fallback for man section of kernel-doc directives. Set this value if
+# you want to create man pages for those kernel-doc directives, which has not
+# been set a ``:man-sect:`` value.
+# Default: None
+kernel_doc_mansect = 9
+
+# In nickpick mode, it will complain about lots of missing references that
+#
+# 1) are just typedefs like: bool, __u32, etc;
+# 2) It will complain for things like: enum, NULL;
+# 3) It will complain for symbols that should be on different
+#    books (but currently aren't ported to ReST)
+#
+# The list below has a list of such symbols to be ignored in nitpick mode
+#
+nitpick_ignore = [
+    ("c:type", "bool"),
+    ("c:type", "enum"),
+    ("c:type", "u16"),
+    ("c:type", "u32"),
+    ("c:type", "u64"),
+    ("c:type", "u8"),
+    ]
 

@@ -39,7 +39,7 @@ u"""
 
     Mostly authors will use this feature in their reST documents in conjunction
     with the ``.. kernel-doc::`` :ref:`directive
-    <kernel-doc:kernel-doc-directive>`, to create man pages from kernel-doc
+    <kernel-doc-directive>`, to create man pages from kernel-doc
     comments.  This could be done, by setting the man section number with the
     option ``man-sect``, e.g.::
 

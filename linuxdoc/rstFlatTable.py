@@ -238,12 +238,12 @@ class ListTableBuilder(object):
     def roundOffTableDefinition(self):
         u"""Round off the table definition.
 
-        This method rounds off the table definition in :py:member:`rows`.
+        This method rounds off the table definition in :py:attr:`rows`.
 
         * This method inserts the needed ``None`` values for the missing cells
-        arising from spanning cells over rows and/or columns.
+          arising from spanning cells over rows and/or columns.
 
-        * recount the :py:member:`max_cols`
+        * recount the :py:attr:`max_cols`
 
         * Autospan or fill (option ``fill-cells``) missing cells on the right
           side of the table-row

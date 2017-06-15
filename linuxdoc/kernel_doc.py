@@ -12,7 +12,7 @@ u"""
     :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
     The kernel-doc parser extracts documentation from Linux kernel's source code
-    comments. This implements the :ref:`kernel-doc:kernel-doc-HOWTO`.
+    comments. This implements the :ref:`kernel-doc markup <kernel-doc-intro>`.
 
     This module provides an API -- which could be used by a sphinx-doc generator
     extension -- and a command-line interface, see ``--help``::
