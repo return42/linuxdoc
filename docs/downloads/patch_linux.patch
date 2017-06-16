@@ -23,7 +23,7 @@ index a423203..b79472a 100644
  	@:
  
 diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 77d47bb..70dc56f 100644
+index 77d47bb..f6de2f6 100644
 --- a/Documentation/conf.py
 +++ b/Documentation/conf.py
 @@ -34,7 +34,15 @@ needs_sphinx = '1.2'
@@ -43,16 +43,17 @@ index 77d47bb..70dc56f 100644
  
  # The name of the math extension changed on Sphinx 1.4
  if major == 1 and minor > 3:
-@@ -133,7 +141,7 @@ pygments_style = 'sphinx'
+@@ -132,9 +140,6 @@ pygments_style = 'sphinx'
+ # If true, keep warnings as "system message" paragraphs in the built documents.
  #keep_warnings = False
  
- # If true, `todo` and `todoList` produce output, else they produce nothing.
+-# If true, `todo` and `todoList` produce output, else they produce nothing.
 -todo_include_todos = False
-+todo_include_todos = True
- 
+-
  primary_domain = 'c'
  highlight_language = 'none'
-@@ -408,10 +416,7 @@ latex_documents = [
+ 
+@@ -408,10 +413,7 @@ latex_documents = [
  
  # One entry per manual page. List of tuples
  # (source start file, name, description, authors, manual section).
@@ -64,7 +65,7 @@ index 77d47bb..70dc56f 100644
  
  # If true, show URL addresses after external links.
  #man_show_urls = False
-@@ -525,11 +530,28 @@ pdf_documents = [
+@@ -525,11 +527,50 @@ pdf_documents = [
      ('kernel-documentation', u'Kernel', u'Kernel', u'J. Random Bozo'),
  ]
  
@@ -77,9 +78,13 @@ index 77d47bb..70dc56f 100644
 +# Options of the kernel-doc parser
 +# ------------------------------------------------------------------------------
 +
-+# If true, fatal errors (like missing function descripions) raise an
-+# error. Default: True
++# If true, fatal errors (like missing function descripions) raise an error. If
++# false, insert Oops messages for fatal errors.  Default: True
 +kernel_doc_raise_error = False
++
++# Oops messages are Sphinx ``.. todo::`` directives. To inster the Oops messages
++# from the kernel-doc parser we have to active todo_include_todos also.
++todo_include_todos = True
 +
 +# If true, more warnings will be logged. E.g. a missing description of a
 +# function's return value will be logged.
@@ -95,6 +100,24 @@ index 77d47bb..70dc56f 100644
 +# been set a ``:man-sect:`` value.
 +# Default: None
 +kernel_doc_mansect = 9
++
++# In nickpick mode, it will complain about lots of missing references that
++#
++# 1) are just typedefs like: bool, __u32, etc;
++# 2) It will complain for things like: enum, NULL;
++# 3) It will complain for symbols that should be on different
++#    books (but currently aren't ported to ReST)
++#
++# The list below has a list of such symbols to be ignored in nitpick mode
++#
++nitpick_ignore = [
++    ("c:type", "bool"),
++    ("c:type", "enum"),
++    ("c:type", "u16"),
++    ("c:type", "u32"),
++    ("c:type", "u64"),
++    ("c:type", "u8"),
++    ]
  
  # ------------------------------------------------------------------------------
  # Since loadConfig overwrites settings from the global namespace, it has to be
