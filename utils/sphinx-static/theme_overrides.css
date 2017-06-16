@@ -81,7 +81,7 @@ div[class^="highlight"] pre {
     div.rst-example > .admonition-title:before{
         font-family: inherit;
         font-style: italic;
-        content: "rendered reST markup:";}
+        content: "rendered example:";}
 
     div.rst-example {
         padding-left: 12px; padding-right: 12px;
