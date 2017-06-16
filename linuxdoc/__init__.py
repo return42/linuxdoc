@@ -1,7 +1,9 @@
 # -*- coding: utf-8; mode: python -*-
 u"""
-The *linuxdoc* lib contains python extensions related to the build process of
-the Linux-Kernel documentation.
+The *linuxdoc* lib contains Sphinx-doc extensions and command line tools
+related to the build process of the Linux-Kernel documentation.  Even if this
+project started in context of the Linux-Kernel documentation, you can use these
+extensions in common Sphinx-doc projects.
 
 :copyright:  Copyright (C) 2017 Markus Heiser
 :e-mail:     markus.heiser@darmarIT.de

@@ -2,36 +2,17 @@
 linuxdoc
 ========
 
-The *linuxdoc* lib contains python extensions related to the build process of
-the Linux-Kernel documentation.
+The *linuxdoc* lib contains Sphinx-doc extensions and command line tools
+related to the build process of the Linux-Kernel documentation.  Even if this
+project started in context of the Linux-Kernel documentation, you can use these
+extensions in common Sphinx-doc projects.
+
+For installation read file ./docs/install.rst or jump to:
+
+  https://return42.github.io/linuxdoc/install.html
 
 :copyright:  Copyright (C) 2017 Markus Heiser
 :e-mail:     markus.heiser@darmarIT.de
 :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 :docs:       http://return42.github.io/linuxdoc
 :repository: `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
-
-It is a straight forward implementation in pure python (no perl script or other
-executable calls). Some of theses extensions are already a part of the kernel
-source others not (yet). E.g. the Sphinx-doc extensions ``flat-table`` and
-``kernel-include`` are merged into the kernel source tree. On the other side,
-e.g. for parsing kernel-doc comments, the linux kernel build uses a perl scripts
-while linuxdoc brings a python module with a kernel-doc parser. With this, the
-documentation build becomes much more clear and flexible (and faster).
-
-If you like to see how (fast) *linuxdoc* builds your kernel documentation,
-follow the more detailed installation instruction in the documentation.
-
-
-Installing
-==========
-
-Install bleeding edge::
-
-  pip install --user git+http://github.com/return42/linuxdoc.git
-
-or clone from github::
-
-  git clone https://github.com/return42/linuxdoc
-  cd linuxdoc
-  make install
