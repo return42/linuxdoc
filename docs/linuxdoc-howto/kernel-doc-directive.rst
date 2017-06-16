@@ -262,7 +262,7 @@ Highlights and cross-references
 ===============================
 
 The following special patterns are recognized in the kernel-doc comment
-descriptive text and converted to proper reStructuredText markup and Sphinx `C
+descriptive text and converted to proper reStructuredText markup and `Sphinx's C
 Domain`_ references.
 
 .. attention::

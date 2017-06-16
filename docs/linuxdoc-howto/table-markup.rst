@@ -196,27 +196,25 @@ The ``flat-table`` (:py:class:`FlatTable`) is a double-stage list similar
 to the ``list-table`` with some additional features:
 
 * *column-span*: with the role ``cspan`` a cell can be extended through
-   additional columns
+  additional columns
 
 * *row-span*: with the role ``rspan`` a cell can be extended through
-   additional rows
+  additional rows
 
-* *auto span* rightmost cell of a table row over the missing cells on the right
+* *auto-span* rightmost cell of a table row over the missing cells on the right
   side of that table-row.  With Option ``:fill-cells:`` this behavior can
   changed from *auto span* to *auto fill*, which automatically inserts (empty)
   cells instead of spanning the last cell.
 
 options:
-
-:header-rows:   [int] count of header rows
-:stub-columns:  [int] count of stub columns
-:widths:        [[int] [int] ... ] widths of columns
-:fill-cells:    instead of auto-span missing cells, insert missing cells
+  :header-rows:   [int] count of header rows
+  :stub-columns:  [int] count of stub columns
+  :widths:        [[int] [int] ... ] widths of columns
+  :fill-cells:    instead of auto-span missing cells, insert missing cells
 
 roles:
-
-:cspan: [int] additional columns (*morecols*)
-:rspan: [int] additional rows (*morerows*)
+  :cspan: [int] additional columns (*morecols*)
+  :rspan: [int] additional rows (*morerows*)
 
 The example below shows how to use this markup.  The first level of the staged
 list is the *table-row*. In the *table-row* there is only one markup allowed,

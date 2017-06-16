@@ -22,12 +22,11 @@ And all the other features of LinuxDoc:
 .. toctree::
    :maxdepth: 1
 
-   table-markup
-   kernel-include-directive
-   cdomain
    kfigure
+   table-markup
+   cdomain
    man-pages
-
+   kernel-include-directive
 
 At least some handy links about reST_  and the `Sphinx markup constructs`_:
 

@@ -65,7 +65,7 @@ kernel-doc comments in the source code.
 
 A *Oops* entrie is inserted in the output (e.g. HTML) when the kernel-doc parser
 can't parse requested documentation. For more details see
-``kernel_doc_raise_error`` in the :ref:`<kernel-doc-config>`. If you want to
+``kernel_doc_raise_error`` in the :ref:`kernel-doc-config`. If you want to
 refer all *Oops* messages in front of the document add the *todolist* directive
 to your ``index.rst`` file. E.g. for driver-api:
 

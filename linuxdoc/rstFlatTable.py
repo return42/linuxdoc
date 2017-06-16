@@ -19,7 +19,7 @@ u"""
     * *row-span*: with the role ``rspan`` a cell can be extended through
       additional rows
 
-    * *auto span* rightmost cell of a table row over the missing cells on the
+    * *auto-span* rightmost cell of a table row over the missing cells on the
       right side of that table-row.  With Option ``:fill-cells:`` this behavior
       can changed from *auto span* to *auto fill*, which automaticly inserts
       (empty) cells instead of spanning the last cell.

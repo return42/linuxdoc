@@ -16,8 +16,9 @@ the ``--help`` option).
 ``kernel-autodoc``
 ==================
 
-Generate a tree of reST files with the content from parsed kernel
-sources. E.g. to parse kernel's whole source tree::
+Suitable for automatic API documentation.  Parses your source tree, grabs
+kernel-doc comments and generates analogous tree of reST files with the content
+from the kernel-doc comments. E.g. to parse kernel's whole source tree::
 
   $ kernel-autodoc /share/linux ./out
 
@@ -29,8 +30,7 @@ of the source tree, e.g. the include folder::
 
 The option ``--markup kernel-doc`` is a tribute to the historical fact, that
 most of the kernel-doc comments are old and not reST compliant. This
-circumstance is also described in the kernel-doc-HOWTO (
-:ref:`vintage-kernel-doc-mode`)
+circumstance is also described see :ref:`[ref] <vintage-kernel-doc-mode>`
 
 .. _kernel-lintdoc:
 
@@ -47,7 +47,7 @@ include folder::
 
   $ kernel-lintdoc /share/linux/include/
 
-.. _kernel-doc:
+.. _kernel-doc-cmd:
 
 ``kernel-doc``
 ==============

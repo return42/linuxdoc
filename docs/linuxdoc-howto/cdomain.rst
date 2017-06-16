@@ -7,7 +7,7 @@
 Customized sphinx c-domain
 ==========================
 
-The LinuxDoc brings a customized Sphinx `C Domain`_ extension. List of
+The LinuxDoc brings a customized `Sphinx's C Domain`_ extension. List of
 customizations:
 
 * Handle signatures of function-like macros well. Don't try to deduce

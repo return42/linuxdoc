@@ -8,10 +8,10 @@ man pages from kernel-doc comments
 ==================================
 
 The ``kernel-doc-man`` builder produces manual pages in the groff format. It is
-a *man* page sphinx-builder mainly written to generate manual pages from
+a *man* page builder for Sphinx-doc mainly written to generate manual pages from
 kernel-doc comments by:
 
-* scanning Sphinx's master ``doc-tree`` for sections marked with a
+* scanning Sphinx's master ``doc-tree`` for *sections* marked with a
 
   .. code-block:: rst
 
@@ -48,5 +48,5 @@ With this ``:man-sect: 9`` option, the kernel-doc parser will insert a:
    .. kernel-doc-man:: <declaration-name>.<man-sect no>
 
 directive in the reST output, for all :ref:`exported <kernel-doc-options>`
-function, union etc. which is documentd by a kernel-doc comment in the source
+function, union etc. which is documentd with a kernel-doc comment in the source
 code.

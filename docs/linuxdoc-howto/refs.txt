@@ -12,8 +12,8 @@
 .. _`intersphinx`: http://www.sphinx-doc.org/en/stable/ext/intersphinx.html
 .. _`sphinx config`: http://www.sphinx-doc.org/en/stable/config.html
 .. _`Sphinx's autodoc`: http://www.sphinx-doc.org/en/stable/ext/autodoc.html
-.. _`Python domain`: http://www.sphinx-doc.org/en/stable/domains.html#the-python-domain
-.. _`C domain`: http://www.sphinx-doc.org/en/stable/domains.html#cross-referencing-c-constructs
+.. _`Sphinx's Python domain`: http://www.sphinx-doc.org/en/stable/domains.html#the-python-domain
+.. _`Sphinx's C domain`: http://www.sphinx-doc.org/en/stable/domains.html#cross-referencing-c-constructs
 
 .. _`docutils`: http://docutils.sourceforge.net/docs/index.html
 .. _`docutils FAQ`: http://docutils.sourceforge.net/FAQ.html

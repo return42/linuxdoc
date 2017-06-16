@@ -18,15 +18,15 @@ members, enumerations, and typedefs.
 .. note::
 
    The kernel-doc format is deceptively similar to Doxygen, javadoc or `Sphinx's
-   autodoc`_ which grabs for comments in the `Python domain`_.  The kernel-doc
+   autodoc`_ which grabs for comments in `Sphinx's Python domain`_.  The kernel-doc
    format has a long tradition, e.g. its also well highlighted in your emacs ;)
 
-If you are familiar with Sphinx, you might know about the `C domain`_
+If you are familiar with Sphinx, you might know about `Sphinx's C domain`_
 markup. Compared with the kernel-doc markup is less verbose, more **"C"
 friendly** and there exists a kernel-doc parser. The kernel-doc parser grabs the
 documentation from your C sources and generates proper reST, which contain
-markup of the `C domain`_). The descriptions are filtered for special kernel-doc
-highlights and cross-references.
+markup of `Sphinx's C domain`_. The descriptions are filtered for special
+kernel-doc highlights and cross-references.
 
 The opening comment mark ``/**`` is reserved for kernel-doc comments.  Only
 comments so marked will be considered by the kernel-doc tools, and any comment

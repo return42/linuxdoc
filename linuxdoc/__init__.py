@@ -1,6 +1,6 @@
 # -*- coding: utf-8; mode: python -*-
 u"""
-The *linuxdoc* lib contains Sphinx-doc extensions and command line tools
+The LinuxDoc library contains Sphinx-doc extensions and command line tools
 related to the build process of the Linux-Kernel documentation.  Even if this
 project started in context of the Linux-Kernel documentation, you can use these
 extensions in common Sphinx-doc projects.
@@ -15,5 +15,5 @@ extensions in common Sphinx-doc projects.
 __version__     = "20170614"
 __copyright__   = "2017 Markus Heiser"
 __url__         = "https://github.com/return42/linuxdoc"
-__description__ = "python extensions related to the Linux-Kernel documentation build"
+__description__ = "Sphinx-doc extensions & tools to extract documentation from C/C++ source file comments."
 __license__     = "GPLv2"
