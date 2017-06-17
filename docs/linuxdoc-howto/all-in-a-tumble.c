@@ -59,5 +59,35 @@ SYSCALL_DEFINE4(rt_sigprocmask, int, how, sigset_t __user *, nset,
   ...
   return 0;
 }
+/* parse-SNAP: rarely_code_styles*/
+/**
+* enum rarely_enum - enum to test parsing rarely code styles
+* @F1: f1
+* @F2: f2
+*/
+enum rarely_enum {
+	F1,
+
+	F2,
+};
+
+
+/**
+* struct rarely_struct - struct to test parsing rarely code styles
+* @foofoo: lorem
+* @barbar: ipsum
+*/
+
+struct rarely_struct {
+	struct foo
+
+	foofoo;
+
+	struct bar
+
+	barbar;
+};
+
 /* parse-SNIP: xxxx */
+
 
