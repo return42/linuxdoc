@@ -6,6 +6,8 @@ include utils/makefile.sphinx
 
 GIT_URL   = https://github.com/return42/linuxdoc.git
 PYOBJECTS = linuxdoc
+DOC       = docs
+API_DOC   = $(DOC)/$(PYOBJECTS)-api
 
 all: clean pylint pytest build docs
 
@@ -30,18 +32,17 @@ install: pyinstall
 PHONY += uninstall
 uninstall: pyuninstall
 
-PHONY += api-doc
-api-doc: $(PY_ENV)
-	rm -rf docs/linuxdoc-api
-	$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o docs/linuxdoc-api linuxdoc
-	rm -f docs/linuxdoc-api/modules.rst
-
 PHONY += docs
-docs:  sphinx-doc api-doc
+docs:  sphinx-doc $(API_DOC)
 	$(call cmd,sphinx,html,docs,docs)
+
+$(API_DOC): $(PY_ENV)
+	$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o docs/linuxdoc-api linuxdoc
+	rm -f $(API_DOC)/modules.rst
 
 PHONY += clean
 clean: pyclean docs-clean
+	rm -rf ./$(API_DOC)
 	$(call cmd,common_clean)
 
 PHONY += help-rqmts
