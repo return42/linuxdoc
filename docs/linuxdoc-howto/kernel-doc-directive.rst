@@ -3,9 +3,9 @@
 
 .. _kernel-doc-directive:
 
-================================
-Use kernel-doc in reST documents
-================================
+============================
+kernel-doc in reST documents
+============================
 
 There exists a `reST-directive
 <http://www.sphinx-doc.org/en/stable/rest.html#directives>`_ named

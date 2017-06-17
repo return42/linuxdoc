@@ -2,9 +2,9 @@
 
 .. _kernel-doc-examples:
 
-=====================
-Examples & test cases
-=====================
+===========================
+kernel-doc examples & tests
+===========================
 
 .. kernel-doc:: ./all-in-a-tumble.h
     :doc: About Examples
