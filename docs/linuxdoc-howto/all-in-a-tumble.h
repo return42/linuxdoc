@@ -335,3 +335,52 @@ int vintage(int parameter_a, char parameter_b)
   return a + b;
 }
 
+/* some C&P for extended tests
+ */
+
+/**
+* struct nfp_flower_priv - Flower APP per-vNIC priv data
+* @nn:                Pointer to vNIC
+* @mask_id_seed:      Seed used for mask hash table
+* @flower_version:    HW version of flower
+* @mask_ids:          List of free mask ids
+* @mask_table:        Hash table used to store masks
+* @flow_table:        Hash table used to store flower rules
+*/
+struct nfp_flower_priv {
+      struct nfp_net *nn;
+      u32 mask_id_seed;
+      u64 flower_version;
+      struct nfp_fl_mask_id mask_ids;
+      DECLARE_HASHTABLE(mask_table, NFP_FLOWER_MASK_HASH_BITS);
+      DECLARE_HASHTABLE(flow_table, NFP_FLOWER_HASH_BITS);
+};
+
+/**
+ * enum foo - foo
+ * @F1: f1
+ * @F2: f2
+ */
+enum foo {
+	F1,
+
+	F2,
+};
+
+
+/**
+* struct something - Lorem ipsum dolor sit amet.
+* @foofoo: lorem
+* @barbar: ipsum
+*/
+
+struct something {
+	struct foo
+
+	foofoo;
+
+	struct bar
+
+	barbar;
+};
+
