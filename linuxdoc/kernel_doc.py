@@ -2496,7 +2496,7 @@ class Parser(SimpleLog):
 
             # replace DECLARE_HASHTABLE
             members = re.sub(r"DECLARE_HASHTABLE\s*\(([^,)]+), ([^,)]+)\)"
-                             , r"unsigned long \1\[1 << ((\2) - 1)\]"
+                             , r"unsigned long \1[1 << ((\2) - 1)]"
                              , members )
 
             self.create_parameterlist(members, ';')
