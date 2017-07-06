@@ -2494,6 +2494,11 @@ class Parser(SimpleLog):
                              , r"unsigned long \1[BITS_TO_LONGS(\2)]"
                              , members )
 
+            # replace DECLARE_HASHTABLE
+            members = re.sub(r"DECLARE_HASHTABLE\s*\(([^,)]+), ([^,)]+)\)"
+                             , r"unsigned long \1\[1 << ((\2) - 1)\]"
+                             , members )
+
             self.create_parameterlist(members, ';')
             self.check_sections(self.ctx.decl_name
                                 , self.ctx.decl_type
