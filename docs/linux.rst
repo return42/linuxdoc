@@ -32,7 +32,7 @@ If you like to see how the LinuxDoc extensions build your kernel documentation
 
 To get LinuxDoc into your kernel-build install it::
 
-  pip install --user git+http://github.com/return42/linuxdoc.git
+  pip install --user git+http://github.com/return42/linuxdoc.git sphinx_rtd_theme
 
 and add the following patch to the Linux source tree:
 
