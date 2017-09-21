@@ -2468,7 +2468,7 @@ class Parser(SimpleLog):
             members = C_STRUCT_UNION[2]
 
             # ignore embedded structs or unions
-            embeded_re = RE(r"({.*})")
+            embeded_re = RE(r"({[^\}]*})")
             if embeded_re.search(proto):
                 nested  = embeded_re[0]
                 members = embeded_re.sub("", members)
