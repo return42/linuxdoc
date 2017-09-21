@@ -16,6 +16,45 @@ div[class^="highlight"] pre {
 
 @media screen {
 
+    /* change some of RTDs base color
+     */
+
+    body {
+        color: #150303;
+        font-family: "Lucida Grande",Arial,Verdana,sans-serif;
+    }
+
+    h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+        margin-top: 0;
+        font-weight: 700;
+        font-family: "Lucida Grande",Arial,Verdana,sans-serif;
+    }
+    
+    .wy-nav-content {
+        background-color: #fff;
+        background-image: url("../_static/background.png");
+        background-repeat: repeat-x;
+    }
+
+    .wy-side-nav-search { background-color: #182A36; }
+    .wy-nav-side { background-color: #182A36; }
+    .wy-menu-vertical { background-color: #182A36; }
+    .wy-menu-vertical a:hover { background-color: #1A2C38; }
+
+    wy-side-nav-search input[type="text"] {
+        border-radius: 5px;
+        padding: 6px 12px;
+        border-color: #e1e1ed;
+        background-color: cornsilk;
+    }
+    
+    /* remove border from API prototypes */
+    .rst-content dl:not(.docutils) dt {border: none; }
+    .rst-content dl:not(.docutils) dl dt {border: none; }
+
+    /* place logo bottom-left */
+    img.logo {z-index:-5; height:8vh; width:8vw; position:absolute; bottom:2vh; left:2vw;}
+
     /* content column
      *
      * RTD theme's default is 800px as max width for the content, but we have
@@ -81,7 +120,7 @@ div[class^="highlight"] pre {
     div.rst-example > .admonition-title:before{
         font-family: inherit;
         font-style: italic;
-        content: "rendered example:";}
+        content: "rendered reST markup:";}
 
     div.rst-example {
         padding-left: 12px; padding-right: 12px;

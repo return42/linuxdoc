@@ -51,6 +51,7 @@ $(GH_PAGES):
 	rm -rf $(GH_PAGES)/* $(GH_PAGES)/.gitignore
 	touch $(GH_PAGES)/.nojekyll ;\
 	cp -r $(DOCS_DIST)/* $(GH_PAGES)/
+	echo "<html><head><META http-equiv='refresh' content='0;URL=index.html'></head></html>" > $(GH_PAGES)/404.html
 	-cd $(GH_PAGES); git push origin :gh-pages
 	cd $(GH_PAGES);\
 		git add --all . ;\
