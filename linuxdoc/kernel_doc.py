@@ -2467,11 +2467,20 @@ class Parser(SimpleLog):
             self.ctx.decl_name = C_STRUCT_UNION[1]
             members = C_STRUCT_UNION[2]
 
-            # ignore embedded structs or unions
-            embeded_re = RE(r"({[^\}]*})")
-            if embeded_re.search(proto):
-                nested  = embeded_re[0]
-                members = embeded_re.sub("", members)
+            if "{" in members:
+                # ignore embedded structs or unions
+                m = members
+                members = ""
+                c = 0
+                for x in m:
+                    if x == "{":
+                        c += 1
+                    if c == 0:
+                        members += x
+                    else:
+                        nested += x
+                    if x == "}":
+                        c -= 1
 
             # ignore members marked private:
             members = re.sub(r"/\*\s*private:.*?/\*\s*public:.*?\*/", "", members, flags=re.I)
