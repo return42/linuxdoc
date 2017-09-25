@@ -630,6 +630,7 @@ class TranslatorAPI(object):
             , parametertypes   = None # ctx.parametertypes
             , sections         = None # ctx.sections
             , purpose          = None # ctx.decl_purpose
+            , definition       = None # ctx.definition
             , ):
         raise NotImplementedError
 
@@ -1010,6 +1011,7 @@ class ReSTTranslator(TranslatorAPI):
             , parametertypes   = None # ctx.parametertypes
             , sections         = None # ctx.sections
             , purpose          = None # ctx.decl_purpose
+            , definition       = None # ctx.definition
             , ):
         self.parser.ctx.offset = self.parser.ctx.decl_offset
         self.write_anchor(decl_name)
@@ -1034,32 +1036,20 @@ class ReSTTranslator(TranslatorAPI):
         self.write("\n.. code-block:: c\n\n")
         self.write(self.INDENT, decl_type, " ", decl_name, " {\n")
 
-        for p_name in parameterlist:
-            p_type = parametertypes[p_name]
-
-            if MACRO.match(p_name):
-                self.write(self.INDENT, "%s\n" % p_name)
-
-            elif self.FUNC_PTR.search(p_type):
-                # pointer to function
-                self.write(
-                    self.INDENT * 2
-                    , "%s%s)(%s);\n" % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1]))
-
-            elif self.BITFIELD.match(p_type):
-                self.write(
-                    self.INDENT * 2
-                    , "%s %s%s;\n" % (self.BITFIELD[0], p_name, self.BITFIELD[1]))
-            elif p_type.endswith("*"):
-                # pointer
-                self.write(
-                    self.INDENT * 2
-                    , "%s%s;\n" % (p_type, p_name))
-
+        definition = re.sub(r"(([{;]))", r"\1\n", definition)
+        level = 2
+        for clause in definition.split('\n'):
+            clause = normalize_ws(clause)
+            if not clause:
+                continue
+            if clause[0] == "}" and level > 2:
+                level -= 1
+            if MACRO.match(clause):
+                self.write(self.INDENT, clause[:-1].strip(), '\n')
             else:
-                self.write(
-                    self.INDENT * 2
-                    , "%s %s;\n" % (p_type, p_name))
+                self.write(self.INDENT * level, clause, '\n')
+            if clause[-1] == "{":
+                level += 1
 
         self.write(self.INDENT, "}\n")
 
@@ -2188,7 +2178,7 @@ class Parser(SimpleLog):
 
         if MACRO.match(line):
             # To distinguish preprocessor directive from regular declaration
-            # later.
+            # later (drop-semicolon).
             line += ";"
 
         m = RE(r"([^{};]*)([{};])(.*)")
@@ -2388,7 +2378,7 @@ class Parser(SimpleLog):
                             , self.ctx.decl_type
                             , self.ctx.sectcheck
                             , self.ctx.parameterlist
-                            , "")
+                            )
         if hasRetVal:
             self.check_return_section(self.ctx.decl_name, self.ctx.return_type)
 
@@ -2426,7 +2416,8 @@ class Parser(SimpleLog):
             , parameterdescs   = self.ctx.parameterdescs
             , parametertypes   = self.ctx.parametertypes
             , sections         = self.ctx.sections
-            , purpose          = self.ctx.decl_purpose )
+            , purpose          = self.ctx.decl_purpose
+            , definition       = self.ctx.definition )
 
     def dump_struct(self, proto):
 
@@ -2447,14 +2438,14 @@ class Parser(SimpleLog):
             , parameterdescs   = self.ctx.parameterdescs
             , parametertypes   = self.ctx.parametertypes
             , sections         = self.ctx.sections
-            , purpose          = self.ctx.decl_purpose )
+            , purpose          = self.ctx.decl_purpose
+            , definition       = self.ctx.definition)
 
     def prepare_struct_union(self, proto):
         self.debug("prepare_struct_union(): '%(proto)s'", proto=proto)
 
         retVal  = False
         members = ""
-        nested  = ""
 
         if C_STRUCT_UNION.match(proto):
 
@@ -2464,31 +2455,13 @@ class Parser(SimpleLog):
                            % (C_STRUCT_UNION[0], self.ctx.decl_type, proto))
                 return False
 
-            self.ctx.decl_name = C_STRUCT_UNION[1]
-            members = C_STRUCT_UNION[2]
 
-            if "{" in members:
-                # ignore embedded structs or unions
-                m = members
-                members = ""
-                c = 0
-                for x in m:
-                    if x == "{":
-                        c += 1
-                    if c == 0:
-                        members += x
-                    else:
-                        nested += x
-                    if x == "}":
-                        c -= 1
+            self.ctx.decl_name = C_STRUCT_UNION[1]
+            self.ctx.definition = members = C89_comments.sub("", C_STRUCT_UNION[2])
 
             # ignore members marked private:
             members = re.sub(r"/\*\s*private:.*?/\*\s*public:.*?\*/", "", members, flags=re.I)
             members = re.sub(r"/\*\s*private:.*", "", members, flags=re.I)
-
-            # strip comments:
-            members = C89_comments.sub("", members)
-            nested  = C89_comments.sub("", nested)
 
             # strip kmemcheck_bitfield_{begin,end}.*;
             members =  re.sub(r"kmemcheck_bitfield_.*?;", "", members)
@@ -2508,12 +2481,19 @@ class Parser(SimpleLog):
                              , r"unsigned long \1[1 << ((\2) - 1)]"
                              , members )
 
+            # Split nested struct/union elements as newer ones
+            NESTED = RE(r"(struct|union)\s+{([^{}]*)}(\s*[^\s;]\s*)")
+            while NESTED.search(members):
+                members = NESTED.sub(r'\1 \3 \2 ', members)
+
+            # ignore other nested elements, like enums
+            members = re.sub(r"({[^\{\}]*})", '', members)
             self.create_parameterlist(members, ';')
             self.check_sections(self.ctx.decl_name
                                 , self.ctx.decl_type
                                 , self.ctx.sectcheck
                                 , self.ctx.parameterlist # self.ctx.struct_actual.split(" ")
-                                , nested)
+                                )
             retVal = True
 
         else:
@@ -2557,8 +2537,7 @@ class Parser(SimpleLog):
             self.check_sections(self.ctx.decl_name
                                 , self.ctx.decl_type
                                 , self.ctx.sectcheck
-                                , self.ctx.parameterlist
-                                , "")
+                                , self.ctx.parameterlist )
 
             self.output_decl(
                 self.ctx.decl_name, "enum_decl"
@@ -2601,8 +2580,7 @@ class Parser(SimpleLog):
             self.check_sections(self.ctx.decl_name
                                 , self.ctx.decl_type
                                 , self.ctx.sectcheck
-                                , self.ctx.parameterlist
-                                , "")
+                                , self.ctx.parameterlist )
             self.output_decl(
                 self.ctx.decl_name, "function_decl"
                 , function         = self.ctx.decl_name
@@ -2634,8 +2612,7 @@ class Parser(SimpleLog):
                 self.check_sections(self.ctx.decl_name
                                     , self.ctx.decl_type
                                     , self.ctx.sectcheck
-                                    , self.ctx.parameterlist
-                                    , "")
+                                    , self.ctx.parameterlist )
                 self.output_decl(
                     self.ctx.decl_name, "typedef_decl"
                         , typedef   = self.ctx.decl_name
@@ -2661,7 +2638,6 @@ class Parser(SimpleLog):
 
         self.debug("create_parameterlist(): params='%(y)s'", y=parameter)
         for c, p in enumerate(parameter.split(splitchar)):
-
             p = C99_comments.sub("", p)
             p = p.strip()
 
@@ -2772,7 +2748,7 @@ class Parser(SimpleLog):
             # handle unnamed (anonymous) union or struct:
             p_type  = p_name
             p_name = "{unnamed_" + p_name + "}"
-            self.ctx.parameterdescs[p_name] = "anonymous\n"
+            self.ctx.parameterdescs[p_name] = "anonymous"
             self.anon_struct_union = True
 
         self.debug(
@@ -2826,10 +2802,10 @@ class Parser(SimpleLog):
 
 
     def check_sections(self, decl_name, decl_type
-                       , sectcheck, parameterlist, nested):
+                       , sectcheck, parameterlist):
         self.debug("check_sections(): decl_name='%(n)s' / decl_type='%(t)s' /"
-                   " sectcheck=%(sc)s / parameterlist=%(pl)s / nested='%(nested)s'"
-                   , n=decl_name, t=decl_type, sc=sectcheck, pl=parameterlist, nested=nested)
+                   " sectcheck=%(sc)s / parameterlist=%(pl)s"
+                   , n=decl_name, t=decl_type, sc=sectcheck, pl=parameterlist)
 
         for sect in sectcheck:
             sub_sect = re.sub(r"\..*", "", sect) # take @foo.bar sections as "foo" sub-section
@@ -2846,7 +2822,7 @@ class Parser(SimpleLog):
                         "excess function parameter '%(sect)s' description in '%(decl_name)s'"
                         , sect = sect, decl_name = decl_name
                         , line_no = self.ctx.decl_offset )
-                elif not re.search(r"\b(" + sect + ")[^a-zA-Z0-9]", nested):
+                else:
                     self.warn(
                         "excess %(decl_type)s member '%(sect)s' description in '%(decl_name)s'"
                         , decl_type = decl_type, decl_name = decl_name, sect = sect
