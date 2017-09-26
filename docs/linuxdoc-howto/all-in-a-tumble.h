@@ -69,19 +69,28 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
  */
 /* parse-SNAP: */
 
+
 /* parse-SNIP: my_struct */
 /**
  * struct my_struct - short description
  * @a: first member
  * @b: second member
+ * @c: third member
+ * @c.name: third member's name
+ * @c.number: third member's number
+ * @d: fourth member, same union as @c
  *
  * Longer description
  */
 struct my_struct {
     int a;
     int b;
+    union {
+        const char *name;
+	int number;
+    } c, d;
 /* private: */
-    int c;
+	int not_documented;   /* missing documentation result in a warning */
 };
 /* parse-SNAP: */
 

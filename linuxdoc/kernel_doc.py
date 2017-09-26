@@ -965,6 +965,11 @@ class ReSTTranslator(TranslatorAPI):
 
             p_type = parametertypes[p_name]
             p_name = re.sub(r"\[.*", "", p_name)
+
+            if p_name != "..." and "." in p_name:
+                # @foo.bar sub-descriptions are printed below, ignore them here
+                continue
+
             p_desc = parameterdescs[p_name]
 
             param = ""
@@ -975,7 +980,7 @@ class ReSTTranslator(TranslatorAPI):
                 # pointer & pointer to pointer
                 param = ":param %s%s:" % (p_type, p_name)
             elif p_name == "...":
-                param = ":param %s :" % (p_name)
+                param = ":param ellipsis ellipsis:"
             else:
                 param = ":param %s %s:" % (p_type, p_name)
 
@@ -988,6 +993,9 @@ class ReSTTranslator(TranslatorAPI):
             sub_descr = [x for x in parameterdescs.keys() if x.startswith(p_name + ".")]
             for _p_name in sub_descr:
                 p_desc = parameterdescs.get(_p_name, None)
+                # do not print undescribed sub-descriptions
+                if p_desc == self.parser.undescribed:
+                    continue
                 self.parser.ctx.offset = parameterdescs.offsets.get(
                     _p_name, self.parser.ctx.offset)
                 self.write_definition(_p_name, p_desc)
@@ -1062,6 +1070,10 @@ class ReSTTranslator(TranslatorAPI):
             if MACRO.match(p_name):
                 continue
             p_name = re.sub(r"\[.*", "", p_name)
+            if "." in p_name:
+                # @foo.bar sub-descriptions are printed below, ignore them here
+                continue
+            
             p_desc = parameterdescs.get(p_name, None)
 
             if p_desc is not None:
@@ -1073,6 +1085,9 @@ class ReSTTranslator(TranslatorAPI):
             sub_descr = [x for x in parameterdescs.keys() if x.startswith(p_name + ".")]
             for _p_name in sub_descr:
                 p_desc = parameterdescs.get(_p_name, None)
+                # do not print undescribed sub-descriptions
+                if p_desc == self.parser.undescribed:
+                    continue
                 self.parser.ctx.offset = parameterdescs.offsets.get(
                     _p_name, self.parser.ctx.offset)
                 self.write_definition(_p_name, p_desc)
@@ -2482,9 +2497,29 @@ class Parser(SimpleLog):
                              , members )
 
             # Split nested struct/union elements as newer ones
-            NESTED = RE(r"(struct|union)\s+{([^{}]*)}(\s*[^\s;]*\s*);")
+            NESTED = RE(r"(struct|union)([^{};]+){([^{}]*)}([^{}\;]*)\;")
             while NESTED.search(members):
-                members = NESTED.sub(r'\1 \3; \2 ', members)
+                n_content = NESTED[2].strip()
+                n_ids = re.sub(r"[:\[].*", "", NESTED[3]).strip()
+                n_new = ''
+                # union car {int foo;} bar1, bar2, *bbar3;
+                for n_id in n_ids.split(','):
+                    n_id = n_id.strip()
+                    n_new += "%s %s;" % (NESTED[0].strip(), n_id) 
+                    for arg in n_content.split(';'):
+                        arg = n_type = n_name = normalize_ws(arg)
+                        if not arg:
+                            continue
+                        n_type = arg.split(" ")[0]
+                        n_name = arg.split(" ")[-1]
+                        if not n_name:
+                            continue
+                        if not n_id:
+                            # anonymous struct/union
+                            n_new += "%s %s;" % (n_type, n_name)
+                        else:
+                            n_new += "%s %s.%s;" % (n_type, n_id, n_name)
+                members = NESTED.sub(n_new, members, count=1)
 
             # ignore other nested elements, like enums
             members = re.sub(r"({[^\{\}]*})", '', members)
@@ -2784,7 +2819,7 @@ class Parser(SimpleLog):
                               , p_name = p_name
                               , decl_name = self.ctx.decl_name
                               , line_no = self.ctx.last_offset)
-                else:
+                elif "." not in p_name: # ignore nested sructs & unions
                     self.warn("no description found for parameter '%(p_name)s'"
                               , p_name = p_name, line_no = self.ctx.decl_offset)
                 self.ctx.parameterdescs[p_name] = Parser.undescribed

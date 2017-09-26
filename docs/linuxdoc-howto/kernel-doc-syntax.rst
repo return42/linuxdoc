@@ -102,7 +102,7 @@ structs, unions
 Beside functions you can also write documentation for ``structs``,
 ``unions``. Instead of the function name you must write the name of the
 declaration; the ``struct`` or ``union`` must always precede the name. Nesting
-of declarations is not supported.  Use the ``@argument`` mechanism to document
+of declarations is supported.  Use the ``@argument`` mechanism to document
 members or constants.
 
 Inside a ``struct`` description, you can use the 'private:' and 'public:' comment

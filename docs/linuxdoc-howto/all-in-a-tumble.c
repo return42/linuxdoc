@@ -12,6 +12,7 @@ int main() {
 /**
  * user_function - function that can only be called in user context
  * @a: some argument
+ * @...: ellipsis operator
  *
  * This function makes no sense, it's only a kernel-doc demonstration.
  *
@@ -22,7 +23,7 @@ int main() {
  * Returns first argument
  */
 int
-user_function(int a)
+user_function(int a, ...)
 {
   return a;
 }
