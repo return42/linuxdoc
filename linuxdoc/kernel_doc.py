@@ -2482,9 +2482,9 @@ class Parser(SimpleLog):
                              , members )
 
             # Split nested struct/union elements as newer ones
-            NESTED = RE(r"(struct|union)\s+{([^{}]*)}(\s*[^\s;]\s*)")
+            NESTED = RE(r"(struct|union)\s+{([^{}]*)}(\s*[^\s;]*\s*);")
             while NESTED.search(members):
-                members = NESTED.sub(r'\1 \3 \2 ', members)
+                members = NESTED.sub(r'\1 \3; \2 ', members)
 
             # ignore other nested elements, like enums
             members = re.sub(r"({[^\{\}]*})", '', members)
