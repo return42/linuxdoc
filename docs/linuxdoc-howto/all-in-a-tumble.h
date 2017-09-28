@@ -86,10 +86,10 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
 struct my_struct {
     /* Anonymous union/struct*/
     union {
-	struct {
-	    __u8 arg1 : 1;
-	    __u8 arg2 : 3;
-	};
+        struct {
+            __u8 arg1 : 1;
+            __u8 arg2 : 3;
+        };
         struct {
             int arg1;
             int arg2;
@@ -99,6 +99,15 @@ struct my_struct {
             int arg4;
         };
     };
+    /* private: */
+    int undoc_privat;    /* is undocumented but private, no warning */
+
+    /* public: */
+    enum {
+        FOO,
+        BAR,
+    } undoc_public;      /* is undocumented, cause a warning */
+
     union {
         struct {
             int arg1;
@@ -106,15 +115,9 @@ struct my_struct {
         } st1;           /* bar.st1 is undocumented, cause a warning */
         struct {
             void *arg1;  /* bar.st3.arg1 is undocumented, cause a warning */
-	    int arg2;
+            int arg2;
         } st2, st3;
     } bar;               /* bar is undocumented, cause a warning */
-
-    /* private: */
-    int undoc_privat;    /* is undocumented but private, no warning */
-
-    /* public: */
-    int undoc_public;    /* is undocumented, cause a warning */
 
 };
 /* parse-SNAP: */

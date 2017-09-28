@@ -1046,6 +1046,7 @@ class ReSTTranslator(TranslatorAPI):
 
         definition = re.sub(r"(([{;]))", r"\1\n", definition)
         level = 2
+        enum = False
         for clause in definition.split('\n'):
             clause = normalize_ws(clause)
             if not clause:
@@ -1054,10 +1055,19 @@ class ReSTTranslator(TranslatorAPI):
                 level -= 1
             if MACRO.match(clause):
                 self.write(self.INDENT, clause[:-1].strip(), '\n')
+            elif enum:
+                for l in clause.split(','):
+                    l = normalize_ws(l)
+                    if l[0] == "}" and level > 2:
+                        level -= 1
+                        self.write(self.INDENT * level, l, '\n')
+                    else:
+                        self.write(self.INDENT * level, l, ',\n')
             else:
                 self.write(self.INDENT * level, clause, '\n')
             if clause[-1] == "{":
                 level += 1
+                enum = clause.startswith('enum')
 
         self.write(self.INDENT, "}\n")
 
@@ -2462,8 +2472,8 @@ class Parser(SimpleLog):
         members = ""
 
         # ignore members marked private:
-        proto = re.sub(r"/\*\s*private:.*?/\*\s*public:.*?\*/", "", proto, flags=re.I)
-        proto = re.sub(r"/\*\s*private:.*", "", proto, flags=re.I)
+        proto = re.sub(r"/\*\s*private:.*?\/\*\s*public:.*?\*\/", "", proto, flags=re.I)
+        proto = re.sub(r"/\*\s*private:.*$", "};", proto, flags=re.I)
 
         if C_STRUCT_UNION.match(proto):
 
