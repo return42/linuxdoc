@@ -86,6 +86,10 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
 struct my_struct {
     /* Anonymous union/struct*/
     union {
+	struct {
+	    __u8 arg1 : 1;
+	    __u8 arg2 : 3;
+	};
         struct {
             int arg1;
             int arg2;

@@ -1073,7 +1073,7 @@ class ReSTTranslator(TranslatorAPI):
             if "." in p_name:
                 # @foo.bar sub-descriptions are printed below, ignore them here
                 continue
-            
+
             p_desc = parameterdescs.get(p_name, None)
 
             if p_desc is not None:
@@ -2473,7 +2473,6 @@ class Parser(SimpleLog):
                            % (C_STRUCT_UNION[0], self.ctx.decl_type, proto))
                 return False
 
-
             self.ctx.decl_name = C_STRUCT_UNION[1]
             self.ctx.definition = members = C89_comments.sub("", C_STRUCT_UNION[2])
 
@@ -2504,9 +2503,11 @@ class Parser(SimpleLog):
                 # union car {int foo;} bar1, bar2, *bbar3;
                 for n_id in n_ids.split(','):
                     n_id = n_id.strip().replace('*','')
-                    n_new += "%s %s;" % (NESTED[0].strip(), n_id) 
+                    n_new += "%s %s;" % (NESTED[0].strip(), n_id)
                     for arg in n_content.split(';'):
                         arg = normalize_ws(arg)
+                        # suppport bit types e.g. '__u8 arg1 : 1' --> '__u8 arg1'
+                        arg = re.sub("\s*:\s*[0-9]+", "", arg)
                         if not arg:
                             continue
                         n_type = arg.split(" ")[0]
