@@ -72,25 +72,46 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
 
 /* parse-SNIP: my_struct */
 /**
- * struct my_struct - short description
- * @a: first member
- * @b: second member
- * @c: third member
- * @c.name: third member's name
- * @c.number: third member's number
- * @d: fourth member, same union as @c
- *
- * Longer description
+ * struct my_struct - a struct with nested unions and structs
+ * @arg1: first argument of anonymous union/anonymous struct
+ * @arg2: second argument of anonymous union/anonymous struct
+ * @arg3: third argument of anonymous union/anonymous struct
+ * @arg4: fourth argument of anonymous union/anonymous struct
+ * @bar.st1.arg1: first argument of struct st1 on union bar
+ * @bar.st1.arg2: second argument of struct st1 on union bar
+ * @bar.st2.arg1: first argument of struct st2 on union bar
+ * @bar.st2.arg2: second argument of struct st2 on union bar
+ * @bar.st3.arg2: second argument of struct st3 on union bar
  */
 struct my_struct {
-    int a;
-    int b;
+    /* Anonymous union/struct*/
     union {
-        const char *name;
-	int number;
-    } c, d;
-/* private: */
-	int not_documented;   /* missing documentation result in a warning */
+        struct {
+            int arg1;
+            int arg2;
+        };
+        struct {
+            void *arg3;
+            int arg4;
+        };
+    };
+    union {
+        struct {
+            int arg1;
+            int arg2;
+        } st1;           /* bar.st1 is undocumented, cause a warning */
+        struct {
+            void *arg1;  /* bar.st3.arg1 is undocumented, cause a warning */
+	    int arg2;
+        } st2, st3;
+    } bar;               /* bar is undocumented, cause a warning */
+
+    /* private: */
+    int undoc_privat;    /* is undocumented but private, no warning */
+
+    /* public: */
+    int undoc_public;    /* is undocumented, cause a warning */
+
 };
 /* parse-SNAP: */
 

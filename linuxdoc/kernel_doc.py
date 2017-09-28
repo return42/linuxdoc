@@ -2262,7 +2262,6 @@ class Parser(SimpleLog):
         self.debug("dump_section(): %(name)s", name = name)
         name = name.strip()
         cont = cont.rstrip() # dismiss trailing whitespace
-
         # FIXME: sections with '%CONST' prefix no longer exists
         # _type_constant     = RE(r"\%([-_\w]+)")
         #if _type_constant.match(name):  # '%CONST' - name of a constant.
@@ -2462,6 +2461,10 @@ class Parser(SimpleLog):
         retVal  = False
         members = ""
 
+        # ignore members marked private:
+        proto = re.sub(r"/\*\s*private:.*?/\*\s*public:.*?\*/", "", proto, flags=re.I)
+        proto = re.sub(r"/\*\s*private:.*", "", proto, flags=re.I)
+
         if C_STRUCT_UNION.match(proto):
 
             if C_STRUCT_UNION[0] != self.ctx.decl_type:
@@ -2473,10 +2476,6 @@ class Parser(SimpleLog):
 
             self.ctx.decl_name = C_STRUCT_UNION[1]
             self.ctx.definition = members = C89_comments.sub("", C_STRUCT_UNION[2])
-
-            # ignore members marked private:
-            members = re.sub(r"/\*\s*private:.*?/\*\s*public:.*?\*/", "", members, flags=re.I)
-            members = re.sub(r"/\*\s*private:.*", "", members, flags=re.I)
 
             # strip kmemcheck_bitfield_{begin,end}.*;
             members =  re.sub(r"kmemcheck_bitfield_.*?;", "", members)
@@ -2504,18 +2503,18 @@ class Parser(SimpleLog):
                 n_new = ''
                 # union car {int foo;} bar1, bar2, *bbar3;
                 for n_id in n_ids.split(','):
-                    n_id = n_id.strip()
+                    n_id = n_id.strip().replace('*','')
                     n_new += "%s %s;" % (NESTED[0].strip(), n_id) 
                     for arg in n_content.split(';'):
-                        arg = n_type = n_name = normalize_ws(arg)
+                        arg = normalize_ws(arg)
                         if not arg:
                             continue
                         n_type = arg.split(" ")[0]
-                        n_name = arg.split(" ")[-1]
-                        if not n_name:
-                            continue
-                        if not n_id:
+                        n_name = arg.split(" ")[-1].replace('*','')
+                        if n_name == n_type:
                             # anonymous struct/union
+                            n_new += "%s;" % (n_type)
+                        elif not n_id:
                             n_new += "%s %s;" % (n_type, n_name)
                         else:
                             n_new += "%s %s.%s;" % (n_type, n_id, n_name)
@@ -2755,7 +2754,6 @@ class Parser(SimpleLog):
         self.debug(
             "push_parameter(): p_name='%(p_name)s' / p_type='%(p_type)s'"
             , p_name=p_name, p_type=p_type)
-
         p_name  = p_name.strip()
         p_type  = p_type.strip()
 
@@ -2809,7 +2807,6 @@ class Parser(SimpleLog):
         # also ignore unnamed structs/unions;
 
         if not self.anon_struct_union:
-
             if (not self.ctx.parameterdescs.get(p_name, None)
                 and not p_name.startswith("#")):
 
@@ -2819,7 +2816,7 @@ class Parser(SimpleLog):
                               , p_name = p_name
                               , decl_name = self.ctx.decl_name
                               , line_no = self.ctx.last_offset)
-                elif "." not in p_name: # ignore nested sructs & unions
+                else:
                     self.warn("no description found for parameter '%(p_name)s'"
                               , p_name = p_name, line_no = self.ctx.decl_offset)
                 self.ctx.parameterdescs[p_name] = Parser.undescribed
@@ -2843,12 +2840,11 @@ class Parser(SimpleLog):
                    , n=decl_name, t=decl_type, sc=sectcheck, pl=parameterlist)
 
         for sect in sectcheck:
-            sub_sect = re.sub(r"\..*", "", sect) # take @foo.bar sections as "foo" sub-section
             err = True
             for para in parameterlist:
                 para = re.sub(r"\[.*\]", "", para)
                 #para = re.sub(r"/__attribute__\s*\(\([A-Za-z,_\*\s\(\)]*\)\)/", "", para)
-                if para == sub_sect or para == sect:
+                if para == sect:
                     err = False
                     break
             if err:
