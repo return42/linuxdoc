@@ -72,52 +72,59 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
 
 /* parse-SNIP: my_struct */
 /**
- * struct my_struct - a struct with nested unions and structs
- * @arg1: first argument of anonymous union/anonymous struct
- * @arg2: second argument of anonymous union/anonymous struct
- * @arg3: third argument of anonymous union/anonymous struct
- * @arg4: fourth argument of anonymous union/anonymous struct
- * @bar.st1.arg1: first argument of struct st1 on union bar
- * @bar.st1.arg2: second argument of struct st1 on union bar
- * @bar.st2.arg1: first argument of struct st2 on union bar
- * @bar.st2.arg2: second argument of struct st2 on union bar
- * @bar.st3.arg2: second argument of struct st3 on union bar
- */
+* struct my_struct - a struct with nested unions and structs
+* @arg1: first argument of anonymous union/anonymous struct
+* @arg2: second argument of anonymous union/anonymous struct
+* @arg1b: first argument of anonymous union/anonymous struct
+* @arg2b: second argument of anonymous union/anonymous struct
+* @arg3: third argument of anonymous union/anonymous struct
+* @arg4: fourth argument of anonymous union/anonymous struct
+* @bar.st1.arg1: first argument of struct st1 on union bar
+* @bar.st1.arg2: second argument of struct st1 on union bar
+* @bar.st2.arg1: first argument of struct st2 on union bar
+* @bar.st2.arg2: second argument of struct st2 on union bar
+* @bar.st3.arg2: second argument of struct st3 on union bar
+* @f1: nested function on anonimous union/struct
+* @bar.st2.f2: nested function on named union/struct
+*/
 struct my_struct {
-    /* Anonymous union/struct*/
-    union {
-        struct {
-            __u8 arg1 : 1;
-            __u8 arg2 : 3;
-        };
-        struct {
-            int arg1;
-            int arg2;
-        };
-        struct {
-            void *arg3;
-            int arg4;
-        };
-    };
-    /* private: */
-    int undoc_privat;    /* is undocumented but private, no warning */
+  /* Anonymous union/struct*/
+  union {
+	struct {
+	    char arg1 : 1;
+	    char arg2 : 3;
+	};
+      struct {
+          int arg1b;
+          int arg2b;
+      };
+      struct {
+          void *arg3;
+          int arg4;
+          int (*f1)(char foo, int bar);
+      };
+  };
+  union {
+      struct {
+          int arg1;
+          int arg2;
+      } st1;           /* bar.st1 is undocumented, cause a warning */
+      struct {
+          void *arg1;  /* bar.st3.arg1 is undocumented, cause a warning */
+	    int arg2;
+         int (*f2)(char foo, int bar); /* bar.st3.fn2 is undocumented, cause a warning */
+      } st2, st3;
+      int (*f3)(char foo, int bar); /* f3 is undocumented, cause a warning */
+  } bar;               /* bar is undocumented, cause a warning */
 
-    /* public: */
-    enum {
-        FOO,
-        BAR,
-    } undoc_public;      /* is undocumented, cause a warning */
+  /* private: */
+  int undoc_privat;    /* is undocumented but private, no warning */
 
-    union {
-        struct {
-            int arg1;
-            int arg2;
-        } st1;           /* bar.st1 is undocumented, cause a warning */
-        struct {
-            void *arg1;  /* bar.st3.arg1 is undocumented, cause a warning */
-            int arg2;
-        } st2, st3;
-    } bar;               /* bar is undocumented, cause a warning */
+  /* public: */
+  enum {
+      FOO,
+      BAR,
+  } undoc_public;      /* is undocumented, cause a warning */
 
 };
 /* parse-SNAP: */

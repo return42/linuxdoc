@@ -2508,27 +2508,45 @@ class Parser(SimpleLog):
             NESTED = RE(r"(struct|union)([^{};]+){([^{}]*)}([^{}\;]*)\;")
             while NESTED.search(members):
                 n_content = NESTED[2].strip()
-                n_ids = re.sub(r"[:\[].*", "", NESTED[3]).strip()
+                n_type = NESTED[0].strip()
+                n_ids = NESTED[3].strip()
                 n_new = ''
                 # union car {int foo;} bar1, bar2, *bbar3;
                 for n_id in n_ids.split(','):
+                    n_id = re.sub(r"[:\[].*", "", n_id).strip()
                     n_id = n_id.strip().replace('*','')
                     n_new += "%s %s;" % (NESTED[0].strip(), n_id)
                     for arg in n_content.split(';'):
                         arg = normalize_ws(arg)
-                        # suppport bit types e.g. '__u8 arg1 : 1' --> '__u8 arg1'
-                        arg = re.sub("\s*:\s*[0-9]+", "", arg)
                         if not arg:
                             continue
-                        n_type = arg.split(" ")[0]
-                        n_name = arg.split(" ")[-1].replace('*','')
-                        if n_name == n_type:
-                            # anonymous struct/union
-                            n_new += "%s;" % (n_type)
-                        elif not n_id:
-                            n_new += "%s %s;" % (n_type, n_name)
+                        # Handle arrays
+                        arg = re.sub(r"\[\s*\S.*\]", "", arg)
+
+                        PTR_TO_FUNC = RE(r"^([^\(]+\(\*?\s*)([\w\.]*)(\s*\).*)")
+                        if PTR_TO_FUNC.search(arg):
+                            n_type = PTR_TO_FUNC[0].strip()
+                            n_name = PTR_TO_FUNC[1].strip()
+                            n_extra = PTR_TO_FUNC[2].strip()
+                            if not n_name:
+                                continue
+                            if not n_id:
+                                n_new += "%s%s%s; " % (n_type, n_name, n_extra)
+                            else:
+                                n_new += "%s%s.%s%s; " % (n_type, n_id, n_name, n_extra)
+
                         else:
-                            n_new += "%s %s.%s;" % (n_type, n_id, n_name)
+                            # suppport bit types e.g. '__u8 arg1 : 1' --> '__u8 arg1'
+                            arg = re.sub(r"\s*:\s*[0-9]+", "", arg)
+                            n_type = arg.split(" ")[0]
+                            n_name = arg.split(" ")[-1].replace('*','')
+                            if n_name == n_type:
+                                # anonymous struct/union
+                                n_new += "%s;" % (n_type)
+                            elif not n_id:
+                                n_new += "%s %s;" % (n_type, n_name)
+                            else:
+                                n_new += "%s %s.%s;" % (n_type, n_id, n_name)
                 members = NESTED.sub(n_new, members, count=1)
 
             # ignore other nested elements, like enums
@@ -2703,7 +2721,7 @@ class Parser(SimpleLog):
                 # pointer-to-function
                 p = p.replace("#", ",") # reinsert temporarily removed commas
                 self.debug("  parameter#%(c)s: (pointer to function) %(p)s", c=c, p=p)
-                m = RE(r"[^\(]+\(\*?\s*(\w*)\s*\)")
+                m = RE(r"[^\(]+\(\*?\s*([\w\.]*)\s*\)")
                 m.match(p)
                 p_name = m[0]
                 p_type  = p
