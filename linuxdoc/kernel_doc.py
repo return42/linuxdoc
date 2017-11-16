@@ -227,7 +227,7 @@ FUNC_PROTOTYPES = [
 ]
 
 EXPORTED_SYMBOLS = RE(
-    r"^\s*(EXPORT_SYMBOL)(_GPL)?(_FUTURE)?\s*\(\s*(\w*)\s*\)\s*", flags=re.M)
+    r"^\s*(?:(?:EXPORT_SYMBOL)|(?:EXPORT_SYMBOL_GPL)|(?:EXPORT_SYMBOL_GPL_FUTURE))\s*\(\s*(\w*)\s*\)\s*", flags=re.M)
 
 # MODULE_AUTHOR("..."); /  MODULE_DESCRIPTION("..."); / MODULE_LICENSE("...");
 #
@@ -1676,8 +1676,7 @@ class Parser(SimpleLog):
         """
 
         LOG.debug("gather_context() regExp: %(pattern)s", pattern=EXPORTED_SYMBOLS.pattern)
-        for match in EXPORTED_SYMBOLS.findall(src):
-            name = match[3]
+        for name in EXPORTED_SYMBOLS.findall(src):
             LOG.info("exported symbol: %(name)s", name = name)
             ctx.exported_symbols.append(name)
 
