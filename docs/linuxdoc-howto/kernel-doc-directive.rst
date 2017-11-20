@@ -41,6 +41,8 @@ Here is a short overview of the options:
         :no-header:
         :export:
         :internal:
+        :exp-method: <method>
+        :exp-ids:    <identifier [, identifiers [, ...]]>
         :functions: <function [, functions [, ...]]>
         :module:    <prefix-id>
         :man-sect:  <man sect-no>
@@ -81,6 +83,29 @@ these options make sense:
     Include documentation for all documented definitions, **not** exported using
     EXPORT_SYMBOL macro either in ``<src-filename>`` or in any of the files
     specified by ``<src-fname-pattern>``.
+
+``exp-method <method>``
+    Change the way exported symbols are specified in source code.
+    Default value ('macro') if not provided can be set globally by
+    kernel_doc_exp_method in the sphinx configuration.
+    ``<method>`` must one of the following value:
+
+    ``macro``
+        Exported symbols are specified by macros (whose names are
+        controlled by ```exp-ids` option) invoked in the source the
+        following way: THIS_IS_AN_EXPORTED_SYMBOL(symbol)
+
+    ``attribute``
+        Exported symbols are specified definition using a specific
+        attribute (controlled by ```exp-ids` option) either in their
+        declaration or definition:
+        THIS_IS_AN_EXPORTED_SYMBOL int symbol(void* some_arg) {...}
+
+``exp-ids <identifier [, identifiers [, ...]]>``
+    Use the specified list of identifiers instead of default value:
+    EXPORT_SYMBOL, EXPORT_SYMBOL_GPL, EXPORT_SYMBOL_GPL_FUTURE. Default
+    value can be overriden globally by sphinx configuration option:
+    kernel_doc_exp_ids
 
 ``functions <name [, names [, ...]]>``
     Include documentation for each named definition.

@@ -18,6 +18,8 @@
 
 EXPORT_SYMBOL_GPL_FUTURE(user_function)
 
+int user_sum(int a, int b);
+
 /**
  * block_touch_buffer - mark a buffer accessed
  * @bh: buffer_head being touched
