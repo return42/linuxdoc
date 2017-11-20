@@ -226,9 +226,6 @@ FUNC_PROTOTYPES = [
     , RE(r"^(\w+\s+\w+\s*\*\s*\w+\s*\*+\s*)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)")
 ]
 
-EXPORTED_SYMBOLS = RE(
-    r"^\s*(?:(?:EXPORT_SYMBOL)|(?:EXPORT_SYMBOL_GPL)|(?:EXPORT_SYMBOL_GPL_FUTURE))\s*\(\s*(\w*)\s*\)\s*", flags=re.M)
-
 # MODULE_AUTHOR("..."); /  MODULE_DESCRIPTION("..."); / MODULE_LICENSE("...");
 #
 MODULE_INFO = RE(r'^\s*(MODULE_)(AUTHOR|DESCRIPTION|LICENSE)\s*\(\s*"([^"]+)"', flags=re.M)
@@ -347,6 +344,8 @@ SRCTREE        = OS_ENV.get("srctree", "")
 GIT_REF        = ("Linux kernel source tree:"
                   " `%(rel_fname)s <https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/"
                   "%(rel_fname)s>`__")
+DEFAULT_EXP_METHOD = "macro"
+DEFAULT_EXP_IDS    = ['EXPORT_SYMBOL', 'EXPORT_SYMBOL_GPL', 'EXPORT_SYMBOL_GPL_FUTURE']
 
 # ==============================================================================
 # Logging stuff
@@ -528,7 +527,7 @@ def main():
             # gather exported symbols ...
             src   = readFile(opts.fname)
             ctx   = ParserContext()
-            Parser.gather_context(src, ctx)
+            Parser.gather_context(src, ctx, opts)
 
             opts.error_missing = False
             opts.use_names     = ctx.exported_symbols
@@ -1315,6 +1314,8 @@ class ParseOptions(Container):
         # *context*.
 
         self.gather_context    = False
+        self.exp_method        = None
+        self.exp_ids           = []
 
         # epilog / preamble
 
@@ -1362,6 +1363,14 @@ class ParseOptions(Container):
             self.fname = os.path.abspath(self.fname)
 
     def set_defaults(self):
+
+        # default way to identify exported symbol
+
+        if not self.exp_method:
+            self.exp_method = DEFAULT_EXP_METHOD
+
+        if not self.exp_ids:
+            self.exp_ids = DEFAULT_EXP_IDS
 
         # default top title and top link
 
@@ -1414,6 +1423,17 @@ class ParseOptions(Container):
                         , name=name, value=value)
                 break
         return line
+
+    def get_exported_symbols_re(self):
+        if self.exp_method == 'macro':
+            proto_pattern = r"^\s*(?:%s)\s*\(\s*(\w*)\s*\)\s*"
+        elif self.exp_method == 'attribute':
+            proto_pattern = r"(?:%s)(?:\s+\**\w+\**)*?\s+\**(\w+)\s*[(;]+"
+        else:
+            LOG.error("Unknown exported symbol method: %s" % self.exp_method)
+
+        id_pattern = "|".join(["(?:" + name + ")" for name in self.exp_ids])
+        return RE(proto_pattern % id_pattern, flags=re.M)
 
 # ------------------------------------------------------------------------------
 class ParserContext(Container):
@@ -1637,7 +1657,7 @@ class Parser(SimpleLog):
     # ------------------------------------------------------------
 
     @classmethod
-    def gather_context(cls, src, ctx):
+    def gather_context(cls, src, ctx, opts):
         u"""Scan source about context informations.
 
         Scans *whole* source (e.g. :py:attr:`Parser.rawdata`) about data relevant
@@ -1645,11 +1665,7 @@ class Parser(SimpleLog):
 
         Names of exported symbols gathered in :py:attr:`ParserContext.exported`.
         The list contains names (symbols) which are exported using the
-        EXPORT_SYMBOL macro.
-
-        * ``EXPORT_SYMBOL(<name>)``
-        * ``EXPORT_SYMBOL_GPL(<name>)``
-        * ``EXPORT_SYMBOL_GPL_FUTURE(<name>)``)
+        pattern specified in opts.
 
         .. hint::
 
@@ -1675,8 +1691,9 @@ class Parser(SimpleLog):
            files.
         """
 
-        LOG.debug("gather_context() regExp: %(pattern)s", pattern=EXPORTED_SYMBOLS.pattern)
-        for name in EXPORTED_SYMBOLS.findall(src):
+        expsym_re = opts.get_exported_symbols_re();
+        LOG.debug("gather_context() regExp: %(pattern)s", pattern=expsym_re.pattern)
+        for name in expsym_re.findall(src):
             LOG.info("exported symbol: %(name)s", name = name)
             ctx.exported_symbols.append(name)
 
@@ -1757,7 +1774,7 @@ class Parser(SimpleLog):
             if not eof:
                 return
             else:
-                self.gather_context(self.rawdata, self.ctx)
+                self.gather_context(self.rawdata, self.ctx, self.options)
 
         lines = self.rawdata.split("\n")
 
@@ -2385,6 +2402,13 @@ class Parser(SimpleLog):
         proto = re.sub( r"__meminit +"       , "", proto )
         proto = re.sub( r"__must_check +"    , "", proto )
         proto = re.sub( r"__weak +"          , "", proto )
+
+        # Remove known attributes from function prototype
+        known_attrs = []
+        if (self.options.exp_method == 'attribute'):
+            known_attrs.extend(self.options.exp_ids)
+        for attr in known_attrs:
+            proto = re.sub(r"%s +" % attr, "", proto)
 
         define = bool(MACRO_define.match(proto))
         proto = MACRO_define.sub("", proto )

@@ -350,13 +350,13 @@ class KernelDoc(Directive):
 
         if "export" in self.options:
             # gather exported symbols and add them to the list of names
-            kerneldoc.Parser.gather_context(kerneldoc.readFile(opts.fname), ctx)
+            kerneldoc.Parser.gather_context(kerneldoc.readFile(opts.fname), ctx, opts)
             exp_files.extend((self.options.get('export') or "").replace(","," ").split())
             opts.error_missing = True
 
         elif "internal" in self.options:
             # gather exported symbols and add them to the ignore-list of names
-            kerneldoc.Parser.gather_context(kerneldoc.readFile(opts.fname), ctx)
+            kerneldoc.Parser.gather_context(kerneldoc.readFile(opts.fname), ctx, opts)
             exp_files.extend((self.options.get('internal') or "").replace(","," ").split())
 
         if "functions" in self.options:
@@ -380,7 +380,7 @@ class KernelDoc(Directive):
 
             for fname in glob.glob(pattern):
                 self.env.note_dependency(path.abspath(fname))
-                kerneldoc.Parser.gather_context(kerneldoc.readFile(fname), ctx)
+                kerneldoc.Parser.gather_context(kerneldoc.readFile(fname), ctx, opts)
 
         if "export" in self.options:
             if not ctx.exported_symbols:
