@@ -107,6 +107,14 @@ these options make sense:
     value can be overriden globally by sphinx configuration option:
     kernel_doc_exp_ids
 
+``known-attrs <attr [, attrs [, ...]]>``
+    Specified a list of function attribute that are known and must be
+    hidden when displaying function prototype. When ``exp-method`` is
+    set to 'attribute' the list in ``exp-ids`` is considered as known
+    and added implicitely to this list of known attributes. The default
+    list is empty and can be adjusted by the sphinx configuration option
+    kernel_doc_known_attrs
+
 ``functions <name [, names [, ...]]>``
     Include documentation for each named definition.
 
