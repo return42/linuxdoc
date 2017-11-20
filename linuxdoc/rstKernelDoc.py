@@ -22,6 +22,8 @@ u"""
             :no-header:
             :export:
             :internal:
+            :exp-method:  <method>
+            :exp-ids:     <identifier [, identifiers [, ...]]>
             :functions: <function [, functions [, ...]]>
             :module:    <prefix-id>
             :man-sect:  <man sect-no>
@@ -62,6 +64,29 @@ u"""
         Include documentation for all documented definitions, **not** exported using
         EXPORT_SYMBOL macro either in ``<src-filename>`` or in any of the files
         specified by ``<src-fname-pattern>``.
+
+    ``exp-method <method>``
+        Change the way exported symbols are specified in source code.
+        Default value ('macro') if not provided can be set globally by
+        kernel_doc_exp_method in the sphinx configuration.
+	``<method>`` must one of the following value:
+
+        ``macro``
+            Exported symbols are specified by macros (whose names are
+            controlled by ```exp-ids` option) invoked in the source the
+            following way: THIS_IS_AN_EXPORTED_SYMBOL(symbol)
+
+        ``attribute``
+            Exported symbols are specified definition using a specific
+            attribute (controlled by ```exp-ids` option) either in their
+            declaration or definition:
+            THIS_IS_AN_EXPORTED_SYMBOL int symbol(void* some_arg) {...}
+
+    ``exp-ids <identifier [, identifiers [, ...]]>``
+        Use the specified list of identifiers instead of default value:
+        EXPORT_SYMBOL, EXPORT_SYMBOL_GPL, EXPORT_SYMBOL_GPL_FUTURE. Default
+        value can be overriden globally by sphinx configuration option:
+        kernel_doc_exp_ids
 
     ``functions <name [, names [, ...]]>``
         Include documentation for each named definition.
@@ -194,6 +219,8 @@ def setup(app):
     app.add_config_value('kernel_doc_verbose_warn', True, 'env')
     app.add_config_value('kernel_doc_mode', "reST", 'env')
     app.add_config_value('kernel_doc_mansect', None, 'env')
+    app.add_config_value('kernel_doc_exp_method', None, 'env')
+    app.add_config_value('kernel_doc_exp_ids', None, 'env')
     app.add_directive("kernel-doc", KernelDoc)
 
     return dict(
@@ -263,6 +290,8 @@ class KernelDoc(Directive):
         , "export"     : directives.unchanged          # aka lines containing !E
         , "internal"   : directives.unchanged          # aka lines containing !I
         , "functions"  : directives.unchanged_required # aka lines containing !F
+        , "exp-method" : directives.unchanged_required
+        , "exp-ids"    : directives.unchanged_required
 
         , "debug"      : directives.flag               # insert generated reST as code-block
 
@@ -286,6 +315,8 @@ class KernelDoc(Directive):
         fname     = self.arguments[0]
         src_tree  = kerneldoc.SRCTREE
         exp_files = []  # file pattern to search for EXPORT_SYMBOL
+        exp_method  = self.options.get("exp-method", self.env.config.kernel_doc_exp_method)
+        exp_ids     = self.options.get("exp-ids", self.env.config.kernel_doc_exp_ids)
 
         if self.arguments[0].startswith("./"):
             # the prefix "./" indicates a relative pathname
@@ -319,6 +350,8 @@ class KernelDoc(Directive):
             , verbose_warn  = self.env.config.kernel_doc_verbose_warn
             , markup        = self.env.config.kernel_doc_mode
             , man_sect      = self.options.get("man-sect", None)
+            , exp_method    = exp_method
+            , exp_ids       = (exp_ids or "").replace(","," ").split()
             ,)
 
         if ("doc" not in self.options

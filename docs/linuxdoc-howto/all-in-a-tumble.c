@@ -29,6 +29,28 @@ user_function(int a, ...)
 }
 /* parse-SNAP: */
 
+
+/* parse-SNIP: user_function */
+/**
+ * user_sum() - another function that can only be called in user context
+ * @a: first argument
+ * @b: second argument
+ *
+ * This function makes no sense, it's only a kernel-doc demonstration.
+ *
+ * Example:
+ * x = user_sum(1, 2);
+ *
+ * Return:
+ * Returns the sum of the @a and @b
+ */
+API_EXPORTED
+int user_sum(int a, int b)
+{
+  return b;
+}
+/* parse-SNAP: */
+
 /* parse-SNIP: internal_function */
 /**
  * internal_function - the answer
