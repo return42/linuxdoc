@@ -24,6 +24,7 @@ u"""
             :internal:
             :exp-method:  <method>
             :exp-ids:     <identifier [, identifiers [, ...]]>
+            :known-attrs: <attr [, attrs [, ...]]>
             :functions: <function [, functions [, ...]]>
             :module:    <prefix-id>
             :man-sect:  <man sect-no>
@@ -87,6 +88,14 @@ u"""
         EXPORT_SYMBOL, EXPORT_SYMBOL_GPL, EXPORT_SYMBOL_GPL_FUTURE. Default
         value can be overriden globally by sphinx configuration option:
         kernel_doc_exp_ids
+
+    ``known-attrs <attr [, attrs [, ...]]>``
+        Specified a list of function attribute that are known and must be
+        hidden when displaying function prototype. When ``exp-method`` is
+        set to 'attribute' the list in ``exp-ids`` is considered as known
+        and added implicitely to this list of known attributes. The default
+        list is empty and can be adjusted by the sphinx configuration option
+        kernel_doc_known_attrs
 
     ``functions <name [, names [, ...]]>``
         Include documentation for each named definition.
@@ -221,6 +230,7 @@ def setup(app):
     app.add_config_value('kernel_doc_mansect', None, 'env')
     app.add_config_value('kernel_doc_exp_method', None, 'env')
     app.add_config_value('kernel_doc_exp_ids', None, 'env')
+    app.add_config_value('kernel_doc_known_attrs', None, 'env')
     app.add_directive("kernel-doc", KernelDoc)
 
     return dict(
@@ -292,6 +302,7 @@ class KernelDoc(Directive):
         , "functions"  : directives.unchanged_required # aka lines containing !F
         , "exp-method" : directives.unchanged_required
         , "exp-ids"    : directives.unchanged_required
+        , "known-attrs": directives.unchanged_required
 
         , "debug"      : directives.flag               # insert generated reST as code-block
 
@@ -317,6 +328,7 @@ class KernelDoc(Directive):
         exp_files = []  # file pattern to search for EXPORT_SYMBOL
         exp_method  = self.options.get("exp-method", self.env.config.kernel_doc_exp_method)
         exp_ids     = self.options.get("exp-ids", self.env.config.kernel_doc_exp_ids)
+        known_attrs = self.options.get("known-attrs", self.env.config.kernel_doc_known_attrs)
 
         if self.arguments[0].startswith("./"):
             # the prefix "./" indicates a relative pathname
@@ -352,6 +364,7 @@ class KernelDoc(Directive):
             , man_sect      = self.options.get("man-sect", None)
             , exp_method    = exp_method
             , exp_ids       = (exp_ids or "").replace(","," ").split()
+            , known_attrs   = (known_attrs or "").replace(","," ").split()
             ,)
 
         if ("doc" not in self.options

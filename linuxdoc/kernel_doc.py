@@ -504,6 +504,13 @@ def main():
         , default = DEFAULT_EXP_IDS
         , help    = "identifiers list that specifies an exported symbol")
 
+    CLI.add_argument(
+        "--known-attrs"
+        , default = ""
+        , nargs   = "+"
+        , help    = ("provides a list of known attributes that has to be"
+                     " hidden when displaying function prototypes"))
+
     CMD     = CLI.parse_args()
     VERBOSE = CMD.verbose
     DEBUG   = CMD.debug
@@ -527,6 +534,7 @@ def main():
             , verbose_warn  = not (CMD.sloppy)
             , exp_method    = CMD.symbols_exported_method
             , exp_ids       = CMD.symbols_exported_identifiers
+            , known_attrs   = CMD.known_attrs
             ,)
         opts.set_defaults()
 
@@ -1330,6 +1338,7 @@ class ParseOptions(Container):
         self.gather_context    = False
         self.exp_method        = None
         self.exp_ids           = []
+        self.known_attrs       = []
 
         # epilog / preamble
 
@@ -2418,7 +2427,7 @@ class Parser(SimpleLog):
         proto = re.sub( r"__weak +"          , "", proto )
 
         # Remove known attributes from function prototype
-        known_attrs = []
+        known_attrs = self.options.known_attrs
         if (self.options.exp_method == 'attribute'):
             known_attrs.extend(self.options.exp_ids)
         for attr in known_attrs:
