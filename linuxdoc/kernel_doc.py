@@ -465,7 +465,7 @@ def main():
     CLI.add_argument(
         "--list-exports"
         , action  = "store_true"
-        , help    = "list all symbols exported using EXPORT_SYMBOL" )
+        , help    = "list all exported symbols" )
 
     CLI.add_argument(
         "--use-names"
@@ -475,8 +475,7 @@ def main():
     CLI.add_argument(
         "--exported"
         , action  = "store_true"
-        , help    = ("print documentation of all symbols exported"
-                     " using EXPORT_SYMBOL macros" ))
+        , help    = "print documentation of all exported symbols")
 
     CLI.add_argument(
          "--internal"
@@ -491,6 +490,19 @@ def main():
         , help    = (
             "Markup of the comments. Change this option only if you know"
             " what you do. New comments must be marked up with reST!"))
+
+    CLI.add_argument(
+        "--symbols-exported-method"
+        , default = DEFAULT_EXP_METHOD
+        , help    = (
+            "Indicate the way by which an exported symbol an exported symbol"
+            " is exported. Must be either 'macro' or 'attribute'."))
+
+    CLI.add_argument(
+        "--symbols-exported-identifiers"
+        , nargs   = "+"
+        , default = DEFAULT_EXP_IDS
+        , help    = "identifiers list that specifies an exported symbol")
 
     CMD     = CLI.parse_args()
     VERBOSE = CMD.verbose
@@ -513,6 +525,8 @@ def main():
             , out           = STREAM.appl_out
             , markup        = CMD.markup
             , verbose_warn  = not (CMD.sloppy)
+            , exp_method    = CMD.symbols_exported_method
+            , exp_ids       = CMD.symbols_exported_identifiers
             ,)
         opts.set_defaults()
 
