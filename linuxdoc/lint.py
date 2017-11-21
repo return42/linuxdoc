@@ -31,7 +31,7 @@ import argparse
 
 #import six
 
-from fspath import FSPath
+import os
 from . import kernel_doc as kerneldoc
 
 # ------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ def main():
     CLI.add_argument(
         "srctree"
         , help    = "File or folder of source code."
-        , type    = lambda x: FSPath(x).ABSPATH)
+        , type    = lambda x: os.path.abspath(x))
 
     CLI.add_argument(
         "--sloppy"

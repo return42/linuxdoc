@@ -32,7 +32,7 @@ import multiprocessing
 
 import six
 
-from fspath import FSPath
+import os
 from . import kernel_doc as kerneldoc
 from .kernel_doc import Container
 
@@ -78,12 +78,12 @@ def main():
     CLI.add_argument(
         "srctree"
         , help    = "Folder of source code."
-        , type    = lambda x: FSPath(x).ABSPATH)
+        , type    = lambda x: os.path.abspath(x))
 
     CLI.add_argument(
         "doctree"
         , help    = "Folder to place reST documentation."
-        , type    = lambda x: FSPath(x).ABSPATH)
+        , type    = lambda x: os.path.abspath(x))
 
     CLI.add_argument(
         "--sloppy"
@@ -111,7 +111,7 @@ def main():
 
     CLI.add_argument(
         "--rst-files"
-        , type    = lambda x: FSPath(x).ABSPATH
+        , type    = lambda x: os.path.abspath(x)
         , help    = (
             "File that list source files, which has comments in reST markup."
             " Use kernel-grepdoc command to generate those file."))

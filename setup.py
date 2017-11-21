@@ -6,8 +6,7 @@
 from setuptools import setup, find_packages
 import linuxdoc
 
-install_requires = [
-    'fspath' ]
+install_requires = []
 
 setup(
     name               = "linuxdoc"

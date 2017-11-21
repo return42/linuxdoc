@@ -69,8 +69,6 @@ import textwrap
 
 import six
 
-from fspath import OS_ENV
-
 # ==============================================================================
 # common globals
 # ==============================================================================
@@ -338,9 +336,9 @@ class DevNull(object):
         pass
 DevNull = DevNull()
 
-KBUILD_VERBOSE = int(OS_ENV.get("KBUILD_VERBOSE", "0"))
-KERNELVERSION  = OS_ENV.get("KERNELVERSION", "unknown kernel version")
-SRCTREE        = OS_ENV.get("srctree", "")
+KBUILD_VERBOSE = int(os.getenv("KBUILD_VERBOSE", "0"))
+KERNELVERSION  = os.getenv("KERNELVERSION", "unknown kernel version")
+SRCTREE        = os.getenv("srctree", "")
 GIT_REF        = ("Linux kernel source tree:"
                   " `%(rel_fname)s <https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/"
                   "%(rel_fname)s>`__")
