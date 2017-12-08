@@ -428,3 +428,27 @@ struct something {
 	barbar;
 };
 
+/**
+ * struct lineevent_state - contains the state of a userspace event
+ * @gdev: the GPIO device the event pertains to
+ * @label: consumer label used to tag descriptors
+ * @desc: the GPIO descriptor held by this event
+ * @eflags: the event flags this line was requested with
+ * @irq: the interrupt that trigger in response to events on this GPIO
+ * @wait: wait queue that handles blocking reads of events
+ * @events: KFIFO for the GPIO events (testing DECLARE_KFIFO)
+ * @foobar: testing DECLARE_KFIFO_PTR
+ * @read_lock: mutex lock to protect reads from colliding with adding
+ * new events to the FIFO
+ */
+struct lineevent_state {
+	struct gpio_device *gdev;
+	const char *label;
+	struct gpio_desc *desc;
+	u32 eflags;
+	int irq;
+	wait_queue_head_t wait;
+	DECLARE_KFIFO(events, struct gpioevent_data, 16);
+	DECLARE_KFIFO_PTR(foobar, struct lirc_scancode);
+	struct mutex read_lock;
+};

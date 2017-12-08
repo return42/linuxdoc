@@ -2495,13 +2495,23 @@ class Parser(SimpleLog):
             members = re.sub(r"\s*CRYPTO_MINALIGN_ATTR", "", members)
 
             # replace DECLARE_BITMAP
-            members = re.sub(r"DECLARE_BITMAP\s*\(([^,)]+), ([^,)]+)\)"
+            members = re.sub(r"DECLARE_BITMAP\s*\(([^,)]+),\s*([^,)]+)\)"
                              , r"unsigned long \1[BITS_TO_LONGS(\2)]"
                              , members )
 
             # replace DECLARE_HASHTABLE
-            members = re.sub(r"DECLARE_HASHTABLE\s*\(([^,)]+), ([^,)]+)\)"
+            members = re.sub(r"DECLARE_HASHTABLE\s*\(([^,)]+),\s*([^,)]+)\)"
                              , r"unsigned long \1[1 << ((\2) - 1)]"
+                             , members )
+
+            # replace DECLARE_KFIFO
+            members = re.sub(r"DECLARE_KFIFO\s*\(([^,)]+),\s*([^,)]+),\s*([^,)]+)\)"
+                             , r"\2 \1"
+                             , members )
+
+            # replace DECLARE_KFIFO_PTR
+            members = re.sub(r"DECLARE_KFIFO_PTR\s*\(([^,)]+),\s*([^,)]+)\)"
+                             , r"\2 \1"
                              , members )
 
             # Split nested struct/union elements as newer ones
