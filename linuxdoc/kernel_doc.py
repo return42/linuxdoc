@@ -265,7 +265,8 @@ RST_INDENT = RE(r"^(\s*)[^\s]")
 def map_row(row, map_table):
     for regexpr, substitute in map_table:
         if substitute is not None:
-            row = regexpr.sub(substitute, row)
+            # python has only fixed width lookbehind: add temporarily leading space
+            row = regexpr.sub(substitute, " " + row)[1:]
     return row
 
 def highlight_parser(text, map_table):
