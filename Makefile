@@ -13,9 +13,10 @@ all: clean pylint pytest build docs
 
 PHONY += help
 help:
-	@echo  '  docs	- build documentation'
-	@echo  '  clean	- remove most generated files'
-	@echo  '  rqmts	- info about build requirements'
+	@echo  '  docs	    - build documentation'
+	@echo  '  docs-live - autobuild HTML documentation while editing'
+	@echo  '  clean	    - remove most generated files'
+	@echo  '  rqmts	    - info about build requirements'
 	@echo  ''
 	@echo  '  install   - developer install'
 	@echo  '  uninstall - developer uninstall'
@@ -35,6 +36,10 @@ uninstall: pyuninstall
 PHONY += docs
 docs:  sphinx-doc $(API_DOC)
 	$(call cmd,sphinx,html,docs,docs)
+
+PHONY += docs-live
+docs-live:  sphinx-live
+	$(call cmd,sphinx_autobuild,html,docs,docs)
 
 $(API_DOC): $(PY_ENV)
 	$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o docs/linuxdoc-api linuxdoc

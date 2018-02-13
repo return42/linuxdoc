@@ -19,6 +19,9 @@ docs-help:
 sphinx-doc: $(PY_ENV)
 	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) Sphinx
 
+sphinx-live: $(PY_ENV)
+	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) Sphinx sphinx-autobuild
+
 # ------------------------------------------------------------------------------
 # commands
 # ------------------------------------------------------------------------------
@@ -30,6 +33,10 @@ sphinx-doc: $(PY_ENV)
 
 quiet_cmd_sphinx = SPHINX  $@ --> file://$(abspath $(DOCS_DIST)/$5)
       cmd_sphinx = $(SPHINXBUILD) $(SPHINXOPTS)\
+	-b $2 -c $3 -d $(DOCS_BUILD)/.doctrees $4 $(DOCS_DIST)/$5
+
+quiet_cmd_sphinx_autobuild = SPHINX  $@ --> file://$(abspath $(DOCS_DIST)/$5)
+      cmd_sphinx_autobuild = PATH="$(PY_ENV_BIN):$(PATH)" $(PY_ENV_BIN)/sphinx-autobuild -v --poll -B $(SPHINXOPTS)\
 	-b $2 -c $3 -d $(DOCS_BUILD)/.doctrees $4 $(DOCS_DIST)/$5
 
 quiet_cmd_sphinx_clean = CLEAN     $@

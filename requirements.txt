@@ -20,7 +20,8 @@ pylint
 
 Sphinx>=1.5
 sphinx_rtd_theme
-pip
+sphinx-autobuild
+
 #twine
 #wheel
 #mock
