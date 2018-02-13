@@ -105,7 +105,7 @@ class RE(object):
         if group < 0 or group > self.groups - 1:
             raise IndexError("group index out of range (max %s groups)" % self.groups )
         if self.last_match is None:
-            raise IndexError("nothing hase matched / no groups")
+            raise IndexError("nothing has matched / no groups")
         return self.last_match.group(group + 1)
 
 # these regular expresions has been *stolen* from the kernel-doc perl script.
@@ -249,11 +249,67 @@ def normalize_id(ID):
     u"""substitude invalid chars of the ID with ``-`` and mak it lowercase"""
     return ID_CHARS.sub("-", ID).lower()
 
-def map_text(text, map_table):
+
+RST_DIRECTIVE_PATTERN = r"""
+  \.\.[ ]+          # explicit markup start
+  (%s)              # directive name
+  [ ]?              # optional space
+  ::                # directive delimiter
+  ([ ]+|$)          # whitespace or end of line
+  """
+
+RST_CODE_BLOCK = RE(RST_DIRECTIVE_PATTERN % 'code-block', re.VERBOSE | re.UNICODE)
+RST_LITERAL_BLOCK = RE(r'(?<!\\)(\\\\)*::$')
+RST_INDENT = RE(r"^(\s*)[^\s]")
+
+def map_row(row, map_table):
     for regexpr, substitute in map_table:
         if substitute is not None:
-            text = regexpr.sub(substitute, text)
-    return text
+            row = regexpr.sub(substitute, row)
+    return row
+
+def highlight_parser(text, map_table):
+    # FIXME: document this
+    block_indent = 0
+    row_indent = 0
+    state = 'highlight' # [highlight|literal]
+    out = []
+    in_rows = text.splitlines()
+
+    while in_rows:
+        row = in_rows.pop(0)
+
+        if not row.strip(): # pass-through empty lines & continue
+            out.append(row)
+            continue
+
+        RST_INDENT.search(row)
+        indent = len(RST_INDENT[0].expandtabs()) 
+
+        if state == 'highlight':
+            out.append(map_row(row, map_table))
+            # prepare next state
+            if (RST_LITERAL_BLOCK.search(row) or RST_CODE_BLOCK.search(row)):
+                state = 'literal'
+                block_indent = row_indent + 1
+            continue
+
+        if state == 'literal':
+            if indent < block_indent:
+                # this is a new block, push row back onto the stack and repeat
+                # the loop
+                state = 'highlight'
+                block_indent = indent
+                in_rows.insert(0, row)
+                continue
+            else:
+                out.append(row)
+
+    return "\n".join(out)
+
+
+
+
 
 # ==============================================================================
 # helper
@@ -536,7 +592,7 @@ class TranslatorAPI(object):
     def highlight(self, cont):
         u"""returns *highlighted* text"""
         if self.options.highlight:
-            return map_text(cont, self.HIGHLIGHT_MAP)
+            return highlight_parser(cont, self.HIGHLIGHT_MAP)
         return cont
 
     def get_preamble(self):
@@ -801,9 +857,9 @@ class ReSTTranslator(TranslatorAPI):
 
     def highlight(self, text):
         if self.options.markup == "kernel-doc":
-            text = map_text(text, self.MASK_REST_INLINES + self.HIGHLIGHT_MAP )
+            text = highlight_parser(text, self.MASK_REST_INLINES + self.HIGHLIGHT_MAP )
         elif self.options.markup == "reST":
-            text = map_text(text, self.HIGHLIGHT_MAP )
+            text = highlight_parser(text, self.HIGHLIGHT_MAP )
         return text
 
     def format_block(self, content):

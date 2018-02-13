@@ -286,7 +286,8 @@ typedef int my_typedef;
  *     +-+----+ |      | +----+-+
  *      \|     \|      |/     |/
  *       +------+      +------+
- *
+ *        foo()         bar()
+ * 
  * Highlighted code blocks:
  * The next example shows a code block, with highlighting C syntax in the
  * output.
@@ -295,7 +296,7 @@ typedef int my_typedef;
  *
  *     // Hello World program
  *     #include<stdio.h>
- *     int main\()
+ *     int main()
  *     {
  *        printf("Hello World");
  *     }
