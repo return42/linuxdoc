@@ -10,7 +10,7 @@ int main() {
 
 /* parse-SNIP: user_function */
 /**
- * user_function - function that can only be called in user context
+ * user_function() - function that can only be called in user context
  * @a: some argument
  * @...: ellipsis operator
  *
