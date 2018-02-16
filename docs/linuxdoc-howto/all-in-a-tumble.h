@@ -79,10 +79,14 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
 * @arg2b: second argument of anonymous union/anonymous struct
 * @arg3: third argument of anonymous union/anonymous struct
 * @arg4: fourth argument of anonymous union/anonymous struct
+* @bar: non-anonymous union
+* @bar.st1: struct st1 inside @bar
 * @bar.st1.arg1: first argument of struct st1 on union bar
 * @bar.st1.arg2: second argument of struct st1 on union bar
+* @bar.st2: struct st2 inside @bar
 * @bar.st2.arg1: first argument of struct st2 on union bar
 * @bar.st2.arg2: second argument of struct st2 on union bar
+* @bar.st3: struct st3 inside @bar
 * @bar.st3.arg2: second argument of struct st3 on union bar
 * @f1: nested function on anonimous union/struct
 * @bar.st2.f2: nested function on named union/struct
@@ -108,7 +112,7 @@ struct my_struct {
       struct {
           int arg1;
           int arg2;
-      } st1;           /* bar.st1 is undocumented, cause a warning */
+      } st1;
       struct {
           void *arg1;  /* bar.st3.arg1 is undocumented, cause a warning */
 	    int arg2;
