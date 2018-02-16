@@ -171,7 +171,7 @@ type_member       = RE(r"(?<=\s)\&([_\w]+)((\.|->)[_\w]+)")
 type_member_func  = RE(type_member.pattern + r"\(\)")
 type_func         = RE(r"(?<=\s)(\w+)(?<!\\)\(\)")
 type_constant     = RE(r"(?<=\s)\%([-_\w]+)")
-type_param        = RE(r"(?<=\s)\@(\w+)")
+type_param        = RE(r"(?<=\s)\@(\w*(\.\w+)*(\.\.\.)?)")
 type_env          = RE(r"(?<=\s)(\$\w+)")
 type_struct       = RE(r"(?<=\s)\&((struct\s*)*[_\w]+)")
 
