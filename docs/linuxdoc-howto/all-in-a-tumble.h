@@ -155,7 +155,7 @@ struct my_long_struct {
 	/** @bar2: Description for struct @bar2 inside @my_long_struct */
 	struct {
 		/**
-		 * @bar2.barbar: Description for @barbar inside @foo.bar2
+		 * @bar2.barbar: Description for @barbar inside @my_long_struct.bar2
 		 */
 		int barbar;
 	} bar2;
