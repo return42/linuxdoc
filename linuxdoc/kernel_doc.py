@@ -157,7 +157,8 @@ doc_block        = RE(doc_com.pattern + r"DOC:\s*(.*)?")
 
 # state: 5 - gathering documentation outside main block
 doc_state5_start = RE(r"^\s*/\*\*\s*$")
-doc_state5_sect  = RE(r"\s*\*\s*(@[\w\s]+):(.*)")
+doc_state5_sect  = RE(r"\s*\*\s*(@\s*[\w][\w\.]*\s*):(.*)")
+
 doc_state5_end   = RE(r"^\s*\*/\s*$")
 doc_state5_oneline = RE(r"^\s*/\*\*\s*(@[\w\s]+):\s*(.*)\s*\*/\s*$")
 

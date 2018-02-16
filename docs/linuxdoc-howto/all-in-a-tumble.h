@@ -148,8 +148,17 @@ struct my_long_struct {
          * Here, the member description may contain several paragraphs.
          */
         int baz;
-        /** @foobar: Single line description. */
-        int foobar;
+	union {
+		/** @foobar: Single line description. */
+		int foobar;
+	};
+	/** @bar2: Description for struct @bar2 inside @my_long_struct */
+	struct {
+		/**
+		 * @bar2.barbar: Description for @barbar inside @foo.bar2
+		 */
+		int barbar;
+	} bar2;
 };
 /* parse-SNAP: */
 
