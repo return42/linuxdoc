@@ -947,7 +947,7 @@ class ReSTTranslator(TranslatorAPI):
                 self.write(self.INDENT, l)
         self.write("\n")
 
-    def write_func_param(self, param, descr):
+    def write_func_param(self, param, param_type, descr):
         param = param.replace("*", r"\*")
         self.write("\n", self.INDENT, param)
 
@@ -958,6 +958,11 @@ class ReSTTranslator(TranslatorAPI):
             self.write("\n")
             if l.strip():
                 self.write(self.INDENT * 2, l)
+
+        if param_type:
+            param_type = param_type.replace("*", r"\*")
+            self.write("\n", self.INDENT, param_type)
+
         self.write("\n")
 
     def output_preamble(self):
@@ -1050,21 +1055,24 @@ class ReSTTranslator(TranslatorAPI):
             p_desc = parameterdescs[p_name]
 
             param = ""
+            param_type = None
             if self.FUNC_PTR.search(p_type):
                 # pointer to function
                 param = ":param %s%s)(%s):" % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1])
             elif p_type.endswith("*"):
                 # pointer & pointer to pointer
-                param = ":param %s%s:" % (p_type, p_name)
+                param = ":param %s:" % (p_name)
+                param_type = ":type %s: %s" % (p_name, p_type)
             elif p_name == "...":
                 param = ":param ellipsis ellipsis:"
             else:
-                param = ":param %s %s:" % (p_type, p_name)
+                param = ":param %s:" % (p_name)
+                param_type = ":type %s: %s" % (p_name, p_type)
 
             self.parser.ctx.offset = parameterdescs.offsets.get(
                 p_name, self.parser.ctx.offset)
 
-            self.write_func_param(param, p_desc)
+            self.write_func_param(param, param_type, p_desc)
 
             # print all the @foo.bar sub-descriptions
             sub_descr = [x for x in parameterdescs.keys() if x.startswith(p_name + ".")]
