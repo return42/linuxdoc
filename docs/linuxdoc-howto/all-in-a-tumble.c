@@ -116,3 +116,33 @@ struct rarely_struct {
 /* parse-SNIP: xxxx */
 
 
+/* parse-SNIP: user_function */
+/**
+ * user_function_1() - function that can only be called in user context
+ * @a: some argument
+ *
+ * This function calls and returns user_function_2()
+ * Since user_function_2() is mentionned in the description, it will
+ * be part of the See Also section below the description.
+ * This is true for all formats, but mostly useful for manpages
+ *
+ */
+int
+user_function_1(int a)
+{
+  return user_function_2(a);
+}
+
+/**
+ * user_function_2() - function that can only be called in user context
+ * @a: some argument
+ *
+ * This function makes no sense, it's only a kernel-doc demonstration.
+ */
+int
+user_function_2(int a)
+{
+  return a;
+}
+/* parse-SNAP: */
+

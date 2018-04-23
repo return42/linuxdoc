@@ -1095,6 +1095,25 @@ class ReSTTranslator(TranslatorAPI):
                 , sec_level = 3
                 , ID = function + "." + header)
 
+        # if no "See Also" section was filled, try to use the :function:
+        # argument list from the kernel-doc directive.
+
+        if "See also" not in sections.keys():
+            content_set = set()
+            if 'Description' in sections:
+                fnlist = re.findall(r'([a-z0-9_]*)\(\)', sections['Description'], re.DOTALL)
+                while function in list(fnlist):
+                    fnlist.remove(function)  # remove self from the list
+                content_set = {':c:func:`{}`'.format(fn) for fn in fnlist}
+            if content_set:
+                content = ", ".join(content_set)
+                self.write_section(
+                    "See also"
+                    , content
+                    , sec_level = 3
+                    , ID = "fun." + function + "." + "seealso")
+
+
     def output_struct_decl(
             self
             , decl_name        = None # ctx.decl_name
