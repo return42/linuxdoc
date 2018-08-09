@@ -2,8 +2,6 @@
 # requires
 # --------
 
-fspath
-
 # --------------
 # tests_requires
 # --------------

@@ -22,7 +22,7 @@ u"""
 # ------------------------------------------------------------------------------
 
 import argparse, re, sys
-from fspath import FSPath
+import os
 
 description = """ The 'kernel-grepdoc' command scans ``*.rst`` files from kernel's
 ``./Documentation`` source tree and filters all 'kernel-doc' directives.  The
@@ -52,7 +52,7 @@ def main():
     CLI.add_argument(
         "srctree"
         , help    = "Linux's source tree"
-        , type    = lambda x: FSPath(x).ABSPATH)
+        , type    = lambda x: os.path.abspath(x))
 
     CMD = CLI.parse_args()
 

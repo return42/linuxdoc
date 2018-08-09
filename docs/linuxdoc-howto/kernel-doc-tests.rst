@@ -74,6 +74,33 @@ and parses comments from ``all-in-a-tumble.c``.
         :man-sect: 2
 
 
+This test gathers function ``all-in-a-tumble.c`` whose function attributes
+mark them as exported and that are present in ``all-in-a-tumble.h``.
+
+.. code-block:: rst
+
+    .. kernel-doc::  ./all-in-a-tumble.c
+        :export:  ./all-in-a-tumble.h
+        :exp-method: attribute
+        :exp-ids: API_EXPORTED
+        :module: test-example-fnattrs
+        :man-sect: 2
+
+.. admonition:: exported symbols
+    :class: rst-example
+
+    .. kernel-doc::  ./all-in-a-tumble.c
+        :export:  ./all-in-a-tumble.h
+        :exp-method: attribute
+        :exp-ids: API_EXPORTED
+        :module: test-example-fnattrs
+        :man-sect: 2
+
+The ``exp-method`` and ``exp-ids`` could be respectively omitted if
+``kernel_doc_exp_method`` and ``kernel_doc_exp_ids`` are set in the sphinx
+configuration.
+
+
 Get documentation of internal symbols
 -------------------------------------
 
