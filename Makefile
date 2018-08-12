@@ -7,6 +7,7 @@ include utils/makefile.sphinx
 GIT_URL   = https://github.com/return42/linuxdoc.git
 PYOBJECTS = linuxdoc
 DOC       = docs
+#SLIDES    = docs/slides
 API_DOC   = $(DOC)/$(PYOBJECTS)-api
 
 all: clean pylint pytest build docs
@@ -35,11 +36,17 @@ uninstall: pyuninstall
 
 PHONY += docs
 docs:  sphinx-doc $(API_DOC)
+	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) -e .
 	$(call cmd,sphinx,html,docs,docs)
 
 PHONY += docs-live
 docs-live:  sphinx-live
+	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) -e .
 	$(call cmd,sphinx_autobuild,html,docs,docs)
+
+#PHONY += slides
+#slides:  sphinx-doc
+#	$(call cmd,sphinx,html,$(SLIDES),$(SLIDES),slides)
 
 $(API_DOC): $(PY_ENV)
 	$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o docs/linuxdoc-api linuxdoc
@@ -50,8 +57,8 @@ clean: pyclean docs-clean
 	rm -rf ./$(API_DOC)
 	$(call cmd,common_clean)
 
-PHONY += help-rqmts
-rqmts: msg-sphinx-doc msg-pylint-exe msg-pip-exe
+PHONY += rqmts
+rqmts: msg-python-exe msg-pip-exe msg-virtualenv-exe
 
 
 .PHONY: $(PHONY)
