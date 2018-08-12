@@ -2,7 +2,7 @@
 LinuxDoc
 ========
 
-:copyright:  Copyright (C) 2017 Markus Heiser
+:copyright:  Copyright (C) 2018 Markus Heiser
 :e-mail:     markus.heiser@darmarIT.de
 :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
