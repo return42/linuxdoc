@@ -2,7 +2,6 @@
 #
 # Sphinx documentation build configuration file
 
-import re
 import linuxdoc
 import sphinx_rtd_theme
 
@@ -39,6 +38,7 @@ html_context = {
         '_static/theme_overrides.css',
     ],
 }
+html_logo = 'darmarIT_logo_128.png'
 
 # since https://h2626237.stratoserver.net/ is self-signed, disable tls verify
 tls_verify = False
