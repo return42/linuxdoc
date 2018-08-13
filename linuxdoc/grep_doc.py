@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0103,C0410
-
+# pylint: invalid-name
 u"""
     grep_doc
     ~~~~~~~~
@@ -21,10 +20,13 @@ u"""
 # imports
 # ------------------------------------------------------------------------------
 
-import argparse, re, sys
+import argparse
+import re
+import sys
+
 from fspath import FSPath
 
-description = """ The 'kernel-grepdoc' command scans ``*.rst`` files from kernel's
+DESCRIPTION = """ The 'kernel-grepdoc' command scans ``*.rst`` files from kernel's
 ``./Documentation`` source tree and filters all 'kernel-doc' directives.  The
 source files which are used in those 'kernel-doc' directives are printed out as
 list. This list can be used to identify which files from the source tree has
@@ -42,11 +44,11 @@ ERR    = lambda msg: sys.__stderr__.write("ERROR: %s\n" % msg)
 KERNEL_DOC_RE = re.compile(r'^\s*..\s+kernel-doc::\s+([a-zA-Z0-9_\-\.\/]+)')
 
 # ------------------------------------------------------------------------------
-def main():
+def main(): # pylint: disable=missing-docstring
 # ------------------------------------------------------------------------------
 
-    CLI = argparse.ArgumentParser(
-        description = description
+    CLI = argparse.ArgumentParser(  # pylint: disable=invalid-name
+        description = DESCRIPTION
         , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     CLI.add_argument(
@@ -54,7 +56,7 @@ def main():
         , help    = "Linux's source tree"
         , type    = lambda x: FSPath(x).ABSPATH)
 
-    CMD = CLI.parse_args()
+    CMD = CLI.parse_args()  # pylint: disable=invalid-name
 
     if not CMD.srctree.EXISTS:
         ERR("%s does not exists." % CMD.srctree)
@@ -64,17 +66,17 @@ def main():
         ERR("%s is not a folder." % CMD.srctree)
         sys.exit(42)
 
-    rstSources = set()
+    rst_sources = set()
     doc_tree = CMD.srctree/"Documentation"
     for fname in doc_tree.reMatchFind(r"^.*\.rst$"):
         if fname.BASENAME == 'kernel-documentation.rst':
             continue
         #MSG("scan %s" % fname)
         for line in fname.openTextFile():
-            m = KERNEL_DOC_RE.search(line)
-            if m:
-                rstSources.add(m.group(1))
+            _m = KERNEL_DOC_RE.search(line)
+            if _m:
+                rst_sources.add(_m.group(1))
 
-    rstSources = list(rstSources)
-    rstSources.sort()
-    PRINT("\n".join(rstSources))
+    rst_sources = list(rst_sources)
+    rst_sources.sort()
+    PRINT("\n".join(rst_sources))

@@ -1,6 +1,5 @@
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=R0912,R0914,R0915,W0221
-
+# pylint: disable=missing-docstring, invalid-name
 u"""
     rstKernelDoc
     ~~~~~~~~~~~~
@@ -251,6 +250,8 @@ class KernelDocParser(kerneldoc.Parser):
     # bind the parser logging to the sphinx application
     # -------------------------------------------------
 
+    # pylint: disable=arguments-differ
+
     def error(self, message, **replace):
         replace["fname"]   = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
@@ -294,6 +295,10 @@ class KernelDoc(Directive):
     final_argument_whitespace = True
 
     option_spec = {
+
+        # see https://github.com/PyCQA/pylint/issues/289
+        # pylint: disable=bad-continuation
+
         "doc"          : directives.unchanged_required # aka lines containing !P
         , "no-header"  : directives.flag
 
@@ -321,7 +326,7 @@ class KernelDoc(Directive):
 
     }
 
-    def getParserOptions(self):
+    def getParserOptions(self):  # pylint: disable=too-many-branches, too-many-statements
 
         fname     = self.arguments[0]
         src_tree  = kerneldoc.SRCTREE
@@ -480,16 +485,17 @@ class KernelDoc(Directive):
 
     def run(self):
 
-        # pylint: disable=W0201
-        self.parser = None
-        self.doc    = self.state.document
-        self.env    = self.doc.settings.env
-        self.nodes  = []
+        # FIXME: think about again; these members has been added for convenience
+        self.parser = None                     # pylint: disable=attribute-defined-outside-init
+        self.doc    = self.state.document      # pylint: disable=attribute-defined-outside-init
+        self.env    = self.doc.settings.env    # pylint: disable=attribute-defined-outside-init
+        self.nodes  = []                       # pylint: disable=attribute-defined-outside-init
 
         try:
             if not self.doc.settings.file_insertion_enabled:
                 raise FaultyOption('docutils: file insertion disabled')
             opts = self.getParserOptions()
+            # FIXME: think about again; these members has been added for convenience
             self.parser = self.parseSource(opts)
             self.nodes.extend(self.getNodes())
 
@@ -499,7 +505,7 @@ class KernelDoc(Directive):
         return self.nodes
 
 
-    def getNodes(self):
+    def getNodes(self):  # pylint: disable=too-many-branches, too-many-statements, too-many-locals
 
         translator = kerneldoc.ReSTTranslator()
         lines      = ""

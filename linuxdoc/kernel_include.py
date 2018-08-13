@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=R0914,R0912,R0915
 u"""
     kernel-include
     ~~~~~~~~~~~~~~
@@ -41,7 +40,7 @@ from docutils.parsers.rst.directives.misc import Include
 __version__  = '1.0'
 
 # ==============================================================================
-def setup(app):
+def setup(app): # pylint: disable=missing-docstring
 # ==============================================================================
 
     app.add_directive("kernel-include", KernelInclude)
@@ -72,7 +71,7 @@ class KernelInclude(Include):
         #return super(KernelInclude, self).run() # won't work, see HINTs in _run()
         return self._run()
 
-    def _run(self):
+    def _run(self):  # pylint: disable=R
         """Include a file as part of the content of this reST file."""
 
         # HINT: I had to copy&paste the whole Include.run method. I'am not happy
@@ -111,7 +110,7 @@ class KernelInclude(Include):
                               (self.name, SafeString(path)))
         except IOError as error:
             raise self.severe('Problems with "%s" directive path:\n%s.' %
-                      (self.name, ErrorString(error)))
+                              (self.name, ErrorString(error)))
         startline = self.options.get('start-line', None)
         endline = self.options.get('end-line', None)
         try:
@@ -152,7 +151,7 @@ class KernelInclude(Include):
             else:
                 text = rawtext
             literal_block = nodes.literal_block(rawtext, source=path,
-                                    classes=self.options.get('class', []))
+                                                classes=self.options.get('class', []))
             literal_block.line = 1
             self.add_name(literal_block)
             if 'number-lines' in self.options:

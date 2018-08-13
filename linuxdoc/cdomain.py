@@ -1,5 +1,4 @@
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0113,C0103,C0325
 u"""
     cdomain
     ~~~~~~~
@@ -45,9 +44,9 @@ from sphinx.domains.c import CDomain as Base_CDomain
 __version__  = '1.0'
 
 # Get Sphinx version
-major, minor, patch = sphinx.version_info[:3]
+major, minor, patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
 
-def setup(app):
+def setup(app):  # pylint: disable=missing-docstring
 
     app.override_domain(CDomain)
 
@@ -78,9 +77,9 @@ class CObject(Base_CObject):
         if not self.objtype == 'function':
             return False
 
-        m = c_funcptr_sig_re.match(sig)
+        m = c_funcptr_sig_re.match(sig)  # pylint: disable=invalid-name
         if m is None:
-            m = c_sig_re.match(sig)
+            m = c_sig_re.match(sig)      # pylint: disable=invalid-name
             if m is None:
                 raise ValueError('no match')
 
@@ -156,7 +155,7 @@ class CObject(Base_CObject):
                     ('single', indextext, targetname, '', None))
 
     def get_index_text(self, name):
-        if self.is_function_like_macro:
+        if self.is_function_like_macro:  # pylint: disable=no-else-return
             return _('%s (C macro)') % name
         else:
             return super(CObject, self).get_index_text(name)

@@ -1,5 +1,6 @@
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0103, R0903, R0912, R0915
+# pylint: disable=invalid-name, missing-docstring, too-many-branches
+
 u"""
     scalable figure and image handling
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,15 +64,15 @@ from six import iteritems
 PY3 = sys.version_info[0] == 3
 
 if PY3:
-    _unicode = str
+    _unicode = str       # pylint: disable=invalid-name
 else:
-    _unicode = unicode  # pylint: disable=E0602
+    _unicode = unicode   # pylint: disable=undefined-variable, invalid-name
 
 # Get Sphinx version
-major, minor, patch = sphinx.version_info[:3]
+major, minor, patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
 if major == 1 and minor > 3:
     # patches.Figure only landed in Sphinx 1.4
-    from sphinx.directives.patches import Figure  # pylint: disable=C0412
+    from sphinx.directives.patches import Figure  # pylint: disable=ungrouped-imports
 else:
     Figure = images.Figure
 
@@ -80,7 +81,7 @@ __version__  = '1.0.0'
 # simple helper
 # -------------
 
-def which(cmd):
+def which(cmd):  # pylint: disable=inconsistent-return-statements
     """Searches the ``cmd`` in the ``PATH`` environment.
 
     This *which* searches the PATH for executable ``cmd`` . First match is
@@ -111,7 +112,7 @@ def isNewer(path1, path2):
     return (path.exists(path1)
             and os.stat(path1).st_ctime > os.stat(path2).st_ctime)
 
-def pass_handle(self, node):           # pylint: disable=W0613
+def pass_handle(self, node):  # pylint: disable=unused-argument
     pass
 
 # setup conversion tools and sphinx extension
@@ -170,7 +171,7 @@ def setupTools(app):
 
     This function is called once, when the builder is initiated.
     """
-    global dot_cmd, convert_cmd   # pylint: disable=W0603
+    global dot_cmd, convert_cmd  # pylint: disable=global-statement
     app.verbose("kfigure: check installed tools ...")
 
     dot_cmd = which('dot')
@@ -329,7 +330,7 @@ def svg2pdf(app, svg_fname, pdf_fname):
 # image handling
 # ---------------------
 
-def visit_kernel_image(self, node):    # pylint: disable=W0613
+def visit_kernel_image(self, node):
     """Visitor of the ``kernel_image`` Node.
 
     Handles the ``image`` child-node with the ``convert_image(...)``.
@@ -366,7 +367,7 @@ class KernelImage(images.Image):
 # figure handling
 # ---------------------
 
-def visit_kernel_figure(self, node):   # pylint: disable=W0613
+def visit_kernel_figure(self, node):
     """Visitor of the ``kernel_figure`` Node.
 
     Handles the ``image`` child-node with the ``convert_image(...)``.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C1801
+# pylint: disable=missing-docstring
 
 u"""
     kernel-doc-man
@@ -70,7 +70,7 @@ from docutils.transforms import Transform
 
 from sphinx import addnodes
 from sphinx.util.nodes import inline_all_toctrees
-from sphinx.util.console import bold, darkgreen     # pylint: disable=E0611
+from sphinx.util.console import bold, darkgreen  # pylint: disable=no-name-in-module
 from sphinx.writers.manpage import ManualPageWriter
 
 from sphinx.builders.manpage import ManualPageBuilder
@@ -109,11 +109,12 @@ def setup(app):
     )
 
 # ==============================================================================
-class kernel_doc_man(nodes.Invisible, nodes.Element):    # pylint: disable=C0103
+class kernel_doc_man(  # pylint: disable=invalid-name
+        nodes.Invisible, nodes.Element):
 # ==============================================================================
     """Node to mark a section as *manpage*"""
 
-def skip_kernel_doc_man(self, node):                     # pylint: disable=W0613
+def skip_kernel_doc_man(self, node):  # pylint: disable=unused-argument
     raise nodes.SkipNode
 
 
@@ -204,11 +205,11 @@ class Section2Manpage(Transform):
     manTitleOrder = [t for r,t in manTitles]
 
     @classmethod
-    def getFirstChild(cls, subtree, *classes):
-        for c in classes:
+    def sec2man_get_first_child(cls, subtree, *classes):
+        for _c in classes:
             if subtree is None:
                 break
-            idx = subtree.first_child_matching_class(c)
+            idx = subtree.first_child_matching_class(_c)
             if idx is None:
                 subtree = None
                 break
@@ -218,13 +219,13 @@ class Section2Manpage(Transform):
     def strip_man_info(self):
         section  = self.document[0]
         man_info = Container(authors=[])
-        man_node = self.getFirstChild(section, kernel_doc_man)
+        man_node = self.sec2man_get_first_child(section, kernel_doc_man)
         name, sect = (man_node["manpage"].split(".", -1) + [DEFAULT_MAN_SECT])[:2]
         man_info["manpage"] = name
         man_info["mansect"] = sect
 
         # strip field list
-        field_list = self.getFirstChild(section, nodes.field_list)
+        field_list = self.sec2man_get_first_child(section, nodes.field_list)
         if field_list:
             field_list.parent.remove(field_list)
             for field in field_list:
@@ -238,7 +239,7 @@ class Section2Manpage(Transform):
                 man_info["authors"].append("%s <%s>" % (auth, adr))
 
         # strip *purpose*
-        desc_content = self.getFirstChild(
+        desc_content = self.sec2man_get_first_child(
             section, addnodes.desc, addnodes.desc_content)
         if not len(desc_content):
             # missing initial short description in kernel-doc comment
@@ -248,11 +249,11 @@ class Section2Manpage(Transform):
             del desc_content[0]
 
         # remove section title
-        old_title = self.getFirstChild(section, nodes.title)
+        old_title = self.sec2man_get_first_child(section, nodes.title)
         old_title.parent.remove(old_title)
 
         # gather type of the declaration
-        decl_type = self.getFirstChild(
+        decl_type = self.sec2man_get_first_child(
             section, addnodes.desc, addnodes.desc_signature, addnodes.desc_type)
         if decl_type is not None:
             decl_type = decl_type.astext().strip()
@@ -264,10 +265,10 @@ class Section2Manpage(Transform):
 
         return man_info
 
-    def isolateSections(self, sec_by_title):
+    def isolate_sections(self, sec_by_title):
         section = self.document[0]
         while True:
-            sect = self.getFirstChild(section, nodes.section)
+            sect = self.sec2man_get_first_child(section, nodes.section)
             if not sect:
                 break
             sec_parent = sect.parent
@@ -277,7 +278,7 @@ class Section2Manpage(Transform):
                 # drop target / is useless in man-pages
                 del sec_parent[target_idx]
             title = sect[0].astext().upper()
-            for r, man_title in self.manTitles:
+            for r, man_title in self.manTitles:  # pylint: disable=invalid-name
                 if r.search(title):
                     title = man_title
                     sect[0].replace_self(nodes.title(text = title))
@@ -287,9 +288,9 @@ class Section2Manpage(Transform):
 
         return sec_by_title
 
-    def isolateSynopsis(self, sec_by_title):
+    def isolate_synopsis(self, sec_by_title):
         synopsis = None
-        c_desc = self.getFirstChild(self.document[0], addnodes.desc)
+        c_desc = self.sec2man_get_first_child(self.document[0], addnodes.desc)
         if c_desc is not None:
             c_desc.parent.remove(c_desc)
             synopsis = nodes.section()
@@ -298,16 +299,16 @@ class Section2Manpage(Transform):
             sec_by_title["SYNOPSIS"] = sec_by_title.get("SYNOPSIS", []) + [synopsis]
         return sec_by_title
 
-    def apply(self):
+    def apply(self, **kwargs):
         self.document.man_info = self.strip_man_info()
         sec_by_title = collections.OrderedDict()
 
-        self.isolateSections(sec_by_title)
+        self.isolate_sections(sec_by_title)
         # On struct, enum, union, typedef, the SYNOPSIS is taken from the
         # DEFINITION section.
         if self.document.man_info.decl_type not in [
                 "struct", "enum", "union", "typedef"]:
-            self.isolateSynopsis(sec_by_title)
+            self.isolate_synopsis(sec_by_title)
 
         for sec_name in self.manTitleOrder:
             sec_list = sec_by_title.pop(sec_name,[])
@@ -330,11 +331,11 @@ class KernelDocManBuilder(ManualPageBuilder):
     def init(self):
         pass
 
-    def is_manpage(self, node):               # pylint: disable=R0201
+    def is_manpage(self, node):  # pylint: disable=no-self-use
         if isinstance(node, nodes.section):
             return bool(
-                Section2Manpage.getFirstChild(
-                node, kernel_doc_man) is not None)
+                Section2Manpage.sec2man_get_first_child(
+                    node, kernel_doc_man) is not None)
         return False
 
     def prepare_writing(self, docnames):
@@ -345,7 +346,7 @@ class KernelDocManBuilder(ManualPageBuilder):
         """Where you actually write something to the filesystem."""
         pass
 
-    def get_partial_document(self, children): # pylint: disable=R0201
+    def get_partial_document(self, children):  # pylint: disable=no-self-use
         doc_tree =  new_document('<output>')
         doc_tree += children
         return doc_tree
@@ -354,7 +355,6 @@ class KernelDocManBuilder(ManualPageBuilder):
         if self.config.man_pages:
             # build manpages from config.man_pages as usual
             ManualPageBuilder.write(self, *ignored)
-            # FIXME:
 
         self.info(bold("scan master tree for kernel-doc man-pages ... ") + darkgreen("{"), nonl=True)
 

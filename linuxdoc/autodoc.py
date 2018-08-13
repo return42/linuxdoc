@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0103
-
 u"""
     autodoc
     ~~~~~~~
@@ -58,9 +56,8 @@ TEMPLATE_INDEX="""\
 
 """
 
-epilog = u"""This implementation of uses the kernel-doc parser
-from the linuxdoc extension, for detail informations read
-http://return42.github.io/sphkerneldoc/books/kernel-doc-HOWTO"""
+EPILOG = u"""This implementation of autodoc uses the kernel-doc parser from the linuxdoc
+extension, for details see: https://return42.github.io/linuxdoc/cmd-line.html"""
 
 CMD = None
 
@@ -68,11 +65,13 @@ CMD = None
 def main():
 # ------------------------------------------------------------------------------
 
-    global CMD  # pylint: disable=W0603
+    "Parse *kernel-doc* comments from source code (main)"
 
-    CLI = argparse.ArgumentParser(
+    global CMD  # pylint: disable=global-statement
+
+    CLI = argparse.ArgumentParser(  # pylint: disable=invalid-name
         description = ("Parse *kernel-doc* comments from source code")
-        , epilog = epilog
+        , epilog = EPILOG
         , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     CLI.add_argument(
@@ -150,6 +149,8 @@ def main():
 def gather_filenames(cmd):
 # ------------------------------------------------------------------------------
 
+    "yield .c & .h filenames"
+
     for fname in cmd.srctree.reMatchFind(r"^.*\.[ch]$"):
         if fname.startswith(CMD.srctree/"Documentation"):
             continue
@@ -158,6 +159,8 @@ def gather_filenames(cmd):
 # ------------------------------------------------------------------------------
 def autodoc_file(fname):
 # ------------------------------------------------------------------------------
+
+    "generate documentation from fname"
 
     fname  = fname.relpath(CMD.srctree)
     markup = CMD.markup
@@ -175,7 +178,7 @@ def autodoc_file(fname):
     parser = kerneldoc.Parser(opts, kerneldoc.NullTranslator())
     try:
         parser.parse()
-    except Exception: # pylint: disable=W0703
+    except Exception:  # pylint: disable=broad-except
         FATAL("kernel-doc markup of %s seems buggy / can't parse" % opts.fname)
         return
 
@@ -196,12 +199,12 @@ def autodoc_file(fname):
         # declaration are different", etc ...).
         parser.parse_dump_storage(translator=translator)
 
-        outFile = CMD.doctree / fname.replace(".","_") + ".rst"
-        outFile.DIRNAME.makedirs()
-        with outFile.openTextFile(mode="w") as out:
+        out_file = CMD.doctree / fname.replace(".","_") + ".rst"
+        out_file.DIRNAME.makedirs()
+        with out_file.openTextFile(mode="w") as out:
             out.write(rst.getvalue())
 
-    except Exception: # pylint: disable=W0703
+    except Exception:  # pylint: disable=broad-except
         FATAL("kernel-doc markup of %s seems buggy / can't parse" % opts.fname)
         return
 
@@ -209,17 +212,19 @@ def autodoc_file(fname):
 def insert_index_files(root_folder):
 # ------------------------------------------------------------------------------
 
+    "From root_folder traverse over subfolders and generate all index.rst files "
+
     for folder, dirnames, filenames in root_folder.walk():
         ctx = Container( title = folder.FILENAME )
         dirnames.sort()
         filenames.sort()
-        indexFile = folder / "index.rst"
-        MSG("create index: %s" % indexFile)
-        with indexFile.openTextFile(mode="w") as index:
+        index_file = folder / "index.rst"
+        MSG("create index: %s" % index_file)
+        with index_file.openTextFile(mode="w") as index:
             index.write(TEMPLATE_INDEX % ctx)
-            for d in dirnames:
-                index.write("    %s/index\n" % d.FILENAME)
-            for f in filenames:
-                if f.FILENAME == "index":
+            for _d in dirnames:
+                index.write("    %s/index\n" % _d.FILENAME)
+            for _f in filenames:
+                if _f.FILENAME == "index":
                     continue
-                index.write("    %s\n" % f.FILENAME)
+                index.write("    %s\n" % _f.FILENAME)

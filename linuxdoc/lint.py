@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=C0103
 
 u"""
     lint
@@ -42,17 +41,19 @@ MSG    = lambda msg: sys.__stderr__.write("INFO : %s\n" % msg)
 ERR    = lambda msg: sys.__stderr__.write("ERROR: %s\n" % msg)
 FATAL  = lambda msg: sys.__stderr__.write("FATAL: %s\n" % msg)
 
-epilog = u"""This implementation of uses the kernel-doc parser
+EPILOG = u"""This implementation uses the kernel-doc parser
 from the linuxdoc extension, for detail informations read
-http://return42.github.io/sphkerneldoc/books/kernel-doc-HOWTO"""
+https://return42.github.io/linuxdoc/cmd-line.html#kernel-lintdoc"""
 
 # ------------------------------------------------------------------------------
 def main():
 # ------------------------------------------------------------------------------
 
-    CLI = argparse.ArgumentParser(
+    "Lint *kernel-doc* comments from source code (main)"
+
+    CLI = argparse.ArgumentParser( # pylint: disable=invalid-name
         description = ("Lint *kernel-doc* comments from source code")
-        , epilog = epilog
+        , epilog = EPILOG
         , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     CLI.add_argument(
@@ -83,7 +84,7 @@ def main():
         , action  = "store_true"
         , help    = "debug messages to stderr" )
 
-    CMD = CLI.parse_args()
+    CMD = CLI.parse_args()  # pylint: disable=invalid-name
     kerneldoc.DEBUG = CMD.debug
     kerneldoc.VERBOSE = CMD.verbose
 
@@ -102,8 +103,10 @@ def main():
         lintdoc_file(fname, CMD)
 
 # ------------------------------------------------------------------------------
-def lintdoc_file(fname, CMD):
+def lintdoc_file(fname, CMD):  # pylint: disable=invalid-name
 # ------------------------------------------------------------------------------
+
+    "lint documentation from fname"
 
     fname = fname.relpath(CMD.srctree)
     opts = kerneldoc.ParseOptions(
@@ -115,6 +118,6 @@ def lintdoc_file(fname, CMD):
     parser = kerneldoc.Parser(opts, kerneldoc.NullTranslator())
     try:
         parser.parse()
-    except Exception: # pylint: disable=W0703
+    except Exception:  # pylint: disable=broad-except
         FATAL("kernel-doc comments markup of %s seems buggy / can't parse" % opts.fname)
         return
