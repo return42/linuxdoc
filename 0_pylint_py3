@@ -1,0 +1,18 @@
+************* Module linuxdoc.kernel_doc
+linuxdoc/kernel_doc.py:278:[W0511(fixme),] FIXME: document this
+linuxdoc/kernel_doc.py:2086:[W0511(fixme),] FIXME: I doubt if it is a good idea to strip leading
+linuxdoc/kernel_doc.py:2388:[W0511(fixme),] FIXME: sections with '%CONST' prefix no longer exists
+linuxdoc/kernel_doc.py:3099:[W0511(fixme),] FIXME: just for testing
+************* Module linuxdoc.rstFlatTable
+linuxdoc/rstFlatTable.py:184:[W0511(fixme),] FIXME: It seems, that the stub method only works well in the
+linuxdoc/rstFlatTable.py:312:[W0612(unused-variable),ListTableBuilder.roundOffTableDefinition] Unused variable 'i'
+linuxdoc/rstFlatTable.py:373:[C1801(len-as-condition),ListTableBuilder.parseCellItem] Do not use `len(SEQUENCE)` to determine if a sequence is empty
+************* Module linuxdoc.rstKernelDoc
+linuxdoc/rstKernelDoc.py:488:[W0511(fixme),] FIXME: think about again; these members has been added for convenience
+linuxdoc/rstKernelDoc.py:498:[W0511(fixme),] FIXME: think about again; these members has been added for convenience
+linuxdoc/rstKernelDoc.py:499:[W0201(attribute-defined-outside-init),KernelDoc.run] Attribute 'parser' defined outside __init__
+************* Module linuxdoc.cdomain
+linuxdoc/cdomain.py:123:[W0511(fixme),] FIXME: handle :name: value of other declaration types?
+************* Module linuxdoc.manKernelDoc
+linuxdoc/manKernelDoc.py:1:[C0103(invalid-name),] Module name "manKernelDoc" doesn't conform to '([a-z_][a-z0-9_]*)$' pattern
+linuxdoc/manKernelDoc.py:244:[C1801(len-as-condition),Section2Manpage.strip_man_info] Do not use `len(SEQUENCE)` to determine if a sequence is empty
