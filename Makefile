@@ -60,6 +60,10 @@ clean: pyclean docs-clean
 PHONY += rqmts
 rqmts: msg-python-exe msg-pip-exe msg-virtualenv-exe
 
+PHONY += zero_pylint
+zero_pylint: pylint-exe
+	$(call cmd,pylint,$(PYOBJECTS)) | grep '^[\*\*\*\*\*\*|linuxdoc]' > 0_pylint_py$(PY)
+
 
 .PHONY: $(PHONY)
 
