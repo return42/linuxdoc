@@ -74,12 +74,12 @@ u"""
 
         ``macro``
             Exported symbols are specified by macros (whose names are
-            controlled by ```exp-ids` option) invoked in the source the
+            controlled by ``exp-ids`` option) invoked in the source the
             following way: THIS_IS_AN_EXPORTED_SYMBOL(symbol)
 
         ``attribute``
             Exported symbols are specified definition using a specific
-            attribute (controlled by ```exp-ids` option) either in their
+            attribute (controlled by ``exp-ids`` option) either in their
             declaration or definition:
             THIS_IS_AN_EXPORTED_SYMBOL int symbol(void* some_arg) {...}
 
