@@ -367,8 +367,8 @@ class KernelDoc(Directive):
             , known_attrs   = (known_attrs or "").replace(","," ").split()
             ,)
 
-        if ("doc" not in self.options
-            and opts.man_sect is None):
+        if ( "doc" not in self.options
+             and opts.man_sect is None):
             opts.man_sect = self.env.config.kernel_doc_mansect
 
         opts.set_defaults()
@@ -381,11 +381,11 @@ class KernelDoc(Directive):
         opts.skip_preamble = True
         opts.skip_epilog   = True
 
-        if ("doc" not in self.options
-            and "export" not in self.options
-            and "internal" not in self.options
-            and "functions" not in self.options
-            and "snippets" not in self.options):
+        if ( "doc" not in self.options
+             and "export" not in self.options
+             and "internal" not in self.options
+             and "functions" not in self.options
+             and "snippets" not in self.options ):
             # if no explicit content is selected, then print all, including all
             # DOC sections
             opts.use_all_docs = True
@@ -418,8 +418,8 @@ class KernelDoc(Directive):
             else:
                 pattern = path.join(kerneldoc.SRCTREE, pattern)
 
-            if (not glob.has_magic(pattern)
-                and not path.lexists(pattern)):
+            if ( not glob.has_magic(pattern)
+                 and not path.lexists(pattern) ):
                 # if pattern is a filename (is not a glob pattern) and this file
                 # does not exists, an error is raised.
                 raise FaultyOption("file not found: %s" % pattern)

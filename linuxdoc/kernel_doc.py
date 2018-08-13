@@ -126,31 +126,34 @@ doc_sect_except  = RE(doc_com.pattern + r"[^\s@](.*)?:[^\s]")
 #doc_sect = RE(doc_com.pattern + r"([" + doc_special.pattern + r"]?[\w\s]+):(.*)")
 # "section header:" names must be unique per function (or struct,union, typedef,
 # enum). Additional condition: the header name should have 3 characters at least!
-doc_sect  = RE(doc_com_section.pattern
-               + r"("
-               + r"@\w[^:]*"                                 # "@foo: lorem" or
-               + r"|" + r"@\w[.\w]+[^:]*"                    # "@foo.bar: lorem" or
-               + r"|" + r"\@\.\.\."                          # ellipsis "@...: lorem" or
-               + r"|" + r"\w[\w\s]+\w"                       # e.g. "Return: lorem"
-               + r")"
-               + r":(.*?)\s*$")   # this matches also strings like "http://..." (doc_sect_except)
+doc_sect  = RE(
+    doc_com_section.pattern
+    + r"("
+    + r"@\w[^:]*"                                 # "@foo: lorem" or
+    + r"|" + r"@\w[.\w]+[^:]*"                    # "@foo.bar: lorem" or
+    + r"|" + r"\@\.\.\."                          # ellipsis "@...: lorem" or
+    + r"|" + r"\w[\w\s]+\w"                       # e.g. "Return: lorem"
+    + r")"
+    + r":(.*?)\s*$")   # this matches also strings like "http://..." (doc_sect_except)
 
-doc_sect_reST = RE(doc_com_section.pattern
-               + r"("
-               + r"@\w[^:]*"                                 # "@foo: lorem" or
-               + r"|" + r"@\w[.\w]+[^:]*"                    # "@foo.bar: lorem" or
-               + r"|" + r"\@\.\.\."                          # ellipsis "@...: lorem" or
-               # a tribute to vintage markups, when in reST mode ...
-               + r"|description|context|returns?|notes?|examples?|introduction|intro"
-               + r")"
-               + r":(.*?)\s*$"    # this matches also strings like "http://..." (doc_sect_except)
-               , flags = re.IGNORECASE)
+doc_sect_reST = RE(
+    doc_com_section.pattern
+    + r"("
+    + r"@\w[^:]*"                                 # "@foo: lorem" or
+    + r"|" + r"@\w[.\w]+[^:]*"                    # "@foo.bar: lorem" or
+    + r"|" + r"\@\.\.\."                          # ellipsis "@...: lorem" or
+    # a tribute to vintage markups, when in reST mode ...
+    + r"|description|context|returns?|notes?|examples?|introduction|intro"
+    + r")"
+    + r":(.*?)\s*$"    # this matches also strings like "http://..." (doc_sect_except)
+    , flags = re.IGNORECASE)
 
-reST_sect = RE(doc_com_section.pattern
-              + r"("
-              r"\w[\w\s]+\w"
-              + r")"
-              + r":\s*$")
+reST_sect = RE(
+    doc_com_section.pattern
+    + r"("
+    r"\w[\w\s]+\w"
+    + r")"
+    + r":\s*$")
 
 doc_content      = RE(doc_com_body.pattern + r"(.*)")
 doc_block        = RE(doc_com.pattern + r"DOC:\s*(.*)?")
@@ -2138,8 +2141,8 @@ class Parser(SimpleLog):
 
         elif doc_content.match(line):
             cont = doc_content[0]
-            if (not cont.strip() # dismiss leading newlines
-                and not self.ctx.contents):
+            if ( not cont.strip() # dismiss leading newlines
+                 and not self.ctx.contents):
                 pass
             else:
                 self.ctx.contents += doc_content[0] + "\n"
@@ -2147,8 +2150,8 @@ class Parser(SimpleLog):
     def state_5(self, line):
         u"""state: 5 - gathering documentation outside main block"""
 
-        if (self.split_doc_state == 1
-            and doc_state5_sect.match(line)):
+        if ( self.split_doc_state == 1
+             and doc_state5_sect.match(line)):
 
             # First line (split_doc_state 1) needs to be a @parameter
             self.ctx.section  = self.sect_title(doc_state5_sect[0].strip())
@@ -2209,9 +2212,9 @@ class Parser(SimpleLog):
         elif stripProto.match(line):
             self.ctx.prototype += " " + stripProto[0]
 
-        if (MACRO_define.search(line)
-            or "{" in line
-            or ";" in line ):
+        if ( MACRO_define.search(line)
+             or "{" in line
+             or ";" in line ):
 
             # strip cr&nl, strip C89 comments, strip leading whitespaces
             self.ctx.prototype = C89_comments.sub(
@@ -2220,9 +2223,9 @@ class Parser(SimpleLog):
             if SYSCALL_DEFINE.search(self.ctx.prototype):
                 self.ctx.prototype = self.syscall_munge(self.ctx.prototype)
 
-            if (TRACE_EVENT.search(self.ctx.prototype)
-                or DEFINE_EVENT.search(self.ctx.prototype)
-                or DEFINE_SINGLE_EVENT.search(self.ctx.prototype) ):
+            if ( TRACE_EVENT.search(self.ctx.prototype)
+                 or DEFINE_EVENT.search(self.ctx.prototype)
+                 or DEFINE_SINGLE_EVENT.search(self.ctx.prototype) ):
                 self.ctx.prototype = self.tracepoint_munge(self.ctx.prototype)
 
             self.ctx.prototype = self.ctx.prototype.strip()
@@ -2900,9 +2903,9 @@ class Parser(SimpleLog):
         p_name  = p_name.strip()
         p_type  = p_type.strip()
 
-        if (self.anon_struct_union
-            and not p_type
-            and p_name == "}"):
+        if ( self.anon_struct_union
+             and not p_type
+             and p_name == "}" ):
             # ignore the ending }; from anon. struct/union
             return
 
@@ -2950,10 +2953,9 @@ class Parser(SimpleLog):
         # also ignore unnamed structs/unions;
 
         if not self.anon_struct_union:
-            if (not self.ctx.parameterdescs.get(p_name, None)
-                and not p_name.startswith("#")):
-
-                if p_type == "function" or p_type == "enum":
+            if ( not self.ctx.parameterdescs.get(p_name, None)
+                 and not p_name.startswith("#") ):
+                if p_type in ("function", "enum"):
                     self.warn("Function parameter or member '%(p_name)s' not "
                               "described in '%(decl_name)s'."
                               , p_name = p_name
@@ -3011,8 +3013,8 @@ class Parser(SimpleLog):
         # Ignore an empty return type (It's a macro) and ignore functions with a
         # "void" return type. (But don't ignore "void *")
 
-        if (not return_type
-            or re.match(r"void\s*\w*\s*$", return_type)):
+        if ( not return_type
+             or re.match(r"void\s*\w*\s*$", return_type) ):
             self.debug("check_return_section(): ignore void")
             return
 

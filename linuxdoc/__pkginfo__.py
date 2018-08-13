@@ -25,8 +25,7 @@ def get_entry_points():
             , 'kernel-autodoc = linuxdoc.autodoc:main'
             , 'kernel-lintdoc = linuxdoc.lint:main'
             , 'kernel-grepdoc = linuxdoc.grep_doc:main'
-            , ]
-        , }
+            , ] , }
 
 # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
 classifiers = [
