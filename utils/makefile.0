@@ -1,0 +1,82 @@
+# -*- coding: utf-8; mode: makefile-gmake -*-
+
+# ------------------------------------------------------------------------------
+# wrapp 0.% --> zero.%
+# ------------------------------------------------------------------------------
+
+0.%:
+	@echo "  ZERO START $@ --> $(patsubst 0.%,zero.%,$@)"
+	@$(MAKE) -s PY_ENV=$(ZERO_PYENV) PYOBJECTS=$(PYOBJECTS)  $(patsubst 0.%,zero.%,$@)
+	@echo "  ZERO END"
+
+# ------------------------------------------------------------------------------
+# zero build's virtual environment & git workingtree
+# ------------------------------------------------------------------------------
+#
+# Do wo use local working-tree '.' or do we need another git-worktree instance
+# from commit.  E.g.: '@{-1}' or 'aacf4a760a1' or 'HEAD~~'
+
+COMMIT = .
+
+# folder where the outputs are stored
+0_BUILD_DEST = ./0_build
+
+# build's working tree for installations into build's environment is local '.'
+# or a commit checked out into a git-worktree located in folder
+# ./build/0_build_worktree.
+ifeq ($(strip $(COMMIT)),.)
+	0_BUILD_WTREE = .
+else
+	0_BUILD_WTREE = ./build/0_build_worktree
+endif
+
+PHONY += zero.clean
+zero.clean:: zero.env_drop
+	@echo "  ZERO-ENV  clean $(0_BUILD_DEST)/*"
+	@rm -rf $(0_BUILD_DEST)/*
+
+PHONY += zero.build
+zero.build:: | zero.clean $(0_BUILD_DEST)/.git zero.env
+	@echo "  ZERO-ENV  OK"
+
+quiet_cmd_zero_info = ZERO-INFO   PY_ENV=$(PY_ENV) :: 0_BUILD_WTREE=$(0_BUILD_WTREE) :: PYOBJECTS=$(PYOBJECTS)
+      cmd_zero_info =
+
+
+PHONY += zero.info
+zero.info:: zero.env
+
+#PHONY += zero.commit
+#zero.commit:
+#	cd $(0_BUILD_DEST); git rev-parse --short HEAD
+#	@git --no-pager worktree list
+
+
+#cd $(0_BUILD_DEST); git status
+
+PHONY += zero.env
+zero.env: | zero.env_drop sphinx-doc
+ifneq ($(strip $(0_BUILD_WTREE)),.)
+	@echo "  ZERO-ENV  checkout worktree $(0_BUILD_WTREE) $(COMMIT)"
+	@git worktree add --checkout $(0_BUILD_WTREE) $(COMMIT)
+	@git worktree list #--porcelain
+endif
+	@echo "  ZERO-ENV  install $(PYOBJECTS) :: origin located at '$(0_BUILD_WTREE)'"
+	@$(PY_ENV_BIN)/pip $(PIP_VERBOSE) install -e $(0_BUILD_WTREE)
+
+PHONY += zero.env_drop
+zero.env_drop:
+	@echo "  ZERO-ENV  uninstall py-package '$(PYOBJECTS)' from $(PY_ENV) :: origin located at '$(0_BUILD_WTREE)'"
+	@[ -d $(PY_ENV_BIN) ] && $(PY_ENV_BIN)/pip $(PIP_VERBOSE) uninstall --yes $(PYOBJECTS) || true
+ifneq ($(strip $(0_BUILD_WTREE)),.)
+	@echo "  ZERO-ENV  drop worktree $(0_BUILD_WTREE)"
+	@rm -rf '$(0_BUILD_WTREE)'
+	@git worktree prune
+endif
+
+$(0_BUILD_DEST)/.git:
+	mkdir -p $(0_BUILD_DEST)
+	git init $(0_BUILD_DEST)
+
+ZERO_PYENV=./local/0_build_env
+
