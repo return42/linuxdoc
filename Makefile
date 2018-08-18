@@ -51,11 +51,11 @@ docs-live:  sphinx-live
 
 $(API_DOC): $(PY_ENV)
 	$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o docs/linuxdoc-api linuxdoc
-	rm -f $(API_DOC)/modules.rst
+	@rm -f $(API_DOC)/modules.rst
 
 PHONY += clean
 clean: pyclean docs-clean
-	rm -rf ./$(API_DOC)
+	@rm -rf ./$(API_DOC)
 	$(call cmd,common_clean)
 
 PHONY += rqmts
