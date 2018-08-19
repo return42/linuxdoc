@@ -1,82 +1,243 @@
 # -*- coding: utf-8; mode: makefile-gmake -*-
 
-# ------------------------------------------------------------------------------
-# wrapp 0.% --> zero.%
-# ------------------------------------------------------------------------------
+PROJECT      =  $(PYOBJECTS)
+0_BUILD_DEST =  0_build
+0_PY_ENV     =  local/0env
+0_GIT        =  git --no-pager
+0_ROOT       := $(shell git rev-parse --show-toplevel)
 
+## .. _makefile.0:
+## ---------------------------
+## Makefile: 0-build workflows
+## ---------------------------
+##
+## Here are some handy makefile definitions for 0-build (aka 0-Day) workflows.
+## A simple workflow to test changes in the worktree is::
+##
+##  $ make COMMIT=HEAD zero   # baseline is HEAD
+##  $ make 0.commit           # commit zero baseline
+##  $ make zero 0.status      # build with current working tree changes
+##
+## zero target
+## -----------
+##
+## The ``zero`` target is the main target, it builds the `zero.build target`_.
+## targets
+##
+PHONY += zero
+ifneq ($(PY_ENV),$(0_PY_ENV))
+zero:
+	@echo "  ZERO START target --> $@"
+	@$(MAKE) PY_ENV=$(0_PY_ENV) zero
+else
+zero:  zero.dump zero.env_drop zero.build
+	$(Q)echo "  ZERO END   build with worktree $(0_BUILD_WTREE) commit: $(shell cd $(0_BUILD_WTREE); $(0_GIT) rev-parse --short HEAD)"
+endif
+
+## wrap target 0.% --> zero.%
+## --------------------------
+##
+## Zero build targets need special 0_PY_ENV environment, therefore the external
+## ``0.%`` targets are wrapped to a makefile call ``zero.%``.
+##
+ifneq ($(PY_ENV),$(0_PY_ENV))
 0.%:
-	@echo "  ZERO START $@ --> $(patsubst 0.%,zero.%,$@)"
-	@$(MAKE) -s PY_ENV=$(ZERO_PYENV) PYOBJECTS=$(PYOBJECTS)  $(patsubst 0.%,zero.%,$@)
-	@echo "  ZERO END"
+	@echo "  ZERO start $@ --> $(patsubst 0.%,zero.%,$@)"
+	$(Q)$(MAKE) -s PY_ENV=$(0_PY_ENV) $(patsubst 0.%,zero.%,$@)
+	@echo "  ZERO end   $@"
+endif
 
-# ------------------------------------------------------------------------------
-# zero build's virtual environment & git workingtree
-# ------------------------------------------------------------------------------
-#
-# Do wo use local working-tree '.' or do we need another git-worktree instance
-# from commit.  E.g.: '@{-1}' or 'aacf4a760a1' or 'HEAD~~'
-
+## COMMIT variable
+## ---------------
+##
+## Variable Do we use local working-tree ``.`` for the 0-build, or do we
+## need a git worktree instance from an other commit.  E.g.: ``@{-1}`` or
+## 'aacf4a760a1' or 'HEAD~~'
+##
 COMMIT = .
 
-# folder where the outputs are stored
-0_BUILD_DEST = ./0_build
+## 0_BUILD_KEEP variable
+## ---------------------
+##
+## When target zero.clean is called, everything is deleted, except those path
+## names listed in $(0_BUILD_KEEP).  In your Makefile, add more files to keep
+## with::
+##
+##   0_BUILD_KEEP += hello.txt
+##
+0_BUILD_KEEP  = .git .gitignore
+0_BUILD_CLEAN = \
+    $(filter-out $(0_BUILD_KEEP),\
+        $(patsubst $(0_BUILD_DEST)/%,\
+            %,$(wildcard $(0_BUILD_DEST)/* $(0_BUILD_DEST)/.[^.]*)))
 
-# build's working tree for installations into build's environment is local '.'
-# or a commit checked out into a git-worktree located in folder
-# ./build/0_build_worktree.
+## 0_BUILD_WTREE variable
+## ----------------------
+##
+## If ``COMMIT==.`` use the working tree we are in. In any other case, checkout
+## commit $(COMMIT) into working tree at: ./build/0_build_worktree.
+
 ifeq ($(strip $(COMMIT)),.)
-	0_BUILD_WTREE = .
+0_BUILD_WTREE = .
 else
-	0_BUILD_WTREE = ./build/0_build_worktree
-endif
-
-PHONY += zero.clean
-zero.clean:: zero.env_drop
-	@echo "  ZERO-ENV  clean $(0_BUILD_DEST)/*"
-	@rm -rf $(0_BUILD_DEST)/*
-
-PHONY += zero.build
-zero.build:: | zero.clean $(0_BUILD_DEST)/.git zero.env
-	@echo "  ZERO-ENV  OK"
-
-quiet_cmd_zero_info = ZERO-INFO   PY_ENV=$(PY_ENV) :: 0_BUILD_WTREE=$(0_BUILD_WTREE) :: PYOBJECTS=$(PYOBJECTS)
-      cmd_zero_info =
-
-
-PHONY += zero.info
-zero.info:: zero.env
-
-#PHONY += zero.commit
-#zero.commit:
-#	cd $(0_BUILD_DEST); git rev-parse --short HEAD
-#	@git --no-pager worktree list
-
-
-#cd $(0_BUILD_DEST); git status
-
-PHONY += zero.env
-zero.env: | zero.env_drop sphinx-doc
-ifneq ($(strip $(0_BUILD_WTREE)),.)
-	@echo "  ZERO-ENV  checkout worktree $(0_BUILD_WTREE) $(COMMIT)"
-	@git worktree add --checkout $(0_BUILD_WTREE) $(COMMIT)
-	@git worktree list #--porcelain
-endif
-	@echo "  ZERO-ENV  install $(PYOBJECTS) :: origin located at '$(0_BUILD_WTREE)'"
-	@$(PY_ENV_BIN)/pip $(PIP_VERBOSE) install -e $(0_BUILD_WTREE)
-
-PHONY += zero.env_drop
-zero.env_drop:
-	@echo "  ZERO-ENV  uninstall py-package '$(PYOBJECTS)' from $(PY_ENV) :: origin located at '$(0_BUILD_WTREE)'"
-	@[ -d $(PY_ENV_BIN) ] && $(PY_ENV_BIN)/pip $(PIP_VERBOSE) uninstall --yes $(PYOBJECTS) || true
-ifneq ($(strip $(0_BUILD_WTREE)),.)
-	@echo "  ZERO-ENV  drop worktree $(0_BUILD_WTREE)"
-	@rm -rf '$(0_BUILD_WTREE)'
-	@git worktree prune
+0_BUILD_WTREE = ./build/0_build_worktree
 endif
 
 $(0_BUILD_DEST)/.git:
-	mkdir -p $(0_BUILD_DEST)
-	git init $(0_BUILD_DEST)
+	$(Q){ \
+	mkdir -p $(0_BUILD_DEST) ;\
+	cd $(0_BUILD_DEST) ;\
+	touch .gitignore ;\
+	$(0_GIT) init ;\
+	$(0_GIT) add --all ;\
+	$(0_GIT) commit -m "[0-build inital]" ;\
+	}
 
-ZERO_PYENV=./local/0_build_env
+ifeq ($(PY_ENV),$(0_PY_ENV)) # ---- START: define zero.% targets ----------
+
+## zero.clean target
+## -----------------
+##
+## Delete all files and folders in $(0_BUILD_DEST) who are listed in
+## $(0_BUILD_CLEAN), which are all path names in the root folder except those
+## listed in $(0_BUILD_KEEP)
+##
+PHONY += zero.clean
+zero.clean:: zero.env_drop
+	@echo "  ZERO-ENV  clean $(0_BUILD_DEST)/* ..."
+	@$(if $(0_BUILD_CLEAN), echo -n '           ')
+	$(Q)for FILE in ${0_BUILD_CLEAN}; do echo -n " $$FILE" ; rm -rf $(0_BUILD_DEST)/$$FILE; done
+	@$(if $(0_BUILD_CLEAN), echo)
+
+## zero.drop target
+## -----------------
+##
+## Drop the whole 0-build environment and the repository
+##
+zero.drop:: zero.env_drop
+	@echo "  ZERO-DROP  delete $(0_BUILD_DEST)"
+	$(Q)rm -rf $(0_BUILD_DEST)
+
+
+## zero.build target
+## -----------------
+##
+## The target zero.build is a defined as a `double colon
+## <https://www.gnu.org/software/make/manual/html_node/Double_002dColon.html>`__
+## rule. To extend the zero.build rules just add them to your makefile by using
+## double colon. E.g. to add the output of a *dummy* build to the scope of your
+## zero builds define a double colon target like the following::
+##
+##     zero.build::
+##             @echo "dummy zero.build output" > $(0_BUILD_DEST)/dummy_build_output.log
+##
+PHONY += zero.build
+zero.build:: zero.clean zero.env
+	@echo "  ZERO-ENV  OK"
+
+## zero.commit target
+## ------------------
+##
+## TODO: add documentation
+##
+PHONY += zero.commit
+zero.commit:
+	$(Q){ \
+        cd $(0_ROOT)/$(0_BUILD_WTREE) ;\
+        wt_rev=$$($(0_GIT) log --pretty=format:'[$(0_PROJECT) %h] %s (%ci) <%an>' --abbrev-commit  -1) ;\
+        cd $(0_ROOT)/$(0_BUILD_DEST) ;\
+	$(0_GIT) add --all .;\
+	$(0_GIT) commit -m "$$wt_rev" ;\
+	}
+
+## zero.commit status
+## ------------------
+##
+## TODO: add documentation
+##
+PHONY += zero.status
+zero.status:
+	{ \
+        cd $(0_BUILD_DEST);\
+	$(0_GIT) status -s;\
+	}
+
+## zero.env target
+## ------------------
+##
+## Target to build the environment for the 0-build run.
+##
+PHONY += zero.env
+zero.env: | sphinx-doc $(0_BUILD_DEST)/.git
+ifneq ($(strip $(0_BUILD_WTREE)),.)
+	@echo "  ZERO-ENV  checkout worktree $(0_BUILD_WTREE) $(COMMIT)"
+	$(Q)$(0_GIT) worktree add --checkout $(0_BUILD_WTREE) $(COMMIT)
+	$(Q)$(0_GIT) worktree list #--porcelain
+endif
+	@echo "  ZERO-ENV  install $(PYOBJECTS) :: origin located at '$(0_BUILD_WTREE)'"
+	$(Q)$(PY_ENV_BIN)/pip --no-color $(PIP_VERBOSE) install -e $(0_BUILD_WTREE)
+
+## zero.env_drop target
+## ---------------------
+##
+## Target to drop old build environment.  This will not drop the whole
+## virtualenv $(0_PY_ENV), only the $(PYOBJECTS) will be uninstalled and the
+## $(0_BUILD_WTREE) will be deleted (except it is the local workspace '.').
+##
+PHONY += zero.env_drop
+zero.env_drop:
+	@echo "  ZERO-DROP  uninstall py-package '$(PYOBJECTS)' from $(PY_ENV)"
+	$(Q)[ -d $(PY_ENV_BIN) ] && $(PY_ENV_BIN)/pip --no-color $(PIP_VERBOSE) uninstall --yes $(PYOBJECTS) || true
+ifneq ($(strip $(0_BUILD_WTREE)),.)
+	@echo "  ZERO-DROP  drop worktree $(0_BUILD_WTREE)"
+	$(Q)rm -rf '$(0_BUILD_WTREE)'
+	$(Q)$(0_GIT) worktree prune
+endif
+
+endif # ---- END: define zero.% targets ----------
+
+
+## Debug stuff
+## -----------
+##
+## Only usefully within Makefile development.
+##
+## zero.dump
+## ~~~~~~~~~
+##
+## ZERO_DUMP: template with dump message.
+##
+define ZERO_DUMP
+PROJECT        : $(PROJECT)
+COMMIT         : $(COMMIT)
+PYOBJECTS      : $(PYOBJECTS)
+PY_ENV         : $(PY_ENV)
+0_PY_ENV       : $(0_PY_ENV)
+0_BUILD_WTREE  : $(0_BUILD_WTREE)
+0_BUILD_DEST   : $(0_BUILD_DEST)
+0_BUILD_KEEP   : $(0_BUILD_KEEP)
+endef
+
+define ZERO_DUMP_MSG
+  ZERO-DUMP  $(1)
+$(2)
+endef
+
+## zero_dump
+## ~~~~~~~~~
+##
+## Makefile makro to print a dump message, usage::
+##
+##   $(zero,<prompt message>)
+##
+zero_dump=$(info $(call ZERO_DUMP_MSG,$1,$2))
+
+## zero.dump
+## ~~~~~~~~~
+##
+## Makefile target to print a dump message.
+##
+PHONY += zero.dump
+zero.dump::
+	$(call zero_dump,$@,$(ZERO_DUMP))
 

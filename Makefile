@@ -83,7 +83,12 @@ zero.build:: $(KERNEL_0_BUILD)
 PHONY += $(KERNEL_0_BUILD)
 $(KERNEL_0_BUILD):
 	@echo "  ZERO-BUILD   $@"
-	#$(call cmd,kernel_book,xml,$(patsubst books/%.zero,%,$@),xml,$(KERNEL_DOC))
+	$(call cmd,kernel_book,xml,$(patsubst books/%.zero,%,$@),xml,$(KERNEL_DOC))
+
+# $(KERNEL_0_BUILD):
+# 	@echo "test123" > $(0_BUILD_DEST)/$@
+# 	@mkdir -p $(0_BUILD_DEST)/books
+
 
 # $2 sphinx builder e.g. "html"
 # $3 name of the book / e.g. "gpu", used as:
