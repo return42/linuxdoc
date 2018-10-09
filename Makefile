@@ -41,7 +41,7 @@ docs:  sphinx-doc $(API_DOC)
 	$(call cmd,sphinx,html,docs,docs)
 
 PHONY += docs-live
-docs-live:  sphinx-live
+docs-live:  sphinx-live $(API_DOC)
 	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) -e .
 	$(call cmd,sphinx_autobuild,html,docs,docs)
 

@@ -255,8 +255,7 @@ ignore-docstrings=yes
 ignore-imports=no
 
 # Minimum lines number of a similarity.
-# workaround for --> https://github.com/PyCQA/pylint/pull/1014#issuecomment-412536223
-min-similarity-lines=50
+min-similarity-lines=4
 
 
 [SPELLING]

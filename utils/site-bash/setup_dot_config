@@ -1,0 +1,94 @@
+# -*- coding: utf-8; mode: sh -*-
+# ----------------------------------------------------------------------------
+# setup config
+# ----------------------------------------------------------------------------
+
+# SCRIPT_FOLDER: Ordner mit den Skripten für die Setups
+#
+#SCRIPT_FOLDER=${REPO_ROOT}/scripts
+
+# TEMPLATES: Ordner in dem die vorlagen für die Setups zu finden sind
+#
+#TEMPLATES="${REPO_ROOT}/templates"
+
+# CACHE: Ordner in dem die Downloads und Builds gecached werden
+#
+# CACHE=${REPO_ROOT}/cache
+
+# CONFIG: Ordner unter dem die Konfiguration eines Hosts gesichert werden soll
+# Das wird nicht hier gesetzt sondern in der .config Datei (templates/do_config)
+#
+# CONFIG="${REPO_ROOT}/hostSetup/$(hostname)"
+
+# WWW_USER: Benutzer für die Prozesse des WEB-Servers
+#
+#WWW_USER=www-data
+
+# WWW_FOLDER: Ordner in dem die Resourcen des WEB-Servers liegen
+#
+#WWW_FOLDER=/var/www
+
+# =========
+# toolchain
+# =========
+
+# THREE_WAY_MERGE_CMD: Kommando oder Funktion mit der ein (interaktives)
+# drei-Wege Merge gemacht werden kann. Das Kommando muss die vier Argumente für
+# Dateinamen entgegennehmen.
+#
+#    $THREE_WAY_MERGE_CMD {mine} {yours} {ancestor} {merged}
+#
+#THREE_WAY_MERGE_CMD=merge3FilesWithEmacs
+#THREE_WAY_MERGE_CMD=merge3FilesWithMeld
+
+# MERGE_CMD: Kommando oder Funktion mit der ein (interaktiver) Merge gemacht
+# werden kann. Das Kommando muss die drei Argumente für Dateinamen
+# entgegennehmen.
+#
+#     $MERGE_CMD {file_a} {file_b} {merged}
+#
+#MERGE_CMD=merge2FilesWithEmacs
+#MERGE_CMD=merge2FilesWithMeld
+
+# DIFF_CMD: Kommando oder Funktion mit der ein diff angezeigt werden soll. Im
+# Default wird ``colordiff`` verwendet, wenn das nicht vorhanden ist, dann wird
+# das ganz normale ``diff`` verwendet.
+#
+#DIFF_CMD=colordiff
+
+# =====
+# SAMBA
+# =====
+
+# SAMBA_SERVER=127.0.0.1
+
+# =====================
+# Debian's Apache Setup
+# =====================
+
+# APACHE_SETUP="/etc/apache2"
+# APACHE_SITES_AVAILABE="${APACHE_SETUP}/sites-available"
+# APACHE_MODS_AVAILABE="${APACHE_SETUP}/mods-available"
+# APACHE_CONF_AVAILABE="${APACHE_SETUP}/conf-available"
+
+
+# Debian's OpenLDAP Setup
+# =======================
+
+# LDAP_SERVER="myserver"
+# LDAP_SSL_PORT=636
+# OPENLDAP_USER=openldap
+# SLAPD_DBDIR=/var/lib/ldap
+# SLAPD_CONF="/etc/ldap/slapd.d"
+
+# =======
+# Firefox
+# =======
+
+# FFOX_GLOBAL_EXTENSIONS=/usr/lib/firefox-addons/extensions
+
+# =====
+# GNOME
+# =====
+
+# GNOME_APPL_FOLDER=/usr/share/applications
