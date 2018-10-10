@@ -7,21 +7,16 @@
 man pages from kernel-doc comments
 ==================================
 
-The ``kernel-doc-man`` builder produces manual pages in the groff format. It is
-a *man* page builder for Sphinx-doc mainly written to generate manual pages from
-kernel-doc comments by:
+The :py:class:`linuxdoc.manKernelDoc.KernelDocManBuilder` produces manual pages
+in the groff format.  It is a *man* page builder for Sphinx-doc, mainly written
+to generate manual pages from kernel-doc comments by scanning Sphinx's master
+``doc-tree`` for *sections* marked with a
 
-* scanning Sphinx's master ``doc-tree`` for *sections* marked with a
+.. code-block:: rst
 
-  .. code-block:: rst
+   .. kernel-doc-man:: <declaration-name>.<man-sect no>
 
-     .. kernel-doc-man:: <declaration-name>.<man-sect no>
-
-  directive and build manual pages from those marked *sections*.
-
-* reorder / rename (sub-) sections according to the conventions that should
-  be employed when writing man pages for the Linux man-pages project, see
-  man-pages(7)
+directive and build manual pages from those marked *sections*.
 
 Usage::
 
@@ -35,7 +30,9 @@ marked with the ``.. kernel-doc-man::`` directive.
 Mostly authors will use this feature in their reST documents in conjunction with
 the ``.. kernel-doc::`` :ref:`directive <kernel-doc-man-pages>`, to create man
 pages from kernel-doc comments.  This could be done, by setting the man section
-number with the option ``man-sect``, e.g.::
+number with the option ``man-sect``, e.g.:
+
+.. code-block:: rst
 
   .. kernel-doc:: include/linux/debugobjects.h
       :export:
@@ -48,5 +45,5 @@ With this ``:man-sect: 9`` option, the kernel-doc parser will insert a:
    .. kernel-doc-man:: <declaration-name>.<man-sect no>
 
 directive in the reST output, for all :ref:`exported <kernel-doc-options>`
-function, union etc. which is documentd with a kernel-doc comment in the source
-code.
+functions, unions etc. which are documented with by kernel-doc comments in the
+source code.

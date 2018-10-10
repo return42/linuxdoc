@@ -7,13 +7,13 @@ u"""
 
     Implementation of the ``kernel-grepdoc`` command.
 
-    :copyright:  Copyright (C) 2016  Markus Heiser
+    :copyright:  Copyright (C) 2018 Markus Heiser
     :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
     The ``kernel-grepdoc`` command *greps* informations from Linux kernel's
     (reST) documentation, see ``--help``::
 
-        $ kernel-lintdoc --help
+        $ kernel-grepdoc --help
 """
 
 # ------------------------------------------------------------------------------
@@ -29,8 +29,8 @@ from fspath import FSPath
 DESCRIPTION = """ The 'kernel-grepdoc' command scans ``*.rst`` files from kernel's
 ``./Documentation`` source tree and filters all 'kernel-doc' directives.  The
 source files which are used in those 'kernel-doc' directives are printed out as
-list. This list can be used to identify which files from the source tree has
-already been ported to reST markup and which not. You will need those sort of
+list.  This list can be used to identify which files from the source tree has
+already been ported to reST markup and which not.  You will need those sort of
 list to distinguish between source files in *reST* and those in *vintage*
 kernel-doc mode."""
 

@@ -6,7 +6,7 @@ u"""
 
     Implementation of the ``kernel-autodoc`` command.
 
-    :copyright:  Copyright (C) 2016  Markus Heiser
+    :copyright:  Copyright (C) 2018 Markus Heiser
     :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
     The ``kernel-autodoc`` command extracts documentation from Linux kernel's
@@ -14,11 +14,7 @@ u"""
 
         $ kernel-autodoc --help
 
-    .. note::
-
-       The kernel-autodoc command is under construction, no stable release
-       yet. The command line arguments might be changed/extended in the near
-       future."""
+"""
 
 # ------------------------------------------------------------------------------
 # imports

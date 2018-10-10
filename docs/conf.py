@@ -47,6 +47,10 @@ intersphinx_mapping['template-book'] = ('https://h2626237.stratoserver.net/kerne
 intersphinx_mapping['process'] = ('https://h2626237.stratoserver.net/kernel/books/process/', None)
 #intersphinx_mapping['linux'] = ('https://h2626237.stratoserver.net/kernel/linux_src_doc/', None)
 
+extlinks = {}
+# usage:    :mid:`<mail's Message-ID>`  e.g.
+extlinks['mid']       = ('http://mid.mail-archive.com/%s', '')
+
 # ------------------------------------------------------------------------------
 # Options of the kernel-doc parser
 # ------------------------------------------------------------------------------

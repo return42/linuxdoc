@@ -5,21 +5,11 @@ u"""
     lint
     ~~~~
 
-    Implementation of the ``kernel-lintdoc`` command.
+    Implementation of the :ref:`kernel-lintdoc` command.
 
-    :copyright:  Copyright (C) 2016  Markus Heiser
+    :copyright:  Copyright (C) 2018  Markus Heiser
     :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
-
-    The ``kernel-doclint`` command *lints* documentation from Linux kernel's
-    source code comments, see ``--help``::
-
-        $ kernel-lintdoc --help
-
-    .. note::
-
-       The kernel-lintdoc command is under construction, no stable release
-       yet. The command-line arguments might be changed/extended in the near
-       future."""
+"""
 
 # ------------------------------------------------------------------------------
 # imports

@@ -7,10 +7,10 @@
 Scalable figure and image handling
 ==================================
 
-The LinuxDoc brings the ``kfigure`` Sphinx extension which implements scalable
-image handling.  The build for image formats depend on image's source format and
-output's destination format. This extension implement methods to simplify image
-handling from the author's POV. Directives like ``kernel-figure`` implement
+LinuxDoc brings the ``kfigure`` Sphinx extension which implements scalable image
+handling.  The build for image formats depend on image's source format and
+output's destination format.  This extension implement methods to simplify image
+handling from the author's POV.  Directives like ``kernel-figure`` implement
 methods *to* always get the best output-format even if some tools are not
 installed.
 

@@ -10,7 +10,6 @@ How to use the kernel-doc markup and it's parser :
 .. toctree::
    :maxdepth: 1
 
-   kernel-doc-intro
    kernel-doc-syntax
    kernel-doc-directive
    kernel-doc-examples

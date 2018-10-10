@@ -5,30 +5,10 @@ u"""
 
     Replacement for the sphinx c-domain.
 
-    :copyright:  Copyright (C) 2016  Markus Heiser
+    :copyright:  Copyright (C) 2018 Markus Heiser
     :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
-    List of customizations:
-
-    * Moved the *duplicate C object description* warnings for function
-      declarations in the nitpicky mode. See Sphinx documentation for
-      the config values for ``nitpick`` and ``nitpick_ignore``.
-
-    * Add option 'name' to the "c:function:" directive.  With option 'name' the
-      ref-name of a function can be modified. E.g.::
-
-          .. c:function:: int ioctl( int fd, int request )
-             :name: VIDIOC_LOG_STATUS
-
-      The func-name (e.g. ioctl) remains in the output but the ref-name changed
-      from 'ioctl' to 'VIDIOC_LOG_STATUS'. The function is referenced by::
-
-          * :c:func:`VIDIOC_LOG_STATUS` or
-          * :any:`VIDIOC_LOG_STATUS` (``:any:`` needs sphinx 1.3)
-
-     * Handle signatures of function-like macros well. Don't try to deduce
-       arguments types of function-like macros.
-
+    For user documentation see :ref:`customized-c-domain`.
 """
 
 from docutils import nodes
@@ -162,7 +142,9 @@ class CObject(Base_CObject):
 
 class CDomain(Base_CDomain):
 
-    """C language domain."""
+    """C language domain.
+
+    """
     name = 'c'
     label = 'C'
     directives = {
@@ -172,3 +154,4 @@ class CDomain(Base_CDomain):
         'type':     CObject,
         'var':      CObject,
     }
+    "Use :py:class:`CObject <linuxdoc.cdomain.CObject>` directives."

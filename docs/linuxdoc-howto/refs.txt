@@ -1,9 +1,14 @@
+.. -*- coding: utf-8; mode: rst -*-
+..
+..  common hyperlink targets
+
 .. _`reST (spec)`: http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
 .. _`reST (quickref)`: http://docutils.sourceforge.net/docs/user/rst/quickref.html
 .. _`reST include directive`: http://docutils.sourceforge.net/docs/ref/rst/directives.html#including-an-external-document-fragment
 
 .. _`reST`: http://www.sphinx-doc.org/en/stable/rest.html
 .. _`Sphinx markup constructs`: http://www.sphinx-doc.org/en/stable/markup/index.html
+.. _`Sphinx`: http://www.sphinx-doc.org/
 .. _`sphinx-doc`: http://www.sphinx-doc.org/
 .. _`sphinx-doc FAQ`: http://www.sphinx-doc.org/en/stable/faq.html
 .. _`sphinx domains`: http://www.sphinx-doc.org/en/stable/domains.html

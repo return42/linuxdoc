@@ -7,3 +7,4 @@
 .. _`sphinx config`: http://www.sphinx-doc.org/en/stable/config.html
 .. _`sphinx-doc`: http://www.sphinx-doc.org/
 .. _`Sphinx's C domain`: http://www.sphinx-doc.org/en/stable/domains.html#cross-referencing-c-constructs
+.. _sphinx-extensions: http://www.sphinx-doc.org/en/master/usage/extensions

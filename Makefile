@@ -49,7 +49,9 @@ docs-live:  sphinx-live $(API_DOC)
 #slides:  sphinx-doc
 #	$(call cmd,sphinx,html,$(SLIDES),$(SLIDES),slides)
 
+PHONY += $(API_DOC)
 $(API_DOC): $(PY_ENV)
+	@rm -rf ./$(API_DOC)
 	$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o docs/linuxdoc-api linuxdoc
 	@rm -f $(API_DOC)/modules.rst
 

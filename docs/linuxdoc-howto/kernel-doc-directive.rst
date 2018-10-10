@@ -32,7 +32,7 @@ Mostly you want to select more fine grained, read on to see how.
 kernel-doc options
 ==================
 
-Here is a short overview of the options:
+Here is a short overview of the directives options:
 
 .. code-block:: rst
 

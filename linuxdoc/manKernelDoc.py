@@ -8,49 +8,10 @@ u"""
 
     Implementation of the ``kernel-doc-man`` builder.
 
-    :copyright:  Copyright (C) 2016  Markus Heiser
+    :copyright:  Copyright (C) 2018 Markus Heiser
     :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
-    The ``kernel-doc-man`` (:py:class:`KernelDocManBuilder`) produces manual
-    pages in the groff format. It is a *man* page sphinx-builder mainly written
-    to generate manual pages from kernel-doc comments by :
-
-    * scanning the master doc-tree for sections marked with the
-      ``.. kernel-doc-man::`` directive and build manual pages for theses
-      sections.
-
-    * reorder / rename (sub-) sections according to the conventions that should
-      be employed when writing man pages for the Linux man-pages project, see
-      man-pages(7)
-
-    Usage::
-
-        $ sphinx-build -b kernel-doc-man
-
-    rest-Markup entry (e.g)::
-
-        .. kernel-doc-man::  manpage-name.9
-
-    Since the ``kernel-doc-man`` is an extension of the common `sphinx *man*
-    builder
-    <http://www.sphinx-doc.org/en/stable/config.html#confval-man_pages>`_, it is
-    also a full replacement, building booth, the common sphinx man-pages and
-    those marked with the ``.. kernel-doc-man::`` directive.
-
-    Mostly authors will use this feature in their reST documents in conjunction
-    with the ``.. kernel-doc::`` :ref:`directive
-    <kernel-doc-directive>`, to create man pages from kernel-doc
-    comments.  This could be done, by setting the man section number with the
-    option ``man-sect``, e.g.::
-
-      .. kernel-doc:: include/linux/debugobjects.h
-          :man-sect: 9
-          :internal:
-
-    With this ``:man-sect: 9`` option, the kernel-doc parser will insert a
-    ``.. kernel-doc-man:: <declaration-name>.<man-sect no>`` directive in the
-    reST output, for every section describing a function, union etc.
-
+    User documentation see :ref:`man-pages`.
 """
 
 # ==============================================================================
@@ -136,7 +97,7 @@ class Section2Manpage(Transform):
     u"""Transforms a *section* tree into an *manpage* tree.
 
     The structural layout of a man-page differs from the one produced, by the
-    kernel-doc parser. The kernel-doc parser produce reST which fits to *normal*
+    kernel-doc parser.  The kernel-doc parser produce reST which fits to *normal*
     documentation, e.g. the declaration of a function in reST is like.
 
     .. code-block:: rst

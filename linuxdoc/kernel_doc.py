@@ -12,7 +12,7 @@ u"""
 
     Implementation of the ``kernel-doc`` parser.
 
-    :copyright:  Copyright (C) 2016  Markus Heiser
+    :copyright:  Copyright (C) 2018 Markus Heiser
     :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
     The kernel-doc parser extracts documentation from Linux kernel's source code
@@ -27,15 +27,12 @@ u"""
 
     Compared with the Perl kernel-doc script, this implementation has additional
     features like *parse options* for a smooth integration of reStructuredText
-    (reST) markup in the kernel's source code comments. In addition, this
-    rewrite brings the functionalities, which has been spread in *docproc* and
-    make files (e.g. working with *EXPORTED_SYMBOLS*) back to the kernel-doc
-    parse process. In combination with a (separate) *kernel-doc* reST directive
-    (which uses this module), the documentation generation becomes more clear
-    and flexible.
+    (reST) markup in the kernel's source code comments.  In combination with the
+    (separate) *kernel-doc* reST directive (which uses this module), the
+    documentation generation becomes more clear and flexible.
 
-    The architecture is simple and consists of three types of objects (three
-    classes).
+    The architecture of the parser is simple and consists of three types of
+    objects (three classes).
 
     * class Parser: The parser parses the source-file and dumps extracted
       kernel-doc data.
@@ -56,6 +53,7 @@ u"""
     (e.g. with the ReSTTranslator) and the option container.
 
     With parsing the source files only once, the building time is reduced n-times.
+
 """
 
 # ==============================================================================

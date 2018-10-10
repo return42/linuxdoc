@@ -5,7 +5,7 @@ python package meta informations
 """
 
 package      = 'linuxdoc'
-version      = '20180812'
+version      = '20181010'
 authors      = ['Markus Heiser', ]
 emails       = ['markus.heiser@darmarIT.de', ]
 copyright    = '2018 Markus Heiser'

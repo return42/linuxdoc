@@ -10,34 +10,10 @@ u"""
 
     Implementation of the ``flat-table`` reST-directive.
 
-    :copyright:  Copyright (C) 2016  Markus Heiser
+    :copyright:  Copyright (C) 2018 Markus Heiser
     :license:    GPL Version 2, June 1991 see linux/COPYING for details.
 
-    The ``flat-table`` (:py:class:`FlatTable`) is a double-stage list similar to
-    the ``list-table`` with some additional features:
-
-    * *column-span*: with the role ``cspan`` a cell can be extended through
-      additional columns
-
-    * *row-span*: with the role ``rspan`` a cell can be extended through
-      additional rows
-
-    * *auto-span* rightmost cell of a table row over the missing cells on the
-      right side of that table-row.  With Option ``:fill-cells:`` this behavior
-      can changed from *auto span* to *auto fill*, which automaticly inserts
-      (empty) cells instead of spanning the last cell.
-
-    Options:
-
-    * header-rows:   [int] count of header rows
-    * stub-columns:  [int] count of stub columns
-    * widths:        [[int] [int] ... ] widths of columns
-    * fill-cells:    instead of autospann missing cells, insert missing cells
-
-    roles:
-
-    * cspan: [int] additionale columns (*morecols*)
-    * rspan: [int] additionale rows (*morerows*)
+    User documentation see :ref:`rest-flat-table`
 """
 
 # ==============================================================================
