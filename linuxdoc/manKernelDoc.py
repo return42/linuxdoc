@@ -55,7 +55,6 @@ def setup(app):
 
     app.add_builder(KernelDocManBuilder)
     app.add_directive("kernel-doc-man", KernelDocMan)
-    app.add_config_value('author', "", 'env')
     app.add_node(kernel_doc_man
                  , html    = (skip_kernel_doc_man, None)
                  , latex   = (skip_kernel_doc_man, None)
