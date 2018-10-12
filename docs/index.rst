@@ -26,7 +26,6 @@ unclear to you, take a look at our :ref:`Introduction <kernel-doc-intro>`.
 LinuxDoc is hosted at github: https://github.com/return42/linuxdoc
 
 
-==================
 Known applications
 ==================
 
@@ -37,8 +36,6 @@ some alternative concepts for the Linux-Kernel documentation.
 * https://h2626237.stratoserver.net/kernel
 
 
-
-===========
 Source Code
 ===========
 
@@ -47,7 +44,7 @@ Source Code
 
    linuxdoc-api/linuxdoc
 
-==================
+
 Indices and tables
 ==================
 

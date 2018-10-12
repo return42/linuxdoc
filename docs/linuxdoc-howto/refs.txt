@@ -26,3 +26,14 @@
 .. _`Kernel's Source code documentation`: https://h2626237.stratoserver.net/kernel/linux_src_doc/index.html
 .. _`nitpick_ignore`: http://www.sphinx-doc.org/en/stable/config.html#confval-nitpick_ignore
 .. _`nitpicky`: http://www.sphinx-doc.org/en/stable/config.html#confval-nitpicky
+
+.. _raster-graphics: https://en.wikipedia.org/wiki/Raster_graphics
+.. _vector-graphics: https://en.wikipedia.org/wiki/Vector_graphics
+
+.. _SVG: https://www.w3.org/TR/SVG11/expanded-toc.html
+
+.. _DOT: https://graphviz.gitlab.io/_pages/doc/info/lang.html
+.. _`Graphviz's dot`: https://graphviz.gitlab.io/_pages/pdf/dotguide.pdf
+.. _Graphviz: https://graphviz.gitlab.io
+
+.. _ImageMagick: https://www.imagemagick.org

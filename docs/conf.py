@@ -49,7 +49,9 @@ intersphinx_mapping['process'] = ('https://h2626237.stratoserver.net/kernel/book
 
 extlinks = {}
 # usage:    :mid:`<mail's Message-ID>`  e.g.
-extlinks['mid']       = ('http://mid.mail-archive.com/%s', '')
+extlinks['mid'] = ('http://mid.mail-archive.com/%s', '')
+extlinks['lwn'] = ('https://lwn.net/Articles/%s', 'LWN article #')
+extlinks['rst-directive'] = ('http://docutils.sourceforge.net/docs/ref/rst/directives.html#%s', '')
 
 # ------------------------------------------------------------------------------
 # Options of the kernel-doc parser

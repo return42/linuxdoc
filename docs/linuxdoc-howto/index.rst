@@ -5,7 +5,22 @@
 LinuxDoc HowTo
 ==============
 
-How to use the kernel-doc markup and it's parser :
+As you might already noticed, the LinuxDoc project has a focus on kernel-doc.
+Most of the documentation you will find here deal with this markup, its syntax,
+use-cases and tools. But that's not all ..
+
+  The LinuxDoc project was founded at the time where the linux Kernel migrates
+  its documentation from XML-DocBook to the plain text format reST_ (OT: if
+  interested :lwn:`692704` and :lwn:`692705`).  In that context we also touched
+  other topics.  To name just two; the ":ref:`Scalable figure and image handling
+  <kfigure>`" and the ":ref:`diff friendly table markup <rest-flat-table>`".
+  All these and more topics are dealing with the same parent topic: *The various
+  aspects of documenting software developments* and are incorporated into the
+  LinuxDoc project.
+
+
+kernel-doc
+==========
 
 .. toctree::
    :maxdepth: 1
@@ -16,7 +31,8 @@ How to use the kernel-doc markup and it's parser :
    reST-kernel-doc-mode
    vintage-kernel-doc-mode
 
-And all the other features of LinuxDoc:
+other topics
+============
 
 .. toctree::
    :maxdepth: 1
