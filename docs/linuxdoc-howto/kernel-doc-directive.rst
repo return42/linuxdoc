@@ -7,13 +7,11 @@
 kernel-doc in reST documents
 ============================
 
-There exists a `reST-directive
-<http://www.sphinx-doc.org/en/stable/rest.html#directives>`_ named
-``kernel-doc`` to integrate kernel-doc comments into a reST document (e.g. in a
-*book*). The directive comes with options to fine grain control which parts
-should be placed into the reST document. With no options given, the complete
-kernel-doc comments from a source file will be inserted. So, the first and very
-simple example is:
+To integrate :ref:`kernel-doc <kernel-doc-syntax>` comments into a reST document
+(e.g. in a *book*), there exists a reST-directive_ named ``kernel-doc`` .  The
+directive comes with options to fine grain control which parts should be placed
+into the reST document.  With no options given, the complete kernel-doc comments
+from a source file will be inserted. So, the first and very simple example is:
 
 .. code-block:: rst
 
@@ -56,19 +54,19 @@ kernel source tree. The pathname is relative to kernel's root folder.  The
 options have the following meaning, but be aware that not all combinations of
 these options make sense:
 
-``doc <section title>``
+``:doc: <section title>``
     Include content of the ``DOC:`` section titled ``<section title>``.  Spaces
     are allowed in ``<section title>``; do not quote the ``<section title>``.
 
     The next option make only sense in conjunction with option ``doc``:
 
-    ``no-header``
+    ``:no-header:``
         Do not output DOC: section's title. Useful, if the surrounding context
         already has a heading, and the DOC: section title is only used as an
         identifier. Take in mind, that this option will not suppress any native
         reST heading markup in the comment (:ref:`reST-section-structure`).
 
-``export [<src-fname-pattern> [, ...]]``
+``:export: [<src-fname-pattern> [, ...]]``
     Include documentation for all function, struct or whatever definition in
     ``<src-filename>``, exported using EXPORT_SYMBOL macro (``EXPORT_SYMBOL``,
     ``EXPORT_SYMBOL_GPL`` & ``EXPORT_SYMBOL_GPL_FUTURE``) either in
@@ -79,54 +77,53 @@ these options make sense:
     have been placed in header files, while EXPORT_SYMBOL are next to the
     function definitions.
 
-``internal [<src-fname-pattern> [, ...]]``
+``:internal: [<src-fname-pattern> [, ...]]``
     Include documentation for all documented definitions, **not** exported using
     EXPORT_SYMBOL macro either in ``<src-filename>`` or in any of the files
     specified by ``<src-fname-pattern>``.
 
-``exp-method <method>``
-    Change the way exported symbols are specified in source code.
-    Default value ('macro') if not provided can be set globally by
-    kernel_doc_exp_method in the sphinx configuration.
-    ``<method>`` must one of the following value:
+``:exp-method: <method>``
+    Change the way exported symbols are specified in source code.  Default value
+    ('macro') if not provided can be set globally by kernel_doc_exp_method in
+    the sphinx configuration.  ``<method>`` must one of the following value:
 
     ``macro``
-        Exported symbols are specified by macros (whose names are
-        controlled by ``exp-ids`` option) invoked in the source the
-        following way: THIS_IS_AN_EXPORTED_SYMBOL(symbol)
+        Exported symbols are specified by macros (whose names are controlled by
+        ``exp-ids`` option) invoked in the source the following way:
+        THIS_IS_AN_EXPORTED_SYMBOL(symbol)
 
     ``attribute``
-        Exported symbols are specified definition using a specific
-        attribute (controlled by ``exp-ids`` option) either in their
-        declaration or definition:
-        THIS_IS_AN_EXPORTED_SYMBOL int symbol(void* some_arg) {...}
+        Exported symbols are specified definition using a specific attribute
+        (controlled by ``exp-ids`` option) either in their declaration or
+        definition: THIS_IS_AN_EXPORTED_SYMBOL int symbol(void* some_arg) {...}
 
-``exp-ids <identifier [, identifiers [, ...]]>``
+``:exp-ids: <identifier [, identifiers [, ...]]>``
     Use the specified list of identifiers instead of default value:
-    EXPORT_SYMBOL, EXPORT_SYMBOL_GPL, EXPORT_SYMBOL_GPL_FUTURE. Default
-    value can be overriden globally by sphinx configuration option:
-    kernel_doc_exp_ids
+    EXPORT_SYMBOL, EXPORT_SYMBOL_GPL, EXPORT_SYMBOL_GPL_FUTURE.  Default value
+    can be overriden globally by sphinx configuration option
+    :ref:`kernel_doc_exp_ids <kernel-doc-config>`.
 
-``known-attrs <attr [, attrs [, ...]]>``
-    Specified a list of function attribute that are known and must be
-    hidden when displaying function prototype. When ``exp-method`` is
-    set to 'attribute' the list in ``exp-ids`` is considered as known
-    and added implicitely to this list of known attributes. The default
-    list is empty and can be adjusted by the sphinx configuration option
-    kernel_doc_known_attrs
+``:known-attrs: <attr [, attrs [, ...]]>``
+    Specified a list of function attributes that are known and must be hidden
+    when displaying function prototype.
 
-``functions <name [, names [, ...]]>``
+    When ``:exp-method:`` is set to ``attribute`` the list in ``:exp-ids:`` is
+    considered as known and added implicitly to this list of known attributes.
+    The default list is empty and can be adjusted by the sphinx configuration
+    option :ref:`kernel_doc_known_attrs <kernel-doc-config>`.
+
+``:functions: <name [, names [, ...]]>``
     Include documentation for each named definition.
 
-``module <prefix-id>``
+``:module: <prefix-id>``
     The option ``:module: <id-prefix>`` sets a module-name. The module-name is
     used as a prefix for automatic generated IDs (reference anchors).
 
-``man-sect <sect-no>``
+``:man-sect: <sect-no>``
   Section number of the manual pages (see man man-pages). The man-pages are build
   by the ``kernel-doc-man`` builder.
 
-``snippets <name [, names [, ...]]>``
+``:snippets: <name [, names [, ...]]>``
     Inserts the source-code passage(s) marked with the snippet ``name``. The
     snippet is inserted with a `code-block:: <http://www.sphinx-doc.org/en/stable/markup/code.html>`_
     directive.
@@ -139,7 +136,7 @@ these options make sense:
     ``linenos``
         Set line numbers in the snippet code-block.
 
-``debug``
+``:debug:``
     Inserts a code-block with the generated reST source. This might sometimes
     helpful to see how the kernel-doc parser transforms the kernel-doc markup to
     reST markup.
@@ -249,13 +246,13 @@ code-snippet below is:
     :linenos:
 
 
-.. _kernel-doc-man-pages:
+.. _kernel-doc-man-sect:
 
-man pages
-=========
+man pages (:man-sect:)
+======================
 
 To get man pages from kernel-doc comments, add the ``:man-sect:`` option to your
-kernel-doc directives. E.g. to get man-pages of media's remote control (file
+kernel-doc directives.  E.g. to get man-pages of media's remote control (file
 ``media/kapi/rc-core.rst``) add ``:man-sect: 9`` to all the kernel-doc includes.
 
 .. code-block:: rst
@@ -279,16 +276,16 @@ kernel-doc directives. E.g. to get man-pages of media's remote control (file
      :man-sect: 9
 
 If you don't want to edit all your kernel-doc directives to get man page from,
-set a global man-sect in your ``conf.py`` (see ``kernel_doc_mansect`` below).
-Further reading: :ref:`man-pages`.
+set a global man-sect in your ``conf.py``, see sphinx configuration
+:ref:`kernel_doc_mansect <kernel-doc-config>`).  Further reading:
+:ref:`man-pages`.
 
 If not already exists, add a man-page target to your Makefile which calls
-sphinx-builder with the kernel-doc-man builder. E.g. in the kernel sources at
+sphinx-builder with the kernel-doc-man builder.  E.g. in the kernel sources at
 ``Documentation/Makefile`` you need something like this::
 
   mandocs:
           @$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,kernel-doc-man,$(var),man,$(var)))
-
 
 
 Highlights and cross-references
@@ -347,33 +344,11 @@ Domain`_ references.
 kernel-doc config
 =================
 
-Within the sphinx-doc config file (``conf.py`` or ``my_project.conf``) you can
+Within the `sphinx config`_ file (``conf.py`` or ``my_project.conf``) you can
 set the following option.
 
-kernel_doc_raise_error: ``True``
-  If true, fatal errors (like missing function descriptions) raise an error. The
-  default is ``True``. Because this might break your build process, you can
-  change the value to ``False``.
-
-  In this example, the documentation of definition ``no_longer_exists`` is
-  required.
-
-  .. code-block:: rst
-
-      .. kernel-doc::  ./all-in-a-tumble.h
-          :functions:  no_longer_exist
-
-  Since this definition not exists (anymore), the following TODO entry with Oops
-  is inserted (when ``kernel_doc_raise_error`` is ``False``).
-
-  .. admonition:: parser error inserts a ".. todo::" directive with *Oops* in
-     :class: rst-example
-
-     .. kernel-doc::  ./all-in-a-tumble.h
-        :functions:  no_longer_exist
-
 kernel_doc_verbose_warn: ``True``
-  If true, more warnings will be logged. E.g. a missing description of a
+  If true, more warnings will be logged.  E.g. a missing description of a
   function's return value will be logged.
 
 kernel_doc_mansect: ``None``
@@ -386,3 +361,33 @@ kernel_doc_mansect: ``None``
 kernel_doc_mode: ``reST``
   Set parser's default kernel-doc mode ``reST|kernel-doc``. See
   :ref:`reST-kernel-doc-mode` and :ref:`vintage-kernel-doc-mode`.
+
+kernel_doc_exp_ids: ``['EXPORT_SYMBOL', 'EXPORT_SYMBOL_GPL', 'EXPORT_SYMBOL_GPL_FUTURE']``
+  Set parser's default value for kernel-doc directive option ``:exp-ids:``.
+
+kernel_doc_known_attrs: ``[]``
+  Set parser's default value for kernel-doc directive option  ``:known-attrs:``
+
+kernel_doc_raise_error: ``True``
+  If true, fatal errors (like missing function descriptions) raise an error.
+  The default is ``True``, what means, the build process break every time a
+  serve error in the documentation build occur.  Often it might be better the
+  build continues and inserts Oops on serve errors.  For this, set
+  ``kernel_doc_raise_error`` to ``False``.  In the next example, the
+  documentation of a non existing definition name ``no_longer_exists`` is
+  required:
+
+  .. code-block:: rst
+
+      .. kernel-doc::  ./all-in-a-tumble.h
+          :functions:  no_longer_exist
+
+  Since this definition not exists (anymore), the following TODO entry with Oops
+  is inserted (again; only when ``kernel_doc_raise_error`` is ``False``).
+
+  .. admonition:: parser error inserts a ".. todo::" directive with *Oops* in
+     :class: rst-example
+
+     .. kernel-doc::  ./all-in-a-tumble.h
+        :functions:  no_longer_exist
+
