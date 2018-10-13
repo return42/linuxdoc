@@ -36,13 +36,11 @@ PHONY += uninstall
 uninstall: pyuninstall
 
 PHONY += docs
-docs:  sphinx-doc $(API_DOC)
-	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) -e .
+docs:  pyenv-install sphinx-doc $(API_DOC)
 	$(call cmd,sphinx,html,docs,docs)
 
 PHONY += docs-live
-docs-live:  sphinx-live $(API_DOC)
-	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) -e .
+docs-live:  pyenv-install sphinx-live $(API_DOC)
 	$(call cmd,sphinx_autobuild,html,docs,docs)
 
 #PHONY += slides
@@ -51,9 +49,9 @@ docs-live:  sphinx-live $(API_DOC)
 
 PHONY += $(API_DOC)
 $(API_DOC): $(PY_ENV)
-	@rm -rf ./$(API_DOC)
-	$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o docs/linuxdoc-api linuxdoc
-	@rm -f $(API_DOC)/modules.rst
+	$(Q)rm -rf ./$(API_DOC)
+	$(Q)$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o docs/linuxdoc-api linuxdoc
+	$(Q)rm -f $(API_DOC)/modules.rst
 
 PHONY += clean
 clean: pyclean docs-clean
