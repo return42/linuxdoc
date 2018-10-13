@@ -7,6 +7,25 @@ DOCS_BUILD  ?= build/docs
 GH_PAGES    ?= gh-pages
 DOCS_DIST   ?= dist/docs
 
+
+## SPHINXVERS variable
+## ===================
+##
+## .. _requirement-specifiers: https://pip.pypa.io/en/stable/reference/pip_install/#requirement-specifiers
+##
+## Sphinx version to use, when building documentation.  Set this when calling
+## build target.  The default value is empty (install latest), to select a
+## specific version use a requirement-specifiers_.  E.g. to build your target
+## 'doc' with a select sphinx-doc_ version 1.7.9::
+##
+##     make SPHINXVERS='==1.7.9' docs
+##
+## To build with latest 1.7::
+##
+##     make SPHINXVERS='>=1.7,<1.8' docs
+##
+SPHINXVERS  ?=
+
 docs-help:
 	@echo  'makefile.docs:'
 	@echo  '  docs-clean	- clean intermediate doc objects'
@@ -17,10 +36,12 @@ docs-help:
 # ------------------------------------------------------------------------------
 
 sphinx-doc: $(PY_ENV)
-	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) Sphinx
+	@echo "  PY_ENV    installing Sphinx$(SPHINXVERS)"
+	$(Q)$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) 'Sphinx$(SPHINXVERS)'
 
 sphinx-live: $(PY_ENV)
-	@$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) Sphinx sphinx-autobuild
+	@echo "  PY_ENV    installing Sphinx$(SPHINXVERS)"
+	$(Q)$(PY_ENV_BIN)/pip install $(PIP_VERBOSE) 'Sphinx$(SPHINXVERS)' sphinx-autobuild
 
 # ------------------------------------------------------------------------------
 # commands
