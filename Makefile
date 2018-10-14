@@ -74,20 +74,41 @@ srctree ?= /share/linux
 export srctree
 
 KERNEL_DOC=$(srctree)/Documentation
+
+# zero.src2rst
+# ------------
+#
+# add linux autodoc sources to reST as one zero.build target
+#
+# 1. make 0.drop zero 0.commit
+# 2, .. edit sources ..
+# 3. make zero 0.status
+
+PHONY += zero.src2rst
+zero.src2rst: $(PY_ENV) src-reST-Files
+	rm -rf $(AUTODOC_FOLDER)
+	$(AUTODOC_SCRIPT)  --markup kernel-doc --rst-files $(0_BUILD_DEST)/src-reST-Files.txt $(srctree) $(AUTODOC_FOLDER)
+
+zero.build:: zero.src2rst
+
+# kernel's sphinx-books
+AUTODOC_SCRIPT := $(PY_ENV_BIN)/kernel-autodoc
+AUTODOC_FOLDER := $(0_BUILD_DEST)/autodoc.linux
+
+PHONY += src-reST-Files
+src-reST-Files: $(PY_ENV)
+	$(PY_ENV_BIN)/$(PYTHON) ./kernel-docgrep $(KERNEL_DOC) > $(0_BUILD_DEST)/src-reST-Files.txt
+
 # FIXME: media not yet work
-KERNEL_BOOKS   = $(filter-out media,$(patsubst $(srctree)/Documentation/%/conf.py,%,$(wildcard $(KERNEL_DOC)/*/conf.py)))
-KERNEL_0_BUILD = $(patsubst %,books/%.zero, $(KERNEL_BOOKS))
+#KERNEL_BOOKS   = $(filter-out media,$(patsubst $(KERNEL_DOC)/%/conf.py,%,$(wildcard $(KERNEL_DOC)/*/conf.py)))
+#KERNEL_0_BUILD = $(patsubst %,books/%.zero, $(KERNEL_BOOKS))
 
-zero.build:: $(KERNEL_0_BUILD)
+# zero.build:: $(KERNEL_0_BUILD)
 
-PHONY += $(KERNEL_0_BUILD)
-$(KERNEL_0_BUILD):
-	@echo "  ZERO-BUILD   $@"
-	$(call cmd,kernel_book,xml,$(patsubst books/%.zero,%,$@),xml,$(KERNEL_DOC))
-
-# $(KERNEL_0_BUILD):
-# 	@echo "test123" > $(0_BUILD_DEST)/$@
-# 	@mkdir -p $(0_BUILD_DEST)/books
+#PHONY += $(KERNEL_0_BUILD)
+#$(KERNEL_0_BUILD):
+#	@echo "  ZERO-BUILD   $@"
+#	$(call cmd,kernel_book,xml,$(patsubst books/%.zero,%,$@),xml,$(KERNEL_DOC))
 
 
 # $2 sphinx builder e.g. "html"
@@ -98,14 +119,17 @@ $(KERNEL_0_BUILD):
 # $5 reST source folder,
 #    e.g. "$(BOOKS_MIGRATED_FOLDER)" for the migrated books
 
-quiet_cmd_kernel_book = $(shell echo "     $2" | tr '[:lower:]' '[:upper:]')     --> file://$(abspath $(0_BUILD_DEST)/$3/$4)
-      cmd_kernel_book = SPHINX_CONF=$(abspath $5/$3/conf.py) \
-	$(SPHINXBUILD) \
-	$(ALLSPHINXOPTS) \
-	-b $2 \
-	-c docs \
-	-d $(DOCS_BUILD)/$3.doctrees \
-	$(abspath $5/$3) \
-	$(abspath $(0_BUILD_DEST)/$3/$4)
+# quiet_cmd_kernel_book = $(shell echo "     $2" | tr '[:lower:]' '[:upper:]')     --> file://$(abspath $(0_BUILD_DEST)/$3/$4)
+#       cmd_kernel_book = SPHINX_CONF=$(abspath $5/$3/conf.py) \
+# 	$(SPHINXBUILD) \
+# 	$(ALLSPHINXOPTS) \
+# 	-b $2 \
+# 	-c docs \
+# 	-d $(DOCS_BUILD)/$3.doctrees \
+# 	$(abspath $5/$3) \
+# 	$(abspath $(0_BUILD_DEST)/$3/$4)
+
+
 
 .PHONY: $(PHONY)
+
