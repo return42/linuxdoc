@@ -29,6 +29,7 @@ from docutils.parsers.rst import Directive, directives
 from docutils.utils import SystemMessage
 from docutils.statemachine import ViewList
 
+from sphinx.util import logging
 from sphinx.ext.autodoc import AutodocReporter
 
 from . import kernel_doc as kerneldoc
@@ -42,6 +43,8 @@ from . import kernel_doc as kerneldoc
 __version__  = '1.0'
 
 PARSER_CACHE = dict()
+
+app_log = logging.getLogger('application')
 
 # ==============================================================================
 def setup(app):
@@ -81,20 +84,20 @@ class KernelDocParser(kerneldoc.Parser):
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
         self.errors += 1
         message = ("%(fname)s:%(line_no)s: [kernel-doc ERROR] : " + message) % replace
-        self.app.warn(message)
+        app_log.warn(message)
 
     def warn(self, message, **replace):
         replace["fname"]   = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
         self.warnings += 1
         message = ("%(fname)s:%(line_no)s: [kernel-doc WARN] : " + message) % replace
-        self.app.warn(message)
+        app_log.warn(message)
 
     def info(self, message, **replace):
         replace["fname"]   = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
         message = ("%(fname)s:%(line_no)s: [kernel-doc INFO] : " + message) % replace
-        self.app.verbose(message)
+        app_log.verbose(message)
 
     def debug(self, message, **replace):
         if self.app.verbosity < 2:
@@ -102,7 +105,7 @@ class KernelDocParser(kerneldoc.Parser):
         replace["fname"]   = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
         message = ("%(fname)s:%(line_no)s: [kernel-doc DEBUG] : " + message) % replace
-        self.app.debug(message)
+        app_log.debug(message)
 
 
 # ==============================================================================
@@ -298,7 +301,7 @@ class KernelDoc(Directive):
 
         if parser is None:
             self.env.note_dependency(opts.fname)
-            #self.env.app.info("parse kernel-doc comments from: %s" % opts.fname)
+            #app_log.info("parse kernel-doc comments from: %s" % opts.fname)
             parser = KernelDocParser(self.env.app, opts, kerneldoc.NullTranslator())
             parser.parse()
             PARSER_CACHE[opts.fname] = parser

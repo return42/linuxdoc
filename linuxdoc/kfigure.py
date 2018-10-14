@@ -25,8 +25,11 @@ from docutils.parsers.rst import directives
 from docutils.parsers.rst.directives import images
 import sphinx
 
+from sphinx.util import logging
 from sphinx.util.nodes import clean_astext
 from six import iteritems
+
+app_log = logging.getLogger('application')
 
 PY3 = sys.version_info[0] == 3
 
@@ -139,20 +142,20 @@ def setupTools(app):
     This function is called once, when the builder is initiated.
     """
     global dot_cmd, convert_cmd  # pylint: disable=global-statement
-    app.verbose("kfigure: check installed tools ...")
+    app_log.verbose("kfigure: check installed tools ...")
 
     dot_cmd = which('dot')
     convert_cmd = which('convert')
 
     if dot_cmd:
-        app.verbose("use dot(1) from: " + dot_cmd)
+        app_log.verbose("use dot(1) from: " + dot_cmd)
     else:
-        app.warn("dot(1) not found, for better output quality install "
+        app_log.warn("dot(1) not found, for better output quality install "
                  "graphviz from http://www.graphviz.org")
     if convert_cmd:
-        app.verbose("use convert(1) from: " + convert_cmd)
+        app_log.verbose("use convert(1) from: " + convert_cmd)
     else:
-        app.warn(
+        app_log.warn(
             "convert(1) not found, for SVG to PDF conversion install "
             "ImageMagick (https://www.imagemagick.org)")
 
@@ -188,12 +191,12 @@ def convert_image(img_node, translator, src_fname=None):
 
     # in kernel builds, use 'make SPHINXOPTS=-v' to see verbose messages
 
-    app.verbose('assert best format for: ' + img_node['uri'])
+    app_log.verbose('assert best format for: ' + img_node['uri'])
 
     if in_ext == '.dot':
 
         if not dot_cmd:
-            app.verbose("dot from graphviz not available / include DOT raw.")
+            app_log.verbose("dot from graphviz not available / include DOT raw.")
             img_node.replace_self(file2literal(src_fname))
 
         elif translator.builder.format == 'latex':
@@ -220,7 +223,7 @@ def convert_image(img_node, translator, src_fname=None):
 
         if translator.builder.format == 'latex':
             if convert_cmd is None:
-                app.verbose("no SVG to PDF conversion available / include SVG raw.")
+                app_log.verbose("no SVG to PDF conversion available / include SVG raw.")
                 img_node.replace_self(file2literal(src_fname))
             else:
                 dst_fname = path.join(translator.builder.outdir, fname + '.pdf')
@@ -233,18 +236,18 @@ def convert_image(img_node, translator, src_fname=None):
         _name = dst_fname[len(translator.builder.outdir) + 1:]
 
         if isNewer(dst_fname, src_fname):
-            app.verbose("convert: {out}/%s already exists and is newer" % _name)
+            app_log.verbose("convert: {out}/%s already exists and is newer" % _name)
 
         else:
             ok = False
             mkdir(path.dirname(dst_fname))
 
             if in_ext == '.dot':
-                app.verbose('convert DOT to: {out}/' + _name)
+                app_log.verbose('convert DOT to: {out}/' + _name)
                 ok = dot2format(app, src_fname, dst_fname)
 
             elif in_ext == '.svg':
-                app.verbose('convert SVG to: {out}/' + _name)
+                app_log.verbose('convert SVG to: {out}/' + _name)
                 ok = svg2pdf(app, src_fname, dst_fname)
 
             if not ok:
@@ -273,7 +276,7 @@ def dot2format(app, dot_fname, out_fname):
     with open(out_fname, "w") as out:
         exit_code = subprocess.call(cmd, stdout = out)
         if exit_code != 0:
-            app.warn("Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
+            app_log.warn("Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
     return bool(exit_code == 0)
 
 def svg2pdf(app, svg_fname, pdf_fname):
@@ -290,7 +293,7 @@ def svg2pdf(app, svg_fname, pdf_fname):
     # use stdout and stderr from parent
     exit_code = subprocess.call(cmd)
     if exit_code != 0:
-        app.warn("Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
+        app_log.warn("Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
     return bool(exit_code == 0)
 
 
@@ -383,15 +386,15 @@ def visit_kernel_render(self, node):
     app = self.builder.app
     srclang = node.get('srclang')
 
-    app.verbose('visit kernel-render node lang: "%s"' % (srclang))
+    app_log.verbose('visit kernel-render node lang: "%s"' % (srclang))
 
     tmp_ext = RENDER_MARKUP_EXT.get(srclang, None)
     if tmp_ext is None:
-        app.warn('kernel-render: "%s" unknown / include raw.' % (srclang))
+        app_log.warn('kernel-render: "%s" unknown / include raw.' % (srclang))
         return
 
     if not dot_cmd and tmp_ext == '.dot':
-        app.verbose("dot from graphviz not available / include raw.")
+        app_log.verbose("dot from graphviz not available / include raw.")
         return
 
     literal_block = node[0]
