@@ -65,25 +65,60 @@ PHONY += zero_pylint
 zero_pylint: pylint-exe
 	$(call cmd,pylint,$(PYOBJECTS)) | grep '^[\*\*\*\*\*\*|linuxdoc]' > 0_pylint_py$(PY)
 
-# ------------------------------------------------------------------------------
-# zero.build: add linux kernel's sphinx-books
-# ------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------
+## zero.build: add linux kernel's sphinx-books
+## ------------------------------------------------------------------------------
+##
+## A simple zero build workflow to compare builds from linuxdoc current working
+## tree with build commit at HEAD~~~:
+##
+## 1. initialize:               ``make 0.drop``
+## 2. build HEAD~~~ and commit: ``make COMMIT='HEAD~~~' zero 0.commit``
+## 3. build with working tree:  ``make zero 0.status``
+##
+## The ``0.status`` will show you differences between both builds.  To see
+## detail changes use::
+##
+##    git -C ./0_build diff
+##
 
-# user linux Kernel documentation as build-reference
+## zero.docxml
+## ------------
+##
+## To track changes in the builder (generated output), add XML output of ./docs
+## as zero.build target.
+##
+PHONY += zero.docxml
+zero.doc2xml:
+	cp -f ./Makefile $(0_BUILD_WTREE) || exit 0 > /dev/null
+	cd $(0_BUILD_WTREE); $(MAKE) DOCS_DIST=$(abspath $(0_BUILD_DEST))/doc2xml docs.xml
+	find $(0_BUILD_DEST)/doc2xml -type f -exec sed -i "s/build\/0_build_worktree\///g" {} \;
+
+zero.build:: zero.doc2xml
+
+PHONY += docs
+docs.xml:  pyenv-install sphinx-doc $(API_DOC)
+	$(call cmd,sphinx,xml,docs,docs)
+
+## srctree variable
+## ----------------
+##
+## Path where Kernel's sources cloned, default is ``/share/linux``.::
+##
+##     cd share
+##     git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git linux
+##
 srctree ?= /share/linux
 export srctree
-
 KERNEL_DOC=$(srctree)/Documentation
 
-# zero.src2rst
-# ------------
-#
-# add linux autodoc sources to reST as one zero.build target
-#
-# 1. make 0.drop zero 0.commit
-# 2, .. edit sources ..
-# 3. make zero 0.status
-
+## zero.src2rst
+## ------------
+##
+## To track changes of the kernel-doc parser (generated output), add linux
+## autodoc sources to reST as one zero.build target.  Require Kernel's sources
+## at `srctree variable`_.
+##
 PHONY += zero.src2rst
 zero.src2rst: $(PY_ENV) src-reST-Files
 	rm -rf $(AUTODOC_FOLDER)
@@ -99,18 +134,20 @@ PHONY += src-reST-Files
 src-reST-Files: $(PY_ENV)
 	$(PY_ENV_BIN)/$(PYTHON) ./kernel-docgrep $(KERNEL_DOC) > $(0_BUILD_DEST)/src-reST-Files.txt
 
+
+
 # FIXME: media not yet work
 #KERNEL_BOOKS   = $(filter-out media,$(patsubst $(KERNEL_DOC)/%/conf.py,%,$(wildcard $(KERNEL_DOC)/*/conf.py)))
 #KERNEL_0_BUILD = $(patsubst %,books/%.zero, $(KERNEL_BOOKS))
-
+#
 # zero.build:: $(KERNEL_0_BUILD)
-
+#
 #PHONY += $(KERNEL_0_BUILD)
 #$(KERNEL_0_BUILD):
 #	@echo "  ZERO-BUILD   $@"
 #	$(call cmd,kernel_book,xml,$(patsubst books/%.zero,%,$@),xml,$(KERNEL_DOC))
-
-
+#
+#
 # $2 sphinx builder e.g. "html"
 # $3 name of the book / e.g. "gpu", used as:
 #    * dest folder relative to $(DIST_BOOKS) and
@@ -118,7 +155,7 @@ src-reST-Files: $(PY_ENV)
 # $4 dest subfolder e.g. "man" for man pages at gpu/man
 # $5 reST source folder,
 #    e.g. "$(BOOKS_MIGRATED_FOLDER)" for the migrated books
-
+#
 # quiet_cmd_kernel_book = $(shell echo "     $2" | tr '[:lower:]' '[:upper:]')     --> file://$(abspath $(0_BUILD_DEST)/$3/$4)
 #       cmd_kernel_book = SPHINX_CONF=$(abspath $5/$3/conf.py) \
 # 	$(SPHINXBUILD) \
@@ -128,8 +165,6 @@ src-reST-Files: $(PY_ENV)
 # 	-d $(DOCS_BUILD)/$3.doctrees \
 # 	$(abspath $5/$3) \
 # 	$(abspath $(0_BUILD_DEST)/$3/$4)
-
-
 
 .PHONY: $(PHONY)
 

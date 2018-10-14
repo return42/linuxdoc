@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8; mode: python -*-
+
+u""" hackisch script to grep all kernel-doc directives from a set of folders
+with rst files under. """
+
+import sys, re
+from fspath import FSPath
+
+pat = re.compile(r"^\s*\.\.\s+kernel-doc::\s*([^\s]+)\s*$")
+out = set()
+for arg in sys.argv:
+    for rstFile in FSPath(arg).reMatchFind(r".*\.rst"):
+        if rstFile.BASENAME == "kernel-doc.rst":
+            continue
+        #print(rstFile)
+        with rstFile.openTextFile() as f:
+            for l in f:
+                match = pat.search(l)
+                if match:
+                    #print(match.group(1))
+                    out.add(match.group(1))
+for l in sorted(out):
+    print(l)
