@@ -312,9 +312,6 @@ def highlight_parser(text, map_table):
     return "\n".join(out)
 
 
-
-
-
 # ==============================================================================
 # helper
 # ==============================================================================
@@ -343,8 +340,6 @@ class DevNull(object): # pylint: disable=too-few-public-methods
         pass
 DevNull = DevNull()
 
-KBUILD_VERBOSE = int(OS_ENV.get("KBUILD_VERBOSE", "0"))
-KERNELVERSION  = OS_ENV.get("KERNELVERSION", "unknown kernel version")
 SRCTREE        = OS_ENV.get("srctree", "")
 GIT_REF        = ("Linux kernel source tree:"
                   " `%(rel_fname)s <https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/"
@@ -362,10 +357,9 @@ STREAM = Container(
     , log_out  = sys.__stderr__
     , )
 
-VERBOSE = bool(KBUILD_VERBOSE)
+VERBOSE = False
 DEBUG   = False
 INSPECT = False
-QUIET   = False
 
 class SimpleLog(object):
 
@@ -377,8 +371,6 @@ class SimpleLog(object):
         STREAM.log_out.write(self.LOG_FORMAT % replace)
 
     def warn(self, message, **replace):
-        if QUIET:
-            return
         message = message % replace
         replace.update(dict(message = message, logclass = "WARN"))
         STREAM.log_out.write(self.LOG_FORMAT % replace)

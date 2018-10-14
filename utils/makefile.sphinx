@@ -7,6 +7,11 @@ DOCS_BUILD  ?= build/docs
 GH_PAGES    ?= gh-pages
 DOCS_DIST   ?= dist/docs
 
+ifeq ($(KBUILD_VERBOSE),1)
+  SPHINX_VERBOSE = "-v"
+else
+  SPHINX_VERBOSE =
+endif
 
 ## SPHINXVERS variable
 ## ===================
@@ -53,11 +58,11 @@ sphinx-live: $(PY_ENV)
 # $5 dest subfolder e.g. "man" for man pages at $(DOCS_DIST)/man
 
 quiet_cmd_sphinx = SPHINX  $@ --> file://$(abspath $(DOCS_DIST)/$5)
-      cmd_sphinx = $(SPHINXBUILD) $(SPHINXOPTS)\
+      cmd_sphinx = $(SPHINXBUILD) $(SPHINX_VERBOSE) $(SPHINXOPTS)\
 	-b $2 -c $3 -d $(DOCS_BUILD)/.doctrees $4 $(DOCS_DIST)/$5
 
 quiet_cmd_sphinx_autobuild = SPHINX  $@ --> file://$(abspath $(DOCS_DIST)/$5)
-      cmd_sphinx_autobuild = PATH="$(PY_ENV_BIN):$(PATH)" $(PY_ENV_BIN)/sphinx-autobuild -v --poll -B $(SPHINXOPTS)\
+      cmd_sphinx_autobuild = PATH="$(PY_ENV_BIN):$(PATH)" $(PY_ENV_BIN)/sphinx-autobuild  $(SPHINX_VERBOSE) --poll -B $(SPHINXOPTS)\
 	-b $2 -c $3 -d $(DOCS_BUILD)/.doctrees $4 $(DOCS_DIST)/$5
 
 quiet_cmd_sphinx_clean = CLEAN     $@
