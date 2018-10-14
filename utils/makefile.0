@@ -66,7 +66,7 @@ zero:
 	@echo "  ZERO START target --> $@"
 	@$(MAKE) PY_ENV=$(0_PY_ENV) zero
 else
-zero:  zero.dump zero.env_drop zero.build
+zero:  zero.env_drop zero.build
 	$(Q)echo "  ZERO END   build with worktree $(0_BUILD_WTREE) commit: $(shell cd $(0_BUILD_WTREE); $(0_GIT) rev-parse --short HEAD)"
 endif
 
@@ -142,7 +142,7 @@ ifeq ($(PY_ENV),$(0_PY_ENV)) # ---- START: define zero.% targets ----------
 ##
 PHONY += zero.clean
 zero.clean:: zero.env_drop
-	@echo "  ZERO-ENV  clean $(0_BUILD_DEST)/* ..."
+	@echo "  ZERO      clean $(0_BUILD_DEST)/* ..."
 	@$(if $(0_BUILD_CLEAN), echo -n '           ')
 	$(Q)for FILE in ${0_BUILD_CLEAN}; do echo -n " $$FILE" ; rm -rf $(0_BUILD_DEST)/$$FILE; done
 	@$(if $(0_BUILD_CLEAN), echo)
@@ -153,7 +153,7 @@ zero.clean:: zero.env_drop
 ## Drop the whole 0-build environment and the repository
 ##
 zero.drop:: zero.env_drop
-	@echo "  ZERO-DROP  delete $(0_BUILD_DEST)"
+	@echo "  ZERO      drop$(0_BUILD_DEST)"
 	$(Q)rm -rf $(0_BUILD_DEST)
 
 
@@ -224,10 +224,10 @@ endif
 ##
 PHONY += zero.env_drop
 zero.env_drop:
-	@echo "  ZERO-DROP  uninstall py-package '$(PYOBJECTS)' from $(PY_ENV)"
+	@echo "  ZERO-ENV  uninstall py-package '$(PYOBJECTS)' from $(PY_ENV)"
 	$(Q)[ -d $(PY_ENV_BIN) ] && $(PY_ENV_BIN)/pip --no-color $(PIP_VERBOSE) uninstall --yes $(PYOBJECTS) || true
 ifneq ($(strip $(0_BUILD_WTREE)),.)
-	@echo "  ZERO-DROP  drop worktree $(0_BUILD_WTREE)"
+	@echo "  ZERO-ENV  drop worktree $(0_BUILD_WTREE)"
 	$(Q)rm -rf '$(0_BUILD_WTREE)'
 	$(Q)$(0_GIT) worktree prune
 endif
