@@ -28,7 +28,7 @@ also a full replacement, building booth, the common sphinx man-pages and those
 marked with the ``.. kernel-doc-man::`` directive.
 
 Mostly authors will use this feature in their reST documents in conjunction with
-the ``.. kernel-doc::`` :ref:`directive <kernel-doc-man-pages>`, to create man
+the ``.. kernel-doc::`` :ref:`directive <kernel-doc-man-sect>`, to create man
 pages from kernel-doc comments.  This could be done, by setting the man section
 number with the option ``man-sect``, e.g.:
 
