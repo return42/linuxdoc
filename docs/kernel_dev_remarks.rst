@@ -95,10 +95,8 @@ As you can see, Perl's output is a flatten stream of markups and emphasis while
 the the Python variant produce a structured and valid reST_ document.  One might
 think, that we can fix the Perl script to be more structural.  As far as I know,
 it is not possible to embed structured reST into the doctree without being
-in-process where you have access to the *in memory* doctree `[ref]
-<http://www.sphinx-doc.org/en/master/extdev/tutorial.html?highlight=doctree#build-phases>`__.
-I don't know where the Kernel development goes in the future, IMO there are
-three choices:
+in-process where you have access to the *in memory* doctree_.  I don't know
+where the Kernel development goes in the future, IMO there are three choices:
 
 1. Stay with Perl implementation of the kernel-doc parser and fumble around with
    its limitations.

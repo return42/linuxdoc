@@ -21,6 +21,8 @@
 .. _`Sphinx's Python domain`: http://www.sphinx-doc.org/en/stable/domains.html#the-python-domain
 .. _`Sphinx's C domain`: http://www.sphinx-doc.org/en/stable/domains.html#cross-referencing-c-constructs
 
+.. _doctree: http://www.sphinx-doc.org/en/master/extdev/tutorial.html?highlight=doctree#build-phases
+
 .. _`docutils`: http://docutils.sourceforge.net/docs/index.html
 .. _`docutils FAQ`: http://docutils.sourceforge.net/FAQ.html
 
