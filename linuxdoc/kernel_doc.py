@@ -1013,12 +1013,10 @@ class ReSTTranslator(TranslatorAPI):
         # write function definition
 
         self.write("\n.. c:function:: ")
-        if return_type and return_type.endswith("**"):
-            self.write(return_type[:-2].strip(), " **", function.strip(), "(")
-        elif return_type and return_type.endswith("*"):
-            self.write(return_type[:-1].strip(), " *", function.strip(), "(")
+        if return_type and re.search(r"\s\*+$", return_type):
+            self.write(return_type, function, "(")
         else:
-            self.write(return_type, " ", function.strip(), "(")
+            self.write(return_type, " ", function, "(")
 
         p_list = []
 
@@ -1029,14 +1027,11 @@ class ReSTTranslator(TranslatorAPI):
                 # pointer to function
                 p_list.append("%s%s)(%s)"
                               % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1]))
-            elif p_type.endswith("**"):
+            elif re.search(r"\s\*+$", p_type):
                 # pointer
-                p_list.append("%s **%s" % (p_type[:-2].strip(), p_name.strip()))
-            elif p_type.endswith("*"):
-                # pointer
-                p_list.append("%s *%s" % (p_type[:-1].strip(), p_name.strip()))
+                p_list.append("%s%s" % (p_type, p_name))
             else:
-                p_list.append("%s %s" % (p_type.strip(), p_name.strip()))
+                p_list.append("%s %s" % (p_type, p_name))
 
         p_line = ", ".join(p_list)
         self.write(p_line, ")\n")
