@@ -29,9 +29,9 @@ from docutils.parsers.rst import Directive, directives
 from docutils.utils import SystemMessage
 from docutils.statemachine import ViewList
 
-from sphinx.util import logging
 from sphinx.ext.autodoc import AutodocReporter
 
+from . import compat
 from . import kernel_doc as kerneldoc
 
 # ==============================================================================
@@ -44,7 +44,7 @@ __version__  = '1.0'
 
 PARSER_CACHE = dict()
 
-app_log = logging.getLogger('application')
+app_log = compat.getLogger('application')
 
 # ==============================================================================
 def setup(app):

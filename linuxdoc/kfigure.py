@@ -25,11 +25,11 @@ from docutils.parsers.rst import directives
 from docutils.parsers.rst.directives import images
 import sphinx
 
-from sphinx.util import logging
 from sphinx.util.nodes import clean_astext
 from six import iteritems
 
-app_log = logging.getLogger('application')
+from . import compat
+app_log = compat.getLogger('application')
 
 PY3 = sys.version_info[0] == 3
 
