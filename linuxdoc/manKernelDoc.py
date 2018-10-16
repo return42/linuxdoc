@@ -36,8 +36,8 @@ from sphinx.writers.manpage import ManualPageWriter
 
 from sphinx.builders.manpage import ManualPageBuilder
 
-
 from .kernel_doc import Container
+from . import compat
 
 # ==============================================================================
 # common globals
@@ -55,6 +55,8 @@ def setup(app):
 
     app.add_builder(KernelDocManBuilder)
     app.add_directive("kernel-doc-man", KernelDocMan)
+    if compat.major == 1 and compat.minor < 8:
+        app.add_config_value('author', "", 'env')
     app.add_node(kernel_doc_man
                  , html    = (skip_kernel_doc_man, None)
                  , latex   = (skip_kernel_doc_man, None)
