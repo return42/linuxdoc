@@ -3,12 +3,12 @@
 /**
  * DOC: About Examples
  *
- * The file ``all-in-a-tumble.h`` includes all the referred examples of the
- * linuxdoc-HOWTO documentation. It is also used as a test of the kernel-doc
- * parser, to see how kernel-doc content will be rendered and where the parser
- * might fail.
+ * The files :ref:`all-in-a-tumble.c-src` and :ref:`all-in-a-tumble.h-src` are
+ * including all examples of the :ref:`linuxdoc-howto` documentation.  These
+ * files are also used as a test of the kernel-doc parser, to see how kernel-doc
+ * content will be rendered and where the parser might fail.
  *
- * The content itself is nonsense / don’t look to close ;-)
+ * And ... The content itself is nonsense / don’t look to close ;-)
  */
 
 // testing:
@@ -59,7 +59,7 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
  * foo bar splat
  * -------------
  *
- * The only drawback to this gizmo is that is can sometimes damage hardware,
+ * The only drawback to this gizmo is that it can sometimes damage hardware,
  * software, or its subject(s).
  *
  * DOC: multiple DOC sections
@@ -211,8 +211,9 @@ typedef int my_typedef;
 /* parse-SNAP: */
 
 
+/* parse-SNIP: rst_mode */
 /**
- * rst_mode - short description of this function
+ * rst_mode - dummy to demonstrate reST & kernel-doc markup in comments
  * @a: first argument
  * @b: second argument
  * Context: :c:func:`in_gizmo_mode`.
@@ -336,11 +337,11 @@ typedef int my_typedef;
  * lorem ipsum
  *
  */
-
 int rst_mode(int a, char *b)
 {
   return a + b;
 }
+/* parse-SNAP: */
 
 
 /* parse-markup: kernel-doc */

@@ -14,7 +14,7 @@ from), you can use these extensions in common sphinx-doc_ projects.  If this is
 unclear to you, take a look at our :ref:`Introduction <kernel-doc-intro>`.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    Introduction <kernel-doc-intro>
    install

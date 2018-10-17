@@ -13,6 +13,7 @@ project   = 'LinuxDoc'
 copyright = linuxdoc.__copyright__
 version   = linuxdoc.__version__
 release   = linuxdoc.__version__
+author    = 'return42'
 show_authors = True
 
 extensions = [

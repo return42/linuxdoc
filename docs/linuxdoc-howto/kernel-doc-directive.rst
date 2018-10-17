@@ -116,8 +116,10 @@ these options make sense:
     Include documentation for each named definition.
 
 ``:module: <prefix-id>``
-    The option ``:module: <id-prefix>`` sets a module-name. The module-name is
-    used as a prefix for automatic generated IDs (reference anchors).
+    The option ``:module: <id-prefix>`` sets a module-name.  The module-name is
+    used as a prefix for automatic generated IDs (reference anchors).  To give a
+    example, if you like to refer ``my_struct`` from module ``example`` use
+    ``:ref:\`example.my_struct\``` (:ref:`example.my_struct`).
 
 ``:man-sect: <sect-no>``
   Section number of the manual pages (see man man-pages). The man-pages are build

@@ -20,17 +20,20 @@ The kernel-doc format is deceptively similar to Doxygen, javadoc or `Sphinx's
 autodoc`_ which grabs for comments in `Sphinx's Python domain`_.  The kernel-doc
 format has a long tradition, e.g. its also well highlighted in your emacs ;) If
 you are familiar with Sphinx_, you might know about `Sphinx's C domain`_ markup.
-Compared with, the kernel-doc markup is less verbose.
+
+.. note::
+
+   - Compared `Sphinx's C domain`_, the :ref:`kernel-doc-syntax` is less verbose
+     and much more coder friendly (:ref:`kernel-doc comment
+     <kernel-doc-intro-example>` and :ref:`reST <kernel-doc-intro-example-out>`).
+
+   - The opening comment mark ``/**`` is reserved for kernel-doc comments.
 
 The **kernel-doc parser** of the LinuxDoc package grabs the documentation from
 your C sources and translates the **kernel-doc markup** into proper reST_.  From
 coder's POV, the C-friendly kernel-doc markup is translated into the more
 verbosely `Sphinx's C domain`_ which can be included at any place in the
 documentation.
-
-.. note::
-
-   The opening comment mark ``/**`` is reserved for kernel-doc comments.
 
 Only comments so marked will be considered by the kernel-doc tools, and any
 comment so marked must be in kernel-doc format.  The closing comment marker for
@@ -88,12 +91,12 @@ From coder's point, we made a great job documenting our ``foorbar()`` function.
 Now lets take the POV of an author who like to use this description in his
 detailed API documentation.  This is where the :ref:`kernel-doc directive
 <kernel-doc-directive>` comes in use.  To include the ``foobar()`` description,
-which might be located in file ``include/foobar.c``, the author can use the
+which might be located in file ``include/foobar.h``, the author can use the
 kernel-doc directive like this:
 
 .. code-block:: rst
 
-    .. kernel-doc:: include/foobar.c
+    .. kernel-doc:: include/foobar.h
         :functions: foobar
 
 Now, if the documentation build process takes places, the kernel-doc directive

@@ -1,6 +1,8 @@
 .. -*- coding: utf-8; mode: rst -*-
 .. include:: refs.txt
 
+.. _linuxdoc-howto:
+
 ==============
 LinuxDoc HowTo
 ==============
@@ -23,19 +25,19 @@ kernel-doc
 ==========
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    kernel-doc-syntax
    kernel-doc-directive
    kernel-doc-examples
-   reST-kernel-doc-mode
-   vintage-kernel-doc-mode
+   kernel-doc-modes
+
 
 other topics
 ============
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    kfigure
    table-markup
