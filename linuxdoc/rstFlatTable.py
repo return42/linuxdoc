@@ -285,7 +285,7 @@ class ListTableBuilder(object):
                     cspan, rspan, content = row[-1]
                     row[-1] = (cspan + x, rspan, content)
             elif x and fill_cells:
-                for i in range(x):
+                for _i in range(x):
                     row.append( (0, 0, nodes.comment()) )
 
     def pprint(self):
@@ -346,7 +346,7 @@ class ListTableBuilder(object):
         # search and remove cspan, rspan colspec from the first element in
         # this listItem (field).
         cspan = rspan = 0
-        if not len(cellItem):
+        if not cellItem:
             return cspan, rspan, []
         for elem in cellItem[0]:
             if isinstance(elem, colSpan):

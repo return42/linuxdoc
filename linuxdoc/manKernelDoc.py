@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=missing-docstring
-
+# pylint: disable=missing-docstring, invalid-name
 u"""
     kernel-doc-man
     ~~~~~~~~~~~~~~
@@ -203,7 +202,7 @@ class Section2Manpage(Transform):
         # strip *purpose*
         desc_content = self.sec2man_get_first_child(
             section, addnodes.desc, addnodes.desc_content)
-        if not len(desc_content):
+        if not desc_content:
             # missing initial short description in kernel-doc comment
             man_info.subtitle = ""
         else:

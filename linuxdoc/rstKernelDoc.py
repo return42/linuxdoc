@@ -323,7 +323,7 @@ class KernelDoc(Directive):
                 raise FaultyOption('docutils: file insertion disabled')
             opts = self.getParserOptions()
             # FIXME: think about again; these members has been added for convenience
-            self.parser = self.parseSource(opts)
+            self.parser = self.parseSource(opts) # pylint: disable=attribute-defined-outside-init
             self.nodes.extend(self.getNodes())
 
         except FaultyOption as exc:

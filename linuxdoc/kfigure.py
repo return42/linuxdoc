@@ -135,7 +135,7 @@ def setup(app):
     )
 
 
-def setupTools(app):
+def setupTools(app): # pylint: disable=unused-argument
     u"""
     Check available build tools and log some *verbose* messages.
 
@@ -153,7 +153,7 @@ def setupTools(app):
         app_log.verbose("use dot(1) from: " + dot_cmd)
     else:
         app_log.warn("dot(1) not found, for better output quality install "
-                 "graphviz from http://www.graphviz.org")
+                     "graphviz from http://www.graphviz.org")
     if convert_cmd:
         app_log.verbose("use convert(1) from: " + convert_cmd)
     else:
@@ -256,7 +256,7 @@ def convert_image(img_node, translator, src_fname=None):
                 img_node.replace_self(file2literal(src_fname))
 
 
-def dot2format(app, dot_fname, out_fname):
+def dot2format(app, dot_fname, out_fname): # pylint: disable=unused-argument
     """Converts DOT file to ``out_fname`` using ``dot(1)``.
 
     * ``dot_fname`` pathname of the input DOT file, including extension ``.dot``
@@ -282,7 +282,7 @@ def dot2format(app, dot_fname, out_fname):
             app_log.warn("Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
     return bool(exit_code == 0)
 
-def svg2pdf(app, svg_fname, pdf_fname):
+def svg2pdf(app, svg_fname, pdf_fname): # pylint: disable=unused-argument
     """Converts SVG to PDF with ``convert(1)`` command.
 
     Uses ``convert(1)`` from ImageMagick (https://www.imagemagick.org) for
@@ -387,7 +387,6 @@ def visit_kernel_render(self, node):
     ``image`` node, pointing to the saved markup file. Afterwards, handle the
     image child-node with the ``convert_image(...)``.
     """
-    app = self.builder.app
     srclang = node.get('srclang')
 
     # pylint: disable=deprecated-method
