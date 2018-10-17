@@ -142,6 +142,8 @@ def setupTools(app):
     This function is called once, when the builder is initiated.
     """
     global dot_cmd, convert_cmd  # pylint: disable=global-statement
+
+    # pylint: disable=deprecated-method
     app_log.verbose("kfigure: check installed tools ...")
 
     dot_cmd = which('dot')
@@ -276,6 +278,7 @@ def dot2format(app, dot_fname, out_fname):
     with open(out_fname, "w") as out:
         exit_code = subprocess.call(cmd, stdout = out)
         if exit_code != 0:
+            # pylint: disable=deprecated-method
             app_log.warn("Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
     return bool(exit_code == 0)
 
@@ -293,6 +296,7 @@ def svg2pdf(app, svg_fname, pdf_fname):
     # use stdout and stderr from parent
     exit_code = subprocess.call(cmd)
     if exit_code != 0:
+        # pylint: disable=deprecated-method
         app_log.warn("Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
     return bool(exit_code == 0)
 
@@ -386,6 +390,7 @@ def visit_kernel_render(self, node):
     app = self.builder.app
     srclang = node.get('srclang')
 
+    # pylint: disable=deprecated-method
     app_log.verbose('visit kernel-render node lang: "%s"' % (srclang))
 
     tmp_ext = RENDER_MARKUP_EXT.get(srclang, None)

@@ -29,8 +29,6 @@ from docutils.parsers.rst import Directive, directives
 from docutils.utils import SystemMessage
 from docutils.statemachine import ViewList
 
-from sphinx.ext.autodoc import AutodocReporter
-
 from . import compat
 from . import kernel_doc as kerneldoc
 
@@ -68,6 +66,8 @@ def setup(app):
 # ==============================================================================
 class KernelDocParser(kerneldoc.Parser):
 # ==============================================================================
+
+    # pylint: disable=deprecated-method
 
     def __init__(self, app, *args, **kwargs):
         super(KernelDocParser, self).__init__(*args, **kwargs)
@@ -337,7 +337,6 @@ class KernelDoc(Directive):
         translator = kerneldoc.ReSTTranslator()
         lines      = ""
         content    = WriterList(self.parser)
-        node       = nodes.section()
 
         # translate
 
@@ -402,14 +401,17 @@ class KernelDoc(Directive):
             for l in lines.split("\n"):
                 content.append(l, reSTfname, self.lineno)
 
-        buf = self.state.memo.title_styles, self.state.memo.section_level, self.state.memo.reporter
-        self.state.memo.reporter = AutodocReporter(content, self.state.memo.reporter)
-        self.state.memo.title_styles, self.state.memo.section_level = [], 0
-        try:
-            self.state.nested_parse(content, 0, node, match_titles=1)
-        finally:
-            self.state.memo.title_styles, self.state.memo.section_level, self.state.memo.reporter = buf
-
+        node = nodes.section()
+        # necessary so that the child nodes get the right source/line set
+        node.document = self.state.document
+        with compat.switch_source_input(self.state, content):
+            # hack around title style bookkeeping
+            buf = self.state.memo.title_styles, self.state.memo.section_level
+            self.state.memo.title_styles, self.state.memo.section_level = [], 0
+            try:
+                self.state.nested_parse(content, 0, node, match_titles=1)
+            finally:
+                self.state.memo.title_styles, self.state.memo.section_level = buf
         return node.children
 
 
