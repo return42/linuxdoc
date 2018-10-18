@@ -346,7 +346,7 @@ class ListTableBuilder(object):
         # search and remove cspan, rspan colspec from the first element in
         # this listItem (field).
         cspan = rspan = 0
-        if not cellItem:
+        if not len(cellItem): # pylint: disable=len-as-condition
             return cspan, rspan, []
         for elem in cellItem[0]:
             if isinstance(elem, colSpan):
