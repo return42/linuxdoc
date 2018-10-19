@@ -112,6 +112,63 @@ tests are based on this comment:
       :doc: multiple DOC sections
 
 
+.. _opt_man-sect:
+
+option ``:man-sect:``
+=====================
+
+.. _man_pages: http://www.sphinx-doc.org/en/stable/config.html#confval-man_pages
+
+In the :ref:`opt_export` example, we can add a ``:man-sect: 2`` option, to
+generate man pages with the :ref:`kernel-doc-man builder <man-pages>` for all
+exported symbols.  The usage is:
+
+.. code-block:: rst
+
+   .. kernel-doc::  ./all-in-a-tumble.c
+      :export:  ./all-in-a-tumble.h
+      :module: test
+      :man-sect: 2
+
+In the conf.py_ file we set `man_pages`_ and :ref:`kernel_doc_mansect
+<kernel-doc-config>`::
+
+  kernel_doc_mansect = None
+  man_pages = [ ]
+
+To place and gzip the manuals in ``dist/docs/man`` Folder see
+:ref:`kernel-doc-man_builder`.
+
+.. only:: builder_html
+
+   You can include the man-page as a download item in your HTML like this
+   (relative build path is needed):
+
+   .. code-block:: rst
+
+      :download:`user_function.2.gz   <../../dist/docs/man/user_function.2.gz>`
+
+   .. admonition:: download directive
+      :class: rst-example
+
+      :download:`user_function.2.gz   <../../dist/docs/man/user_function.2.gz>`
+
+   Or just set a link to the man page file (relative HTML URL is needed)
+
+   .. code-block:: rst
+
+      hyperlink to: `user_function.2.gz <../man/user_function.2.gz>`_
+
+   .. admonition:: link man folder ``/man``
+      :class: rst-example
+
+      hyperlink to: `user_function.2.gz <../man/user_function.2.gz>`_
+
+To view a (downloaded) man-page use::
+
+  $ man ~/Downloads/user_function.2.gz
+
+
 .. _exported_symbols:
 
 exported symbols
@@ -144,6 +201,7 @@ To gather exports from :ref:`all-in-a-tumble.h-src` and
    .. kernel-doc::  ./all-in-a-tumble.c
       :export:  ./all-in-a-tumble.h
       :module: test
+      :man-sect: 2
 
 
 options ``:export:, :exp-method:, :exp-ids:``

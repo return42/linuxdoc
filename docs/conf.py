@@ -79,7 +79,11 @@ kernel_doc_mode = "reST"
 # you want to create man pages for those kernel-doc directives, which has not
 # been set a ``:man-sect:`` value.
 # Default: None
-kernel_doc_mansect = 9
+kernel_doc_mansect = None
+
+# One entry per manual page. List of tuples
+# (source start file, name, description, authors, manual section).
+man_pages = [ ]
 
 # In nickpick mode, it will complain about lots of missing references that
 #

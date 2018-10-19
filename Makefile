@@ -36,12 +36,17 @@ PHONY += uninstall
 uninstall: pyuninstall
 
 PHONY += docs
-docs:  pyenv-install sphinx-doc $(API_DOC)
+docs:  docs-man
 	$(call cmd,sphinx,html,docs,docs)
 
 PHONY += docs-live
-docs-live:  pyenv-install sphinx-live $(API_DOC)
+docs-live: docs-man
 	$(call cmd,sphinx_autobuild,html,docs,docs)
+
+PHONY += docs-man
+docs-man: pyenv-install sphinx-doc $(API_DOC)
+	$(call cmd,sphinx,kernel-doc-man,docs,docs,man)
+	find $(DOCS_DIST)/man -name '*.[0-9]' -exec gzip -nf {} +
 
 #PHONY += slides
 #slides:  sphinx-doc
