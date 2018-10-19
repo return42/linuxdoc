@@ -54,14 +54,23 @@ The ``<declaration-name>`` is the name of the manual page. Therefor the name of
 the :ref:`kernel-doc comment <kernel-doc-syntax>` is used.  Which is the name of
 the :ref:`struct, union <kernel-doc-syntax-structs-unions>`, :ref:`enum, typedef
 <kernel-doc-syntax-enums-typedefs>` or :ref:`function
-<kernel-doc-syntax-functions>`.  As described above, the ``kernel-doc-man``
-builder will build all the manuals which are defined in the `conf.py man-pages`_
-and from all sections marked with the ``.. kernel-doc-man`` directive.::
+<kernel-doc-syntax-functions>`.
 
-  $ sphinx-build -b kernel-doc-man ...
-    ...
-  building [kernel-doc-man]: all manpages
-    ...
+.. _kernel-doc-man_builder:
+
+``kernel-doc-man`` Builder
+==========================
+
+As described above, the ``kernel-doc-man`` builder will build all the manuals
+which are defined in the `conf.py man-pages`_ and from all sections marked with
+the ``.. kernel-doc-man`` directive.  To place and gzip the man-pages in
+``dist/docs/man`` use::
+
+  $ sphinx-build -b kernel-doc-man docs dist/docs/man
+  building [kernel-doc-man]: all manpages ...
   scan master tree for kernel-doc man-pages ...
-    ...
   writing man pages ... user_function.2 internal_function.2 ...
+
+  $ find dist/docs/man -name '*.[0-9]' -exec gzip -nf {} +
+
+To see how it works, jump to the :ref:`opt_man-sect` example.

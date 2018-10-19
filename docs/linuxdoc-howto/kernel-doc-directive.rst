@@ -63,8 +63,8 @@ these options make sense:
     ``:no-header:`` (:ref:`opt_no-header`)
         Do not output DOC: section's title. Useful, if the surrounding context
         already has a heading, and the DOC: section title is only used as an
-        identifier. Take in mind, that this option will not suppress any native
-        reST heading markup in the comment (:ref:`reST-section-structure`).
+        identifier.  Take in mind, that this option will not suppress any native
+        reST heading markup in the comment.
 
 ``:export: [<src-fname-pattern> [, ...]]`` (:ref:`exported_symbols`)
     Include documentation for all function, struct or whatever definition in

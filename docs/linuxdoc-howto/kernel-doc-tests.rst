@@ -1,5 +1,7 @@
 .. -*- coding: utf-8; mode: rst -*-
 
+.. _conf.py: http://www.sphinx-doc.org/en/stable/config.html#confval-man_pages
+
 .. _kernel-doc-tests:
 
 ===============
@@ -69,7 +71,7 @@ To insert just the content, without the header use :ref:`option :no-header:
       :no-header:
 
 
-.. _doc_sections:
+.. _multiple_doc_sections:
 
 multiple DOC sections
 ---------------------
