@@ -1,18 +1,17 @@
 diff --git a/Documentation/Makefile b/Documentation/Makefile
-index 85f7856..ba96a09 100644
+index 2ca77ad0f238..554c5ecaf436 100644
 --- a/Documentation/Makefile
 +++ b/Documentation/Makefile
-@@ -35,8 +35,7 @@ HAVE_PDFLATEX := $(shell if which $(PDFLATEX) >/dev/null 2>&1; then echo 1; else
- PAPEROPT_a4     = -D latex_paper_size=a4
+@@ -36,7 +36,7 @@ PAPEROPT_a4     = -D latex_paper_size=a4
  PAPEROPT_letter = -D latex_paper_size=letter
  KERNELDOC       = $(srctree)/scripts/kernel-doc
--KERNELDOC_CONF  = -D kerneldoc_srctree=$(srctree) -D kerneldoc_bin=$(KERNELDOC)
+ KERNELDOC_CONF  = -D kerneldoc_srctree=$(srctree) -D kerneldoc_bin=$(KERNELDOC)
 -ALLSPHINXOPTS   =  $(KERNELDOC_CONF) $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
 +ALLSPHINXOPTS   = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
  # the i18n builder cannot share the environment and doctrees with the others
  I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
  
-@@ -67,6 +66,9 @@ quiet_cmd_sphinx = SPHINX  $@ --> file://$(abspath $(BUILDDIR)/$3/$4)
+@@ -67,6 +67,9 @@ quiet_cmd_sphinx = SPHINX  $@ --> file://$(abspath $(BUILDDIR)/$3/$4)
  htmldocs:
  	@+$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,html,$(var),,$(var)))
  
@@ -23,14 +22,14 @@ index 85f7856..ba96a09 100644
  	@$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,linkcheck,$(var),,$(var)))
  
 diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 63857d3..52978b7 100644
+index b691af4831fa..87c4b1cb2710 100644
 --- a/Documentation/conf.py
 +++ b/Documentation/conf.py
 @@ -34,7 +34,15 @@ needs_sphinx = '1.3'
  # Add any Sphinx extension module names here, as strings. They can be
  # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
  # ones.
--extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain', 'kfigure']
+-extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain', 'kfigure', 'sphinx.ext.ifconfig']
 +extensions = [
 +    'linuxdoc.rstFlatTable'      # flat-table reST directive
 +    , 'linuxdoc.rstKernelDoc'    # kernel-doc reST directive
@@ -43,7 +42,7 @@ index 63857d3..52978b7 100644
  
  # The name of the math extension changed on Sphinx 1.4
  if major == 1 and minor > 3:
-@@ -133,7 +141,7 @@ pygments_style = 'sphinx'
+@@ -132,7 +140,7 @@ pygments_style = 'sphinx'
  #keep_warnings = False
  
  # If true, `todo` and `todoList` produce output, else they produce nothing.
@@ -52,7 +51,7 @@ index 63857d3..52978b7 100644
  
  primary_domain = 'c'
  highlight_language = 'none'
-@@ -431,10 +439,7 @@ latex_documents = [
+@@ -430,10 +438,7 @@ latex_documents = [
  
  # One entry per manual page. List of tuples
  # (source start file, name, description, authors, manual section).
@@ -64,7 +63,7 @@ index 63857d3..52978b7 100644
  
  # If true, show URL addresses after external links.
  #man_show_urls = False
-@@ -548,11 +553,50 @@ pdf_documents = [
+@@ -547,11 +552,66 @@ pdf_documents = [
      ('kernel-documentation', u'Kernel', u'Kernel', u'J. Random Bozo'),
  ]
  
@@ -77,28 +76,44 @@ index 63857d3..52978b7 100644
 +# Options of the kernel-doc parser
 +# ------------------------------------------------------------------------------
 +
-+# If true, fatal errors (like missing function descripions) raise an error. If
-+# false, insert Oops messages for fatal errors.  Default: True
-+kernel_doc_raise_error = False
++# Set parser's default value for kernel-doc directive option  ``:exp-method:``
++# default: kernel_doc_exp_method = 'macro'
 +
-+# Oops messages are Sphinx ``.. todo::`` directives. To inster the Oops messages
-+# from the kernel-doc parser we have to active todo_include_todos also.
-+todo_include_todos = True
++# Set parser's default value for kernel-doc directive option ``:exp-ids:``.
++# default: kernel_doc_exp_ids = \
++#    ['EXPORT_SYMBOL', 'EXPORT_SYMBOL_GPL', 'EXPORT_SYMBOL_GPL_FUTURE']
 +
-+# If true, more warnings will be logged. E.g. a missing description of a
++# Set parser's default value for kernel-doc directive option  ``:known-attrs:``
++# default: kernel_doc_known_attrs = [...]
++
++# Global fallback for man section of kernel-doc directives.  Set this value if
++# you want to create man pages for those kernel-doc directives, which has not
++# been set a ``:man-sect:`` value.  The default is ``None``, which means; do the
++# opposite and create only man pages for those directives which has been set the
++# ``:man-sect:`` option.
++# default: kernel_doc_mansect = None
++kernel_doc_mansect = 9
++
++# Set parser's default kernel-doc mode ``[reST|kernel-doc]``.  Normally you wont
++# set anything other than the default!
++# default: kernel_doc_mode = 'reST'
++
++# If true, more warnings will be logged.  E.g. a missing description of a
 +# function's return value will be logged.
-+# Default: True
++# default: kernel_doc_verbose_warn = True
 +kernel_doc_verbose_warn = False
 +
-+# Set parser's default kernel-doc mode ``reST|kernel-doc``.
-+# Default: "reST"
-+kernel_doc_mode = "reST"
++# If ``True`` fatal errors (like missing function descriptions) raise an error.
++# The default is ``True``. This means that the build process break every time a
++# serve error in the documentation build occur.  Often it might be better the
++# build continues and inserts Oops on serve errors.  For this, set
++# ``kernel_doc_raise_error`` to ``False``.
++# default kernel_doc_raise_error = True
++kernel_doc_raise_error = False
 +
-+# Global fallback for man section of kernel-doc directives. Set this value if
-+# you want to create man pages for those kernel-doc directives, which has not
-+# been set a ``:man-sect:`` value.
-+# Default: None
-+kernel_doc_mansect = 9
++# Oops messages are Sphinx ``.. todo::`` directives.  To insert the Oops
++# messages from the kernel-doc parser we have to active todo_include_todos also.
++todo_include_todos = True
 +
 +# In nickpick mode, it will complain about lots of missing references that
 +#
@@ -120,28 +135,8 @@ index 63857d3..52978b7 100644
  
  # ------------------------------------------------------------------------------
  # Since loadConfig overwrites settings from the global namespace, it has to be
-diff --git a/Documentation/driver-api/index.rst b/Documentation/driver-api/index.rst
-index 9c20624..c31b9b9 100644
---- a/Documentation/driver-api/index.rst
-+++ b/Documentation/driver-api/index.rst
-@@ -53,3 +53,5 @@ available subsections can be seen below.
-    =======
- 
-    * :ref:`genindex`
-+
-+   .. todolist::
-diff --git a/Documentation/index.rst b/Documentation/index.rst
-index cb7f1ba..253a69c 100644
---- a/Documentation/index.rst
-+++ b/Documentation/index.rst
-@@ -115,3 +115,5 @@ Indices and tables
- ==================
- 
- * :ref:`genindex`
-+
-+.. todolist::
 diff --git a/Documentation/media/Makefile b/Documentation/media/Makefile
-index 3616695..4eed044 100644
+index 36166952d555..4eed044450cd 100644
 --- a/Documentation/media/Makefile
 +++ b/Documentation/media/Makefile
 @@ -55,6 +55,7 @@ $(BUILDDIR)/lirc.h.rst: ${UAPI}/lirc.h ${PARSER} $(SRC_DIR)/lirc.h.rst.exception
@@ -153,15 +148,14 @@ index 3616695..4eed044 100644
  xml: all
  latex: $(IMGPDF) all
 diff --git a/Makefile b/Makefile
-index ab067d5..9953e23 100644
+index bf3786e4ffec..6b465832a865 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1468,7 +1468,7 @@ $(help-board-dirs): help-%:
- 
+@@ -1473,6 +1473,7 @@ $(help-board-dirs): help-%:
  # Documentation targets
  # ---------------------------------------------------------------------------
--DOC_TARGETS := xmldocs latexdocs pdfdocs htmldocs epubdocs cleandocs linkcheckdocs
-+DOC_TARGETS := xmldocs latexdocs pdfdocs htmldocs mandocs epubdocs cleandocs linkcheckdocs
+ DOC_TARGETS := xmldocs latexdocs pdfdocs htmldocs epubdocs cleandocs \
++	       mandocs \
+ 	       linkcheckdocs dochelp refcheckdocs
  PHONY += $(DOC_TARGETS)
  $(DOC_TARGETS): scripts_basic FORCE
- 	$(Q)$(MAKE) $(build)=Documentation $@
