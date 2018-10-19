@@ -70,6 +70,25 @@ PHONY += zero_pylint
 zero_pylint: pylint-exe
 	$(call cmd,pylint,$(PYOBJECTS)) | grep '^[\*\*\*\*\*\*|linuxdoc]' > 0_pylint_py$(PY)
 
+
+## srctree variable
+## ----------------
+##
+## Path where Kernel's sources cloned, default is ``../linux``.::
+##
+##     git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git linux
+##
+srctree ?= ../linux
+export srctree
+
+PHONY += diff_linux
+diff_linux:
+	git -C $(srctree) diff > docs/downloads/patch_linux.patch
+
+PHONY += patch_linux
+patch_linux:
+	git -C $(srctree) apply $(PWD)/docs/downloads/patch_linux.patch
+
 ## ------------------------------------------------------------------------------
 ## zero.build: add linux kernel's sphinx-books
 ## ------------------------------------------------------------------------------
@@ -105,16 +124,6 @@ PHONY += docs
 docs.xml:  pyenv-install sphinx-doc $(API_DOC)
 	$(call cmd,sphinx,xml,docs,docs)
 
-## srctree variable
-## ----------------
-##
-## Path where Kernel's sources cloned, default is ``/share/linux``.::
-##
-##     cd share
-##     git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git linux
-##
-srctree ?= /share/linux
-export srctree
 KERNEL_DOC=$(srctree)/Documentation
 
 ## zero.src2rst
