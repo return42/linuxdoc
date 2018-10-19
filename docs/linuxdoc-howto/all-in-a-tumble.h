@@ -16,9 +16,16 @@
 // .. kernel-doc::  ./all-in-a-tumble.c
 //     :export:  ./all-in-a-tumble.h
 
+/* parse-SNIP:  EXPORT_SYMBOL */
 EXPORT_SYMBOL_GPL_FUTURE(user_function)
 
+int user_function(int a, ...)
+/* parse-SNAP: */
+
+/* parse-SNIP:  user_sum-h */
 int user_sum(int a, int b);
+/* parse-SNAP: */
+
 
 /**
  * block_touch_buffer - mark a buffer accessed
@@ -68,6 +75,19 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
  * comment block. To insert a new "DOC:" section, create a new comment block and
  * to create a sub-section use the reST markup for headings, see documentation
  * of function rst_mode()
+ */
+/* parse-SNAP: */
+
+/* parse-SNIP: lorem */
+/**
+ * DOC: lorem ipsum
+ *
+ * Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor
+ * incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+ * nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi
+ * consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore
+ * eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident,
+ * sunt in culpa qui officia deserunt mollit anim id est laborum.
  */
 /* parse-SNAP: */
 

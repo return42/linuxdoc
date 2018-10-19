@@ -25,12 +25,12 @@ int main() {
 int
 user_function(int a, ...)
 {
-  return a;
+	return a;
 }
 /* parse-SNAP: */
 
 
-/* parse-SNIP: user_function */
+/* parse-SNIP: user_sum-c */
 /**
  * user_sum() - another function that can only be called in user context
  * @a: first argument
@@ -47,7 +47,7 @@ user_function(int a, ...)
 API_EXPORTED
 int user_sum(int a, int b)
 {
-  return b;
+	return a + b;
 }
 /* parse-SNAP: */
 
@@ -62,27 +62,29 @@ int user_sum(int a, int b)
  */
 int internal_function()
 {
-  return 42;
+	return 42;
 }
 /* parse-SNAP: */
 
 /* parse-SNIP: test_SYSCALL */
 /**
- *  sys_rt_sigprocmask - change the list of currently blocked signals
- *  @how: whether to add, remove, or set signals
- *  @nset: stores pending signals
- *  @oset: previous value of signal mask if non-null
- *  @sigsetsize: size of sigset_t type
+ *  sys_tgkill - send signal to one specific thread
+ *  @tgid: the thread group ID of the thread
+ *  @pid: the PID of the thread
+ *  @sig: signal to be sent
  *
- * Return: 0
+ *  This syscall also checks the @tgid and returns -ESRCH even if the PID
+ *  exists but it's not belonging to the target process anymore. This
+ *  method solves the problem of threads exiting and PIDs getting reused.
  */
-SYSCALL_DEFINE4(rt_sigprocmask, int, how, sigset_t __user *, nset,
-		sigset_t __user *, oset, size_t, sigsetsize)
+SYSCALL_DEFINE3(tgkill, pid_t, tgid, pid_t, pid, int, sig)
 {
-  ...
-  return 0;
+	...
 }
-/* parse-SNAP: rarely_code_styles*/
+
+/* parse-SNAP: */
+
+/* parse-SNIP: rarely_code_styles*/
 /**
 * enum rarely_enum - enum to test parsing rarely code styles
 * @F1: f1

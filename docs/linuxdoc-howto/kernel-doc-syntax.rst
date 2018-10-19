@@ -94,7 +94,7 @@ they are marked appropriately in the output format.
 
 Rendered example: :ref:`example.user_function`
 
-.. _kernel-doc-syntax-struct-unions:
+.. _kernel-doc-syntax-structs-unions:
 
 structs, unions
 ===============
@@ -131,8 +131,11 @@ they are each on a line of their own, like all other kernel-doc comments:
 
 Rendered example: :ref:`example.my_long_struct`
 
-enums and typedefs
-==================
+
+.. _kernel-doc-syntax-enums-typedefs:
+
+enums, typedefs
+===============
 
 To write documentation for enums and typedefs, you must write the name of the
 declaration; the ``enum`` or ``typedef`` must always precede the name.
@@ -238,15 +241,4 @@ The snippet region stops with a new snippet region or at the next::
 
   /* parse-SNAP: */
 
-A small source code example:
-
-.. code-block:: c
-
-    /* parse-SNIP: hello-world */
-    #include<stdio.h>
-    int main() {
-        printf("Hello World\n");
-    return 0;
-    }
-    /* parse-SNAP: */
-
+Jump to :ref:`kernel-doc-snippets` to see an example.

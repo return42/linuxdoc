@@ -54,19 +54,19 @@ kernel source tree. The pathname is relative to kernel's root folder.  The
 options have the following meaning, but be aware that not all combinations of
 these options make sense:
 
-``:doc: <section title>``
+``:doc: <section title>`` (:ref:`doc_sections`)
     Include content of the ``DOC:`` section titled ``<section title>``.  Spaces
     are allowed in ``<section title>``; do not quote the ``<section title>``.
 
     The next option make only sense in conjunction with option ``doc``:
 
-    ``:no-header:``
+    ``:no-header:`` (:ref:`opt_no-header`)
         Do not output DOC: section's title. Useful, if the surrounding context
         already has a heading, and the DOC: section title is only used as an
         identifier. Take in mind, that this option will not suppress any native
         reST heading markup in the comment (:ref:`reST-section-structure`).
 
-``:export: [<src-fname-pattern> [, ...]]``
+``:export: [<src-fname-pattern> [, ...]]`` (:ref:`exported_symbols`)
     Include documentation for all function, struct or whatever definition in
     ``<src-filename>``, exported using EXPORT_SYMBOL macro (``EXPORT_SYMBOL``,
     ``EXPORT_SYMBOL_GPL`` & ``EXPORT_SYMBOL_GPL_FUTURE``) either in
@@ -77,7 +77,7 @@ these options make sense:
     have been placed in header files, while EXPORT_SYMBOL are next to the
     function definitions.
 
-``:internal: [<src-fname-pattern> [, ...]]``
+``:internal: [<src-fname-pattern> [, ...]]`` (:ref:`opt_internal`)
     Include documentation for all documented definitions, **not** exported using
     EXPORT_SYMBOL macro either in ``<src-filename>`` or in any of the files
     specified by ``<src-fname-pattern>``.
@@ -112,8 +112,8 @@ these options make sense:
     The default list is empty and can be adjusted by the sphinx configuration
     option :ref:`kernel_doc_known_attrs <kernel-doc-config>`.
 
-``:functions: <name [, names [, ...]]>``
-    Include documentation for each named definition.
+``:functions: <name [, names [, ...]]>`` (:ref:`kernel-doc-functions`, :ref:`kernel-doc-structs`)
+   Include documentation for each named definition.
 
 ``:module: <prefix-id>``
     The option ``:module: <id-prefix>`` sets a module-name.  The module-name is
@@ -122,8 +122,8 @@ these options make sense:
     ``:ref:\`example.my_struct\``` (:ref:`example.my_struct`).
 
 ``:man-sect: <sect-no>``
-  Section number of the manual pages (see man man-pages). The man-pages are build
-  by the ``kernel-doc-man`` builder.
+  Section number of the manual pages (see ``man man-pages``). The man-pages are build
+  by the ``kernel-doc-man`` builder.  Read on here: :ref:`man-pages`
 
 ``:snippets: <name [, names [, ...]]>``
     Inserts the source-code passage(s) marked with the snippet ``name``. The
@@ -144,28 +144,6 @@ these options make sense:
     reST markup.
 
 
-.. _kernel-doc-doc-section:
-
-documentation blocks
-====================
-
-The following example inserts the documentation block with the title "Theory of
-Operation".
-
-.. code-block:: rst
-
-     .. kernel-doc::  ./all-in-a-tumble.h
-        :doc:  Theory of Operation
-        :module: example
-
-With the module name "example" the title refers by:
-
-.. code-block:: rst
-
-    Rendered example: :ref:`example.theory-of-operation`
-
-Rendered example: :ref:`example.theory-of-operation`
-
 .. _kernel-doc-functions:
 
 functions
@@ -179,13 +157,20 @@ The following example inserts the documentation of struct 'user_function'.
         :functions:  user_function
         :module:     example
 
+These ``example`` module has already been defined in our :ref:`all-in-a-tumble
+examples <all-in-a-tumble-debug>`, lets use it to show how to link such a
+documentation:
+
 .. code-block:: rst
 
-    * Rendered example by ID with module prefix: :ref:`example.user_function`
-    * Function reference: :c:func:`user_function`
+   * Rendered example by ID with module prefix: :ref:`example.user_function`
+   * Function reference: :c:func:`user_function`
 
-* Rendered example by ID with module prefix: :ref:`example.user_function`
-* Function reference: :c:func:`user_function`
+.. admonition:: option ``:functions:``
+   :class: rst-example
+
+   * Rendered example by ID with module prefix: :ref:`example.user_function`
+   * Function reference: :c:func:`user_function`
 
 
 .. _kernel-doc-structs:
@@ -204,26 +189,20 @@ The following example inserts the documentation of struct 'my_long_struct'.
         :functions:  my_long_struct
         :module:     example
 
-.. code-block:: rst
-
-    * Rendered example by ID with module prefix: :ref:`example.my_long_struct`
-    * Type reference: :c:type:`my_long_struct` or the alternativ notation
-      with title :c:type:`struct my_long_struct <my_long_struct>`
-
-* Rendered example by ID with module prefix: :ref:`example.my_long_struct`
-* Type reference: :c:type:`my_long_struct` or the alternativ notation
-  with title :c:type:`struct my_long_struct <my_long_struct>`
-
-.. _kernel-doc-export:
-
-exported
-========
+To link into the :ref:`all-in-a-tumble examples <all-in-a-tumble-debug>` use:
 
 .. code-block:: rst
 
-  .. kernel-doc:: include/uapi/linux/dvb/frontend.h
-     :export: net/mac80211/*.c
-     :module: mac80211
+   * Rendered example by ID with module prefix: :ref:`example.my_long_struct`
+   * Type reference: :c:type:`my_long_struct` or the alternativ notation
+     with title :c:type:`struct my_long_struct <my_long_struct>`
+
+.. admonition:: option ``:functions: structs, unions, enums and typedefs``
+   :class: rst-example
+
+   * Rendered example by ID with module prefix: :ref:`example.my_long_struct`
+   * Type reference: :c:type:`my_long_struct` or the alternativ notation
+     with title :c:type:`struct my_long_struct <my_long_struct>`
 
 
 .. _kernel-doc-snippets:
@@ -231,22 +210,35 @@ exported
 Snippets
 ========
 
-The kernel-doc Parser supports a comment-markup for
-:ref:`kernel-doc-syntax-snippets`. By example; The directive of the shown
-code-snippet below is:
+The kernel-doc Parser supports a markup for :ref:`kernel-doc-syntax-snippets`.
+By example; In the the :ref:`all-in-a-tumble examples <all-in-a-tumble.c-src>`
+we have a small source code example:
+
+.. code-block:: c
+
+    /* parse-SNIP: hello-world */
+    #include<stdio.h>
+    int main() {
+        printf("Hello World\n");
+        return 0;
+    }
+    /* parse-SNAP: */
+
+To insert the code passage between SNIP & SNAP use:
 
 .. code-block:: rst
 
-     .. kernel-doc::  ./all-in-a-tumble.c
-        :snippets:  hello-world
-        :language:  c
-        :linenos:
+   .. kernel-doc::  ./all-in-a-tumble.c
+      :snippets:  hello-world
+      :language:  c
+      :linenos:
 
-.. kernel-doc::  ./all-in-a-tumble.c
-    :snippets:  hello-world
-    :language:  c
-    :linenos:
+And here is the rendered example:
 
+   .. kernel-doc::  ./all-in-a-tumble.c
+      :snippets:  hello-world
+      :language:  c
+      :linenos:
 
 .. _kernel-doc-man-sect:
 
@@ -279,16 +271,8 @@ kernel-doc directives.  E.g. to get man-pages of media's remote control (file
 
 If you don't want to edit all your kernel-doc directives to get man page from,
 set a global man-sect in your ``conf.py``, see sphinx configuration
-:ref:`kernel_doc_mansect <kernel-doc-config>`).  Further reading:
-:ref:`man-pages`.
-
-If not already exists, add a man-page target to your Makefile which calls
-sphinx-builder with the kernel-doc-man builder.  E.g. in the kernel sources at
-``Documentation/Makefile`` you need something like this::
-
-  mandocs:
-          @$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,kernel-doc-man,$(var),man,$(var)))
-
+:ref:`kernel_doc_mansect <kernel-doc-config>` and about build look at:
+:ref:`man-pages`
 
 Highlights and cross-references
 ===============================

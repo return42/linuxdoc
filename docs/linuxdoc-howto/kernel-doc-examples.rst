@@ -11,9 +11,9 @@ Examples & Tests
     :no-header:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 3
 
+    kernel-doc-tests
     all-in-a-tumble-src
     all-in-a-tumble-debug
     all-in-a-tumble
-    kernel-doc-tests
