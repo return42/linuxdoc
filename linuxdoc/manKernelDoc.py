@@ -202,7 +202,7 @@ class Section2Manpage(Transform):
         # strip *purpose*
         desc_content = self.sec2man_get_first_child(
             section, addnodes.desc, addnodes.desc_content)
-        if not desc_content:
+        if not desc_content or not len(desc_content): # pylint: disable=len-as-condition
             # missing initial short description in kernel-doc comment
             man_info.subtitle = ""
         else:
