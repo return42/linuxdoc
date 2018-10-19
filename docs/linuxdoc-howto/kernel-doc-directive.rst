@@ -1,6 +1,8 @@
 .. -*- coding: utf-8; mode: rst -*-
 .. include:: refs.txt
 
+.. _conf.py: http://www.sphinx-doc.org/en/stable/config.html
+
 .. _kernel-doc-directive:
 
 ============================
@@ -84,24 +86,29 @@ these options make sense:
 
 ``:exp-method: <method>``
     Change the way exported symbols are specified in source code.  Default value
-    ('macro') if not provided can be set globally by kernel_doc_exp_method in
-    the sphinx configuration.  ``<method>`` must one of the following value:
+    ``macro`` if not provided, can be set globally by
+    :ref:`kernel_doc_exp_method <kernel-doc-config>` in the sphinx conf.py_.
+
+
+    The ``<method>`` must one of
+    the following value:
 
     ``macro``
         Exported symbols are specified by macros (whose names are controlled by
         ``exp-ids`` option) invoked in the source the following way:
-        THIS_IS_AN_EXPORTED_SYMBOL(symbol)
+        ``THIS_IS_AN_EXPORTED_SYMBOL(symbol)``
 
     ``attribute``
         Exported symbols are specified definition using a specific attribute
         (controlled by ``exp-ids`` option) either in their declaration or
-        definition: THIS_IS_AN_EXPORTED_SYMBOL int symbol(void* some_arg) {...}
+        definition: ``THIS_IS_AN_EXPORTED_SYMBOL int symbol(void* some_arg)
+        {...}``
 
 ``:exp-ids: <identifier [, identifiers [, ...]]>``
     Use the specified list of identifiers instead of default value:
     EXPORT_SYMBOL, EXPORT_SYMBOL_GPL, EXPORT_SYMBOL_GPL_FUTURE.  Default value
-    can be overriden globally by sphinx configuration option
-    :ref:`kernel_doc_exp_ids <kernel-doc-config>`.
+    can be overriden globally by sphinx conf.py_ option :ref:`kernel_doc_exp_ids
+    <kernel-doc-config>`.
 
 ``:known-attrs: <attr [, attrs [, ...]]>``
     Specified a list of function attributes that are known and must be hidden
@@ -119,11 +126,14 @@ these options make sense:
     The option ``:module: <id-prefix>`` sets a module-name.  The module-name is
     used as a prefix for automatic generated IDs (reference anchors).  To give a
     example, if you like to refer ``my_struct`` from module ``example`` use
-    ``:ref:\`example.my_struct\``` (:ref:`example.my_struct`).
+    ``:ref:`example.my_struct``` (:ref:`example.my_struct`).  See module
+    ``test`` in the :ref:`doc_sections` example.
 
 ``:man-sect: <sect-no>``
-  Section number of the manual pages (see ``man man-pages``). The man-pages are build
-  by the ``kernel-doc-man`` builder.  Read on here: :ref:`man-pages`
+  Section number of the manual pages (see "``$ man man-pages``"").  Optional set
+  :ref:`kernel_doc_mansect <kernel-doc-config>` option in sphinx conf.py_.  The
+  man-pages are build by the ``kernel-doc-man`` builder.  Read on here:
+  :ref:`man-pages`
 
 ``:snippets: <name [, names [, ...]]>``
     Inserts the source-code passage(s) marked with the snippet ``name``. The
@@ -333,30 +343,37 @@ kernel-doc config
 Within the `sphinx config`_ file (``conf.py`` or ``my_project.conf``) you can
 set the following option.
 
-kernel_doc_verbose_warn: ``True``
-  If true, more warnings will be logged.  E.g. a missing description of a
-  function's return value will be logged.
+kernel_doc_exp_method: ``macro``
+  Set parser's default value for kernel-doc directive option  ``:exp-method:``
+  (details see: :ref:`kernel-doc-options`)
+
+kernel_doc_exp_ids: ``['EXPORT_SYMBOL', 'EXPORT_SYMBOL_GPL', 'EXPORT_SYMBOL_GPL_FUTURE']``
+  Set parser's default value for kernel-doc directive option ``:exp-ids:``.
+  (details see: :ref:`kernel-doc-options`)
+
+kernel_doc_known_attrs: ``[...]``
+  Set parser's default value for kernel-doc directive option  ``:known-attrs:``
+  (details see: :ref:`kernel-doc-options`)
 
 kernel_doc_mansect: ``None``
-  Global fallback for man section of kernel-doc directives. Set this value if
+  Global fallback for man section of kernel-doc directives.  Set this value if
   you want to create man pages for those kernel-doc directives, which has not
-  been set a ``:man-sect:`` value. The default is ``None``, which means; do the
+  been set a ``:man-sect:`` value.  The default is ``None``, which means; do the
   opposite and create only man pages for those directives which has been set the
   ``:man-sect:`` option (``None`` is what you mostly want).
 
 kernel_doc_mode: ``reST``
-  Set parser's default kernel-doc mode ``reST|kernel-doc``. See
-  :ref:`reST-kernel-doc-mode` and :ref:`vintage-kernel-doc-mode`.
+  Set parser's default kernel-doc mode ``[reST|kernel-doc]``.  Normally you wont
+  set anything other than the default! See :ref:`reST-kernel-doc-mode` and
+  :ref:`vintage-kernel-doc-mode`.
 
-kernel_doc_exp_ids: ``['EXPORT_SYMBOL', 'EXPORT_SYMBOL_GPL', 'EXPORT_SYMBOL_GPL_FUTURE']``
-  Set parser's default value for kernel-doc directive option ``:exp-ids:``.
-
-kernel_doc_known_attrs: ``[]``
-  Set parser's default value for kernel-doc directive option  ``:known-attrs:``
+kernel_doc_verbose_warn: ``True``
+  If true, more warnings will be logged.  E.g. a missing description of a
+  function's return value will be logged.
 
 kernel_doc_raise_error: ``True``
-  If true, fatal errors (like missing function descriptions) raise an error.
-  The default is ``True``, what means, the build process break every time a
+  If ``True`` fatal errors (like missing function descriptions) raise an error.
+  The default is ``True``. This means that the build process break every time a
   serve error in the documentation build occur.  Often it might be better the
   build continues and inserts Oops on serve errors.  For this, set
   ``kernel_doc_raise_error`` to ``False``.  In the next example, the

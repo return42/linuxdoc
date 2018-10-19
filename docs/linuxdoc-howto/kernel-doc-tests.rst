@@ -1,6 +1,6 @@
 .. -*- coding: utf-8; mode: rst -*-
 
-.. _conf.py: http://www.sphinx-doc.org/en/stable/config.html#confval-man_pages
+.. _conf.py: http://www.sphinx-doc.org/en/stable/config.html
 
 .. _kernel-doc-tests:
 
@@ -130,7 +130,7 @@ exported symbols.  The usage is:
       :module: test
       :man-sect: 2
 
-In the conf.py_ file we set `man_pages`_ and :ref:`kernel_doc_mansect
+In the conf.py_ file we set man_pages_ and :ref:`kernel_doc_mansect
 <kernel-doc-config>`::
 
   kernel_doc_mansect = None
