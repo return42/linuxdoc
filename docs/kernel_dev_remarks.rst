@@ -2,16 +2,27 @@
 
 .. include:: refs.txt
 
+.. _kernel_dev_remarks:
+
 ============================
 Remarks for Kernel developer
 ============================
 
-Some of the LinuxDoc features are already a part of the kernel source others not
-(yet).  E.g. the sphinx-doc_ extensions :ref:`rest-flat-table`, :ref:`cdomain
-<customized-c-domain>`, :ref:`kfigure <kfigure>` and :ref:`kernel-include
-<kernel-include-directive>` are merged into Kernel's source tree.  On the other
-side, e.g. for parsing kernel-doc comments, the Linux Kernel build process uses
-a Perl scripts while LinuxDoc brings a python module with a kernel-doc parser.
+Starting with Linux Kernel v4.8 a `sphinx-doc`_ build is available to build
+formats like HTML from reStructuredText (`reST`_) markup.  The Makefile target
+``htmldocs`` builds the HTML documentation::
+
+  make htmldocs
+
+The sphinx extensions for this build, which are shipped by the kernel source
+tree, are placed in the ``Documentation/sphinx`` folder.  Some of the LinuxDoc
+features are already a part of the Kernel's ``Documentation/sphinx`` folder
+others not (yet).  E.g. the sphinx-doc_ extensions :ref:`rest-flat-table`,
+:ref:`cdomain <customized-c-domain>`, :ref:`kfigure <kfigure>` and
+:ref:`kernel-include <kernel-include-directive>` are merged into Kernel's source
+tree.  On the other side, e.g. for parsing kernel-doc comments, the Linux Kernel
+build process uses a Perl script while LinuxDoc brings a python module with a
+kernel-doc parser.
 
 One drawback of the Perl script is, that it fits not very well into
 sphinx-extensions_ which are normally written in python.  As a stand-alone
