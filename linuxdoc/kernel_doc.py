@@ -119,7 +119,7 @@ doc_com_section  = RE(r"\s*\*\s{1,8}") # more than 8 spaces (one tab) as prefix 
 doc_com_body     = RE(r"\s*\* ?")
 doc_decl         = RE(doc_com.pattern + r"(\w+)")
 #doc_decl_ident   = RE(r"\s*([\w\s]+?)\s*[\(\)]\s*[-:]")
-doc_decl_ident   = RE(doc_com.pattern + r"(struct|union|enum|typedef|function)\s*(\w+)(\(\))?")
+doc_decl_ident   = RE(doc_com.pattern + r"(struct|union|enum|typedef|function)\b\s*(\w+)(\(\))?")
 doc_decl_purpose = RE(r"[-:](.*)$")
 
 # except pattern like "http://", a whitespace is required after the colon
