@@ -79,6 +79,9 @@ zero_pylint: pylint-exe
 ##     git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git linux
 ##
 srctree ?= ../linux
+
+# zero build's CWD is ./build/0_build_worktree: srctree has to be abspath
+srctree ::= $(abspath $(srctree))
 export srctree
 
 PHONY += diff_linux
