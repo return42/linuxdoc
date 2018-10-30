@@ -51,7 +51,7 @@ import sphinx
 
 # Get Sphinx version
 major, minor, patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
-docutils_major, docutils_minor, docutils_patch = docutils.__version_info__[:3]
+docutils_major, docutils_minor = map(int, docutils.__version__.split('.')[:2])
 
 
 if (major == 1 and minor <= 4) and (docutils_major == 0 and docutils_minor>=13):
