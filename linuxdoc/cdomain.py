@@ -28,7 +28,7 @@ major, minor, patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
 
 def setup(app):  # pylint: disable=missing-docstring
 
-    app.override_domain(CDomain)
+    app.add_domain(CDomain, override=True)
 
     return dict(
         version = __version__,
