@@ -38,6 +38,9 @@ from sphinx.builders.manpage import ManualPageBuilder
 from .kernel_doc import Container
 from . import compat
 
+from sphinx.util import logging
+logger = logging.getLogger(__name__)
+
 # ==============================================================================
 # common globals
 # ==============================================================================
@@ -317,19 +320,19 @@ class KernelDocManBuilder(ManualPageBuilder):
             # build manpages from config.man_pages as usual
             ManualPageBuilder.write(self, *ignored)
 
-        self.info(bold("scan master tree for kernel-doc man-pages ... ") + darkgreen("{"), nonl=True)
+        logger.info(bold("scan master tree for kernel-doc man-pages ... ") + darkgreen("{"), nonl=True)
 
         master_tree = self.env.get_doctree(self.config.master_doc)
         master_tree = inline_all_toctrees(
             self, set(), self.config.master_doc, master_tree, darkgreen, [self.config.master_doc])
-        self.info(darkgreen("}"))
+        logger.info(darkgreen("}"))
         man_nodes   = master_tree.traverse(condition=self.is_manpage)
         if not man_nodes and not self.config.man_pages:
-            self.warn('no "man_pages" config value nor manual section found; no manual pages '
-                      'will be written')
+            logger.warn('no "man_pages" config value nor manual section found; no manual pages '
+                        'will be written')
             return
 
-        self.info(bold('writing man pages ... '), nonl=True)
+        logger.info(bold('START writing man pages ... '), nonl=True)
 
         for man_parent in man_nodes:
 
@@ -357,14 +360,14 @@ class KernelDocManBuilder(ManualPageBuilder):
                 destination_path = path.join(self.outdir, targetname)
                 , encoding='utf-8')
 
-            self.info(darkgreen(targetname) + " ", nonl=True)
+            logger.info(darkgreen(targetname) + " ", nonl=True)
             self.env.resolve_references(doc_tree, doc_tree.man_info.manpage, self)
 
             # remove pending_xref nodes
             for pendingnode in doc_tree.traverse(addnodes.pending_xref):
                 pendingnode.replace_self(pendingnode.children)
             doc_writer.write(doc_tree, destination)
-        self.info()
+        logger.info("END writing man pages.")
 
 
     def finish(self):
