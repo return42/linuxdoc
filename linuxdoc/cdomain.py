@@ -11,17 +11,36 @@ u"""
     For user documentation see :ref:`customized-c-domain`.
 """
 
+import re
+
 from docutils import nodes
 from docutils.parsers.rst import directives
 
 import sphinx
 from sphinx import addnodes
 from sphinx.locale import _
-from sphinx.domains.c import c_funcptr_sig_re, c_sig_re
 from sphinx.domains.c import CObject as Base_CObject
 from sphinx.domains.c import CDomain as Base_CDomain
 
-__version__  = '1.0'
+# fixes https://github.com/sphinx-doc/sphinx/commit/0f49e30c51b5cc5055cda5b4b294c2dd9d1df573#r38750737
+
+# pylint: disable=invalid-name
+c_sig_re = re.compile(
+    r'''^([^(]*?)          # return type
+        ([\w:.]+)  \s*     # thing name (colon allowed for C++)
+        (?: \((.*)\) )?    # optionally arguments
+        (\s+const)? $      # const specifier
+    ''', re.VERBOSE)
+
+c_funcptr_sig_re = re.compile(
+    r'''^([^(]+?)          # return type
+        (\( [^()]+ \)) \s* # name in parentheses
+        \( (.*) \)         # arguments
+        (\s+const)? $      # const specifier
+    ''', re.VERBOSE)
+# pylint: enable=invalid-name
+
+__version__  = '1.0.1'
 
 # Get Sphinx version
 major, minor, patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
