@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: invalid-name
 u"""
     grep_doc
     ~~~~~~~~

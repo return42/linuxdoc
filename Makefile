@@ -13,21 +13,27 @@ API_DOC   = $(DOC)/$(PYOBJECTS)-api
 
 all: clean pylint pytest build docs
 
-PHONY += help
-help:
-	@echo  '  docs	    - build documentation'
+PHONY += help help-min help-all
+
+help: help-min
+	@echo  ''
+	@echo  'to get more help:  make help-all'
+
+help-min:
+	@echo  '  docs      - build documentation'
 	@echo  '  docs-live - autobuild HTML documentation while editing'
-	@echo  '  clean	    - remove most generated files'
+	@echo  '  clean     - remove most generated files'
+	@echo  '  install   - developer install (./local)'
+	@echo  '  uninstall - uninstall (./local)'
 	@echo  '  rqmts	    - info about build requirements'
 	@echo  ''
-	@echo  '  install   - developer install'
-	@echo  '  uninstall - developer uninstall'
+	$(Q)$(MAKE) -e -s make-help
+
+help-all: help-min
 	@echo  ''
-	@$(MAKE) -s -f utils/makefile.include make-help
+	$(Q)$(MAKE) -e -s docs-help
 	@echo  ''
-	@$(MAKE) -s -f utils/makefile.python python-help
-	@echo  ''
-	@$(MAKE) -s -f utils/makefile.sphinx docs-help
+	$(Q)$(MAKE) -e -s python-help
 
 PHONY += install
 install: pyinstall

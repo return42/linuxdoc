@@ -153,7 +153,7 @@ zero.clean:: zero.env_drop
 ## Drop the whole 0-build environment and the repository
 ##
 zero.drop:: zero.env_drop
-	@echo "  ZERO       drop folder $(0_BUILD_DEST)"
+	@echo "  ZERO      drop$(0_BUILD_DEST)"
 	$(Q)rm -rf $(0_BUILD_DEST)
 
 
@@ -224,8 +224,8 @@ endif
 ##
 PHONY += zero.env_drop
 zero.env_drop:
-	@echo "  ZERO-ENV   uninstall py-package '$(PYOBJECTS)' from $(PY_ENV)"
-	- $(Q)[ -e $(PY_ENV_BIN)/pip ] && $(PY_ENV_BIN)/pip --no-color $(PIP_VERBOSE) uninstall --yes $(PYOBJECTS)
+	@echo "  ZERO-ENV  uninstall py-package '$(PYOBJECTS)' from $(PY_ENV)"
+	$(Q)[ -d $(PY_ENV_BIN) ] && $(PY_ENV_BIN)/pip --no-color $(PIP_VERBOSE) uninstall --yes $(PYOBJECTS) || true
 ifneq ($(strip $(0_BUILD_WTREE)),.)
 	@echo "  ZERO-ENV  drop worktree $(0_BUILD_WTREE)"
 	$(Q)rm -rf '$(0_BUILD_WTREE)'

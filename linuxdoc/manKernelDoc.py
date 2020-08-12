@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
-# pylint: disable=missing-docstring, invalid-name
+# pylint: disable=missing-docstring, invalid-name, unnecessary-pass
 u"""
     kernel-doc-man
     ~~~~~~~~~~~~~~
@@ -29,6 +29,7 @@ from docutils.parsers.rst import Directive
 from docutils.transforms import Transform
 
 from sphinx import addnodes
+from sphinx.util import logging
 from sphinx.util.nodes import inline_all_toctrees
 from sphinx.util.console import bold, darkgreen  # pylint: disable=no-name-in-module
 from sphinx.writers.manpage import ManualPageWriter
@@ -38,7 +39,6 @@ from sphinx.builders.manpage import ManualPageBuilder
 from .kernel_doc import Container
 from . import compat
 
-from sphinx.util import logging
 logger = logging.getLogger(__name__)
 
 # ==============================================================================

@@ -1,5 +1,6 @@
 # -*- coding: utf-8; mode: python -*-
 # pylint: disable=invalid-name, missing-docstring, too-many-branches
+# pylint: disable=unnecessary-pass
 
 u"""
     scalable figure and image handling
