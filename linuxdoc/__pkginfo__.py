@@ -5,10 +5,10 @@ python package meta informations
 """
 
 package      = 'linuxdoc'
-version      = '20181010'
+version      = '20200812'
 authors      = ['Markus Heiser', ]
 emails       = ['markus.heiser@darmarIT.de', ]
-copyright    = '2018 Markus Heiser'
+copyright    = '2020 Markus Heiser'
 url          = 'https://github.com/return42/linuxdoc'
 description  = 'Sphinx-doc extensions & tools to extract documentation from C/C++ source file comments.'
 license      = 'GPLv2'
@@ -35,7 +35,6 @@ classifiers = [
     , "License :: OSI Approved :: GNU General Public License v2 (GPLv2)"
     , "Operating System :: OS Independent"
     , "Programming Language :: Python"
-    , "Programming Language :: Python :: 2"
     , "Programming Language :: Python :: 3"
     , "Topic :: Utilities"
     , "Topic :: Documentation :: linux"

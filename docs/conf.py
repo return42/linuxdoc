@@ -21,7 +21,7 @@ extensions = [
     , 'linuxdoc.rstKernelDoc'    # Implementation of the 'kernel-doc' reST-directive.
     , 'linuxdoc.kernel_include'  # Implementation of the 'kernel-include' reST-directive.
     , 'linuxdoc.manKernelDoc'    # Implementation of the 'kernel-doc-man' builder
-    , 'linuxdoc.cdomain'         # Replacement for the sphinx c-domain.
+    , 'linuxdoc.cdomain'         # Replacement for the sphinx c-domain (not in sphinx-doc >= v3.0)
     , 'linuxdoc.kfigure'         # Sphinx extension which implements scalable image handling.
     , 'sphinx.ext.autodoc'
     , 'sphinx.ext.extlinks'
