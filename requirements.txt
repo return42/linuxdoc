@@ -1,27 +1,37 @@
-# --------
-# requires
-# --------
+# -*- coding: utf-8; mode: conf -*-
+
+# requirements of package linuxdoc
+# --------------------------------
 
 fspath
 
-# --------------
-# tests_requires
-# --------------
+# test requires
+# -------------
 
-pip
-tox
-pytest
-pytest-cov
 pylint
 
-# -------
+# tox
+# pytest
+# pytest-cov
+
+# make docs
+# ---------
+
+Sphinx<3.0
+pallets-sphinx-themes
+sphinx-autobuild
+sphinx-issues
+sphinx-jinja
+sphinx-tabs
+sphinxcontrib-programoutput
+linuxdoc @ git+http://github.com/return42/linuxdoc.git
+
+# slide-shows with revaljs
+# git+https://github.com/return42/sphinxjp.themes.revealjs
+
 # develop
 # -------
 
-Sphinx<3.0
-sphinx_rtd_theme
-sphinx-autobuild
-
-#twine
-#wheel
-#mock
+# sqlalchemy_schemadisplay @ git+https://github.com/fschulze/sqlalchemy_schemadisplay
+# wheel
+# mock

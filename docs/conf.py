@@ -2,12 +2,11 @@
 #
 # Sphinx documentation build configuration file
 
+import re
 import linuxdoc
-import sphinx_rtd_theme
-
-master_doc = 'index'
-templates_path = ['_templates']
-exclude_patterns = ['_build']
+import sys, os
+sys.path.append(os.path.abspath('../utils/site-python'))
+from sphinx_build_tools import load_sphinx_config
 
 project   = 'LinuxDoc'
 copyright = linuxdoc.__copyright__
@@ -16,43 +15,69 @@ release   = linuxdoc.__version__
 author    = 'return42'
 show_authors = True
 
+source_suffix       = '.rst'
+show_authors        = True
+master_doc          = 'index'
+templates_path      = ['_templates']
+exclude_patterns    = ['_build', 'slides']
+todo_include_todos  = True
+highlight_language = 'none'
+
+# if self-signed, disable tls verify
+# tls_verify = False
+
 extensions = [
-    'linuxdoc.rstFlatTable'      # Implementation of the 'flat-table' reST-directive.
+    'sphinx.ext.imgmath'
+    , 'sphinx.ext.autodoc'
+    , 'sphinx.ext.extlinks'
+    #, 'sphinx.ext.autosummary'
+    #, 'sphinx.ext.doctest'
+    , 'sphinx.ext.todo'
+    , 'sphinx.ext.coverage'
+    #, 'sphinx.ext.pngmath'
+    #, 'sphinx.ext.mathjax'
+    , 'sphinx.ext.viewcode'
+    , 'sphinx.ext.intersphinx'
+    , 'pallets_sphinx_themes'
+
+    , 'linuxdoc.rstFlatTable'    # Implementation of the 'flat-table' reST-directive.
     , 'linuxdoc.rstKernelDoc'    # Implementation of the 'kernel-doc' reST-directive.
     , 'linuxdoc.kernel_include'  # Implementation of the 'kernel-include' reST-directive.
     , 'linuxdoc.manKernelDoc'    # Implementation of the 'kernel-doc-man' builder
     , 'linuxdoc.cdomain'         # Replacement for the sphinx c-domain (not in sphinx-doc >= v3.0)
     , 'linuxdoc.kfigure'         # Sphinx extension which implements scalable image handling.
-    , 'sphinx.ext.autodoc'
-    , 'sphinx.ext.extlinks'
-    , 'sphinx.ext.todo'
-    , 'sphinx.ext.coverage'
-    , 'sphinx.ext.viewcode'
-    , 'sphinx.ext.intersphinx'
 ]
 
-html_theme = "sphinx_rtd_theme"
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-html_static_path = ["../utils/sphinx-static"]
-html_context = {
-    'css_files': [
-        '_static/theme_overrides.css',
-    ],
-}
-html_logo = 'darmarIT_logo_128.png'
-
-# since https://h2626237.stratoserver.net/ is self-signed, disable tls verify
-tls_verify = False
 intersphinx_mapping = {}
-intersphinx_mapping['template-book'] = ('https://h2626237.stratoserver.net/kernel/books/template-book/', None)
-intersphinx_mapping['process'] = ('https://h2626237.stratoserver.net/kernel/books/process/', None)
-#intersphinx_mapping['linux'] = ('https://h2626237.stratoserver.net/kernel/linux_src_doc/', None)
+#intersphinx_mapping['template-book'] = (
+#    'https://h2626237.stratoserver.net/kernel/books/template-book/', None)
+#intersphinx_mapping['process'] = (
+#    'https://h2626237.stratoserver.net/kernel/books/process/', None)
+#intersphinx_mapping['linux'] = (
+#    'https://h2626237.stratoserver.net/kernel/linux_src_doc/', None)
 
 extlinks = {}
+extlinks['origin'] = ('https://github.com/return42/linuxdoc/src/master/%s', 'git')
+extlinks['commit'] = ('https://github.com/return42/linuxdoc/commit/%s', '#')
+
 # usage:    :mid:`<mail's Message-ID>`  e.g.
 extlinks['mid'] = ('http://mid.mail-archive.com/%s', '')
 extlinks['lwn'] = ('https://lwn.net/Articles/%s', 'LWN article #')
 extlinks['rst-directive'] = ('http://docutils.sourceforge.net/docs/ref/rst/directives.html#%s', '')
+
+# sphinx.ext.imgmath setup
+html_math_renderer = 'imgmath'
+imgmath_image_format = 'svg'
+imgmath_font_size = 14
+# sphinx.ext.imgmath setup END
+
+html_search_language = 'de'
+
+sys.path.append(os.path.abspath('_themes'))
+html_theme           = "custom"
+html_logo            = 'darmarIT_logo_128.png'
+html_theme_path      = ['_themes']
+html_static_path     = ["static"]
 
 # ------------------------------------------------------------------------------
 # Options of the kernel-doc parser
@@ -103,3 +128,8 @@ nitpick_ignore = [
     ("c:type", "u8"),
     ]
 
+# ------------------------------------------------------------------------------
+# Since loadConfig overwrites settings from the global namespace, it has to be
+# the last statement in the conf.py file
+# ------------------------------------------------------------------------------
+load_sphinx_config(globals())
