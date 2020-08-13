@@ -1,7 +1,6 @@
 *~
 gh-pages
 local/
-docs/linuxdoc-api
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
