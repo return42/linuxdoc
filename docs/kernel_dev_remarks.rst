@@ -8,6 +8,13 @@
 Remarks for Kernel developer
 ============================
 
+.. sidebar::  update 2020-08
+
+   This article left here for historical reasons.
+
+   (TL;DR) Now we have kernel v5.9 and something in kernel's doc-build chain has
+   been changed.
+
 Starting with Linux Kernel v4.8 a `sphinx-doc`_ build is available to build
 formats like HTML from reStructuredText (`reST`_) markup.  The Makefile target
 ``htmldocs`` builds the HTML documentation::

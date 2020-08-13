@@ -8,6 +8,14 @@
 Patch Linux Kernel Documentation
 ================================
 
+.. sidebar::  update 2020-08
+
+   This article left here for historical reasons.
+
+   (TL;DR) Now we have kernel v5.9 and something in kernel's doc-build chain has
+   been changed.  The LinuxDoc project is **no longer a drop-in replacement for
+   the sphinx-doc build chain of the linux Kernel.**
+
 The LinuxDoc project is a drop-in replacement for the sphinx-doc build chain of
 the linux Kernel (see :ref:`kernel_dev_remarks`).  If you like to see how the
 LinuxDoc extensions build your kernel documentation (HTML, man, ...) install
