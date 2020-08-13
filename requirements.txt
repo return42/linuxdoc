@@ -24,7 +24,6 @@ sphinx-issues
 sphinx-jinja
 sphinx-tabs
 sphinxcontrib-programoutput
-linuxdoc @ git+http://github.com/return42/linuxdoc.git
 
 # slide-shows with revaljs
 # git+https://github.com/return42/sphinxjp.themes.revealjs

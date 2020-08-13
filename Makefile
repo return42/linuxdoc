@@ -42,7 +42,7 @@ PHONY += uninstall
 uninstall: pyuninstall
 
 PHONY += docs
-docs:  docs-man
+docs:  docs-man $(API_DOC)
 	$(call cmd,sphinx,html,docs,docs)
 
 PHONY += docs-live

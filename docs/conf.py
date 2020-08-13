@@ -5,8 +5,15 @@
 import re
 import linuxdoc
 import sys, os
+
+from pallets_sphinx_themes import ProjectLink
+
 sys.path.append(os.path.abspath('../utils/site-python'))
 from sphinx_build_tools import load_sphinx_config
+
+DOC_URL    = "https://return42.github.io/linuxdoc"
+GIT_URL    = "https://github.com/return42/linuxdoc"
+GIT_BRANCH = 'master'
 
 project   = 'LinuxDoc'
 copyright = linuxdoc.__copyright__
@@ -38,6 +45,8 @@ extensions = [
     #, 'sphinx.ext.mathjax'
     , 'sphinx.ext.viewcode'
     , 'sphinx.ext.intersphinx'
+    , 'sphinxcontrib.programoutput'  # https://github.com/NextThought/sphinxcontrib-programoutput
+    , 'sphinx_tabs.tabs'             # https://github.com/djungelorm/sphinx-tabs
     , 'pallets_sphinx_themes'
 
     , 'linuxdoc.rstFlatTable'    # Implementation of the 'flat-table' reST-directive.
@@ -57,8 +66,8 @@ intersphinx_mapping = {}
 #    'https://h2626237.stratoserver.net/kernel/linux_src_doc/', None)
 
 extlinks = {}
-extlinks['origin'] = ('https://github.com/return42/linuxdoc/src/master/%s', 'git')
-extlinks['commit'] = ('https://github.com/return42/linuxdoc/commit/%s', '#')
+extlinks['origin'] = (GIT_URL + '/blob/' + GIT_BRANCH + '/%s', 'git://')
+extlinks['commit'] = (GIT_URL + '/commit/%s', '#')
 
 # usage:    :mid:`<mail's Message-ID>`  e.g.
 extlinks['mid'] = ('http://mid.mail-archive.com/%s', '')
@@ -71,13 +80,26 @@ imgmath_image_format = 'svg'
 imgmath_font_size = 14
 # sphinx.ext.imgmath setup END
 
-html_search_language = 'de'
+html_search_language = 'en'
 
 sys.path.append(os.path.abspath('_themes'))
 html_theme           = "custom"
 html_logo            = 'darmarIT_logo_128.png'
 html_theme_path      = ['_themes']
-html_static_path     = ["static"]
+# html_static_path     = ["static"]
+
+html_theme_options = {"index_sidebar_logo": True}
+html_context = {
+    "project_links": [
+        ProjectLink("Home", DOC_URL),
+        ProjectLink("Source", GIT_URL),
+        ProjectLink("API", DOC_URL + '/linuxdoc-api/linuxdoc.html'),
+    ]
+}
+html_sidebars = {
+    "**": ["project.html", "relations.html", "localtoc.html", "searchbox.html"],
+}
+singlehtml_sidebars = {"index": ["project.html", "localtoc.html"]}
 
 # ------------------------------------------------------------------------------
 # Options of the kernel-doc parser
