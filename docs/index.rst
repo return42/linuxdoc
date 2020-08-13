@@ -7,6 +7,15 @@
 LinuxDoc
 ========
 
+.. sidebar::  update 2020-08
+
+   ATM LinuxDoc does not support Sphinx v3.0 or above (:commit:`a5290d5`).  The
+   v3.0 includes a `C, initial rewrite`_ which is not downward compatible.  The
+   :py:mod:`linuxdoc.cdomain` needs a complete revision within the model used by
+   Sphinx v3.
+
+.. _C, initial rewrite:   https://github.com/sphinx-doc/sphinx/commit/0f49e30c51b5cc5055cda5b4b294c2dd9d1df573#r38750737
+
 The LinuxDoc library contains sphinx-doc_ extensions and command line tools to
 extract documentation from C/C++ source file comments. Even if this project
 started in context of the Linux-Kernel documentation (where the name comes
