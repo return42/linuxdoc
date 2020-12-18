@@ -13,6 +13,9 @@ PYDIST   = ./dist$(LXC_ENV_FOLDER)
 PYBUILD  = ./build$(LXC_ENV_FOLDER)
 # python version to use
 PY       ?=3
+# $(PYTHON) points to the python interpreter from the OS!  The python from the
+# OS is needed e.g. to create a virtualenv.  For tasks inside the virtualenv the
+# interpeter from '$(PY_ENV_BIN)/python' is used.
 PYTHON   ?= python$(PY)
 PIP      ?= pip$(PY)
 PIP_INST ?= --user

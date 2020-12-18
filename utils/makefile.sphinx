@@ -107,7 +107,7 @@ quiet_cmd_sphinx = SPHINX    $@ --> file://$(abspath $(DOCS_DIST)/$5)
 	-b $2 -c $3 -d $(DOCS_BUILD)/.doctrees $4 $(DOCS_DIST)/$5
 
 quiet_cmd_sphinx_autobuild = SPHINX    $@ --> file://$(abspath $(DOCS_DIST)/$5)
-      cmd_sphinx_autobuild = PATH="$(PY_ENV_BIN):$(PATH)" $(PY_ENV_BIN)/sphinx-autobuild  $(SPHINX_VERBOSE) --poll -B --host localhost --port 8080 $(SPHINXOPTS)\
+      cmd_sphinx_autobuild = PATH="$(PY_ENV_BIN):$(PATH)" $(PY_ENV_BIN)/sphinx-autobuild  $(SPHINX_VERBOSE) --open-browser $(SPHINXOPTS)\
 	-b $2 -c $3 -d $(DOCS_BUILD)/.doctrees $4 $(DOCS_DIST)/$5
 
 quiet_cmd_sphinx_clean = CLEAN     $@
@@ -196,6 +196,11 @@ $(BOOKS_CLEAN):
 	       $(DOCS_BUILD)/latex/$(patsubst books/%.clean,%,$@)
 
 # github pages
+PHONY += prepare-gh-pages
+prepare-gh-pages:
+	cp -r $(DOCS_DIST)/* $(GH_PAGES)/
+	touch $(GH_PAGES)/.nojekyll
+	echo "<html><head><META http-equiv='refresh' content='0;URL=index.html'></head></html>" > $(GH_PAGES)/404.html
 
 PHONY += $(GH_PAGES)
 $(GH_PAGES)::
@@ -204,9 +209,7 @@ $(GH_PAGES)::
 	-cd $(GH_PAGES); git checkout gh-pages >/dev/null
 	-cd $(GH_PAGES); git pull
 	-cd $(GH_PAGES); ls -A | grep -v '.git$$' | xargs rm -rf
-	cp -r $(DOCS_DIST)/* $(GH_PAGES)/
-	touch $(GH_PAGES)/.nojekyll
-	echo "<html><head><META http-equiv='refresh' content='0;URL=index.html'></head></html>" > $(GH_PAGES)/404.html
+	$(MAKE) prepare-gh-pages
 	cd $(GH_PAGES);\
 		git add --all . ;\
 		git commit -m "gh-pages: updated" ;\
