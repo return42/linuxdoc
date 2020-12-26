@@ -58,6 +58,13 @@ docs-man: pyenvinstall $(API_DOC)
 #slides:  pyenvinstall
 #	$(call cmd,sphinx,html,$(SLIDES),$(SLIDES),slides)
 
+PHONY += project
+project: pyenvinstall $(API_DOC)
+	@echo '  PROJECT   requirements.txt'
+	$(Q)- rm -f requirements.txt
+	$(Q)$(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(requirements_txt)" > ./requirements.txt
+	$(Q)$(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(README)" > README.rst
+
 PHONY += $(API_DOC)
 $(API_DOC): $(PY_ENV)
 	$(Q)rm -rf ./$(API_DOC)

@@ -4,6 +4,7 @@
 
 import re
 import linuxdoc
+import linuxdoc.__pkginfo__ as PKG
 import sys, os
 
 from pallets_sphinx_themes import ProjectLink
@@ -92,6 +93,14 @@ html_context = {
         ProjectLink("API", DOC_URL + '/linuxdoc-api/linuxdoc.html'),
     ]
 }
+
+if GIT_URL:
+    html_context["project_links"].append(ProjectLink("Source", GIT_URL))
+if PKG.issues:
+    html_context["project_links"].append(ProjectLink("Issue Tracker", PKG.issues))
+if PKG.author_email:
+    html_context["project_links"].append(ProjectLink("Contact", 'mailto:' + PKG.author_email))
+
 html_sidebars = {
     "**": ["project.html", "relations.html", "localtoc.html", "searchbox.html"],
 }
