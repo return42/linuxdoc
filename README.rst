@@ -2,24 +2,31 @@
 LinuxDoc
 ========
 
-:copyright:  Copyright (C) 2018 Markus Heiser
-:e-mail:     markus.heiser@darmarIT.de
-:license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+.. sidebar::  Info
+
+   - linuxdoc (20200812)
+   - 2020 Markus Heiser / GPLv2
+   - https://github.com/return42/linuxdoc
 
 The LinuxDoc library contains Sphinx-doc extensions and command line tools to
-extract documentation from C/C++ source file comments. Even if this project
+extract documentation from C/C++ source file comments.  Even if this project
 started in context of the Linux-Kernel documentation, you can use these
 extensions in common Sphinx-doc projects.
 
 Documentation is available at ./docs or jump to:
 
-  http://return42.github.io/linuxdoc
+  https://return42.github.io/linuxdoc
 
-The LinuxDoc repository is hosted at github:
+The LinuxDoc repository is hosted at:
 
   https://github.com/return42/linuxdoc
+
+Issue tracker:
+
+  https://github.com/return42/linuxdoc/issues
 
 For installation read file ./docs/install.rst or jump to:
 
   https://return42.github.io/linuxdoc/install.html
+
 

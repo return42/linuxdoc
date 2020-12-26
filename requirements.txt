@@ -10,13 +10,10 @@ fspath
 
 pylint
 
-# tox
-# pytest
-# pytest-cov
+# develop
+# -------
 
-# make docs
-# ---------
-
+twine
 Sphinx<3.0
 pallets-sphinx-themes
 sphinx-autobuild
@@ -25,12 +22,3 @@ sphinx-jinja
 sphinx-tabs
 sphinxcontrib-programoutput
 
-# slide-shows with revaljs
-# git+https://github.com/return42/sphinxjp.themes.revealjs
-
-# develop
-# -------
-
-# sqlalchemy_schemadisplay @ git+https://github.com/fschulze/sqlalchemy_schemadisplay
-# wheel
-# mock
