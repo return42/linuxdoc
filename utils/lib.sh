@@ -885,9 +885,7 @@ apache_distro_setup
 
 install_apache(){
     info_msg "installing apache ..."
-    if ! pkg_is_installed; then
-        pkg_install "$APACHE_PACKAGES"
-    fi
+    pkg_install "$APACHE_PACKAGES"
     case $DIST_ID-$DIST_VERS in
         arch-*|fedora-*)
             if ! grep "IncludeOptional sites-enabled" "/etc/httpd/conf/httpd.conf"; then
@@ -1365,7 +1363,7 @@ git_clone() {
     #  into <path>.  If repository is allready cloned, pull from <branch> and
     #  update working tree (if needed, the caller has to stash local changes).
     #
-    #    git clone https://github.com/asciimoo/searx searx-src origin/master searxlogin
+    #    git clone https://github.com/searx/searx searx-src origin/master searxlogin
     #
 
     local url="$1"
@@ -1388,7 +1386,7 @@ git_clone() {
         tee_stderr 0.1 <<EOF | $bash_cmd 2>&1 |  prefix_stdout "  ${_Yellow}|$user|${_creset} "
 cd "${dest}"
 git checkout -m -B "$branch" --track "$remote/$branch"
-git pull --all --no-rebase
+git pull --all
 EOF
     else
         info_msg "clone into: $dest"
@@ -1439,13 +1437,13 @@ EOF
 }
 
 # apt packages
-LXC_BASE_PACKAGES_debian="bash git build-essential python3 virtualenv"
+LXC_BASE_PACKAGES_debian="bash git build-essential python3 python3-venv"
 
 # pacman packages
-LXC_BASE_PACKAGES_arch="bash git base-devel python python-virtualenv"
+LXC_BASE_PACKAGES_arch="bash git base-devel python"
 
 # dnf packages
-LXC_BASE_PACKAGES_fedora="bash git @development-tools python virtualenv"
+LXC_BASE_PACKAGES_fedora="bash git @development-tools python"
 
 case $DIST_ID in
     ubuntu|debian) LXC_BASE_PACKAGES="${LXC_BASE_PACKAGES_debian}" ;;

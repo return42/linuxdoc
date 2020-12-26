@@ -50,12 +50,12 @@ docs-live: docs-man
 	$(call cmd,sphinx_autobuild,html,docs,docs)
 
 PHONY += docs-man
-docs-man: pyenv-install sphinx-doc $(API_DOC)
+docs-man: pyenvinstall $(API_DOC)
 	$(call cmd,sphinx,kernel-doc-man,docs,docs,man)
 	find $(DOCS_DIST)/man -name '*.[0-9]' -exec gzip -nf {} +
 
 #PHONY += slides
-#slides:  sphinx-doc
+#slides:  pyenvinstall
 #	$(call cmd,sphinx,html,$(SLIDES),$(SLIDES),slides)
 
 PHONY += $(API_DOC)
@@ -130,7 +130,7 @@ zero.doc2xml:
 zero.build:: zero.doc2xml
 
 PHONY += docs
-docs.xml:  pyenv-install sphinx-doc $(API_DOC)
+docs.xml:  pyenvinstall $(API_DOC)
 	$(call cmd,sphinx,xml,docs,docs)
 
 KERNEL_DOC=$(srctree)/Documentation
