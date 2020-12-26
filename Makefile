@@ -36,18 +36,18 @@ help-all: help-min
 	$(Q)$(MAKE) -e -s python-help
 
 PHONY += install
-install: pyinstall
+install: pyenvinstall
 
 PHONY += uninstall
-uninstall: pyuninstall
+uninstall: pyenvuninstall
 
 PHONY += docs
 docs:  docs-man $(API_DOC)
 	$(call cmd,sphinx,html,docs,docs)
 
 PHONY += docs-live
-docs-live: docs-man
-	$(call cmd,sphinx_autobuild,html,docs,docs)
+docs-live: pyenvinstall docs-man
+	$(call cmd,sphinx_autobuild,html,$(DOCS_FOLDER),$(DOCS_FOLDER))
 
 PHONY += docs-man
 docs-man: pyenvinstall $(API_DOC)
@@ -70,7 +70,7 @@ clean: pyclean docs-clean
 	$(call cmd,common_clean)
 
 PHONY += rqmts
-rqmts: msg-python-exe msg-pip-exe msg-virtualenv-exe
+rqmts: msg-python-exe msg-pip-exe
 
 PHONY += zero_pylint
 zero_pylint: pylint-exe
