@@ -58,12 +58,8 @@ extensions = [
 ]
 
 intersphinx_mapping = {}
-#intersphinx_mapping['template-book'] = (
-#    'https://h2626237.stratoserver.net/kernel/books/template-book/', None)
-#intersphinx_mapping['process'] = (
-#    'https://h2626237.stratoserver.net/kernel/books/process/', None)
-#intersphinx_mapping['linux'] = (
-#    'https://h2626237.stratoserver.net/kernel/linux_src_doc/', None)
+intersphinx_mapping['linux'] = (
+    'https://www.kernel.org/doc/html/latest/', None)
 
 extlinks = {}
 extlinks['origin'] = (GIT_URL + '/blob/' + GIT_BRANCH + '/%s', 'git://')

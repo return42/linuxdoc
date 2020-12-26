@@ -54,7 +54,7 @@ At least some handy links about reST_  and the `Sphinx markup constructs`_:
 * `intersphinx`_, `sphinx.ext.intersphinx`_
 * `sphinx-doc`_, `sphinx-doc FAQ`_
 * `docutils`_, `docutils FAQ`_
-* :ref:`process:codingstyle` and in absence of a more detailed C style guide
-  for documentation, the `Python's Style Guide for documentation
+* The :ref:`linux:codingstyle` and (in absence of a more detailed C style guide for
+  documentation) the `Python's Style Guide for documentation
   <https://docs.python.org/devguide/documenting.html#style-guide>`_ provides a
   good orientation.
