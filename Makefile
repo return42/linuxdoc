@@ -68,7 +68,7 @@ project: pyenvinstall $(API_DOC)
 PHONY += $(API_DOC)
 $(API_DOC): $(PY_ENV)
 	$(Q)rm -rf ./$(API_DOC)
-	$(Q)$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o $(API_DOC) linuxdoc
+	$(Q)$(PY_ENV_BIN)/sphinx-apidoc --separate --maxdepth=0 -o $(API_DOC) linuxdoc linuxdoc/cdomainv2.py linuxdoc/cdomainv3.py
 	$(Q)rm -f $(API_DOC)/modules.rst
 
 PHONY += clean
