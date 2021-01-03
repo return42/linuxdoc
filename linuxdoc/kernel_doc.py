@@ -195,7 +195,7 @@ C_ENUM           = RE(r"enum\s+(\w+)\s*{(.*)}")
 C_TYPEDEF        = RE(r"typedef.*\s+(\w+)\s*;")
 
 # typedef of a function pointer
-_typedef_type    = r"((?:\s+[\w\*]+){1,8})\s*"
+_typedef_type    = r"((?:\s+[\w\*]+\b){1,8})\s*"
 _typedef_ident   = r"\*?\s*(\w\S+)\s*"
 _typedef_args    = r"\s*\((.*)\);"
 C_FUNC_TYPEDEF   = RE(r"typedef" + _typedef_type + r"\(" + _typedef_ident + r"\)" + _typedef_args)

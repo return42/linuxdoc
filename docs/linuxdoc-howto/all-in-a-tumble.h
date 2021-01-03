@@ -506,3 +506,13 @@ typedef unsigned long (*genpool_algo_t)(unsigned long *map,
 			unsigned int nr,
 			void *data, struct gen_pool *pool,
 			unsigned long start_addr);
+
+/**
+ * typedef v4l2_check_dv_timings_fnc - timings check callback
+ *
+ * @t: the v4l2_dv_timings struct.
+ * @handle: a handle from the driver.
+ *
+ * Returns true if the given timings are valid.
+ */
+typedef bool v4l2_check_dv_timings_fnc(const struct v4l2_dv_timings *t, void *handle);
