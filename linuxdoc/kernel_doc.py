@@ -195,8 +195,11 @@ C_ENUM           = RE(r"enum\s+(\w+)\s*{(.*)}")
 C_TYPEDEF        = RE(r"typedef.*\s+(\w+)\s*;")
 
 # typedef of a function pointer
-C_FUNC_TYPEDEF   = RE(r"typedef((?:\s+[\w\*]+){1,8})\s*\(\*?\s*(\w\S+)\s*\)\s*\((.*)\);")
-C_FUNC_TYPEDEF_2 = RE(r"typedef((?:\s+[\w\*]+\s+){1,8})\s*\*?(\w\S+)\s*\s*\((.*)\);")
+_typedef_type    = r"((?:\s+[\w\*]+){1,8})\s*"
+_typedef_ident   = r"\*?\s*(\w\S+)\s*"
+_typedef_args    = r"\s*\((.*)\);"
+C_FUNC_TYPEDEF   = RE(r"typedef" + _typedef_type + r"\(" + _typedef_ident + r"\)" + _typedef_args)
+C_FUNC_TYPEDEF_2 = RE(r"typedef" + _typedef_type + _typedef_ident + _typedef_args)
 
 MACRO            = RE(r"^#")
 MACRO_define     = RE(r"^#\s*define\s+")
