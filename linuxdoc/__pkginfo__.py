@@ -104,7 +104,7 @@ test_requires_txt = "\n".join(test_requires)
 develop_requires = [
     'twine',
     # 'wheel'
-    'Sphinx<3.0',
+    'Sphinx',
     'pallets-sphinx-themes',
     'sphinx-autobuild',
     'sphinx-issues',

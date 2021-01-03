@@ -14,9 +14,9 @@ u"""
 import sphinx
 
 # Get Sphinx version
-major, minor, patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
+sphinx_major, sphinx_minor, sphinx_patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
 
-if major >= 3:
+if sphinx_major >= 3:
     from .cdomainv3 import CDomain
     __version__ = 3
 else:

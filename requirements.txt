@@ -14,7 +14,7 @@ pylint
 # -------
 
 twine
-Sphinx<3.0
+Sphinx
 pallets-sphinx-themes
 sphinx-autobuild
 sphinx-issues
