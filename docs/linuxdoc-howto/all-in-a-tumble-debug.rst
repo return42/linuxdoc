@@ -15,10 +15,10 @@ document by using the following directives:
 .. code-block:: rst
 
    .. kernel-doc::  ./all-in-a-tumble.c
-      :module: example
+      :module: foo
 
    .. kernel-doc::  ./all-in-a-tumble.h
-      :module: example
+      :module: foo
 
 The option ``:module:`` is optional, to find out why we use this option *here*,
 see :ref:`kernel-doc-options`.
@@ -33,7 +33,7 @@ kernel-doc from  ``all-in-a-tumble.h``
 
 .. kernel-doc::  ./all-in-a-tumble.h
     :debug:
-    :module: example
+    :module: foo
 
 .. _all-in-a-tumble.c-debug:
 
@@ -42,5 +42,5 @@ kernel-doc from  ``all-in-a-tumble.c``
 
 .. kernel-doc::  ./all-in-a-tumble.c
     :debug:
-    :module: example
+    :module: foo
 
