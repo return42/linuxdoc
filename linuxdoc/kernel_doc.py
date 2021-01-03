@@ -72,6 +72,8 @@ import textwrap
 import six
 
 from fspath import OS_ENV
+from linuxdoc.cdomain import sphinx_major
+
 
 # ==============================================================================
 # common globals
@@ -1116,8 +1118,10 @@ class ReSTTranslator(TranslatorAPI):
 
         # write struct definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
-        self.write("\n.. c:type:: struct %s\n\n" % decl_name)
-
+        if sphinx_major >= 3:
+            self.write("\n.. c:struct:: %s\n\n" % decl_name)
+        else:
+            self.write("\n.. c:type:: struct %s\n\n" % decl_name)
         # purpose
 
         if purpose:
@@ -1215,7 +1219,10 @@ class ReSTTranslator(TranslatorAPI):
 
         # write union definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
-        self.write("\n.. c:type:: enum %s\n\n" % enum)
+        if sphinx_major >= 3:
+            self.write("\n.. c:enum:: %s\n\n" % enum)
+        else:
+            self.write("\n.. c:type:: enum %s\n\n" % enum)
 
         # purpose
 
@@ -1278,7 +1285,10 @@ class ReSTTranslator(TranslatorAPI):
 
         # write typdef definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
-        self.write("\n.. c:type:: typedef %s\n\n" % typedef)
+        if sphinx_major >= 3:
+            self.write("\n.. c:type:: %s\n\n" % typedef)
+        else:
+            self.write("\n.. c:type:: typedef %s\n\n" % typedef)
         if purpose:
             self.write(self.INDENT, self.highlight(purpose), "\n")
 
