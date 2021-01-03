@@ -1122,9 +1122,9 @@ class ReSTTranslator(TranslatorAPI):
         # write struct definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
         if sphinx_major >= 3:
-            self.write("\n.. c:struct:: %s\n\n" % decl_name)
+            self.write("\n.. c:%s:: %s\n\n" % (decl_type, decl_name))
         else:
-            self.write("\n.. c:type:: struct %s\n\n" % decl_name)
+            self.write("\n.. c:type:: %s %s\n\n" % (decl_type, decl_name))
         # purpose
 
         if purpose:
