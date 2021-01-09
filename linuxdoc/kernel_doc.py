@@ -418,11 +418,9 @@ def main():
         "--id-prefix"
         , default = ""
         , help    = (
-            "A prefix for generated IDs. IDs are used as anchors by cross"
-            " references. They are automaticly gernerated based on the declaration"
-            " and / or section names. Declartions like 'open' or section names"
-            " like 'Intro' are very common, to make them unique, a prefix is needed."
-            " Mostly you will choose the *module* or *include filename* as prefix." ))
+            "A prefix for automatic generated IDs. The IDs are automaticly"
+            " gernerated based on the declaration and / or section names. The"
+            " prefix is also used as namespace in Sphinx's C-domain"))
 
     CLI.add_argument(
         "--verbose", "-v"
@@ -680,6 +678,12 @@ class TranslatorAPI(object):
     def output_epilog(self):
         raise NotImplementedError
 
+    def output_prefix(self):
+        raise NotImplementedError
+
+    def output_suffix(self):
+        raise NotImplementedError
+
     def output_DOC(
             self
             , sections         = None # ctx.sections
@@ -746,6 +750,10 @@ class NullTranslator(TranslatorAPI):
         pass
     def output_epilog(self, *args, **kwargs):
         pass
+    def output_prefix(self):
+        pass
+    def output_suffix(self):
+        pass
     def output_DOC(self, *args, **kwargs):
         pass
     def output_function_decl(self, *args, **kwargs):
@@ -790,6 +798,12 @@ class ListTranslator(TranslatorAPI):
         pass
 
     def output_epilog(self):
+        pass
+
+    def output_prefix(self):
+        pass
+
+    def output_suffix(self):
         pass
 
     def output_DOC(self, sections = None):
@@ -988,6 +1002,14 @@ class ReSTTranslator(TranslatorAPI):
         epilog = self.get_epilog()
         if epilog:
             self.write(epilog, "\n")
+
+    def output_prefix(self):
+        if compat.sphinx_has_c_namespace() and self.options.id_prefix:
+            self.write(".. c:namespace-push:: %s" % self.options.id_prefix, "\n")
+
+    def output_suffix(self):
+        if compat.sphinx_has_c_namespace() and self.options.id_prefix:
+            self.write("\n", ".. c:namespace-pop::", "\n")
 
     def output_DOC(self, sections = None):
         self.parser.ctx.offset = self.parser.ctx.decl_offset
@@ -1761,6 +1783,7 @@ class Parser(SimpleLog):
 
     def parse(self, src=None): # start parsing
         self.dump_preamble()
+        self.dump_prefix()
         if src is not None:
             for line in src:
                 self.feed(line)
@@ -1768,6 +1791,7 @@ class Parser(SimpleLog):
             with openTextFile(self.options.fname, encoding=self.options.encoding) as srcFile:
                 for line in srcFile:
                     self.feed(line)
+        self.dump_suffix()
         self.dump_epilog()
         self.translator.eof()
 
@@ -1777,10 +1801,12 @@ class Parser(SimpleLog):
         if translator is not None:
             self.setTranslator(translator)
         self.dump_preamble()
+        self.dump_prefix()
         for name, out_type, opts, ctx, kwargs in self.ctx.dump_storage:
             self.options.update(opts)
             self.ctx.update(ctx)
             self.output_decl(name, out_type, **kwargs)
+        self.dump_suffix()
         self.dump_epilog()
         self.translator.eof()
 
@@ -2370,6 +2396,12 @@ class Parser(SimpleLog):
     def dump_epilog(self):
         if not self.options.skip_epilog:
             self.translator.output_epilog()
+
+    def dump_prefix(self):
+        self.translator.output_prefix()
+
+    def dump_suffix(self):
+        self.translator.output_suffix()
 
     def dump_section(self, name, cont):
         u"""Store section's *content* under it's name.

@@ -128,12 +128,11 @@ these options make sense:
   Include documentation for each named definition.  For backward compatibility
   there exists an alias ``functions``.
 
-``:module: <prefix-id>``
-    The option ``:module: <id-prefix>`` sets a module-name.  The module-name is
-    used as a prefix for automatic generated IDs (reference anchors).  To give a
-    example, if you like to refer ``my_struct`` from module ``example`` use
-    ``:ref:`example.my_struct``` (:ref:`example.my_struct`).  See module
-    ``test`` in the :ref:`doc_sections` example.
+``:module: <namespace>``
+    The option ``:module: <namespace>`` sets a module-name and is used in
+    ``.. c:namespace-push:`` `[ref] <C domain namespacing_>`__.  The module-name
+    (aka *namespace*) is used as a prefix in the cross links.  For a detailed
+    example have a look at section :ref:`kernel-doc-functions`.
 
 ``:man-sect: <sect-no>``
   Section number of the manual pages (see "``$ man man-pages``"").  Optional set
@@ -162,10 +161,18 @@ these options make sense:
 
 .. _kernel-doc-functions:
 
-functions
-=========
+Insert function's documentation
+===============================
 
-The following example inserts the documentation of struct 'user_function'.
+In :ref:`all-in-a-tumble.c-src` there is the following function definition which
+is documented by a :ref:`kernel-doc-syntax`.
+
+.. kernel-doc::  ./all-in-a-tumble.c
+   :snippets:  user_function
+   :language:  c
+
+To include the documentation from C-:ref:`kernel-doc-syntax-functions` into your
+reStructuredText document use the following markup:
 
 .. code-block:: rst
 
@@ -173,20 +180,39 @@ The following example inserts the documentation of struct 'user_function'.
       :symbols:  user_function
       :module:   foo
 
-These ``example`` module has already been defined in our :ref:`all-in-a-tumble
-examples <all-in-a-tumble-debug>`, lets use it to show how to link such a
-documentation:
+This will convert the :ref:`kernel-doc-syntax` into the following reST markup:
+
+.. kernel-doc:: ./all-in-a-tumble.c
+   :symbols:  user_function
+   :module:   foo
+   :debug:
+
+----
+
+In the next view lines you will see how the documentation will be rendered:
+
+.. admonition:: kernel-doc option ``:symbols:``
+   :class: rst-example
+
+   .. kernel-doc:: ./all-in-a-tumble.c
+      :symbols:    user_function
+      :module:     foo
+
+In reST documents you can cross reference to the function or directly to one of
+the sections of this documentation:
 
 .. code-block:: rst
 
-   * Rendered example by ID with module prefix: :ref:`example.user_function`
-   * Function reference: :c:func:`user_function`
+   * C constructs in Sphinx >= 3.1 :c:func:`foo.user_function`
+   * refer sections: :ref:`Example <foo.user_function.example>`,
+     :ref:`Return <foo.user_function.return>` ...
 
-.. admonition:: option ``:functions:``
+.. admonition:: cross referencing function's documentation
    :class: rst-example
 
-   * Rendered example by ID with module prefix: :ref:`example.user_function`
-   * Function reference: :c:func:`user_function`
+   * C constructs in Sphinx >= 3.1 :c:func:`foo.user_function`
+   * refer sections: :ref:`Example <foo.user_function.example>`,
+     :ref:`Return <foo.user_function.return>` ...
 
 
 .. _kernel-doc-structs:
@@ -197,7 +223,7 @@ documentation:
 structs, unions, enums and typedefs
 ===================================
 
-The following example inserts the documentation of struct 'my_long_struct'.
+The following example inserts the documentation of struct ``my_long_struct``.
 
 .. code-block:: rst
 
@@ -205,21 +231,24 @@ The following example inserts the documentation of struct 'my_long_struct'.
         :symbols:    my_long_struct
         :module:     example
 
-To link into the :ref:`all-in-a-tumble examples <all-in-a-tumble-debug>` use:
+Here in this documentation the examples from the :ref:`all-in-a-tumble-src` are
+located in the ``example`` module (aka *namespace*).  To `Cross-referencing C
+constructs`_ within this module you can use the Sphinx *namespace* or to point
+to a section you can use the anchors inserted by the ``.. kernel-doc::``
+directive.
 
 .. code-block:: rst
 
-   * Rendered example by ID with module prefix: :ref:`example.my_long_struct`
-   * Type reference: :c:type:`my_long_struct` or the alternativ notation
-     with title :c:type:`struct my_long_struct <my_long_struct>`
+   * C constructs in Sphinx >= 3.1 :c:struct:`example.my_long_struct`
+   * refer sections: :ref:`Definition <example.my_long_struct.definition>`,
+     :ref:`Members <example.my_long_struct.members>` ...
 
-.. admonition:: option ``:functions: structs, unions, enums and typedefs``
+.. admonition:: option ``:symbols: structs, unions, enums and typedefs``
    :class: rst-example
 
-   * Rendered example by ID with module prefix: :ref:`example.my_long_struct`
-   * Type reference: :c:type:`my_long_struct` or the alternativ notation
-     with title :c:type:`struct my_long_struct <my_long_struct>`
-
+   * C constructs in Sphinx >= 3.1 :c:struct:`example.my_long_struct`
+   * refer sections: :ref:`Definition <example.my_long_struct.definition>`,
+     :ref:`Members <example.my_long_struct.members>` ...
 
 .. _kernel-doc-snippets:
 
