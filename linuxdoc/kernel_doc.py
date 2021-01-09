@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
+# SPDX-License-Identifier: GPL-2.0
 #
 # pylint: disable=missing-docstring, arguments-differ, invalid-name
 # pylint: disable=too-many-arguments, too-many-locals, too-many-branches
 # pylint: disable=too-many-nested-blocks, too-many-lines
 # pylint: disable=too-many-statements, useless-object-inheritance
 
-u"""
+"""
     kernel_doc
     ~~~~~~~~~~
 
     Implementation of the ``kernel-doc`` parser.
-
-    :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
 
     The kernel-doc parser extracts documentation from Linux kernel's source code
     comments. This implements the :ref:`kernel-doc markup <kernel-doc-intro>`.
@@ -72,8 +70,7 @@ import textwrap
 import six
 
 from fspath import OS_ENV
-from linuxdoc.cdomain import sphinx_major
-
+from . import compat
 
 # ==============================================================================
 # common globals
@@ -321,10 +318,8 @@ def highlight_parser(text, map_table):
 # helper
 # ==============================================================================
 
-def openTextFile(fname, mode="r", encoding="utf-8", errors="strict", buffering=1):
-    return codecs.open(
-        fname, mode=mode, encoding=encoding
-        , errors=errors, buffering=buffering)
+def openTextFile(fname, mode="r", encoding="utf-8", errors="strict"):
+    return codecs.open(fname, mode=mode, encoding=encoding, errors=errors)
 
 def readFile(fname, encoding="utf-8", errors="strict"):
     with openTextFile(fname, encoding=encoding, errors=errors) as f:
@@ -1121,7 +1116,7 @@ class ReSTTranslator(TranslatorAPI):
 
         # write struct definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
-        if sphinx_major >= 3:
+        if compat.sphinx_has_c_types():
             self.write("\n.. c:%s:: %s\n\n" % (decl_type, decl_name))
         else:
             self.write("\n.. c:type:: %s %s\n\n" % (decl_type, decl_name))
@@ -1222,7 +1217,7 @@ class ReSTTranslator(TranslatorAPI):
 
         # write union definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
-        if sphinx_major >= 3:
+        if compat.sphinx_has_c_types():
             self.write("\n.. c:enum:: %s\n\n" % enum)
         else:
             self.write("\n.. c:type:: enum %s\n\n" % enum)
@@ -1288,7 +1283,7 @@ class ReSTTranslator(TranslatorAPI):
 
         # write typdef definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
-        if sphinx_major >= 3:
+        if compat.sphinx_has_c_types():
             self.write("\n.. c:type:: %s\n\n" % typedef)
         else:
             self.write("\n.. c:type:: typedef %s\n\n" % typedef)

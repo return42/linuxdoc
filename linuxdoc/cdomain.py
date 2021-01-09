@@ -1,27 +1,22 @@
 # -*- coding: utf-8; mode: python -*-
-u"""
-    cdomain
-    ~~~~~~~
+# SPDX-License-Identifier: GPL-2.0
+"""\
+cdomain
+~~~~~~~
 
-    Replacement for the sphinx c-domain.
+Replacement for the sphinx c-domain.  For user documentation see
+:ref:`customized-c-domain`.
 
-    :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
-
-    For user documentation see :ref:`customized-c-domain`.
 """
 
-import sphinx
+from .compat import sphinx_has_c_namespace
 
-# Get Sphinx version
-sphinx_major, sphinx_minor, sphinx_patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
+__version__  = '3.0'
 
-if sphinx_major >= 3:
+if sphinx_has_c_namespace():
     from .cdomainv3 import CDomain
-    __version__ = 3
 else:
     from .cdomainv2 import CDomain
-    __version__ = 2
 
 def setup(app):  # pylint: disable=missing-docstring
 
@@ -29,5 +24,5 @@ def setup(app):  # pylint: disable=missing-docstring
     return dict(
         version = __version__,
         parallel_read_safe = True,
-        parallel_write_safe = True
+        parallel_write_safe = True,
     )

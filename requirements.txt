@@ -4,6 +4,7 @@
 # --------------------------------
 
 fspath
+setuptools
 
 # test requires
 # -------------

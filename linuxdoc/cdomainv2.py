@@ -1,14 +1,12 @@
 # -*- coding: utf-8; mode: python -*-
-u"""
-    cdomainv2 (Sphinx v<3.0)
-    ~~~~~~~~~~~~~~~~~~~~~~~~
+# SPDX-License-Identifier: GPL-2.0
+"""\
+cdomainv2 (Sphinx v<3.0)
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Replacement for the sphinx c-domain.
+Replacement for the sphinx c-domain.  For user documentation see
+:ref:`customized-c-domain`.
 
-    :copyright:  Copyright (C) 2020 Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
-
-    For user documentation see :ref:`customized-c-domain`.
 """
 
 from docutils import nodes

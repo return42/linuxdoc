@@ -1,16 +1,14 @@
 # -*- coding: utf-8; mode: python -*-
 # pylint: disable=missing-docstring, invalid-name
-u"""
-    rstKernelDoc
-    ~~~~~~~~~~~~
+# SPDX-License-Identifier: GPL-2.0
+"""\
+rstKernelDoc
+~~~~~~~~~~~~
 
-    Implementation of the ``kernel-doc`` reST-directive.
+Implementation of the ``kernel-doc`` reST-directive.
 
-    :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
-
-    The ``kernel-doc`` (:py:class:`KernelDoc`) directive includes contend from
-    linux kernel source code comments.
+The ``kernel-doc`` (:py:class:`KernelDoc`) directive includes contend from
+linux kernel source code comments.
 
 """
 
@@ -19,6 +17,7 @@ u"""
 # ==============================================================================
 
 import glob
+import logging
 from os import path
 from io import StringIO
 
@@ -28,21 +27,19 @@ from docutils import nodes
 from docutils.parsers.rst import Directive, directives
 from docutils.utils import SystemMessage
 from docutils.statemachine import ViewList
+from sphinx.util.docutils import switch_source_input
 
-from . import compat
 from . import kernel_doc as kerneldoc
 
 # ==============================================================================
 # common globals
 # ==============================================================================
 
-# The version numbering follows numbering of the specification
-# (Documentation/books/kernel-doc-HOWTO).
-__version__  = '1.0'
+__version__  = '3.0'
 
 PARSER_CACHE = dict()
 
-app_log = compat.getLogger('application')
+app_log = logging.getLogger('application')
 
 # ==============================================================================
 def setup(app):
@@ -97,7 +94,7 @@ class KernelDocParser(kerneldoc.Parser):
         replace["fname"]   = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
         message = ("%(fname)s:%(line_no)s: [kernel-doc INFO] : " + message) % replace
-        app_log.verbose(message)
+        app_log.info(message)
 
     def debug(self, message, **replace):
         if self.app.verbosity < 2:
@@ -124,7 +121,6 @@ class KernelDoc(Directive):
     option_spec = {
 
         # see https://github.com/PyCQA/pylint/issues/289
-        # pylint: disable=bad-continuation
 
         "doc"          : directives.unchanged_required # aka lines containing !P
         , "no-header"  : directives.flag
@@ -404,7 +400,7 @@ class KernelDoc(Directive):
         node = nodes.section()
         # necessary so that the child nodes get the right source/line set
         node.document = self.state.document
-        with compat.switch_source_input(self.state, content):
+        with switch_source_input(self.state, content):
             # hack around title style bookkeeping
             buf = self.state.memo.title_styles, self.state.memo.section_level
             self.state.memo.title_styles, self.state.memo.section_level = [], 0

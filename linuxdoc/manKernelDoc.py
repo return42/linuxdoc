@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8; mode: python -*-
+# SPDX-License-Identifier: GPL-2.0
 # pylint: disable=missing-docstring, invalid-name, unnecessary-pass
-u"""
-    kernel-doc-man
-    ~~~~~~~~~~~~~~
+"""\
+kernel-doc-man
+~~~~~~~~~~~~~~
 
-    Implementation of the ``kernel-doc-man`` builder.
+Implementation of the ``kernel-doc-man`` builder.
 
-    :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
-
-    User documentation see :ref:`man-pages`.
+User documentation see :ref:`man-pages`.
 """
 
 # ==============================================================================
@@ -57,8 +55,6 @@ def setup(app):
 
     app.add_builder(KernelDocManBuilder)
     app.add_directive("kernel-doc-man", KernelDocMan)
-    if compat.major == 1 and compat.minor < 8:
-        app.add_config_value('author', "", 'env')
     app.add_node(kernel_doc_man
                  , html    = (skip_kernel_doc_man, None)
                  , latex   = (skip_kernel_doc_man, None)

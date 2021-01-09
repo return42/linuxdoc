@@ -1,19 +1,17 @@
 # -*- coding: utf-8; mode: python -*-
+# SPDX-License-Identifier: GPL-2.0
 #
 # pylint: disable=missing-docstring, arguments-differ, invalid-name
 # pylint: disable=too-many-arguments, too-many-locals, too-many-branches
 # pylint: disable=too-many-nested-blocks, useless-object-inheritance
 
-u"""
-    flat-table
-    ~~~~~~~~~~
+"""\
+flat-table
+~~~~~~~~~~
 
-    Implementation of the ``flat-table`` reST-directive.
+Implementation of the ``flat-table`` reST-directive.  User documentation see
+:ref:`rest-flat-table`
 
-    :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
-
-    User documentation see :ref:`rest-flat-table`
 """
 
 # ==============================================================================
@@ -31,16 +29,7 @@ from docutils.utils import SystemMessagePropagation
 # common globals
 # ==============================================================================
 
-# The version numbering follows numbering of the specification
-# (Documentation/books/kernel-doc-HOWTO).
-__version__  = '1.0'
-
-PY3 = sys.version_info[0] == 3
-PY2 = sys.version_info[0] == 2
-
-if PY3:
-    unicode     = str
-    basestring  = str
+__version__  = '3.0'
 
 # ==============================================================================
 def setup(app):

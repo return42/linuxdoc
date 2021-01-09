@@ -1,4 +1,5 @@
 # -*- coding: utf-8; mode: python; mode: flycheck -*-
+# SPDX-License-Identifier: GPL-2.0
 # pylint: disable=invalid-name,redefined-builtin
 """
 python package meta informations
@@ -91,6 +92,7 @@ py_modules = []
 
 install_requires = [
     'fspath',
+    'setuptools',
 ]
 
 install_requires_txt = "\n".join(install_requires)

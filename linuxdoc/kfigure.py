@@ -1,24 +1,21 @@
 # -*- coding: utf-8; mode: python -*-
 # pylint: disable=invalid-name, missing-docstring, too-many-branches
 # pylint: disable=unnecessary-pass
+# SPDX-License-Identifier: GPL-2.0
+"""\
+scalable figure and image handling
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-u"""
-    scalable figure and image handling
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Sphinx extension which implements scalable image handling.
-
-    :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
-
-    User documentation see :ref:`kfigure`
-    """
+Sphinx extension which implements scalable image handling.
+User documentation see :ref:`kfigure`
+"""
 
 import os
 from os import path
 import subprocess
 from hashlib import sha1
 import sys
+import logging
 
 from docutils import nodes
 from docutils.statemachine import ViewList
@@ -29,25 +26,9 @@ import sphinx
 from sphinx.util.nodes import clean_astext
 from six import iteritems
 
-from . import compat
-app_log = compat.getLogger('application')
+__version__  = '3.0'
 
-PY3 = sys.version_info[0] == 3
-
-if PY3:
-    _unicode = str       # pylint: disable=invalid-name
-else:
-    _unicode = unicode   # pylint: disable=undefined-variable, invalid-name
-
-# Get Sphinx version
-major, minor, patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
-if major == 1 and minor > 3:
-    # patches.Figure only landed in Sphinx 1.4
-    from sphinx.directives.patches import Figure  # pylint: disable=ungrouped-imports
-else:
-    Figure = images.Figure
-
-__version__  = '1.0.0'
+app_log = logging.getLogger('application')
 
 # simple helper
 # -------------
@@ -145,18 +126,18 @@ def setupTools(app): # pylint: disable=unused-argument
     global dot_cmd, convert_cmd  # pylint: disable=global-statement
 
     # pylint: disable=deprecated-method
-    app_log.verbose("kfigure: check installed tools ...")
+    app_log.info("kfigure: check installed tools ...")
 
     dot_cmd = which('dot')
     convert_cmd = which('convert')
 
     if dot_cmd:
-        app_log.verbose("use dot(1) from: " + dot_cmd)
+        app_log.info("use dot(1) from: " + dot_cmd)
     else:
         app_log.warn("dot(1) not found, for better output quality install "
                      "graphviz from http://www.graphviz.org")
     if convert_cmd:
-        app_log.verbose("use convert(1) from: " + convert_cmd)
+        app_log.info("use convert(1) from: " + convert_cmd)
     else:
         app_log.warn(
             "convert(1) not found, for SVG to PDF conversion install "
@@ -194,12 +175,12 @@ def convert_image(img_node, translator, src_fname=None):
 
     # in kernel builds, use 'make SPHINXOPTS=-v' to see verbose messages
 
-    app_log.verbose('assert best format for: ' + img_node['uri'])
+    app_log.info('assert best format for: ' + img_node['uri'])
 
     if in_ext == '.dot':
 
         if not dot_cmd:
-            app_log.verbose("dot from graphviz not available / include DOT raw.")
+            app_log.info("dot from graphviz not available / include DOT raw.")
             img_node.replace_self(file2literal(src_fname))
 
         elif translator.builder.format == 'latex':
@@ -226,7 +207,7 @@ def convert_image(img_node, translator, src_fname=None):
 
         if translator.builder.format == 'latex':
             if convert_cmd is None:
-                app_log.verbose("no SVG to PDF conversion available / include SVG raw.")
+                app_log.info("no SVG to PDF conversion available / include SVG raw.")
                 img_node.replace_self(file2literal(src_fname))
             else:
                 dst_fname = path.join(translator.builder.outdir, fname + '.pdf')
@@ -239,18 +220,18 @@ def convert_image(img_node, translator, src_fname=None):
         _name = dst_fname[len(translator.builder.outdir) + 1:]
 
         if isNewer(dst_fname, src_fname):
-            app_log.verbose("convert: {out}/%s already exists and is newer" % _name)
+            app_log.info("convert: {out}/%s already exists and is newer" % _name)
 
         else:
             ok = False
             mkdir(path.dirname(dst_fname))
 
             if in_ext == '.dot':
-                app_log.verbose('convert DOT to: {out}/' + _name)
+                app_log.info('convert DOT to: {out}/' + _name)
                 ok = dot2format(app, src_fname, dst_fname)
 
             elif in_ext == '.svg':
-                app_log.verbose('convert SVG to: {out}/' + _name)
+                app_log.info('convert SVG to: {out}/' + _name)
                 ok = svg2pdf(app, src_fname, dst_fname)
 
             if not ok:
@@ -353,7 +334,7 @@ def visit_kernel_figure(self, node):
 class kernel_figure(nodes.figure):
     """Node for ``kernel-figure`` directive."""
 
-class KernelFigure(Figure):
+class KernelFigure(images.Figure):
     u"""KernelImage directive
 
     Earns everything from ``.. figure::`` directive, except *remote URI* and
@@ -368,7 +349,7 @@ class KernelFigure(Figure):
                 'Error in "%s: %s":'
                 ' glob pattern and remote images are not allowed'
                 % (self.name, uri))
-        result = Figure.run(self)
+        result = images.Figure.run(self)
         if len(result) == 2 or isinstance(result[0], nodes.system_message):
             return result
         (figure_node,) = result
@@ -391,7 +372,7 @@ def visit_kernel_render(self, node):
     srclang = node.get('srclang')
 
     # pylint: disable=deprecated-method
-    app_log.verbose('visit kernel-render node lang: "%s"' % (srclang))
+    app_log.info('visit kernel-render node lang: "%s"' % (srclang))
 
     tmp_ext = RENDER_MARKUP_EXT.get(srclang, None)
     if tmp_ext is None:
@@ -399,7 +380,7 @@ def visit_kernel_render(self, node):
         return
 
     if not dot_cmd and tmp_ext == '.dot':
-        app_log.verbose("dot from graphviz not available / include raw.")
+        app_log.info("dot from graphviz not available / include raw.")
         return
 
     literal_block = node[0]
@@ -429,7 +410,7 @@ class kernel_render(nodes.General, nodes.Inline, nodes.Element):
     """Node for ``kernel-render`` directive."""
     pass
 
-class KernelRender(Figure):
+class KernelRender(images.Figure):
     u"""KernelRender directive
 
     Render content by external tool.  Has all the options known from the
@@ -447,7 +428,7 @@ class KernelRender(Figure):
     final_argument_whitespace = False
 
     # earn options from 'figure'
-    option_spec = Figure.option_spec.copy()
+    option_spec = images.Figure.option_spec.copy()
     option_spec['caption'] = directives.unchanged
 
     def run(self):
