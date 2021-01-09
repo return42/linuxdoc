@@ -97,7 +97,7 @@ kernel-doc directive like this:
 .. code-block:: rst
 
     .. kernel-doc:: include/foobar.h
-        :functions: foobar
+        :symbols: foobar
 
 Now, if the documentation build process takes places, the kernel-doc directive
 runs the **kernel-doc parser** which grabs the documentation and translates the

@@ -97,4 +97,4 @@ a look here ...
    :class: rst-example
 
    .. kernel-doc::  ./all-in-a-tumble.h
-      :functions:  rst_mode
+      :symbols:  rst_mode

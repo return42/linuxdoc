@@ -40,7 +40,7 @@ See: :ref:`kernel-doc-man-sect`
 .. code-block:: rst
 
    .. kernel-doc::  ./all-in-a-tumble.c
-       :functions: user_function
+       :symbols: user_function
        :man-sect: 1
 
 With this ``:man-sect: <man-sect no>`` option, the kernel-doc parser will insert

@@ -27,6 +27,11 @@ inserted direct under the chapter "My Media Book". The "DOC:" sections, the func
 and the type descriptions will be inserted in the order they appear in the source file.
 Mostly you want to select more fine grained, read on to see how.
 
+.. contents:: Contents
+   :depth: 2
+   :local:
+   :backlinks: entry
+
 .. _kernel-doc-options:
 
 kernel-doc options
@@ -43,11 +48,11 @@ Here is a short overview of the directives options:
         :internal:
         :exp-method: <method>
         :exp-ids:    <identifier [, identifiers [, ...]]>
-        :functions: <function [, functions [, ...]]>
-        :module:    <prefix-id>
-        :man-sect:  <man sect-no>
-        :snippets:  <snippet [, snippets [, ...]]>
-        :language:  <snippet-lang>
+        :symbols:    <function [, union, struct [, ...]]>
+        :module:     <namespace>
+        :man-sect:   <man sect-no>
+        :snippets:   <snippet [, snippets [, ...]]>
+        :language:   <snippet-lang>
         :linenos:
         :debug:
 
@@ -119,8 +124,9 @@ these options make sense:
     The default list is empty and can be adjusted by the sphinx configuration
     option :ref:`kernel_doc_known_attrs <kernel-doc-config>`.
 
-``:functions: <name [, names [, ...]]>`` (:ref:`kernel-doc-functions`, :ref:`kernel-doc-structs`)
-   Include documentation for each named definition.
+``:symbols: <name [, names [, ...]]>`` (:ref:`kernel-doc-functions`, :ref:`kernel-doc-structs`)
+  Include documentation for each named definition.  For backward compatibility
+  there exists an alias ``functions``.
 
 ``:module: <prefix-id>``
     The option ``:module: <id-prefix>`` sets a module-name.  The module-name is
@@ -163,9 +169,9 @@ The following example inserts the documentation of struct 'user_function'.
 
 .. code-block:: rst
 
-     .. kernel-doc:: ./all-in-a-tumble.h
-        :functions:  user_function
-        :module:     example
+   .. kernel-doc:: ./all-in-a-tumble.c
+      :symbols:  user_function
+      :module:   foo
 
 These ``example`` module has already been defined in our :ref:`all-in-a-tumble
 examples <all-in-a-tumble-debug>`, lets use it to show how to link such a
@@ -196,7 +202,7 @@ The following example inserts the documentation of struct 'my_long_struct'.
 .. code-block:: rst
 
      .. kernel-doc:: ./all-in-a-tumble.h
-        :functions:  my_long_struct
+        :symbols:    my_long_struct
         :module:     example
 
 To link into the :ref:`all-in-a-tumble examples <all-in-a-tumble-debug>` use:
@@ -383,7 +389,7 @@ kernel_doc_raise_error: ``True``
   .. code-block:: rst
 
       .. kernel-doc::  ./all-in-a-tumble.h
-          :functions:  no_longer_exist
+          :symbols:  no_longer_exist
 
   Since this definition not exists (anymore), the following TODO entry with Oops
   is inserted (again; only when ``kernel_doc_raise_error`` is ``False``).
@@ -392,5 +398,5 @@ kernel_doc_raise_error: ``True``
      :class: rst-example
 
      .. kernel-doc::  ./all-in-a-tumble.h
-        :functions:  no_longer_exist
+        :symbols:  no_longer_exist
 

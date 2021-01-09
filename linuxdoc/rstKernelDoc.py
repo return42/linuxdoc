@@ -128,6 +128,7 @@ class KernelDoc(Directive):
         , "export"     : directives.unchanged          # aka lines containing !E
         , "internal"   : directives.unchanged          # aka lines containing !I
         , "functions"  : directives.unchanged_required # aka lines containing !F
+        , "symbols"    : directives.unchanged_required
         , "exp-method" : directives.unchanged_required
         , "exp-ids"    : directives.unchanged_required
         , "known-attrs": directives.unchanged_required
@@ -313,6 +314,18 @@ class KernelDoc(Directive):
         self.doc    = self.state.document      # pylint: disable=attribute-defined-outside-init
         self.env    = self.doc.settings.env    # pylint: disable=attribute-defined-outside-init
         self.nodes  = []                       # pylint: disable=attribute-defined-outside-init
+
+        if "symbols" in self.options and "functions" in self.options:
+            error = self.state_machine.reporter.error(
+                ('Error in "%s" directive: used option :symbols:'
+                 ' and its alias :functions:'  % self.name),
+                nodes.literal_block(self.block_text, self.block_text),
+                line = self.lineno
+            )
+            raise SystemMessage(error, 4)
+
+        if "symbols" in self.options:
+            self.options['functions'] = self.options['symbols']
 
         try:
             if not self.doc.settings.file_insertion_enabled:

@@ -306,10 +306,10 @@ By example:
 .. code-block:: rst
 
    .. kernel-doc::  ./all-in-a-tumble.c
-      :functions:  sys_tgkill
+      :symbols:  sys_tgkill
 
 .. admonition:: missing exports
    :class: rst-example
 
    .. kernel-doc::  ./all-in-a-tumble.c
-      :functions:  sys_tgkill
+      :symbols:  sys_tgkill
