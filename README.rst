@@ -4,8 +4,8 @@ LinuxDoc
 
 .. sidebar::  Info
 
-   - linuxdoc (20200812)
-   - 2020 Markus Heiser / GPLv2
+   - linuxdoc v20210110
+   - 2021 Markus Heiser / GPLv2
    - https://github.com/return42/linuxdoc
 
 The LinuxDoc library contains Sphinx-doc extensions and command line tools to

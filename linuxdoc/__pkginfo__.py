@@ -8,13 +8,13 @@ python package meta informations
 from setuptools import find_packages
 
 package = 'linuxdoc'
-version = '20200812'
+version = '20210110'
 license   = 'GPLv2'
 description  = (
     'Sphinx-doc extensions & tools to extract documentation'
     ' from C/C++ source file comments.'
 )
-copyright = '2020 Markus Heiser'
+copyright = '2021 Markus Heiser'
 
 author = 'Markus Heiser'
 author_email = 'markus.heiser@darmarIT.de'
