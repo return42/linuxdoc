@@ -285,7 +285,7 @@ typedef int my_typedef;
  * - ``\$ENVVAR`` : environmental variable
  *
  * Since the prefixes ``$...``, ``&...`` and ``@...`` are used to markup the
- * highlight pattern, you have to escape them in other uses: $lorem, \&lorem,
+ * highlight pattern, you have to escape them in other uses: \$lorem, \&lorem,
  * \%lorem and \@lorem. To esacpe from function highlighting, use lorem\().
  *
  * Parser Mode:
