@@ -50,7 +50,6 @@ package_data = {
 #     ]
 }
 
-
 # https://docs.python.org/distutils/setupscript.html#installing-additional-files
 # https://setuptools.readthedocs.io/en/latest/setuptools.html?highlight=options.data_files#configuring-setup-using-setup-cfg-files
 # https://www.scivision.dev/newer-setuptools-needed/
@@ -66,9 +65,8 @@ data_files = [
 #     ])
 ]
 
-
 # https://packaging.python.org/guides/distributing-packages-using-setuptools/#python-requires
-python_requires  ='>=3.7'
+python_requires ='>=3.7'
 
 # https://packaging.python.org/guides/distributing-packages-using-setuptools/#py-modules
 py_modules = []
@@ -145,7 +143,6 @@ classifiers = [
      "Programming Language :: Python",
      "Programming Language :: Python :: 3",
      "Topic :: Utilities",
-     "Topic :: Documentation :: linux",
      "Topic :: Software Development :: Documentation",
      "Topic :: Software Development :: Libraries",
      "Topic :: Text Processing",
@@ -154,7 +151,7 @@ classifiers = [
 docstring = """\
 .. sidebar::  Info
 
-   - %(package)s (%(version)s)
+   - %(package)s v%(version)s
    - %(copyright)s / %(license)s
    - %(url)s
 
@@ -165,19 +162,19 @@ extensions in common Sphinx-doc projects.
 
 Documentation is available at ./docs or jump to:
 
-  %(docs)s
+- %(docs)s
 
 The LinuxDoc repository is hosted at:
 
-  %(url)s
+- %(url)s
 
 Issue tracker:
 
-  %(url)s/issues
+- %(url)s/issues
 
 For installation read file ./docs/install.rst or jump to:
 
-  %(docs)s/install.html
+- %(docs)s/install.html
 """ % globals()
 
 README = """\
