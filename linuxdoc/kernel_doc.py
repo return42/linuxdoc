@@ -340,7 +340,7 @@ class DevNull(object): # pylint: disable=too-few-public-methods
         pass
 DevNull = DevNull()
 
-SRCTREE        = OS_ENV.get("srctree", "")
+SRCTREE        = OS_ENV.get("srctree", os.getcwd())
 GIT_REF        = ("Linux kernel source tree:"
                   " `%(rel_fname)s <https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/"
                   "%(rel_fname)s>`__")
@@ -1348,7 +1348,7 @@ class ParseOptions(Container):
         self.out            = None  # File descriptor for output.
         self.eof_newline    = True  # write newline on end of file
 
-        self.src_tree       = SRCTREE # root of the kernel sources
+        self.src_tree       = SRCTREE # root folder of sources (defaults to CWD)
         self.rel_fname      = ""      # pathname relative to src_tree
         self.fname          = ""      # absolute pathname
 
@@ -1401,29 +1401,21 @@ class ParseOptions(Container):
         # SNIP / SNAP
         self.SNIP = None
 
+        # init options with arguments from caller
         super(ParseOptions, self).__init__(self, *args, **kwargs)
 
         # absolute and relativ filename
 
-        if self.src_tree and self.fname and os.path.isabs(self.fname):
-            # if SCRTREE and abspath fname is given, determine relativ pathname
-            self.rel_fname = os.path.relpath(self.fname, self.src_tree)
-
-        if self.src_tree and self.fname and not os.path.isabs(self.fname):
-            # if SCRTREE and relative fname is given, drop fname and set rel_fname
-            self.rel_fname = self.fname
-            self.fname = ""
-
-        if self.src_tree and self.rel_fname:
-            self.fname = os.path.join(self.src_tree, self.rel_fname)
-        else:
-            LOG.warn("no relative pathname given / no SRCTREE: "
-                     " features based on these settings might not work"
-                     " as expected!")
         if not self.fname:
             LOG.error("no source file given!")
-        else:
-            self.fname = os.path.abspath(self.fname)
+
+        self.rel_fname = self.fname
+        if self.fname[0] == '/':
+            if not self.src_tree:
+                LOG.error("missing SRCTREE")
+            self.rel_fname = self.fname[1:]
+
+        self.fname = os.path.abspath(self.src_tree + "/" + self.rel_fname)
 
     def set_defaults(self):
 

@@ -17,15 +17,17 @@ from a source file will be inserted. So, the first and very simple example is:
 
 .. code-block:: rst
 
-   My Media Book
-   =============
+   My Lib
+   ======
 
-   .. kernel-doc:: include/media/media-device.h
+   .. kernel-doc:: ../src/mylib.h
 
-With this small example the kernel-doc comments from the media-device.h will be
-inserted direct under the chapter "My Media Book". The "DOC:" sections, the function
-and the type descriptions will be inserted in the order they appear in the source file.
-Mostly you want to select more fine grained, read on to see how.
+
+With this small example (a file ``doc/mylib.rst``) the kernel-doc comments from
+the ``src/mylib.h`` will be inserted direct under the chapter "My Lib".  The
+"DOC:" sections, the function and the type descriptions will be inserted in the
+order they appear in the source file.  Mostly you want to select more fine
+grained, read on to see how.
 
 .. contents:: Contents
    :depth: 2
@@ -56,10 +58,11 @@ Here is a short overview of the directives options:
         :linenos:
         :debug:
 
-The argument ``<src-filename>`` is required, it points to a source file in the
-kernel source tree. The pathname is relative to kernel's root folder.  The
-options have the following meaning, but be aware that not all combinations of
-these options make sense:
+The argument ``<src-filename>`` is required and points to the source file.  The
+pathname is relative to the pathname of the ``kernel-doc`` directive.  Absolute
+pathnames are relative to environment ``srctree`` (if unset, defaults to CWD).
+The options have the following meaning, but be aware that not all combinations
+of these options make sense:
 
 ``:doc: <section title>`` (:ref:`doc_sections`)
     Include content of the ``DOC:`` section titled ``<section title>``.  Spaces

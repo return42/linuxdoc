@@ -18,7 +18,7 @@ linux kernel source code comments.
 
 import glob
 import logging
-from os import path
+from os import path, sep
 from io import StringIO
 
 import six
@@ -153,16 +153,16 @@ class KernelDoc(Directive):
     def getParserOptions(self):  # pylint: disable=too-many-branches, too-many-statements
 
         fname     = self.arguments[0]
-        src_tree  = kerneldoc.SRCTREE
+        src_tree  = path.dirname(path.normpath(self.doc.current_source))
         exp_files = []  # file pattern to search for EXPORT_SYMBOL
         exp_method  = self.options.get("exp-method", self.env.config.kernel_doc_exp_method)
         exp_ids     = self.options.get("exp-ids", self.env.config.kernel_doc_exp_ids)
         known_attrs = self.options.get("known-attrs", self.env.config.kernel_doc_known_attrs)
 
-        if self.arguments[0].startswith("./"):
-            # the prefix "./" indicates a relative pathname
-            fname = self.arguments[0][2:]
-            src_tree = path.dirname(path.normpath(self.doc.current_source))
+        if self.arguments[0].startswith("/"):
+            # Absolute path names are relative to kerneldoc.SRCTREE
+            fname = self.arguments[0][1:]
+            src_tree = kerneldoc.SRCTREE
 
         if "internal" in self.options and "export" in self.options:
             raise FaultyOption(
@@ -184,7 +184,7 @@ class KernelDoc(Directive):
 
         ctx  = kerneldoc.ParserContext()
         opts = kerneldoc.ParseOptions(
-            rel_fname       = fname
+            fname           = fname
             , src_tree      = src_tree
             , id_prefix     = self.options.get("module", "").strip()
             , encoding      = self.options.get("encoding", self.env.config.source_encoding)
@@ -223,8 +223,7 @@ class KernelDoc(Directive):
             opts.no_header = bool("no-header" in self.options)
             opts.use_names.append(self.options.get("doc"))
 
-        if "export" in self.options:
-            # gather exported symbols and add them to the list of names
+        if "export" in self.options and self.options.get('export'):
             kerneldoc.Parser.gather_context(kerneldoc.readFile(opts.fname), ctx, opts)
             exp_files.extend((self.options.get('export') or "").replace(","," ").split())
             opts.error_missing = True
@@ -240,18 +239,16 @@ class KernelDoc(Directive):
                 self.options["functions"].replace(","," ").split())
 
         for pattern in exp_files:
-            if pattern.startswith("./"): # "./" indicates a relative pathname
-                pattern = path.join(
-                    path.dirname(path.normpath(self.doc.current_source))
-                    , pattern[2:])
-            else:
-                pattern = path.join(kerneldoc.SRCTREE, pattern)
+
+            if pattern[0] == '/':
+                pattern = pattern[1:]
+            pattern = path.join(opts.src_tree, pattern)
 
             if ( not glob.has_magic(pattern)
                  and not path.lexists(pattern) ):
                 # if pattern is a filename (is not a glob pattern) and this file
                 # does not exists, an error is raised.
-                raise FaultyOption("file not found: %s" % pattern)
+                raise FaultyOption("file (pattern) not found: %s" % pattern)
 
             for fname in glob.glob(pattern):
                 self.env.note_dependency(path.abspath(fname))
