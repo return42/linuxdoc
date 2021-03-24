@@ -84,27 +84,6 @@ zero_pylint: pylint-exe
 	$(call cmd,pylint,$(PYOBJECTS)) | grep '^[\*\*\*\*\*\*|linuxdoc]' > 0_pylint_py$(PY)
 
 
-## srctree variable
-## ----------------
-##
-## Path where Kernel's sources cloned, default is ``../linux``.::
-##
-##     git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git linux
-##
-srctree ?= ../linux
-
-# zero build's CWD is ./build/0_build_worktree: srctree has to be abspath
-srctree ::= $(abspath $(srctree))
-export srctree
-
-PHONY += diff_linux
-diff_linux:
-	git -C $(srctree) diff > docs/downloads/patch_linux.patch
-
-PHONY += patch_linux
-patch_linux:
-	git -C $(srctree) apply $(PWD)/docs/downloads/patch_linux.patch
-
 ## ------------------------------------------------------------------------------
 ## zero.build: add linux kernel's sphinx-books
 ## ------------------------------------------------------------------------------
@@ -140,61 +119,5 @@ PHONY += docs
 docs.xml:  pyenvinstall $(API_DOC)
 	$(call cmd,sphinx,xml,docs,docs)
 
-KERNEL_DOC=$(srctree)/Documentation
-
-## zero.src2rst
-## ------------
-##
-## To track changes of the kernel-doc parser (generated output), add linux
-## autodoc sources to reST as one zero.build target.  Require Kernel's sources
-## at `srctree variable`_.
-##
-PHONY += zero.src2rst
-zero.src2rst: $(PY_ENV) src-reST-Files
-	rm -rf $(AUTODOC_FOLDER)
-	$(AUTODOC_SCRIPT)  --markup kernel-doc --rst-files $(0_BUILD_DEST)/src-reST-Files.txt $(srctree) $(AUTODOC_FOLDER)
-
-zero.build:: zero.src2rst
-
-# kernel's sphinx-books
-AUTODOC_SCRIPT := $(PY_ENV_BIN)/kernel-autodoc
-AUTODOC_FOLDER := $(0_BUILD_DEST)/autodoc.linux
-
-PHONY += src-reST-Files
-src-reST-Files: $(PY_ENV)
-	$(PY_ENV_BIN)/$(PYTHON) ./kernel-docgrep $(KERNEL_DOC) > $(0_BUILD_DEST)/src-reST-Files.txt
-
-
-
-# FIXME: media not yet work
-#KERNEL_BOOKS   = $(filter-out media,$(patsubst $(KERNEL_DOC)/%/conf.py,%,$(wildcard $(KERNEL_DOC)/*/conf.py)))
-#KERNEL_0_BUILD = $(patsubst %,books/%.zero, $(KERNEL_BOOKS))
-#
-# zero.build:: $(KERNEL_0_BUILD)
-#
-#PHONY += $(KERNEL_0_BUILD)
-#$(KERNEL_0_BUILD):
-#	@echo "  ZERO-BUILD   $@"
-#	$(call cmd,kernel_book,xml,$(patsubst books/%.zero,%,$@),xml,$(KERNEL_DOC))
-#
-#
-# $2 sphinx builder e.g. "html"
-# $3 name of the book / e.g. "gpu", used as:
-#    * dest folder relative to $(DIST_BOOKS) and
-#    * cache folder relative to $(DOCS_BUILD)/$3.doctrees
-# $4 dest subfolder e.g. "man" for man pages at gpu/man
-# $5 reST source folder,
-#    e.g. "$(BOOKS_MIGRATED_FOLDER)" for the migrated books
-#
-# quiet_cmd_kernel_book = $(shell echo "     $2" | tr '[:lower:]' '[:upper:]')     --> file://$(abspath $(0_BUILD_DEST)/$3/$4)
-#       cmd_kernel_book = SPHINX_CONF=$(abspath $5/$3/conf.py) \
-# 	$(SPHINXBUILD) \
-# 	$(ALLSPHINXOPTS) \
-# 	-b $2 \
-# 	-c docs \
-# 	-d $(DOCS_BUILD)/$3.doctrees \
-# 	$(abspath $5/$3) \
-# 	$(abspath $(0_BUILD_DEST)/$3/$4)
 
 .PHONY: $(PHONY)
-
