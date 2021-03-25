@@ -1,24 +1,21 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.rstKernelDoc module &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <title>linuxdoc.rstKernelDoc module &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="linuxdoc.rstFlatTable module" href="linuxdoc.rstFlatTable.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
-   
+    <link rel="prev" title="linuxdoc.rstFlatTable module" href="linuxdoc.rstFlatTable.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,7 +29,7 @@
         <li class="right" >
           <a href="linuxdoc.rstFlatTable.html" title="linuxdoc.rstFlatTable module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="linuxdoc.html" accesskey="U">linuxdoc package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.rstKernelDoc module</a></li> 
       </ul>
@@ -43,125 +40,160 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-linuxdoc.rstKernelDoc">
-<span id="linuxdoc-rstkerneldoc-module"></span><h1>linuxdoc.rstKernelDoc module<a class="headerlink" href="#module-linuxdoc.rstKernelDoc" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="rstkerneldoc">
-<h2>rstKernelDoc<a class="headerlink" href="#rstkerneldoc" title="Permalink to this headline">¶</a></h2>
+  <section id="module-linuxdoc.rstKernelDoc">
+<span id="linuxdoc-rstkerneldoc-module"></span><h1>linuxdoc.rstKernelDoc module<a class="headerlink" href="#module-linuxdoc.rstKernelDoc" title="Permalink to this heading">¶</a></h1>
+<section id="rstkerneldoc">
+<h2>rstKernelDoc<a class="headerlink" href="#rstkerneldoc" title="Permalink to this heading">¶</a></h2>
 <p>Implementation of the <code class="docutils literal notranslate"><span class="pre">kernel-doc</span></code> reST-directive.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">kernel-doc</span></code> (<a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc" title="linuxdoc.rstKernelDoc.KernelDoc"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelDoc</span></code></a>) directive includes contend from
 linux kernel source code comments.</p>
+</section>
 <dl class="py exception">
-<dt id="linuxdoc.rstKernelDoc.FaultyOption">
-<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></code><code class="sig-name descname"><span class="pre">FaultyOption</span></code><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#FaultyOption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.FaultyOption" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.FaultyOption">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></span><span class="sig-name descname"><span class="pre">FaultyOption</span></span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#FaultyOption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.FaultyOption" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></code><code class="sig-name descname"><span class="pre">KernelDoc</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.parsers.rst.Directive</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></span><span class="sig-name descname"><span class="pre">KernelDoc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Directive</span></code></p>
 <p>KernelDoc (<code class="docutils literal notranslate"><span class="pre">kernel-doc</span></code>) directive</p>
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc.errMsg">
-<code class="sig-name descname"><span class="pre">errMsg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.errMsg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.errMsg" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc.errMsg">
+<span class="sig-name descname"><span class="pre">errMsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.errMsg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.errMsg" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc.final_argument_whitespace">
-<code class="sig-name descname"><span class="pre">final_argument_whitespace</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.final_argument_whitespace" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc.final_argument_whitespace">
+<span class="sig-name descname"><span class="pre">final_argument_whitespace</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.final_argument_whitespace" title="Permalink to this definition">¶</a></dt>
 <dd><p>May the final argument contain whitespace?</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc.getNodes">
-<code class="sig-name descname"><span class="pre">getNodes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.getNodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.getNodes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc.getNodes">
+<span class="sig-name descname"><span class="pre">getNodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.getNodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.getNodes" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc.getParserOptions">
-<code class="sig-name descname"><span class="pre">getParserOptions</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.getParserOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.getParserOptions" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc.getParserOptions">
+<span class="sig-name descname"><span class="pre">getParserOptions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.getParserOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.getParserOptions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc.option_spec">
-<code class="sig-name descname"><span class="pre">option_spec</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'debug':</span> <span class="pre">&lt;function</span> <span class="pre">flag&gt;,</span> <span class="pre">'doc':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'encoding':</span> <span class="pre">&lt;function</span> <span class="pre">encoding&gt;,</span> <span class="pre">'exp-ids':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'exp-method':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'export':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'functions':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'internal':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'known-attrs':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'language':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'linenos':</span> <span class="pre">&lt;function</span> <span class="pre">flag&gt;,</span> <span class="pre">'man-sect':</span> <span class="pre">&lt;function</span> <span class="pre">nonnegative_int&gt;,</span> <span class="pre">'module':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'no-header':</span> <span class="pre">&lt;function</span> <span class="pre">flag&gt;,</span> <span class="pre">'snippets':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'symbols':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;}</span></em><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.option_spec" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc.option_spec">
+<span class="sig-name descname"><span class="pre">option_spec</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'debug':</span> <span class="pre">&lt;function</span> <span class="pre">flag&gt;,</span> <span class="pre">'doc':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'encoding':</span> <span class="pre">&lt;function</span> <span class="pre">encoding&gt;,</span> <span class="pre">'exp-ids':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'exp-method':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'export':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'functions':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'internal':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'known-attrs':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'language':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'linenos':</span> <span class="pre">&lt;function</span> <span class="pre">flag&gt;,</span> <span class="pre">'man-sect':</span> <span class="pre">&lt;function</span> <span class="pre">nonnegative_int&gt;,</span> <span class="pre">'module':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'no-header':</span> <span class="pre">&lt;function</span> <span class="pre">flag&gt;,</span> <span class="pre">'snippets':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'symbols':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;}</span></em><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.option_spec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mapping of option names to validator functions.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc.optional_arguments">
-<code class="sig-name descname"><span class="pre">optional_arguments</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.optional_arguments" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc.optional_arguments">
+<span class="sig-name descname"><span class="pre">optional_arguments</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.optional_arguments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of optional arguments after the required arguments.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc.parseSource">
-<code class="sig-name descname"><span class="pre">parseSource</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.parseSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.parseSource" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc.parseSource">
+<span class="sig-name descname"><span class="pre">parseSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.parseSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.parseSource" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc.required_arguments">
-<code class="sig-name descname"><span class="pre">required_arguments</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.required_arguments" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc.required_arguments">
+<span class="sig-name descname"><span class="pre">required_arguments</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.required_arguments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of required directive arguments.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.KernelDoc.run">
-<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDoc.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDoc.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDoc.run" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.rstKernelDoc.KernelDocParser">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></code><code class="sig-name descname"><span class="pre">KernelDocParser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser" title="linuxdoc.kernel_doc.Parser"><code class="xref py py-class docutils literal notranslate"><span class="pre">linuxdoc.kernel_doc.Parser</span></code></a></p>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDocParser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></span><span class="sig-name descname"><span class="pre">KernelDocParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser" title="linuxdoc.kernel_doc.Parser"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parser</span></code></a></p>
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.KernelDocParser.debug">
-<code class="sig-name descname"><span class="pre">debug</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser.debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser.debug" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDocParser.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser.debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser.debug" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.KernelDocParser.error">
-<code class="sig-name descname"><span class="pre">error</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser.error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser.error" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDocParser.error">
+<span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser.error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser.error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.KernelDocParser.info">
-<code class="sig-name descname"><span class="pre">info</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser.info" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDocParser.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser.info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.KernelDocParser.warn">
-<code class="sig-name descname"><span class="pre">warn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser.warn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser.warn" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.KernelDocParser.warn">
+<span class="sig-name descname"><span class="pre">warn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#KernelDocParser.warn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.KernelDocParser.warn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.PARSER_CACHE">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></span><span class="sig-name descname"><span class="pre">PARSER_CACHE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;linuxdoc.rstKernelDoc.ParserCache</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#linuxdoc.rstKernelDoc.PARSER_CACHE" title="Permalink to this definition">¶</a></dt>
+<dd><p>ToDo: this type of cache (in process) does not (fully) support sphinx’s
+paralell build (job option -j N) where builds are spanned over processes.
+Sphinx-build creates a new job (process) not for each kernel-doc directive but
+for each rest-file (that contains at least one kernel-doc directive).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.ParserCache">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></span><span class="sig-name descname"><span class="pre">ParserCache</span></span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#ParserCache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.ParserCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A simple (in process) cache for <a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDocParser" title="linuxdoc.rstKernelDoc.KernelDocParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KernelDocParser</span></code></a> objects (read
+<a class="reference internal" href="#linuxdoc.rstKernelDoc.PARSER_CACHE" title="linuxdoc.rstKernelDoc.PARSER_CACHE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PARSER_CACHE</span></code></a>)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.ParserCache.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#ParserCache.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.ParserCache.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.ParserCache.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#ParserCache.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.ParserCache.get_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a cache ID from the options of the kernel-doc directive.  Some of
+the options control the parsing rules and thus in the end the parsing
+result.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.ParserCache.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#ParserCache.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.ParserCache.set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.rstKernelDoc.WriterList">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></code><code class="sig-name descname"><span class="pre">WriterList</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#WriterList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.WriterList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.statemachine.ViewList</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.WriterList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></span><span class="sig-name descname"><span class="pre">WriterList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#WriterList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.WriterList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ViewList</span></code></p>
 <p>docutils ViewList with write method.</p>
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.WriterList.flush">
-<code class="sig-name descname"><span class="pre">flush</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#WriterList.flush"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.WriterList.flush" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.WriterList.flush">
+<span class="sig-name descname"><span class="pre">flush</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#WriterList.flush"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.WriterList.flush" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstKernelDoc.WriterList.write">
-<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cont</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#WriterList.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.WriterList.write" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.WriterList.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cont</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#WriterList.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.WriterList.write" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.rstKernelDoc.setup">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></code><code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.setup" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstKernelDoc.setup">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.rstKernelDoc.</span></span><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstKernelDoc.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstKernelDoc.setup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</div>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -207,6 +239,39 @@ linux kernel source code comments.</p>
   <ul>
 <li><a class="reference internal" href="#">linuxdoc.rstKernelDoc module</a><ul>
 <li><a class="reference internal" href="#rstkerneldoc">rstKernelDoc</a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.FaultyOption"><code class="docutils literal notranslate"><span class="pre">FaultyOption</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc"><code class="docutils literal notranslate"><span class="pre">KernelDoc</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc.errMsg"><code class="docutils literal notranslate"><span class="pre">KernelDoc.errMsg()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc.final_argument_whitespace"><code class="docutils literal notranslate"><span class="pre">KernelDoc.final_argument_whitespace</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc.getNodes"><code class="docutils literal notranslate"><span class="pre">KernelDoc.getNodes()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc.getParserOptions"><code class="docutils literal notranslate"><span class="pre">KernelDoc.getParserOptions()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc.option_spec"><code class="docutils literal notranslate"><span class="pre">KernelDoc.option_spec</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc.optional_arguments"><code class="docutils literal notranslate"><span class="pre">KernelDoc.optional_arguments</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc.parseSource"><code class="docutils literal notranslate"><span class="pre">KernelDoc.parseSource()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc.required_arguments"><code class="docutils literal notranslate"><span class="pre">KernelDoc.required_arguments</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDoc.run"><code class="docutils literal notranslate"><span class="pre">KernelDoc.run()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDocParser"><code class="docutils literal notranslate"><span class="pre">KernelDocParser</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDocParser.debug"><code class="docutils literal notranslate"><span class="pre">KernelDocParser.debug()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDocParser.error"><code class="docutils literal notranslate"><span class="pre">KernelDocParser.error()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDocParser.info"><code class="docutils literal notranslate"><span class="pre">KernelDocParser.info()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.KernelDocParser.warn"><code class="docutils literal notranslate"><span class="pre">KernelDocParser.warn()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.PARSER_CACHE"><code class="docutils literal notranslate"><span class="pre">PARSER_CACHE</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.ParserCache"><code class="docutils literal notranslate"><span class="pre">ParserCache</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.ParserCache.get"><code class="docutils literal notranslate"><span class="pre">ParserCache.get()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.ParserCache.get_id"><code class="docutils literal notranslate"><span class="pre">ParserCache.get_id()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.ParserCache.set"><code class="docutils literal notranslate"><span class="pre">ParserCache.set()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.WriterList"><code class="docutils literal notranslate"><span class="pre">WriterList</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.WriterList.flush"><code class="docutils literal notranslate"><span class="pre">WriterList.flush()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.WriterList.write"><code class="docutils literal notranslate"><span class="pre">WriterList.write()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.rstKernelDoc.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -215,20 +280,20 @@ linux kernel source code comments.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

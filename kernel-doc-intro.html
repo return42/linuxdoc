@@ -1,25 +1,22 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>kernel-doc introduction &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <title>kernel-doc introduction &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Install LinuxDoc" href="install.html" />
-    <link rel="prev" title="LinuxDoc" href="index.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
-   
+    <link rel="prev" title="LinuxDoc" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -36,7 +33,7 @@
         <li class="right" >
           <a href="index.html" title="LinuxDoc"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">kernel-doc introduction</a></li> 
       </ul>
     </div>  
@@ -46,8 +43,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="kernel-doc-introduction">
-<span id="kernel-doc-intro"></span><h1>kernel-doc introduction<a class="headerlink" href="#kernel-doc-introduction" title="Permalink to this headline">¶</a></h1>
+  <section id="kernel-doc-introduction">
+<span id="kernel-doc-intro"></span><h1>kernel-doc introduction<a class="headerlink" href="#kernel-doc-introduction" title="Permalink to this heading">¶</a></h1>
 <p>In order to embed <strong>“C” friendly</strong> and extractable documentation into C/C++
 source code comments, the Kernel community adopted a consistent style for
 documentation comments.  The markup for this documentation is called the
@@ -78,8 +75,8 @@ comment so marked must be in kernel-doc format.  The closing comment marker for
 kernel-doc comments can be either <code class="docutils literal notranslate"><span class="pre">*/</span></code> or <code class="docutils literal notranslate"><span class="pre">**/</span></code>, but <code class="docutils literal notranslate"><span class="pre">*/</span></code> is preferred in
 the Linux kernel tree.  The lines in between should be prefixed by `` * ``
 (space star space).</p>
-<div class="section" id="by-example">
-<span id="kernel-doc-intro-example"></span><h2>by example<a class="headerlink" href="#by-example" title="Permalink to this headline">¶</a></h2>
+<section id="by-example">
+<span id="kernel-doc-intro-example"></span><h2>by example<a class="headerlink" href="#by-example" title="Permalink to this heading">¶</a></h2>
 <p>Lets start with a simple example, documenting our elaborate <em>foobar</em> function.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * foobar() - short function description of foobar</span>
@@ -108,7 +105,7 @@ the Linux kernel tree.  The lines in between should be prefixed by `` * ``
 <span class="cm"> * Return:</span>
 <span class="cm"> * Describe the return value of foobar.</span>
 <span class="cm"> */</span>
-<span class="kt">int</span> <span class="nf">foobar</span><span class="p">(</span><span class="kt">int</span> <span class="n">arg1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">arg2</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">foobar</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">arg1</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">arg2</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Pause here and recap what we have seen in the example above.  It is a mix-up of
@@ -198,9 +195,9 @@ markup and the reST markup will bite each other.  There you will need some
 quotes (<code class="docutils literal notranslate"><span class="pre">\</span></code>) to escape, that might partial cutting your joy in kernel-doc.
 Anyway, overall you should be able to recognize the daily benefit of using
 kernel-doc markup in your projects.</p>
-</div>
-<div class="section" id="linuxdoc-feature-overview">
-<h2>LinuxDoc feature overview<a class="headerlink" href="#linuxdoc-feature-overview" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="linuxdoc-feature-overview">
+<h2>LinuxDoc feature overview<a class="headerlink" href="#linuxdoc-feature-overview" title="Permalink to this heading">¶</a></h2>
 <dl class="simple">
 <dt>kernel-doc</dt><dd><p>A “C” friendly markup, the parser, the Sphinx-doc extension and some tools.
 The kernel-doc markup embeds documentation within the C source files, using a
@@ -233,8 +230,8 @@ environment variables in the path name and allows to include files from
 arbitrary locations ref:<cite>[ref] &lt;kernel-include-directive&gt;</cite>.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -286,20 +283,20 @@ arbitrary locations ref:<cite>[ref] &lt;kernel-include-directive&gt;</cite>.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="_static/version_warning_offset.js"></script>
 

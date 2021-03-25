@@ -226,7 +226,7 @@ To insert the documentation use:
       :export:  ./all-in-a-tumble.h
       :exp-method: attribute
       :exp-ids: API_EXPORTED
-      :module: test-fnattrs
+      :module: test.fnattrs
 
 The ``exp-method`` and ``exp-ids`` could be respectively omitted if
 ``kernel_doc_exp_method`` and ``kernel_doc_exp_ids`` are set in the sphinx
@@ -239,38 +239,102 @@ configuration.
       :export:  ./all-in-a-tumble.h
       :exp-method: attribute
       :exp-ids: API_EXPORTED
-      :module: test-fnattrs
+      :module: test.fnattrs
 
 .. _opt_internal:
 
 option ``:internal:``
 ---------------------
 
-Include documentation for all documented definitions, **not** exported.  This
-test gathers exports from :ref:`all-in-a-tumble.h-src` and
-:ref:`all-in-a-tumble.c-src` and parses comments from
-:ref:`all-in-a-tumble.c-src`, from where only the *not exported* definitions are
-used in the reST output:
+Include documentation of all documented definitions, **not** exported.  This
+test gathers exports from :origin:`test_internals.h
+<docs/linuxdoc-howto/test_internals.h>` and :origin:`test_internals.c
+<docs/linuxdoc-howto/test_internals.c>` and parses comments from
+:origin:`test_internals.c <docs/linuxdoc-howto/test_internals.c>`, from where
+only the *not exported* definitions are used in the reST output.
 
-.. code-block:: rst
+.. attention::
 
-   .. kernel-doc::  ./all-in-a-tumble.c
-      :internal:  ./all-in-a-tumble.h
-      :module: tests-internal
+   The both examples below also demonstrate that it is not good to mix the
+   export methods (``:exp-method: [macro|attribute]``) in one source
+   ``test_internals.[hc]``.  Only one methode can be used by the ``:internal:``
+   option to identfy a symbol to be exported.
 
-The example also shows, that mixing different values for
+.. tabs::
 
-- ``:exp-method:`` --> ``[macro|attribute]`` and
-- ``:exp-ids:``    --> ``[EXPORT_SYMBOL|API_EXPORTED]``
+   .. group-tab:: exp-method is ``macro``
 
-in one source file is not well supported:
+      From :``test_internals.h``:
 
-.. admonition:: internal symbols
-   :class: rst-example
+      .. kernel-doc::  ./test_internals.h
+	 :snippets: EXP_SYMB
 
-   .. kernel-doc::  ./all-in-a-tumble.c
-      :internal:  ./all-in-a-tumble.h
-      :module: tests-internal
+      From ``test_internals.c``:
+
+      .. kernel-doc::  ./test_internals.c
+	 :snippets: EXP_SYMB
+
+   .. group-tab:: exp-method is ``attribute``
+
+      From ``test_internals.c``:
+
+      .. kernel-doc::  ./test_internals.c
+	 :snippets: API_EXP
+
+      From ``test_internals.h``:
+
+      .. kernel-doc::  ./test_internals.h
+	 :snippets: API_EXP
+
+.. tabs::
+
+   .. group-tab:: exp-method is ``macro``
+
+      .. code-block:: rst
+
+	 .. kernel-doc::  ./test_internals.c
+	    :internal:  ./test_internals.h
+	    :module: test_internals_A
+	    :exp-method: macro
+	    :exp-ids: EXP_SYMB
+	    :known-attrs: API_EXP
+
+	 Its not good to mix ``exp-method``, the ``know-attrs`` here is needed to
+	 avoid the Sphinx warning::
+
+             test_internals.c:24: WARNING: Error in declarator or parameters
+	     Invalid C declaration: Expected identifier in nested name, got keyword: int [error at 11]
+	     API_EXP int bar(int a,  ...)
+	     -----------^
+
+      .. admonition:: internal symbols (when exp-method is ``macro``)
+	 :class: rst-example
+
+	 .. kernel-doc::  ./test_internals.c
+	    :internal:  ./test_internals.h
+	    :module: test_internals_A
+	    :exp-method: macro
+	    :exp-ids: EXP_SYMB
+	    :known-attrs: API_EXP
+
+   .. group-tab:: exp-method is ``attribute``
+
+      .. code-block:: rst
+
+	 .. kernel-doc::  ./test_internals.c
+	    :internal:  ./test_internals.h
+	    :module: test_internals_B
+	    :exp-method: attribute
+	    :exp-ids: API_EXP
+
+      .. admonition:: internal symbols (when exp-method is ``attribute``)
+	 :class: rst-example
+
+	 .. kernel-doc::  ./test_internals.c
+	    :internal:  ./test_internals.h
+	    :module: test_internals_B
+	    :exp-method: attribute
+	    :exp-ids: API_EXP
 
 
 Missing exports

@@ -1,25 +1,22 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Examples &amp; Tests &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <title>Examples &amp; Tests &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="kernel-doc Test" href="kernel-doc-tests.html" />
-    <link rel="prev" title="kernel-doc in reST documents" href="kernel-doc-directive.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
-   
+    <link rel="prev" title="kernel-doc in reST documents" href="kernel-doc-directive.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -36,7 +33,7 @@
         <li class="right" >
           <a href="kernel-doc-directive.html" title="kernel-doc in reST documents"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">LinuxDoc HowTo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Examples &amp; Tests</a></li> 
       </ul>
@@ -47,8 +44,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="examples-tests">
-<span id="kernel-doc-examples"></span><h1>Examples &amp; Tests<a class="headerlink" href="#examples-tests" title="Permalink to this headline">¶</a></h1>
+  <section id="examples-tests">
+<span id="kernel-doc-examples"></span><h1>Examples &amp; Tests<a class="headerlink" href="#examples-tests" title="Permalink to this heading">¶</a></h1>
 <p>The files <a class="reference internal" href="all-in-a-tumble-src.html#all-in-a-tumble-c-src"><span class="std std-ref">source all-in-a-tumble.c</span></a> and <a class="reference internal" href="all-in-a-tumble-src.html#all-in-a-tumble-h-src"><span class="std std-ref">source all-in-a-tumble.h</span></a> are
 including all examples of the <a class="reference internal" href="index.html#linuxdoc-howto"><span class="std std-ref">LinuxDoc HowTo</span></a> documentation.  These
 files are also used as a test of the kernel-doc parser, to see how kernel-doc
@@ -86,6 +83,7 @@ content will be rendered and where the parser might fail.</p>
 <li class="toctree-l1"><a class="reference internal" href="all-in-a-tumble.html">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a><ul>
 <li class="toctree-l2"><a class="reference internal" href="all-in-a-tumble.html#all-in-a-tumble-h">all-in-a-tumble.h</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#about-examples">About Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#callback">callback</a></li>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#trace-block-touch-buffer">trace_block_touch_buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#trace-block-dirty-buffer">trace_block_dirty_buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#theory-of-operation">Theory of Operation</a></li>
@@ -102,14 +100,15 @@ content will be rendered and where the parser might fail.</p>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#enum-foo">enum foo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#struct-something">struct something</a></li>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#struct-lineevent-state">struct lineevent_state</a></li>
-<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#genpool-algo-t">genpool_algo_t</a></li>
-<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#v4l2-check-dv-timings-fnc">v4l2_check_dv_timings_fnc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#typedef-genpool-algo-t">typedef genpool_algo_t</a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#typedef-v4l2-check-dv-timings-fnc">typedef v4l2_check_dv_timings_fnc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#macro-add">macro ADD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#macro-iosys-map-wr-field">macro iosys_map_wr_field</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="all-in-a-tumble.html#all-in-a-tumble-c">all-in-a-tumble.c</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#user-function">user_function</a></li>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#user-sum">user_sum</a></li>
-<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#internal-function">internal_function</a></li>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#sys-tgkill">sys_tgkill</a></li>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#enum-rarely-enum">enum rarely_enum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html#struct-rarely-struct">struct rarely_struct</a></li>
@@ -119,7 +118,7 @@ content will be rendered and where the parser might fail.</p>
 </li>
 </ul>
 </div>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -165,20 +164,20 @@ content will be rendered and where the parser might fail.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

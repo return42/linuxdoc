@@ -14,10 +14,14 @@ p.version-warning {
   background-color: #004b6b;
 }
 
-div.sidebar {
+aside.sidebar {
   background-color: whitesmoke;
   border-color: lightsteelblue;
   border-radius: 3pt;
+}
+
+div.sphinxsidebar p.caption {
+  display: none;
 }
 
 p.sidebar-title, .sidebar p {
@@ -29,11 +33,14 @@ p.sidebar-title, .sidebar p {
   list-style-type: disclosure-closed;
 }
 
+.sphinxsidebar .current > a {
+  font-weight: bold;
+}
 
 /* admonitions
 */
 
-div.admonition, div.topic, div.toctree-wrapper {
+div.admonition, div.topic, nav.contents, div.toctree-wrapper {
   background-color: #fafafa;
   margin: 8px 0px;
   padding: 1em;
@@ -137,4 +144,8 @@ caption {
   margin: 0.5em 0 0.5em 0;
   caption-side: top;
   text-align: left;
+}
+
+div.sphinx-tabs {
+    clear: both;
 }

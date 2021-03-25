@@ -1,24 +1,21 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.rstKernelDoc &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <title>linuxdoc.rstKernelDoc &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/tabs.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../../';</script>
-   
+    <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -29,7 +26,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.rstKernelDoc</a></li> 
       </ul>
@@ -61,7 +58,7 @@ linux kernel source code comments.
 
 import glob
 import logging
-from os import path, sep
+from os import path
 from io import StringIO
 
 import six
@@ -72,6 +69,7 @@ from docutils.utils import SystemMessage
 from docutils.statemachine import ViewList
 from sphinx.util.docutils import switch_source_input
 
+from fspath import OS_ENV
 from . import kernel_doc as kerneldoc
 
 # ==============================================================================
@@ -80,7 +78,38 @@ from . import kernel_doc as kerneldoc
 
 __version__  = &#39;3.0&#39;
 
-PARSER_CACHE = dict()
+<div class="viewcode-block" id="ParserCache"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache">[docs]</a>class ParserCache:
+    &quot;&quot;&quot;A simple (in process) cache for :py:obj:`KernelDocParser` objects (read
+    :py:obj:`PARSER_CACHE`)
+
+    &quot;&quot;&quot;
+
+    def __init__(self):
+        self._cache = {}
+
+<div class="viewcode-block" id="ParserCache.get_id"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get_id">[docs]</a>    def get_id(self, opts):
+        &quot;&quot;&quot;Generate a cache ID from the options of the kernel-doc directive.  Some of
+        the options control the parsing rules and thus in the end the parsing
+        result.
+
+        &quot;&quot;&quot;
+        return (opts.fname, opts.exp_method, tuple(opts.exp_ids), tuple(opts.known_attrs))</div>
+
+<div class="viewcode-block" id="ParserCache.get"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get">[docs]</a>    def get(self, opts):
+        x = self.get_id(opts)
+        return self._cache.get(x)</div>
+
+<div class="viewcode-block" id="ParserCache.set"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.set">[docs]</a>    def set(self, opts, parser):
+        self._cache[self.get_id(opts)] = parser</div></div>
+
+
+PARSER_CACHE = ParserCache()
+&quot;&quot;&quot;ToDo: this type of cache (in process) does not (fully) support sphinx&#39;s
+paralell build (job option -j N) where builds are spanned over processes.
+Sphinx-build creates a new job (process) not for each kernel-doc directive but
+for each rest-file (that contains at least one kernel-doc directive).
+
+&quot;&quot;&quot;
 
 app_log = logging.getLogger(&#39;application&#39;)
 
@@ -95,6 +124,7 @@ app_log = logging.getLogger(&#39;application&#39;)
     app.add_config_value(&#39;kernel_doc_exp_method&#39;, None, &#39;env&#39;)
     app.add_config_value(&#39;kernel_doc_exp_ids&#39;, None, &#39;env&#39;)
     app.add_config_value(&#39;kernel_doc_known_attrs&#39;, None, &#39;env&#39;)
+    app.add_config_value(&#39;kernel_doc_srctree&#39;, kerneldoc.SRCTREE, &#39;env&#39;)
     app.add_directive(&quot;kernel-doc&quot;, KernelDoc)
 
     return dict(
@@ -110,7 +140,7 @@ app_log = logging.getLogger(&#39;application&#39;)
     # pylint: disable=deprecated-method
 
     def __init__(self, app, *args, **kwargs):
-        super(KernelDocParser, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.app = app
 
     # -------------------------------------------------
@@ -203,9 +233,10 @@ app_log = logging.getLogger(&#39;application&#39;)
         known_attrs = self.options.get(&quot;known-attrs&quot;, self.env.config.kernel_doc_known_attrs)
 
         if self.arguments[0].startswith(&quot;/&quot;):
-            # Absolute path names are relative to kerneldoc.SRCTREE
+            # Absolute path names are relative to srctree, which is taken from
+            # environment, configuration or current directory (in this order).
             fname = self.arguments[0][1:]
-            src_tree = kerneldoc.SRCTREE
+            src_tree = OS_ENV.get(&quot;srctree&quot;, self.env.config.kernel_doc_srctree)
 
         if &quot;internal&quot; in self.options and &quot;export&quot; in self.options:
             raise FaultyOption(
@@ -334,14 +365,14 @@ app_log = logging.getLogger(&#39;application&#39;)
         self.state_machine.insert_input(todo.split(&quot;\n&quot;), self.arguments[0] )</div>
 
 <div class="viewcode-block" id="KernelDoc.parseSource"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.parseSource">[docs]</a>    def parseSource(self, opts):
-        parser = PARSER_CACHE.get(opts.fname, None)
+        parser = PARSER_CACHE.get(opts)
 
         if parser is None:
-            self.env.note_dependency(opts.fname)
+            self.env.note_dependency(opts.fname) # ??
             #app_log.info(&quot;parse kernel-doc comments from: %s&quot; % opts.fname)
             parser = KernelDocParser(self.env.app, opts, kerneldoc.NullTranslator())
             parser.parse()
-            PARSER_CACHE[opts.fname] = parser
+            PARSER_CACHE.set(opts, parser)
         else:
             parser.setOptions(opts)
 
@@ -349,7 +380,7 @@ app_log = logging.getLogger(&#39;application&#39;)
 
 <div class="viewcode-block" id="KernelDoc.run"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.run">[docs]</a>    def run(self):
 
-        # FIXME: think about again; these members has been added for convenience
+        # ToDo: think about again; these members has been added for convenience
         self.parser = None                     # pylint: disable=attribute-defined-outside-init
         self.doc    = self.state.document      # pylint: disable=attribute-defined-outside-init
         self.env    = self.doc.settings.env    # pylint: disable=attribute-defined-outside-init
@@ -371,7 +402,7 @@ app_log = logging.getLogger(&#39;application&#39;)
             if not self.doc.settings.file_insertion_enabled:
                 raise FaultyOption(&#39;docutils: file insertion disabled&#39;)
             opts = self.getParserOptions()
-            # FIXME: think about again; these members has been added for convenience
+            # ToDo: think about again; these members has been added for convenience
             self.parser = self.parseSource(opts) # pylint: disable=attribute-defined-outside-init
             self.nodes.extend(self.getNodes())
 
@@ -533,20 +564,20 @@ app_log = logging.getLogger(&#39;application&#39;)
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../../_static/version_warning_offset.js"></script>
 

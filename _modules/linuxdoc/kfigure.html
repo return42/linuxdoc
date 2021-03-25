@@ -1,24 +1,21 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.kfigure &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <title>linuxdoc.kfigure &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/tabs.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../../';</script>
-   
+    <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -29,7 +26,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.kfigure</a></li> 
       </ul>
@@ -57,14 +54,12 @@ import os
 from os import path
 import subprocess
 from hashlib import sha1
-import sys
 import logging
 
 from docutils import nodes
 from docutils.statemachine import ViewList
 from docutils.parsers.rst import directives
 from docutils.parsers.rst.directives import images
-import sphinx
 
 from sphinx.util.nodes import clean_astext
 from six import iteritems
@@ -93,7 +88,7 @@ app_log = logging.getLogger(&#39;application&#39;)
         os.makedirs(folder, mode)</div>
 
 <div class="viewcode-block" id="file2literal"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.file2literal">[docs]</a>def file2literal(fname):
-    with open(fname, &quot;r&quot;) as src:
+    with open(fname, &quot;r&quot;, encoding=&quot;utf-8&quot;) as src:
         data = src.read()
         node = nodes.literal_block(data, data)
     return node</div>
@@ -175,12 +170,12 @@ convert_cmd = None
     convert_cmd = which(&#39;convert&#39;)
 
     if dot_cmd:
-        app_log.info(&quot;use dot(1) from: &quot; + dot_cmd)
+        app_log.info(&quot;use dot(1) from: %s&quot;,  dot_cmd)
     else:
         app_log.warn(&quot;dot(1) not found, for better output quality install &quot;
                      &quot;graphviz from http://www.graphviz.org&quot;)
     if convert_cmd:
-        app_log.info(&quot;use convert(1) from: &quot; + convert_cmd)
+        app_log.info(&quot;use convert(1) from: %s&quot;, convert_cmd)
     else:
         app_log.warn(
             &quot;convert(1) not found, for SVG to PDF conversion install &quot;
@@ -218,7 +213,7 @@ RENDER_MARKUP_EXT = {
 
     # in kernel builds, use &#39;make SPHINXOPTS=-v&#39; to see verbose messages
 
-    app_log.info(&#39;assert best format for: &#39; + img_node[&#39;uri&#39;])
+    app_log.info(&#39;assert best format for: %s&#39;, img_node[&#39;uri&#39;])
 
     if in_ext == &#39;.dot&#39;:
 
@@ -263,18 +258,18 @@ RENDER_MARKUP_EXT = {
         _name = dst_fname[len(translator.builder.outdir) + 1:]
 
         if isNewer(dst_fname, src_fname):
-            app_log.info(&quot;convert: {out}/%s already exists and is newer&quot; % _name)
+            app_log.info(&quot;convert: {out}/%s already exists and is newer&quot;, _name)
 
         else:
             ok = False
             mkdir(path.dirname(dst_fname))
 
             if in_ext == &#39;.dot&#39;:
-                app_log.info(&#39;convert DOT to: {out}/&#39; + _name)
+                app_log.info(&#39;convert DOT to: {out}/%s&#39;, _name)
                 ok = dot2format(app, src_fname, dst_fname)
 
             elif in_ext == &#39;.svg&#39;:
-                app_log.info(&#39;convert SVG to: {out}/&#39; + _name)
+                app_log.info(&#39;convert SVG to: {out}/%s&#39;, _name)
                 ok = svg2pdf(app, src_fname, dst_fname)
 
             if not ok:
@@ -300,11 +295,11 @@ RENDER_MARKUP_EXT = {
     cmd = [dot_cmd, &#39;-T%s&#39; % out_format, dot_fname]
     exit_code = 42
 
-    with open(out_fname, &quot;w&quot;) as out:
+    with open(out_fname, &quot;w&quot;, encoding=&quot;utf-8&quot;) as out:
         exit_code = subprocess.call(cmd, stdout = out)
         if exit_code != 0:
             # pylint: disable=deprecated-method
-            app_log.warn(&quot;Error #%d when calling: %s&quot; % (exit_code, &quot; &quot;.join(cmd)))
+            app_log.warn(&quot;Error #%d when calling: %s&quot;, exit_code, &quot; &quot;.join(cmd))
     return bool(exit_code == 0)</div>
 
 <div class="viewcode-block" id="svg2pdf"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.svg2pdf">[docs]</a>def svg2pdf(app, svg_fname, pdf_fname): # pylint: disable=unused-argument
@@ -322,7 +317,7 @@ RENDER_MARKUP_EXT = {
     exit_code = subprocess.call(cmd)
     if exit_code != 0:
         # pylint: disable=deprecated-method
-        app_log.warn(&quot;Error #%d when calling: %s&quot; % (exit_code, &quot; &quot;.join(cmd)))
+        app_log.warn(&quot;Error #%d when calling: %s&quot;, exit_code, &quot; &quot;.join(cmd))
     return bool(exit_code == 0)</div>
 
 
@@ -414,12 +409,11 @@ RENDER_MARKUP_EXT = {
     &quot;&quot;&quot;
     srclang = node.get(&#39;srclang&#39;)
 
-    # pylint: disable=deprecated-method
-    app_log.info(&#39;visit kernel-render node lang: &quot;%s&quot;&#39; % (srclang))
+    app_log.info(&#39;visit kernel-render node lang: &quot;%s&quot;&#39;, srclang)
 
     tmp_ext = RENDER_MARKUP_EXT.get(srclang, None)
     if tmp_ext is None:
-        app_log.warn(&#39;kernel-render: &quot;%s&quot; unknown / include raw.&#39; % (srclang))
+        app_log.warning(&#39;kernel-render: &quot;%s&quot; unknown / include raw&#39;, srclang)
         return
 
     if not dot_cmd and tmp_ext == &#39;.dot&#39;:
@@ -437,7 +431,7 @@ RENDER_MARKUP_EXT = {
 
     if not path.isfile(tmp_fname):
         mkdir(path.dirname(tmp_fname))
-        with open(tmp_fname, &quot;w&quot;) as out:
+        with open(tmp_fname, &quot;w&quot;, encoding=&quot;utf-8&quot;) as out:
             out.write(code)
 
     img_node = nodes.image(node.rawsource, **node.attributes)
@@ -594,20 +588,20 @@ RENDER_MARKUP_EXT = {
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../../_static/version_warning_offset.js"></script>
 

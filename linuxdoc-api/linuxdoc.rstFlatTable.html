@@ -1,25 +1,22 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.rstFlatTable module &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <title>linuxdoc.rstFlatTable module &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="linuxdoc.rstKernelDoc module" href="linuxdoc.rstKernelDoc.html" />
-    <link rel="prev" title="linuxdoc.manKernelDoc module" href="linuxdoc.manKernelDoc.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
-   
+    <link rel="prev" title="linuxdoc.manKernelDoc module" href="linuxdoc.manKernelDoc.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -36,7 +33,7 @@
         <li class="right" >
           <a href="linuxdoc.manKernelDoc.html" title="linuxdoc.manKernelDoc module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="linuxdoc.html" accesskey="U">linuxdoc package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.rstFlatTable module</a></li> 
       </ul>
@@ -47,74 +44,75 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-linuxdoc.rstFlatTable">
-<span id="linuxdoc-rstflattable-module"></span><h1>linuxdoc.rstFlatTable module<a class="headerlink" href="#module-linuxdoc.rstFlatTable" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="flat-table">
-<h2>flat-table<a class="headerlink" href="#flat-table" title="Permalink to this headline">¶</a></h2>
+  <section id="module-linuxdoc.rstFlatTable">
+<span id="linuxdoc-rstflattable-module"></span><h1>linuxdoc.rstFlatTable module<a class="headerlink" href="#module-linuxdoc.rstFlatTable" title="Permalink to this heading">¶</a></h1>
+<section id="flat-table">
+<h2>flat-table<a class="headerlink" href="#flat-table" title="Permalink to this heading">¶</a></h2>
 <p>Implementation of the <code class="docutils literal notranslate"><span class="pre">flat-table</span></code> reST-directive.  User documentation see
 <a class="reference internal" href="../linuxdoc-howto/table-markup.html#rest-flat-table"><span class="std std-ref">flat-table</span></a></p>
+</section>
 <dl class="py class">
-<dt id="linuxdoc.rstFlatTable.FlatTable">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></code><code class="sig-name descname"><span class="pre">FlatTable</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#FlatTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.FlatTable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.parsers.rst.directives.tables.Table</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.FlatTable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></span><span class="sig-name descname"><span class="pre">FlatTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#FlatTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.FlatTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code></p>
 <p>FlatTable (<code class="docutils literal notranslate"><span class="pre">flat-table</span></code>) directive</p>
 <dl class="py attribute">
-<dt id="linuxdoc.rstFlatTable.FlatTable.option_spec">
-<code class="sig-name descname"><span class="pre">option_spec</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'class':</span> <span class="pre">&lt;function</span> <span class="pre">class_option&gt;,</span> <span class="pre">'fill-cells':</span> <span class="pre">&lt;function</span> <span class="pre">flag&gt;,</span> <span class="pre">'header-rows':</span> <span class="pre">&lt;function</span> <span class="pre">nonnegative_int&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'stub-columns':</span> <span class="pre">&lt;function</span> <span class="pre">nonnegative_int&gt;,</span> <span class="pre">'widths':</span> <span class="pre">&lt;function</span> <span class="pre">positive_int_list&gt;}</span></em><a class="headerlink" href="#linuxdoc.rstFlatTable.FlatTable.option_spec" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.FlatTable.option_spec">
+<span class="sig-name descname"><span class="pre">option_spec</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'align':</span> <span class="pre">&lt;function</span> <span class="pre">align&gt;,</span> <span class="pre">'class':</span> <span class="pre">&lt;function</span> <span class="pre">class_option&gt;,</span> <span class="pre">'fill-cells':</span> <span class="pre">&lt;function</span> <span class="pre">flag&gt;,</span> <span class="pre">'header-rows':</span> <span class="pre">&lt;function</span> <span class="pre">nonnegative_int&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'stub-columns':</span> <span class="pre">&lt;function</span> <span class="pre">nonnegative_int&gt;,</span> <span class="pre">'width':</span> <span class="pre">&lt;function</span> <span class="pre">length_or_percentage_or_unitless&gt;,</span> <span class="pre">'widths':</span> <span class="pre">&lt;function</span> <span class="pre">value_or.&lt;locals&gt;.auto_or_other&gt;}</span></em><a class="headerlink" href="#linuxdoc.rstFlatTable.FlatTable.option_spec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mapping of option names to validator functions.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstFlatTable.FlatTable.run">
-<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#FlatTable.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.FlatTable.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.FlatTable.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#FlatTable.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.FlatTable.run" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.rstFlatTable.ListTableBuilder">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></code><code class="sig-name descname"><span class="pre">ListTableBuilder</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directive</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.ListTableBuilder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></span><span class="sig-name descname"><span class="pre">ListTableBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directive</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Builds a table from a double-stage list</p>
 <dl class="py method">
-<dt id="linuxdoc.rstFlatTable.ListTableBuilder.buildTableNode">
-<code class="sig-name descname"><span class="pre">buildTableNode</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.buildTableNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.buildTableNode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.ListTableBuilder.buildTableNode">
+<span class="sig-name descname"><span class="pre">buildTableNode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.buildTableNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.buildTableNode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstFlatTable.ListTableBuilder.buildTableRowNode">
-<code class="sig-name descname"><span class="pre">buildTableRowNode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.buildTableRowNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.buildTableRowNode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.ListTableBuilder.buildTableRowNode">
+<span class="sig-name descname"><span class="pre">buildTableRowNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.buildTableRowNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.buildTableRowNode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem">
-<code class="sig-name descname"><span class="pre">parseCellItem</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cellItem</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.parseCellItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem">
+<span class="sig-name descname"><span class="pre">parseCellItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cellItem</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.parseCellItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstFlatTable.ListTableBuilder.parseFlatTableNode">
-<code class="sig-name descname"><span class="pre">parseFlatTableNode</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.parseFlatTableNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.parseFlatTableNode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.ListTableBuilder.parseFlatTableNode">
+<span class="sig-name descname"><span class="pre">parseFlatTableNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.parseFlatTableNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.parseFlatTableNode" title="Permalink to this definition">¶</a></dt>
 <dd><p>parses the node from a <a class="reference internal" href="#linuxdoc.rstFlatTable.FlatTable" title="linuxdoc.rstFlatTable.FlatTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlatTable</span></code></a> directive’s body</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstFlatTable.ListTableBuilder.parseRowItem">
-<code class="sig-name descname"><span class="pre">parseRowItem</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rowItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rowNum</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.parseRowItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.parseRowItem" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.ListTableBuilder.parseRowItem">
+<span class="sig-name descname"><span class="pre">parseRowItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rowItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rowNum</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.parseRowItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.parseRowItem" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstFlatTable.ListTableBuilder.pprint">
-<code class="sig-name descname"><span class="pre">pprint</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.pprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.pprint" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.ListTableBuilder.pprint">
+<span class="sig-name descname"><span class="pre">pprint</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.pprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.pprint" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstFlatTable.ListTableBuilder.raiseError">
-<code class="sig-name descname"><span class="pre">raiseError</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.raiseError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.raiseError" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.ListTableBuilder.raiseError">
+<span class="sig-name descname"><span class="pre">raiseError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.raiseError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.raiseError" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.rstFlatTable.ListTableBuilder.roundOffTableDefinition">
-<code class="sig-name descname"><span class="pre">roundOffTableDefinition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.roundOffTableDefinition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.roundOffTableDefinition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.ListTableBuilder.roundOffTableDefinition">
+<span class="sig-name descname"><span class="pre">roundOffTableDefinition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#ListTableBuilder.roundOffTableDefinition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.ListTableBuilder.roundOffTableDefinition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Round off the table definition.</p>
 <p>This method rounds off the table definition in <code class="xref py py-attr docutils literal notranslate"><span class="pre">rows</span></code>.</p>
 <ul class="simple">
@@ -129,34 +127,33 @@ side of the table-row</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.rstFlatTable.c_span">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></code><code class="sig-name descname"><span class="pre">c_span</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawtext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inliner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#c_span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.c_span" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.c_span">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></span><span class="sig-name descname"><span class="pre">c_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawtext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inliner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#c_span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.c_span" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.rstFlatTable.colSpan">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></code><code class="sig-name descname"><span class="pre">colSpan</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#colSpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.colSpan" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.nodes.General</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.nodes.Element</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.colSpan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></span><span class="sig-name descname"><span class="pre">colSpan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#colSpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.colSpan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">General</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.rstFlatTable.r_span">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></code><code class="sig-name descname"><span class="pre">r_span</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawtext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inliner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#r_span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.r_span" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.r_span">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></span><span class="sig-name descname"><span class="pre">r_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rawtext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inliner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#r_span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.r_span" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.rstFlatTable.rowSpan">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></code><code class="sig-name descname"><span class="pre">rowSpan</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#rowSpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.rowSpan" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.nodes.General</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.nodes.Element</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.rowSpan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></span><span class="sig-name descname"><span class="pre">rowSpan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#rowSpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.rowSpan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">General</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.rstFlatTable.setup">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></code><code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.setup" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rstFlatTable.setup">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.rstFlatTable.</span></span><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rstFlatTable.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rstFlatTable.setup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</div>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -202,6 +199,27 @@ side of the table-row</p></li>
   <ul>
 <li><a class="reference internal" href="#">linuxdoc.rstFlatTable module</a><ul>
 <li><a class="reference internal" href="#flat-table">flat-table</a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.FlatTable"><code class="docutils literal notranslate"><span class="pre">FlatTable</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.FlatTable.option_spec"><code class="docutils literal notranslate"><span class="pre">FlatTable.option_spec</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.FlatTable.run"><code class="docutils literal notranslate"><span class="pre">FlatTable.run()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.ListTableBuilder"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.ListTableBuilder.buildTableNode"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.buildTableNode()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.ListTableBuilder.buildTableRowNode"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.buildTableRowNode()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.parseCellItem()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.ListTableBuilder.parseFlatTableNode"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.parseFlatTableNode()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.ListTableBuilder.parseRowItem"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.parseRowItem()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.ListTableBuilder.pprint"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.pprint()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.ListTableBuilder.raiseError"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.raiseError()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.ListTableBuilder.roundOffTableDefinition"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.roundOffTableDefinition()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.c_span"><code class="docutils literal notranslate"><span class="pre">c_span()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.colSpan"><code class="docutils literal notranslate"><span class="pre">colSpan</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.r_span"><code class="docutils literal notranslate"><span class="pre">r_span()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.rowSpan"><code class="docutils literal notranslate"><span class="pre">rowSpan</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rstFlatTable.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -210,20 +228,20 @@ side of the table-row</p></li>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

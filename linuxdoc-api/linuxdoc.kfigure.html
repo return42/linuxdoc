@@ -1,25 +1,22 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.kfigure module &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <title>linuxdoc.kfigure module &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="linuxdoc.lint module" href="linuxdoc.lint.html" />
-    <link rel="prev" title="linuxdoc.kernel_include module" href="linuxdoc.kernel_include.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
-   
+    <link rel="prev" title="linuxdoc.kernel_include module" href="linuxdoc.kernel_include.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -36,7 +33,7 @@
         <li class="right" >
           <a href="linuxdoc.kernel_include.html" title="linuxdoc.kernel_include module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="linuxdoc.html" accesskey="U">linuxdoc package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.kfigure module</a></li> 
       </ul>
@@ -47,46 +44,47 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-linuxdoc.kfigure">
-<span id="linuxdoc-kfigure-module"></span><h1>linuxdoc.kfigure module<a class="headerlink" href="#module-linuxdoc.kfigure" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="scalable-figure-and-image-handling">
-<h2>scalable figure and image handling<a class="headerlink" href="#scalable-figure-and-image-handling" title="Permalink to this headline">¶</a></h2>
+  <section id="module-linuxdoc.kfigure">
+<span id="linuxdoc-kfigure-module"></span><h1>linuxdoc.kfigure module<a class="headerlink" href="#module-linuxdoc.kfigure" title="Permalink to this heading">¶</a></h1>
+<section id="scalable-figure-and-image-handling">
+<h2>scalable figure and image handling<a class="headerlink" href="#scalable-figure-and-image-handling" title="Permalink to this heading">¶</a></h2>
 <p>Sphinx extension which implements scalable image handling.
 User documentation see <a class="reference internal" href="../linuxdoc-howto/kfigure.html#kfigure"><span class="std std-ref">Scalable figure and image handling</span></a></p>
+</section>
 <dl class="py class">
-<dt id="linuxdoc.kfigure.KernelFigure">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">KernelFigure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelFigure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelFigure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.parsers.rst.directives.images.Figure</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelFigure">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">KernelFigure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelFigure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelFigure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
 <p>KernelImage directive</p>
 <p>Earns everything from <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">figure::</span></code> directive, except <em>remote URI</em> and
 <em>glob</em> pattern.  The KernelFigure wraps a figure node into a kernel_figure
 node. See <code class="docutils literal notranslate"><span class="pre">visit_kernel_figure</span></code>.</p>
 <dl class="py method">
-<dt id="linuxdoc.kfigure.KernelFigure.run">
-<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelFigure.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelFigure.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelFigure.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelFigure.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelFigure.run" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.kfigure.KernelImage">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">KernelImage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelImage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.parsers.rst.directives.images.Image</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelImage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">KernelImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code></p>
 <p>KernelImage directive</p>
 <p>Earns everything from <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span></code> directive, except <em>remote URI</em> and
 <em>glob</em> pattern. The KernelImage wraps a image node into a
 kernel_image node. See <code class="docutils literal notranslate"><span class="pre">visit_kernel_image</span></code>.</p>
 <dl class="py method">
-<dt id="linuxdoc.kfigure.KernelImage.run">
-<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelImage.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelImage.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelImage.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelImage.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelImage.run" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.kfigure.KernelRender">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">KernelRender</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelRender"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelRender" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.parsers.rst.directives.images.Figure</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelRender">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">KernelRender</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_machine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelRender"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelRender" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
 <p>KernelRender directive</p>
 <p>Render content by external tool.  Has all the options known from the
 <em>figure</em>  directive, plus option <code class="docutils literal notranslate"><span class="pre">caption</span></code>.  If <code class="docutils literal notranslate"><span class="pre">caption</span></code> has a
@@ -96,50 +94,50 @@ inserted.</p>
 literal_block node and wraps it into a kernel_render node. See
 <code class="docutils literal notranslate"><span class="pre">visit_kernel_render</span></code>.</p>
 <dl class="py method">
-<dt id="linuxdoc.kfigure.KernelRender.build_node">
-<code class="sig-name descname"><span class="pre">build_node</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelRender.build_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.build_node" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelRender.build_node">
+<span class="sig-name descname"><span class="pre">build_node</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelRender.build_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.build_node" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="linuxdoc.kfigure.KernelRender.final_argument_whitespace">
-<code class="sig-name descname"><span class="pre">final_argument_whitespace</span></code><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.final_argument_whitespace" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelRender.final_argument_whitespace">
+<span class="sig-name descname"><span class="pre">final_argument_whitespace</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.final_argument_whitespace" title="Permalink to this definition">¶</a></dt>
 <dd><p>May the final argument contain whitespace?</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="linuxdoc.kfigure.KernelRender.has_content">
-<code class="sig-name descname"><span class="pre">has_content</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.has_content" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelRender.has_content">
+<span class="sig-name descname"><span class="pre">has_content</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.has_content" title="Permalink to this definition">¶</a></dt>
 <dd><p>May the directive have content?</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="linuxdoc.kfigure.KernelRender.option_spec">
-<code class="sig-name descname"><span class="pre">option_spec</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'align':</span> <span class="pre">&lt;function</span> <span class="pre">Figure.align&gt;,</span> <span class="pre">'alt':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'caption':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'class':</span> <span class="pre">&lt;function</span> <span class="pre">class_option&gt;,</span> <span class="pre">'figclass':</span> <span class="pre">&lt;function</span> <span class="pre">class_option&gt;,</span> <span class="pre">'figwidth':</span> <span class="pre">&lt;function</span> <span class="pre">Figure.figwidth_value&gt;,</span> <span class="pre">'height':</span> <span class="pre">&lt;function</span> <span class="pre">length_or_unitless&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'scale':</span> <span class="pre">&lt;function</span> <span class="pre">percentage&gt;,</span> <span class="pre">'target':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'width':</span> <span class="pre">&lt;function</span> <span class="pre">length_or_percentage_or_unitless&gt;}</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.option_spec" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelRender.option_spec">
+<span class="sig-name descname"><span class="pre">option_spec</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'align':</span> <span class="pre">&lt;function</span> <span class="pre">Figure.align&gt;,</span> <span class="pre">'alt':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'caption':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'class':</span> <span class="pre">&lt;function</span> <span class="pre">class_option&gt;,</span> <span class="pre">'figclass':</span> <span class="pre">&lt;function</span> <span class="pre">class_option&gt;,</span> <span class="pre">'figwidth':</span> <span class="pre">&lt;function</span> <span class="pre">Figure.figwidth_value&gt;,</span> <span class="pre">'height':</span> <span class="pre">&lt;function</span> <span class="pre">length_or_unitless&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged&gt;,</span> <span class="pre">'scale':</span> <span class="pre">&lt;function</span> <span class="pre">percentage&gt;,</span> <span class="pre">'target':</span> <span class="pre">&lt;function</span> <span class="pre">unchanged_required&gt;,</span> <span class="pre">'width':</span> <span class="pre">&lt;function</span> <span class="pre">length_or_percentage_or_unitless&gt;}</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.option_spec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mapping of option names to validator functions.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="linuxdoc.kfigure.KernelRender.optional_arguments">
-<code class="sig-name descname"><span class="pre">optional_arguments</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.optional_arguments" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelRender.optional_arguments">
+<span class="sig-name descname"><span class="pre">optional_arguments</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.optional_arguments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of optional arguments after the required arguments.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="linuxdoc.kfigure.KernelRender.required_arguments">
-<code class="sig-name descname"><span class="pre">required_arguments</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.required_arguments" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelRender.required_arguments">
+<span class="sig-name descname"><span class="pre">required_arguments</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.required_arguments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of required directive arguments.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="linuxdoc.kfigure.KernelRender.run">
-<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelRender.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.KernelRender.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#KernelRender.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.KernelRender.run" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.add_kernel_figure_to_std_domain">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">add_kernel_figure_to_std_domain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doctree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#add_kernel_figure_to_std_domain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.add_kernel_figure_to_std_domain" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.add_kernel_figure_to_std_domain">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">add_kernel_figure_to_std_domain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doctree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#add_kernel_figure_to_std_domain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.add_kernel_figure_to_std_domain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add kernel-figure anchors to ‘std’ domain.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">StandardDomain.process_doc(..)</span></code> method does not know how to resolve
 the caption (label) of <code class="docutils literal notranslate"><span class="pre">kernel-figure</span></code> directive (it only knows about
@@ -149,8 +147,8 @@ this will result in a ‘undefined label’ for kernel-figures.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.convert_image">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">convert_image</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#convert_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.convert_image" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.convert_image">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">convert_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#convert_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.convert_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a image node for the builder.</p>
 <p>Different builder prefer different image formats, e.g. <em>latex</em> builder
 prefer PDF while <em>html</em> builder prefer SVG format for images.</p>
@@ -159,8 +157,8 @@ format (of the image) and the translator’s output format.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.dot2format">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">dot2format</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dot_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_fname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#dot2format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.dot2format" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.dot2format">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">dot2format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dot_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_fname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#dot2format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.dot2format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts DOT file to <code class="docutils literal notranslate"><span class="pre">out_fname</span></code> using <code class="docutils literal notranslate"><span class="pre">dot(1)</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dot_fname</span></code> pathname of the input DOT file, including extension <code class="docutils literal notranslate"><span class="pre">.dot</span></code></p></li>
@@ -177,64 +175,64 @@ option <code class="docutils literal notranslate"><span class="pre">-Txxx</span>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.file2literal">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">file2literal</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#file2literal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.file2literal" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.file2literal">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">file2literal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#file2literal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.file2literal" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.isNewer">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">isNewer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#isNewer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.isNewer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.isNewer">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">isNewer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#isNewer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.isNewer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if <code class="docutils literal notranslate"><span class="pre">path1</span></code> is newer than <code class="docutils literal notranslate"><span class="pre">path2</span></code></p>
 <p>If <code class="docutils literal notranslate"><span class="pre">path1</span></code> exists and is newer than <code class="docutils literal notranslate"><span class="pre">path2</span></code> the function returns
 <code class="docutils literal notranslate"><span class="pre">True</span></code> is returned otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.kfigure.kernel_figure">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">kernel_figure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#kernel_figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.kernel_figure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.nodes.figure</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.kernel_figure">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">kernel_figure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#kernel_figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.kernel_figure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">figure</span></code></p>
 <p>Node for <code class="docutils literal notranslate"><span class="pre">kernel-figure</span></code> directive.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.kfigure.kernel_image">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">kernel_image</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#kernel_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.kernel_image" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.nodes.image</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.kernel_image">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">kernel_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#kernel_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.kernel_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">image</span></code></p>
 <p>Node for <code class="docutils literal notranslate"><span class="pre">kernel-image</span></code> directive.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="linuxdoc.kfigure.kernel_render">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">kernel_render</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#kernel_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.kernel_render" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.nodes.General</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.nodes.Inline</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">docutils.nodes.Element</span></code></p>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.kernel_render">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">kernel_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rawsource</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">attributes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#kernel_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.kernel_render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">General</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Inline</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Element</span></code></p>
 <p>Node for <code class="docutils literal notranslate"><span class="pre">kernel-render</span></code> directive.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.mkdir">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">mkdir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">509</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#mkdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.mkdir" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.mkdir">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">mkdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">509</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#mkdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.mkdir" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.pass_handle">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">pass_handle</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#pass_handle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.pass_handle" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.pass_handle">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">pass_handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#pass_handle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.pass_handle" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.setup">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.setup" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.setup">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.setup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.setupTools">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">setupTools</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#setupTools"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.setupTools" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.setupTools">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">setupTools</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#setupTools"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.setupTools" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check available build tools and log some <em>verbose</em> messages.</p>
 <p>This function is called once, when the builder is initiated.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.svg2pdf">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">svg2pdf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svg_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_fname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#svg2pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.svg2pdf" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.svg2pdf">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">svg2pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svg_fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_fname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#svg2pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.svg2pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts SVG to PDF with <code class="docutils literal notranslate"><span class="pre">convert(1)</span></code> command.</p>
 <p>Uses <code class="docutils literal notranslate"><span class="pre">convert(1)</span></code> from ImageMagick (<a class="reference external" href="https://www.imagemagick.org">https://www.imagemagick.org</a>) for
 conversion.  Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> on success and <code class="docutils literal notranslate"><span class="pre">False</span></code> if an error occurred.</p>
@@ -245,22 +243,22 @@ conversion.  Returns <code class="docutils literal notranslate"><span class="pre
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.visit_kernel_figure">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">visit_kernel_figure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#visit_kernel_figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.visit_kernel_figure" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.visit_kernel_figure">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">visit_kernel_figure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#visit_kernel_figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.visit_kernel_figure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Visitor of the <code class="docutils literal notranslate"><span class="pre">kernel_figure</span></code> Node.</p>
 <p>Handles the <code class="docutils literal notranslate"><span class="pre">image</span></code> child-node with the <code class="docutils literal notranslate"><span class="pre">convert_image(...)</span></code>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.visit_kernel_image">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">visit_kernel_image</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#visit_kernel_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.visit_kernel_image" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.visit_kernel_image">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">visit_kernel_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#visit_kernel_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.visit_kernel_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Visitor of the <code class="docutils literal notranslate"><span class="pre">kernel_image</span></code> Node.</p>
 <p>Handles the <code class="docutils literal notranslate"><span class="pre">image</span></code> child-node with the <code class="docutils literal notranslate"><span class="pre">convert_image(...)</span></code>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.visit_kernel_render">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">visit_kernel_render</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#visit_kernel_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.visit_kernel_render" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.visit_kernel_render">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">visit_kernel_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#visit_kernel_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.visit_kernel_render" title="Permalink to this definition">¶</a></dt>
 <dd><p>Visitor of the <code class="docutils literal notranslate"><span class="pre">kernel_render</span></code> Node.</p>
 <p>If rendering tools available, save the markup of the <code class="docutils literal notranslate"><span class="pre">literal_block</span></code> child
 node into a file and replace the <code class="docutils literal notranslate"><span class="pre">literal_block</span></code> node with a new created
@@ -269,15 +267,14 @@ image child-node with the <code class="docutils literal notranslate"><span class
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.kfigure.which">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></code><code class="sig-name descname"><span class="pre">which</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#which"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.which" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.kfigure.which">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kfigure.</span></span><span class="sig-name descname"><span class="pre">which</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kfigure.html#which"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kfigure.which" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searches the <code class="docutils literal notranslate"><span class="pre">cmd</span></code> in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment.</p>
 <p>This <em>which</em> searches the PATH for executable <code class="docutils literal notranslate"><span class="pre">cmd</span></code> . First match is
 returned, if nothing is found, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
 </dd></dl>
 
-</div>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -323,6 +320,41 @@ returned, if nothing is found, <code class="docutils literal notranslate"><span 
   <ul>
 <li><a class="reference internal" href="#">linuxdoc.kfigure module</a><ul>
 <li><a class="reference internal" href="#scalable-figure-and-image-handling">scalable figure and image handling</a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelFigure"><code class="docutils literal notranslate"><span class="pre">KernelFigure</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelFigure.run"><code class="docutils literal notranslate"><span class="pre">KernelFigure.run()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelImage"><code class="docutils literal notranslate"><span class="pre">KernelImage</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelImage.run"><code class="docutils literal notranslate"><span class="pre">KernelImage.run()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelRender"><code class="docutils literal notranslate"><span class="pre">KernelRender</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelRender.build_node"><code class="docutils literal notranslate"><span class="pre">KernelRender.build_node()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelRender.final_argument_whitespace"><code class="docutils literal notranslate"><span class="pre">KernelRender.final_argument_whitespace</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelRender.has_content"><code class="docutils literal notranslate"><span class="pre">KernelRender.has_content</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelRender.option_spec"><code class="docutils literal notranslate"><span class="pre">KernelRender.option_spec</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelRender.optional_arguments"><code class="docutils literal notranslate"><span class="pre">KernelRender.optional_arguments</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelRender.required_arguments"><code class="docutils literal notranslate"><span class="pre">KernelRender.required_arguments</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.KernelRender.run"><code class="docutils literal notranslate"><span class="pre">KernelRender.run()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.add_kernel_figure_to_std_domain"><code class="docutils literal notranslate"><span class="pre">add_kernel_figure_to_std_domain()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.convert_image"><code class="docutils literal notranslate"><span class="pre">convert_image()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.dot2format"><code class="docutils literal notranslate"><span class="pre">dot2format()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.file2literal"><code class="docutils literal notranslate"><span class="pre">file2literal()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.isNewer"><code class="docutils literal notranslate"><span class="pre">isNewer()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.kernel_figure"><code class="docutils literal notranslate"><span class="pre">kernel_figure</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.kernel_image"><code class="docutils literal notranslate"><span class="pre">kernel_image</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.kernel_render"><code class="docutils literal notranslate"><span class="pre">kernel_render</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.mkdir"><code class="docutils literal notranslate"><span class="pre">mkdir()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.pass_handle"><code class="docutils literal notranslate"><span class="pre">pass_handle()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.setupTools"><code class="docutils literal notranslate"><span class="pre">setupTools()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.svg2pdf"><code class="docutils literal notranslate"><span class="pre">svg2pdf()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.visit_kernel_figure"><code class="docutils literal notranslate"><span class="pre">visit_kernel_figure()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.visit_kernel_image"><code class="docutils literal notranslate"><span class="pre">visit_kernel_image()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.visit_kernel_render"><code class="docutils literal notranslate"><span class="pre">visit_kernel_render()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kfigure.which"><code class="docutils literal notranslate"><span class="pre">which()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -331,20 +363,20 @@ returned, if nothing is found, <code class="docutils literal notranslate"><span 
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

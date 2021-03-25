@@ -1,25 +1,22 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>kernel-doc in reST documents &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <title>kernel-doc in reST documents &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Examples &amp; Tests" href="kernel-doc-examples.html" />
-    <link rel="prev" title="kernel-doc syntax" href="kernel-doc-syntax.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
-   
+    <link rel="prev" title="kernel-doc syntax" href="kernel-doc-syntax.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -36,7 +33,7 @@
         <li class="right" >
           <a href="kernel-doc-syntax.html" title="kernel-doc syntax"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">LinuxDoc HowTo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">kernel-doc in reST documents</a></li> 
       </ul>
@@ -47,8 +44,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="kernel-doc-in-rest-documents">
-<span id="kernel-doc-directive"></span><h1>kernel-doc in reST documents<a class="headerlink" href="#kernel-doc-in-rest-documents" title="Permalink to this headline">¶</a></h1>
+  <section id="kernel-doc-in-rest-documents">
+<span id="kernel-doc-directive"></span><h1>kernel-doc in reST documents<a class="headerlink" href="#kernel-doc-in-rest-documents" title="Permalink to this heading">¶</a></h1>
 <p>To integrate <a class="reference internal" href="kernel-doc-syntax.html#kernel-doc-syntax"><span class="std std-ref">kernel-doc</span></a> comments into a reST document
 (e.g. in a <em>book</em>), there exists a <a class="reference external" href="http://www.sphinx-doc.org/en/stable/rest.html#directives">reST-directive</a> named <code class="docutils literal notranslate"><span class="pre">kernel-doc</span></code> .  The
 directive comes with options to fine grain control which parts should be placed
@@ -65,7 +62,7 @@ the <code class="docutils literal notranslate"><span class="pre">src/mylib.h</sp
 “DOC:” sections, the function and the type descriptions will be inserted in the
 order they appear in the source file.  Mostly you want to select more fine
 grained, read on to see how.</p>
-<div class="contents local topic" id="contents">
+<nav class="contents local" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#kernel-doc-options" id="id4">kernel-doc options</a></p></li>
@@ -76,9 +73,9 @@ grained, read on to see how.</p>
 <li><p><a class="reference internal" href="#highlights-and-cross-references" id="id9">Highlights and cross-references</a></p></li>
 <li><p><a class="reference internal" href="#kernel-doc-config" id="id10">kernel-doc config</a></p></li>
 </ul>
-</div>
-<div class="section" id="kernel-doc-options">
-<span id="id1"></span><h2><a class="toc-backref" href="#id4">kernel-doc options</a><a class="headerlink" href="#kernel-doc-options" title="Permalink to this headline">¶</a></h2>
+</nav>
+<section id="kernel-doc-options">
+<span id="id1"></span><h2><a class="toc-backref" href="#id4" role="doc-backlink">kernel-doc options</a><a class="headerlink" href="#kernel-doc-options" title="Permalink to this heading">¶</a></h2>
 <p>Here is a short overview of the directives options:</p>
 <div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">kernel-doc</span><span class="p">::</span> <span class="nt">&lt;src-filename&gt;</span>
     <span class="nc">:doc:</span> <span class="nt">&lt;section title&gt;</span>
@@ -98,9 +95,10 @@ grained, read on to see how.</p>
 </div>
 <p>The argument <code class="docutils literal notranslate"><span class="pre">&lt;src-filename&gt;</span></code> is required and points to the source file.  The
 pathname is relative to the pathname of the <code class="docutils literal notranslate"><span class="pre">kernel-doc</span></code> directive.  Absolute
-pathnames are relative to environment <code class="docutils literal notranslate"><span class="pre">srctree</span></code> (if unset, defaults to CWD).
-The options have the following meaning, but be aware that not all combinations
-of these options make sense:</p>
+pathnames are relative to <code class="docutils literal notranslate"><span class="pre">srctree</span></code>, which can be set in the environment or
+using <a class="reference internal" href="#kernel-doc-config"><span class="std std-ref">kernel_doc_srctree</span></a> in the sphinx <a class="reference external" href="http://www.sphinx-doc.org/en/stable/config.html">conf.py</a> (if
+unset, defaults to CWD).  The options have the following meaning, but be aware
+that not all combinations of these options make sense:</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">:doc:</span> <span class="pre">&lt;section</span> <span class="pre">title&gt;</span></code> (<a class="reference internal" href="kernel-doc-tests.html#doc-sections"><span class="std std-ref">DOC sections</span></a>)</dt><dd><p>Include content of the <code class="docutils literal notranslate"><span class="pre">DOC:</span></code> section titled <code class="docutils literal notranslate"><span class="pre">&lt;section</span> <span class="pre">title&gt;</span></code>.  Spaces
 are allowed in <code class="docutils literal notranslate"><span class="pre">&lt;section</span> <span class="pre">title&gt;</span></code>; do not quote the <code class="docutils literal notranslate"><span class="pre">&lt;section</span> <span class="pre">title&gt;</span></code>.</p>
@@ -113,22 +111,22 @@ reST heading markup in the comment.</p>
 </dd>
 </dl>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">:export:</span> <span class="pre">[&lt;src-fname-pattern&gt;</span> <span class="pre">[,</span> <span class="pre">...]]</span></code> (<a class="reference internal" href="kernel-doc-tests.html#exported-symbols"><span class="std std-ref">exported symbols</span></a>)</dt><dd><p>Include documentation for all function, struct or whatever definition in
-<code class="docutils literal notranslate"><span class="pre">&lt;src-filename&gt;</span></code>, exported using EXPORT_SYMBOL macro (<code class="docutils literal notranslate"><span class="pre">EXPORT_SYMBOL</span></code>,
-<code class="docutils literal notranslate"><span class="pre">EXPORT_SYMBOL_GPL</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">EXPORT_SYMBOL_GPL_FUTURE</span></code>) either in
-<code class="docutils literal notranslate"><span class="pre">&lt;src-filename&gt;</span></code> or in any of the files specified by
-<code class="docutils literal notranslate"><span class="pre">&lt;src-fname-pattern&gt;</span></code>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">:export:</span> <span class="pre">[&lt;src-fname-pattern&gt;</span> <span class="pre">[,</span> <span class="pre">...]]</span></code> (<a class="reference internal" href="kernel-doc-tests.html#opt-export"><span class="std std-ref">option :export:</span></a>)</dt><dd><p>Include documentation of all function, struct or whatever definitions in
+<code class="docutils literal notranslate"><span class="pre">&lt;src-filename&gt;</span></code> and exported using one of the <a class="reference internal" href="#exp-ids-option"><span class="std std-ref">export symbols</span></a> (<a class="reference internal" href="#exp-method-option"><span class="std std-ref">macro</span></a>) either in <code class="docutils literal notranslate"><span class="pre">&lt;src-filename&gt;</span></code> or in
+any of the files specified by <code class="docutils literal notranslate"><span class="pre">&lt;src-fname-pattern&gt;</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">&lt;src-fname-pattern&gt;</span></code> (glob) is useful when the kernel-doc comments
-have been placed in header files, while EXPORT_SYMBOL are next to the
+have been placed in header files, while <em>EXPORT_SYMBOL</em> are next to the
 function definitions.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">:internal:</span> <span class="pre">[&lt;src-fname-pattern&gt;</span> <span class="pre">[,</span> <span class="pre">...]]</span></code> (<a class="reference internal" href="kernel-doc-tests.html#opt-internal"><span class="std std-ref">option :internal:</span></a>)</dt><dd><p>Include documentation for all documented definitions, <strong>not</strong> exported using
-EXPORT_SYMBOL macro either in <code class="docutils literal notranslate"><span class="pre">&lt;src-filename&gt;</span></code> or in any of the files
-specified by <code class="docutils literal notranslate"><span class="pre">&lt;src-fname-pattern&gt;</span></code>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">:internal:</span> <span class="pre">[&lt;src-fname-pattern&gt;</span> <span class="pre">[,</span> <span class="pre">...]]</span></code> (<a class="reference internal" href="kernel-doc-tests.html#opt-internal"><span class="std std-ref">option :internal:</span></a>)</dt><dd><p>Include documentation of all documented definitions, <strong>not</strong> exported by one
+of the <a class="reference internal" href="#exp-ids-option"><span class="std std-ref">export symbols</span></a> (<a class="reference internal" href="#exp-method-option"><span class="std std-ref">macro</span></a>) either in <code class="docutils literal notranslate"><span class="pre">&lt;src-filename&gt;</span></code> or in any of the files specified by
+<code class="docutils literal notranslate"><span class="pre">&lt;src-fname-pattern&gt;</span></code>.</p>
 </dd>
+</dl>
+<dl id="exp-method-option">
 <dt><code class="docutils literal notranslate"><span class="pre">:exp-method:</span> <span class="pre">&lt;method&gt;</span></code></dt><dd><p>Change the way exported symbols are specified in source code.  Default value
 <code class="docutils literal notranslate"><span class="pre">macro</span></code> if not provided, can be set globally by
-<a class="reference internal" href="#kernel-doc-config"><span class="std std-ref">kernel_doc_exp_method</span></a> in the sphinx <a class="reference external" href="http://www.sphinx-doc.org/en/stable/config.html">conf.py</a>.</p>
+<a class="reference internal" href="#kernel-doc-exp-method"><span class="std std-ref">kernel_doc_exp_method</span></a> in the sphinx <a class="reference external" href="http://www.sphinx-doc.org/en/stable/config.html">conf.py</a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">&lt;method&gt;</span></code> must one of
 the following value:</p>
 <dl class="simple">
@@ -143,9 +141,11 @@ definition: <code class="docutils literal notranslate"><span class="pre">THIS_IS
 </dd>
 </dl>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">:exp-ids:</span> <span class="pre">&lt;identifier</span> <span class="pre">[,</span> <span class="pre">identifiers</span> <span class="pre">[,</span> <span class="pre">...]]&gt;</span></code></dt><dd><p>Use the specified list of identifiers instead of default value:
-EXPORT_SYMBOL, EXPORT_SYMBOL_GPL, EXPORT_SYMBOL_GPL_FUTURE.  Default value
-can be overriden globally by sphinx <a class="reference external" href="http://www.sphinx-doc.org/en/stable/config.html">conf.py</a> option <a class="reference internal" href="#kernel-doc-config"><span class="std std-ref">kernel_doc_exp_ids</span></a>.</p>
+</dl>
+<dl id="exp-ids-option">
+<dt><code class="docutils literal notranslate"><span class="pre">:exp-ids:</span> <span class="pre">&lt;identifier</span> <span class="pre">[,</span> <span class="pre">identifiers</span> <span class="pre">[,</span> <span class="pre">...]]&gt;</span></code></dt><dd><p>Use the specified list of identifiers instead of default value: <code class="docutils literal notranslate"><span class="pre">EXPORT_SYMBOL</span></code>,
+<code class="docutils literal notranslate"><span class="pre">EXPORT_SYMBOL_GPL</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">EXPORT_SYMBOL_GPL_FUTURE</span></code>.  Default value
+can be overriden globally by sphinx <a class="reference external" href="http://www.sphinx-doc.org/en/stable/config.html">conf.py</a> option <a class="reference internal" href="#kernel-doc-exp-ids"><span class="std std-ref">kernel_doc_exp_ids</span></a>.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">:known-attrs:</span> <span class="pre">&lt;attr</span> <span class="pre">[,</span> <span class="pre">attrs</span> <span class="pre">[,</span> <span class="pre">...]]&gt;</span></code></dt><dd><p>Specified a list of function attributes that are known and must be hidden
 when displaying function prototype.</p>
@@ -183,9 +183,9 @@ helpful to see how the kernel-doc parser transforms the kernel-doc markup to
 reST markup.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="insert-function-s-documentation">
-<span id="kernel-doc-functions"></span><h2><a class="toc-backref" href="#id5">Insert function’s documentation</a><a class="headerlink" href="#insert-function-s-documentation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="insert-function-s-documentation">
+<span id="kernel-doc-functions"></span><h2><a class="toc-backref" href="#id5" role="doc-backlink">Insert function’s documentation</a><a class="headerlink" href="#insert-function-s-documentation" title="Permalink to this heading">¶</a></h2>
 <p>In <a class="reference internal" href="all-in-a-tumble-src.html#all-in-a-tumble-c-src"><span class="std std-ref">source all-in-a-tumble.c</span></a> there is the following function definition which
 is documented by a <a class="reference internal" href="kernel-doc-syntax.html#kernel-doc-syntax"><span class="std std-ref">kernel-doc syntax</span></a>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -202,9 +202,9 @@ is documented by a <a class="reference internal" href="kernel-doc-syntax.html#ke
 <span class="cm"> * Returns first argument</span>
 <span class="cm"> */</span>
 <span class="kt">int</span>
-<span class="nf">user_function</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="p">...)</span>
+<span class="nf">user_function</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
 <span class="p">{</span>
-        <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -216,128 +216,86 @@ reStructuredText document use the following markup:</p>
 </pre></div>
 </div>
 <p>This will convert the <a class="reference internal" href="kernel-doc-syntax.html#kernel-doc-syntax"><span class="std std-ref">kernel-doc syntax</span></a> into the following reST markup:</p>
-<div class="highlight-rst notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">c:namespace-push</span><span class="p">::</span> foo
-
-<span class="p">..</span> <span class="nt">_`foo.user_function`:</span>
-
-<span class="gh">user_function</span>
-<span class="gh">=============</span>
-
-<span class="p">..</span> <span class="ow">c:function</span><span class="p">::</span> int user_function(int a,  ...)
-
-    function that can only be called in user context
-
-    <span class="nc">:param a:</span>
-        some argument
-    <span class="nc">:type a:</span> int
-
-    <span class="nc">:param ellipsis ellipsis:</span>
-        ellipsis operator
-
-<span class="p">..</span> <span class="nt">_`foo.user_function.description`:</span>
-
-<span class="gh">Description</span>
-<span class="gh">-----------</span>
-
-This function makes no sense, it&#39;s only a kernel-doc demonstration.
-
-<span class="p">..</span> <span class="nt">_`foo.user_function.example`:</span>
-
-<span class="gh">Example</span>
-<span class="gh">-------</span>
-
-<span class="p">..</span> <span class="ow">code-block</span><span class="p">::</span> <span class="k">c</span>
-
-    <span class="n">x</span> <span class="o">=</span> <span class="n">user_function</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
-
-
-<span class="p">..</span> <span class="nt">_`foo.user_function.return`:</span>
-
-<span class="gh">Return</span>
-<span class="gh">------</span>
-
-Returns first argument
-
-<span class="p">..</span> <span class="ow">c:namespace-pop</span><span class="p">::</span>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">..</span> <span class="ow">c:namespace-push</span><span class="p">::</span> foo
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="p">..</span> <span class="nt">_`foo.user_function`:</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="gh">user_function</span>
+<span class="linenos"> 6</span><span class="gh">=============</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="p">..</span> <span class="ow">c:function</span><span class="p">::</span> int user_function(int a,  ...)
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>    function that can only be called in user context
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="nc">:param a:</span>
+<span class="linenos">13</span>        some argument
+<span class="linenos">14</span>    <span class="nc">:type a:</span> int
+<span class="linenos">15</span>
+<span class="linenos">16</span>    <span class="nc">:param ellipsis ellipsis:</span>
+<span class="linenos">17</span>        ellipsis operator
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="p">..</span> <span class="nt">_`foo.user_function.description`:</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="gh">Description</span>
+<span class="linenos">22</span><span class="gh">-----------</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>This function makes no sense, it&#39;s only a kernel-doc demonstration.
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="p">..</span> <span class="nt">_`foo.user_function.example`:</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="gh">Example</span>
+<span class="linenos">29</span><span class="gh">-------</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="p">..</span> <span class="ow">code-block</span><span class="p">::</span> <span class="k">c</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>    <span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_function</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="p">..</span> <span class="nt">_`foo.user_function.return`:</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="gh">Return</span>
+<span class="linenos">39</span><span class="gh">------</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span>Returns first argument
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="p">..</span> <span class="ow">c:namespace-pop</span><span class="p">::</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <hr class="docutils" />
 <p>In the next view lines you will see how the documentation will be rendered:</p>
 <div class="rst-example admonition">
 <p class="admonition-title">kernel-doc option <code class="docutils literal notranslate"><span class="pre">:symbols:</span></code></p>
-<div class="section" id="user-function">
-<span id="foo-user-function"></span><h3>user_function<a class="headerlink" href="#user-function" title="Permalink to this headline">¶</a></h3>
+<section id="user-function">
+<span id="foo-user-function"></span><h3>user_function<a class="headerlink" href="#user-function" title="Permalink to this heading">¶</a></h3>
 <dl class="c function">
-<dt id="c.foo.user_function">
-<span class="pre">int</span> <code class="sig-name descname"><span class="pre">user_function</span></code><span class="sig-paren">(</span><span class="pre">int</span> <em><span class="pre">a</span></em>, <span class="pre">...</span><span class="sig-paren">)</span><a class="headerlink" href="#c.foo.user_function" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.foo.user_function">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_function</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">a</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.foo.user_function" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>function that can only be called in user context</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> (<em>int</em>) – some argument</p></li>
-<li><p><strong>ellipsis</strong> (<em>ellipsis</em>) – ellipsis operator</p></li>
+<li><p><strong>a</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">int</span></span></span>) – some argument</p></li>
+<li><p><strong>ellipsis</strong> (<span><span class="c-expr sig sig-inline c"><span class="n">ellipsis</span></span></span>) – ellipsis operator</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
-<div class="section" id="description">
-<span id="foo-user-function-description"></span><h4>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h4>
+<section id="description">
+<span id="foo-user-function-description"></span><h4>Description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h4>
 <p>This function makes no sense, it’s only a kernel-doc demonstration.</p>
-</div>
-<div class="section" id="example">
-<span id="foo-user-function-example"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">user_function</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
+</section>
+<section id="example">
+<span id="foo-user-function-example"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_function</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="return">
-<span id="foo-user-function-return"></span><h4>Return<a class="headerlink" href="#return" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="return">
+<span id="foo-user-function-return"></span><h4>Return<a class="headerlink" href="#return" title="Permalink to this heading">¶</a></h4>
 <p>Returns first argument</p>
-</div>
-</div>
+</section>
+</section>
 </div>
 <p>In reST documents you can cross reference to the function or directly to one of
 the sections of this documentation:</p>
@@ -354,9 +312,9 @@ the sections of this documentation:</p>
 <a class="reference internal" href="#foo-user-function-return"><span class="std std-ref">Return</span></a> …</p></li>
 </ul>
 </div>
-</div>
-<div class="section" id="structs-unions-enums-and-typedefs">
-<span id="kernel-doc-typedefs"></span><span id="kernel-doc-enums"></span><span id="kernel-doc-unions"></span><span id="kernel-doc-structs"></span><h2><a class="toc-backref" href="#id6">structs, unions, enums and typedefs</a><a class="headerlink" href="#structs-unions-enums-and-typedefs" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="structs-unions-enums-and-typedefs">
+<span id="kernel-doc-typedefs"></span><span id="kernel-doc-enums"></span><span id="kernel-doc-unions"></span><span id="kernel-doc-structs"></span><h2><a class="toc-backref" href="#id6" role="doc-backlink">structs, unions, enums and typedefs</a><a class="headerlink" href="#structs-unions-enums-and-typedefs" title="Permalink to this heading">¶</a></h2>
 <p>The following example inserts the documentation of struct <code class="docutils literal notranslate"><span class="pre">my_long_struct</span></code>.</p>
 <div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">kernel-doc</span><span class="p">::</span> ./all-in-a-tumble.h
    <span class="nc">:symbols:</span>    my_long_struct
@@ -381,17 +339,17 @@ directive.</p>
 <a class="reference internal" href="all-in-a-tumble.html#example-my-long-struct-members"><span class="std std-ref">Members</span></a> …</p></li>
 </ul>
 </div>
-</div>
-<div class="section" id="snippets">
-<span id="kernel-doc-snippets"></span><h2><a class="toc-backref" href="#id7">Snippets</a><a class="headerlink" href="#snippets" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="snippets">
+<span id="kernel-doc-snippets"></span><h2><a class="toc-backref" href="#id7" role="doc-backlink">Snippets</a><a class="headerlink" href="#snippets" title="Permalink to this heading">¶</a></h2>
 <p>The kernel-doc Parser supports a markup for <a class="reference internal" href="kernel-doc-syntax.html#kernel-doc-syntax-snippets"><span class="std std-ref">Snippets</span></a>.
 By example; In the the <a class="reference internal" href="all-in-a-tumble-src.html#all-in-a-tumble-c-src"><span class="std std-ref">all-in-a-tumble examples</span></a>
 we have a small source code example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* parse-SNIP: hello-world */</span>
-<span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="cm">/* parse-SNAP: */</span>
 </pre></div>
@@ -405,21 +363,17 @@ we have a small source code example:</p>
 </div>
 <p>And here is the rendered example:</p>
 <blockquote>
-<div><div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="linenos">2</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">3</span><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="linenos">4</span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos">5</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
-</div></blockquote>
 </div>
-<div class="section" id="man-pages-man-sect">
-<span id="kernel-doc-man-sect"></span><h2><a class="toc-backref" href="#id8">man pages (:man-sect:)</a><a class="headerlink" href="#man-pages-man-sect" title="Permalink to this headline">¶</a></h2>
+</div></blockquote>
+</section>
+<section id="man-pages-man-sect">
+<span id="kernel-doc-man-sect"></span><h2><a class="toc-backref" href="#id8" role="doc-backlink">man pages (:man-sect:)</a><a class="headerlink" href="#man-pages-man-sect" title="Permalink to this heading">¶</a></h2>
 <p>To get man pages from kernel-doc comments, add the <code class="docutils literal notranslate"><span class="pre">:man-sect:</span></code> option to your
 kernel-doc directives.  E.g. to get man-pages of media’s remote control (file
 <code class="docutils literal notranslate"><span class="pre">media/kapi/rc-core.rst</span></code>) add <code class="docutils literal notranslate"><span class="pre">:man-sect:</span> <span class="pre">9</span></code> to all the kernel-doc includes.</p>
@@ -446,9 +400,9 @@ kernel-doc directives.  E.g. to get man-pages of media’s remote control (file
 set a global man-sect in your <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>, see sphinx configuration
 <a class="reference internal" href="#kernel-doc-config"><span class="std std-ref">kernel_doc_mansect</span></a> and about build look at:
 <a class="reference internal" href="man-pages.html#man-pages"><span class="std std-ref">man pages from kernel-doc comments</span></a></p>
-</div>
-<div class="section" id="highlights-and-cross-references">
-<h2><a class="toc-backref" href="#id9">Highlights and cross-references</a><a class="headerlink" href="#highlights-and-cross-references" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="highlights-and-cross-references">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Highlights and cross-references</a><a class="headerlink" href="#highlights-and-cross-references" title="Permalink to this heading">¶</a></h2>
 <p>The following special patterns are recognized in the kernel-doc comment
 descriptive text and converted to proper reStructuredText markup and <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#the-c-domain">Sphinx’s C
 Domain</a> references.</p>
@@ -486,17 +440,19 @@ or union definition, not the member directly.</p>
 instead. This is mostly for legacy comments.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="kernel-doc-config">
-<span id="id2"></span><h2><a class="toc-backref" href="#id10">kernel-doc config</a><a class="headerlink" href="#kernel-doc-config" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="kernel-doc-config">
+<span id="id2"></span><h2><a class="toc-backref" href="#id10" role="doc-backlink">kernel-doc config</a><a class="headerlink" href="#kernel-doc-config" title="Permalink to this heading">¶</a></h2>
 <p>Within the <a class="reference external" href="http://www.sphinx-doc.org/en/stable/config.html">sphinx config</a> file (<code class="docutils literal notranslate"><span class="pre">conf.py</span></code> or <code class="docutils literal notranslate"><span class="pre">my_project.conf</span></code>) you can
 set the following option.</p>
-<dl>
-<dt>kernel_doc_exp_method: <code class="docutils literal notranslate"><span class="pre">macro</span></code></dt><dd><p>Set parser’s default value for kernel-doc directive option  <code class="docutils literal notranslate"><span class="pre">:exp-method:</span></code>
-(details see: <a class="reference internal" href="#kernel-doc-options"><span class="std std-ref">kernel-doc options</span></a>)</p>
+<dl class="simple" id="kernel-doc-exp-method">
+<dt>kernel_doc_exp_method: <a class="reference internal" href="../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.DEFAULT_EXP_METHOD" title="linuxdoc.kernel_doc.DEFAULT_EXP_METHOD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linuxdoc.kernel_doc.DEFAULT_EXP_METHOD</span></code></a></dt><dd><p>Set parser’s default value for kernel-doc directive option  <code class="docutils literal notranslate"><span class="pre">:exp-method:</span></code>
+(details see: <a class="reference internal" href="#exp-method-option"><span class="std std-ref">exp-method</span></a>)</p>
 </dd>
-<dt>kernel_doc_exp_ids: <code class="docutils literal notranslate"><span class="pre">['EXPORT_SYMBOL',</span> <span class="pre">'EXPORT_SYMBOL_GPL',</span> <span class="pre">'EXPORT_SYMBOL_GPL_FUTURE']</span></code></dt><dd><p>Set parser’s default value for kernel-doc directive option <code class="docutils literal notranslate"><span class="pre">:exp-ids:</span></code>.
-(details see: <a class="reference internal" href="#kernel-doc-options"><span class="std std-ref">kernel-doc options</span></a>)</p>
+</dl>
+<dl id="kernel-doc-exp-ids">
+<dt>kernel_doc_exp_ids: <a class="reference internal" href="../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.DEFAULT_EXP_IDS" title="linuxdoc.kernel_doc.DEFAULT_EXP_IDS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linuxdoc.kernel_doc.DEFAULT_EXP_IDS</span></code></a></dt><dd><p>Set parser’s default value for kernel-doc directive option <code class="docutils literal notranslate"><span class="pre">:exp-ids:</span></code>.
+(details see: <a class="reference internal" href="#exp-ids-option"><span class="std std-ref">exp-ids</span></a>)</p>
 </dd>
 <dt>kernel_doc_known_attrs: <code class="docutils literal notranslate"><span class="pre">[...]</span></code></dt><dd><p>Set parser’s default value for kernel-doc directive option  <code class="docutils literal notranslate"><span class="pre">:known-attrs:</span></code>
 (details see: <a class="reference internal" href="#kernel-doc-options"><span class="std std-ref">kernel-doc options</span></a>)</p>
@@ -533,7 +489,7 @@ is inserted (again; only when <code class="docutils literal notranslate"><span c
 <p class="admonition-title">Todo</p>
 <p>Oops: Document generation inconsistency.</p>
 <p>The template for this document tried to insert structured comment at this point, but an error occoured. This dummy section is inserted to allow generation to continue.:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/800GBPCIex4/share/linuxdoc/docs/linuxdoc-howto/kernel-doc-directive.rst:432: (ERROR/3) selected section(s) not found:
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/800GBPCIex4/share/linuxdoc/docs/linuxdoc-howto/kernel-doc-directive.rst:441: (ERROR/3) selected section(s) not found:
     no_longer_exist
 
 .. kernel-doc::  ./all-in-a-tumble.h
@@ -543,9 +499,12 @@ is inserted (again; only when <code class="docutils literal notranslate"><span c
 </div>
 </div>
 </dd>
+<dt>kernel_doc_srctree: <code class="docutils literal notranslate"><span class="pre">None</span></code></dt><dd><p>Set the pathname used as a base for absolute pathnames in kernel-doc
+directive.  It can be overridden by the <code class="docutils literal notranslate"><span class="pre">srctree</span></code> environment variable.</p>
+</dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -605,20 +564,20 @@ is inserted (again; only when <code class="docutils literal notranslate"><span c
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

@@ -94,6 +94,20 @@ they are marked appropriately in the output format.
 
 Rendered example: :ref:`example.user_function`
 
+.. _kernel-doc-syntax-macro:
+
+macro
+=====
+
+Documenting macros is similar to documenting :ref:`kernel-doc-syntax-functions`.
+
+.. kernel-doc::  ./all-in-a-tumble.h
+    :snippets:  ADD_macro
+    :language:  c
+    :linenos:
+
+Rendered example: :ref:`example.ADD`
+
 .. _kernel-doc-syntax-structs-unions:
 
 structs, unions

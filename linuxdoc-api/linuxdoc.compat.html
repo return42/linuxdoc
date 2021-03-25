@@ -1,25 +1,22 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.compat module &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <title>linuxdoc.compat module &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="linuxdoc.grep_doc module" href="linuxdoc.grep_doc.html" />
-    <link rel="prev" title="linuxdoc.cdomain module" href="linuxdoc.cdomain.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
-   
+    <link rel="prev" title="linuxdoc.cdomain module" href="linuxdoc.cdomain.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -36,7 +33,7 @@
         <li class="right" >
           <a href="linuxdoc.cdomain.html" title="linuxdoc.cdomain module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="linuxdoc.html" accesskey="U">linuxdoc package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.compat module</a></li> 
       </ul>
@@ -47,10 +44,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-linuxdoc.compat">
-<span id="linuxdoc-compat-module"></span><h1>linuxdoc.compat module<a class="headerlink" href="#module-linuxdoc.compat" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="compat">
-<h2>compat<a class="headerlink" href="#compat" title="Permalink to this headline">¶</a></h2>
+  <section id="module-linuxdoc.compat">
+<span id="linuxdoc-compat-module"></span><h1>linuxdoc.compat module<a class="headerlink" href="#module-linuxdoc.compat" title="Permalink to this heading">¶</a></h1>
+<section id="compat">
+<h2>compat<a class="headerlink" href="#compat" title="Permalink to this heading">¶</a></h2>
 <p>Implementation of a compatibility layer for sphinx and docutils related modules.</p>
 <p>Downward compatibility is unfortunately no strength of sphinx-doc <a class="reference external" href="https://github.com/sphinx-doc/sphinx/issues/3212#issuecomment-283756374">[ref]</a> and
 patch levels are not really exists or if so they are not shipped within LTS
@@ -61,20 +58,20 @@ and docutils whose fixing is out of the scope of this linuxdoc project <a class=
 version.</p>
 <p>More details see Sphinx-doc’s <a class="reference external" href="http://www.sphinx-doc.org/en/master/changes.html">CHANGELOG</a> and docutils
 <a class="reference external" href="http://docutils.sourceforge.net/RELEASE-NOTES.html">RELEASE-NOTES</a></p>
+</section>
 <dl class="py function">
-<dt id="linuxdoc.compat.sphinx_has_c_namespace">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.compat.</span></code><code class="sig-name descname"><span class="pre">sphinx_has_c_namespace</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/compat.html#sphinx_has_c_namespace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.compat.sphinx_has_c_namespace" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.compat.sphinx_has_c_namespace">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.compat.</span></span><span class="sig-name descname"><span class="pre">sphinx_has_c_namespace</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/compat.html#sphinx_has_c_namespace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.compat.sphinx_has_c_namespace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks wether Sphinx version supports <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#namespacing">.. c:namespace::</a></p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="linuxdoc.compat.sphinx_has_c_types">
-<code class="sig-prename descclassname"><span class="pre">linuxdoc.compat.</span></code><code class="sig-name descname"><span class="pre">sphinx_has_c_types</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/compat.html#sphinx_has_c_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.compat.sphinx_has_c_types" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.compat.sphinx_has_c_types">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.compat.</span></span><span class="sig-name descname"><span class="pre">sphinx_has_c_types</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/compat.html#sphinx_has_c_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.compat.sphinx_has_c_types" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks wether Sphinx version supports <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#the-c-domain">.. c:struct::, c:union and other C types</a></p>
 </dd></dl>
 
-</div>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -120,6 +117,8 @@ version.</p>
   <ul>
 <li><a class="reference internal" href="#">linuxdoc.compat module</a><ul>
 <li><a class="reference internal" href="#compat">compat</a></li>
+<li><a class="reference internal" href="#linuxdoc.compat.sphinx_has_c_namespace"><code class="docutils literal notranslate"><span class="pre">sphinx_has_c_namespace()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.compat.sphinx_has_c_types"><code class="docutils literal notranslate"><span class="pre">sphinx_has_c_types()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -128,20 +127,20 @@ version.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

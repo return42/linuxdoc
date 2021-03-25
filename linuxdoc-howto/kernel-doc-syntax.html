@@ -1,25 +1,22 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>kernel-doc syntax &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <title>kernel-doc syntax &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="kernel-doc in reST documents" href="kernel-doc-directive.html" />
-    <link rel="prev" title="LinuxDoc HowTo" href="index.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
-   
+    <link rel="prev" title="LinuxDoc HowTo" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -36,7 +33,7 @@
         <li class="right" >
           <a href="index.html" title="LinuxDoc HowTo"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">LinuxDoc HowTo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">kernel-doc syntax</a></li> 
       </ul>
@@ -47,8 +44,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="kernel-doc-syntax">
-<span id="id1"></span><h1>kernel-doc syntax<a class="headerlink" href="#kernel-doc-syntax" title="Permalink to this headline">¶</a></h1>
+  <section id="kernel-doc-syntax">
+<span id="id1"></span><h1>kernel-doc syntax<a class="headerlink" href="#kernel-doc-syntax" title="Permalink to this heading">¶</a></h1>
 <p>The format of a block comment is like this:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * (data-type|DOC)? name(:)? (- short description)?
@@ -67,8 +64,8 @@
 </ul>
 <p>The name of the function, data-type respectively DOC is used as the section
 header. The names of section headers must be unique per source file.</p>
-<div class="section" id="functions">
-<span id="kernel-doc-syntax-functions"></span><h2>functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<section id="functions">
+<span id="kernel-doc-syntax-functions"></span><h2>functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * function_name(:)? (- short description)?
 (* @parameterx: (description of parameter x)?)*
@@ -115,47 +112,46 @@ line.</p>
 <p>A non-void function should have a <code class="docutils literal notranslate"><span class="pre">Return:</span></code> section describing the return
 value(s).  Example-sections should contain the string <code class="docutils literal notranslate"><span class="pre">EXAMPLE</span></code> so that
 they are marked appropriately in the output format.</p>
-<div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * user_function() - function that can only be called in user context</span>
-<span class="cm"> * @a: some argument</span>
-<span class="cm"> * @...: ellipsis operator</span>
-<span class="cm"> *</span>
-<span class="cm"> * This function makes no sense, it&#39;s only a kernel-doc demonstration.</span>
-<span class="cm"> *</span>
-<span class="cm"> * Example:</span>
-<span class="cm"> * x = user_function(22);</span>
-<span class="cm"> *</span>
-<span class="cm"> * Return:</span>
-<span class="cm"> * Returns first argument</span>
-<span class="cm"> */</span>
-<span class="kt">int</span>
-<span class="nf">user_function</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="p">...)</span>
-<span class="p">{</span>
-        <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/**</span>
+<span class="linenos"> 2</span><span class="cm"> * user_function() - function that can only be called in user context</span>
+<span class="linenos"> 3</span><span class="cm"> * @a: some argument</span>
+<span class="linenos"> 4</span><span class="cm"> * @...: ellipsis operator</span>
+<span class="linenos"> 5</span><span class="cm"> *</span>
+<span class="linenos"> 6</span><span class="cm"> * This function makes no sense, it&#39;s only a kernel-doc demonstration.</span>
+<span class="linenos"> 7</span><span class="cm"> *</span>
+<span class="linenos"> 8</span><span class="cm"> * Example:</span>
+<span class="linenos"> 9</span><span class="cm"> * x = user_function(22);</span>
+<span class="linenos">10</span><span class="cm"> *</span>
+<span class="linenos">11</span><span class="cm"> * Return:</span>
+<span class="linenos">12</span><span class="cm"> * Returns first argument</span>
+<span class="linenos">13</span><span class="cm"> */</span>
+<span class="linenos">14</span><span class="kt">int</span>
+<span class="linenos">15</span><span class="nf">user_function</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
+<span class="linenos">16</span><span class="p">{</span>
+<span class="linenos">17</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="linenos">18</span><span class="p">}</span>
 </pre></div>
-</td></tr></table></div>
-<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-user-function"><span class="std std-ref">user_function</span></a></p>
 </div>
-<div class="section" id="structs-unions">
-<span id="kernel-doc-syntax-structs-unions"></span><h2>structs, unions<a class="headerlink" href="#structs-unions" title="Permalink to this headline">¶</a></h2>
+<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-user-function"><span class="std std-ref">user_function</span></a></p>
+</section>
+<section id="macro">
+<span id="kernel-doc-syntax-macro"></span><h2>macro<a class="headerlink" href="#macro" title="Permalink to this heading">¶</a></h2>
+<p>Documenting macros is similar to documenting <a class="reference internal" href="#kernel-doc-syntax-functions"><span class="std std-ref">functions</span></a>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cm">/**</span>
+<span class="linenos">2</span><span class="cm"> * macro ADD - Function like macro to add two values</span>
+<span class="linenos">3</span><span class="cm"> *</span>
+<span class="linenos">4</span><span class="cm"> * @first:  first value</span>
+<span class="linenos">5</span><span class="cm"> * @second:  second value</span>
+<span class="linenos">6</span><span class="cm"> *</span>
+<span class="linenos">7</span><span class="cm"> * Is replaced by a addition of @first and @second.</span>
+<span class="linenos">8</span><span class="cm"> */</span>
+<span class="linenos">9</span><span class="cp">#define ADD(first, second) (first) + (second)</span>
+</pre></div>
+</div>
+<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-add"><span class="std std-ref">macro ADD</span></a></p>
+</section>
+<section id="structs-unions">
+<span id="kernel-doc-syntax-structs-unions"></span><h2>structs, unions<a class="headerlink" href="#structs-unions" title="Permalink to this heading">¶</a></h2>
 <p>Beside functions you can also write documentation for <code class="docutils literal notranslate"><span class="pre">structs</span></code>,
 <code class="docutils literal notranslate"><span class="pre">unions</span></code>. Instead of the function name you must write the name of the
 declaration; the <code class="docutils literal notranslate"><span class="pre">struct</span></code> or <code class="docutils literal notranslate"><span class="pre">union</span></code> must always precede the name. Nesting
@@ -166,245 +162,143 @@ tags.  Structure fields that are inside a ‘private:’ area are not listed in 
 generated output documentation.  The ‘private:’ and ‘public:’ tags must begin
 immediately following a <code class="docutils literal notranslate"><span class="pre">/*</span></code> comment marker.  They may optionally include
 comments between the <code class="docutils literal notranslate"><span class="pre">:</span></code> and the ending <code class="docutils literal notranslate"><span class="pre">*/</span></code> marker.</p>
-<div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm">* struct my_struct - a struct with nested unions and structs</span>
-<span class="cm">* @arg1: first argument of anonymous union/anonymous struct</span>
-<span class="cm">* @arg2: second argument of anonymous union/anonymous struct</span>
-<span class="cm">* @arg1b: first argument of anonymous union/anonymous struct</span>
-<span class="cm">* @arg2b: second argument of anonymous union/anonymous struct</span>
-<span class="cm">* @arg3: third argument of anonymous union/anonymous struct</span>
-<span class="cm">* @arg4: fourth argument of anonymous union/anonymous struct</span>
-<span class="cm">* @bar: non-anonymous union</span>
-<span class="cm">* @bar.st1: struct st1 inside @bar</span>
-<span class="cm">* @bar.st1.arg1: first argument of struct st1 on union bar</span>
-<span class="cm">* @bar.st1.arg2: second argument of struct st1 on union bar</span>
-<span class="cm">* @bar.st2: struct st2 inside @bar</span>
-<span class="cm">* @bar.st2.arg1: first argument of struct st2 on union bar</span>
-<span class="cm">* @bar.st2.arg2: second argument of struct st2 on union bar</span>
-<span class="cm">* @bar.st3: struct st3 inside @bar</span>
-<span class="cm">* @bar.st3.arg2: second argument of struct st3 on union bar</span>
-<span class="cm">* @f1: nested function on anonimous union/struct</span>
-<span class="cm">* @bar.st2.f2: nested function on named union/struct</span>
-<span class="cm">*/</span>
-<span class="k">struct</span> <span class="nc">my_struct</span> <span class="p">{</span>
-  <span class="cm">/* Anonymous union/struct*/</span>
-  <span class="k">union</span> <span class="p">{</span>
-        <span class="k">struct</span> <span class="p">{</span>
-            <span class="kt">char</span> <span class="nl">arg1</span> <span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="kt">char</span> <span class="nl">arg2</span> <span class="p">:</span> <span class="mi">3</span><span class="p">;</span>
-        <span class="p">};</span>
-      <span class="k">struct</span> <span class="p">{</span>
-          <span class="kt">int</span> <span class="n">arg1b</span><span class="p">;</span>
-          <span class="kt">int</span> <span class="n">arg2b</span><span class="p">;</span>
-      <span class="p">};</span>
-      <span class="k">struct</span> <span class="p">{</span>
-          <span class="kt">void</span> <span class="o">*</span><span class="n">arg3</span><span class="p">;</span>
-          <span class="kt">int</span> <span class="n">arg4</span><span class="p">;</span>
-          <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">f1</span><span class="p">)(</span><span class="kt">char</span> <span class="n">foo</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bar</span><span class="p">);</span>
-      <span class="p">};</span>
-  <span class="p">};</span>
-  <span class="k">union</span> <span class="p">{</span>
-      <span class="k">struct</span> <span class="p">{</span>
-          <span class="kt">int</span> <span class="n">arg1</span><span class="p">;</span>
-          <span class="kt">int</span> <span class="n">arg2</span><span class="p">;</span>
-      <span class="p">}</span> <span class="n">st1</span><span class="p">;</span>
-      <span class="k">struct</span> <span class="p">{</span>
-          <span class="kt">void</span> <span class="o">*</span><span class="n">arg1</span><span class="p">;</span>  <span class="cm">/* bar.st3.arg1 is undocumented, cause a warning */</span>
-            <span class="kt">int</span> <span class="n">arg2</span><span class="p">;</span>
-         <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">f2</span><span class="p">)(</span><span class="kt">char</span> <span class="n">foo</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bar</span><span class="p">);</span> <span class="cm">/* bar.st3.fn2 is undocumented, cause a warning */</span>
-      <span class="p">}</span> <span class="n">st2</span><span class="p">,</span> <span class="n">st3</span><span class="p">;</span>
-      <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">f3</span><span class="p">)(</span><span class="kt">char</span> <span class="n">foo</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bar</span><span class="p">);</span> <span class="cm">/* f3 is undocumented, cause a warning */</span>
-  <span class="p">}</span> <span class="n">bar</span><span class="p">;</span>               <span class="cm">/* bar is undocumented, cause a warning */</span>
-
-  <span class="cm">/* private: */</span>
-  <span class="kt">int</span> <span class="n">undoc_privat</span><span class="p">;</span>    <span class="cm">/* is undocumented but private, no warning */</span>
-
-  <span class="cm">/* public: */</span>
-  <span class="k">enum</span> <span class="p">{</span>
-      <span class="n">FOO</span><span class="p">,</span>
-      <span class="n">BAR</span><span class="p">,</span>
-  <span class="p">}</span> <span class="n">undoc_public</span><span class="p">;</span>      <span class="cm">/* is undocumented, cause a warning */</span>
-
-<span class="p">};</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/**</span>
+<span class="linenos"> 2</span><span class="cm">* struct my_struct - a struct with nested unions and structs</span>
+<span class="linenos"> 3</span><span class="cm">* @arg1: first argument of anonymous union/anonymous struct</span>
+<span class="linenos"> 4</span><span class="cm">* lorem ipsum ...</span>
+<span class="linenos"> 5</span><span class="cm">* @arg2: second argument of anonymous union/anonymous struct</span>
+<span class="linenos"> 6</span><span class="cm">* @arg1b: first argument of anonymous union/anonymous struct</span>
+<span class="linenos"> 7</span><span class="cm">* @arg2b: second argument of anonymous union/anonymous struct</span>
+<span class="linenos"> 8</span><span class="cm">* @arg3: third argument of anonymous union/anonymous struct</span>
+<span class="linenos"> 9</span><span class="cm">* @arg4: fourth argument of anonymous union/anonymous struct</span>
+<span class="linenos">10</span><span class="cm">* @bar: non-anonymous union</span>
+<span class="linenos">11</span><span class="cm">* @bar.st1: struct st1 inside @bar</span>
+<span class="linenos">12</span><span class="cm">* @bar.st1.arg1: first argument of struct st1 on union bar</span>
+<span class="linenos">13</span><span class="cm">* @bar.st1.arg2: second argument of struct st1 on union bar</span>
+<span class="linenos">14</span><span class="cm">* @bar.st2: struct st2 inside @bar</span>
+<span class="linenos">15</span><span class="cm">* @bar.st2.arg1: first argument of struct st2 on union bar</span>
+<span class="linenos">16</span><span class="cm">* @bar.st2.arg2: second argument of struct st2 on union bar</span>
+<span class="linenos">17</span><span class="cm">* @bar.st3: struct st3 inside @bar</span>
+<span class="linenos">18</span><span class="cm">* @bar.st3.arg2: second argument of struct st3 on union bar</span>
+<span class="linenos">19</span><span class="cm">* @f1: nested function on anonimous union/struct</span>
+<span class="linenos">20</span><span class="cm">* @bar.st2.f2: nested function on named union/struct</span>
+<span class="linenos">21</span><span class="cm">*/</span>
+<span class="linenos">22</span><span class="k">struct</span><span class="w"> </span><span class="nc">my_struct</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">23</span><span class="w">  </span><span class="cm">/* Anonymous union/struct*/</span>
+<span class="linenos">24</span><span class="w">  </span><span class="k">union</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">25</span><span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">26</span><span class="w">            </span><span class="kt">char</span><span class="w"> </span><span class="n">arg1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="linenos">27</span><span class="w">            </span><span class="kt">char</span><span class="w"> </span><span class="n">arg2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="linenos">28</span><span class="w">        </span><span class="p">};</span>
+<span class="linenos">29</span><span class="w">      </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">30</span><span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">arg1b</span><span class="p">;</span>
+<span class="linenos">31</span><span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">arg2b</span><span class="p">;</span>
+<span class="linenos">32</span><span class="w">      </span><span class="p">};</span>
+<span class="linenos">33</span><span class="w">      </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">34</span><span class="w">          </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg3</span><span class="p">;</span>
+<span class="linenos">35</span><span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">arg4</span><span class="p">;</span>
+<span class="linenos">36</span><span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">f1</span><span class="p">)(</span><span class="kt">char</span><span class="w"> </span><span class="n">foo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bar</span><span class="p">);</span>
+<span class="linenos">37</span><span class="w">      </span><span class="p">};</span>
+<span class="linenos">38</span><span class="w">  </span><span class="p">};</span>
+<span class="linenos">39</span><span class="w">  </span><span class="k">union</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">40</span><span class="w">      </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">41</span><span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">arg1</span><span class="p">;</span>
+<span class="linenos">42</span><span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">arg2</span><span class="p">;</span>
+<span class="linenos">43</span><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="n">st1</span><span class="p">;</span>
+<span class="linenos">44</span><span class="w">      </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">45</span><span class="w">          </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg1</span><span class="p">;</span><span class="w">  </span><span class="cm">/* bar.st3.arg1 is undocumented, cause a warning */</span>
+<span class="linenos">46</span><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">arg2</span><span class="p">;</span>
+<span class="linenos">47</span><span class="w">         </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">f2</span><span class="p">)(</span><span class="kt">char</span><span class="w"> </span><span class="n">foo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bar</span><span class="p">);</span><span class="w"> </span><span class="cm">/* bar.st3.fn2 is undocumented, cause a warning */</span>
+<span class="linenos">48</span><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="n">st2</span><span class="p">,</span><span class="w"> </span><span class="n">st3</span><span class="p">;</span>
+<span class="linenos">49</span><span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">f3</span><span class="p">)(</span><span class="kt">char</span><span class="w"> </span><span class="n">foo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bar</span><span class="p">);</span><span class="w"> </span><span class="cm">/* f3 is undocumented, cause a warning */</span>
+<span class="linenos">50</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">bar</span><span class="p">;</span><span class="w">               </span><span class="cm">/* bar is undocumented, cause a warning */</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="w">  </span><span class="cm">/* private: */</span>
+<span class="linenos">53</span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">undoc_privat</span><span class="p">;</span><span class="w">    </span><span class="cm">/* is undocumented but private, no warning */</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span><span class="w">  </span><span class="cm">/* public: */</span>
+<span class="linenos">56</span><span class="w">  </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">57</span><span class="w">      </span><span class="n">FOO</span><span class="p">,</span>
+<span class="linenos">58</span><span class="w">      </span><span class="n">BAR</span><span class="p">,</span>
+<span class="linenos">59</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">undoc_public</span><span class="p">;</span><span class="w">      </span><span class="cm">/* is undocumented, cause a warning */</span>
+<span class="linenos">60</span>
+<span class="linenos">61</span><span class="p">};</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-my-struct"><span class="std std-ref">struct my_struct</span></a></p>
 <p>All descriptions can be multi-line, except the short function description.  For
 really longs <code class="docutils literal notranslate"><span class="pre">structs</span></code>, you can also describe arguments inside the body of the
 <code class="docutils literal notranslate"><span class="pre">struct</span></code>.  There are two styles, single-line comments where both the opening
 <code class="docutils literal notranslate"><span class="pre">/**</span></code> and closing <code class="docutils literal notranslate"><span class="pre">*/</span></code> are on the same line, and multi-line comments where
 they are each on a line of their own, like all other kernel-doc comments:</p>
-<div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * struct my_long_struct - short description with &amp;my_struct-&gt;a and &amp;my_struct-&gt;b</span>
-<span class="cm"> * @foo: The Foo member.</span>
-<span class="cm"> *</span>
-<span class="cm"> * Longer description</span>
-<span class="cm"> */</span>
-<span class="k">struct</span> <span class="nc">my_long_struct</span> <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">foo</span><span class="p">;</span>
-        <span class="cm">/**</span>
-<span class="cm">         * @bar: The Bar member.</span>
-<span class="cm">         */</span>
-        <span class="kt">int</span> <span class="n">bar</span><span class="p">;</span>
-        <span class="cm">/**</span>
-<span class="cm">         * @baz: The Baz member.</span>
-<span class="cm">         *</span>
-<span class="cm">         * Here, the member description may contain several paragraphs.</span>
-<span class="cm">         */</span>
-        <span class="kt">int</span> <span class="n">baz</span><span class="p">;</span>
-        <span class="k">union</span> <span class="p">{</span>
-                <span class="cm">/** @foobar: Single line description. */</span>
-                <span class="kt">int</span> <span class="n">foobar</span><span class="p">;</span>
-        <span class="p">};</span>
-        <span class="cm">/** @bar2: Description for struct @bar2 inside @my_long_struct */</span>
-        <span class="k">struct</span> <span class="p">{</span>
-                <span class="cm">/**</span>
-<span class="cm">                 * @bar2.barbar: Description for @barbar inside @my_long_struct.bar2</span>
-<span class="cm">                 */</span>
-                <span class="kt">int</span> <span class="n">barbar</span><span class="p">;</span>
-        <span class="p">}</span> <span class="n">bar2</span><span class="p">;</span>
-<span class="p">};</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/**</span>
+<span class="linenos"> 2</span><span class="cm"> * struct my_long_struct - short description with &amp;my_struct-&gt;a and &amp;my_struct-&gt;b</span>
+<span class="linenos"> 3</span><span class="cm"> * @foo: The Foo member.</span>
+<span class="linenos"> 4</span><span class="cm"> *</span>
+<span class="linenos"> 5</span><span class="cm"> * Longer description</span>
+<span class="linenos"> 6</span><span class="cm"> */</span>
+<span class="linenos"> 7</span><span class="k">struct</span><span class="w"> </span><span class="nc">my_long_struct</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">foo</span><span class="p">;</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="cm">/**</span>
+<span class="linenos">10</span><span class="cm">         * @bar: The Bar member,</span>
+<span class="linenos">11</span><span class="cm">         * lorem ipsum ..</span>
+<span class="linenos">12</span><span class="cm">         */</span>
+<span class="linenos">13</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">bar</span><span class="p">;</span>
+<span class="linenos">14</span><span class="w">        </span><span class="cm">/**</span>
+<span class="linenos">15</span><span class="cm">         * @baz: The Baz member,</span>
+<span class="linenos">16</span><span class="cm">         * lorem ipsum ..</span>
+<span class="linenos">17</span><span class="cm">         *</span>
+<span class="linenos">18</span><span class="cm">         * Here, the member description may contain several paragraphs.</span>
+<span class="linenos">19</span><span class="cm">         */</span>
+<span class="linenos">20</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">baz</span><span class="p">;</span>
+<span class="linenos">21</span><span class="w">        </span><span class="k">union</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">22</span><span class="w">                </span><span class="cm">/** @foobar: Single line description. */</span>
+<span class="linenos">23</span><span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">foobar</span><span class="p">;</span>
+<span class="linenos">24</span><span class="w">        </span><span class="p">};</span>
+<span class="linenos">25</span><span class="w">        </span><span class="cm">/** @bar2: Description for struct @bar2 inside @my_long_struct */</span>
+<span class="linenos">26</span><span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">27</span><span class="w">                </span><span class="cm">/**</span>
+<span class="linenos">28</span><span class="cm">                 * @bar2.barbar: Description for @barbar inside @my_long_struct.bar2</span>
+<span class="linenos">29</span><span class="cm">                 */</span>
+<span class="linenos">30</span><span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">barbar</span><span class="p">;</span>
+<span class="linenos">31</span><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="n">bar2</span><span class="p">;</span>
+<span class="linenos">32</span><span class="p">};</span>
 </pre></div>
-</td></tr></table></div>
-<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-my-long-struct"><span class="std std-ref">struct my_long_struct</span></a></p>
 </div>
-<div class="section" id="enums-typedefs">
-<span id="kernel-doc-syntax-enums-typedefs"></span><h2>enums, typedefs<a class="headerlink" href="#enums-typedefs" title="Permalink to this headline">¶</a></h2>
+<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-my-long-struct"><span class="std std-ref">struct my_long_struct</span></a></p>
+</section>
+<section id="enums-typedefs">
+<span id="kernel-doc-syntax-enums-typedefs"></span><h2>enums, typedefs<a class="headerlink" href="#enums-typedefs" title="Permalink to this heading">¶</a></h2>
 <p>To write documentation for enums and typedefs, you must write the name of the
 declaration; the <code class="docutils literal notranslate"><span class="pre">enum</span></code> or <code class="docutils literal notranslate"><span class="pre">typedef</span></code> must always precede the name.</p>
-<div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * enum my_enum - log level</span>
-<span class="cm"> * @QUIET: logs nothing</span>
-<span class="cm"> * @INFO: logs info messages</span>
-<span class="cm"> * @WARN: logs warn and info messages</span>
-<span class="cm"> * @DEBUG: logs debug, warn and info messages</span>
-<span class="cm"> */</span>
-
-<span class="k">enum</span> <span class="n">my_enum</span> <span class="p">{</span>
-  <span class="n">QUIET</span><span class="p">,</span>
-  <span class="n">INFO</span><span class="p">,</span>
-  <span class="n">WARN</span><span class="p">,</span>
-  <span class="n">DEBUG</span>
-<span class="p">};</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/**</span>
+<span class="linenos"> 2</span><span class="cm"> * enum my_enum - log level</span>
+<span class="linenos"> 3</span><span class="cm"> * @QUIET: logs nothing</span>
+<span class="linenos"> 4</span><span class="cm"> * @INFO: logs info messages</span>
+<span class="linenos"> 5</span><span class="cm"> * @WARN: logs warn and info messages</span>
+<span class="linenos"> 6</span><span class="cm"> * @DEBUG: logs debug, warn and info messages</span>
+<span class="linenos"> 7</span><span class="cm"> */</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">enum</span><span class="w"> </span><span class="n">my_enum</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">10</span><span class="w">  </span><span class="n">QUIET</span><span class="p">,</span>
+<span class="linenos">11</span><span class="w">  </span><span class="n">INFO</span><span class="p">,</span>
+<span class="linenos">12</span><span class="w">  </span><span class="n">WARN</span><span class="p">,</span>
+<span class="linenos">13</span><span class="w">  </span><span class="n">DEBUG</span>
+<span class="linenos">14</span><span class="p">};</span>
 </pre></div>
-</td></tr></table></div>
-<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-my-enum"><span class="std std-ref">enum my_enum</span></a></p>
-<div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * typedef my_typedef - useless typdef of int</span>
-<span class="cm"> *</span>
-<span class="cm"> */</span>
-<span class="k">typedef</span> <span class="kt">int</span> <span class="n">my_typedef</span><span class="p">;</span>
-</pre></div>
-</td></tr></table></div>
-<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-my-typedef"><span class="std std-ref">typedef my_typedef</span></a></p>
 </div>
-<div class="section" id="documentation-blocks">
-<span id="kernel-doc-syntax-doc"></span><h2>documentation blocks<a class="headerlink" href="#documentation-blocks" title="Permalink to this headline">¶</a></h2>
+<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-my-enum"><span class="std std-ref">enum my_enum</span></a></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cm">/**</span>
+<span class="linenos">2</span><span class="cm"> * typedef my_typedef - useless typdef of int</span>
+<span class="linenos">3</span><span class="cm"> *</span>
+<span class="linenos">4</span><span class="cm"> */</span>
+<span class="linenos">5</span><span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">my_typedef</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-my-typedef"><span class="std std-ref">typedef my_typedef</span></a></p>
+</section>
+<section id="documentation-blocks">
+<span id="kernel-doc-syntax-doc"></span><h2>documentation blocks<a class="headerlink" href="#documentation-blocks" title="Permalink to this heading">¶</a></h2>
 <p>To facilitate having source code and comments close together, you can include
 kernel-doc documentation blocks that are <em>free-form</em> comments instead of being
 kernel-doc for functions, structures, unions, enumerations, or typedefs.  This
@@ -412,49 +306,31 @@ could be used for something like a theory of operation for a driver or library
 code, for example.</p>
 <p>This is done by using a <code class="docutils literal notranslate"><span class="pre">DOC:</span></code> section keyword with a section title. A small
 example:</p>
-<div class="highlight-c notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * DOC: Theory of Operation</span>
-<span class="cm"> *</span>
-<span class="cm"> * The whizbang foobar is a dilly of a gizmo.  It can do whatever you</span>
-<span class="cm"> * want it to do, at any time.  It reads your mind.  Here&#39;s how it works.</span>
-<span class="cm"> *</span>
-<span class="cm"> * foo bar splat</span>
-<span class="cm"> * -------------</span>
-<span class="cm"> *</span>
-<span class="cm"> * The only drawback to this gizmo is that it can sometimes damage hardware,</span>
-<span class="cm"> * software, or its subject(s).</span>
-<span class="cm"> *</span>
-<span class="cm"> * DOC: multiple DOC sections</span>
-<span class="cm"> *</span>
-<span class="cm"> * It&#39;s not recommended to place more than one &quot;DOC:&quot; section in the same</span>
-<span class="cm"> * comment block. To insert a new &quot;DOC:&quot; section, create a new comment block and</span>
-<span class="cm"> * to create a sub-section use the reST markup for headings, see documentation</span>
-<span class="cm"> * of function rst_mode()</span>
-<span class="cm"> */</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/**</span>
+<span class="linenos"> 2</span><span class="cm"> * DOC: Theory of Operation</span>
+<span class="linenos"> 3</span><span class="cm"> *</span>
+<span class="linenos"> 4</span><span class="cm"> * The whizbang foobar is a dilly of a gizmo.  It can do whatever you</span>
+<span class="linenos"> 5</span><span class="cm"> * want it to do, at any time.  It reads your mind.  Here&#39;s how it works.</span>
+<span class="linenos"> 6</span><span class="cm"> *</span>
+<span class="linenos"> 7</span><span class="cm"> * foo bar splat</span>
+<span class="linenos"> 8</span><span class="cm"> * -------------</span>
+<span class="linenos"> 9</span><span class="cm"> *</span>
+<span class="linenos">10</span><span class="cm"> * The only drawback to this gizmo is that it can sometimes damage hardware,</span>
+<span class="linenos">11</span><span class="cm"> * software, or its subject(s).</span>
+<span class="linenos">12</span><span class="cm"> *</span>
+<span class="linenos">13</span><span class="cm"> * DOC: multiple DOC sections</span>
+<span class="linenos">14</span><span class="cm"> *</span>
+<span class="linenos">15</span><span class="cm"> * It&#39;s not recommended to place more than one &quot;DOC:&quot; section in the same</span>
+<span class="linenos">16</span><span class="cm"> * comment block. To insert a new &quot;DOC:&quot; section, create a new comment block and</span>
+<span class="linenos">17</span><span class="cm"> * to create a sub-section use the reST markup for headings, see documentation</span>
+<span class="linenos">18</span><span class="cm"> * of function rst_mode()</span>
+<span class="linenos">19</span><span class="cm"> */</span>
 </pre></div>
-</td></tr></table></div>
-<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-theory-of-operation"><span class="std std-ref">Theory of Operation</span></a></p>
 </div>
-<div class="section" id="highlight-pattern">
-<span id="kernel-doc-highlights"></span><h2>highlight pattern<a class="headerlink" href="#highlight-pattern" title="Permalink to this headline">¶</a></h2>
+<p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-theory-of-operation"><span class="std std-ref">Theory of Operation</span></a></p>
+</section>
+<section id="highlight-pattern">
+<span id="kernel-doc-highlights"></span><h2>highlight pattern<a class="headerlink" href="#highlight-pattern" title="Permalink to this heading">¶</a></h2>
 <p>All kernel-doc markup is processed as described above, all descriptive text is
 further processed, scanning for the following special patterns, which are
 highlighted appropriately.</p>
@@ -498,9 +374,9 @@ documentation in source code comments. You can’t use them in plain reST files
 (“.rst”). If you are editing “.rst” files (e.g. files under <code class="docutils literal notranslate"><span class="pre">Documentation</span></code>)
 please use the corresponding <a class="reference external" href="http://www.sphinx-doc.org/en/stable/rest.html">reST</a> markups (<a class="reference external" href="http://www.sphinx-doc.org/en/stable/domains.html">sphinx domains</a>).</p>
 </div>
-</div>
-<div class="section" id="snippets">
-<span id="kernel-doc-syntax-snippets"></span><h2>Snippets<a class="headerlink" href="#snippets" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="snippets">
+<span id="kernel-doc-syntax-snippets"></span><h2>Snippets<a class="headerlink" href="#snippets" title="Permalink to this heading">¶</a></h2>
 <p>The kernel-doc Parser supports a comment-markup for snippets out of the source
 code. To start a region to snip insert:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* parse-SNIP: &lt;snippet-name&gt; */
@@ -511,8 +387,8 @@ code. To start a region to snip insert:</p>
 </pre></div>
 </div>
 <p>Jump to <a class="reference internal" href="kernel-doc-directive.html#kernel-doc-snippets"><span class="std std-ref">Snippets</span></a> to see an example.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -558,6 +434,7 @@ code. To start a region to snip insert:</p>
   <ul>
 <li><a class="reference internal" href="#">kernel-doc syntax</a><ul>
 <li><a class="reference internal" href="#functions">functions</a></li>
+<li><a class="reference internal" href="#macro">macro</a></li>
 <li><a class="reference internal" href="#structs-unions">structs, unions</a></li>
 <li><a class="reference internal" href="#enums-typedefs">enums, typedefs</a></li>
 <li><a class="reference internal" href="#documentation-blocks">documentation blocks</a></li>
@@ -571,20 +448,20 @@ code. To start a region to snip insert:</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

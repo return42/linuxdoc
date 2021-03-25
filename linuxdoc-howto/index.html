@@ -1,25 +1,22 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LinuxDoc HowTo &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <title>LinuxDoc HowTo &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="kernel-doc syntax" href="kernel-doc-syntax.html" />
-    <link rel="prev" title="Install LinuxDoc" href="../install.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
-   
+    <link rel="prev" title="Install LinuxDoc" href="../install.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -36,7 +33,7 @@
         <li class="right" >
           <a href="../install.html" title="Install LinuxDoc"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">LinuxDoc HowTo</a></li> 
       </ul>
     </div>  
@@ -46,8 +43,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="linuxdoc-howto">
-<span id="id1"></span><h1>LinuxDoc HowTo<a class="headerlink" href="#linuxdoc-howto" title="Permalink to this headline">¶</a></h1>
+  <section id="linuxdoc-howto">
+<span id="id1"></span><h1>LinuxDoc HowTo<a class="headerlink" href="#linuxdoc-howto" title="Permalink to this heading">¶</a></h1>
 <p>As you might already noticed, the LinuxDoc project has a focus on kernel-doc.
 Most of the documentation you will find here deal with this markup, its syntax,
 use-cases and tools. But that’s not all ..</p>
@@ -60,12 +57,13 @@ All these and more topics are dealing with the same parent topic: <em>The variou
 aspects of documenting software developments</em> and are incorporated into the
 LinuxDoc project.</p>
 </div></blockquote>
-<div class="section" id="kernel-doc">
-<h2>kernel-doc<a class="headerlink" href="#kernel-doc" title="Permalink to this headline">¶</a></h2>
+<section id="kernel-doc">
+<h2>kernel-doc<a class="headerlink" href="#kernel-doc" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="kernel-doc-syntax.html">kernel-doc syntax</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="kernel-doc-syntax.html#functions">functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel-doc-syntax.html#macro">macro</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kernel-doc-syntax.html#structs-unions">structs, unions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kernel-doc-syntax.html#enums-typedefs">enums, typedefs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kernel-doc-syntax.html#documentation-blocks">documentation blocks</a></li>
@@ -97,9 +95,9 @@ LinuxDoc project.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="other-topics">
-<h2>other topics<a class="headerlink" href="#other-topics" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="other-topics">
+<h2>other topics<a class="headerlink" href="#other-topics" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="kfigure.html">Scalable figure and image handling</a><ul>
@@ -133,12 +131,12 @@ LinuxDoc project.</p>
 <li><p><a class="reference external" href="http://www.sphinx-doc.org/en/stable/ext/intersphinx.html">intersphinx</a>, <a class="reference external" href="http://www.sphinx-doc.org/en/stable/ext/intersphinx.html#module-sphinx.ext.intersphinx">sphinx.ext.intersphinx</a></p></li>
 <li><p><a class="reference external" href="http://www.sphinx-doc.org/">sphinx-doc</a>, <a class="reference external" href="http://www.sphinx-doc.org/en/stable/faq.html">sphinx-doc FAQ</a></p></li>
 <li><p><a class="reference external" href="http://docutils.sourceforge.net/docs/index.html">docutils</a>, <a class="reference external" href="http://docutils.sourceforge.net/FAQ.html">docutils FAQ</a></p></li>
-<li><p>The <a class="reference external" href="https://www.kernel.org/doc/html/latest/process/coding-style.html#codingstyle" title="(in The Linux Kernel v5.12.0-rc4)"><span>Linux kernel coding style</span></a> and (in absence of a more detailed C style guide for
+<li><p>The <a class="reference external" href="https://www.kernel.org/doc/html/latest/process/coding-style.html#codingstyle" title="(in The Linux Kernel v6.3.0-rc3)"><span>Linux kernel coding style</span></a> and (in absence of a more detailed C style guide for
 documentation) the <a class="reference external" href="https://docs.python.org/devguide/documenting.html#style-guide">Python’s Style Guide for documentation</a> provides a
 good orientation.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -190,20 +188,20 @@ good orientation.</p></li>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

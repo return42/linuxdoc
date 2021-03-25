@@ -1,25 +1,22 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Use kernel-include in reST documents &#8212; LinuxDoc 20210324 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <title>Use kernel-include in reST documents &#8212; LinuxDoc 20221127 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Command line tools" href="../cmd-line.html" />
-    <link rel="prev" title="man pages from kernel-doc comments" href="man-pages.html" />
-  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
-   
+    <link rel="prev" title="man pages from kernel-doc comments" href="man-pages.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -36,7 +33,7 @@
         <li class="right" >
           <a href="man-pages.html" title="man pages from kernel-doc comments"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20210324 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20221127 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">LinuxDoc HowTo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Use kernel-include in reST documents</a></li> 
       </ul>
@@ -47,8 +44,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="use-kernel-include-in-rest-documents">
-<span id="kernel-include-directive"></span><h1>Use kernel-include in reST documents<a class="headerlink" href="#use-kernel-include-in-rest-documents" title="Permalink to this headline">¶</a></h1>
+  <section id="use-kernel-include-in-rest-documents">
+<span id="kernel-include-directive"></span><h1>Use kernel-include in reST documents<a class="headerlink" href="#use-kernel-include-in-rest-documents" title="Permalink to this heading">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">kernel-include</span></code> reST-directive is a replacement for the <code class="docutils literal notranslate"><span class="pre">include</span></code>
 directive. The <code class="docutils literal notranslate"><span class="pre">kernel-include</span></code> directive expand environment variables in
 the path name and allows to include files from arbitrary locations.</p>
@@ -73,7 +70,7 @@ non-existing variables are left unchanged.</p>
 </div>
 <p>Since the <code class="docutils literal notranslate"><span class="pre">kernel-include</span></code> reST-directive is a replacement for the existing
 <code class="docutils literal notranslate"><span class="pre">include</span></code> directive, the options are the same, see <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/directives.html#including-an-external-document-fragment">reST include directive</a>.</p>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -119,20 +116,20 @@ non-existing variables are left unchanged.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2021 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+        &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 
