@@ -60,9 +60,10 @@ Here is a short overview of the directives options:
 
 The argument ``<src-filename>`` is required and points to the source file.  The
 pathname is relative to the pathname of the ``kernel-doc`` directive.  Absolute
-pathnames are relative to environment ``srctree`` (if unset, defaults to CWD).
-The options have the following meaning, but be aware that not all combinations
-of these options make sense:
+pathnames are relative to ``srctree``, which can be set in the environment or
+using :ref:`kernel_doc_srctree <kernel-doc-config>` in the sphinx conf.py_ (if
+unset, defaults to CWD).  The options have the following meaning, but be aware
+that not all combinations of these options make sense:
 
 ``:doc: <section title>`` (:ref:`doc_sections`)
     Include content of the ``DOC:`` section titled ``<section title>``.  Spaces
@@ -431,4 +432,8 @@ kernel_doc_raise_error: ``True``
 
      .. kernel-doc::  ./all-in-a-tumble.h
         :symbols:  no_longer_exist
+
+kernel_doc_srctree: ``None``
+  Set the pathname used as a base for absolute pathnames in kernel-doc
+  directive.  It can be overridden by the ``srctree`` environment variable.
 
