@@ -3070,63 +3070,8 @@ class Parser(SimpleLog):
                        , func = decl_name)
 
 # ==============================================================================
-# 2cent debugging & introspection
-# ==============================================================================
-
-def CONSOLE(arround=5, frame=None):
-    # pylint: disable=import-outside-toplevel
-
-    import inspect
-    import code
-    import linecache
-
-    sys.stderr.flush()
-    sys.stdout.flush()
-
-    frame  = frame or inspect.currentframe().f_back
-    fName  = frame.f_code.co_filename
-    lineNo = frame.f_lineno
-
-    ns = dict(**frame.f_globals)
-    ns.update(**frame.f_locals)
-
-    histfile = os.path.join(os.path.expanduser("~"), ".kernel-doc-history")
-    try:
-        import readline
-        import rlcompleter
-        readline.set_completer(rlcompleter.Completer(namespace=ns).complete)
-        readline.parse_and_bind("tab: complete")
-        readline.set_history_length(1000)
-        if os.path.exists(histfile):
-            readline.read_history_file(histfile)
-    except ImportError:
-        readline = None
-    lines  = []
-    for c in range(lineNo - arround, lineNo + arround):
-        if c > 0:
-            prefix = "%-04s|" % c
-            if c == lineNo:
-                prefix = "---->"
-            line = linecache.getline(fName, c, frame.f_globals)
-            if line != '':
-                lines.append(prefix + line)
-            else:
-                if lines:
-                    lines[-1] = lines[-1] + "<EOF>\n"
-                break
-    banner =  "".join(lines) + "file: %s:%s\n" % (fName, lineNo)
-    try:
-        code.interact(banner=banner, local=ns)
-    finally:
-        if readline is not None:
-            readline.write_history_file(histfile)
-
-# ==============================================================================
 # run ...
 # ==============================================================================
 
 if __name__ == "__main__":
     sys.exit(main())
-else:
-    # FIXME: just for testing
-    __builtins__["CONSOLE"] = CONSOLE
