@@ -29,6 +29,7 @@ from docutils.utils import SystemMessage
 from docutils.statemachine import ViewList
 from sphinx.util.docutils import switch_source_input
 
+from fspath import OS_ENV
 from . import kernel_doc as kerneldoc
 
 # ==============================================================================
@@ -52,6 +53,7 @@ def setup(app):
     app.add_config_value('kernel_doc_exp_method', None, 'env')
     app.add_config_value('kernel_doc_exp_ids', None, 'env')
     app.add_config_value('kernel_doc_known_attrs', None, 'env')
+    app.add_config_value('kernel_doc_srctree', kerneldoc.SRCTREE, 'env')
     app.add_directive("kernel-doc", KernelDoc)
 
     return dict(
@@ -160,9 +162,10 @@ class KernelDoc(Directive):
         known_attrs = self.options.get("known-attrs", self.env.config.kernel_doc_known_attrs)
 
         if self.arguments[0].startswith("/"):
-            # Absolute path names are relative to kerneldoc.SRCTREE
+            # Absolute path names are relative to srctree, which is taken from
+            # environment, configuration or current directory (in this order).
             fname = self.arguments[0][1:]
-            src_tree = kerneldoc.SRCTREE
+            src_tree = OS_ENV.get("srctree", self.env.config.kernel_doc_srctree)
 
         if "internal" in self.options and "export" in self.options:
             raise FaultyOption(
