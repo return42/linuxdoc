@@ -15,14 +15,16 @@ import sphinx
 
 from sphinx import addnodes
 from sphinx.locale import _
+# pylint: disable=no-name-in-module
 from sphinx.domains.c import c_funcptr_sig_re, c_sig_re
 from sphinx.domains.c import CObject as Base_CObject
 from sphinx.domains.c import CDomain as Base_CDomain
+# pylint: enable=no-name-in-module
 
 # Get Sphinx version
 major, minor, patch = sphinx.version_info[:3]  # pylint: disable=invalid-name
 
-class CObject(Base_CObject):
+class CObject(Base_CObject):  # pylint: disable=abstract-method
 
     """
     Description of a C language object.
@@ -80,7 +82,7 @@ class CObject(Base_CObject):
 
         fullname = self.handle_func_like_macro(sig, signode)
         if not fullname:
-            fullname = super(CObject, self).handle_signature(sig, signode)
+            fullname = super().handle_signature(sig, signode)
 
         if "name" in self.options:
             if self.objtype == 'function':
@@ -90,7 +92,7 @@ class CObject(Base_CObject):
                 pass
         return fullname
 
-    def add_target_and_index(self, name, sig, signode):
+    def add_target_and_index(self, name, sig, signode):  # pylint: disable=arguments-differ
         # for C API items we add a prefix since names are usually not qualified
         # by a module name and so easily clash with e.g. section titles
         targetname = 'c.' + name
@@ -124,7 +126,7 @@ class CObject(Base_CObject):
         if self.is_function_like_macro:  # pylint: disable=no-else-return
             return _('%s (C macro)') % name
         else:
-            return super(CObject, self).get_index_text(name)
+            return super().get_index_text(name)
 
 class CDomain(Base_CDomain):
 

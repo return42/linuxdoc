@@ -779,7 +779,7 @@ class ListTranslator(TranslatorAPI):
 
     def __init__(self, list_exported, list_internal_types
                  , *args, **kwargs):
-        super(ListTranslator, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.list_exported       = list_exported
         self.list_internal_types = list_internal_types
@@ -1402,7 +1402,7 @@ class ParseOptions(Container):
         self.SNIP = None
 
         # init options with arguments from caller
-        super(ParseOptions, self).__init__(self, *args, **kwargs)
+        super().__init__(self, *args, **kwargs)
 
         # absolute and relativ filename
 
@@ -1562,7 +1562,7 @@ class ParserContext(Container):
         self.sections.offsets = dict()
         self.parameterdescs.offsets = dict()
 
-        super(ParserContext, self).__init__(self, *args, **kwargs)
+        super().__init__(self, *args, **kwargs)
 
     def new(self):
         return self.__class__(
@@ -1591,7 +1591,7 @@ class ParserBuggy(RuntimeError):
         message = ("last parse position %s:%s\n"
                    % (parserObj.ctx.line_no, parserObj.options.fname)
                    + message)
-        super(ParserBuggy, self).__init__(message)
+        super().__init__(message)
         self.parserObj = parserObj
 
 # ------------------------------------------------------------------------------
@@ -1646,7 +1646,7 @@ class Parser(SimpleLog):
                           , section_return ]
 
     def __init__(self, options, translator):
-        super(Parser, self).__init__()
+        super().__init__()
 
         # raw data akku
         self.rawdata    = ""
@@ -1694,23 +1694,23 @@ class Parser(SimpleLog):
         replace["fname"]   = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
         self.errors += 1
-        super(Parser, self).error(message, **replace)
+        super().error(message, **replace)
 
     def warn(self, message, _line_no=None, **replace):
         replace["fname"]   = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
         self.warnings += 1
-        super(Parser, self).warn(message, **replace)
+        super().warn(message, **replace)
 
     def info(self, message, _line_no=None, **replace):
         replace["fname"]   = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
-        super(Parser, self).info(message, **replace)
+        super().info(message, **replace)
 
     def debug(self, message, _line_no=None, **replace):
         replace["fname"]   = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
-        super(Parser, self).debug(message, **replace)
+        super().debug(message, **replace)
 
     # ------------------------------------------------------------
     # state parser

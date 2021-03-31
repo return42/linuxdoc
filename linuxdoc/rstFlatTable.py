@@ -18,8 +18,6 @@ Implementation of the ``flat-table`` reST-directive.  User documentation see
 # imports
 # ==============================================================================
 
-import sys
-
 from docutils import nodes
 from docutils.parsers.rst import directives, roles
 from docutils.parsers.rst.directives.tables import Table
@@ -84,9 +82,6 @@ class FlatTable(Table):
     u"""FlatTable (``flat-table``) directive"""
 
     option_spec = {
-
-        # see https://github.com/PyCQA/pylint/issues/289
-        # pylint: disable=bad-continuation
 
         'name': directives.unchanged
         , 'class': directives.class_option

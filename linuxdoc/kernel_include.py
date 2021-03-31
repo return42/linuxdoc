@@ -144,9 +144,8 @@ class KernelInclude(Include):
             if 'number-lines' in self.options:
                 try:
                     startline = int(self.options['number-lines'] or 1)
-                except ValueError:
-                    raise self.error(':number-lines: with non-integer '
-                                     'start value')
+                except ValueError as exc:
+                    raise self.error(':number-lines: with non-integer start value') from exc
                 endline = startline + len(include_lines)
                 if text.endswith('\n'):
                     text = text[:-1]

@@ -18,7 +18,7 @@ linux kernel source code comments.
 
 import glob
 import logging
-from os import path, sep
+from os import path
 from io import StringIO
 
 import six
@@ -69,7 +69,7 @@ class KernelDocParser(kerneldoc.Parser):
     # pylint: disable=deprecated-method
 
     def __init__(self, app, *args, **kwargs):
-        super(KernelDocParser, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.app = app
 
     # -------------------------------------------------

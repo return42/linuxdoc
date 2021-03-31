@@ -35,7 +35,6 @@ from sphinx.writers.manpage import ManualPageWriter
 from sphinx.builders.manpage import ManualPageBuilder
 
 from .kernel_doc import Container
-from . import compat
 
 logger = logging.getLogger(__name__)
 

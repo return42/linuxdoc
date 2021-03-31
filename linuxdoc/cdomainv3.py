@@ -16,14 +16,12 @@ from sphinx.domains.c import CDomain as Base_CDomain
 
 # fixes https://github.com/sphinx-doc/sphinx/commit/0f49e30c51b5cc5055cda5b4b294c2dd9d1df573#r38750737
 
-class CObject(Base_CObject):
+class CObject(Base_CObject): # pylint: disable=abstract-method
+    """Description of a C language object.
 
     """
-    Description of a C language object.
-    """
 
-class CDomain(Base_CDomain):
-
+class CDomain(Base_CDomain): # pylint: disable=abstract-method
     """C language domain.
 
     """

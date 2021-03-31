@@ -14,14 +14,12 @@ import os
 from os import path
 import subprocess
 from hashlib import sha1
-import sys
 import logging
 
 from docutils import nodes
 from docutils.statemachine import ViewList
 from docutils.parsers.rst import directives
 from docutils.parsers.rst.directives import images
-import sphinx
 
 from sphinx.util.nodes import clean_astext
 from six import iteritems
@@ -132,12 +130,12 @@ def setupTools(app): # pylint: disable=unused-argument
     convert_cmd = which('convert')
 
     if dot_cmd:
-        app_log.info("use dot(1) from: " + dot_cmd)
+        app_log.info("use dot(1) from: %s",  dot_cmd)
     else:
         app_log.warn("dot(1) not found, for better output quality install "
                      "graphviz from http://www.graphviz.org")
     if convert_cmd:
-        app_log.info("use convert(1) from: " + convert_cmd)
+        app_log.info("use convert(1) from: %s", convert_cmd)
     else:
         app_log.warn(
             "convert(1) not found, for SVG to PDF conversion install "
@@ -175,7 +173,7 @@ def convert_image(img_node, translator, src_fname=None):
 
     # in kernel builds, use 'make SPHINXOPTS=-v' to see verbose messages
 
-    app_log.info('assert best format for: ' + img_node['uri'])
+    app_log.info('assert best format for: %s', img_node['uri'])
 
     if in_ext == '.dot':
 
@@ -220,18 +218,18 @@ def convert_image(img_node, translator, src_fname=None):
         _name = dst_fname[len(translator.builder.outdir) + 1:]
 
         if isNewer(dst_fname, src_fname):
-            app_log.info("convert: {out}/%s already exists and is newer" % _name)
+            app_log.info("convert: {out}/%s already exists and is newer", _name)
 
         else:
             ok = False
             mkdir(path.dirname(dst_fname))
 
             if in_ext == '.dot':
-                app_log.info('convert DOT to: {out}/' + _name)
+                app_log.info('convert DOT to: {out}/%s', _name)
                 ok = dot2format(app, src_fname, dst_fname)
 
             elif in_ext == '.svg':
-                app_log.info('convert SVG to: {out}/' + _name)
+                app_log.info('convert SVG to: {out}/%s', _name)
                 ok = svg2pdf(app, src_fname, dst_fname)
 
             if not ok:
@@ -261,7 +259,7 @@ def dot2format(app, dot_fname, out_fname): # pylint: disable=unused-argument
         exit_code = subprocess.call(cmd, stdout = out)
         if exit_code != 0:
             # pylint: disable=deprecated-method
-            app_log.warn("Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
+            app_log.warn("Error #%d when calling: %s", exit_code, " ".join(cmd))
     return bool(exit_code == 0)
 
 def svg2pdf(app, svg_fname, pdf_fname): # pylint: disable=unused-argument
@@ -279,7 +277,7 @@ def svg2pdf(app, svg_fname, pdf_fname): # pylint: disable=unused-argument
     exit_code = subprocess.call(cmd)
     if exit_code != 0:
         # pylint: disable=deprecated-method
-        app_log.warn("Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
+        app_log.warn("Error #%d when calling: %s", exit_code, " ".join(cmd))
     return bool(exit_code == 0)
 
 
@@ -371,12 +369,11 @@ def visit_kernel_render(self, node):
     """
     srclang = node.get('srclang')
 
-    # pylint: disable=deprecated-method
-    app_log.info('visit kernel-render node lang: "%s"' % (srclang))
+    app_log.info('visit kernel-render node lang: "%s"', srclang)
 
     tmp_ext = RENDER_MARKUP_EXT.get(srclang, None)
     if tmp_ext is None:
-        app_log.warn('kernel-render: "%s" unknown / include raw.' % (srclang))
+        app_log.warning('kernel-render: "%s" unknown / include raw', srclang)
         return
 
     if not dot_cmd and tmp_ext == '.dot':
