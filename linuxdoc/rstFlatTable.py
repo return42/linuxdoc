@@ -106,6 +106,9 @@ class FlatTable(Table):
         tableBuilder = ListTableBuilder(self)
         tableBuilder.parseFlatTableNode(node)
         tableNode = tableBuilder.buildTableNode()
+        self.add_name(tableNode)
+        tableNode['classes'] += self.options.get('class', [])
+
         # debug --> tableNode.asdom().toprettyxml()
         if title:
             tableNode.insert(0, title)
@@ -151,7 +154,6 @@ class ListTableBuilder(object):
                 colspec.attributes['stub'] = 1
                 stub_columns -= 1
             tgroup += colspec
-        stub_columns = self.directive.options.get('stub-columns', 0)
 
         if header_rows:
             thead = nodes.thead()
