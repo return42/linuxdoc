@@ -626,6 +626,25 @@ py.clean() {
     )
 }
 
+pypi.help(){
+    cat <<EOF
+pypi.upload:
+  Upload python packages to PyPi (to test use pypi.upload.test)
+EOF
+}
+pypi.upload() {
+    py.clean
+    py.build
+    # https://github.com/pypa/twine
+    pyenv.cmd twine upload "${PYDIST}"/*
+}
+
+pypi.upload.test() {
+    py.clean
+    py.build
+    pyenv.cmd twine upload -r testpypi "${PYDIST}"/*
+}
+
 # shellcheck disable=SC2120
 pyenv() {
 
