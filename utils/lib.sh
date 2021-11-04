@@ -599,6 +599,33 @@ PY_SETUP_EXTRAS="${PY_SETUP_EXTRAS:=[develop,test]}"
 
 PIP_BOILERPLATE=( pip wheel setuptools )
 
+py.help(){
+    cat <<EOF
+py.:
+  build     : Build python packages at ./${PYDIST}
+  clean     : delete virtualenv and intermediate py files
+EOF
+}
+
+py.build() {
+    build_msg BUILD "python package ${PYDIST}"
+    pyenv.cmd python setup.py \
+              sdist -d "${PYDIST}" \
+              bdist_wheel --bdist-dir "${PYBUILD}" -d "${PYDIST}"
+}
+
+py.clean() {
+    build_msg CLEAN pyenv
+    (   set -e
+        pyenv.drop
+        [ "$VERBOSE" = "1" ] && set -x
+        rm -rf "${PYDIST}" "${PYBUILD}" "${PY_ENV}" ./.tox ./*.egg-info
+        find . -name '*.pyc' -exec rm -f {} +
+        find . -name '*.pyo' -exec rm -f {} +
+        find . -name __pycache__ -exec rm -rf {} +
+    )
+}
+
 # shellcheck disable=SC2120
 pyenv() {
 
