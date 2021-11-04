@@ -147,6 +147,8 @@ The ``list-tables`` has no ability to *colspan* nor *rowspan*:
    .. list-table:: table title
       :header-rows: 1
       :stub-columns: 1
+      :class: my-class
+      :name: my-name
 
       * - ..
         - head col 1
@@ -170,6 +172,8 @@ Rendered as:
 .. list-table:: table title
    :header-rows: 1
    :stub-columns: 1
+   :class: my-class
+   :name: my-name
 
    * - ..
      - head col 1
@@ -227,6 +231,8 @@ and *targets* (e.g. a ref to :ref:`row 2 of table's body <row body 2>`).
       :header-rows: 2
       :stub-columns: 1
       :widths: 1 1 1 1 2
+      :class: my-class
+      :name: my-name
 
       * - :rspan:`1` head / stub
         - :cspan:`3` head 1.1-4
@@ -278,6 +284,8 @@ Rendered as:
     :header-rows: 2
     :stub-columns: 1
     :widths: 1 1 1 1 2
+    :class: my-class
+    :name: my-name
 
     * - :rspan:`1` head / stub
       - :cspan:`3` head 1.1-4
@@ -336,6 +344,8 @@ CSV table might be the choice if you want to include CSV-data from a outstanding
       :widths: 15, 10, 30
       :stub-columns: 1
       :file: csv_table.txt
+      :class: my-class
+      :name: my-name
 
 Content of file ``csv_table.txt``:
 
@@ -348,6 +358,8 @@ Rendered as:
    :widths: 15, 10, 30
    :stub-columns: 1
    :file: csv_table.txt
+   :class: my-class
+   :name: my-name
 
 
 Nested Tables
