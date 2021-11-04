@@ -645,6 +645,16 @@ pypi.upload.test() {
     pyenv.cmd twine upload -r testpypi "${PYDIST}"/*
 }
 
+pyenv.help(){
+    cat <<EOF
+pyenv.:
+  install   : developer install of SearXNG into virtualenv
+  uninstall : uninstall developer installation
+  cmd ...   : run command ... in virtualenv
+  OK        : test if virtualenv is OK
+EOF
+}
+
 # shellcheck disable=SC2120
 pyenv() {
 
