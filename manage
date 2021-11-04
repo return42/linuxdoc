@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8; mode: sh indent-tabs-mode: nil -*-
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# shellcheck source=utils/lib.sh
+source "$(dirname "${BASH_SOURCE[0]}")/utils/lib.sh"
+# config
+
+PYOBJECTS="linuxdoc"
+# PY_SETUP_EXTRAS='[test]'
+# SPHINXOPTS=
+
+help() {
+    docs.help
+    py.help
+    pypi.help
+    pyenv.help
+    cat <<EOF
+test.:
+  pylint    : lint PYLINT_FILES, searx/engines, searx & tests
+  unit      : run unit tests
+  coverage  : run unit tests with coverage
+  clean     : clean intermediate test stuff
+EOF
+    static_help
+}
+
+if [ "$VERBOSE" = "1" ]; then
+    SPHINX_VERBOSE="-v"
+    PYLINT_VERBOSE="-v"
+fi
+
+# needed by sphinx-docs
+export DOCS_BUILD
+
+PYLINT_OPTIONS="-m pylint -j 0 --rcfile .pylintrc"
+
+test.pylint() {
+    # shellcheck disable=SC2086
+    (   set -e
+        build_msg TEST "[pylint] linuxdoc"
+        python ${PYLINT_OPTIONS} ${PYLINT_VERBOSE} linuxdoc
+    )
+    dump_return $?
+}
+
+test.unit() {
+    build_msg TEST 'tests/unit'
+    pyenv.cmd python -m nose2 -s tests/unit
+    dump_return $?
+}
+
+test.coverage() {
+    build_msg TEST 'unit test coverage'
+    (   set -e
+        pyenv.activate
+        python -m nose2 -C --log-capture --with-coverage --coverage linuxdoc -s tests/unit
+        coverage report
+        coverage html
+    )
+    dump_return $?
+}
+
+test.clean() {
+    build_msg CLEAN  "test stuff"
+    dump_return $?
+}
+
+# shellcheck disable=SC2119
+main() {
+
+    local _type
+    local cmd="$1"; shift
+
+    if [ "$cmd" == "" ]; then
+        help
+        err_msg "missing command"
+        return 42
+    fi
+
+    case "$cmd" in
+        --getenv) var="$1"; echo "${!var}";;
+        --help) help;;
+        --*)
+            help
+            err_msg "unknown option $cmd"
+            return 42
+            ;;
+        *)
+            _type="$(type -t "$cmd")"
+            if [ "$_type" != 'function' ]; then
+                err_msg "unknown command: $cmd / use --help"
+                return 42
+            else
+                "$cmd" "$@"
+            fi
+            ;;
+    esac
+}
+
+main "$@"
