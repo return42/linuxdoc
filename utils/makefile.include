@@ -1,5 +1,7 @@
 # -*- coding: utf-8; mode: makefile-gmake -*-
 
+LIB_SH ?=$(dir $(abspath $(firstword $(MAKEFILE_LIST))))utils/lib.sh
+
 ifeq (,$(wildcard /.lxcenv.mk))
 PHONY += lxc-activate lxc-purge
 lxc-activate:

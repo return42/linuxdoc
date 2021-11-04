@@ -33,6 +33,7 @@ TEST         ?= .
 PY_ENV       = ./$(LXC_ENV_FOLDER)local/py$(PY)
 PY_ENV_BIN   = $(PY_ENV)/bin
 PY_ENV_ACT   = . $(PY_ENV_BIN)/activate
+PY_ENV_REQ  ?= requirements*.txt
 
 ifeq ($(OS),Windows_NT)
   PYTHON     = python
@@ -45,12 +46,11 @@ VTENV_OPTS ?=
 python-help::
 	@echo  'makefile.python:'
 	@echo  '  pyenv | pyenv[un]install'
-	@echo  '     build $(PY_ENV) & [un]install python objects'
+	@echo  '     build $(PY_ENV) & [un]install python objects (editable)'
 	@echo  '  targts using pyenv $(PY_ENV):'
 	@echo  '    pylint    - run pylint *linting*'
 	@echo  '    pytest    - run *tox* test on python objects'
 	@echo  '    pydebug   - run tests within a PDB debug session'
-	@echo  '    python    - run python interpreter from $(PY_ENV)/bin/python'
 	@echo  '    pybuild   - build python packages ($(PYDIST) $(PYBUILD))'
 	@echo  '    pyclean   - clean intermediate python objects'
 	@echo  '  targets using system users environment:'
@@ -62,6 +62,7 @@ python-help::
 	@echo  '  make TEST=.           => choose test from $(TEST_FOLDER) (default "." runs all)'
 	@echo  '  make DEBUG=           => target "debug": do not invoke PDB on errors'
 	@echo  '  make PY_SETUP_EXTRAS  => also install extras_require from setup.py \[develop,test\]'
+	@echo  '  make PY_ENV_REQ=...    => target pyenv: requirement files (glob pattern $(PY_ENV_REQ))'
 	@echo  '  when using target "pydebug", set breakpoints within py-source by adding::'
 	@echo  '    DEBUG()'
 
@@ -78,7 +79,7 @@ msg-python-exe:
   installed by::\n\n\
     sudo -H add-apt-repository ppa:deadsnakes/ppa\n\
     sudo -H apt update\n\
-    sudo -H apt-get install $(PYTHON) python$(PY)-venv\n"
+    sudo -H apt-get install $(PYTHON) $(PYTHON)-venv\n"
 
 ifeq ($(shell which $(PYTHON) >/dev/null 2>&1; echo $$?), 1)
 python-exe: msg-python-exe
@@ -113,14 +114,18 @@ quiet_cmd_pyinstall = INSTALL   $2
       cmd_pyinstall = $(PIP) $(PIP_VERBOSE) install $(PIP_INST) -e $2$(PY_SETUP_EXTRAS)
 
 # $2 path to folder with setup.py, this uses pip from pyenv (not OS!)
-quiet_cmd_pyenvinstall = PYENV     install $2
+quiet_cmd_pyenvinstall = PYENV     [pyenvinstall] $(PY_ENV): install $2
       cmd_pyenvinstall = \
-	if ! cat $(PY_ENV)/requirements.sha256 2>/dev/null | sha256sum --check --status 2>/dev/null; then \
-		$(PY_ENV_BIN)/python -m pip $(PIP_VERBOSE) install -e $2$(PY_SETUP_EXTRAS) ;\
-		sha256sum requirements*.txt > $(PY_ENV)/requirements.sha256 ;\
+	_IMP_STATEMENT="import $(foreach var,$(wildcard $(PYOBJECTS)),$(var), ) pkg_resources"; \
+	if ! $(PY_ENV_BIN)/python -c \
+		"import sys; sys.path.pop(0); $$_IMP_STATEMENT;" 2>/dev/null;\
+	then \
+		echo "PYENV     [pyenvinstall] $2 not installed: '$$_IMP_STATEMENT' --> failed"; \
+		echo "PYENV     [pyenvinstall] pip install -e $2$(PY_SETUP_EXTRAS)"; \
+		$(PY_ENV_BIN)/python -m pip $(PIP_VERBOSE) install -e $2$(PY_SETUP_EXTRAS); \
 	else \
-		echo "PYENV     $2 already installed"; \
-	fi
+		echo "PYENV     [pyenvinstall] $2 already installed // '$$_IMP_STATEMENT' --> OK"; \
+        fi
 
 # Uninstall the package.  Since pip does not uninstall the no longer needed
 # depencies (something like autoremove) the depencies remain.
@@ -130,23 +135,32 @@ quiet_cmd_pyuninstall = UNINSTALL $2
       cmd_pyuninstall = $(PIP) $(PIP_VERBOSE) uninstall --yes $2
 
 # $2 path to folder with setup.py, this uses pip from pyenv (not OS!)
-quiet_cmd_pyenvuninstall = PYENV     uninstall   $2
-      cmd_pyenvuninstall = $(PY_ENV_BIN)/python -m pip $(PIP_VERBOSE) uninstall --yes $2
+quiet_cmd_pyenvuninstall = PYENV     [pyenvuninstall] uninstall packages: $2
+      cmd_pyenvuninstall = \
+	if [ "." = "$2" ]; then \
+		$(PY_ENV_BIN)/python setup.py develop --uninstall; \
+	else \
+		$(PY_ENV_BIN)/python -m pip $(PIP_VERBOSE) uninstall --yes $2; \
+	fi
 
 # $2 path to folder where virtualenv take place
-quiet_cmd_virtualenv  = PYENV     usage: $ source ./$@/bin/activate
+quiet_cmd_virtualenv  = PYENV     [virtualenv] usage: $ source ./$@/bin/activate
       cmd_virtualenv  = \
-	if [ ! -d "./$(PY_ENV)" ];then                                  \
-		$(PYTHON) -m venv $(VTENV_OPTS) $2;                     \
+	if ! cat $(PY_ENV)/requirements.sha256 2>/dev/null | sha256sum --check --status 2>/dev/null; then \
+		echo "PYENV     [virtualenv] installing $(PY_ENV_REQ) into $2"; \
+		rm -f $(PY_ENV)/$(PY_ENV_REQ).sha256; \
+		$(PYTHON) -m venv $(VTENV_OPTS) $2; \
 		$(PY_ENV_BIN)/python -m pip install $(PIP_VERBOSE) -U pip wheel setuptools; \
-		$(PY_ENV_BIN)/python -m pip install $(PIP_VERBOSE) -r requirements.txt;     \
-	else                                                            \
-		echo "PYENV     using virtualenv from $2";              \
+		$(PY_ENV_BIN)/python -m pip install $(PIP_VERBOSE) $(foreach var,$(wildcard $(PY_ENV_REQ)),-r '$(var)') \
+		&& sha256sum $(wildcard $(PY_ENV_REQ)) > $(PY_ENV)/requirements.sha256 ; \
+	else \
+		echo "PYENV     [virtualenv] using $2 // glob pattern $(PY_ENV_REQ) --> sha256 OK"; \
+		cat $(PY_ENV)/requirements.sha256 | sed 's/^/          [virtualenv] - /'; \
         fi
 
 # $2 path to lint
 quiet_cmd_pylint      = LINT      $@
-      cmd_pylint      = $(PY_ENV_BIN)/python -m pylint --rcfile $(PYLINT_RC) $2
+      cmd_pylint      = $(PY_ENV_BIN)/python -m pylint -j 0 --rcfile $(PYLINT_RC) $2
 
 quiet_cmd_pytest      = TEST      $@
       cmd_pytest      = $(PY_ENV_BIN)/python -m tox -vv
@@ -201,9 +215,8 @@ pyinstall: pip-exe
 
 PHONY += pyuninstall
 pyuninstall: pip-exe
-	$(call cmd,pyuninstall,$(PYOBJECTS))
+	$(call cmd,pyuninstall,.)
 
-# install / uninstall python objects into virtualenv (PYENV)
 # for installation use the pip from PY_ENV (not the OS)!
 PHONY += pyenvinstall
 pyenvinstall: $(PY_ENV)
@@ -211,7 +224,7 @@ pyenvinstall: $(PY_ENV)
 
 PHONY += pyenvuninstall
 pyenvuninstall: $(PY_ENV)
-	$(call cmd,pyenvuninstall,$(PYOBJECTS))
+	$(call cmd,pyenvuninstall,.)
 
 PHONY += pyclean
 pyclean:
@@ -246,8 +259,8 @@ PHONY += pydebug
 pydebug: $(PY_ENV)
 	DEBUG=$(DEBUG) $(PY_ENV_BIN)/pytest $(DEBUG) -v $(TEST_FOLDER)/$(TEST)
 
-# run python interpreter from ./local/py<N>/bin/python
-python: pyenvinstall
+# runs python interpreter from ./local/py<N>/bin/python
+pyenv-python: pyenvinstall
 	$(PY_ENV_BIN)/python -i
 
 # With 'dependency_links=' setuptools supports dependencies on packages hosted
@@ -267,5 +280,4 @@ upload-pypi: pyclean pyenvinstall pybuild
 
 upload-pypi-test: pyclean pyenvinstall pybuild
 	@$(PY_ENV_BIN)/twine upload -r testpypi $(PYDIST)/*
-
 .PHONY: $(PHONY)
