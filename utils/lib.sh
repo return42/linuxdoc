@@ -853,6 +853,17 @@ case $DIST_ID-$DIST_VERS in
     ;;
 esac
 
+docs.help(){
+    cat <<EOF
+docs.:
+  html      : build HTML documentation
+  live      : autobuild HTML documentation while editing
+  gh-pages  : deploy on gh-pages branch
+  prebuild  : build reST include files (./${DOCS_BUILD}/includes)
+  clean     : clean documentation build
+EOF
+}
+
 docs.html() {
     build_msg SPHINX "HTML ./docs --> file://$(readlink -e "$(pwd)/$DOCS_DIST")"
     pyenv.install
