@@ -6,6 +6,7 @@
 .. _`reST (quickref)`: http://docutils.sourceforge.net/docs/user/rst/quickref.html
 .. _`reST include directive`: http://docutils.sourceforge.net/docs/ref/rst/directives.html#including-an-external-document-fragment
 .. _reST-directive: http://www.sphinx-doc.org/en/stable/rest.html#directives
+.. _reST-roles: https://docutils.sourceforge.io/docs/ref/rst/roles.html
 
 .. _`reST`: http://www.sphinx-doc.org/en/stable/rest.html
 .. _`Sphinx markup constructs`: http://www.sphinx-doc.org/en/stable/markup/index.html

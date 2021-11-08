@@ -11,10 +11,16 @@
 About tables
 ============
 
+.. contents:: Contents
+   :depth: 2
+   :local:
+   :backlinks: entry
+
 .. note::
 
    The :ref:`rest-flat-table` directive is the most **diff friendly** table
    markup, it is preferred in the Linux kernel tree.
+
 
 Intro
 =====
@@ -219,6 +225,25 @@ options:
 roles:
   :cspan: [int] additional columns (*morecols*)
   :rspan: [int] additional rows (*morerows*)
+
+  The ``:rspan:`` and ``:cspan:`` are *special* reST-roles_.  These directives
+  are used in the :py:obj:`linuxdoc.rstFlatTable.ListTableBuilder` and
+  :py:obj:`removed <linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem>` while
+  the table is parsed.  These reST-roles must not be in the translation:
+
+  .. code-block:: po
+
+     #: ../index.rst:21
+     msgid ":rspan:`1` :cspan:`1` field 2.2 - 3.3"
+     msgstr "test (fr) field 2.2 - 3.3"
+
+  Most other reST-roles_ should be translated *as-is*:
+
+  .. code-block:: po
+
+     #: ../index.rst:48
+     msgid ":math:`a^2 + b^2 = c^2`"
+     msgstr "test (fr) :math:`a^2 + b^2 = c^2`"
 
 The example below shows how to use this markup.  The first level of the staged
 list is the *table-row*. In the *table-row* there is only one markup allowed,
