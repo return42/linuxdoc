@@ -2789,7 +2789,7 @@ class Parser(SimpleLog):
         if matchExpr:
             # Parse function prototypes
 
-            self.ctx.return_type = matchExpr[0]
+            self.ctx.return_type = matchExpr[0].lstrip()
             self.ctx.decl_name   = matchExpr[1]
             self.check_return_section(self.ctx.decl_name, self.ctx.return_type)
 
