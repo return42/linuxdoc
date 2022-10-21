@@ -138,9 +138,12 @@ class ListTableBuilder(object):
         header_rows  = self.directive.options.get('header-rows', 0)
 
         table = nodes.table()
+        if self.directive.widths == 'auto':
+            table['classes'] += ['colwidths-auto']
+        elif self.directive.widths:  # explicitly set column widths
+            table['classes'] += ['colwidths-given']
         tgroup = nodes.tgroup(cols=len(colwidths))
         table += tgroup
-
 
         for colwidth in colwidths:
             colspec = nodes.colspec(colwidth=colwidth)
