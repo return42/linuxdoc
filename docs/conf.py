@@ -63,13 +63,13 @@ intersphinx_mapping['linux'] = (
     'https://www.kernel.org/doc/html/latest/', None)
 
 extlinks = {}
-extlinks['origin'] = (GIT_URL + '/blob/' + GIT_BRANCH + '/%s', 'git://')
-extlinks['commit'] = (GIT_URL + '/commit/%s', '#')
+extlinks['origin'] = (GIT_URL + '/blob/' + GIT_BRANCH + '/%s', 'git://%s')
+extlinks['commit'] = (GIT_URL + '/commit/%s', '#%s')
 
 # usage:    :mid:`<mail's Message-ID>`  e.g.
-extlinks['mid'] = ('http://mid.mail-archive.com/%s', '')
-extlinks['lwn'] = ('https://lwn.net/Articles/%s', 'LWN article #')
-extlinks['rst-directive'] = ('http://docutils.sourceforge.net/docs/ref/rst/directives.html#%s', '')
+extlinks['mid'] = ('http://mid.mail-archive.com/%s', '%s')
+extlinks['lwn'] = ('https://lwn.net/Articles/%s', 'LWN article #%s')
+extlinks['rst-directive'] = ('http://docutils.sourceforge.net/docs/ref/rst/directives.html#%s', '%s')
 
 # sphinx.ext.imgmath setup
 html_math_renderer = 'imgmath'
