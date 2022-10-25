@@ -20,7 +20,7 @@ Implementation of the ``flat-table`` reST-directive.  User documentation see
 
 from docutils import nodes
 from docutils.parsers.rst import directives, roles
-from docutils.parsers.rst.directives.tables import Table
+from docutils.parsers.rst.directives.tables import Table, align
 from docutils.utils import SystemMessagePropagation
 
 # ==============================================================================
@@ -87,8 +87,11 @@ class FlatTable(Table):
         , 'class': directives.class_option
         , 'header-rows': directives.nonnegative_int
         , 'stub-columns': directives.nonnegative_int
-        , 'widths': directives.positive_int_list
-        , 'fill-cells' : directives.flag }
+        , 'width': directives.length_or_percentage_or_unitless
+        , 'widths': directives.value_or(('auto', 'grid'), directives.positive_int_list)
+        , 'fill-cells': directives.flag
+        , 'align': align
+    }
 
     def run(self):
 
@@ -108,6 +111,9 @@ class FlatTable(Table):
         tableNode = tableBuilder.buildTableNode()
         self.add_name(tableNode)
         tableNode['classes'] += self.options.get('class', [])
+        self.set_table_width(tableNode)
+        if 'align' in self.options:
+            tableNode['align'] = self.options.get('align')
 
         # debug --> tableNode.asdom().toprettyxml()
         if title:
