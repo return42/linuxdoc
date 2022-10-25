@@ -8,7 +8,7 @@ python package meta informations
 from setuptools import find_packages
 
 package = 'linuxdoc'
-version = '20211220'
+version = '20221025'
 license   = 'GPLv2'
 description  = (
     'Sphinx-doc extensions & tools to extract documentation'
