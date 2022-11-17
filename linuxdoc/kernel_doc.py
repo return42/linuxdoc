@@ -1097,14 +1097,7 @@ class ReSTTranslator(TranslatorAPI):
 
             param = ""
             param_type = None
-            if self.FUNC_PTR.search(p_type):
-                # pointer to function
-                param = ":param %s%s)(%s):" % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1])
-            elif p_type.endswith("*"):
-                # pointer & pointer to pointer
-                param = ":param %s:" % (p_name)
-                param_type = ":type %s: %s" % (p_name, p_type)
-            elif p_name == "...":
+            if p_name == "...":
                 param = ":param ellipsis ellipsis:"
             else:
                 param = ":param %s:" % (p_name.replace('_', r'\_'))
