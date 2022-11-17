@@ -1035,7 +1035,11 @@ class ReSTTranslator(TranslatorAPI):
 
         # write function definition
 
-        self.write("\n.. c:function:: ")
+        if return_type:
+            self.write("\n.. c:function:: ")
+        else:
+            self.write("\n.. c:macro:: ")
+
         if return_type and re.search(r"\s\*+$", return_type):
             self.write(return_type, function, "(")
         else:
