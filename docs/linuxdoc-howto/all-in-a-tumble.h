@@ -516,3 +516,39 @@ typedef unsigned long (*genpool_algo_t)(unsigned long *map,
  * Returns true if the given timings are valid.
  */
 typedef bool v4l2_check_dv_timings_fnc(const struct v4l2_dv_timings *t, void *handle);
+
+
+/* parse-SNIP: ADD_macro */
+/**
+ * macro ADD - Function like macro to add two values
+ *
+ * @first:  first value
+ * @second:  second value
+ *
+ * Is replaced by a addition of @first and @second.
+ */
+#define ADD(first, second) (first) + (second)
+/* parse-SNAP: */
+
+/**
+ * iosys_map_wr_field - Write to a member of a struct in the iosys_map
+ *
+ * @map__:		The iosys_map structure
+ * @struct_offset__:	Offset from the beggining of the map, where the struct
+ *			is located
+ * @struct_type__:	The struct describing the layout of the mapping
+ * @field__:		Member of the struct to read
+ * @val__:		Value to write
+ *
+ * Write a value to the iosys_map considering its layout is described by a C
+ * struct starting at @struct_offset__. The field offset and size is calculated
+ * and the @val__ is written. If the field access would incur in un-aligned
+ * access, then either iosys_map_memcpy_to() needs to be used or the
+ * architecture must support it. Refer to iosys_map_rd_field() for expected
+ * usage and memory layout.
+ */
+#define iosys_map_wr_field(map__, struct_offset__, struct_type__, field__, val__) ({	\
+	struct_type__ *s;								\
+	iosys_map_wr(map__, struct_offset__ + offsetof(struct_type__, field__),		\
+		     typeof(s->field__), val__);					\
+})

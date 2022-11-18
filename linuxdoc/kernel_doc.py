@@ -118,7 +118,7 @@ doc_com_section  = RE(r"\s*\*\s{1,8}") # more than 8 spaces (one tab) as prefix 
 doc_com_body     = RE(r"\s*\* ?")
 doc_decl         = RE(doc_com.pattern + r"(\w+)")
 #doc_decl_ident   = RE(r"\s*([\w\s]+?)\s*[\(\)]\s*[-:]")
-doc_decl_ident   = RE(doc_com.pattern + r"(struct|union|enum|typedef|function)\b\s*(\w+)(\(\))?")
+doc_decl_ident   = RE(doc_com.pattern + r"(struct|union|enum|typedef|function|macro)\b\s*(\w+)(\(\))?")
 doc_decl_purpose = RE(r"[-:](.*)$")
 
 # except pattern like "http://", a whitespace is required after the colon
@@ -699,6 +699,7 @@ class TranslatorAPI(object):
             , parametertypes   = None # ctx.parametertypes
             , sections         = None # ctx.sections
             , purpose          = None # ctx.decl_purpose
+            , decl_type        = None # ctx.decl_type
             , ):
         raise NotImplementedError
 
@@ -811,7 +812,12 @@ class ListTranslator(TranslatorAPI):
             self.names["DOC"].append(header)
 
     def output_function_decl(self, **kwargs):
-        self.names["function"].append(kwargs["function"])
+        if kwargs['decl_type'] == 'macro':
+            self.names["macro"].append(kwargs["function"])
+        elif kwargs['decl_type'] == 'typedef':
+            self.names["typedef"].append(kwargs["function"])
+        else:
+            self.names["function"].append(kwargs["function"])
 
     def output_struct_decl(self, **kwargs):
         self.names["struct"].append(kwargs["decl_name"])
@@ -1025,17 +1031,26 @@ class ReSTTranslator(TranslatorAPI):
             , parametertypes   = None # ctx.parametertypes
             , sections         = None # ctx.sections
             , purpose          = None # ctx.decl_purpose
-            , ):
+            , decl_type        = None # ctx.decl_type
+        ):
         self.parser.ctx.offset = self.parser.ctx.decl_offset
+
+        _c_type = decl_type
+        if _c_type == 'typedef':
+            # a function typedef is rendered as function
+            _c_type = 'function'
+
         self.write_anchor(function)
-        self.write_header(function, sec_level=2)
+
+        _header_prefix = ''
+        if decl_type in ('macro', 'typedef'):
+            _header_prefix = '%s ' % decl_type
+        self.write_header(_header_prefix + function, sec_level=2)
 
         if self.options.man_sect:
             self.write("\n.. kernel-doc-man:: %s.%s\n" % (function, self.options.man_sect) )
 
-        # write function definition
-
-        self.write("\n.. c:function:: ")
+        self.write("\n.. c:%s:: " % _c_type)
         if return_type and re.search(r"\s\*+$", return_type):
             self.write(return_type, function, "(")
         else:
@@ -1532,7 +1547,7 @@ class ParserContext(Container):
         self.constants         = dict()
 
         self.decl_name         = ""
-        self.decl_type         = ""  # [struct|union|enum|typedef|function]
+        self.decl_type         = ""  # [struct|union|enum|typedef|function|macro]
         self.decl_purpose      = ""
         self.definition        = ""  # defintion of the struct|union|enum
         self.return_type       = ""  # function's return type definition)
@@ -1625,7 +1640,7 @@ class Parser(SimpleLog):
     LOG_FORMAT = "%(fname)s:%(line_no)s: :%(logclass)s: %(message)s\n"
 
     # DOC_TYPES: types of documentation gathered by the parser
-    DOC_TYPES      = ["DOC", "function", "struct", "union", "enum", "typedef"]
+    DOC_TYPES      = ["DOC", "function", "struct", "union", "enum", "typedef", "macro"]
 
     undescribed      = "*undescribed*"
 
@@ -2149,11 +2164,11 @@ class Parser(SimpleLog):
             self.debug("FLAG: split_doc_state=1 / switch state 3 --> 5")
             self.state = 5
             self.split_doc_state = 1
-            if self.ctx.decl_type == 'function':
+            if self.ctx.decl_type in ('function', 'macro'):
                 self.error("odd construct, gathering documentation of a function"
                            " outside of the main block?!?")
 
-        elif self.ctx.decl_type == 'function':
+        elif self.ctx.decl_type in ('function', 'macro'):
             self.process_state3_function(line)
         else:
             self.process_state3_type(line)
@@ -2237,14 +2252,14 @@ class Parser(SimpleLog):
         line = C99_comments.sub("", line) # strip C99-style comments to end of line
         line = line.strip()
 
+        if MACRO_define.search(line) and self.ctx.decl_type != 'macro':
+            # fix declaration type to 'macro' whenever decalartion type 'macro'
+            # is missed in the DOC string.
+            self.ctx.decl_type = 'macro'
+
         stripProto = RE(r"([^\{]*)")
 
-        # ?!?!? MACDOC does not exists (any more)?
-        # if ($x =~ m#\s*/\*\s+MACDOC\s*#io || ($x =~ /^#/ && $x !~ /^#\s*define/)) {
-        #   do nothing
-        # }
-
-        if line.startswith("#") and not MACRO_define.search(line):
+        if line.startswith("#") and self.ctx.decl_type != "macro":
             # do nothing
             pass
         elif stripProto.match(line):
@@ -2565,7 +2580,9 @@ class Parser(SimpleLog):
             , parameterdescs   = self.ctx.parameterdescs
             , parametertypes   = self.ctx.parametertypes
             , sections         = self.ctx.sections
-            , purpose          = self.ctx.decl_purpose )
+            , purpose          = self.ctx.decl_purpose
+            , decl_type        = self.ctx.decl_type
+        )
 
     def dump_DOC(self, name, cont):
         self.dump_section(name, cont)
@@ -2813,7 +2830,9 @@ class Parser(SimpleLog):
                 , parameterdescs   = self.ctx.parameterdescs
                 , parametertypes   = self.ctx.parametertypes
                 , sections         = self.ctx.sections
-                , purpose          = self.ctx.decl_purpose )
+                , purpose          = self.ctx.decl_purpose
+                , decl_type        = self.ctx.decl_type
+            )
 
         else:
             self.debug("dump_typedef(): '%(proto)s'", proto=proto)
@@ -3037,7 +3056,7 @@ class Parser(SimpleLog):
                     err = False
                     break
             if err:
-                if decl_type == "function":
+                if decl_type in ('function', 'macro'):
                     self.warn(
                         "excess function parameter '%(sect)s' description in '%(decl_name)s'"
                         , sect = sect, decl_name = decl_name
