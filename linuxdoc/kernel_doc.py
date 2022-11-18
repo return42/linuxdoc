@@ -1104,8 +1104,9 @@ class ReSTTranslator(TranslatorAPI):
             elif p_name == "...":
                 param = ":param ellipsis ellipsis:"
             else:
-                param = ":param %s:" % (p_name)
-                param_type = ":type %s: %s" % (p_name, p_type)
+                param = ":param %s:" % (p_name.replace('_', r'\_'))
+                if p_type:
+                    param_type = ":type %s: %s" % (p_name.replace('_', r'\_'), p_type.replace('_', r'\_'))
 
             self.parser.ctx.offset = parameterdescs.offsets.get(
                 p_name, self.parser.ctx.offset)
