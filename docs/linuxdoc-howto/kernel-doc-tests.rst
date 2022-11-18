@@ -226,7 +226,7 @@ To insert the documentation use:
       :export:  ./all-in-a-tumble.h
       :exp-method: attribute
       :exp-ids: API_EXPORTED
-      :module: test-fnattrs
+      :module: test.fnattrs
 
 The ``exp-method`` and ``exp-ids`` could be respectively omitted if
 ``kernel_doc_exp_method`` and ``kernel_doc_exp_ids`` are set in the sphinx
@@ -239,7 +239,7 @@ configuration.
       :export:  ./all-in-a-tumble.h
       :exp-method: attribute
       :exp-ids: API_EXPORTED
-      :module: test-fnattrs
+      :module: test.fnattrs
 
 .. _opt_internal:
 
@@ -256,7 +256,7 @@ used in the reST output:
 
    .. kernel-doc::  ./all-in-a-tumble.c
       :internal:  ./all-in-a-tumble.h
-      :module: tests-internal
+      :module: tests.internal
 
 The example also shows, that mixing different values for
 
@@ -270,7 +270,7 @@ in one source file is not well supported:
 
    .. kernel-doc::  ./all-in-a-tumble.c
       :internal:  ./all-in-a-tumble.h
-      :module: tests-internal
+      :module: tests.internal
 
 
 Missing exports
