@@ -502,7 +502,7 @@ def main():
 
     CLI.add_argument(
         "--known-attrs"
-        , default = ""
+        , default = []
         , nargs   = "+"
         , help    = ("provides a list of known attributes that has to be"
                      " hidden when displaying function prototypes"))
