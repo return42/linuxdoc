@@ -150,11 +150,11 @@ The ``list-tables`` has no ability to *colspan* nor *rowspan*:
 
 .. code-block:: rst
 
-   .. list-table:: table title
+   .. list-table:: list-table example
       :header-rows: 1
       :stub-columns: 1
       :class: my-class
-      :name: my-name
+      :name: my-list-table
 
       * - ..
         - head col 1
@@ -173,13 +173,13 @@ The ``list-tables`` has no ability to *colspan* nor *rowspan*:
         - column
 
 
-Rendered as:
+Rendered in :ref:`my-list-table`:
 
-.. list-table:: table title
+.. list-table:: list-table example
    :header-rows: 1
    :stub-columns: 1
    :class: my-class
-   :name: my-name
+   :name: my-list-table
 
    * - ..
      - head col 1
@@ -252,12 +252,12 @@ and *targets* (e.g. a ref to :ref:`row 2 of table's body <row body 2>`).
 
 .. code-block:: rst
 
-   .. flat-table:: table title
+   .. flat-table:: flat-table example
       :header-rows: 2
       :stub-columns: 1
       :widths: 1 1 1 1 2
       :class: my-class
-      :name: my-name
+      :name: my-flat-table
 
       * - :rspan:`1` head / stub
         - :cspan:`3` head 1.1-4
@@ -303,14 +303,14 @@ and *targets* (e.g. a ref to :ref:`row 2 of table's body <row body 2>`).
         - ..
 
 
-Rendered as:
+Rendered in :ref:`my-flat-table`:
 
- .. flat-table:: table title
+ .. flat-table:: flat-table example
     :header-rows: 2
     :stub-columns: 1
     :widths: 1 1 1 1 2
     :class: my-class
-    :name: my-name
+    :name: my-flat-table
 
     * - :rspan:`1` head / stub
       - :cspan:`3` head 1.1-4
@@ -364,27 +364,27 @@ CSV table might be the choice if you want to include CSV-data from a outstanding
 
 .. code-block:: rst
 
-   .. csv-table:: table title
+   .. csv-table:: csv-table example
       :header: , Header1, Header2
       :widths: 15, 10, 30
       :stub-columns: 1
       :file: csv_table.txt
       :class: my-class
-      :name: my-name
+      :name: my-csv-table
 
 Content of file ``csv_table.txt``:
 
 .. literalinclude:: csv_table.txt
 
-Rendered as:
+Rendered in :ref:`my-csv-table`:
 
-.. csv-table:: table title
+.. csv-table:: csv-table example
    :header: , Header1, Header2
    :widths: 15, 10, 30
    :stub-columns: 1
    :file: csv_table.txt
    :class: my-class
-   :name: my-name
+   :name: my-csv-table
 
 
 Nested Tables
