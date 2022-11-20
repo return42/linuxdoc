@@ -2493,7 +2493,7 @@ class Parser(SimpleLog):
         proto = re.sub( r"__weak +"          , "", proto )
 
         # Remove known attributes from function prototype
-        known_attrs = self.options.known_attrs
+        known_attrs = self.options.known_attrs.copy()
         if self.options.exp_method == 'attribute':
             known_attrs.extend(self.options.exp_ids)
         for attr in known_attrs:
