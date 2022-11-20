@@ -17,7 +17,7 @@
 //     :export:  ./all-in-a-tumble.h
 
 /* parse-SNIP:  EXPORT_SYMBOL */
-EXPORT_SYMBOL_GPL_FUTURE(user_function)
+EXPORT_SYMBOL(user_function)
 
 int user_function(int a, ...)
 /* parse-SNAP: */

@@ -246,31 +246,73 @@ configuration.
 option ``:internal:``
 ---------------------
 
-Include documentation for all documented definitions, **not** exported.  This
+Include documentation of all documented definitions, **not** exported.  This
 test gathers exports from :ref:`all-in-a-tumble.h-src` and
 :ref:`all-in-a-tumble.c-src` and parses comments from
 :ref:`all-in-a-tumble.c-src`, from where only the *not exported* definitions are
-used in the reST output:
+used in the reST output.
 
-.. code-block:: rst
+The both examples below also demonstrate that it is not supported to mix the
+export methods (``:exp-method:``) ``[macro|attribute]`` in one source
+``all-in-a-tumble.[hc]``.  Only one methode can be used by the ``:internal:``
+option to identfy if a symbol is exported.
 
-   .. kernel-doc::  ./all-in-a-tumble.c
-      :internal:  ./all-in-a-tumble.h
-      :module: tests.internal
+.. tabs::
 
-The example also shows, that mixing different values for
+   .. group-tab:: exp-method is ``macro``
 
-- ``:exp-method:`` --> ``[macro|attribute]`` and
-- ``:exp-ids:``    --> ``[EXPORT_SYMBOL|API_EXPORTED]``
+      From :ref:`all-in-a-tumble.h-src`:
 
-in one source file is not well supported:
+      .. kernel-doc::  ./all-in-a-tumble.h
+	 :snippets: EXPORT_SYMBOL
 
-.. admonition:: internal symbols
-   :class: rst-example
+      From :ref:`all-in-a-tumble.c-src`:
 
-   .. kernel-doc::  ./all-in-a-tumble.c
-      :internal:  ./all-in-a-tumble.h
-      :module: tests.internal
+      .. kernel-doc::  ./all-in-a-tumble.c
+	 :snippets: user_function
+
+   .. group-tab:: exp-method is ``attribute``
+
+      From :ref:`all-in-a-tumble.c-src`:
+
+      .. kernel-doc::  ./all-in-a-tumble.c
+	 :snippets: user_sum-c
+
+.. tabs::
+
+   .. group-tab:: exp-method is ``macro``
+
+      .. code-block:: rst
+
+	 .. kernel-doc::  ./all-in-a-tumble.c
+	    :internal:  ./all-in-a-tumble.h
+	    :module: tests.internal
+
+      .. admonition:: internal symbols (when exp-method is ``macro``)
+	 :class: rst-example
+
+	 .. kernel-doc::  ./all-in-a-tumble.c
+	    :internal:  ./all-in-a-tumble.h
+	    :module: tests.internal_A
+
+   .. group-tab:: exp-method is ``attribute``
+
+      .. code-block:: rst
+
+	 .. kernel-doc::  ./all-in-a-tumble.c
+	    :internal:  ./all-in-a-tumble.h
+	    :module: tests.internal_B
+	    :exp-method: attribute
+	    :exp-ids: API_EXPORTED
+
+      .. admonition:: internal symbols (when exp-method is ``attribute``)
+	 :class: rst-example
+
+	 .. kernel-doc::  ./all-in-a-tumble.c
+	    :internal:  ./all-in-a-tumble.h
+	    :module: tests.internal_B
+	    :exp-method: attribute
+	    :exp-ids: API_EXPORTED
 
 
 Missing exports

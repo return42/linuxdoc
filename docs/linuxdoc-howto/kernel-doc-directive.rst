@@ -77,26 +77,28 @@ that not all combinations of these options make sense:
         identifier.  Take in mind, that this option will not suppress any native
         reST heading markup in the comment.
 
-``:export: [<src-fname-pattern> [, ...]]`` (:ref:`exported_symbols`)
-    Include documentation for all function, struct or whatever definition in
-    ``<src-filename>``, exported using EXPORT_SYMBOL macro (``EXPORT_SYMBOL``,
-    ``EXPORT_SYMBOL_GPL`` & ``EXPORT_SYMBOL_GPL_FUTURE``) either in
-    ``<src-filename>`` or in any of the files specified by
-    ``<src-fname-pattern>``.
+``:export: [<src-fname-pattern> [, ...]]`` (:ref:`opt_export`)
+    Include documentation of all function, struct or whatever definitions in
+    ``<src-filename>`` and exported using one of the :ref:`export symbols <exp-ids
+    option>` (:ref:`macro <exp-method option>`) either in ``<src-filename>`` or in
+    any of the files specified by ``<src-fname-pattern>``.
 
     The ``<src-fname-pattern>`` (glob) is useful when the kernel-doc comments
-    have been placed in header files, while EXPORT_SYMBOL are next to the
+    have been placed in header files, while *EXPORT_SYMBOL* are next to the
     function definitions.
 
 ``:internal: [<src-fname-pattern> [, ...]]`` (:ref:`opt_internal`)
-    Include documentation for all documented definitions, **not** exported using
-    EXPORT_SYMBOL macro either in ``<src-filename>`` or in any of the files
-    specified by ``<src-fname-pattern>``.
+    Include documentation of all documented definitions, **not** exported by one
+    of the :ref:`export symbols <exp-ids option>` (:ref:`macro <exp-method
+    option>`) either in ``<src-filename>`` or in any of the files specified by
+    ``<src-fname-pattern>``.
+
+.. _exp-method option:
 
 ``:exp-method: <method>``
     Change the way exported symbols are specified in source code.  Default value
     ``macro`` if not provided, can be set globally by
-    :ref:`kernel_doc_exp_method <kernel-doc-config>` in the sphinx conf.py_.
+    :ref:`kernel_doc_exp_method <kernel_doc_exp_method>` in the sphinx conf.py_.
 
 
     The ``<method>`` must one of
@@ -113,11 +115,13 @@ that not all combinations of these options make sense:
         definition: ``THIS_IS_AN_EXPORTED_SYMBOL int symbol(void* some_arg)
         {...}``
 
+.. _exp-ids option:
+
 ``:exp-ids: <identifier [, identifiers [, ...]]>``
-    Use the specified list of identifiers instead of default value:
-    EXPORT_SYMBOL, EXPORT_SYMBOL_GPL, EXPORT_SYMBOL_GPL_FUTURE.  Default value
+    Use the specified list of identifiers instead of default value: ``EXPORT_SYMBOL``,
+    ``EXPORT_SYMBOL_GPL`` & ``EXPORT_SYMBOL_GPL_FUTURE``.  Default value
     can be overriden globally by sphinx conf.py_ option :ref:`kernel_doc_exp_ids
-    <kernel-doc-config>`.
+    <kernel_doc_exp_ids>`.
 
 ``:known-attrs: <attr [, attrs [, ...]]>``
     Specified a list of function attributes that are known and must be hidden
@@ -382,13 +386,17 @@ kernel-doc config
 Within the `sphinx config`_ file (``conf.py`` or ``my_project.conf``) you can
 set the following option.
 
-kernel_doc_exp_method: ``macro``
-  Set parser's default value for kernel-doc directive option  ``:exp-method:``
-  (details see: :ref:`kernel-doc-options`)
+.. _kernel_doc_exp_method:
 
-kernel_doc_exp_ids: ``['EXPORT_SYMBOL', 'EXPORT_SYMBOL_GPL', 'EXPORT_SYMBOL_GPL_FUTURE']``
+kernel_doc_exp_method: :py:obj:`linuxdoc.kernel_doc.DEFAULT_EXP_METHOD`
+  Set parser's default value for kernel-doc directive option  ``:exp-method:``
+  (details see: :ref:`exp-method <exp-method option>`)
+
+.. _kernel_doc_exp_ids:
+
+kernel_doc_exp_ids: :py:obj:`linuxdoc.kernel_doc.DEFAULT_EXP_IDS`
   Set parser's default value for kernel-doc directive option ``:exp-ids:``.
-  (details see: :ref:`kernel-doc-options`)
+  (details see: :ref:`exp-ids <exp-ids option>`)
 
 kernel_doc_known_attrs: ``[...]``
   Set parser's default value for kernel-doc directive option  ``:known-attrs:``

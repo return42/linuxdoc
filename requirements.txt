@@ -22,4 +22,4 @@ sphinx-issues
 sphinx-jinja
 sphinx-tabs
 sphinxcontrib-programoutput
-
+sphinx-tabs

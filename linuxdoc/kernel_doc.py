@@ -345,7 +345,10 @@ GIT_REF        = ("Linux kernel source tree:"
                   " `%(rel_fname)s <https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/"
                   "%(rel_fname)s>`__")
 DEFAULT_EXP_METHOD = "macro"
+"""Default value of ``:exp-method:``"""
+
 DEFAULT_EXP_IDS    = ['EXPORT_SYMBOL', 'EXPORT_SYMBOL_GPL', 'EXPORT_SYMBOL_GPL_FUTURE']
+"""Default value of ``:exp-ids:``"""
 
 # ==============================================================================
 # Logging stuff
