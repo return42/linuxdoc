@@ -38,7 +38,38 @@ from . import kernel_doc as kerneldoc
 
 __version__  = '3.0'
 
-PARSER_CACHE = dict()
+class ParserCache:
+    """A simple (in process) cache for :py:obj:`KernelDocParser` objects (read
+    :py:obj:`PARSER_CACHE`)
+
+    """
+
+    def __init__(self):
+        self._cache = {}
+
+    def get_id(self, opts):
+        """Generate a cache ID from the options of the kernel-doc directive.  Some of
+        the options control the parsing rules and thus in the end the parsing
+        result.
+
+        """
+        return (opts.fname, opts.exp_method, tuple(opts.exp_ids), tuple(opts.known_attrs))
+
+    def get(self, opts):
+        x = self.get_id(opts)
+        return self._cache.get(x)
+
+    def set(self, opts, parser):
+        self._cache[self.get_id(opts)] = parser
+
+
+PARSER_CACHE = ParserCache()
+"""ToDo: this type of cache (in process) does not (fully) support sphinx's
+paralell build (job option -j N) where builds are spanned over processes.
+Sphinx-build creates a new job (process) not for each kernel-doc directive but
+for each rest-file (that contains at least one kernel-doc directive).
+
+"""
 
 app_log = logging.getLogger('application')
 
@@ -294,14 +325,14 @@ class KernelDoc(Directive):
         self.state_machine.insert_input(todo.split("\n"), self.arguments[0] )
 
     def parseSource(self, opts):
-        parser = PARSER_CACHE.get(opts.fname, None)
+        parser = PARSER_CACHE.get(opts)
 
         if parser is None:
-            self.env.note_dependency(opts.fname)
+            self.env.note_dependency(opts.fname) # ??
             #app_log.info("parse kernel-doc comments from: %s" % opts.fname)
             parser = KernelDocParser(self.env.app, opts, kerneldoc.NullTranslator())
             parser.parse()
-            PARSER_CACHE[opts.fname] = parser
+            PARSER_CACHE.set(opts, parser)
         else:
             parser.setOptions(opts)
 
