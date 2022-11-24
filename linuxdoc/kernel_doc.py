@@ -2205,7 +2205,7 @@ class Parser(SimpleLog):
 
             # First line (split_doc_state 1) needs to be a @parameter
             self.ctx.section  = self.sect_title(doc_state5_sect[0].strip())
-            self.ctx.contents = doc_state5_sect[1].strip()
+            self.ctx.contents = doc_state5_sect[1].strip() + "\n"
             self.split_doc_state = 2
             self.debug("SPLIT-DOC-START: '%(param)s' / split-state 1 --> 2"
                        , param = self.ctx.section)
