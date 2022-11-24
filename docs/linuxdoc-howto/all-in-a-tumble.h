@@ -104,6 +104,7 @@ DEFINE_EVENT(block_buffer, block_dirty_buffer,
 /**
 * struct my_struct - a struct with nested unions and structs
 * @arg1: first argument of anonymous union/anonymous struct
+* lorem ipsum ...
 * @arg2: second argument of anonymous union/anonymous struct
 * @arg1b: first argument of anonymous union/anonymous struct
 * @arg2b: second argument of anonymous union/anonymous struct
@@ -173,11 +174,13 @@ struct my_struct {
 struct my_long_struct {
 	int foo;
         /**
-         * @bar: The Bar member.
+         * @bar: The Bar member,
+	 * lorem ipsum ..
          */
         int bar;
         /**
-         * @baz: The Baz member.
+         * @baz: The Baz member,
+	 * lorem ipsum ..
          *
          * Here, the member description may contain several paragraphs.
          */
