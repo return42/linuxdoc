@@ -46,3 +46,4 @@ all-in-a-tumble.c
 
 .. kernel-doc::  ./all-in-a-tumble.c
     :module: example
+    :known-attrs: API_EXPORTED
