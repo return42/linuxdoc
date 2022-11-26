@@ -247,36 +247,44 @@ option ``:internal:``
 ---------------------
 
 Include documentation of all documented definitions, **not** exported.  This
-test gathers exports from :ref:`all-in-a-tumble.h-src` and
-:ref:`all-in-a-tumble.c-src` and parses comments from
-:ref:`all-in-a-tumble.c-src`, from where only the *not exported* definitions are
-used in the reST output.
+test gathers exports from :origin:`test_internals.h
+<docs/linuxdoc-howto/test_internals.h>` and :origin:`test_internals.c
+<docs/linuxdoc-howto/test_internals.c>` and parses comments from
+:origin:`test_internals.c <docs/linuxdoc-howto/test_internals.c>`, from where
+only the *not exported* definitions are used in the reST output.
 
-The both examples below also demonstrate that it is not supported to mix the
-export methods (``:exp-method:``) ``[macro|attribute]`` in one source
-``all-in-a-tumble.[hc]``.  Only one methode can be used by the ``:internal:``
-option to identfy if a symbol is exported.
+.. attention::
+
+   The both examples below also demonstrate that it is not good to mix the
+   export methods (``:exp-method: [macro|attribute]``) in one source
+   ``test_internals.[hc]``.  Only one methode can be used by the ``:internal:``
+   option to identfy a symbol to be exported.
 
 .. tabs::
 
    .. group-tab:: exp-method is ``macro``
 
-      From :ref:`all-in-a-tumble.h-src`:
+      From :``test_internals.h``:
 
-      .. kernel-doc::  ./all-in-a-tumble.h
-	 :snippets: EXPORT_SYMBOL
+      .. kernel-doc::  ./test_internals.h
+	 :snippets: EXP_SYMB
 
-      From :ref:`all-in-a-tumble.c-src`:
+      From ``test_internals.c``:
 
-      .. kernel-doc::  ./all-in-a-tumble.c
-	 :snippets: user_function
+      .. kernel-doc::  ./test_internals.c
+	 :snippets: EXP_SYMB
 
    .. group-tab:: exp-method is ``attribute``
 
-      From :ref:`all-in-a-tumble.c-src`:
+      From ``test_internals.c``:
 
-      .. kernel-doc::  ./all-in-a-tumble.c
-	 :snippets: user_sum-c
+      .. kernel-doc::  ./test_internals.c
+	 :snippets: API_EXP
+
+      From ``test_internals.h``:
+
+      .. kernel-doc::  ./test_internals.h
+	 :snippets: API_EXP
 
 .. tabs::
 
@@ -284,35 +292,49 @@ option to identfy if a symbol is exported.
 
       .. code-block:: rst
 
-	 .. kernel-doc::  ./all-in-a-tumble.c
-	    :internal:  ./all-in-a-tumble.h
-	    :module: tests.internal
+	 .. kernel-doc::  ./test_internals.c
+	    :internal:  ./test_internals.h
+	    :module: test_internals_A
+	    :exp-method: macro
+	    :exp-ids: EXP_SYMB
+	    :known-attrs: API_EXP
+
+	 Its not good to mix ``exp-method``, the ``know-attrs`` here is needed to
+	 avoid the Sphinx warning::
+
+             test_internals.c:24: WARNING: Error in declarator or parameters
+	     Invalid C declaration: Expected identifier in nested name, got keyword: int [error at 11]
+	     API_EXP int bar(int a,  ...)
+	     -----------^
 
       .. admonition:: internal symbols (when exp-method is ``macro``)
 	 :class: rst-example
 
-	 .. kernel-doc::  ./all-in-a-tumble.c
-	    :internal:  ./all-in-a-tumble.h
-	    :module: tests.internal_A
+	 .. kernel-doc::  ./test_internals.c
+	    :internal:  ./test_internals.h
+	    :module: test_internals_A
+	    :exp-method: macro
+	    :exp-ids: EXP_SYMB
+	    :known-attrs: API_EXP
 
    .. group-tab:: exp-method is ``attribute``
 
       .. code-block:: rst
 
-	 .. kernel-doc::  ./all-in-a-tumble.c
-	    :internal:  ./all-in-a-tumble.h
-	    :module: tests.internal_B
+	 .. kernel-doc::  ./test_internals.c
+	    :internal:  ./test_internals.h
+	    :module: test_internals_B
 	    :exp-method: attribute
-	    :exp-ids: API_EXPORTED
+	    :exp-ids: API_EXP
 
       .. admonition:: internal symbols (when exp-method is ``attribute``)
 	 :class: rst-example
 
-	 .. kernel-doc::  ./all-in-a-tumble.c
-	    :internal:  ./all-in-a-tumble.h
-	    :module: tests.internal_B
+	 .. kernel-doc::  ./test_internals.c
+	    :internal:  ./test_internals.h
+	    :module: test_internals_B
 	    :exp-method: attribute
-	    :exp-ids: API_EXPORTED
+	    :exp-ids: API_EXP
 
 
 Missing exports

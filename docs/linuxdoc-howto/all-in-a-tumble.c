@@ -51,20 +51,6 @@ int user_sum(int a, int b)
 }
 /* parse-SNAP: */
 
-/* parse-SNIP: internal_function */
-/**
- * internal_function - the answer
- *
- * Context: !sanity()
- *
- * Return:
- * The answer to the ultimate question of life, the universe and everything.
- */
-int internal_function()
-{
-	return 42;
-}
-/* parse-SNAP: */
 
 /* parse-SNIP: test_SYSCALL */
 /**
