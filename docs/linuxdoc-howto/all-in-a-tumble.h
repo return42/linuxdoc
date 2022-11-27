@@ -26,6 +26,14 @@ int user_function(int a, ...)
 int user_sum(int a, int b);
 /* parse-SNAP: */
 
+/* parse-SNIP: function pointer argument */
+/**
+ * callback() - Callback function with a function pointer argument
+ * @fct_ptr: Function to call.
+ *
+ */
+void callback(void (*fct_ptr)(void *));
+/* parse-SNAP: */
 
 /**
  * block_touch_buffer - mark a buffer accessed
@@ -323,7 +331,7 @@ typedef int my_typedef;
  *      \|     \|      |/     |/
  *       +------+      +------+
  *        foo()         bar()
- * 
+ *
  * Highlighted code blocks:
  * The next example shows a code block, with highlighting C syntax in the
  * output.
