@@ -360,9 +360,9 @@ STREAM = Container(
     , log_out  = sys.__stderr__
     , )
 
-VERBOSE = False
-DEBUG   = False
-INSPECT = False
+VERBOSE = True
+DEBUG   = True
+INSPECT = True
 
 class SimpleLog(object):
 

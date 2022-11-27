@@ -42,11 +42,11 @@ PHONY += uninstall
 uninstall: pyenvuninstall
 
 PHONY += docs
-docs:  docs-man $(API_DOC)
+docs:
 	$(call cmd,sphinx,html,docs,docs)
 
 PHONY += docs-live
-docs-live: pyenvinstall docs-man
+docs-live: pyenvinstall
 	$(call cmd,sphinx_autobuild,html,$(DOCS_FOLDER),$(DOCS_FOLDER))
 
 PHONY += docs-man

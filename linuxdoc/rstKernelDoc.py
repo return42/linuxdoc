@@ -363,6 +363,10 @@ class KernelDoc(Directive):
                 raise FaultyOption('docutils: file insertion disabled')
             opts = self.getParserOptions()
             # FIXME: think about again; these members has been added for convenience
+            #if opts['rel_fname'].startswith('./test_internal') and len(opts.get('exp_ids', [])) ==1:
+            #    import pdb
+            #    pdb.set_trace()
+
             self.parser = self.parseSource(opts) # pylint: disable=attribute-defined-outside-init
             self.nodes.extend(self.getNodes())
 
