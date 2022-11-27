@@ -4,7 +4,7 @@ LinuxDoc
 
 .. sidebar::  Info
 
-   - linuxdoc v20221025
+   - linuxdoc v20221127
    - 2022 Markus Heiser / GPLv2
    - https://github.com/return42/linuxdoc
 
