@@ -29,6 +29,7 @@ source ``all-in-a-tumble.h``
 .. literalinclude:: ./all-in-a-tumble.h
    :language: c
    :linenos:
+   :tab-width: 8
 
 ----
 
@@ -40,3 +41,4 @@ source ``all-in-a-tumble.c``
 .. literalinclude:: ./all-in-a-tumble.c
    :language: c
    :linenos:
+   :tab-width: 8
