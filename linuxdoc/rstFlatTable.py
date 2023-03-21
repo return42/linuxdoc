@@ -1,5 +1,4 @@
-# -*- coding: utf-8; mode: python -*-
-# SPDX-License-Identifier: GPL-2.0
+# SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # pylint: disable=missing-docstring, arguments-differ, invalid-name
 # pylint: disable=too-many-arguments, too-many-locals, too-many-branches

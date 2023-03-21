@@ -1,6 +1,5 @@
-# -*- coding: utf-8; mode: python -*-
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # pylint: disable=missing-docstring, invalid-name
-# SPDX-License-Identifier: GPL-2.0
 """\
 rstKernelDoc
 ~~~~~~~~~~~~

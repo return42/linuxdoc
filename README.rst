@@ -32,6 +32,6 @@ Links
 package:     linuxdoc (20221127)
 copyright:   2024 Markus Heiser
 e-mail:      markus.heiser@darmarIT.de
-license:     GPLv2
+license:     AGPLv3+
 ============ ===============================================
 

@@ -1,4 +1,4 @@
-# -*- coding: utf-8; mode: python -*-
+# SPDX-License-Identifier: AGPL-3.0-or-later
 u"""
 The LinuxDoc library contains Sphinx-doc extensions and command line tools
 related to the build process of the Linux-Kernel documentation.  Even if this

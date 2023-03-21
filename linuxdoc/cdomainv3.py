@@ -1,4 +1,4 @@
-# -*- coding: utf-8; mode: python -*-
+# SPDX-License-Identifier: AGPL-3.0-or-later
 u"""
     cdomainv3 (Sphinx v>=3.0)
     ~~~~~~~~~~~~~~~~~~~~~~~~~

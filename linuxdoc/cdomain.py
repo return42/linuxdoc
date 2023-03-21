@@ -1,5 +1,4 @@
-# -*- coding: utf-8; mode: python -*-
-# SPDX-License-Identifier: GPL-2.0
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """\
 cdomain
 ~~~~~~~

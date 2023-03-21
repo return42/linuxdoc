@@ -1,5 +1,4 @@
-# -*- coding: utf-8; mode: python; mode: flycheck -*-
-# SPDX-License-Identifier: GPL-2.0
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # pylint: disable=line-too-long, invalid-name, consider-using-f-string
 """Python package meta informations used by setup.py and other project files.
 """
@@ -14,7 +13,7 @@ description = (
     'Sphinx-doc extensions & tools to extract documentation'
     ' from C/C++ source file comments.'
 )
-license   = 'GPLv2'
+license   = 'AGPLv3+'  # pylint: disable=redefined-builtin
 keywords = 'sphinx extension doc source code comments kernel-doc linux'
 
 author = 'Markus Heiser'
@@ -182,7 +181,7 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
      "Intended Audience :: Developers",
      "Intended Audience :: Other Audience",
-     "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+     "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
      "Operating System :: OS Independent",
      "Programming Language :: Python",
      "Programming Language :: Python :: 3",
