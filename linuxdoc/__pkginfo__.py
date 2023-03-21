@@ -1,37 +1,35 @@
 # -*- coding: utf-8; mode: python; mode: flycheck -*-
 # SPDX-License-Identifier: GPL-2.0
-# pylint: disable=invalid-name,redefined-builtin
-"""
-python package meta informations
+# pylint: disable=line-too-long, invalid-name, consider-using-f-string
+"""Python package meta informations used by setup.py and other project files.
 """
 
 from setuptools import find_packages
 
 package = 'linuxdoc'
 version = '20221127'
-license   = 'GPLv2'
-description  = (
+
+copyright = '2024 Markus Heiser'
+description = (
     'Sphinx-doc extensions & tools to extract documentation'
     ' from C/C++ source file comments.'
 )
-copyright = '2021 Markus Heiser'
+license   = 'GPLv2'
+keywords = 'sphinx extension doc source code comments kernel-doc linux'
 
 author = 'Markus Heiser'
 author_email = 'markus.heiser@darmarIT.de'
+authors = [author, ]
+emails = [author_email, ]
 
 maintainer = 'Markus Heiser'
 maintainer_email = 'markus.heiser@darmarIT.de'
+maintainers = [maintainer, ]
+
 
 url = 'https://github.com/return42/linuxdoc'
 docs = 'https://return42.github.io/linuxdoc'
 issues = url + '/issues'
-
-authors      = [author, ]
-
-emails       = [author_email, ]
-keywords     = 'sphinx extension doc source code comments kernel-doc linux'
-
-maintainers = [maintainer, ]
 
 project_urls = {
     'Documentation'    : docs,
@@ -91,6 +89,8 @@ py_modules = []
 install_requires = [
     'fspath',
     'setuptools',
+    'docutils',
+    'sphinx',
 ]
 
 install_requires_txt = "\n".join(install_requires)
@@ -98,28 +98,19 @@ install_requires_txt = "\n".join(install_requires)
 test_requires = [
     'pylint'
     ]
-
+test_requires.sort()
 test_requires_txt = "\n".join(test_requires)
 
 develop_requires = [
-    'twine',
-    # 'wheel'
-    'Sphinx',
     'pallets-sphinx-themes',
     'sphinx-autobuild',
     'sphinx-issues',
     'sphinx-jinja',
     'sphinx-tabs',
     'sphinxcontrib-programoutput',
-    # slide-shows with revaljs
-    # 'sphinxjp.themes.revealjs @ git+https://github.com/return42/sphinxjp.themes.revealjs',
-    # https://jedi.readthedocs.io/
-    # 'jedi',
-    # epc required by emacs: https://tkf.github.io/emacs-jedi
-    # 'epc @ git+https://github.com/tkf/python-epc',
+    'tox',
+    'twine',
     ]
-
-
 develop_requires_txt = "\n".join(develop_requires)
 
 def get_entry_points():
@@ -132,6 +123,59 @@ def get_entry_points():
             'kernel-grepdoc = linuxdoc.grep_doc:main',
         ]
     }
+
+requirements_txt = """\
+%(install_requires_txt)s
+""" % globals()
+
+requirements_dev_txt = """\
+%(test_requires_txt)s
+%(develop_requires_txt)s
+""" % globals()
+
+docstring = """\
+The LinuxDoc library contains Sphinx-doc extensions and command line tools to
+extract documentation from C/C++ source file comments.  Even if this project
+started in context of the Linux-Kernel documentation, you can use these
+extensions in common Sphinx-doc projects.
+""" % globals()
+
+README = """\
+========
+LinuxDoc
+========
+
+%(docstring)s
+
+Install
+=======
+
+`Install LinuxDoc <%(docs)s/install.html>`__ using `pip
+<https://pip.pypa.io/en/stable/quickstart/>`__:
+
+.. code-block:: text
+
+   pip install --user -U linuxdoc
+
+
+Links
+=====
+
+- Documentation:   %(docs)s
+- Releases:        https://pypi.org/project/linuxdoc/
+- Code:            %(url)s
+- Issue tracker:   %(url)s/issues
+
+
+============ ===============================================
+package:     %(package)s (%(version)s)
+copyright:   %(copyright)s
+e-mail:      %(maintainer_email)s
+license:     %(license)s
+============ ===============================================
+""" % globals()
+
+
 
 # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
 classifiers = [
@@ -148,57 +192,3 @@ classifiers = [
      "Topic :: Text Processing",
 ]
 
-docstring = """\
-.. sidebar::  Info
-
-   - %(package)s v%(version)s
-   - %(copyright)s / %(license)s
-   - %(url)s
-
-The LinuxDoc library contains Sphinx-doc extensions and command line tools to
-extract documentation from C/C++ source file comments.  Even if this project
-started in context of the Linux-Kernel documentation, you can use these
-extensions in common Sphinx-doc projects.
-
-Documentation is available at ./docs or jump to:
-
-- %(docs)s
-
-The LinuxDoc repository is hosted at:
-
-- %(url)s
-
-Issue tracker:
-
-- %(url)s/issues
-
-For installation read file ./docs/install.rst or jump to:
-
-- %(docs)s/install.html
-""" % globals()
-
-README = """\
-========
-LinuxDoc
-========
-
-%(docstring)s
-""" % globals()
-
-requirements_txt = """# -*- coding: utf-8; mode: conf -*-
-
-# requirements of package %(package)s
-# --------------------------------
-
-%(install_requires_txt)s
-
-# test requires
-# -------------
-
-%(test_requires_txt)s
-
-# develop
-# -------
-
-%(develop_requires_txt)s
-""" % globals()

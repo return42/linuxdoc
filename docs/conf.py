@@ -10,7 +10,7 @@ import sys, os
 from pallets_sphinx_themes import ProjectLink
 
 sys.path.append(os.path.abspath('../utils/site-python'))
-from sphinx_build_tools import load_sphinx_config
+# from sphinx_build_tools import load_sphinx_config
 
 DOC_URL    = "https://return42.github.io/linuxdoc"
 GIT_URL    = "https://github.com/return42/linuxdoc"
@@ -159,4 +159,4 @@ nitpick_ignore = [
 # Since loadConfig overwrites settings from the global namespace, it has to be
 # the last statement in the conf.py file
 # ------------------------------------------------------------------------------
-load_sphinx_config(globals())
+# load_sphinx_config(globals())

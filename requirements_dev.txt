@@ -1,0 +1,10 @@
+pylint
+pallets-sphinx-themes
+sphinx-autobuild
+sphinx-issues
+sphinx-jinja
+sphinx-tabs
+sphinxcontrib-programoutput
+tox
+twine
+

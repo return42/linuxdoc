@@ -5,7 +5,7 @@ include utils/makefile.python
 include utils/makefile.sphinx
 include utils/makefile.0
 
-GIT_URL   = https://github.com/return42/linuxdoc.git
+GIT_URL   = git@github.com:return42/linuxdoc.git
 PYOBJECTS = linuxdoc
 DOC       = docs
 #SLIDES    = docs/slides
@@ -63,6 +63,11 @@ project: pyenvinstall $(API_DOC)
 	@echo '  PROJECT   requirements.txt'
 	$(Q)- rm -f requirements.txt
 	$(Q)$(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(requirements_txt)" > ./requirements.txt
+	@echo '  PROJECT   requirements_dev.txt'
+	$(Q)- rm -f requirements_dev.txt
+	$(Q)$(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(requirements_dev_txt)" > ./requirements_dev.txt
+	@echo '  PROJECT   README.rst'
+	$(Q)- rm -f README.rst
 	$(Q)$(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(README)" > README.rst
 
 PHONY += $(API_DOC)

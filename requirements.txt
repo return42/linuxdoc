@@ -1,25 +1,5 @@
-# -*- coding: utf-8; mode: conf -*-
-
-# requirements of package linuxdoc
-# --------------------------------
-
 fspath
 setuptools
+docutils
+sphinx
 
-# test requires
-# -------------
-
-pylint
-
-# develop
-# -------
-
-twine
-Sphinx
-pallets-sphinx-themes
-sphinx-autobuild
-sphinx-issues
-sphinx-jinja
-sphinx-tabs
-sphinxcontrib-programoutput
-sphinx-tabs

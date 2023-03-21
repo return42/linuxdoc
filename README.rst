@@ -2,31 +2,36 @@
 LinuxDoc
 ========
 
-.. sidebar::  Info
-
-   - linuxdoc v20221127
-   - 2022 Markus Heiser / GPLv2
-   - https://github.com/return42/linuxdoc
-
 The LinuxDoc library contains Sphinx-doc extensions and command line tools to
 extract documentation from C/C++ source file comments.  Even if this project
 started in context of the Linux-Kernel documentation, you can use these
 extensions in common Sphinx-doc projects.
 
-Documentation is available at ./docs or jump to:
 
-- https://return42.github.io/linuxdoc
+Install
+=======
 
-The LinuxDoc repository is hosted at:
+`Install LinuxDoc <https://return42.github.io/linuxdoc/install.html>`__ using `pip
+<https://pip.pypa.io/en/stable/quickstart/>`__:
 
-- https://github.com/return42/linuxdoc
+.. code-block:: text
 
-Issue tracker:
+   pip install --user -U linuxdoc
 
-- https://github.com/return42/linuxdoc/issues
 
-For installation read file ./docs/install.rst or jump to:
+Links
+=====
 
-- https://return42.github.io/linuxdoc/install.html
+- Documentation:   https://return42.github.io/linuxdoc
+- Releases:        https://pypi.org/project/linuxdoc/
+- Code:            https://github.com/return42/linuxdoc
+- Issue tracker:   https://github.com/return42/linuxdoc/issues
 
+
+============ ===============================================
+package:     linuxdoc (20221127)
+copyright:   2024 Markus Heiser
+e-mail:      markus.heiser@darmarIT.de
+license:     GPLv2
+============ ===============================================
 
