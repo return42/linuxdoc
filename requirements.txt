@@ -3,8 +3,10 @@
 # requirements of package linuxdoc
 # --------------------------------
 
+docutils
 fspath
 setuptools
+sphinx
 
 # test requires
 # -------------
@@ -15,7 +17,6 @@ pylint
 # -------
 
 twine
-Sphinx
 pallets-sphinx-themes
 sphinx-autobuild
 sphinx-issues

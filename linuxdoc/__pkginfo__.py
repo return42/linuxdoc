@@ -89,8 +89,10 @@ py_modules = []
 # [dependency_links] https://python-packaging.readthedocs.io/en/latest/dependencies.html
 
 install_requires = [
+    'docutils',
     'fspath',
     'setuptools',
+    'sphinx',
 ]
 
 install_requires_txt = "\n".join(install_requires)
