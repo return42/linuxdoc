@@ -172,7 +172,7 @@ class ListTableBuilder(object):
             tbody += self.buildTableRowNode(row)
         return table
 
-    def buildTableRowNode(self, row_data, classes=None):  # pylint: disable=no-self-use
+    def buildTableRowNode(self, row_data, classes=None):
         classes = [] if classes is None else classes
         row = nodes.row()
         for cell in row_data:
@@ -332,7 +332,7 @@ class ListTableBuilder(object):
             row.append( (cspan, rspan, cellElements) )
         return row
 
-    def parseCellItem(self, cellItem):  # pylint: disable=no-self-use
+    def parseCellItem(self, cellItem):
         # search and remove cspan, rspan colspec from the first element in
         # this listItem (field).
         cspan = rspan = 0

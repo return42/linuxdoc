@@ -48,7 +48,7 @@ def mkdir(folder, mode=0o775):
         os.makedirs(folder, mode)
 
 def file2literal(fname):
-    with open(fname, "r") as src:
+    with open(fname, "r", encoding="utf-8") as src:
         data = src.read()
         node = nodes.literal_block(data, data)
     return node
@@ -255,7 +255,7 @@ def dot2format(app, dot_fname, out_fname): # pylint: disable=unused-argument
     cmd = [dot_cmd, '-T%s' % out_format, dot_fname]
     exit_code = 42
 
-    with open(out_fname, "w") as out:
+    with open(out_fname, "w", encoding="utf-8") as out:
         exit_code = subprocess.call(cmd, stdout = out)
         if exit_code != 0:
             # pylint: disable=deprecated-method
@@ -391,7 +391,7 @@ def visit_kernel_render(self, node):
 
     if not path.isfile(tmp_fname):
         mkdir(path.dirname(tmp_fname))
-        with open(tmp_fname, "w") as out:
+        with open(tmp_fname, "w", encoding="utf-8") as out:
             out.write(code)
 
     img_node = nodes.image(node.rawsource, **node.attributes)

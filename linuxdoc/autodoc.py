@@ -131,6 +131,7 @@ def main():
         CMD.rst_files = []
 
     if CMD.threads > 1:
+        # pylint: disable=consider-using-with
         pool = multiprocessing.Pool(CMD.threads)
         pool.map(autodoc_file, gather_filenames(CMD))
         pool.close()

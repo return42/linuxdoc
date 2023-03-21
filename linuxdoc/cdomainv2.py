@@ -88,11 +88,11 @@ class CObject(Base_CObject):  # pylint: disable=abstract-method
             if self.objtype == 'function':
                 fullname = self.options["name"]
             else:
-                # FIXME: handle :name: value of other declaration types?
+                # ToDo: handle :name: value of other declaration types?
                 pass
         return fullname
 
-    def add_target_and_index(self, name, sig, signode):  # pylint: disable=arguments-differ
+    def add_target_and_index(self, name, sig, signode):  # pylint: disable=arguments-renamed
         # for C API items we add a prefix since names are usually not qualified
         # by a module name and so easily clash with e.g. section titles
         targetname = 'c.' + name

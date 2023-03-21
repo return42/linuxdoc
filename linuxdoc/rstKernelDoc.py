@@ -340,7 +340,7 @@ class KernelDoc(Directive):
 
     def run(self):
 
-        # FIXME: think about again; these members has been added for convenience
+        # ToDo: think about again; these members has been added for convenience
         self.parser = None                     # pylint: disable=attribute-defined-outside-init
         self.doc    = self.state.document      # pylint: disable=attribute-defined-outside-init
         self.env    = self.doc.settings.env    # pylint: disable=attribute-defined-outside-init
@@ -362,7 +362,7 @@ class KernelDoc(Directive):
             if not self.doc.settings.file_insertion_enabled:
                 raise FaultyOption('docutils: file insertion disabled')
             opts = self.getParserOptions()
-            # FIXME: think about again; these members has been added for convenience
+            # ToDo: think about again; these members has been added for convenience
             self.parser = self.parseSource(opts) # pylint: disable=attribute-defined-outside-init
             self.nodes.extend(self.getNodes())
 

@@ -290,7 +290,7 @@ class KernelDocManBuilder(ManualPageBuilder):
     def init(self):
         pass
 
-    def is_manpage(self, node):  # pylint: disable=no-self-use
+    def is_manpage(self, node):
         if isinstance(node, nodes.section):
             return bool(
                 Section2Manpage.sec2man_get_first_child(
@@ -305,7 +305,7 @@ class KernelDocManBuilder(ManualPageBuilder):
         """Where you actually write something to the filesystem."""
         pass
 
-    def get_partial_document(self, children):  # pylint: disable=no-self-use
+    def get_partial_document(self, children):
         doc_tree =  new_document('<output>')
         doc_tree += children
         return doc_tree
@@ -323,8 +323,10 @@ class KernelDocManBuilder(ManualPageBuilder):
         logger.info(darkgreen("}"))
         man_nodes   = master_tree.traverse(condition=self.is_manpage)
         if not man_nodes and not self.config.man_pages:
-            logger.warn('no "man_pages" config value nor manual section found; no manual pages '
-                        'will be written')
+            logger.warning(
+                'no "man_pages" config value nor manual section found; no manual pages '
+                'will be written'
+            )
             return
 
         logger.info(bold('START writing man pages ... '), nonl=True)

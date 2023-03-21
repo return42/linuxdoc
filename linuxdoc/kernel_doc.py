@@ -275,7 +275,6 @@ def map_row(row, map_table):
     return row
 
 def highlight_parser(text, map_table):
-    # FIXME: document this
     block_indent = 0
     row_indent = 0
     state = 'highlight' # [highlight|literal]
@@ -611,11 +610,11 @@ class TranslatorAPI(object):
     def setOptions(self, options):
         self.options = options
 
-    def highlight(self, cont):
+    def highlight(self, text):
         u"""returns *highlighted* text"""
         if self.options.highlight:
-            return highlight_parser(cont, self.HIGHLIGHT_MAP)
-        return cont
+            return highlight_parser(text, self.HIGHLIGHT_MAP)
+        return text
 
     def get_preamble(self):
         retVal = ""
@@ -2120,9 +2119,9 @@ class Parser(SimpleLog):
             else:
                 if ( self.options.markup == "reST"
                      and self.ctx.section.startswith("@")):
-                    # FIXME: I doubt if it is a good idea to strip leading
-                    # whitespaces in parameter description, but *over all* we
-                    # get better reST output.
+                    # I doubt if it is a good idea to strip leading whitespaces
+                    # in parameter description, but *over all* we get better
+                    # reST output.
                     cont_line = cont_line.strip()
                     # Sub-sections in parameter descriptions are not provided,
                     # but if this is a "lorem:\n" line create a new paragraph.
@@ -2428,15 +2427,6 @@ class Parser(SimpleLog):
         self.debug("dump_section(): %(name)s", name = name)
         name = name.strip()
         cont = cont.rstrip() # dismiss trailing whitespace
-        # FIXME: sections with '%CONST' prefix no longer exists
-        # _type_constant     = RE(r"\%([-_\w]+)")
-        #if _type_constant.match(name):  # '%CONST' - name of a constant.
-        #    name = _type_constant[0]
-        #    self.debug("constant section '%(name)s'",  name = name)
-        #    if self.ctx.constants.get(name, None):
-        #        self.error("duplicate constant definition '%(name)s'"
-        #                   , name = name)
-        #    self.ctx.constants[name] = cont
 
         _type_param  = RE(r"\@(\w[.\w]*)")  # match @foo and @foo.bar
         if _type_param.match(name):   # '@parameter' - name of a parameter
