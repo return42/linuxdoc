@@ -99,7 +99,7 @@ class CObject(Base_CObject):  # pylint: disable=abstract-method
         if targetname not in self.state.document.ids:
             signode['names'].append(targetname)
             signode['ids'].append(targetname)
-            signode['first'] = (not self.names)
+            signode['first'] = not self.names
             self.state.document.note_explicit_target(signode)
             inv = self.env.domaindata['c']['objects']
             if (name in inv and self.env.config.nitpicky):

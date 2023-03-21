@@ -9,7 +9,7 @@ from setuptools import find_packages
 package = 'linuxdoc'
 version = '20221127'
 
-copyright = '2024 Markus Heiser'
+copyright = '2024 Markus Heiser'  # pylint: disable=redefined-builtin
 description = (
     'Sphinx-doc extensions & tools to extract documentation'
     ' from C/C++ source file comments.'
@@ -138,7 +138,7 @@ The LinuxDoc library contains Sphinx-doc extensions and command line tools to
 extract documentation from C/C++ source file comments.  Even if this project
 started in context of the Linux-Kernel documentation, you can use these
 extensions in common Sphinx-doc projects.
-""" % globals()
+"""
 
 README = """\
 ========
@@ -191,4 +191,3 @@ classifiers = [
      "Topic :: Software Development :: Libraries",
      "Topic :: Text Processing",
 ]
-
