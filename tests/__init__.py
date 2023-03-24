@@ -5,7 +5,7 @@
     ~~~~~~~~~~~~~~~~~~~~~~~~~
 
     :copyright:  Copyright (C) 2017 Markus Heiser
-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
+    :license:    AGPL-3.0-or-later; see LICENSE for details.
 """
 
 try:

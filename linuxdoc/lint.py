@@ -7,7 +7,7 @@ u"""
     Implementation of the :ref:`kernel-lintdoc` command.
 
     :copyright:  Copyright (C) 2018  Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+    :license:    AGPL-3.0-or-later; see LICENSE for details.
 """
 
 # ------------------------------------------------------------------------------

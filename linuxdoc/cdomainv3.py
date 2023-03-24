@@ -6,7 +6,7 @@ u"""
     Replacement for the sphinx c-domain.
 
     :copyright:  Copyright (C) 2020 Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+    :license:    AGPL-3.0-or-later; see LICENSE for details.
 
     For user documentation see :ref:`customized-c-domain`.
 """

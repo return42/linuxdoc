@@ -7,7 +7,7 @@ u"""
     Implementation of the ``kernel-grepdoc`` command.
 
     :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+    :license:    AGPL-3.0-or-later; see LICENSE for details.
 
     The ``kernel-grepdoc`` command *greps* informations from Linux kernel's
     (reST) documentation, see ``--help``::
