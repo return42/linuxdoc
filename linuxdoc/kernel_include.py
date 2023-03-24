@@ -7,7 +7,7 @@ u"""
     Implementation of the ``kernel-include`` reST-directive.
 
     :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    GPL Version 2, June 1991 see linux/COPYING for details.
+    :license:    AGPL-3.0-or-later; see LICENSE for details.
 
     For user documentation see :ref:`kernel-include-directive`.
 """

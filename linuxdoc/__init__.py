@@ -7,7 +7,7 @@ extensions in common Sphinx-doc projects.
 
 :copyright:  Copyright (C) 2018 Markus Heiser
 :e-mail:     markus.heiser@darmarIT.de
-:license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+:license:    AGPL-3.0-or-later; see LICENSE for details.
 :docs:       http://return42.github.io/linuxdoc
 :repository: `github return42/linuxdoc <https://github.com/return42/linuxdoc>`_
 """
