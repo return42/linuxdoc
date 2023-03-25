@@ -8,7 +8,7 @@ from setuptools import find_packages
 package = 'linuxdoc'
 version = '20230321'
 
-copyright = '2024 Markus Heiser'  # pylint: disable=redefined-builtin
+copyright = '2023 Markus Heiser'  # pylint: disable=redefined-builtin
 description = (
     'Sphinx-doc extensions & tools to extract documentation'
     ' from C/C++ source file comments.'
@@ -101,6 +101,7 @@ test_requires.sort()
 test_requires_txt = "\n".join(test_requires)
 
 develop_requires = [
+    'argparse-manpage',
     'pallets-sphinx-themes',
     'sphinx-autobuild',
     'sphinx-issues',
@@ -116,10 +117,10 @@ def get_entry_points():
     """get entry points of the python package"""
     return {
         'console_scripts': [
-            'kernel-doc = linuxdoc.kernel_doc:main',
-            'kernel-autodoc = linuxdoc.autodoc:main',
-            'kernel-lintdoc = linuxdoc.lint:main',
-            'kernel-grepdoc = linuxdoc.grep_doc:main',
+            'linuxdoc.rest = linuxdoc.rest:main',
+            'linuxdoc.autodoc = linuxdoc.autodoc:main',
+            'linuxdoc.lintdoc = linuxdoc.lint:main',
+            'linuxdoc.grepdoc = linuxdoc.grepdoc:main',
         ]
     }
 

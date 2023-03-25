@@ -30,7 +30,7 @@ Links
 
 ============ ===============================================
 package:     linuxdoc (20230321)
-copyright:   2024 Markus Heiser
+copyright:   2023 Markus Heiser
 e-mail:      markus.heiser@darmarIT.de
 license:     AGPLv3+
 ============ ===============================================

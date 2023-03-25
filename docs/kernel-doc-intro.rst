@@ -188,14 +188,14 @@ kernel-doc
   in Python and its API is used by the corresponding Sphinx-doc extension.
   Command line tools shipped with:
 
-  - kernel-autodoc: Suitable for automatic API documentation :ref:`[ref]
-    <kernel-autodoc>`.
+  - linuxdoc.autodoc: Suitable for automatic API documentation :ref:`[ref]
+    <linuxdoc.autodoc>`.
 
-  - kernel-lintdoc: *Lint* kernel-doc comments from source code :ref:`[ref]
-    <kernel-lintdoc>`.
+  - linuxdoc.lintdoc: *Lint* kernel-doc comments from source code :ref:`[ref]
+    <linuxdoc.lintdoc>`.
 
-  - kernel-doc: A command line interface for kernel-doc's parser API :ref:`[ref]
-    <kernel-doc-cmd>`.
+  - linuxdoc.rest: A command line interface for kernel-doc's parser API :ref:`[ref]
+    <linuxdoc.rest>`.
 
 kernel-doc-man
   A man page builder. An extension/replacement of the common Sphinx-doc *man*
