@@ -10,6 +10,7 @@ PYOBJECTS = linuxdoc
 DOC       = docs
 #SLIDES    = docs/slides
 API_DOC   = $(DOC)/$(PYOBJECTS)-api
+MAN1      = ./$(LXC_ENV_FOLDER)dist/man1
 
 all: clean pylint pytest build docs
 
@@ -20,12 +21,13 @@ help: help-min
 	@echo  'to get more help:  make help-all'
 
 help-min:
+	@echo  '  dist      - build linuxdoc'
 	@echo  '  docs      - build documentation'
+	@echo  '  man       - build man pages'
 	@echo  '  docs-live - autobuild HTML documentation while editing'
 	@echo  '  clean     - remove most generated files'
 	@echo  '  install   - developer install (./local)'
 	@echo  '  uninstall - uninstall (./local)'
-	@echo  '  rqmts	    - info about build requirements'
 	@echo  ''
 	$(Q)$(MAKE) -e -s make-help
 
@@ -34,6 +36,9 @@ help-all: help-min
 	$(Q)$(MAKE) -e -s docs-help
 	@echo  ''
 	$(Q)$(MAKE) -e -s python-help
+
+PHONY += dist
+dist: pybuild docs man
 
 PHONY += install
 install: pyenvinstall
@@ -69,6 +74,29 @@ project: pyenvinstall $(API_DOC)
 	@echo '  PROJECT   README.rst'
 	$(Q)- rm -f README.rst
 	$(Q)$(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(README)" > README.rst
+
+PHONY += man
+man: pyenvinstall
+	$(Q)mkdir -p $(MAN1)
+	$(call cmd,man1,linuxdoc.autodoc,$(MAN1)/linuxdoc.autodoc.1)
+	$(call cmd,man1,linuxdoc.grepdoc,$(MAN1)/linuxdoc.grepdoc.1)
+	$(call cmd,man1,linuxdoc.lint,$(MAN1)/linuxdoc.lint.1)
+	$(call cmd,man1,linuxdoc.rest,$(MAN1)/linuxdoc.rest.1)
+
+# $2 python module
+# $3 filename of the generated man page
+
+quiet_cmd_man1 = MAN1      [$2] --> man://$(abspath $3)
+      cmd_man1 = \
+	  . $(PY_ENV_BIN)/activate; \
+	  VER=$$($(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(version)"); \
+	  URL=$$($(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(url)"); \
+	  PACKAGE=$$($(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(package)"); \
+	  AUTHOR=$$($(PY_ENV_BIN)/python -c "from linuxdoc.__pkginfo__ import *; print(', '.join(authors))"); \
+	  argparse-manpage --url="$${URL}" --version="$${VER}" --project-name="$${PACKAGE}" \
+                           --author="$${AUTHOR}" --manual-section=1 --manual-title="linuxdoc tools"\
+                           --prog=$2 --module=$2 --function=get_cli > $3
+
 
 PHONY += $(API_DOC)
 $(API_DOC): $(PY_ENV)

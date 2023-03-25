@@ -1,4 +1,5 @@
 pylint
+argparse-manpage
 pallets-sphinx-themes
 sphinx-autobuild
 sphinx-issues

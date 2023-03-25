@@ -1,24 +1,20 @@
-#!/usr/bin/env python3
 # SPDX-License-Identifier: AGPL-3.0-or-later
-u"""
-    autodoc
-    ~~~~~~~
+"""
+autodoc
+~~~~~~~
 
-    Implementation of the ``kernel-autodoc`` command.
+Implementation of the ``linuxdoc.autodoc`` command.
 
-    :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    AGPL-3.0-or-later; see LICENSE for details.
+:copyright:  Copyright (C) 2023 Markus Heiser
+:license:    AGPL-3.0-or-later; see LICENSE for details.
 
-    The ``kernel-autodoc`` command extracts documentation from Linux kernel's
-    source code comments, see ``--help``::
+The command ``linuxdoc.autodoc`` extracts the kernel-doc comments from the
+source code and uses them to create documentation of the source code in the reST
+markup::
 
-        $ kernel-autodoc --help
+    $ linuxdoc.autodoc --help
 
 """
-
-# ------------------------------------------------------------------------------
-# imports
-# ------------------------------------------------------------------------------
 
 import sys
 import argparse
@@ -30,12 +26,8 @@ from fspath import FSPath
 from . import kernel_doc as kerneldoc
 from .kernel_doc import Container
 
+CMD = None
 
-# ------------------------------------------------------------------------------
-# config
-# ------------------------------------------------------------------------------
-
-MARKUP = "kernel-doc" # "reST"
 MSG    = lambda msg: sys.__stderr__.write("INFO : %s\n" % msg)
 ERR    = lambda msg: sys.__stderr__.write("ERROR: %s\n" % msg)
 FATAL  = lambda msg: sys.__stderr__.write("FATAL: %s\n" % msg)
@@ -52,66 +44,22 @@ TEMPLATE_INDEX="""\
 
 """
 
-EPILOG = u"""This implementation of autodoc uses the kernel-doc parser from the linuxdoc
+EPILOG = """This command uses the kernel-doc parser from the linuxdoc Sphinx
 extension, for details see: https://return42.github.io/linuxdoc/cmd-line.html"""
 
-CMD = None
+DESCRIPTION = """The linuxdoc.autodoc tool can be used to generate documentation
+in the reST markup from the kernel-doc markup comments in the source files.
+This tool can be used to create an analogous document structure in reST markup
+from the folder structure of the source code.  """
 
 # ------------------------------------------------------------------------------
 def main():
 # ------------------------------------------------------------------------------
 
-    "Parse *kernel-doc* comments from source code (main)"
-
     global CMD  # pylint: disable=global-statement
 
-    CLI = argparse.ArgumentParser(  # pylint: disable=invalid-name
-        description = ("Parse *kernel-doc* comments from source code")
-        , epilog = EPILOG
-        , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-
-    CLI.add_argument(
-        "srctree"
-        , help    = "Folder of source code."
-        , type    = lambda x: FSPath(x).ABSPATH)
-
-    CLI.add_argument(
-        "doctree"
-        , help    = "Folder to place reST documentation."
-        , type    = lambda x: FSPath(x).ABSPATH)
-
-    CLI.add_argument(
-        "--sloppy"
-        , action  = "store_true"
-        , help    = "Sloppy comment check, reports only severe errors.")
-
-    CLI.add_argument(
-        "--force"
-        , action  = "store_true"
-        , help    = "Don't stop if doctree exists.")
-
-    CLI.add_argument(
-        "--threads"
-        , type    =  int
-        , default = multiprocessing.cpu_count()
-        , help    = "Use up to n threads.")
-
-    CLI.add_argument(
-        "--markup"
-        , choices = ["reST", "kernel-doc"]
-        , default = "reST"
-        , help    = (
-            "Markup of the comments. Change this option only if you know"
-            " what you do. New comments must be marked up with reST!"))
-
-    CLI.add_argument(
-        "--rst-files"
-        , type    = lambda x: FSPath(x).ABSPATH
-        , help    = (
-            "File that list source files, which has comments in reST markup."
-            " Use kernel-grepdoc command to generate those file."))
-
-    CMD = CLI.parse_args()
+    cli = get_cli()
+    CMD = cli.parse_args()
 
     if not CMD.srctree.EXISTS:
         ERR("%s does not exists." % CMD.srctree)
@@ -142,6 +90,62 @@ def main():
 
     insert_index_files(CMD.doctree)
 
+def get_cli():
+
+    cli = argparse.ArgumentParser(
+        description = DESCRIPTION
+        , epilog = EPILOG
+        , formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    cli.add_argument(
+        "srctree"
+        , help    = "Folder of source code."
+        , type    = lambda x: FSPath(x).ABSPATH
+    )
+    cli.add_argument(
+        "doctree"
+        , help    = "Folder to place reST documentation."
+        , type    = lambda x: FSPath(x).ABSPATH
+    )
+    cli.add_argument(
+        "--sloppy"
+        , action  = "store_true"
+        , help    = "Sloppy comment check, reports only severe errors."
+    )
+    cli.add_argument(
+        "--force"
+        , action  = "store_true"
+        , help    = "Don't stop if doctree exists."
+    )
+    cli.add_argument(
+        "--threads"
+        , type    =  int
+        , default = multiprocessing.cpu_count()
+        , help    = "Use up to n threads."
+    )
+    cli.add_argument(
+        "--markup"
+        , choices = ["reST", "kernel-doc"]
+        , default = "reST"
+        , help    = (
+            "Markup of the comments.  Change this option only if you know what"
+            " you do and make use of --rst-files if you also have some files in"
+            " your source tree with reST markup.  The markup of new comments must"
+            " be reST!"
+        )
+    )
+    cli.add_argument(
+        "--rst-files"
+        , type    = lambda x: FSPath(x).ABSPATH
+        , help    = (
+            "File that list source files, which has comments in reST markup."
+            " Use linuxdoc.grepdoc command to generate those file."
+        )
+    )
+
+    return cli
+
+
 # ------------------------------------------------------------------------------
 def gather_filenames(cmd):
 # ------------------------------------------------------------------------------
@@ -149,8 +153,6 @@ def gather_filenames(cmd):
     "yield .c & .h filenames"
 
     for fname in cmd.srctree.reMatchFind(r"^.*\.[ch]$"):
-        if fname.startswith(CMD.srctree/"Documentation"):
-            continue
         yield fname
 
 # ------------------------------------------------------------------------------
@@ -166,7 +168,7 @@ def autodoc_file(fname):
         markup = "reST"
 
     opts = kerneldoc.ParseOptions(
-        rel_fname       = fname
+        fname           = fname
         , src_tree      = CMD.srctree
         , verbose_warn  = not (CMD.sloppy)
         , use_all_docs  = True

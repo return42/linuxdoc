@@ -7,57 +7,46 @@
 # pylint: disable=too-many-statements, useless-object-inheritance
 
 """
-    kernel_doc
-    ~~~~~~~~~~
+kernel_doc
+~~~~~~~~~~
 
-    Implementation of the ``kernel-doc`` parser.
+Implementation of the ``kernel-doc`` parser.  The kernel-doc parser extracts
+:ref:`kernel-doc markup <kernel-doc-intro>` from source code comments.
 
-    The kernel-doc parser extracts documentation from Linux kernel's source code
-    comments. This implements the :ref:`kernel-doc markup <kernel-doc-intro>`.
+This module provides an API which could be used by a sphinx-doc generator
+extension and a command-line interface
 
-    This module provides an API -- which could be used by a sphinx-doc generator
-    extension -- and a command-line interface, see ``--help``::
+Compared with the Perl kernel-doc script used in the Linux kernel, this
+implementation has additional features like *parse options* for a smooth
+integration of reStructuredText (reST) markup in the source code comments.  In
+combination with the (separate) *kernel-doc* reST directive (which uses this
+module), the documentation generation becomes more clear and flexible.
 
-        $ kernel-doc --help
+The architecture of the parser is simple and consists of three types of
+objects (three classes).
 
-    But, the command-line is only for test, normally you don't need it.
+* :py:obj:`Parser`: The parser parses the source-file and dumps extracted
+  kernel-doc data.
 
-    Compared with the Perl kernel-doc script, this implementation has additional
-    features like *parse options* for a smooth integration of reStructuredText
-    (reST) markup in the kernel's source code comments.  In combination with the
-    (separate) *kernel-doc* reST directive (which uses this module), the
-    documentation generation becomes more clear and flexible.
+* subclasses of class :py:obj:`TranslatorAPI`: to translate the dumped
+  kernel-doc data into output formats. There exists two implementations:
 
-    The architecture of the parser is simple and consists of three types of
-    objects (three classes).
+  - :py:obj:`NullTranslator`: translates nothing, just parse
 
-    * class Parser: The parser parses the source-file and dumps extracted
-      kernel-doc data.
+  - :py:obj:`ReSTTranslator`: translates dumped kernel-doc data to reST markup
 
-    * subclasses of class TranslatorAPI: to translate the dumped kernel-doc data
-      into output formats. There exists two implementations:
+* :py:obj:`ParseOptions`: a container full with options to control *parsing* and
+  *translation*.
 
-      - class NullTranslator: translates nothing, just parse
-
-      - class ReSTTranslator(TranslatorAPI): translates dumped kernel-doc data
-        to reST markup.
-
-    * class ParseOptions: a container full with options to control parsing an
-      translation.
-
-    With the NullTranslator a source file is parsed only once while different
-    output could be generated (multiple times) just by changing the Translator
-    (e.g. with the ReSTTranslator) and the option container.
-
-    With parsing the source files only once, the building time is reduced n-times.
+With the :py:obj:`NullTranslator` a source file is parsed only once while
+different output could be generated (multiple times) just by changing the
+Translator (e.g. with the :py:obj:`ReSTTranslator`) and the option
+container. With parsing the source files only once, the building time is reduced
+n-times.
 
 """
 
-# ==============================================================================
-# imports
-# ==============================================================================
 
-import argparse
 import codecs
 import collections
 import copy
@@ -391,186 +380,6 @@ class SimpleLog(object):
         STREAM.log_out.write(self.LOG_FORMAT % replace)
 
 LOG = SimpleLog()
-
-# ==============================================================================
-def main():
-    # pylint: disable=global-statement
-# ==============================================================================
-
-    global VERBOSE, DEBUG
-
-    epilog = (u"This implementation uses the kernel-doc parser"
-              " from the linuxdoc extension, for detail informations read"
-              " https://return42.github.io/linuxdoc/cmd-line.html#kernel-doc")
-
-    CLI = argparse.ArgumentParser(
-        description = (
-            "Parse *kernel-doc* comments from source code"
-            " and print them (with reST markup) to stdout." )
-        , epilog = epilog
-        , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-
-    CLI.add_argument(
-        "files"
-        , nargs   = "+"
-        , help    = "source file(s) to parse.")
-
-    CLI.add_argument(
-        "--id-prefix"
-        , default = ""
-        , help    = (
-            "A prefix for automatic generated IDs. The IDs are automaticly"
-            " gernerated based on the declaration and / or section names. The"
-            " prefix is also used as namespace in Sphinx's C-domain"))
-
-    CLI.add_argument(
-        "--verbose", "-v"
-        , action  = "store_true"
-        , help    = "verbose output with log messages to stderr" )
-
-    CLI.add_argument(
-        "--sloppy"
-        , action  = "store_true"
-        , help    = "Sloppy linting, reports only severe errors.")
-
-    CLI.add_argument(
-        "--debug"
-        , action  = "store_true"
-        , help    = "debug messages to stderr" )
-
-    CLI.add_argument(
-        "--quiet", "-q"
-        , action  = "store_true"
-        , help    = "no messages to stderr" )
-
-    CLI.add_argument(
-        "--skip-preamble"
-        , action  = "store_true"
-        , help    = "skip preamble in the output" )
-
-    CLI.add_argument(
-        "--skip-epilog"
-        , action  = "store_true"
-        , help    = "skip epilog in the output" )
-
-    CLI.add_argument(
-        "--list-internals"
-        , choices = Parser.DOC_TYPES + ["all"]
-        , nargs   = "+"
-        , help    = "list symbols, titles or whatever is documented, but *not* exported" )
-
-    CLI.add_argument(
-        "--list-exports"
-        , action  = "store_true"
-        , help    = "list all exported symbols" )
-
-    CLI.add_argument(
-        "--use-names"
-        , nargs   = "+"
-        , help    = "print documentation of functions, structs or whatever title/object")
-
-    CLI.add_argument(
-        "--exported"
-        , action  = "store_true"
-        , help    = "print documentation of all exported symbols")
-
-    CLI.add_argument(
-        "--internal"
-        , action  = "store_true"
-        , help    = ("print documentation of all symbols that are documented,"
-                     " but not exported" ))
-
-    CLI.add_argument(
-        "--markup"
-        , choices = ["reST", "kernel-doc"]
-        , default = "reST"
-        , help    = (
-            "Markup of the comments. Change this option only if you know"
-            " what you do. New comments must be marked up with reST!"))
-
-    CLI.add_argument(
-        "--symbols-exported-method"
-        , default = DEFAULT_EXP_METHOD
-        , help    = (
-            "Indicate the way by which an exported symbol an exported symbol"
-            " is exported. Must be either 'macro' or 'attribute'."))
-
-    CLI.add_argument(
-        "--symbols-exported-identifiers"
-        , nargs   = "+"
-        , default = DEFAULT_EXP_IDS
-        , help    = "identifiers list that specifies an exported symbol")
-
-    CLI.add_argument(
-        "--known-attrs"
-        , default = []
-        , nargs   = "+"
-        , help    = ("provides a list of known attributes that has to be"
-                     " hidden when displaying function prototypes"))
-
-    CMD     = CLI.parse_args()
-    VERBOSE = CMD.verbose
-    DEBUG   = CMD.debug
-
-    if CMD.quiet:
-        STREAM.log_out = DevNull  # pylint: disable=attribute-defined-outside-init
-
-    LOG.debug(u"CMD: %(CMD)s", CMD=CMD)
-
-    retVal     = 0
-
-    for fname in CMD.files:
-        translator = ReSTTranslator()
-        opts = ParseOptions(
-            fname           = fname
-            , id_prefix     = CMD.id_prefix
-            , skip_preamble = CMD.skip_preamble
-            , skip_epilog   = CMD.skip_epilog
-            , out           = STREAM.appl_out
-            , markup        = CMD.markup
-            , verbose_warn  = not (CMD.sloppy)
-            , exp_method    = CMD.symbols_exported_method
-            , exp_ids       = CMD.symbols_exported_identifiers
-            , known_attrs   = CMD.known_attrs
-            ,)
-        opts.set_defaults()
-
-        if CMD.list_exports or CMD.list_internals:
-            translator = ListTranslator(CMD.list_exports, CMD.list_internals)
-            opts.gather_context = True
-
-        elif CMD.use_names:
-            opts.use_names  = CMD.use_names
-
-        elif CMD.exported or CMD.internal:
-            # gather exported symbols ...
-            src   = readFile(opts.fname)
-            ctx   = ParserContext()
-            Parser.gather_context(src, ctx, opts)
-
-            opts.error_missing = False
-            opts.use_names     = ctx.exported_symbols
-            opts.skip_names    = []
-
-            if CMD.internal:
-                opts.use_names  = []
-                opts.skip_names = ctx.exported_symbols
-        else:
-            # if non section is choosen by use-name, internal or exclude, then
-            # use all DOC: sections
-            opts.use_all_docs = True
-
-        parser = Parser(opts, translator)
-        parser.parse()
-        parser.close()
-        if parser.errors:
-            retVal = 1
-
-    return retVal
-
-# ==============================================================================
-# API
-# ==============================================================================
 
 # ------------------------------------------------------------------------------
 class TranslatorAPI(object):
@@ -1425,7 +1234,7 @@ class ParseOptions(Container):
                 LOG.error("missing SRCTREE")
             self.rel_fname = self.fname[1:]
 
-        self.fname = os.path.abspath(self.src_tree + "/" + self.rel_fname)
+        self.fname = os.path.abspath(str(self.src_tree) + "/" + str(self.rel_fname))
 
     def set_defaults(self):
 
@@ -3073,10 +2882,3 @@ class Parser(SimpleLog):
         else:
             self.debug("check_return_section(): return-value of %(func)s() OK"
                        , func = decl_name)
-
-# ==============================================================================
-# run ...
-# ==============================================================================
-
-if __name__ == "__main__":
-    sys.exit(main())
