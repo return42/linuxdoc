@@ -1,0 +1,14 @@
+2023-03-27 [Unreleased] ..
+
+	* Deprecated: The maintenance of the ``kernel-*`` command endets in
+	version 20230321.  The ``kernel-*`` commands will be removed in a future
+	release: use the ``linuxdoc.*`` commands.
+
+	- kernel-doc     --> linuxdoc.rest
+	- kernel-autodoc --> linuxdoc.autodoc
+        - kernel-lintdoc --> linuxdoc.lintdoc
+        - kernel-grepdoc --> linuxdoc.grepdoc
+
+2023-03-21 [20230321] LICENSE AGPLv3+
+
+	* Changed: GNU Affero General Public License v3 or later (AGPLv3+)
