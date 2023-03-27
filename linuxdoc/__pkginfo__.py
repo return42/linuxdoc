@@ -117,10 +117,19 @@ def get_entry_points():
     """get entry points of the python package"""
     return {
         'console_scripts': [
+
             'linuxdoc.rest = linuxdoc.rest:main',
             'linuxdoc.autodoc = linuxdoc.autodoc:main',
             'linuxdoc.lintdoc = linuxdoc.lint:main',
             'linuxdoc.grepdoc = linuxdoc.grepdoc:main',
+
+            # compatibility / deprecated
+
+            'kernel-doc = linuxdoc.deprecated:cmd_kernel_doc',
+            'kernel-autodoc = linuxdoc.deprecated:cmd_kernel_autodoc',
+            'kernel-lintdoc = linuxdoc.deprecated:cmd_kernel_lintdoc',
+            'kernel-grepdoc = linuxdoc.deprecated:cmd_kernel_grepdoc',
+
         ]
     }
 
