@@ -12,7 +12,7 @@ Install
 =======
 
 `Install LinuxDoc <https://return42.github.io/linuxdoc/install.html>`__ using `pip
-<https://pip.pypa.io/en/stable/quickstart/>`__:
+<https://pip.pypa.io/en/stable/getting-started/>`__:
 
 .. code-block:: text
 

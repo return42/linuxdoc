@@ -1,6 +1,6 @@
 2023-03-27 [Unreleased] ..
 
-	* Deprecated: The maintenance of the ``kernel-*`` command endets in
+	* Deprecated: The maintenance of the ``kernel-*`` command ends in
 	version 20230321.  The ``kernel-*`` commands will be removed in a future
 	release: use the ``linuxdoc.*`` commands.
 

@@ -35,4 +35,5 @@ setup(
     , install_requires = PKG.install_requires
     , entry_points     = PKG.get_entry_points()
     , classifiers      = PKG.classifiers
+    , project_urls     = PKG.project_urls
 )

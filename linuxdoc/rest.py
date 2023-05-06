@@ -15,6 +15,7 @@ print the reST to stdout::
 
 """
 
+from fspath import FSPath
 import argparse
 from . import kernel_doc
 
@@ -43,10 +44,13 @@ def main():
 
     retVal = 0
 
+    src_tree = FSPath.getCWD()
     for fname in CMD.files:
+        fname = FSPath(fname)
         translator = kernel_doc.ReSTTranslator()
         opts = kernel_doc.ParseOptions(
-            fname           = fname
+            fname           = fname.relpath(src_tree)
+            , src_tree      = src_tree
             , id_prefix     = CMD.id_prefix
             , skip_preamble = CMD.skip_preamble
             , skip_epilog   = CMD.skip_epilog

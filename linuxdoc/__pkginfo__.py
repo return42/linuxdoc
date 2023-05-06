@@ -34,6 +34,7 @@ project_urls = {
     'Documentation'    : docs,
     'Code'             : url,
     'Issue tracker'    : issues,
+    'Changelog'        : url + '/blob/master/CHANGELOG',
 }
 
 packages = find_packages(exclude=['docs', 'tests'])
@@ -160,7 +161,7 @@ Install
 =======
 
 `Install LinuxDoc <%(docs)s/install.html>`__ using `pip
-<https://pip.pypa.io/en/stable/quickstart/>`__:
+<https://pip.pypa.io/en/stable/getting-started/>`__:
 
 .. code-block:: text
 
