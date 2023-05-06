@@ -1,4 +1,6 @@
-2023-03-27 [Unreleased] ..
+2023-03-27 [20230506]
+
+        rename kernel-* commands into linuxdoc.* commands & add man pages
 
 	* Deprecated: The maintenance of the ``kernel-*`` command ends in
 	version 20230321.  The ``kernel-*`` commands will be removed in a future
