@@ -18,7 +18,7 @@ def _report(msg):
 # ------------------------------------------------------------------------------
 
 def cmd_kernel_doc():
-    """DEPRECATED: The maintenance of the ``kernel-doc`` command endet in
+    """DEPRECATED: The maintenance of the ``kernel-doc`` command ended in
     version 20230321.  The command will be removed in a future release: use
     command ``linuxdoc.rest``!
 
@@ -28,7 +28,7 @@ def cmd_kernel_doc():
     return main()
 
 def cmd_kernel_autodoc():
-    """DEPRECATED: The maintenance of the ``kernel-autodoc`` command endet in
+    """DEPRECATED: The maintenance of the ``kernel-autodoc`` command ended in
     version 20230321.  The command will be removed in a future release: use
     command ``linuxdoc.autodoc``!
 
@@ -38,7 +38,7 @@ def cmd_kernel_autodoc():
     return main()
 
 def cmd_kernel_lintdoc():
-    """DEPRECATED: The maintenance of the ``kernel-lintdoc`` command endet in
+    """DEPRECATED: The maintenance of the ``kernel-lintdoc`` command ended in
     version 20230321.  The command will be removed in a future release: use
     command ``linuxdoc.lintdoc``!
 
@@ -48,7 +48,7 @@ def cmd_kernel_lintdoc():
     return main()
 
 def cmd_kernel_grepdoc():
-    """DEPRECATED: The maintenance of the ``kernel-grepdoc`` command endet in
+    """DEPRECATED: The maintenance of the ``kernel-grepdoc`` command ended in
     version 20230321.  The command will be removed in a future release: use
     command ``linuxdoc.grepdoc``!
 

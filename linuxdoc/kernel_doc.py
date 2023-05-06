@@ -327,10 +327,7 @@ class DevNull(object): # pylint: disable=too-few-public-methods
         pass
 DevNull = DevNull()
 
-SRCTREE        = OS_ENV.get("srctree", os.getcwd())
-GIT_REF        = ("Linux kernel source tree:"
-                  " `%(rel_fname)s <https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/"
-                  "%(rel_fname)s>`__")
+SRCTREE = OS_ENV.get("srctree", os.getcwd())
 DEFAULT_EXP_METHOD = "macro"
 """Default value of ``:exp-method:``"""
 
@@ -1253,11 +1250,6 @@ class ParseOptions(Container):
         if self.top_title:
             self.top_title = self.top_title % self
 
-        if self.top_link == "":
-            if self.rel_fname:
-                self.top_link  = GIT_REF % self
-            else:
-                LOG.warn("missing SRCTREE, can't set *top_link* option")
         if self.top_link:
             self.top_link = self.top_link % self
 
