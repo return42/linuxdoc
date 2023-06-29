@@ -1,25 +1,35 @@
 #!/usr/bin/env python
-# -*- coding: utf-8; mode: python -*-
 # pylint: disable=invalid-name, missing-docstring
 
 import os
-from os.path import join as ospj
 import io
-import imp
+import importlib
 from setuptools import setup, find_packages
 
 _dir = os.path.abspath(os.path.dirname(__file__))
 
-SRC    = ospj(_dir, 'linuxdoc')
-README = ospj(_dir, 'README.rst')
-DOCS   = ospj(_dir, 'docs')
-TESTS  = ospj(_dir, 'tests')
+SRC    = os.path.join(_dir, 'linuxdoc')
+README = os.path.join(_dir, 'README.rst')
+DOCS   = os.path.join(_dir, 'docs')
+TESTS  = os.path.join(_dir, 'tests')
 
-PKG = imp.load_source('__pkginfo__', ospj(SRC, '__pkginfo__.py'))
+
+def load_source(modname, modpath):
+    spec = importlib.util.spec_from_file_location(modname, modpath)
+    if not spec:
+        raise ValueError("Error loading '%s' module" % modpath)
+    module = importlib.util.module_from_spec(spec)
+    if not spec.loader:
+        raise ValueError("Error loading '%s' module" % modpath)
+    spec.loader.exec_module(module)
+    return module
+
 
 def readFile(fname, m='rt', enc='utf-8', nl=None):
     with io.open(fname, mode=m, encoding=enc, newline=nl) as f:
         return f.read()
+
+PKG = load_source('__pkginfo__', os.path.join(SRC, '__pkginfo__.py'))
 
 setup(
     name               = PKG.package
