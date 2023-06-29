@@ -1,3 +1,7 @@
+2023-06-29 [20230629]
+
+	Python 3.12 compatibility / imp replaced by importlib
+
 2023-05-06 [20230506]
 
         rename kernel-* commands into linuxdoc.* commands & add man pages

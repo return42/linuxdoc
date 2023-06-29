@@ -6,7 +6,7 @@
 from setuptools import find_packages
 
 package = 'linuxdoc'
-version = '20230506'
+version = '20230629'
 
 copyright = '2023 Markus Heiser'  # pylint: disable=redefined-builtin
 description = (
