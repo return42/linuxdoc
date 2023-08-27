@@ -1,19 +1,18 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.manKernelDoc &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/tabs.js"></script>
+    <title>linuxdoc.manKernelDoc &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <script src="../../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/tabs.js?v=3030b3cb"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -26,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.manKernelDoc</a></li> 
       </ul>
@@ -88,7 +87,9 @@ DEFAULT_MAN_SECT  = 9
 __version__  = &#39;1.0&#39;
 
 # ==============================================================================
-<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.setup">[docs]</a>def setup(app):
+<div class="viewcode-block" id="setup">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.setup">[docs]</a>
+def setup(app):
 # ==============================================================================
 
     app.add_builder(KernelDocManBuilder)
@@ -106,30 +107,45 @@ __version__  = &#39;1.0&#39;
         , parallel_write_safe = True
     )</div>
 
+
 # ==============================================================================
-<div class="viewcode-block" id="kernel_doc_man"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.kernel_doc_man">[docs]</a>class kernel_doc_man(  # pylint: disable=invalid-name
+<div class="viewcode-block" id="kernel_doc_man">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.kernel_doc_man">[docs]</a>
+class kernel_doc_man(  # pylint: disable=invalid-name
         nodes.Invisible, nodes.Element):
 # ==============================================================================
     &quot;&quot;&quot;Node to mark a section as *manpage*&quot;&quot;&quot;</div>
 
-<div class="viewcode-block" id="skip_kernel_doc_man"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.skip_kernel_doc_man">[docs]</a>def skip_kernel_doc_man(self, node):  # pylint: disable=unused-argument
+
+<div class="viewcode-block" id="skip_kernel_doc_man">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.skip_kernel_doc_man">[docs]</a>
+def skip_kernel_doc_man(self, node):  # pylint: disable=unused-argument
     raise nodes.SkipNode</div>
 
 
+
 # ==============================================================================
-<div class="viewcode-block" id="KernelDocMan"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocMan">[docs]</a>class KernelDocMan(Directive):
+<div class="viewcode-block" id="KernelDocMan">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocMan">[docs]</a>
+class KernelDocMan(Directive):
 # ==============================================================================
 
     required_arguments = 1
     optional_arguments = 0
 
-<div class="viewcode-block" id="KernelDocMan.run"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocMan.run">[docs]</a>    def run(self):
+<div class="viewcode-block" id="KernelDocMan.run">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocMan.run">[docs]</a>
+    def run(self):
         man_node = kernel_doc_man()
         man_node[&quot;manpage&quot;] = self.arguments[0]
-        return [man_node]</div></div>
+        return [man_node]</div>
+</div>
+
 
 # ==============================================================================
-<div class="viewcode-block" id="Section2Manpage"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage">[docs]</a>class Section2Manpage(Transform):
+<div class="viewcode-block" id="Section2Manpage">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage">[docs]</a>
+class Section2Manpage(Transform):
 # ==============================================================================
     u&quot;&quot;&quot;Transforms a *section* tree into an *manpage* tree.
 
@@ -202,7 +218,9 @@ __version__  = &#39;1.0&#39;
 
     manTitleOrder = [t for r,t in manTitles]
 
-<div class="viewcode-block" id="Section2Manpage.sec2man_get_first_child"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.sec2man_get_first_child">[docs]</a>    @classmethod
+<div class="viewcode-block" id="Section2Manpage.sec2man_get_first_child">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.sec2man_get_first_child">[docs]</a>
+    @classmethod
     def sec2man_get_first_child(cls, subtree, *classes):
         for _c in classes:
             if subtree is None:
@@ -214,7 +232,10 @@ __version__  = &#39;1.0&#39;
             subtree = subtree[idx]
         return subtree</div>
 
-<div class="viewcode-block" id="Section2Manpage.strip_man_info"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.strip_man_info">[docs]</a>    def strip_man_info(self):
+
+<div class="viewcode-block" id="Section2Manpage.strip_man_info">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.strip_man_info">[docs]</a>
+    def strip_man_info(self):
         section  = self.document[0]
         man_info = Container(authors=[])
         man_node = self.sec2man_get_first_child(section, kernel_doc_man)
@@ -263,7 +284,10 @@ __version__  = &#39;1.0&#39;
 
         return man_info</div>
 
-<div class="viewcode-block" id="Section2Manpage.isolate_sections"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.isolate_sections">[docs]</a>    def isolate_sections(self, sec_by_title):
+
+<div class="viewcode-block" id="Section2Manpage.isolate_sections">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.isolate_sections">[docs]</a>
+    def isolate_sections(self, sec_by_title):
         section = self.document[0]
         while True:
             sect = self.sec2man_get_first_child(section, nodes.section)
@@ -286,7 +310,10 @@ __version__  = &#39;1.0&#39;
 
         return sec_by_title</div>
 
-<div class="viewcode-block" id="Section2Manpage.isolate_synopsis"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.isolate_synopsis">[docs]</a>    def isolate_synopsis(self, sec_by_title):
+
+<div class="viewcode-block" id="Section2Manpage.isolate_synopsis">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.isolate_synopsis">[docs]</a>
+    def isolate_synopsis(self, sec_by_title):
         synopsis = None
         c_desc = self.sec2man_get_first_child(self.document[0], addnodes.desc)
         if c_desc is not None:
@@ -297,7 +324,10 @@ __version__  = &#39;1.0&#39;
             sec_by_title[&quot;SYNOPSIS&quot;] = sec_by_title.get(&quot;SYNOPSIS&quot;, []) + [synopsis]
         return sec_by_title</div>
 
-<div class="viewcode-block" id="Section2Manpage.apply"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.apply">[docs]</a>    def apply(self, **kwargs):
+
+<div class="viewcode-block" id="Section2Manpage.apply">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.apply">[docs]</a>
+    def apply(self, **kwargs):
         self.document.man_info = self.strip_man_info()
         sec_by_title = collections.OrderedDict()
 
@@ -313,10 +343,14 @@ __version__  = &#39;1.0&#39;
             self.document[0] += sec_list
 
         for sec_list in sec_by_title.values():
-            self.document[0] += sec_list</div></div>
+            self.document[0] += sec_list</div>
+</div>
+
 
 # ==============================================================================
-<div class="viewcode-block" id="KernelDocManBuilder"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder">[docs]</a>class KernelDocManBuilder(ManualPageBuilder):
+<div class="viewcode-block" id="KernelDocManBuilder">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder">[docs]</a>
+class KernelDocManBuilder(ManualPageBuilder):
 # ==============================================================================
 
     &quot;&quot;&quot;
@@ -326,30 +360,47 @@ __version__  = &#39;1.0&#39;
     format = &#39;man&#39;
     supported_image_types = []
 
-<div class="viewcode-block" id="KernelDocManBuilder.init"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.init">[docs]</a>    def init(self):
+<div class="viewcode-block" id="KernelDocManBuilder.init">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.init">[docs]</a>
+    def init(self):
         pass</div>
 
-<div class="viewcode-block" id="KernelDocManBuilder.is_manpage"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.is_manpage">[docs]</a>    def is_manpage(self, node):
+
+<div class="viewcode-block" id="KernelDocManBuilder.is_manpage">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.is_manpage">[docs]</a>
+    def is_manpage(self, node):
         if isinstance(node, nodes.section):
             return bool(
                 Section2Manpage.sec2man_get_first_child(
                     node, kernel_doc_man) is not None)
         return False</div>
 
-<div class="viewcode-block" id="KernelDocManBuilder.prepare_writing"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.prepare_writing">[docs]</a>    def prepare_writing(self, docnames):
+
+<div class="viewcode-block" id="KernelDocManBuilder.prepare_writing">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.prepare_writing">[docs]</a>
+    def prepare_writing(self, docnames):
         &quot;&quot;&quot;A place where you can add logic before :meth:`write_doc` is run&quot;&quot;&quot;
         pass</div>
 
-<div class="viewcode-block" id="KernelDocManBuilder.write_doc"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.write_doc">[docs]</a>    def write_doc(self, docname, doctree):
+
+<div class="viewcode-block" id="KernelDocManBuilder.write_doc">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.write_doc">[docs]</a>
+    def write_doc(self, docname, doctree):
         &quot;&quot;&quot;Where you actually write something to the filesystem.&quot;&quot;&quot;
         pass</div>
 
-<div class="viewcode-block" id="KernelDocManBuilder.get_partial_document"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.get_partial_document">[docs]</a>    def get_partial_document(self, children):
+
+<div class="viewcode-block" id="KernelDocManBuilder.get_partial_document">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.get_partial_document">[docs]</a>
+    def get_partial_document(self, children):
         doc_tree =  new_document(&#39;&lt;output&gt;&#39;)
         doc_tree += children
         return doc_tree</div>
 
-<div class="viewcode-block" id="KernelDocManBuilder.write"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.write">[docs]</a>    def write(self, *ignored):
+
+<div class="viewcode-block" id="KernelDocManBuilder.write">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.write">[docs]</a>
+    def write(self, *ignored):
         if self.config.man_pages:
             # build manpages from config.man_pages as usual
             ManualPageBuilder.write(self, *ignored)
@@ -406,8 +457,13 @@ __version__  = &#39;1.0&#39;
         logger.info(&quot;END writing man pages.&quot;)</div>
 
 
-<div class="viewcode-block" id="KernelDocManBuilder.finish"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.finish">[docs]</a>    def finish(self):
-        pass</div></div>
+
+<div class="viewcode-block" id="KernelDocManBuilder.finish">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.finish">[docs]</a>
+    def finish(self):
+        pass</div>
+</div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -465,8 +521,8 @@ __version__  = &#39;1.0&#39;
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../../_static/version_warning_offset.js"></script>
 

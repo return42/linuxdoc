@@ -1,19 +1,18 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.rstKernelDoc &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/tabs.js"></script>
+    <title>linuxdoc.rstKernelDoc &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <script src="../../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/tabs.js?v=3030b3cb"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -26,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.rstKernelDoc</a></li> 
       </ul>
@@ -77,7 +76,9 @@ from . import kernel_doc as kerneldoc
 
 __version__  = &#39;3.0&#39;
 
-<div class="viewcode-block" id="ParserCache"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache">[docs]</a>class ParserCache:
+<div class="viewcode-block" id="ParserCache">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache">[docs]</a>
+class ParserCache:
     &quot;&quot;&quot;A simple (in process) cache for :py:obj:`KernelDocParser` objects (read
     :py:obj:`PARSER_CACHE`)
 
@@ -86,7 +87,9 @@ __version__  = &#39;3.0&#39;
     def __init__(self):
         self._cache = {}
 
-<div class="viewcode-block" id="ParserCache.get_id"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get_id">[docs]</a>    def get_id(self, opts):
+<div class="viewcode-block" id="ParserCache.get_id">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get_id">[docs]</a>
+    def get_id(self, opts):
         &quot;&quot;&quot;Generate a cache ID from the options of the kernel-doc directive.  Some of
         the options control the parsing rules and thus in the end the parsing
         result.
@@ -94,12 +97,20 @@ __version__  = &#39;3.0&#39;
         &quot;&quot;&quot;
         return (opts.fname, opts.exp_method, tuple(opts.exp_ids), tuple(opts.known_attrs))</div>
 
-<div class="viewcode-block" id="ParserCache.get"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get">[docs]</a>    def get(self, opts):
+
+<div class="viewcode-block" id="ParserCache.get">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get">[docs]</a>
+    def get(self, opts):
         x = self.get_id(opts)
         return self._cache.get(x)</div>
 
-<div class="viewcode-block" id="ParserCache.set"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.set">[docs]</a>    def set(self, opts, parser):
-        self._cache[self.get_id(opts)] = parser</div></div>
+
+<div class="viewcode-block" id="ParserCache.set">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.set">[docs]</a>
+    def set(self, opts, parser):
+        self._cache[self.get_id(opts)] = parser</div>
+</div>
+
 
 
 PARSER_CACHE = ParserCache()
@@ -113,7 +124,9 @@ for each rest-file (that contains at least one kernel-doc directive).
 app_log = logging.getLogger(&#39;application&#39;)
 
 # ==============================================================================
-<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.setup">[docs]</a>def setup(app):
+<div class="viewcode-block" id="setup">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.setup">[docs]</a>
+def setup(app):
 # ==============================================================================
 
     app.add_config_value(&#39;kernel_doc_raise_error&#39;, False, &#39;env&#39;)
@@ -132,8 +145,11 @@ app_log = logging.getLogger(&#39;application&#39;)
         , parallel_write_safe = True
     )</div>
 
+
 # ==============================================================================
-<div class="viewcode-block" id="KernelDocParser"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser">[docs]</a>class KernelDocParser(kerneldoc.Parser):
+<div class="viewcode-block" id="KernelDocParser">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser">[docs]</a>
+class KernelDocParser(kerneldoc.Parser):
 # ==============================================================================
 
     # pylint: disable=deprecated-method
@@ -148,40 +164,58 @@ app_log = logging.getLogger(&#39;application&#39;)
 
     # pylint: disable=arguments-differ
 
-<div class="viewcode-block" id="KernelDocParser.error"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.error">[docs]</a>    def error(self, message, **replace):
+<div class="viewcode-block" id="KernelDocParser.error">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.error">[docs]</a>
+    def error(self, message, **replace):
         replace[&quot;fname&quot;]   = self.options.fname
         replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
         self.errors += 1
         message = (&quot;%(fname)s:%(line_no)s: [kernel-doc ERROR] : &quot; + message) % replace
         app_log.warn(message)</div>
 
-<div class="viewcode-block" id="KernelDocParser.warn"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.warn">[docs]</a>    def warn(self, message, **replace):
+
+<div class="viewcode-block" id="KernelDocParser.warn">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.warn">[docs]</a>
+    def warn(self, message, **replace):
         replace[&quot;fname&quot;]   = self.options.fname
         replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
         self.warnings += 1
         message = (&quot;%(fname)s:%(line_no)s: [kernel-doc WARN] : &quot; + message) % replace
         app_log.warn(message)</div>
 
-<div class="viewcode-block" id="KernelDocParser.info"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.info">[docs]</a>    def info(self, message, **replace):
+
+<div class="viewcode-block" id="KernelDocParser.info">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.info">[docs]</a>
+    def info(self, message, **replace):
         replace[&quot;fname&quot;]   = self.options.fname
         replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
         message = (&quot;%(fname)s:%(line_no)s: [kernel-doc INFO] : &quot; + message) % replace
         app_log.info(message)</div>
 
-<div class="viewcode-block" id="KernelDocParser.debug"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.debug">[docs]</a>    def debug(self, message, **replace):
+
+<div class="viewcode-block" id="KernelDocParser.debug">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.debug">[docs]</a>
+    def debug(self, message, **replace):
         if self.app.verbosity &lt; 2:
             return
         replace[&quot;fname&quot;]   = self.options.fname
         replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
         message = (&quot;%(fname)s:%(line_no)s: [kernel-doc DEBUG] : &quot; + message) % replace
-        app_log.debug(message)</div></div>
+        app_log.debug(message)</div>
+</div>
+
 
 
 # ==============================================================================
-<div class="viewcode-block" id="FaultyOption"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.FaultyOption">[docs]</a>class FaultyOption(Exception):
+<div class="viewcode-block" id="FaultyOption">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.FaultyOption">[docs]</a>
+class FaultyOption(Exception):
     pass</div>
 
-<div class="viewcode-block" id="KernelDoc"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc">[docs]</a>class KernelDoc(Directive):
+
+<div class="viewcode-block" id="KernelDoc">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc">[docs]</a>
+class KernelDoc(Directive):
 # ==============================================================================
 
     u&quot;&quot;&quot;KernelDoc (``kernel-doc``) directive&quot;&quot;&quot;
@@ -222,7 +256,9 @@ app_log = logging.getLogger(&#39;application&#39;)
 
     }
 
-<div class="viewcode-block" id="KernelDoc.getParserOptions"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.getParserOptions">[docs]</a>    def getParserOptions(self):  # pylint: disable=too-many-branches, too-many-statements
+<div class="viewcode-block" id="KernelDoc.getParserOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.getParserOptions">[docs]</a>
+    def getParserOptions(self):  # pylint: disable=too-many-branches, too-many-statements
 
         fname     = self.arguments[0]
         src_tree  = path.dirname(path.normpath(self.doc.current_source))
@@ -337,7 +373,10 @@ app_log = logging.getLogger(&#39;application&#39;)
 
         return opts</div>
 
-<div class="viewcode-block" id="KernelDoc.errMsg"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.errMsg">[docs]</a>    def errMsg(self, msg):
+
+<div class="viewcode-block" id="KernelDoc.errMsg">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.errMsg">[docs]</a>
+    def errMsg(self, msg):
         msg = six.text_type(msg)
         error = self.state_machine.reporter.error(
             msg
@@ -363,7 +402,10 @@ app_log = logging.getLogger(&#39;application&#39;)
         todo += &quot;\n\n&quot;
         self.state_machine.insert_input(todo.split(&quot;\n&quot;), self.arguments[0] )</div>
 
-<div class="viewcode-block" id="KernelDoc.parseSource"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.parseSource">[docs]</a>    def parseSource(self, opts):
+
+<div class="viewcode-block" id="KernelDoc.parseSource">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.parseSource">[docs]</a>
+    def parseSource(self, opts):
         parser = PARSER_CACHE.get(opts)
 
         if parser is None:
@@ -377,7 +419,10 @@ app_log = logging.getLogger(&#39;application&#39;)
 
         return parser</div>
 
-<div class="viewcode-block" id="KernelDoc.run"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.run">[docs]</a>    def run(self):
+
+<div class="viewcode-block" id="KernelDoc.run">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.run">[docs]</a>
+    def run(self):
 
         # ToDo: think about again; these members has been added for convenience
         self.parser = None                     # pylint: disable=attribute-defined-outside-init
@@ -411,7 +456,10 @@ app_log = logging.getLogger(&#39;application&#39;)
         return self.nodes</div>
 
 
-<div class="viewcode-block" id="KernelDoc.getNodes"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.getNodes">[docs]</a>    def getNodes(self):  # pylint: disable=too-many-branches, too-many-statements, too-many-locals
+
+<div class="viewcode-block" id="KernelDoc.getNodes">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.getNodes">[docs]</a>
+    def getNodes(self):  # pylint: disable=too-many-branches, too-many-statements, too-many-locals
 
         translator = kerneldoc.ReSTTranslator()
         lines      = &quot;&quot;
@@ -491,11 +539,15 @@ app_log = logging.getLogger(&#39;application&#39;)
                 self.state.nested_parse(content, 0, node, match_titles=1)
             finally:
                 self.state.memo.title_styles, self.state.memo.section_level = buf
-        return node.children</div></div>
+        return node.children</div>
+</div>
+
 
 
 # ==============================================================================
-<div class="viewcode-block" id="WriterList"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList">[docs]</a>class WriterList(ViewList):
+<div class="viewcode-block" id="WriterList">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList">[docs]</a>
+class WriterList(ViewList):
 # ==============================================================================
     u&quot;&quot;&quot;docutils ViewList with write method.&quot;&quot;&quot;
 
@@ -506,7 +558,9 @@ app_log = logging.getLogger(&#39;application&#39;)
         self.last_offset = -1
         self.line_buffer = &quot;&quot;
 
-<div class="viewcode-block" id="WriterList.write"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList.write">[docs]</a>    def write(self, cont):
+<div class="viewcode-block" id="WriterList.write">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList.write">[docs]</a>
+    def write(self, cont):
         if self.last_offset != self.parser.ctx.offset:
             self.flush()
             self.line_buffer = &quot;&quot;
@@ -514,10 +568,15 @@ app_log = logging.getLogger(&#39;application&#39;)
 
         self.line_buffer += cont</div>
 
-<div class="viewcode-block" id="WriterList.flush"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList.flush">[docs]</a>    def flush(self):
+
+<div class="viewcode-block" id="WriterList.flush">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList.flush">[docs]</a>
+    def flush(self):
         for _i, l in enumerate(self.line_buffer.split(&quot;\n&quot;)):
             self.append(l, self.parser.options.fname, self.last_offset)
-        self.line_buffer = &quot;&quot;</div></div>
+        self.line_buffer = &quot;&quot;</div>
+</div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -575,8 +634,8 @@ app_log = logging.getLogger(&#39;application&#39;)
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../../_static/version_warning_offset.js"></script>
 

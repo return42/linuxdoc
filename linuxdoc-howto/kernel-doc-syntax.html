@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>kernel-doc syntax &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <title>kernel-doc syntax &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script src="../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="kernel-doc in reST documents" href="kernel-doc-directive.html" />
@@ -33,7 +32,7 @@
         <li class="right" >
           <a href="index.html" title="LinuxDoc HowTo"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">LinuxDoc HowTo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">kernel-doc syntax</a></li> 
       </ul>
@@ -45,7 +44,7 @@
           <div class="body" role="main">
             
   <section id="kernel-doc-syntax">
-<span id="id1"></span><h1>kernel-doc syntax<a class="headerlink" href="#kernel-doc-syntax" title="Permalink to this heading">¶</a></h1>
+<span id="id1"></span><h1>kernel-doc syntax<a class="headerlink" href="#kernel-doc-syntax" title="Link to this heading">¶</a></h1>
 <p>The format of a block comment is like this:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * (data-type|DOC)? name(:)? (- short description)?
@@ -65,7 +64,7 @@
 <p>The name of the function, data-type respectively DOC is used as the section
 header. The names of section headers must be unique per source file.</p>
 <section id="functions">
-<span id="kernel-doc-syntax-functions"></span><h2>functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-syntax-functions"></span><h2>functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * function_name(:)? (- short description)?
 (* @parameterx: (description of parameter x)?)*
@@ -135,7 +134,7 @@ they are marked appropriately in the output format.</p>
 <p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-user-function"><span class="std std-ref">user_function</span></a></p>
 </section>
 <section id="macro">
-<span id="kernel-doc-syntax-macro"></span><h2>macro<a class="headerlink" href="#macro" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-syntax-macro"></span><h2>macro<a class="headerlink" href="#macro" title="Link to this heading">¶</a></h2>
 <p>Documenting macros is similar to documenting <a class="reference internal" href="#kernel-doc-syntax-functions"><span class="std std-ref">functions</span></a>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cm">/**</span>
 <span class="linenos">2</span><span class="cm"> * macro ADD - Function like macro to add two values</span>
@@ -151,7 +150,7 @@ they are marked appropriately in the output format.</p>
 <p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-add"><span class="std std-ref">macro ADD</span></a></p>
 </section>
 <section id="structs-unions">
-<span id="kernel-doc-syntax-structs-unions"></span><h2>structs, unions<a class="headerlink" href="#structs-unions" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-syntax-structs-unions"></span><h2>structs, unions<a class="headerlink" href="#structs-unions" title="Link to this heading">¶</a></h2>
 <p>Beside functions you can also write documentation for <code class="docutils literal notranslate"><span class="pre">structs</span></code>,
 <code class="docutils literal notranslate"><span class="pre">unions</span></code>. Instead of the function name you must write the name of the
 declaration; the <code class="docutils literal notranslate"><span class="pre">struct</span></code> or <code class="docutils literal notranslate"><span class="pre">union</span></code> must always precede the name. Nesting
@@ -268,7 +267,7 @@ they are each on a line of their own, like all other kernel-doc comments:</p>
 <p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-my-long-struct"><span class="std std-ref">struct my_long_struct</span></a></p>
 </section>
 <section id="enums-typedefs">
-<span id="kernel-doc-syntax-enums-typedefs"></span><h2>enums, typedefs<a class="headerlink" href="#enums-typedefs" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-syntax-enums-typedefs"></span><h2>enums, typedefs<a class="headerlink" href="#enums-typedefs" title="Link to this heading">¶</a></h2>
 <p>To write documentation for enums and typedefs, you must write the name of the
 declaration; the <code class="docutils literal notranslate"><span class="pre">enum</span></code> or <code class="docutils literal notranslate"><span class="pre">typedef</span></code> must always precede the name.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/**</span>
@@ -298,7 +297,7 @@ declaration; the <code class="docutils literal notranslate"><span class="pre">en
 <p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-my-typedef"><span class="std std-ref">typedef my_typedef</span></a></p>
 </section>
 <section id="documentation-blocks">
-<span id="kernel-doc-syntax-doc"></span><h2>documentation blocks<a class="headerlink" href="#documentation-blocks" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-syntax-doc"></span><h2>documentation blocks<a class="headerlink" href="#documentation-blocks" title="Link to this heading">¶</a></h2>
 <p>To facilitate having source code and comments close together, you can include
 kernel-doc documentation blocks that are <em>free-form</em> comments instead of being
 kernel-doc for functions, structures, unions, enumerations, or typedefs.  This
@@ -330,7 +329,7 @@ example:</p>
 <p>Rendered example: <a class="reference internal" href="all-in-a-tumble.html#example-theory-of-operation"><span class="std std-ref">Theory of Operation</span></a></p>
 </section>
 <section id="highlight-pattern">
-<span id="kernel-doc-highlights"></span><h2>highlight pattern<a class="headerlink" href="#highlight-pattern" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-highlights"></span><h2>highlight pattern<a class="headerlink" href="#highlight-pattern" title="Link to this heading">¶</a></h2>
 <p>All kernel-doc markup is processed as described above, all descriptive text is
 further processed, scanning for the following special patterns, which are
 highlighted appropriately.</p>
@@ -376,7 +375,7 @@ please use the corresponding <a class="reference external" href="http://www.sphi
 </div>
 </section>
 <section id="snippets">
-<span id="kernel-doc-syntax-snippets"></span><h2>Snippets<a class="headerlink" href="#snippets" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-syntax-snippets"></span><h2>Snippets<a class="headerlink" href="#snippets" title="Link to this heading">¶</a></h2>
 <p>The kernel-doc Parser supports a comment-markup for snippets out of the source
 code. To start a region to snip insert:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* parse-SNIP: &lt;snippet-name&gt; */
@@ -460,8 +459,8 @@ code. To start a region to snip insert:</p>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

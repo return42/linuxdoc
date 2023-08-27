@@ -5,16 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Overview: module code &#8212; LinuxDoc 20230827 documentation</title>
+    <title>linuxdoc.lintdoc &#8212; LinuxDoc 20230827 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52e4ff28" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
     <script src="../_static/documentation_options.js?v=a87da7d6"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/tabs.js?v=3030b3cb"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="linuxdoc.autodoc" href="linuxdoc.autodoc.html" />
+    <link rel="prev" title="linuxdoc.rest" href="linuxdoc.rest.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -25,8 +26,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="linuxdoc.autodoc.html" title="linuxdoc.autodoc"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="linuxdoc.rest.html" title="linuxdoc.rest"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Overview: module code</a></li> 
+          <li class="nav-item nav-item-1"><a href="../cmd-line.html" accesskey="U">Command line tools</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code></a></li> 
       </ul>
     </div>  
 
@@ -35,21 +43,20 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>All modules for which code is available</h1>
-<ul><li><a href="linuxdoc/autodoc.html">linuxdoc.autodoc</a></li>
-<li><a href="linuxdoc/cdomain.html">linuxdoc.cdomain</a></li>
-<li><a href="linuxdoc/compat.html">linuxdoc.compat</a></li>
-<li><a href="linuxdoc/deprecated.html">linuxdoc.deprecated</a></li>
-<li><a href="linuxdoc/grepdoc.html">linuxdoc.grepdoc</a></li>
-<li><a href="linuxdoc/kernel_doc.html">linuxdoc.kernel_doc</a></li>
-<li><a href="linuxdoc/kernel_include.html">linuxdoc.kernel_include</a></li>
-<li><a href="linuxdoc/kfigure.html">linuxdoc.kfigure</a></li>
-<li><a href="linuxdoc/lint.html">linuxdoc.lint</a></li>
-<li><a href="linuxdoc/manKernelDoc.html">linuxdoc.manKernelDoc</a></li>
-<li><a href="linuxdoc/rest.html">linuxdoc.rest</a></li>
-<li><a href="linuxdoc/rstFlatTable.html">linuxdoc.rstFlatTable</a></li>
-<li><a href="linuxdoc/rstKernelDoc.html">linuxdoc.rstKernelDoc</a></li>
-</ul>
+  <section id="linuxdoc-lintdoc">
+<span id="id1"></span><h1><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code><a class="headerlink" href="#linuxdoc-lintdoc" title="Link to this heading">¶</a></h1>
+<p>Lint the kernel-doc comments in the source code.  E.g. to lint the kernel-doc
+comments of a source-file.:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ linuxdoc.lintdoc /share/linux/include/media/lirc_dev.h
+</pre></div>
+</div>
+<p>Alternative you could also <em>lint</em> whole parts of the source tree, e.g. the
+include folder:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ linuxdoc.lintdoc /share/linux/include/
+</pre></div>
+</div>
+</section>
+
 
             <div class="clearer"></div>
           </div>
@@ -81,7 +88,13 @@
   </ul><h3>Navigation</h3>
 <ul>
   <li><a href="../index.html">Overview</a>
-    
+    <ul>
+      <li><a href="../cmd-line.html">Command line tools</a>
+        <ul>
+          <li>Previous: <a href="linuxdoc.rest.html" title="previous chapter"><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code></a>
+          <li>Next: <a href="linuxdoc.autodoc.html" title="next chapter"><code class="docutils literal notranslate"><span class="pre">linuxdoc.autodoc</span></code></a></ul>
+      </li>
+    </ul>
   </li>
 </ul>
 <div id="searchbox" style="display: none" role="search">

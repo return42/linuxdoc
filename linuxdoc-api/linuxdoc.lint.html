@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.lint module &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <title>linuxdoc.lint module &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script src="../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="linuxdoc.manKernelDoc module" href="linuxdoc.manKernelDoc.html" />
@@ -33,7 +32,7 @@
         <li class="right" >
           <a href="linuxdoc.kfigure.html" title="linuxdoc.kfigure module"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="linuxdoc.html" accesskey="U">linuxdoc package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.lint module</a></li> 
       </ul>
@@ -44,46 +43,55 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-linuxdoc.lint">
-<span id="linuxdoc-lint-module"></span><h1>linuxdoc.lint module<a class="headerlink" href="#module-linuxdoc.lint" title="Permalink to this heading">¶</a></h1>
+  <section id="linuxdoc-lint-module">
+<h1>linuxdoc.lint module<a class="headerlink" href="#linuxdoc-lint-module" title="Link to this heading">¶</a></h1>
 <section id="lint">
-<h2>lint<a class="headerlink" href="#lint" title="Permalink to this heading">¶</a></h2>
-<p>Implementation of the <a class="reference internal" href="../cmd-line.html#kernel-lintdoc"><span class="std std-ref">kernel-lintdoc</span></a> command.</p>
+<span id="module-linuxdoc.lint"></span><h2>lint<a class="headerlink" href="#lint" title="Link to this heading">¶</a></h2>
+<p>Implementation of the <a class="reference internal" href="../cmd-line/linuxdoc.lintdoc.html#linuxdoc-lintdoc"><span class="std std-ref">linuxdoc.lintdoc</span></a> command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">copyright<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Copyright (C) 2018  Markus Heiser</p>
+<dd class="field-odd"><p>Copyright (C) 2023  Markus Heiser</p>
 </dd>
 <dt class="field-even">license<span class="colon">:</span></dt>
-<dd class="field-even"><p>GPL Version 2, June 1991 see Linux/COPYING for details.</p>
+<dd class="field-even"><p>AGPL-3.0-or-later; see LICENSE for details.</p>
 </dd>
 </dl>
+<p>The command <code class="docutils literal notranslate"><span class="pre">linuxdoc.lint</span></code> <em>lint</em> the kernel-doc comments in the source
+code:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ linuxdoc.lint --help
+</pre></div>
+</div>
 </section>
 <dl class="py function">
 <dt class="sig sig-object py" id="linuxdoc.lint.ERR">
-<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">ERR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linuxdoc.lint.ERR" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">ERR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linuxdoc.lint.ERR" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="linuxdoc.lint.FATAL">
-<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">FATAL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linuxdoc.lint.FATAL" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">FATAL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linuxdoc.lint.FATAL" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="linuxdoc.lint.MSG">
-<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">MSG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linuxdoc.lint.MSG" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">MSG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#linuxdoc.lint.MSG" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="linuxdoc.lint.get_cli">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">get_cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/lint.html#get_cli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.lint.get_cli" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="linuxdoc.lint.lintdoc_file">
-<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">lintdoc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CMD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/lint.html#lintdoc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.lint.lintdoc_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">lintdoc_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/lint.html#lintdoc_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.lint.lintdoc_file" title="Link to this definition">¶</a></dt>
 <dd><p>lint documentation from fname</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="linuxdoc.lint.main">
-<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/lint.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.lint.main" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lint <em>kernel-doc</em> comments from source code (main)</p>
-</dd></dl>
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.lint.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/lint.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.lint.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </section>
 
@@ -134,6 +142,7 @@
 <li><a class="reference internal" href="#linuxdoc.lint.ERR"><code class="docutils literal notranslate"><span class="pre">ERR()</span></code></a></li>
 <li><a class="reference internal" href="#linuxdoc.lint.FATAL"><code class="docutils literal notranslate"><span class="pre">FATAL()</span></code></a></li>
 <li><a class="reference internal" href="#linuxdoc.lint.MSG"><code class="docutils literal notranslate"><span class="pre">MSG()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.lint.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
 <li><a class="reference internal" href="#linuxdoc.lint.lintdoc_file"><code class="docutils literal notranslate"><span class="pre">lintdoc_file()</span></code></a></li>
 <li><a class="reference internal" href="#linuxdoc.lint.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
@@ -156,8 +165,8 @@
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

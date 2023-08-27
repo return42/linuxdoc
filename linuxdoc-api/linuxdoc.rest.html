@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.cdomain module &#8212; LinuxDoc 20230827 documentation</title>
+    <title>linuxdoc.rest module &#8212; LinuxDoc 20230827 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52e4ff28" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
@@ -14,8 +14,8 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="linuxdoc.compat module" href="linuxdoc.compat.html" />
-    <link rel="prev" title="linuxdoc.autodoc module" href="linuxdoc.autodoc.html" /> 
+    <link rel="next" title="linuxdoc.rstFlatTable module" href="linuxdoc.rstFlatTable.html" />
+    <link rel="prev" title="linuxdoc.manKernelDoc module" href="linuxdoc.manKernelDoc.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,14 +27,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="linuxdoc.compat.html" title="linuxdoc.compat module"
+          <a href="linuxdoc.rstFlatTable.html" title="linuxdoc.rstFlatTable module"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="linuxdoc.autodoc.html" title="linuxdoc.autodoc module"
+          <a href="linuxdoc.manKernelDoc.html" title="linuxdoc.manKernelDoc module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="linuxdoc.html" accesskey="U">linuxdoc package</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">linuxdoc.cdomain module</a></li> 
+        <li class="nav-item nav-item-this"><a href="">linuxdoc.rest module</a></li> 
       </ul>
     </div>  
 
@@ -43,16 +43,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="linuxdoc-cdomain-module">
-<h1>linuxdoc.cdomain module<a class="headerlink" href="#linuxdoc-cdomain-module" title="Link to this heading">¶</a></h1>
-<section id="cdomain">
-<span id="module-linuxdoc.cdomain"></span><h2>cdomain<a class="headerlink" href="#cdomain" title="Link to this heading">¶</a></h2>
-<p>Replacement for the sphinx c-domain.  For user documentation see
-<a class="reference internal" href="../linuxdoc-howto/cdomain.html#customized-c-domain"><span class="std std-ref">Customized sphinx c-domain</span></a>.</p>
+  <section id="linuxdoc-rest-module">
+<h1>linuxdoc.rest module<a class="headerlink" href="#linuxdoc-rest-module" title="Link to this heading">¶</a></h1>
+<section id="rest">
+<span id="module-linuxdoc.rest"></span><h2>rest<a class="headerlink" href="#rest" title="Link to this heading">¶</a></h2>
+<p>Implementation of the <code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code> command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">copyright<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Copyright (C) 2023 Markus Heiser</p>
+</dd>
+<dt class="field-even">license<span class="colon">:</span></dt>
+<dd class="field-even"><p>AGPL-3.0-or-later; see LICENSE for details.</p>
+</dd>
+</dl>
+<p>The <code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code> command parses kernel-doc comments from source code and
+print the reST to stdout:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ linuxdoc.rest --help
+</pre></div>
+</div>
 </section>
 <dl class="py function">
-<dt class="sig sig-object py" id="linuxdoc.cdomain.setup">
-<span class="sig-prename descclassname"><span class="pre">linuxdoc.cdomain.</span></span><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/cdomain.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.cdomain.setup" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="linuxdoc.rest.get_cli">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.rest.</span></span><span class="sig-name descname"><span class="pre">get_cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rest.html#get_cli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rest.get_cli" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="linuxdoc.rest.main">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.rest.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/rest.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.rest.main" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -91,17 +108,18 @@
     <ul>
       <li><a href="linuxdoc.html">linuxdoc package</a>
         <ul>
-          <li>Previous: <a href="linuxdoc.autodoc.html" title="previous chapter">linuxdoc.autodoc module</a>
-          <li>Next: <a href="linuxdoc.compat.html" title="next chapter">linuxdoc.compat module</a></ul>
+          <li>Previous: <a href="linuxdoc.manKernelDoc.html" title="previous chapter">linuxdoc.manKernelDoc module</a>
+          <li>Next: <a href="linuxdoc.rstFlatTable.html" title="next chapter">linuxdoc.rstFlatTable module</a></ul>
       </li>
     </ul>
   </li>
 </ul>
   <h3>Contents</h3>
   <ul>
-<li><a class="reference internal" href="#">linuxdoc.cdomain module</a><ul>
-<li><a class="reference internal" href="#cdomain">cdomain</a></li>
-<li><a class="reference internal" href="#linuxdoc.cdomain.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+<li><a class="reference internal" href="#">linuxdoc.rest module</a><ul>
+<li><a class="reference internal" href="#rest">rest</a></li>
+<li><a class="reference internal" href="#linuxdoc.rest.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.rest.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
 </ul>

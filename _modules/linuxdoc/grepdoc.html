@@ -1,19 +1,18 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.grep_doc &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/tabs.js"></script>
+    <title>linuxdoc.grepdoc &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <script src="../../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/tabs.js?v=3030b3cb"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -26,9 +25,9 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">linuxdoc.grep_doc</a></li> 
+        <li class="nav-item nav-item-this"><a href="">linuxdoc.grepdoc</a></li> 
       </ul>
     </div>  
 
@@ -37,27 +36,24 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for linuxdoc.grep_doc</h1><div class="highlight"><pre>
+  <h1>Source code for linuxdoc.grepdoc</h1><div class="highlight"><pre>
 <span></span>#!/usr/bin/env python3
 # SPDX-License-Identifier: AGPL-3.0-or-later
-u&quot;&quot;&quot;
-    grep_doc
-    ~~~~~~~~
-
-    Implementation of the ``kernel-grepdoc`` command.
-
-    :copyright:  Copyright (C) 2018 Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
-
-    The ``kernel-grepdoc`` command *greps* informations from Linux kernel&#39;s
-    (reST) documentation, see ``--help``::
-
-        $ kernel-grepdoc --help
 &quot;&quot;&quot;
+grep_doc
+~~~~~~~~
 
-# ------------------------------------------------------------------------------
-# imports
-# ------------------------------------------------------------------------------
+Implementation of the ``linuxdoc.grepdoc`` command.
+
+:copyright:  Copyright (C) 2018 Markus Heiser
+:license:    AGPL-3.0-or-later; see LICENSE for details.
+
+The ``linuxdoc.grepdoc`` command *greps* ``.. kernel-doc::`` directives from reST
+files::
+
+    $  linuxdoc.grepdoc --help
+
+&quot;&quot;&quot;
 
 import argparse
 import re
@@ -65,37 +61,32 @@ import sys
 
 from fspath import FSPath
 
-DESCRIPTION = &quot;&quot;&quot; The &#39;kernel-grepdoc&#39; command scans ``*.rst`` files from kernel&#39;s
-``./Documentation`` source tree and filters all &#39;kernel-doc&#39; directives.  The
-source files which are used in those &#39;kernel-doc&#39; directives are printed out as
-list.  This list can be used to identify which files from the source tree has
-already been ported to reST markup and which not.  You will need those sort of
-list to distinguish between source files in *reST* and those in *vintage*
-kernel-doc mode.&quot;&quot;&quot;
-
-# ------------------------------------------------------------------------------
-# config
-# ------------------------------------------------------------------------------
+CMD = None
 
 PRINT  = lambda msg: sys.__stdout__.write(&quot;%s\n&quot; % msg)
 ERR    = lambda msg: sys.__stderr__.write(&quot;ERROR: %s\n&quot; % msg)
 
 KERNEL_DOC_RE = re.compile(r&#39;^\s*..\s+kernel-doc::\s+([a-zA-Z0-9_\-\.\/]+)&#39;)
 
+DESCRIPTION = &quot;&quot;&quot;The linuxdoc.grepdoc command searches &#39;*.rst&#39; files and filters
+all
+
+    .. kernel-doc:: &lt;source files&gt;
+
+directives.  The names of the &lt;source files&gt; used in these kernel-doc directives
+are printed out line by line.&quot;&quot;&quot;
+
+
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.grep_doc.html#linuxdoc.grep_doc.main">[docs]</a>def main(): # pylint: disable=missing-docstring
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.grepdoc.html#linuxdoc.grepdoc.main">[docs]</a>
+def main():
 # ------------------------------------------------------------------------------
 
-    CLI = argparse.ArgumentParser(  # pylint: disable=invalid-name
-        description = DESCRIPTION
-        , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    global CMD  # pylint: disable=global-statement
 
-    CLI.add_argument(
-        &quot;srctree&quot;
-        , help    = &quot;Linux&#39;s source tree&quot;
-        , type    = lambda x: FSPath(x).ABSPATH)
-
-    CMD = CLI.parse_args()  # pylint: disable=invalid-name
+    cli = get_cli()
+    CMD = cli.parse_args()
 
     if not CMD.srctree.EXISTS:
         ERR(&quot;%s does not exists.&quot; % CMD.srctree)
@@ -106,11 +97,8 @@ KERNEL_DOC_RE = re.compile(r&#39;^\s*..\s+kernel-doc::\s+([a-zA-Z0-9_\-\.\/]+)&#
         sys.exit(42)
 
     rst_sources = set()
-    doc_tree = CMD.srctree/&quot;Documentation&quot;
+    doc_tree = CMD.srctree
     for fname in doc_tree.reMatchFind(r&quot;^.*\.rst$&quot;):
-        if fname.BASENAME == &#39;kernel-documentation.rst&#39;:
-            continue
-        #MSG(&quot;scan %s&quot; % fname)
         for line in fname.openTextFile():
             _m = KERNEL_DOC_RE.search(line)
             if _m:
@@ -119,6 +107,24 @@ KERNEL_DOC_RE = re.compile(r&#39;^\s*..\s+kernel-doc::\s+([a-zA-Z0-9_\-\.\/]+)&#
     rst_sources = list(rst_sources)
     rst_sources.sort()
     PRINT(&quot;\n&quot;.join(rst_sources))</div>
+
+
+<div class="viewcode-block" id="get_cli">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.grepdoc.html#linuxdoc.grepdoc.get_cli">[docs]</a>
+def get_cli():
+
+    cli = argparse.ArgumentParser(
+        description = DESCRIPTION
+        , formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    cli.add_argument(
+        &quot;srctree&quot;
+        , help    = &quot;source tree&quot;
+        , type    = lambda x: FSPath(x).ABSPATH
+    )
+
+    return cli</div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -176,8 +182,8 @@ KERNEL_DOC_RE = re.compile(r&#39;^\s*..\s+kernel-doc::\s+([a-zA-Z0-9_\-\.\/]+)&#
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../../_static/version_warning_offset.js"></script>
 

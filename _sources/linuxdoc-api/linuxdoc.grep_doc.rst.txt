@@ -1,7 +1,0 @@
-linuxdoc.grep\_doc module
-=========================
-
-.. automodule:: linuxdoc.grep_doc
-   :members:
-   :undoc-members:
-   :show-inheritance:

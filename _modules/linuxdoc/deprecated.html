@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.cdomain &#8212; LinuxDoc 20230827 documentation</title>
+    <title>linuxdoc.deprecated &#8212; LinuxDoc 20230827 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=52e4ff28" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
@@ -27,7 +27,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">linuxdoc.cdomain</a></li> 
+        <li class="nav-item nav-item-this"><a href="">linuxdoc.deprecated</a></li> 
       </ul>
     </div>  
 
@@ -36,36 +36,76 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for linuxdoc.cdomain</h1><div class="highlight"><pre>
+  <h1>Source code for linuxdoc.deprecated</h1><div class="highlight"><pre>
 <span></span># SPDX-License-Identifier: AGPL-3.0-or-later
-&quot;&quot;&quot;\
-cdomain
-~~~~~~~
+&quot;&quot;&quot;
+deprecated
+~~~~~~~~~~
 
-Replacement for the sphinx c-domain.  For user documentation see
-:ref:`customized-c-domain`.
+Deprecated Operations implemented for compatibility.
 
 &quot;&quot;&quot;
+# pylint: disable=import-outside-toplevel
 
-from .compat import sphinx_has_c_namespace
+import sys
 
-__version__  = &#39;3.0&#39;
+def _report(msg):
+    sys.stderr.write(&#39; &#39;.join(line.strip() for line in msg.splitlines()) + &#39;\n&#39;)
 
-if sphinx_has_c_namespace():
-    from .cdomainv3 import CDomain
-else:
-    from .cdomainv2 import CDomain
+# ------------------------------------------------------------------------------
+# command-lines deprecated
+# ------------------------------------------------------------------------------
 
-<div class="viewcode-block" id="setup">
-<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.cdomain.html#linuxdoc.cdomain.setup">[docs]</a>
-def setup(app):  # pylint: disable=missing-docstring
+<div class="viewcode-block" id="cmd_kernel_doc">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.deprecated.html#linuxdoc.deprecated.cmd_kernel_doc">[docs]</a>
+def cmd_kernel_doc():
+    &quot;&quot;&quot;DEPRECATED: The maintenance of the ``kernel-doc`` command ended in
+    version 20230321.  The command will be removed in a future release: use
+    command ``linuxdoc.rest``!
 
-    app.add_domain(CDomain, override=True)
-    return dict(
-        version = __version__,
-        parallel_read_safe = True,
-        parallel_write_safe = True,
-    )</div>
+    &quot;&quot;&quot;
+    _report(cmd_kernel_doc.__doc__)
+    from .rest import main
+    return main()</div>
+
+
+<div class="viewcode-block" id="cmd_kernel_autodoc">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.deprecated.html#linuxdoc.deprecated.cmd_kernel_autodoc">[docs]</a>
+def cmd_kernel_autodoc():
+    &quot;&quot;&quot;DEPRECATED: The maintenance of the ``kernel-autodoc`` command ended in
+    version 20230321.  The command will be removed in a future release: use
+    command ``linuxdoc.autodoc``!
+
+    &quot;&quot;&quot;
+    _report(cmd_kernel_autodoc.__doc__)
+    from .autodoc import main
+    return main()</div>
+
+
+<div class="viewcode-block" id="cmd_kernel_lintdoc">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.deprecated.html#linuxdoc.deprecated.cmd_kernel_lintdoc">[docs]</a>
+def cmd_kernel_lintdoc():
+    &quot;&quot;&quot;DEPRECATED: The maintenance of the ``kernel-lintdoc`` command ended in
+    version 20230321.  The command will be removed in a future release: use
+    command ``linuxdoc.lintdoc``!
+
+    &quot;&quot;&quot;
+    _report(cmd_kernel_lintdoc.__doc__)
+    from .lint import main
+    return main()</div>
+
+
+<div class="viewcode-block" id="cmd_kernel_grepdoc">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.deprecated.html#linuxdoc.deprecated.cmd_kernel_grepdoc">[docs]</a>
+def cmd_kernel_grepdoc():
+    &quot;&quot;&quot;DEPRECATED: The maintenance of the ``kernel-grepdoc`` command ended in
+    version 20230321.  The command will be removed in a future release: use
+    command ``linuxdoc.grepdoc``!
+
+    &quot;&quot;&quot;
+    _report(cmd_kernel_grepdoc.__doc__)
+    from .grepdoc import main
+    return main()</div>
 
 </pre></div>
 

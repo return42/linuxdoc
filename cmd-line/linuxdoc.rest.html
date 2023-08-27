@@ -5,16 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Overview: module code &#8212; LinuxDoc 20230827 documentation</title>
+    <title>linuxdoc.rest &#8212; LinuxDoc 20230827 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52e4ff28" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
     <script src="../_static/documentation_options.js?v=a87da7d6"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/tabs.js?v=3030b3cb"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="linuxdoc.lintdoc" href="linuxdoc.lintdoc.html" />
+    <link rel="prev" title="Command line tools" href="../cmd-line.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -25,8 +26,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="linuxdoc.lintdoc.html" title="linuxdoc.lintdoc"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../cmd-line.html" title="Command line tools"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Overview: module code</a></li> 
+          <li class="nav-item nav-item-1"><a href="../cmd-line.html" accesskey="U">Command line tools</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code></a></li> 
       </ul>
     </div>  
 
@@ -35,21 +43,18 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>All modules for which code is available</h1>
-<ul><li><a href="linuxdoc/autodoc.html">linuxdoc.autodoc</a></li>
-<li><a href="linuxdoc/cdomain.html">linuxdoc.cdomain</a></li>
-<li><a href="linuxdoc/compat.html">linuxdoc.compat</a></li>
-<li><a href="linuxdoc/deprecated.html">linuxdoc.deprecated</a></li>
-<li><a href="linuxdoc/grepdoc.html">linuxdoc.grepdoc</a></li>
-<li><a href="linuxdoc/kernel_doc.html">linuxdoc.kernel_doc</a></li>
-<li><a href="linuxdoc/kernel_include.html">linuxdoc.kernel_include</a></li>
-<li><a href="linuxdoc/kfigure.html">linuxdoc.kfigure</a></li>
-<li><a href="linuxdoc/lint.html">linuxdoc.lint</a></li>
-<li><a href="linuxdoc/manKernelDoc.html">linuxdoc.manKernelDoc</a></li>
-<li><a href="linuxdoc/rest.html">linuxdoc.rest</a></li>
-<li><a href="linuxdoc/rstFlatTable.html">linuxdoc.rstFlatTable</a></li>
-<li><a href="linuxdoc/rstKernelDoc.html">linuxdoc.rstKernelDoc</a></li>
-</ul>
+  <section id="linuxdoc-rest">
+<span id="id1"></span><h1><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code><a class="headerlink" href="#linuxdoc-rest" title="Link to this heading">¶</a></h1>
+<p>Parse kernel-doc comments from source code and print the reST to stdout.  This
+command exits, to see the generated reST, normally you use the <a class="reference internal" href="../linuxdoc-howto/kernel-doc-directive.html#kernel-doc-directive"><span class="std std-ref">kernel-doc
+directive</span></a> in your reST documentation.:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ linuxdoc.rest /share/linux/include/media/lirc_dev.h
+</pre></div>
+</div>
+<p>To see the difference between <a class="reference internal" href="../linuxdoc-howto/vintage-kernel-doc-mode.html#vintage-kernel-doc-mode"><span class="std std-ref">Vintage kernel-doc mode</span></a> and
+<a class="reference internal" href="../linuxdoc-howto/reST-kernel-doc-mode.html#rest-kernel-doc-mode"><span class="std std-ref">reST kernel-doc mode</span></a> use the option <code class="docutils literal notranslate"><span class="pre">--markup</span> <span class="pre">kernel-doc</span></code>.</p>
+</section>
+
 
             <div class="clearer"></div>
           </div>
@@ -81,7 +86,13 @@
   </ul><h3>Navigation</h3>
 <ul>
   <li><a href="../index.html">Overview</a>
-    
+    <ul>
+      <li><a href="../cmd-line.html">Command line tools</a>
+        <ul>
+          <li>Previous: <a href="../cmd-line.html" title="previous chapter">Command line tools</a>
+          <li>Next: <a href="linuxdoc.lintdoc.html" title="next chapter"><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code></a></ul>
+      </li>
+    </ul>
   </li>
 </ul>
 <div id="searchbox" style="display: none" role="search">

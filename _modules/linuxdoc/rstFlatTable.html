@@ -1,19 +1,18 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.rstFlatTable &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/tabs.js"></script>
+    <title>linuxdoc.rstFlatTable &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <script src="../../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/tabs.js?v=3030b3cb"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -26,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.rstFlatTable</a></li> 
       </ul>
@@ -69,7 +68,9 @@ from docutils.utils import SystemMessagePropagation
 __version__  = &#39;3.0&#39;
 
 # ==============================================================================
-<div class="viewcode-block" id="setup"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.setup">[docs]</a>def setup(app):
+<div class="viewcode-block" id="setup">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.setup">[docs]</a>
+def setup(app):
 # ==============================================================================
 
     app.add_directive(&quot;flat-table&quot;, FlatTable)
@@ -82,8 +83,11 @@ __version__  = &#39;3.0&#39;
         parallel_write_safe = True
     )</div>
 
+
 # ==============================================================================
-<div class="viewcode-block" id="c_span"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.c_span">[docs]</a>def c_span(  # pylint: disable=unused-argument
+<div class="viewcode-block" id="c_span">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.c_span">[docs]</a>
+def c_span(  # pylint: disable=unused-argument
         name, rawtext, text, lineno, inliner, options=None, content=None):
 # ==============================================================================
 
@@ -93,8 +97,11 @@ __version__  = &#39;3.0&#39;
     msglist  = []
     return nodelist, msglist</div>
 
+
 # ==============================================================================
-<div class="viewcode-block" id="r_span"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.r_span">[docs]</a>def r_span(  # pylint: disable=unused-argument
+<div class="viewcode-block" id="r_span">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.r_span">[docs]</a>
+def r_span(  # pylint: disable=unused-argument
         name, rawtext, text, lineno, inliner, options=None, content=None):
 # ==============================================================================
 
@@ -104,18 +111,27 @@ __version__  = &#39;3.0&#39;
     msglist  = []
     return nodelist, msglist</div>
 
+
 # ==============================================================================
-<div class="viewcode-block" id="rowSpan"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.rowSpan">[docs]</a>class rowSpan(nodes.General, nodes.Element):
+<div class="viewcode-block" id="rowSpan">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.rowSpan">[docs]</a>
+class rowSpan(nodes.General, nodes.Element):
 # ==============================================================================
     pass</div>
 
+
 # ==============================================================================
-<div class="viewcode-block" id="colSpan"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.colSpan">[docs]</a>class colSpan(nodes.General, nodes.Element):
+<div class="viewcode-block" id="colSpan">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.colSpan">[docs]</a>
+class colSpan(nodes.General, nodes.Element):
 # ==============================================================================
     pass</div>
 
+
 # ==============================================================================
-<div class="viewcode-block" id="FlatTable"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.FlatTable">[docs]</a>class FlatTable(Table):
+<div class="viewcode-block" id="FlatTable">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.FlatTable">[docs]</a>
+class FlatTable(Table):
 # ==============================================================================
 
     u&quot;&quot;&quot;FlatTable (``flat-table``) directive&quot;&quot;&quot;
@@ -132,7 +148,9 @@ __version__  = &#39;3.0&#39;
         , &#39;align&#39;: align
     }
 
-<div class="viewcode-block" id="FlatTable.run"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.FlatTable.run">[docs]</a>    def run(self):
+<div class="viewcode-block" id="FlatTable.run">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.FlatTable.run">[docs]</a>
+    def run(self):
 
         if not self.content:
             error = self.state_machine.reporter.error(
@@ -157,11 +175,15 @@ __version__  = &#39;3.0&#39;
         # debug --&gt; tableNode.asdom().toprettyxml()
         if title:
             tableNode.insert(0, title)
-        return [tableNode] + messages</div></div>
+        return [tableNode] + messages</div>
+</div>
+
 
 
 # ==============================================================================
-<div class="viewcode-block" id="ListTableBuilder"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder">[docs]</a>class ListTableBuilder(object):
+<div class="viewcode-block" id="ListTableBuilder">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder">[docs]</a>
+class ListTableBuilder(object):
 # ==============================================================================
 
     u&quot;&quot;&quot;Builds a table from a double-stage list&quot;&quot;&quot;
@@ -171,7 +193,9 @@ __version__  = &#39;3.0&#39;
         self.rows      = []
         self.max_cols  = 0
 
-<div class="viewcode-block" id="ListTableBuilder.buildTableNode"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.buildTableNode">[docs]</a>    def buildTableNode(self):
+<div class="viewcode-block" id="ListTableBuilder.buildTableNode">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.buildTableNode">[docs]</a>
+    def buildTableNode(self):
 
         colwidths    = self.directive.get_column_widths(self.max_cols)
         stub_columns = self.directive.options.get(&#39;stub-columns&#39;, 0)
@@ -211,7 +235,10 @@ __version__  = &#39;3.0&#39;
             tbody += self.buildTableRowNode(row)
         return table</div>
 
-<div class="viewcode-block" id="ListTableBuilder.buildTableRowNode"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.buildTableRowNode">[docs]</a>    def buildTableRowNode(self, row_data, classes=None):
+
+<div class="viewcode-block" id="ListTableBuilder.buildTableRowNode">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.buildTableRowNode">[docs]</a>
+    def buildTableRowNode(self, row_data, classes=None):
         classes = [] if classes is None else classes
         row = nodes.row()
         for cell in row_data:
@@ -229,7 +256,10 @@ __version__  = &#39;3.0&#39;
             row += entry
         return row</div>
 
-<div class="viewcode-block" id="ListTableBuilder.raiseError"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.raiseError">[docs]</a>    def raiseError(self, msg):
+
+<div class="viewcode-block" id="ListTableBuilder.raiseError">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.raiseError">[docs]</a>
+    def raiseError(self, msg):
         error =  self.directive.state_machine.reporter.error(
             msg
             , nodes.literal_block(self.directive.block_text
@@ -237,7 +267,10 @@ __version__  = &#39;3.0&#39;
             , line = self.directive.lineno )
         raise SystemMessagePropagation(error)</div>
 
-<div class="viewcode-block" id="ListTableBuilder.parseFlatTableNode"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseFlatTableNode">[docs]</a>    def parseFlatTableNode(self, node):
+
+<div class="viewcode-block" id="ListTableBuilder.parseFlatTableNode">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseFlatTableNode">[docs]</a>
+    def parseFlatTableNode(self, node):
         u&quot;&quot;&quot;parses the node from a :py:class:`FlatTable` directive&#39;s body&quot;&quot;&quot;
 
         if len(node) != 1 or not isinstance(node[0], nodes.bullet_list):
@@ -250,7 +283,10 @@ __version__  = &#39;3.0&#39;
             self.rows.append(row)
         self.roundOffTableDefinition()</div>
 
-<div class="viewcode-block" id="ListTableBuilder.roundOffTableDefinition"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.roundOffTableDefinition">[docs]</a>    def roundOffTableDefinition(self):
+
+<div class="viewcode-block" id="ListTableBuilder.roundOffTableDefinition">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.roundOffTableDefinition">[docs]</a>
+    def roundOffTableDefinition(self):
         u&quot;&quot;&quot;Round off the table definition.
 
         This method rounds off the table definition in :py:attr:`rows`.
@@ -317,7 +353,10 @@ __version__  = &#39;3.0&#39;
                 for _i in range(x):
                     row.append( (0, 0, nodes.comment()) )</div>
 
-<div class="viewcode-block" id="ListTableBuilder.pprint"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.pprint">[docs]</a>    def pprint(self):
+
+<div class="viewcode-block" id="ListTableBuilder.pprint">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.pprint">[docs]</a>
+    def pprint(self):
         # for debugging
         retVal = &quot;[   &quot;
         for row in self.rows:
@@ -338,7 +377,10 @@ __version__  = &#39;3.0&#39;
         retVal = retVal[:-2]
         return retVal + &quot;]&quot;</div>
 
-<div class="viewcode-block" id="ListTableBuilder.parseRowItem"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseRowItem">[docs]</a>    def parseRowItem(self, rowItem, rowNum):
+
+<div class="viewcode-block" id="ListTableBuilder.parseRowItem">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseRowItem">[docs]</a>
+    def parseRowItem(self, rowItem, rowNum):
         row = []
         childNo = 0
         error   = False
@@ -371,7 +413,10 @@ __version__  = &#39;3.0&#39;
             row.append( (cspan, rspan, cellElements) )
         return row</div>
 
-<div class="viewcode-block" id="ListTableBuilder.parseCellItem"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem">[docs]</a>    def parseCellItem(self, cellItem):
+
+<div class="viewcode-block" id="ListTableBuilder.parseCellItem">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem">[docs]</a>
+    def parseCellItem(self, cellItem):
         # search and remove cspan, rspan colspec from the first element in
         # this listItem (field).
         cspan = rspan = 0
@@ -386,7 +431,9 @@ __version__  = &#39;3.0&#39;
                 rspan = elem.get(&quot;span&quot;)
                 elem.parent.remove(elem)
                 continue
-        return cspan, rspan, cellItem[:]</div></div>
+        return cspan, rspan, cellItem[:]</div>
+</div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -444,8 +491,8 @@ __version__  = &#39;3.0&#39;
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../../_static/version_warning_offset.js"></script>
 

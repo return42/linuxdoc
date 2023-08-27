@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>kernel-doc in reST documents &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <title>kernel-doc in reST documents &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script src="../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Examples &amp; Tests" href="kernel-doc-examples.html" />
@@ -33,7 +32,7 @@
         <li class="right" >
           <a href="kernel-doc-syntax.html" title="kernel-doc syntax"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">LinuxDoc HowTo</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">kernel-doc in reST documents</a></li> 
       </ul>
@@ -45,7 +44,7 @@
           <div class="body" role="main">
             
   <section id="kernel-doc-in-rest-documents">
-<span id="kernel-doc-directive"></span><h1>kernel-doc in reST documents<a class="headerlink" href="#kernel-doc-in-rest-documents" title="Permalink to this heading">¶</a></h1>
+<span id="kernel-doc-directive"></span><h1>kernel-doc in reST documents<a class="headerlink" href="#kernel-doc-in-rest-documents" title="Link to this heading">¶</a></h1>
 <p>To integrate <a class="reference internal" href="kernel-doc-syntax.html#kernel-doc-syntax"><span class="std std-ref">kernel-doc</span></a> comments into a reST document
 (e.g. in a <em>book</em>), there exists a <a class="reference external" href="http://www.sphinx-doc.org/en/stable/rest.html#directives">reST-directive</a> named <code class="docutils literal notranslate"><span class="pre">kernel-doc</span></code> .  The
 directive comes with options to fine grain control which parts should be placed
@@ -75,7 +74,7 @@ grained, read on to see how.</p>
 </ul>
 </nav>
 <section id="kernel-doc-options">
-<span id="id1"></span><h2><a class="toc-backref" href="#id4" role="doc-backlink">kernel-doc options</a><a class="headerlink" href="#kernel-doc-options" title="Permalink to this heading">¶</a></h2>
+<span id="id1"></span><h2><a class="toc-backref" href="#id4" role="doc-backlink">kernel-doc options</a><a class="headerlink" href="#kernel-doc-options" title="Link to this heading">¶</a></h2>
 <p>Here is a short overview of the directives options:</p>
 <div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">kernel-doc</span><span class="p">::</span> <span class="nt">&lt;src-filename&gt;</span>
     <span class="nc">:doc:</span> <span class="nt">&lt;section title&gt;</span>
@@ -185,7 +184,7 @@ reST markup.</p>
 </dl>
 </section>
 <section id="insert-function-s-documentation">
-<span id="kernel-doc-functions"></span><h2><a class="toc-backref" href="#id5" role="doc-backlink">Insert function’s documentation</a><a class="headerlink" href="#insert-function-s-documentation" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-functions"></span><h2><a class="toc-backref" href="#id5" role="doc-backlink">Insert function’s documentation</a><a class="headerlink" href="#insert-function-s-documentation" title="Link to this heading">¶</a></h2>
 <p>In <a class="reference internal" href="all-in-a-tumble-src.html#all-in-a-tumble-c-src"><span class="std std-ref">source all-in-a-tumble.c</span></a> there is the following function definition which
 is documented by a <a class="reference internal" href="kernel-doc-syntax.html#kernel-doc-syntax"><span class="std std-ref">kernel-doc syntax</span></a>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -266,10 +265,10 @@ reStructuredText document use the following markup:</p>
 <div class="rst-example admonition">
 <p class="admonition-title">kernel-doc option <code class="docutils literal notranslate"><span class="pre">:symbols:</span></code></p>
 <section id="user-function">
-<span id="foo-user-function"></span><h3>user_function<a class="headerlink" href="#user-function" title="Permalink to this heading">¶</a></h3>
+<span id="foo-user-function"></span><h3>user_function<a class="headerlink" href="#user-function" title="Link to this heading">¶</a></h3>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.foo.user_function">
-<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_function</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">a</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.foo.user_function" title="Permalink to this definition">¶</a><br /></dt>
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_function</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">a</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.foo.user_function" title="Link to this definition">¶</a><br /></dt>
 <dd><p>function that can only be called in user context</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -282,17 +281,17 @@ reStructuredText document use the following markup:</p>
 </dd></dl>
 
 <section id="description">
-<span id="foo-user-function-description"></span><h4>Description<a class="headerlink" href="#description" title="Permalink to this heading">¶</a></h4>
+<span id="foo-user-function-description"></span><h4>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h4>
 <p>This function makes no sense, it’s only a kernel-doc demonstration.</p>
 </section>
 <section id="example">
-<span id="foo-user-function-example"></span><h4>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h4>
+<span id="foo-user-function-example"></span><h4>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h4>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_function</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
 <section id="return">
-<span id="foo-user-function-return"></span><h4>Return<a class="headerlink" href="#return" title="Permalink to this heading">¶</a></h4>
+<span id="foo-user-function-return"></span><h4>Return<a class="headerlink" href="#return" title="Link to this heading">¶</a></h4>
 <p>Returns first argument</p>
 </section>
 </section>
@@ -314,7 +313,7 @@ the sections of this documentation:</p>
 </div>
 </section>
 <section id="structs-unions-enums-and-typedefs">
-<span id="kernel-doc-typedefs"></span><span id="kernel-doc-enums"></span><span id="kernel-doc-unions"></span><span id="kernel-doc-structs"></span><h2><a class="toc-backref" href="#id6" role="doc-backlink">structs, unions, enums and typedefs</a><a class="headerlink" href="#structs-unions-enums-and-typedefs" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-typedefs"></span><span id="kernel-doc-enums"></span><span id="kernel-doc-unions"></span><span id="kernel-doc-structs"></span><h2><a class="toc-backref" href="#id6" role="doc-backlink">structs, unions, enums and typedefs</a><a class="headerlink" href="#structs-unions-enums-and-typedefs" title="Link to this heading">¶</a></h2>
 <p>The following example inserts the documentation of struct <code class="docutils literal notranslate"><span class="pre">my_long_struct</span></code>.</p>
 <div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">kernel-doc</span><span class="p">::</span> ./all-in-a-tumble.h
    <span class="nc">:symbols:</span>    my_long_struct
@@ -341,7 +340,7 @@ directive.</p>
 </div>
 </section>
 <section id="snippets">
-<span id="kernel-doc-snippets"></span><h2><a class="toc-backref" href="#id7" role="doc-backlink">Snippets</a><a class="headerlink" href="#snippets" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-snippets"></span><h2><a class="toc-backref" href="#id7" role="doc-backlink">Snippets</a><a class="headerlink" href="#snippets" title="Link to this heading">¶</a></h2>
 <p>The kernel-doc Parser supports a markup for <a class="reference internal" href="kernel-doc-syntax.html#kernel-doc-syntax-snippets"><span class="std std-ref">Snippets</span></a>.
 By example; In the the <a class="reference internal" href="all-in-a-tumble-src.html#all-in-a-tumble-c-src"><span class="std std-ref">all-in-a-tumble examples</span></a>
 we have a small source code example:</p>
@@ -373,7 +372,7 @@ we have a small source code example:</p>
 </div></blockquote>
 </section>
 <section id="man-pages-man-sect">
-<span id="kernel-doc-man-sect"></span><h2><a class="toc-backref" href="#id8" role="doc-backlink">man pages (:man-sect:)</a><a class="headerlink" href="#man-pages-man-sect" title="Permalink to this heading">¶</a></h2>
+<span id="kernel-doc-man-sect"></span><h2><a class="toc-backref" href="#id8" role="doc-backlink">man pages (:man-sect:)</a><a class="headerlink" href="#man-pages-man-sect" title="Link to this heading">¶</a></h2>
 <p>To get man pages from kernel-doc comments, add the <code class="docutils literal notranslate"><span class="pre">:man-sect:</span></code> option to your
 kernel-doc directives.  E.g. to get man-pages of media’s remote control (file
 <code class="docutils literal notranslate"><span class="pre">media/kapi/rc-core.rst</span></code>) add <code class="docutils literal notranslate"><span class="pre">:man-sect:</span> <span class="pre">9</span></code> to all the kernel-doc includes.</p>
@@ -402,7 +401,7 @@ set a global man-sect in your <code class="docutils literal notranslate"><span c
 <a class="reference internal" href="man-pages.html#man-pages"><span class="std std-ref">man pages from kernel-doc comments</span></a></p>
 </section>
 <section id="highlights-and-cross-references">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">Highlights and cross-references</a><a class="headerlink" href="#highlights-and-cross-references" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Highlights and cross-references</a><a class="headerlink" href="#highlights-and-cross-references" title="Link to this heading">¶</a></h2>
 <p>The following special patterns are recognized in the kernel-doc comment
 descriptive text and converted to proper reStructuredText markup and <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#the-c-domain">Sphinx’s C
 Domain</a> references.</p>
@@ -442,7 +441,7 @@ instead. This is mostly for legacy comments.</p>
 </dl>
 </section>
 <section id="kernel-doc-config">
-<span id="id2"></span><h2><a class="toc-backref" href="#id10" role="doc-backlink">kernel-doc config</a><a class="headerlink" href="#kernel-doc-config" title="Permalink to this heading">¶</a></h2>
+<span id="id2"></span><h2><a class="toc-backref" href="#id10" role="doc-backlink">kernel-doc config</a><a class="headerlink" href="#kernel-doc-config" title="Link to this heading">¶</a></h2>
 <p>Within the <a class="reference external" href="http://www.sphinx-doc.org/en/stable/config.html">sphinx config</a> file (<code class="docutils literal notranslate"><span class="pre">conf.py</span></code> or <code class="docutils literal notranslate"><span class="pre">my_project.conf</span></code>) you can
 set the following option.</p>
 <dl class="simple" id="kernel-doc-exp-method">
@@ -489,7 +488,7 @@ is inserted (again; only when <code class="docutils literal notranslate"><span c
 <p class="admonition-title">Todo</p>
 <p>Oops: Document generation inconsistency.</p>
 <p>The template for this document tried to insert structured comment at this point, but an error occoured. This dummy section is inserted to allow generation to continue.:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/800GBPCIex4/share/linuxdoc/docs/linuxdoc-howto/kernel-doc-directive.rst:441: (ERROR/3) selected section(s) not found:
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/share/linuxdoc/docs/linuxdoc-howto/kernel-doc-directive.rst:441: (ERROR/3) selected section(s) not found:
     no_longer_exist
 
 .. kernel-doc::  ./all-in-a-tumble.h
@@ -576,8 +575,8 @@ directive.  It can be overridden by the <code class="docutils literal notranslat
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

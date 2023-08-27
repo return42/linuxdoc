@@ -10,12 +10,14 @@ Submodules
    linuxdoc.autodoc
    linuxdoc.cdomain
    linuxdoc.compat
-   linuxdoc.grep_doc
+   linuxdoc.deprecated
+   linuxdoc.grepdoc
    linuxdoc.kernel_doc
    linuxdoc.kernel_include
    linuxdoc.kfigure
    linuxdoc.lint
    linuxdoc.manKernelDoc
+   linuxdoc.rest
    linuxdoc.rstFlatTable
    linuxdoc.rstKernelDoc
 

@@ -1,19 +1,18 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.lint &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/tabs.js"></script>
+    <title>linuxdoc.lint &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <script src="../../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/tabs.js?v=3030b3cb"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -26,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.lint</a></li> 
       </ul>
@@ -38,84 +37,53 @@
           <div class="body" role="main">
             
   <h1>Source code for linuxdoc.lint</h1><div class="highlight"><pre>
-<span></span>#!/usr/bin/env python3
-# SPDX-License-Identifier: AGPL-3.0-or-later
-u&quot;&quot;&quot;
-    lint
-    ~~~~
-
-    Implementation of the :ref:`kernel-lintdoc` command.
-
-    :copyright:  Copyright (C) 2018  Markus Heiser
-    :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+<span></span># SPDX-License-Identifier: AGPL-3.0-or-later
 &quot;&quot;&quot;
+lint
+~~~~
 
-# ------------------------------------------------------------------------------
-# imports
-# ------------------------------------------------------------------------------
+Implementation of the :ref:`linuxdoc.lintdoc` command.
+
+:copyright:  Copyright (C) 2023  Markus Heiser
+:license:    AGPL-3.0-or-later; see LICENSE for details.
+
+The command ``linuxdoc.lint`` *lint* the kernel-doc comments in the source
+code::
+
+    $ linuxdoc.lint --help
+
+&quot;&quot;&quot;
 
 import sys
 import argparse
 
-#import six
-
 from fspath import FSPath
-from . import kernel_doc as kerneldoc
+from . import kernel_doc
 
-# ------------------------------------------------------------------------------
-# config
-# ------------------------------------------------------------------------------
+CMD = None
 
 MSG    = lambda msg: sys.__stderr__.write(&quot;INFO : %s\n&quot; % msg)
 ERR    = lambda msg: sys.__stderr__.write(&quot;ERROR: %s\n&quot; % msg)
 FATAL  = lambda msg: sys.__stderr__.write(&quot;FATAL: %s\n&quot; % msg)
 
-EPILOG = u&quot;&quot;&quot;This implementation uses the kernel-doc parser
-from the linuxdoc extension, for detail informations read
-https://return42.github.io/linuxdoc/cmd-line.html#kernel-lintdoc&quot;&quot;&quot;
+EPILOG = &quot;&quot;&quot;This command uses the kernel-doc parser from the linuxdoc Sphinx
+extension, for details see: https://return42.github.io/linuxdoc/cmd-line.html&quot;&quot;&quot;
+
+DESCRIPTION = &quot;&quot;&quot;Lint the kernel-doc markup comments in the source code files.&quot;&quot;&quot;
 
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.lint.html#linuxdoc.lint.main">[docs]</a>def main():
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.lint.html#linuxdoc.lint.main">[docs]</a>
+def main():
 # ------------------------------------------------------------------------------
 
-    &quot;Lint *kernel-doc* comments from source code (main)&quot;
+    global CMD  # pylint: disable=global-statement
 
-    CLI = argparse.ArgumentParser( # pylint: disable=invalid-name
-        description = (&quot;Lint *kernel-doc* comments from source code&quot;)
-        , epilog = EPILOG
-        , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    cli = get_cli()
+    CMD = cli.parse_args()
 
-    CLI.add_argument(
-        &quot;srctree&quot;
-        , help    = &quot;File or folder of source code.&quot;
-        , type    = lambda x: FSPath(x).ABSPATH)
-
-    CLI.add_argument(
-        &quot;--sloppy&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;Sloppy linting, reports only severe errors.&quot;)
-
-    CLI.add_argument(
-        &quot;--markup&quot;
-        , choices = [&quot;reST&quot;, &quot;kernel-doc&quot;]
-        , default = &quot;reST&quot;
-        , help    = (
-            &quot;Markup of the comments. Change this option only if you know&quot;
-            &quot; what you do. New comments must be marked up with reST!&quot;))
-
-    CLI.add_argument(
-        &quot;--verbose&quot;, &quot;-v&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;verbose output with log messages to stderr&quot; )
-
-    CLI.add_argument(
-        &quot;--debug&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;debug messages to stderr&quot; )
-
-    CMD = CLI.parse_args()  # pylint: disable=invalid-name
-    kerneldoc.DEBUG = CMD.debug
-    kerneldoc.VERBOSE = CMD.verbose
+    kernel_doc.DEBUG = CMD.debug
+    kernel_doc.VERBOSE = CMD.verbose
 
     if not CMD.srctree.EXISTS:
         ERR(&quot;%s does not exists or is not a folder&quot; % CMD.srctree)
@@ -123,33 +91,78 @@ https://return42.github.io/linuxdoc/cmd-line.html#kernel-lintdoc&quot;&quot;&quo
 
     if CMD.srctree.ISDIR:
         for fname in CMD.srctree.reMatchFind(r&quot;^.*\.[ch]$&quot;):
-            if fname.startswith(CMD.srctree/&quot;Documentation&quot;):
-                continue
-            lintdoc_file(fname, CMD)
+            lintdoc_file(fname)
     else:
         fname = CMD.srctree
         CMD.srctree = CMD.srctree.DIRNAME
-        lintdoc_file(fname, CMD)</div>
+        lintdoc_file(fname)</div>
+
+
+
+<div class="viewcode-block" id="get_cli">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.lint.html#linuxdoc.lint.get_cli">[docs]</a>
+def get_cli():
+
+    cli = argparse.ArgumentParser(
+        description = (&quot;&quot;)
+        , epilog = EPILOG
+        , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
+    cli.add_argument(
+        &quot;srctree&quot;
+        , help    = &quot;File or folder of source code.&quot;
+        , type    = lambda x: FSPath(x).ABSPATH
+    )
+    cli.add_argument(
+        &quot;--sloppy&quot;
+        , action  = &quot;store_true&quot;
+        , help    = &quot;Sloppy linting, reports only severe errors.&quot;
+    )
+    cli.add_argument(
+        &quot;--markup&quot;
+        , choices = [&quot;reST&quot;, &quot;kernel-doc&quot;]
+        , default = &quot;reST&quot;
+        , help    = (
+            &quot;Markup of the comments.  Change this option only if you know&quot;
+            &quot; what you do. New comments must be marked up with reST!&quot;
+        )
+    )
+    cli.add_argument(
+        &quot;--verbose&quot;, &quot;-v&quot;
+        , action  = &quot;store_true&quot;
+        , help    = &quot;verbose output with log messages to stderr&quot;
+    )
+    cli.add_argument(
+        &quot;--debug&quot;
+        , action  = &quot;store_true&quot;
+        , help    = &quot;debug messages to stderr&quot;
+    )
+    return cli</div>
+
+
 
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="lintdoc_file"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.lint.html#linuxdoc.lint.lintdoc_file">[docs]</a>def lintdoc_file(fname, CMD):  # pylint: disable=invalid-name
+<div class="viewcode-block" id="lintdoc_file">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.lint.html#linuxdoc.lint.lintdoc_file">[docs]</a>
+def lintdoc_file(fname):
 # ------------------------------------------------------------------------------
 
     &quot;lint documentation from fname&quot;
 
     fname = fname.relpath(CMD.srctree)
-    opts = kerneldoc.ParseOptions(
-        rel_fname       = fname
+    opts = kernel_doc.ParseOptions(
+        fname           = fname
         , src_tree      = CMD.srctree
         , verbose_warn  = not (CMD.sloppy)
-        , markup        = CMD.markup )
-
-    parser = kerneldoc.Parser(opts, kerneldoc.NullTranslator())
+        , markup        = CMD.markup
+    )
+    parser = kernel_doc.Parser(opts, kernel_doc.NullTranslator())
     try:
         parser.parse()
     except Exception:  # pylint: disable=broad-except
         FATAL(&quot;kernel-doc comments markup of %s seems buggy / can&#39;t parse&quot; % opts.fname)
         return</div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -207,8 +220,8 @@ https://return42.github.io/linuxdoc/cmd-line.html#kernel-lintdoc&quot;&quot;&quo
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../../_static/version_warning_offset.js"></script>
 

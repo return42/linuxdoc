@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc package &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <title>linuxdoc package &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script src="../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="linuxdoc.autodoc module" href="linuxdoc.autodoc.html" />
@@ -33,7 +32,7 @@
         <li class="right" >
           <a href="../linux.html" title="Patch Linux Kernel Documentation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc package</a></li> 
       </ul>
     </div>  
@@ -44,9 +43,9 @@
           <div class="body" role="main">
             
   <section id="linuxdoc-package">
-<h1>linuxdoc package<a class="headerlink" href="#linuxdoc-package" title="Permalink to this heading">¶</a></h1>
+<h1>linuxdoc package<a class="headerlink" href="#linuxdoc-package" title="Link to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="linuxdoc.autodoc.html">linuxdoc.autodoc module</a><ul>
@@ -56,6 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.MSG"><code class="docutils literal notranslate"><span class="pre">MSG()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.autodoc_file"><code class="docutils literal notranslate"><span class="pre">autodoc_file()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.gather_filenames"><code class="docutils literal notranslate"><span class="pre">gather_filenames()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.insert_index_files"><code class="docutils literal notranslate"><span class="pre">insert_index_files()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
@@ -71,11 +71,20 @@
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.compat.html#linuxdoc.compat.sphinx_has_c_types"><code class="docutils literal notranslate"><span class="pre">sphinx_has_c_types()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="linuxdoc.grep_doc.html">linuxdoc.grep_doc module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grep_doc.html#grep-doc">grep_doc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grep_doc.html#linuxdoc.grep_doc.ERR"><code class="docutils literal notranslate"><span class="pre">ERR()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grep_doc.html#linuxdoc.grep_doc.PRINT"><code class="docutils literal notranslate"><span class="pre">PRINT()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grep_doc.html#linuxdoc.grep_doc.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.deprecated.html">linuxdoc.deprecated module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.deprecated.html#deprecated">deprecated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.deprecated.html#linuxdoc.deprecated.cmd_kernel_autodoc"><code class="docutils literal notranslate"><span class="pre">cmd_kernel_autodoc()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.deprecated.html#linuxdoc.deprecated.cmd_kernel_doc"><code class="docutils literal notranslate"><span class="pre">cmd_kernel_doc()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.deprecated.html#linuxdoc.deprecated.cmd_kernel_grepdoc"><code class="docutils literal notranslate"><span class="pre">cmd_kernel_grepdoc()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.deprecated.html#linuxdoc.deprecated.cmd_kernel_lintdoc"><code class="docutils literal notranslate"><span class="pre">cmd_kernel_lintdoc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.grepdoc.html">linuxdoc.grepdoc module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#grep-doc">grep_doc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#linuxdoc.grepdoc.ERR"><code class="docutils literal notranslate"><span class="pre">ERR()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#linuxdoc.grepdoc.PRINT"><code class="docutils literal notranslate"><span class="pre">PRINT()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#linuxdoc.grepdoc.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#linuxdoc.grepdoc.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="linuxdoc.kernel_doc.html">linuxdoc.kernel_doc module</a><ul>
@@ -249,7 +258,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.highlight_parser"><code class="docutils literal notranslate"><span class="pre">highlight_parser()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.map_row"><code class="docutils literal notranslate"><span class="pre">map_row()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_id"><code class="docutils literal notranslate"><span class="pre">normalize_id()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_ws"><code class="docutils literal notranslate"><span class="pre">normalize_ws()</span></code></a></li>
@@ -310,6 +318,7 @@
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.ERR"><code class="docutils literal notranslate"><span class="pre">ERR()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.FATAL"><code class="docutils literal notranslate"><span class="pre">FATAL()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.MSG"><code class="docutils literal notranslate"><span class="pre">MSG()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.lintdoc_file"><code class="docutils literal notranslate"><span class="pre">lintdoc_file()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
@@ -348,6 +357,12 @@
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.kernel_doc_man"><code class="docutils literal notranslate"><span class="pre">kernel_doc_man</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.skip_kernel_doc_man"><code class="docutils literal notranslate"><span class="pre">skip_kernel_doc_man()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.rest.html">linuxdoc.rest module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rest.html#rest">rest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rest.html#linuxdoc.rest.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rest.html#linuxdoc.rest.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="linuxdoc.rstFlatTable.html">linuxdoc.rstFlatTable module</a><ul>
@@ -415,9 +430,9 @@
 </ul>
 </div>
 </section>
-<section id="module-linuxdoc">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-linuxdoc" title="Permalink to this heading">¶</a></h2>
-<p>The LinuxDoc library contains Sphinx-doc extensions and command line tools
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<p id="module-linuxdoc">The LinuxDoc library contains Sphinx-doc extensions and command line tools
 related to the build process of the Linux-Kernel documentation.  Even if this
 project started in context of the Linux-Kernel documentation, you can use these
 extensions in common Sphinx-doc projects.</p>
@@ -429,7 +444,7 @@ extensions in common Sphinx-doc projects.</p>
 <dd class="field-even"><p><a class="reference external" href="mailto:markus&#46;heiser&#37;&#52;&#48;darmarIT&#46;de">markus<span>&#46;</span>heiser<span>&#64;</span>darmarIT<span>&#46;</span>de</a></p>
 </dd>
 <dt class="field-odd">license<span class="colon">:</span></dt>
-<dd class="field-odd"><p>GPL Version 2, June 1991 see Linux/COPYING for details.</p>
+<dd class="field-odd"><p>AGPL-3.0-or-later; see LICENSE for details.</p>
 </dd>
 <dt class="field-even">docs<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="http://return42.github.io/linuxdoc">http://return42.github.io/linuxdoc</a></p>
@@ -482,7 +497,7 @@ extensions in common Sphinx-doc projects.</p>
   <ul>
 <li><a class="reference internal" href="#">linuxdoc package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-linuxdoc">Module contents</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -503,8 +518,8 @@ extensions in common Sphinx-doc projects.</p>
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 

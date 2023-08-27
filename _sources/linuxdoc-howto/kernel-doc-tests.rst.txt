@@ -299,13 +299,13 @@ only the *not exported* definitions are used in the reST output.
 	    :exp-ids: EXP_SYMB
 	    :known-attrs: API_EXP
 
-	 Its not good to mix ``exp-method``, the ``know-attrs`` here is needed to
-	 avoid the Sphinx warning::
+      Its not good to mix ``exp-method``, the ``know-attrs`` here is needed to
+      avoid the Sphinx warning::
 
-             test_internals.c:24: WARNING: Error in declarator or parameters
-	     Invalid C declaration: Expected identifier in nested name, got keyword: int [error at 11]
-	     API_EXP int bar(int a,  ...)
-	     -----------^
+        ./test_internals.c:24: WARNING: Error in declarator or parameters
+        Invalid C declaration: Expected identifier in nested name, got keyword: int [error at 11]
+          API_EXP int bar(int a,  ...)
+	-----------^
 
       .. admonition:: internal symbols (when exp-method is ``macro``)
 	 :class: rst-example

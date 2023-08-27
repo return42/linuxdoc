@@ -1,19 +1,18 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>linuxdoc.kernel_doc &#8212; LinuxDoc 20230321 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/tabs.js"></script>
+    <title>linuxdoc.kernel_doc &#8212; LinuxDoc 20230827 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=52e4ff28" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <script src="../../_static/documentation_options.js?v=a87da7d6"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/tabs.js?v=3030b3cb"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -26,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230321 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">linuxdoc.kernel_doc</a></li> 
       </ul>
@@ -47,57 +46,46 @@
 # pylint: disable=too-many-statements, useless-object-inheritance
 
 &quot;&quot;&quot;
-    kernel_doc
-    ~~~~~~~~~~
+kernel_doc
+~~~~~~~~~~
 
-    Implementation of the ``kernel-doc`` parser.
+Implementation of the ``kernel-doc`` parser.  The kernel-doc parser extracts
+:ref:`kernel-doc markup &lt;kernel-doc-intro&gt;` from source code comments.
 
-    The kernel-doc parser extracts documentation from Linux kernel&#39;s source code
-    comments. This implements the :ref:`kernel-doc markup &lt;kernel-doc-intro&gt;`.
+This module provides an API which could be used by a sphinx-doc generator
+extension and a command-line interface
 
-    This module provides an API -- which could be used by a sphinx-doc generator
-    extension -- and a command-line interface, see ``--help``::
+Compared with the Perl kernel-doc script used in the Linux kernel, this
+implementation has additional features like *parse options* for a smooth
+integration of reStructuredText (reST) markup in the source code comments.  In
+combination with the (separate) *kernel-doc* reST directive (which uses this
+module), the documentation generation becomes more clear and flexible.
 
-        $ kernel-doc --help
+The architecture of the parser is simple and consists of three types of
+objects (three classes).
 
-    But, the command-line is only for test, normally you don&#39;t need it.
+* :py:obj:`Parser`: The parser parses the source-file and dumps extracted
+  kernel-doc data.
 
-    Compared with the Perl kernel-doc script, this implementation has additional
-    features like *parse options* for a smooth integration of reStructuredText
-    (reST) markup in the kernel&#39;s source code comments.  In combination with the
-    (separate) *kernel-doc* reST directive (which uses this module), the
-    documentation generation becomes more clear and flexible.
+* subclasses of class :py:obj:`TranslatorAPI`: to translate the dumped
+  kernel-doc data into output formats. There exists two implementations:
 
-    The architecture of the parser is simple and consists of three types of
-    objects (three classes).
+  - :py:obj:`NullTranslator`: translates nothing, just parse
 
-    * class Parser: The parser parses the source-file and dumps extracted
-      kernel-doc data.
+  - :py:obj:`ReSTTranslator`: translates dumped kernel-doc data to reST markup
 
-    * subclasses of class TranslatorAPI: to translate the dumped kernel-doc data
-      into output formats. There exists two implementations:
+* :py:obj:`ParseOptions`: a container full with options to control *parsing* and
+  *translation*.
 
-      - class NullTranslator: translates nothing, just parse
-
-      - class ReSTTranslator(TranslatorAPI): translates dumped kernel-doc data
-        to reST markup.
-
-    * class ParseOptions: a container full with options to control parsing an
-      translation.
-
-    With the NullTranslator a source file is parsed only once while different
-    output could be generated (multiple times) just by changing the Translator
-    (e.g. with the ReSTTranslator) and the option container.
-
-    With parsing the source files only once, the building time is reduced n-times.
+With the :py:obj:`NullTranslator` a source file is parsed only once while
+different output could be generated (multiple times) just by changing the
+Translator (e.g. with the :py:obj:`ReSTTranslator`) and the option
+container. With parsing the source files only once, the building time is reduced
+n-times.
 
 &quot;&quot;&quot;
 
-# ==============================================================================
-# imports
-# ==============================================================================
 
-import argparse
 import codecs
 import collections
 import copy
@@ -123,20 +111,28 @@ __version__  = &#39;1.0&#39;
 # regular expresssions and helper used by the parser and the translator
 # ==============================================================================
 
-<div class="viewcode-block" id="RE"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE">[docs]</a>class RE(object):
+<div class="viewcode-block" id="RE">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE">[docs]</a>
+class RE(object):
     u&quot;&quot;&quot;regular expression that stores last match (like Perl&#39;s ``=~`` operator)&quot;&quot;&quot;
 
     def __init__(self, *args, **kwargs):
         self.re = re.compile(*args, **kwargs)
         self.last_match = None
 
-<div class="viewcode-block" id="RE.match"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE.match">[docs]</a>    def match(self, *args, **kwargs):
+<div class="viewcode-block" id="RE.match">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE.match">[docs]</a>
+    def match(self, *args, **kwargs):
         self.last_match = self.re.match(*args, **kwargs)
         return self.last_match</div>
 
-<div class="viewcode-block" id="RE.search"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE.search">[docs]</a>    def search(self, *args, **kwargs):
+
+<div class="viewcode-block" id="RE.search">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE.search">[docs]</a>
+    def search(self, *args, **kwargs):
         self.last_match = self.re.search(*args, **kwargs)
         return self.last_match</div>
+
 
     def __getattr__(self, attr):
         return getattr(self.re, attr)
@@ -147,6 +143,7 @@ __version__  = &#39;1.0&#39;
         if self.last_match is None:
             raise IndexError(&quot;nothing has matched / no groups&quot;)
         return self.last_match.group(group + 1)</div>
+
 
 # these regular expresions has been *stolen* from the kernel-doc perl script.
 
@@ -278,7 +275,9 @@ MODULE_INFO = RE(r&#39;^\s*(MODULE_)(AUTHOR|DESCRIPTION|LICENSE)\s*\(\s*&quot;([
 
 WHITESPACE = RE(r&quot;\s+&quot;, flags=re.UNICODE)
 
-<div class="viewcode-block" id="normalize_ws"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_ws">[docs]</a>def normalize_ws(string):
+<div class="viewcode-block" id="normalize_ws">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_ws">[docs]</a>
+def normalize_ws(string):
     u&quot;&quot;&quot;strip needles whitespaces.
 
     Substitute consecutive whitespaces with one single space and strip
@@ -287,11 +286,15 @@ WHITESPACE = RE(r&quot;\s+&quot;, flags=re.UNICODE)
     string = WHITESPACE.sub(&quot; &quot;, string)
     return string.strip()</div>
 
+
 ID_CHARS = RE(r&quot;[^A-Za-z0-9\._]&quot;)
 
-<div class="viewcode-block" id="normalize_id"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_id">[docs]</a>def normalize_id(ID):
+<div class="viewcode-block" id="normalize_id">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_id">[docs]</a>
+def normalize_id(ID):
     u&quot;&quot;&quot;substitude invalid chars of the ID with ``-`` and mak it lowercase&quot;&quot;&quot;
     return ID_CHARS.sub(&quot;-&quot;, ID).lower()</div>
+
 
 
 RST_DIRECTIVE_PATTERN = r&quot;&quot;&quot;
@@ -306,14 +309,19 @@ RST_CODE_BLOCK = RE(RST_DIRECTIVE_PATTERN % &#39;code-block&#39;, re.VERBOSE | r
 RST_LITERAL_BLOCK = RE(r&#39;(?&lt;!\\)(\\\\)*::$&#39;)
 RST_INDENT = RE(r&quot;^(\s*)[^\s]&quot;)
 
-<div class="viewcode-block" id="map_row"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.map_row">[docs]</a>def map_row(row, map_table):
+<div class="viewcode-block" id="map_row">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.map_row">[docs]</a>
+def map_row(row, map_table):
     for regexpr, substitute in map_table:
         if substitute is not None:
             # python has only fixed width lookbehind: add temporarily leading space
             row = regexpr.sub(substitute, &quot; &quot; + row)[1:]
     return row</div>
 
-<div class="viewcode-block" id="highlight_parser"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.highlight_parser">[docs]</a>def highlight_parser(text, map_table):
+
+<div class="viewcode-block" id="highlight_parser">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.highlight_parser">[docs]</a>
+def highlight_parser(text, map_table):
     block_indent = 0
     row_indent = 0
     state = &#39;highlight&#39; # [highlight|literal]
@@ -352,18 +360,27 @@ RST_INDENT = RE(r&quot;^(\s*)[^\s]&quot;)
     return &quot;\n&quot;.join(out)</div>
 
 
+
 # ==============================================================================
 # helper
 # ==============================================================================
 
-<div class="viewcode-block" id="openTextFile"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.openTextFile">[docs]</a>def openTextFile(fname, mode=&quot;r&quot;, encoding=&quot;utf-8&quot;, errors=&quot;strict&quot;):
+<div class="viewcode-block" id="openTextFile">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.openTextFile">[docs]</a>
+def openTextFile(fname, mode=&quot;r&quot;, encoding=&quot;utf-8&quot;, errors=&quot;strict&quot;):
     return codecs.open(fname, mode=mode, encoding=encoding, errors=errors)</div>
 
-<div class="viewcode-block" id="readFile"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.readFile">[docs]</a>def readFile(fname, encoding=&quot;utf-8&quot;, errors=&quot;strict&quot;):
+
+<div class="viewcode-block" id="readFile">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.readFile">[docs]</a>
+def readFile(fname, encoding=&quot;utf-8&quot;, errors=&quot;strict&quot;):
     with openTextFile(fname, encoding=encoding, errors=errors) as f:
         return f.read()</div>
 
-<div class="viewcode-block" id="Container"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Container">[docs]</a>class Container(dict):
+
+<div class="viewcode-block" id="Container">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Container">[docs]</a>
+class Container(dict):
     @property
     def __dict__(self):
         return self
@@ -372,16 +389,14 @@ RST_INDENT = RE(r&quot;^(\s*)[^\s]&quot;)
     def __setattr__(self, attr, val):
         self[attr] = val</div>
 
+
 class DevNull(object): # pylint: disable=too-few-public-methods
     &quot;&quot;&quot;A dev/null file descriptor.&quot;&quot;&quot;
     def write(self, *args, **kwargs):
         pass
 DevNull = DevNull()
 
-SRCTREE        = OS_ENV.get(&quot;srctree&quot;, os.getcwd())
-GIT_REF        = (&quot;Linux kernel source tree:&quot;
-                  &quot; `%(rel_fname)s &lt;https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/&quot;
-                  &quot;%(rel_fname)s&gt;`__&quot;)
+SRCTREE = OS_ENV.get(&quot;srctree&quot;, os.getcwd())
 DEFAULT_EXP_METHOD = &quot;macro&quot;
 &quot;&quot;&quot;Default value of ``:exp-method:``&quot;&quot;&quot;
 
@@ -402,218 +417,55 @@ VERBOSE = False
 DEBUG   = False
 INSPECT = False
 
-<div class="viewcode-block" id="SimpleLog"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog">[docs]</a>class SimpleLog(object):
+<div class="viewcode-block" id="SimpleLog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog">[docs]</a>
+class SimpleLog(object):
 
     LOG_FORMAT = &quot;%(logclass)s: %(message)s\n&quot;
 
-<div class="viewcode-block" id="SimpleLog.error"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.error">[docs]</a>    def error(self, message, **replace):
+<div class="viewcode-block" id="SimpleLog.error">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.error">[docs]</a>
+    def error(self, message, **replace):
         message = message % replace
         replace.update(dict(message = message, logclass = &quot;ERROR&quot;))
         STREAM.log_out.write(self.LOG_FORMAT % replace)</div>
 
-<div class="viewcode-block" id="SimpleLog.warn"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.warn">[docs]</a>    def warn(self, message, **replace):
+
+<div class="viewcode-block" id="SimpleLog.warn">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.warn">[docs]</a>
+    def warn(self, message, **replace):
         message = message % replace
         replace.update(dict(message = message, logclass = &quot;WARN&quot;))
         STREAM.log_out.write(self.LOG_FORMAT % replace)</div>
 
-<div class="viewcode-block" id="SimpleLog.info"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.info">[docs]</a>    def info(self, message, **replace):
+
+<div class="viewcode-block" id="SimpleLog.info">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.info">[docs]</a>
+    def info(self, message, **replace):
         if not VERBOSE:
             return
         message = message % replace
         replace.update(dict(message = message, logclass = &quot;INFO&quot;))
         STREAM.log_out.write(self.LOG_FORMAT % replace)</div>
 
-<div class="viewcode-block" id="SimpleLog.debug"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.debug">[docs]</a>    def debug(self, message, **replace):
+
+<div class="viewcode-block" id="SimpleLog.debug">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.debug">[docs]</a>
+    def debug(self, message, **replace):
         if not DEBUG:
             return
         message = message % replace
         replace.update(dict(message = message, logclass = &quot;DEBUG&quot;))
-        STREAM.log_out.write(self.LOG_FORMAT % replace)</div></div>
+        STREAM.log_out.write(self.LOG_FORMAT % replace)</div>
+</div>
+
 
 LOG = SimpleLog()
 
-# ==============================================================================
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.main">[docs]</a>def main():
-    # pylint: disable=global-statement
-# ==============================================================================
-
-    global VERBOSE, DEBUG
-
-    epilog = (u&quot;This implementation uses the kernel-doc parser&quot;
-              &quot; from the linuxdoc extension, for detail informations read&quot;
-              &quot; https://return42.github.io/linuxdoc/cmd-line.html#kernel-doc&quot;)
-
-    CLI = argparse.ArgumentParser(
-        description = (
-            &quot;Parse *kernel-doc* comments from source code&quot;
-            &quot; and print them (with reST markup) to stdout.&quot; )
-        , epilog = epilog
-        , formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-
-    CLI.add_argument(
-        &quot;files&quot;
-        , nargs   = &quot;+&quot;
-        , help    = &quot;source file(s) to parse.&quot;)
-
-    CLI.add_argument(
-        &quot;--id-prefix&quot;
-        , default = &quot;&quot;
-        , help    = (
-            &quot;A prefix for automatic generated IDs. The IDs are automaticly&quot;
-            &quot; gernerated based on the declaration and / or section names. The&quot;
-            &quot; prefix is also used as namespace in Sphinx&#39;s C-domain&quot;))
-
-    CLI.add_argument(
-        &quot;--verbose&quot;, &quot;-v&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;verbose output with log messages to stderr&quot; )
-
-    CLI.add_argument(
-        &quot;--sloppy&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;Sloppy linting, reports only severe errors.&quot;)
-
-    CLI.add_argument(
-        &quot;--debug&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;debug messages to stderr&quot; )
-
-    CLI.add_argument(
-        &quot;--quiet&quot;, &quot;-q&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;no messages to stderr&quot; )
-
-    CLI.add_argument(
-        &quot;--skip-preamble&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;skip preamble in the output&quot; )
-
-    CLI.add_argument(
-        &quot;--skip-epilog&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;skip epilog in the output&quot; )
-
-    CLI.add_argument(
-        &quot;--list-internals&quot;
-        , choices = Parser.DOC_TYPES + [&quot;all&quot;]
-        , nargs   = &quot;+&quot;
-        , help    = &quot;list symbols, titles or whatever is documented, but *not* exported&quot; )
-
-    CLI.add_argument(
-        &quot;--list-exports&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;list all exported symbols&quot; )
-
-    CLI.add_argument(
-        &quot;--use-names&quot;
-        , nargs   = &quot;+&quot;
-        , help    = &quot;print documentation of functions, structs or whatever title/object&quot;)
-
-    CLI.add_argument(
-        &quot;--exported&quot;
-        , action  = &quot;store_true&quot;
-        , help    = &quot;print documentation of all exported symbols&quot;)
-
-    CLI.add_argument(
-        &quot;--internal&quot;
-        , action  = &quot;store_true&quot;
-        , help    = (&quot;print documentation of all symbols that are documented,&quot;
-                     &quot; but not exported&quot; ))
-
-    CLI.add_argument(
-        &quot;--markup&quot;
-        , choices = [&quot;reST&quot;, &quot;kernel-doc&quot;]
-        , default = &quot;reST&quot;
-        , help    = (
-            &quot;Markup of the comments. Change this option only if you know&quot;
-            &quot; what you do. New comments must be marked up with reST!&quot;))
-
-    CLI.add_argument(
-        &quot;--symbols-exported-method&quot;
-        , default = DEFAULT_EXP_METHOD
-        , help    = (
-            &quot;Indicate the way by which an exported symbol an exported symbol&quot;
-            &quot; is exported. Must be either &#39;macro&#39; or &#39;attribute&#39;.&quot;))
-
-    CLI.add_argument(
-        &quot;--symbols-exported-identifiers&quot;
-        , nargs   = &quot;+&quot;
-        , default = DEFAULT_EXP_IDS
-        , help    = &quot;identifiers list that specifies an exported symbol&quot;)
-
-    CLI.add_argument(
-        &quot;--known-attrs&quot;
-        , default = []
-        , nargs   = &quot;+&quot;
-        , help    = (&quot;provides a list of known attributes that has to be&quot;
-                     &quot; hidden when displaying function prototypes&quot;))
-
-    CMD     = CLI.parse_args()
-    VERBOSE = CMD.verbose
-    DEBUG   = CMD.debug
-
-    if CMD.quiet:
-        STREAM.log_out = DevNull  # pylint: disable=attribute-defined-outside-init
-
-    LOG.debug(u&quot;CMD: %(CMD)s&quot;, CMD=CMD)
-
-    retVal     = 0
-
-    for fname in CMD.files:
-        translator = ReSTTranslator()
-        opts = ParseOptions(
-            fname           = fname
-            , id_prefix     = CMD.id_prefix
-            , skip_preamble = CMD.skip_preamble
-            , skip_epilog   = CMD.skip_epilog
-            , out           = STREAM.appl_out
-            , markup        = CMD.markup
-            , verbose_warn  = not (CMD.sloppy)
-            , exp_method    = CMD.symbols_exported_method
-            , exp_ids       = CMD.symbols_exported_identifiers
-            , known_attrs   = CMD.known_attrs
-            ,)
-        opts.set_defaults()
-
-        if CMD.list_exports or CMD.list_internals:
-            translator = ListTranslator(CMD.list_exports, CMD.list_internals)
-            opts.gather_context = True
-
-        elif CMD.use_names:
-            opts.use_names  = CMD.use_names
-
-        elif CMD.exported or CMD.internal:
-            # gather exported symbols ...
-            src   = readFile(opts.fname)
-            ctx   = ParserContext()
-            Parser.gather_context(src, ctx, opts)
-
-            opts.error_missing = False
-            opts.use_names     = ctx.exported_symbols
-            opts.skip_names    = []
-
-            if CMD.internal:
-                opts.use_names  = []
-                opts.skip_names = ctx.exported_symbols
-        else:
-            # if non section is choosen by use-name, internal or exclude, then
-            # use all DOC: sections
-            opts.use_all_docs = True
-
-        parser = Parser(opts, translator)
-        parser.parse()
-        parser.close()
-        if parser.errors:
-            retVal = 1
-
-    return retVal</div>
-
-# ==============================================================================
-# API
-# ==============================================================================
-
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="TranslatorAPI"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI">[docs]</a>class TranslatorAPI(object):
+<div class="viewcode-block" id="TranslatorAPI">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI">[docs]</a>
+class TranslatorAPI(object):
 # ------------------------------------------------------------------------------
     u&quot;&quot;&quot;
     Abstract kernel-doc translator.
@@ -642,20 +494,31 @@ LOG = SimpleLog()
         self.dumped_names = []
         self.translated_names = set()
 
-<div class="viewcode-block" id="TranslatorAPI.setParser"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.setParser">[docs]</a>    def setParser(self, parser):
+<div class="viewcode-block" id="TranslatorAPI.setParser">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.setParser">[docs]</a>
+    def setParser(self, parser):
         self.parser = parser
         self.dumped_names = []</div>
 
-<div class="viewcode-block" id="TranslatorAPI.setOptions"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.setOptions">[docs]</a>    def setOptions(self, options):
+
+<div class="viewcode-block" id="TranslatorAPI.setOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.setOptions">[docs]</a>
+    def setOptions(self, options):
         self.options = options</div>
 
-<div class="viewcode-block" id="TranslatorAPI.highlight"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.highlight">[docs]</a>    def highlight(self, text):
+
+<div class="viewcode-block" id="TranslatorAPI.highlight">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.highlight">[docs]</a>
+    def highlight(self, text):
         u&quot;&quot;&quot;returns *highlighted* text&quot;&quot;&quot;
         if self.options.highlight:
             return highlight_parser(text, self.HIGHLIGHT_MAP)
         return text</div>
 
-<div class="viewcode-block" id="TranslatorAPI.get_preamble"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.get_preamble">[docs]</a>    def get_preamble(self):
+
+<div class="viewcode-block" id="TranslatorAPI.get_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.get_preamble">[docs]</a>
+    def get_preamble(self):
         retVal = &quot;&quot;
         if self.options.preamble == &quot;&quot;:
             retVal = self.comment(&quot;src-file: %s&quot; % (self.options.rel_fname or self.options.fname))
@@ -663,7 +526,10 @@ LOG = SimpleLog()
             retVal = self.options.preamble % self
         return retVal</div>
 
-<div class="viewcode-block" id="TranslatorAPI.get_epilog"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.get_epilog">[docs]</a>    def get_epilog(self):
+
+<div class="viewcode-block" id="TranslatorAPI.get_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.get_epilog">[docs]</a>
+    def get_epilog(self):
         retVal = &quot;&quot;
         if self.options.epilog == &quot;&quot;:
             retVal = self.comment(
@@ -672,7 +538,10 @@ LOG = SimpleLog()
             retVal = self.options.epilog % self
         return retVal</div>
 
-<div class="viewcode-block" id="TranslatorAPI.comment"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.comment">[docs]</a>    @classmethod
+
+<div class="viewcode-block" id="TranslatorAPI.comment">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.comment">[docs]</a>
+    @classmethod
     def comment(cls, cont):
         u&quot;&quot;&quot;returns *commented* text&quot;&quot;&quot;
 
@@ -688,7 +557,10 @@ LOG = SimpleLog()
                 retVal.append(&quot;&quot;)
         return &quot;\n&quot;.join(retVal)</div>
 
-<div class="viewcode-block" id="TranslatorAPI.write"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.write">[docs]</a>    def write(self, *objects):
+
+<div class="viewcode-block" id="TranslatorAPI.write">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.write">[docs]</a>
+    def write(self, *objects):
         u&quot;&quot;&quot;Write *objects* to stream.
 
         Write Unicode-values of the *objects* to :py:attr:``self.options.out``.
@@ -700,38 +572,62 @@ LOG = SimpleLog()
             cont = six.text_type(obj)
             self.options.out.write(cont)</div>
 
-<div class="viewcode-block" id="TranslatorAPI.write_comment"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.write_comment">[docs]</a>    def write_comment(self, *objects):
+
+<div class="viewcode-block" id="TranslatorAPI.write_comment">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.write_comment">[docs]</a>
+    def write_comment(self, *objects):
         u&quot;&quot;&quot;Write *objects* as comments to stream.&quot;&quot;&quot;
         for obj in objects:
             cont = six.text_type(obj)
             self.write(self.comment(cont))</div>
 
-<div class="viewcode-block" id="TranslatorAPI.eof"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.eof">[docs]</a>    def eof(self):
+
+<div class="viewcode-block" id="TranslatorAPI.eof">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.eof">[docs]</a>
+    def eof(self):
         if self.options.eof_newline:
             self.write(&quot;\n&quot;)</div>
+
 
     # API
     # ---
 
-<div class="viewcode-block" id="TranslatorAPI.output_preamble"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_preamble">[docs]</a>    def output_preamble(self):
+<div class="viewcode-block" id="TranslatorAPI.output_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_preamble">[docs]</a>
+    def output_preamble(self):
         raise NotImplementedError</div>
 
-<div class="viewcode-block" id="TranslatorAPI.output_epilog"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_epilog">[docs]</a>    def output_epilog(self):
+
+<div class="viewcode-block" id="TranslatorAPI.output_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_epilog">[docs]</a>
+    def output_epilog(self):
         raise NotImplementedError</div>
 
-<div class="viewcode-block" id="TranslatorAPI.output_prefix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_prefix">[docs]</a>    def output_prefix(self):
+
+<div class="viewcode-block" id="TranslatorAPI.output_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_prefix">[docs]</a>
+    def output_prefix(self):
         raise NotImplementedError</div>
 
-<div class="viewcode-block" id="TranslatorAPI.output_suffix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_suffix">[docs]</a>    def output_suffix(self):
+
+<div class="viewcode-block" id="TranslatorAPI.output_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_suffix">[docs]</a>
+    def output_suffix(self):
         raise NotImplementedError</div>
 
-<div class="viewcode-block" id="TranslatorAPI.output_DOC"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_DOC">[docs]</a>    def output_DOC(
+
+<div class="viewcode-block" id="TranslatorAPI.output_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_DOC">[docs]</a>
+    def output_DOC(
             self
             , sections         = None # ctx.sections
             , ):
         raise NotImplementedError</div>
 
-<div class="viewcode-block" id="TranslatorAPI.output_function_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_function_decl">[docs]</a>    def output_function_decl(
+
+<div class="viewcode-block" id="TranslatorAPI.output_function_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_function_decl">[docs]</a>
+    def output_function_decl(
             self
             , function         = None # ctx.decl_name
             , return_type      = None # ctx.return_type
@@ -744,7 +640,10 @@ LOG = SimpleLog()
             , ):
         raise NotImplementedError</div>
 
-<div class="viewcode-block" id="TranslatorAPI.output_struct_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_struct_decl">[docs]</a>    def output_struct_decl(
+
+<div class="viewcode-block" id="TranslatorAPI.output_struct_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_struct_decl">[docs]</a>
+    def output_struct_decl(
             self
             , decl_name        = None # ctx.decl_name
             , decl_type        = None # ctx.decl_type
@@ -757,10 +656,16 @@ LOG = SimpleLog()
             , ):
         raise NotImplementedError</div>
 
-<div class="viewcode-block" id="TranslatorAPI.output_union_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_union_decl">[docs]</a>    def output_union_decl(self, *args, **kwargs):
+
+<div class="viewcode-block" id="TranslatorAPI.output_union_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_union_decl">[docs]</a>
+    def output_union_decl(self, *args, **kwargs):
         self.output_struct_decl(*args, **kwargs)</div>
 
-<div class="viewcode-block" id="TranslatorAPI.output_enum_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_enum_decl">[docs]</a>    def output_enum_decl(
+
+<div class="viewcode-block" id="TranslatorAPI.output_enum_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_enum_decl">[docs]</a>
+    def output_enum_decl(
             self
             , enum             = None # ctx.decl_name
             , parameterlist    = None # ctx.parameterlist
@@ -770,16 +675,23 @@ LOG = SimpleLog()
             , ):
         raise NotImplementedError</div>
 
-<div class="viewcode-block" id="TranslatorAPI.output_typedef_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_typedef_decl">[docs]</a>    def output_typedef_decl(
+
+<div class="viewcode-block" id="TranslatorAPI.output_typedef_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_typedef_decl">[docs]</a>
+    def output_typedef_decl(
             self
             , typedef          = None # ctx.decl_name
             , sections         = None # ctx.sections
             , purpose          = None # ctx.decl_purpose
             , ):
-        raise NotImplementedError</div></div>
+        raise NotImplementedError</div>
+</div>
+
 
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="NullTranslator"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator">[docs]</a>class NullTranslator(TranslatorAPI):
+<div class="viewcode-block" id="NullTranslator">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator">[docs]</a>
+class NullTranslator(TranslatorAPI):
 # ------------------------------------------------------------------------------
     u&quot;&quot;&quot;
     Null translator, translates nothing, just parse.
@@ -788,31 +700,67 @@ LOG = SimpleLog()
     LINE_COMMENT = (&quot;&quot;, &quot;&quot;)
 
     # pylint: disable=signature-differs
-<div class="viewcode-block" id="NullTranslator.output_preamble"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_preamble">[docs]</a>    def output_preamble(self, *args, **kwargs):
+<div class="viewcode-block" id="NullTranslator.output_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_preamble">[docs]</a>
+    def output_preamble(self, *args, **kwargs):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.output_epilog"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_epilog">[docs]</a>    def output_epilog(self, *args, **kwargs):
+
+<div class="viewcode-block" id="NullTranslator.output_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_epilog">[docs]</a>
+    def output_epilog(self, *args, **kwargs):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.output_prefix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_prefix">[docs]</a>    def output_prefix(self):
+
+<div class="viewcode-block" id="NullTranslator.output_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_prefix">[docs]</a>
+    def output_prefix(self):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.output_suffix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_suffix">[docs]</a>    def output_suffix(self):
+
+<div class="viewcode-block" id="NullTranslator.output_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_suffix">[docs]</a>
+    def output_suffix(self):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.output_DOC"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_DOC">[docs]</a>    def output_DOC(self, *args, **kwargs):
+
+<div class="viewcode-block" id="NullTranslator.output_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_DOC">[docs]</a>
+    def output_DOC(self, *args, **kwargs):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.output_function_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_function_decl">[docs]</a>    def output_function_decl(self, *args, **kwargs):
+
+<div class="viewcode-block" id="NullTranslator.output_function_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_function_decl">[docs]</a>
+    def output_function_decl(self, *args, **kwargs):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.output_struct_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_struct_decl">[docs]</a>    def output_struct_decl(self, *args, **kwargs):
+
+<div class="viewcode-block" id="NullTranslator.output_struct_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_struct_decl">[docs]</a>
+    def output_struct_decl(self, *args, **kwargs):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.output_union_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_union_decl">[docs]</a>    def output_union_decl(self, *args, **kwargs):
+
+<div class="viewcode-block" id="NullTranslator.output_union_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_union_decl">[docs]</a>
+    def output_union_decl(self, *args, **kwargs):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.output_enum_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_enum_decl">[docs]</a>    def output_enum_decl(self, *args, **kwargs):
+
+<div class="viewcode-block" id="NullTranslator.output_enum_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_enum_decl">[docs]</a>
+    def output_enum_decl(self, *args, **kwargs):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.output_typedef_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_typedef_decl">[docs]</a>    def output_typedef_decl(self, *args, **kwargs):
+
+<div class="viewcode-block" id="NullTranslator.output_typedef_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_typedef_decl">[docs]</a>
+    def output_typedef_decl(self, *args, **kwargs):
         pass</div>
-<div class="viewcode-block" id="NullTranslator.eof"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.eof">[docs]</a>    def eof(self):
-        pass</div></div>
+
+<div class="viewcode-block" id="NullTranslator.eof">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.eof">[docs]</a>
+    def eof(self):
+        pass</div>
+</div>
+
 
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="ListTranslator"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator">[docs]</a>class ListTranslator(TranslatorAPI):
+<div class="viewcode-block" id="ListTranslator">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator">[docs]</a>
+class ListTranslator(TranslatorAPI):
 # ------------------------------------------------------------------------------
 
     u&quot;&quot;&quot;
@@ -830,29 +778,49 @@ LOG = SimpleLog()
         for t in Parser.DOC_TYPES:
             self.names[t] = []
 
-<div class="viewcode-block" id="ListTranslator.get_type"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.get_type">[docs]</a>    def get_type(self, name):
+<div class="viewcode-block" id="ListTranslator.get_type">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.get_type">[docs]</a>
+    def get_type(self, name):
         for t, l in self.names.items():
             if name in l:
                 return t
         return None</div>
 
-<div class="viewcode-block" id="ListTranslator.output_preamble"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_preamble">[docs]</a>    def output_preamble(self):
+
+<div class="viewcode-block" id="ListTranslator.output_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_preamble">[docs]</a>
+    def output_preamble(self):
         pass</div>
 
-<div class="viewcode-block" id="ListTranslator.output_epilog"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_epilog">[docs]</a>    def output_epilog(self):
+
+<div class="viewcode-block" id="ListTranslator.output_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_epilog">[docs]</a>
+    def output_epilog(self):
         pass</div>
 
-<div class="viewcode-block" id="ListTranslator.output_prefix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_prefix">[docs]</a>    def output_prefix(self):
+
+<div class="viewcode-block" id="ListTranslator.output_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_prefix">[docs]</a>
+    def output_prefix(self):
         pass</div>
 
-<div class="viewcode-block" id="ListTranslator.output_suffix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_suffix">[docs]</a>    def output_suffix(self):
+
+<div class="viewcode-block" id="ListTranslator.output_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_suffix">[docs]</a>
+    def output_suffix(self):
         pass</div>
 
-<div class="viewcode-block" id="ListTranslator.output_DOC"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_DOC">[docs]</a>    def output_DOC(self, sections = None):
+
+<div class="viewcode-block" id="ListTranslator.output_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_DOC">[docs]</a>
+    def output_DOC(self, sections = None):
         for header in sections.keys():
             self.names[&quot;DOC&quot;].append(header)</div>
 
-<div class="viewcode-block" id="ListTranslator.output_function_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_function_decl">[docs]</a>    def output_function_decl(self, **kwargs):
+
+<div class="viewcode-block" id="ListTranslator.output_function_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_function_decl">[docs]</a>
+    def output_function_decl(self, **kwargs):
         if kwargs[&#39;decl_type&#39;] == &#39;macro&#39;:
             self.names[&quot;macro&quot;].append(kwargs[&quot;function&quot;])
         elif kwargs[&#39;decl_type&#39;] == &#39;typedef&#39;:
@@ -860,19 +828,34 @@ LOG = SimpleLog()
         else:
             self.names[&quot;function&quot;].append(kwargs[&quot;function&quot;])</div>
 
-<div class="viewcode-block" id="ListTranslator.output_struct_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_struct_decl">[docs]</a>    def output_struct_decl(self, **kwargs):
+
+<div class="viewcode-block" id="ListTranslator.output_struct_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_struct_decl">[docs]</a>
+    def output_struct_decl(self, **kwargs):
         self.names[&quot;struct&quot;].append(kwargs[&quot;decl_name&quot;])</div>
 
-<div class="viewcode-block" id="ListTranslator.output_union_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_union_decl">[docs]</a>    def output_union_decl(self, **kwargs):
+
+<div class="viewcode-block" id="ListTranslator.output_union_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_union_decl">[docs]</a>
+    def output_union_decl(self, **kwargs):
         self.names[&quot;union&quot;].append(kwargs[&quot;decl_name&quot;])</div>
 
-<div class="viewcode-block" id="ListTranslator.output_enum_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_enum_decl">[docs]</a>    def output_enum_decl(self, **kwargs):
+
+<div class="viewcode-block" id="ListTranslator.output_enum_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_enum_decl">[docs]</a>
+    def output_enum_decl(self, **kwargs):
         self.names[&quot;enum&quot;].append(kwargs[&quot;enum&quot;])</div>
 
-<div class="viewcode-block" id="ListTranslator.output_typedef_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_typedef_decl">[docs]</a>    def output_typedef_decl(self, **kwargs):
+
+<div class="viewcode-block" id="ListTranslator.output_typedef_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_typedef_decl">[docs]</a>
+    def output_typedef_decl(self, **kwargs):
         self.names[&quot;typedef&quot;].append(kwargs[&quot;typedef&quot;])</div>
 
-<div class="viewcode-block" id="ListTranslator.eof"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.eof">[docs]</a>    def eof(self):
+
+<div class="viewcode-block" id="ListTranslator.eof">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.eof">[docs]</a>
+    def eof(self):
 
         if self.list_exported:
             self.parser.info(&quot;list exported symbols&quot;)
@@ -892,10 +875,14 @@ LOG = SimpleLog()
                     continue
                 for name in l:
                     if name not in self.parser.ctx.exported_symbols:
-                        self.write(&quot;[internal %-10s] %s \n&quot; % (t, name))</div></div>
+                        self.write(&quot;[internal %-10s] %s \n&quot; % (t, name))</div>
+</div>
+
 
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="ReSTTranslator"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator">[docs]</a>class ReSTTranslator(TranslatorAPI):
+<div class="viewcode-block" id="ReSTTranslator">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator">[docs]</a>
+class ReSTTranslator(TranslatorAPI):
 # ------------------------------------------------------------------------------
 
     u&quot;&quot;&quot;
@@ -938,14 +925,19 @@ LOG = SimpleLog()
     FUNC_PTR = RE(r&quot;([^\(]*\(\*)\s*\)\s*\(([^\)]*)\)&quot;)
     BITFIELD = RE(r&quot;^(.*?)\s*(:.*)&quot;)
 
-<div class="viewcode-block" id="ReSTTranslator.highlight"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.highlight">[docs]</a>    def highlight(self, text):
+<div class="viewcode-block" id="ReSTTranslator.highlight">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.highlight">[docs]</a>
+    def highlight(self, text):
         if self.options.markup == &quot;kernel-doc&quot;:
             text = highlight_parser(text, self.MASK_REST_INLINES + self.HIGHLIGHT_MAP )
         elif self.options.markup == &quot;reST&quot;:
             text = highlight_parser(text, self.HIGHLIGHT_MAP )
         return text</div>
 
-<div class="viewcode-block" id="ReSTTranslator.format_block"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.format_block">[docs]</a>    def format_block(self, content):
+
+<div class="viewcode-block" id="ReSTTranslator.format_block">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.format_block">[docs]</a>
+    def format_block(self, content):
         u&quot;&quot;&quot;format the content (string)&quot;&quot;&quot;
         lines = []
         if self.options.markup == &quot;kernel-doc&quot;:
@@ -954,12 +946,16 @@ LOG = SimpleLog()
             lines = [ l.rstrip() for l in content.split(&quot;\n&quot;)]
         return &quot;\n&quot;.join(lines)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.write_anchor"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_anchor">[docs]</a>    def write_anchor(self, refname):
+
+<div class="viewcode-block" id="ReSTTranslator.write_anchor">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_anchor">[docs]</a>
+    def write_anchor(self, refname):
         ID = refname
         if self.options.id_prefix:
             ID = self.options.id_prefix + &quot;.&quot; + ID
         ID = normalize_id(ID)
         self.write(&quot;\n.. _`%s`:\n&quot; % ID)</div>
+
 
     HEADER_TAGS = (
         &quot;#&quot;   # level 0 / part with overline
@@ -969,7 +965,9 @@ LOG = SimpleLog()
         &quot;-&quot;   # level 4 / subsubsec
         &#39;&quot;&#39; ) # level 5 / para
 
-<div class="viewcode-block" id="ReSTTranslator.write_header"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_header">[docs]</a>    def write_header(self, header, sec_level=2):
+<div class="viewcode-block" id="ReSTTranslator.write_header">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_header">[docs]</a>
+    def write_header(self, header, sec_level=2):
         header = self.highlight(header)
         sectag = self.HEADER_TAGS[sec_level]
         if sec_level &lt; 2:
@@ -977,7 +975,10 @@ LOG = SimpleLog()
         self.write(&quot;\n%s&quot; % header)
         self.write(&quot;\n&quot;, (sectag * len(header)), &quot;\n&quot;)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.write_section"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_section">[docs]</a>    def write_section(self, header, content, sec_level=2, ID=None):
+
+<div class="viewcode-block" id="ReSTTranslator.write_section">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_section">[docs]</a>
+    def write_section(self, header, content, sec_level=2, ID=None):
         if not self.options.no_header:
             if ID:
                 self.write_anchor(ID)
@@ -996,7 +997,10 @@ LOG = SimpleLog()
 
         self.write(&quot;\n&quot;)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.write_definition"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_definition">[docs]</a>    def write_definition(self, term, definition, prefix=&quot;&quot;):
+
+<div class="viewcode-block" id="ReSTTranslator.write_definition">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_definition">[docs]</a>
+    def write_definition(self, term, definition, prefix=&quot;&quot;):
         term  = normalize_ws(term) # term has to be a &quot;one-liner&quot;
         term  = self.highlight(term)
         if definition != Parser.undescribed:
@@ -1009,7 +1013,10 @@ LOG = SimpleLog()
                 self.write(self.INDENT, l)
         self.write(&quot;\n&quot;)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.write_func_param"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_func_param">[docs]</a>    def write_func_param(self, param, param_type, descr):
+
+<div class="viewcode-block" id="ReSTTranslator.write_func_param">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_func_param">[docs]</a>
+    def write_func_param(self, param, param_type, descr):
         param = param.replace(&quot;*&quot;, r&quot;\*&quot;)
         self.write(&quot;\n&quot;, self.INDENT, param)
 
@@ -1027,7 +1034,10 @@ LOG = SimpleLog()
 
         self.write(&quot;\n&quot;)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.output_preamble"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_preamble">[docs]</a>    def output_preamble(self):
+
+<div class="viewcode-block" id="ReSTTranslator.output_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_preamble">[docs]</a>
+    def output_preamble(self):
         self.parser.ctx.offset = 0
         if self.options.mode_line:
             self.write_comment(
@@ -1044,26 +1054,41 @@ LOG = SimpleLog()
             if self.options.top_link:
                 self.write(&quot;\n&quot;, self.options.top_link % self.options, &quot;\n&quot;)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.output_epilog"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_epilog">[docs]</a>    def output_epilog(self):
+
+<div class="viewcode-block" id="ReSTTranslator.output_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_epilog">[docs]</a>
+    def output_epilog(self):
         self.parser.ctx.offset = 0
         epilog = self.get_epilog()
         if epilog:
             self.write(epilog, &quot;\n&quot;)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.output_prefix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_prefix">[docs]</a>    def output_prefix(self):
+
+<div class="viewcode-block" id="ReSTTranslator.output_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_prefix">[docs]</a>
+    def output_prefix(self):
         if compat.sphinx_has_c_namespace() and self.options.id_prefix:
             self.write(&quot;.. c:namespace-push:: %s&quot; % self.options.id_prefix, &quot;\n&quot;)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.output_suffix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_suffix">[docs]</a>    def output_suffix(self):
+
+<div class="viewcode-block" id="ReSTTranslator.output_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_suffix">[docs]</a>
+    def output_suffix(self):
         if compat.sphinx_has_c_namespace() and self.options.id_prefix:
             self.write(&quot;\n&quot;, &quot;.. c:namespace-pop::&quot;, &quot;\n&quot;)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.output_DOC"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_DOC">[docs]</a>    def output_DOC(self, sections = None):
+
+<div class="viewcode-block" id="ReSTTranslator.output_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_DOC">[docs]</a>
+    def output_DOC(self, sections = None):
         self.parser.ctx.offset = self.parser.ctx.decl_offset
         for header, content in sections.items():
             self.write_section(header, content, sec_level=2, ID=header)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.output_function_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_function_decl">[docs]</a>    def output_function_decl(
+
+<div class="viewcode-block" id="ReSTTranslator.output_function_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_function_decl">[docs]</a>
+    def output_function_decl(
             self
             , function         = None # ctx.decl_name
             , return_type      = None # ctx.return_type
@@ -1168,7 +1193,10 @@ LOG = SimpleLog()
                 , sec_level = 3
                 , ID = function + &quot;.&quot; + header)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.output_struct_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_struct_decl">[docs]</a>    def output_struct_decl(
+
+<div class="viewcode-block" id="ReSTTranslator.output_struct_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_struct_decl">[docs]</a>
+    def output_struct_decl(
             self
             , decl_name        = None # ctx.decl_name
             , decl_type        = None # ctx.decl_type
@@ -1272,7 +1300,10 @@ LOG = SimpleLog()
                 , sec_level = 3
                 , ID = decl_name + &quot;.&quot; + header)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.output_enum_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_enum_decl">[docs]</a>    def output_enum_decl(
+
+<div class="viewcode-block" id="ReSTTranslator.output_enum_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_enum_decl">[docs]</a>
+    def output_enum_decl(
             self
             , enum             = None # ctx.decl_name
             , parameterlist    = None # ctx.parameterlist
@@ -1340,7 +1371,10 @@ LOG = SimpleLog()
                 , sec_level = 3
                 , ID = enum + &quot;.&quot; + header)</div>
 
-<div class="viewcode-block" id="ReSTTranslator.output_typedef_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_typedef_decl">[docs]</a>    def output_typedef_decl(
+
+<div class="viewcode-block" id="ReSTTranslator.output_typedef_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_typedef_decl">[docs]</a>
+    def output_typedef_decl(
             self
             , typedef          = None # ctx.decl_name
             , sections         = None # ctx.sections
@@ -1368,10 +1402,14 @@ LOG = SimpleLog()
                 header
                 , content or &quot;???&quot;
                 , sec_level = 3
-                , ID = typedef + &quot;.&quot; + header)</div></div>
+                , ID = typedef + &quot;.&quot; + header)</div>
+</div>
+
 
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="ParseOptions"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions">[docs]</a>class ParseOptions(Container):
+<div class="viewcode-block" id="ParseOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions">[docs]</a>
+class ParseOptions(Container):
 # ------------------------------------------------------------------------------
 
     # pylint: disable=too-many-instance-attributes
@@ -1386,11 +1424,14 @@ LOG = SimpleLog()
         , (&quot;SNAP&quot;,    [], &quot;snap&quot;)
         , ]
 
-<div class="viewcode-block" id="ParseOptions.dumpOptions"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.dumpOptions">[docs]</a>    def dumpOptions(self):
+<div class="viewcode-block" id="ParseOptions.dumpOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.dumpOptions">[docs]</a>
+    def dumpOptions(self):
         # dumps options which are variable from parsing source-code
         return dict(
             highlight = self.highlight
             , markup  = self.markup )</div>
+
 
     def __init__(self, *args, **kwargs):
 
@@ -1465,9 +1506,11 @@ LOG = SimpleLog()
                 LOG.error(&quot;missing SRCTREE&quot;)
             self.rel_fname = self.fname[1:]
 
-        self.fname = os.path.abspath(self.src_tree + &quot;/&quot; + self.rel_fname)
+        self.fname = os.path.abspath(str(self.src_tree) + &quot;/&quot; + str(self.rel_fname))
 
-<div class="viewcode-block" id="ParseOptions.set_defaults"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.set_defaults">[docs]</a>    def set_defaults(self):
+<div class="viewcode-block" id="ParseOptions.set_defaults">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.set_defaults">[docs]</a>
+    def set_defaults(self):
 
         # default way to identify exported symbol
 
@@ -1484,15 +1527,13 @@ LOG = SimpleLog()
         if self.top_title:
             self.top_title = self.top_title % self
 
-        if self.top_link == &quot;&quot;:
-            if self.rel_fname:
-                self.top_link  = GIT_REF % self
-            else:
-                LOG.warn(&quot;missing SRCTREE, can&#39;t set *top_link* option&quot;)
         if self.top_link:
             self.top_link = self.top_link % self</div>
 
-<div class="viewcode-block" id="ParseOptions.add_filters"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.add_filters">[docs]</a>    def add_filters(self, parse_options):
+
+<div class="viewcode-block" id="ParseOptions.add_filters">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.add_filters">[docs]</a>
+    def add_filters(self, parse_options):
 
         def setINSPECT(name, val): # pylint: disable=unused-argument
             global INSPECT
@@ -1509,7 +1550,10 @@ LOG = SimpleLog()
             self.opt_filters[option] = (
                 RE(self.PARSE_OPTION_RE % option), val_list, _actions[action])</div>
 
-<div class="viewcode-block" id="ParseOptions.filter_opt"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.filter_opt">[docs]</a>    def filter_opt(self, line, parser):
+
+<div class="viewcode-block" id="ParseOptions.filter_opt">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.filter_opt">[docs]</a>
+    def filter_opt(self, line, parser):
 
         for name, (regexpr, val_list, action) in self.opt_filters.items():
             if regexpr.match(line):
@@ -1529,7 +1573,10 @@ LOG = SimpleLog()
                 break
         return line</div>
 
-<div class="viewcode-block" id="ParseOptions.get_exported_symbols_re"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.get_exported_symbols_re">[docs]</a>    def get_exported_symbols_re(self):
+
+<div class="viewcode-block" id="ParseOptions.get_exported_symbols_re">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.get_exported_symbols_re">[docs]</a>
+    def get_exported_symbols_re(self):
         if self.exp_method == &#39;macro&#39;:
             proto_pattern = r&quot;^\s*(?:%s)\s*\(\s*(\w*)\s*\)\s*&quot;
         elif self.exp_method == &#39;attribute&#39;:
@@ -1538,18 +1585,25 @@ LOG = SimpleLog()
             LOG.error(&quot;Unknown exported symbol method: %s&quot; % self.exp_method)
 
         id_pattern = &quot;|&quot;.join([&quot;(?:&quot; + name + &quot;)&quot; for name in self.exp_ids])
-        return RE(proto_pattern % id_pattern, flags=re.M)</div></div>
+        return RE(proto_pattern % id_pattern, flags=re.M)</div>
+</div>
+
 
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="ParserContext"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext">[docs]</a>class ParserContext(Container):
+<div class="viewcode-block" id="ParserContext">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext">[docs]</a>
+class ParserContext(Container):
 # ------------------------------------------------------------------------------
 
     # pylint: disable=too-many-instance-attributes
 
-<div class="viewcode-block" id="ParserContext.dumpCtx"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext.dumpCtx">[docs]</a>    def dumpCtx(self):
+<div class="viewcode-block" id="ParserContext.dumpCtx">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext.dumpCtx">[docs]</a>
+    def dumpCtx(self):
         # dumps options which are variable from parsing source-code
         return dict(
             decl_offset = self.decl_offset )</div>
+
 
     def __init__(self, *args, **kwargs):
         self.line_no           = 0
@@ -1614,15 +1668,21 @@ LOG = SimpleLog()
 
         super().__init__(self, *args, **kwargs)
 
-<div class="viewcode-block" id="ParserContext.new"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext.new">[docs]</a>    def new(self):
+<div class="viewcode-block" id="ParserContext.new">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext.new">[docs]</a>
+    def new(self):
         return self.__class__(
             line_no            = self.line_no
             , exported_symbols = self.exported_symbols
             , snippets         = self.snippets
-            , dump_storage     = self.dump_storage )</div></div>
+            , dump_storage     = self.dump_storage )</div>
+</div>
 
 
-<div class="viewcode-block" id="ParserBuggy"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserBuggy">[docs]</a>class ParserBuggy(RuntimeError):
+
+<div class="viewcode-block" id="ParserBuggy">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserBuggy">[docs]</a>
+class ParserBuggy(RuntimeError):
     u&quot;&quot;&quot;Exception raised when the parser implementation seems buggy.
 
     The parser implementation perform some integrity tests at runtime.  This
@@ -1644,8 +1704,11 @@ LOG = SimpleLog()
         super().__init__(message)
         self.parserObj = parserObj</div>
 
+
 # ------------------------------------------------------------------------------
-<div class="viewcode-block" id="Parser"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser">[docs]</a>class Parser(SimpleLog):
+<div class="viewcode-block" id="Parser">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser">[docs]</a>
+class Parser(SimpleLog):
 # ------------------------------------------------------------------------------
 
     # pylint: disable=too-many-public-methods
@@ -1718,16 +1781,24 @@ LOG = SimpleLog()
         self.setTranslator(translator)
         self.setOptions(options)
 
-<div class="viewcode-block" id="Parser.setTranslator"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.setTranslator">[docs]</a>    def setTranslator(self, translator):
+<div class="viewcode-block" id="Parser.setTranslator">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.setTranslator">[docs]</a>
+    def setTranslator(self, translator):
         self.translator = translator
         self.translator.setParser(self)
         self.translator.setOptions(self.options)</div>
 
-<div class="viewcode-block" id="Parser.setOptions"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.setOptions">[docs]</a>    def setOptions(self, options):
+
+<div class="viewcode-block" id="Parser.setOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.setOptions">[docs]</a>
+    def setOptions(self, options):
         self.options = options
         self.translator.setOptions(options)</div>
 
-<div class="viewcode-block" id="Parser.reset_state"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.reset_state">[docs]</a>    def reset_state(self):
+
+<div class="viewcode-block" id="Parser.reset_state">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.reset_state">[docs]</a>
+    def reset_state(self):
         self.ctx = self.ctx.new()
         self.state             = 0
         self.split_doc_state   = 0
@@ -1736,37 +1807,52 @@ LOG = SimpleLog()
         self.brcount           = 0
         self.anon_struct_union = False</div>
 
+
     # ------------------------------------------------------------
     # Log
     # ------------------------------------------------------------
 
-<div class="viewcode-block" id="Parser.error"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.error">[docs]</a>    def error(self, message, _line_no=None, **replace):
+<div class="viewcode-block" id="Parser.error">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.error">[docs]</a>
+    def error(self, message, _line_no=None, **replace):
         replace[&quot;fname&quot;]   = self.options.fname
         replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
         self.errors += 1
         super().error(message, **replace)</div>
 
-<div class="viewcode-block" id="Parser.warn"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.warn">[docs]</a>    def warn(self, message, _line_no=None, **replace):
+
+<div class="viewcode-block" id="Parser.warn">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.warn">[docs]</a>
+    def warn(self, message, _line_no=None, **replace):
         replace[&quot;fname&quot;]   = self.options.fname
         replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
         self.warnings += 1
         super().warn(message, **replace)</div>
 
-<div class="viewcode-block" id="Parser.info"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.info">[docs]</a>    def info(self, message, _line_no=None, **replace):
+
+<div class="viewcode-block" id="Parser.info">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.info">[docs]</a>
+    def info(self, message, _line_no=None, **replace):
         replace[&quot;fname&quot;]   = self.options.fname
         replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
         super().info(message, **replace)</div>
 
-<div class="viewcode-block" id="Parser.debug"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.debug">[docs]</a>    def debug(self, message, _line_no=None, **replace):
+
+<div class="viewcode-block" id="Parser.debug">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.debug">[docs]</a>
+    def debug(self, message, _line_no=None, **replace):
         replace[&quot;fname&quot;]   = self.options.fname
         replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
         super().debug(message, **replace)</div>
+
 
     # ------------------------------------------------------------
     # state parser
     # ------------------------------------------------------------
 
-<div class="viewcode-block" id="Parser.gather_context"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.gather_context">[docs]</a>    @classmethod
+<div class="viewcode-block" id="Parser.gather_context">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.gather_context">[docs]</a>
+    @classmethod
     def gather_context(cls, src, ctx, opts):
         u&quot;&quot;&quot;Scan source about context informations.
 
@@ -1823,7 +1909,10 @@ LOG = SimpleLog()
         LOG.info(&quot;mod_descr: %(x)s&quot;,    x = ctx.mod_descr)
         LOG.info(&quot;mod_license : %(x)s&quot;, x = ctx.mod_license)</div>
 
-<div class="viewcode-block" id="Parser.parse"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.parse">[docs]</a>    def parse(self, src=None): # start parsing
+
+<div class="viewcode-block" id="Parser.parse">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.parse">[docs]</a>
+    def parse(self, src=None): # start parsing
         self.dump_preamble()
         self.dump_prefix()
         if src is not None:
@@ -1837,7 +1926,10 @@ LOG = SimpleLog()
         self.dump_epilog()
         self.translator.eof()</div>
 
-<div class="viewcode-block" id="Parser.parse_dump_storage"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.parse_dump_storage">[docs]</a>    def parse_dump_storage(self, translator=None, options=None):
+
+<div class="viewcode-block" id="Parser.parse_dump_storage">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.parse_dump_storage">[docs]</a>
+    def parse_dump_storage(self, translator=None, options=None):
         if options is not None:
             self.setOptions(options)
         if translator is not None:
@@ -1852,7 +1944,10 @@ LOG = SimpleLog()
         self.dump_epilog()
         self.translator.eof()</div>
 
-<div class="viewcode-block" id="Parser.close"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.close">[docs]</a>    def close(self):           # end parsing
+
+<div class="viewcode-block" id="Parser.close">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.close">[docs]</a>
+    def close(self):           # end parsing
         self.feed(&quot;&quot;, eof=True)
         # log requested but missed documentation
         log_missed = self.error
@@ -1877,7 +1972,10 @@ LOG = SimpleLog()
         global INSPECT  # pylint: disable=global-statement
         INSPECT = False</div>
 
-<div class="viewcode-block" id="Parser.feed"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.feed">[docs]</a>    def feed(self, data, eof=False):
+
+<div class="viewcode-block" id="Parser.feed">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.feed">[docs]</a>
+    def feed(self, data, eof=False):
         self.rawdata = self.rawdata + data
 
         if self.options.gather_context:
@@ -1920,7 +2018,10 @@ LOG = SimpleLog()
                 self.error(&quot;unhandled exception in line: %(l)s&quot;, l=l)
                 raise</div>
 
-<div class="viewcode-block" id="Parser.output_decl"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.output_decl">[docs]</a>    def output_decl(self, name, out_type, **kwargs):
+
+<div class="viewcode-block" id="Parser.output_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.output_decl">[docs]</a>
+    def output_decl(self, name, out_type, **kwargs):
         self.ctx.offset = self.ctx.decl_offset
 
         if name in self.translator.dumped_names:
@@ -1952,7 +2053,10 @@ LOG = SimpleLog()
         else:
             self.debug(&quot;skip translation of %(t)s: &#39;%(n)s&#39;&quot;, t=out_type, n=name)</div>
 
-<div class="viewcode-block" id="Parser.state_0"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_0">[docs]</a>    def state_0(self, line):
+
+<div class="viewcode-block" id="Parser.state_0">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_0">[docs]</a>
+    def state_0(self, line):
         u&quot;&quot;&quot;state: 0 - normal code&quot;&quot;&quot;
 
         if doc_start.match(line):
@@ -1961,7 +2065,10 @@ LOG = SimpleLog()
             self.state = 1
             self.in_doc_sect = False</div>
 
-<div class="viewcode-block" id="Parser.state_1"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_1">[docs]</a>    def state_1(self, line):
+
+<div class="viewcode-block" id="Parser.state_1">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_1">[docs]</a>
+    def state_1(self, line):
         u&quot;&quot;&quot;state: 1 - looking for function name&quot;&quot;&quot;
 
         if doc_block.match(line):
@@ -2003,7 +2110,10 @@ LOG = SimpleLog()
                       &quot; - I thought it was a doc line&quot; , line=line)
             self.state = 0</div>
 
-<div class="viewcode-block" id="Parser.sect_title"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.sect_title">[docs]</a>    def sect_title(self, title):
+
+<div class="viewcode-block" id="Parser.sect_title">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.sect_title">[docs]</a>
+    def sect_title(self, title):
         u&quot;&quot;&quot;Normalize common section titles&quot;&quot;&quot;
         # fix varius notations for the &quot;Return:&quot; section
 
@@ -2023,7 +2133,10 @@ LOG = SimpleLog()
 
         return retVal</div>
 
-<div class="viewcode-block" id="Parser.state_2"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_2">[docs]</a>    def state_2(self, line):
+
+<div class="viewcode-block" id="Parser.state_2">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_2">[docs]</a>
+    def state_2(self, line):
         u&quot;&quot;&quot;state: 2 - scanning field start. &quot;&quot;&quot;
 
         new_sect = &quot;&quot;
@@ -2173,7 +2286,10 @@ LOG = SimpleLog()
             # i dont know - bad line?  ignore.
             self.warn(&quot;bad line: &#39;%(line)s&#39;&quot;, line = line.strip())</div>
 
-<div class="viewcode-block" id="Parser.state_3"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_3">[docs]</a>    def state_3(self, line):
+
+<div class="viewcode-block" id="Parser.state_3">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_3">[docs]</a>
+    def state_3(self, line):
         u&quot;&quot;&quot;state: 3 - scanning prototype.&quot;&quot;&quot;
 
         if line.startswith(&#39;typedef&#39;):
@@ -2208,7 +2324,10 @@ LOG = SimpleLog()
         else:
             self.process_state3_type(line)</div>
 
-<div class="viewcode-block" id="Parser.state_4"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_4">[docs]</a>    def state_4(self, line):
+
+<div class="viewcode-block" id="Parser.state_4">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_4">[docs]</a>
+    def state_4(self, line):
         u&quot;&quot;&quot;state: 4 - documentation block&quot;&quot;&quot;
 
         if doc_block.match(line):
@@ -2235,7 +2354,10 @@ LOG = SimpleLog()
             else:
                 self.ctx.contents += doc_content[0] + &quot;\n&quot;</div>
 
-<div class="viewcode-block" id="Parser.state_5"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_5">[docs]</a>    def state_5(self, line):
+
+<div class="viewcode-block" id="Parser.state_5">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_5">[docs]</a>
+    def state_5(self, line):
         u&quot;&quot;&quot;state: 5 - gathering documentation outside main block&quot;&quot;&quot;
 
         if ( self.split_doc_state == 1
@@ -2277,11 +2399,14 @@ LOG = SimpleLog()
                 self.warn(&quot;Incorrect use of kernel-doc format: %(line)s&quot;
                           , line = line)</div>
 
+
     # ------------------------------------------------------------
     # helper to parse special objects
     # ------------------------------------------------------------
 
-<div class="viewcode-block" id="Parser.process_state3_function"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.process_state3_function">[docs]</a>    def process_state3_function(self, line):
+<div class="viewcode-block" id="Parser.process_state3_function">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.process_state3_function">[docs]</a>
+    def process_state3_function(self, line):
 
         self.debug(&quot;PROCESS-FUNCTION: %(line)s&quot;, line=line)
         line = C99_comments.sub(&quot;&quot;, line) # strip C99-style comments to end of line
@@ -2321,7 +2446,10 @@ LOG = SimpleLog()
             self.dump_function(self.ctx.prototype)
             self.reset_state()</div>
 
-<div class="viewcode-block" id="Parser.syscall_munge"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.syscall_munge">[docs]</a>    def syscall_munge(self, prototype):
+
+<div class="viewcode-block" id="Parser.syscall_munge">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.syscall_munge">[docs]</a>
+    def syscall_munge(self, prototype):
         self.debug(&quot;syscall munge: &#39;%(prototype)s&#39;&quot; , prototype=prototype)
         void = False
 
@@ -2352,7 +2480,10 @@ LOG = SimpleLog()
         self.debug(&quot;syscall munge: retVal &#39;%(retVal)s&#39;&quot; , retVal=retVal)
         return retVal</div>
 
-<div class="viewcode-block" id="Parser.tracepoint_munge"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.tracepoint_munge">[docs]</a>    def tracepoint_munge(self, prototype):
+
+<div class="viewcode-block" id="Parser.tracepoint_munge">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.tracepoint_munge">[docs]</a>
+    def tracepoint_munge(self, prototype):
         self.debug(&quot;tracepoint munge: %(prototype)s&quot; , prototype=prototype)
 
         retVal  = prototype
@@ -2383,7 +2514,10 @@ LOG = SimpleLog()
                       % (tp_name, tp_args))
         return retVal</div>
 
-<div class="viewcode-block" id="Parser.process_state3_type"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.process_state3_type">[docs]</a>    def process_state3_type(self, line):
+
+<div class="viewcode-block" id="Parser.process_state3_type">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.process_state3_type">[docs]</a>
+    def process_state3_type(self, line):
         self.debug(&quot;PROCESS-TYPE: %(line)s&quot;, line=line)
 
         # strip cr&amp;nl, strip C99 comments, strip leading&amp;trailing whitespaces
@@ -2427,25 +2561,40 @@ LOG = SimpleLog()
                 self.ctx.prototype += line
                 break</div>
 
+
     # ------------------------------------------------------------
     # dump objects
     # ------------------------------------------------------------
 
-<div class="viewcode-block" id="Parser.dump_preamble"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_preamble">[docs]</a>    def dump_preamble(self):
+<div class="viewcode-block" id="Parser.dump_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_preamble">[docs]</a>
+    def dump_preamble(self):
         if not self.options.skip_preamble:
             self.translator.output_preamble()</div>
 
-<div class="viewcode-block" id="Parser.dump_epilog"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_epilog">[docs]</a>    def dump_epilog(self):
+
+<div class="viewcode-block" id="Parser.dump_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_epilog">[docs]</a>
+    def dump_epilog(self):
         if not self.options.skip_epilog:
             self.translator.output_epilog()</div>
 
-<div class="viewcode-block" id="Parser.dump_prefix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_prefix">[docs]</a>    def dump_prefix(self):
+
+<div class="viewcode-block" id="Parser.dump_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_prefix">[docs]</a>
+    def dump_prefix(self):
         self.translator.output_prefix()</div>
 
-<div class="viewcode-block" id="Parser.dump_suffix"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_suffix">[docs]</a>    def dump_suffix(self):
+
+<div class="viewcode-block" id="Parser.dump_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_suffix">[docs]</a>
+    def dump_suffix(self):
         self.translator.output_suffix()</div>
 
-<div class="viewcode-block" id="Parser.dump_section"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_section">[docs]</a>    def dump_section(self, name, cont):
+
+<div class="viewcode-block" id="Parser.dump_section">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_section">[docs]</a>
+    def dump_section(self, name, cont):
         u&quot;&quot;&quot;Store section&#39;s *content* under it&#39;s name.
 
         :param str name: name of the section
@@ -2497,7 +2646,10 @@ LOG = SimpleLog()
                 self.ctx.sections[name] = cont
             self.ctx.sections.offsets[name] = self.ctx.last_offset</div>
 
-<div class="viewcode-block" id="Parser.dump_function"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_function">[docs]</a>    def dump_function(self, proto):
+
+<div class="viewcode-block" id="Parser.dump_function">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_function">[docs]</a>
+    def dump_function(self, proto):
         self.debug(&quot;dump_function(): (1) &#39;%(proto)s&#39;&quot;, proto=proto)
         hasRetVal = True
         proto = re.sub( r&quot;^static +&quot;         , &quot;&quot;, proto )
@@ -2610,12 +2762,18 @@ LOG = SimpleLog()
             , decl_type        = self.ctx.decl_type
         )</div>
 
-<div class="viewcode-block" id="Parser.dump_DOC"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_DOC">[docs]</a>    def dump_DOC(self, name, cont):
+
+<div class="viewcode-block" id="Parser.dump_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_DOC">[docs]</a>
+    def dump_DOC(self, name, cont):
         self.dump_section(name, cont)
         self.output_decl(name, &quot;DOC&quot;
                          , sections = self.ctx.sections )</div>
 
-<div class="viewcode-block" id="Parser.dump_union"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_union">[docs]</a>    def dump_union(self, proto):
+
+<div class="viewcode-block" id="Parser.dump_union">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_union">[docs]</a>
+    def dump_union(self, proto):
 
         if not self.prepare_struct_union(proto):
             self.error(&quot;can&#39;t parse union!&quot;)
@@ -2637,7 +2795,10 @@ LOG = SimpleLog()
             , purpose          = self.ctx.decl_purpose
             , definition       = self.ctx.definition )</div>
 
-<div class="viewcode-block" id="Parser.dump_struct"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_struct">[docs]</a>    def dump_struct(self, proto):
+
+<div class="viewcode-block" id="Parser.dump_struct">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_struct">[docs]</a>
+    def dump_struct(self, proto):
 
         if not self.prepare_struct_union(proto):
             self.error(&quot;can&#39;t parse struct!&quot;)
@@ -2659,7 +2820,10 @@ LOG = SimpleLog()
             , purpose          = self.ctx.decl_purpose
             , definition       = self.ctx.definition)</div>
 
-<div class="viewcode-block" id="Parser.prepare_struct_union"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.prepare_struct_union">[docs]</a>    def prepare_struct_union(self, proto):
+
+<div class="viewcode-block" id="Parser.prepare_struct_union">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.prepare_struct_union">[docs]</a>
+    def prepare_struct_union(self, proto):
         self.debug(&quot;prepare_struct_union(): &#39;%(proto)s&#39;&quot;, proto=proto)
 
         retVal  = False
@@ -2768,7 +2932,10 @@ LOG = SimpleLog()
 
         return retVal</div>
 
-<div class="viewcode-block" id="Parser.dump_enum"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_enum">[docs]</a>    def dump_enum(self, proto):
+
+<div class="viewcode-block" id="Parser.dump_enum">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_enum">[docs]</a>
+    def dump_enum(self, proto):
         self.debug(&quot;dump_enum(): &#39;%(proto)s&#39;&quot;, proto=proto)
 
         proto = C89_comments.sub(&quot;&quot;, proto)
@@ -2817,7 +2984,10 @@ LOG = SimpleLog()
         else:
             self.error(&quot;can&#39;t parse enum!&quot;)</div>
 
-<div class="viewcode-block" id="Parser.dump_typedef"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_typedef">[docs]</a>    def dump_typedef(self, proto):
+
+<div class="viewcode-block" id="Parser.dump_typedef">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_typedef">[docs]</a>
+    def dump_typedef(self, proto):
         self.debug(&quot;dump_typedef(): &#39;%(proto)s&#39;&quot;, proto=proto)
 
         proto = C89_comments.sub(&quot;&quot;, proto)
@@ -2890,7 +3060,10 @@ LOG = SimpleLog()
             else:
                 self.error(&quot;can&#39;t parse typedef!&quot;)</div>
 
-<div class="viewcode-block" id="Parser.create_parameterlist"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.create_parameterlist">[docs]</a>    def create_parameterlist(self, parameter, splitchar):
+
+<div class="viewcode-block" id="Parser.create_parameterlist">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.create_parameterlist">[docs]</a>
+    def create_parameterlist(self, parameter, splitchar):
         self.debug(&quot;create_parameterlist(): splitchar=&#39;%(x)s&#39; params=&#39;%(y)s&#39;&quot;
                    , x=splitchar, y=parameter)
         parameter = normalize_ws(parameter)
@@ -2985,7 +3158,10 @@ LOG = SimpleLog()
                     #self.save_struct_actual(p_name)
                     self.push_parameter(p_name, p_type)</div>
 
-<div class="viewcode-block" id="Parser.push_parameter"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.push_parameter">[docs]</a>    def push_parameter(self, p_name, p_type):
+
+<div class="viewcode-block" id="Parser.push_parameter">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.push_parameter">[docs]</a>
+    def push_parameter(self, p_name, p_type):
         self.debug(
             &quot;push_parameter(): p_name=&#39;%(p_name)s&#39; / p_type=&#39;%(p_type)s&#39;&quot;
             , p_name=p_name, p_type=p_type)
@@ -3058,6 +3234,7 @@ LOG = SimpleLog()
         self.ctx.parameterlist.append(p_name)
         self.ctx.parametertypes[p_name] = p_type.strip()</div>
 
+
     # def save_struct_actual(self, actual):
     #     # strip all spaces from the actual param so that it looks like one
     #     # string item
@@ -3067,7 +3244,9 @@ LOG = SimpleLog()
     #     self.debug(&quot;save_struct_actual: &#39;%(a)s&#39;&quot;, a=self.ctx.struct_actual)
 
 
-<div class="viewcode-block" id="Parser.check_sections"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.check_sections">[docs]</a>    def check_sections(self, decl_name, decl_type
+<div class="viewcode-block" id="Parser.check_sections">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.check_sections">[docs]</a>
+    def check_sections(self, decl_name, decl_type
                        , sectcheck, parameterlist):
         self.debug(&quot;check_sections(): decl_name=&#39;%(n)s&#39; / decl_type=&#39;%(t)s&#39; /&quot;
                    &quot; sectcheck=%(sc)s / parameterlist=%(pl)s&quot;
@@ -3096,7 +3275,10 @@ LOG = SimpleLog()
                 self.debug(&quot;check_sections(): parameter &#39;%(sect)s&#39;: description exists / OK&quot;
                            , sect=sect)</div>
 
-<div class="viewcode-block" id="Parser.check_return_section"><a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.check_return_section">[docs]</a>    def check_return_section(self, decl_name, return_type):
+
+<div class="viewcode-block" id="Parser.check_return_section">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.check_return_section">[docs]</a>
+    def check_return_section(self, decl_name, return_type):
         self.debug(&quot;check_return_section(): decl_name=&#39;%(n)s&#39;, return_type=&#39;%(t)s&quot;
                    , n=decl_name, t=return_type)
         # Ignore an empty return type (It&#39;s a macro) and ignore functions with a
@@ -3112,14 +3294,9 @@ LOG = SimpleLog()
                       , func = decl_name, line_no = self.ctx.decl_offset)
         else:
             self.debug(&quot;check_return_section(): return-value of %(func)s() OK&quot;
-                       , func = decl_name)</div></div>
+                       , func = decl_name)</div>
+</div>
 
-# ==============================================================================
-# run ...
-# ==============================================================================
-
-if __name__ == &quot;__main__&quot;:
-    sys.exit(main())
 </pre></div>
 
             <div class="clearer"></div>
@@ -3177,8 +3354,8 @@ if __name__ == &quot;__main__&quot;:
     </div>
   
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; Copyright 2023 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
     </div>
   <script src="../../_static/version_warning_offset.js"></script>
 
