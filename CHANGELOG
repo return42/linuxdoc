@@ -1,3 +1,7 @@
+2023-08-27 [20230827]
+
+	Sphinx 8 will drop support for representing paths as strings
+
 2023-06-29 [20230629]
 
 	Python 3.12 compatibility / imp replaced by importlib
