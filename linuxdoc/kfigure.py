@@ -11,6 +11,7 @@ User documentation see :ref:`kfigure`
 """
 
 import os
+import pathlib
 from os import path
 import subprocess
 from hashlib import sha1
@@ -215,7 +216,7 @@ def convert_image(img_node, translator, src_fname=None):
     if dst_fname:
         # the builder needs not to copy one more time, so pop it if exists.
         translator.builder.images.pop(img_node['uri'], None)
-        _name = dst_fname[len(translator.builder.outdir) + 1:]
+        _name = pathlib.Path(dst_fname).relative_to(translator.builder.outdir)
 
         if isNewer(dst_fname, src_fname):
             app_log.info("convert: {out}/%s already exists and is newer", _name)
