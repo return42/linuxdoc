@@ -41,7 +41,7 @@ setup(
     , author_email     = PKG.emails[0]
     , license          = PKG.license
     , keywords         = PKG.keywords
-    , packages         = find_packages(exclude=['docs', ])
+    , packages         = ['linuxdoc']
     , install_requires = PKG.install_requires
     , entry_points     = PKG.get_entry_points()
     , classifiers      = PKG.classifiers

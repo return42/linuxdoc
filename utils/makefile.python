@@ -192,9 +192,7 @@ quiet_cmd_pytest      = TEST      $@
 # .. _installing: https://packaging.python.org/tutorials/installing-packages/
 #
 quiet_cmd_pybuild     = BUILD     $@
-      cmd_pybuild     = $(PY_ENV_BIN)/python setup.py \
-			sdist -d $(PYDIST)  \
-			bdist_wheel --bdist-dir $(PYBUILD) -d $(PYDIST)
+      cmd_pybuild     = $(PY_ENV_BIN)/python setup.py sdist -d $(PYDIST)
 
 quiet_cmd_pyclean     = CLEAN     $@
 # remove 'build' folder since bdist_wheel does not care the --bdist-dir
