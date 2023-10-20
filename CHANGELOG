@@ -1,3 +1,7 @@
+2023-10-20 [20231020]
+
+	[fix] build: don't include test folder in the distributed package
+
 2023-06-29 [20230629]
 
 	Python 3.12 compatibility / imp replaced by importlib
