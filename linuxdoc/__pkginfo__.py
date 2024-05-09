@@ -6,9 +6,9 @@
 from setuptools import find_packages
 
 package = 'linuxdoc'
-version = '20231020'
+version = '20240509'
 
-copyright = '2023 Markus Heiser'  # pylint: disable=redefined-builtin
+copyright = '2024 Markus Heiser'  # pylint: disable=redefined-builtin
 description = (
     'Sphinx-doc extensions & tools to extract documentation'
     ' from C/C++ source file comments.'
