@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>rendered all-in-a-tumble.[ch] &#8212; LinuxDoc 20230827 documentation</title>
+    <title>rendered all-in-a-tumble.[ch] &#8212; LinuxDoc 20240509 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52e4ff28" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
-    <script src="../_static/documentation_options.js?v=a87da7d6"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/documentation_options.js?v=e7faada2"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="all-in-a-tumble-debug.html" title="kernel-doc from all-in-a-tumble.[ch]"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20230827 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">LinuxDoc 20240509 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >LinuxDoc HowTo</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="kernel-doc-examples.html" accesskey="U">Examples &amp; Tests</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li> 
@@ -162,7 +162,7 @@ content will be rendered and where the parser might fail.</p>
 
 <section id="example-trace-block-dirty-buffer-description">
 <span id="id2"></span><h4>Description<a class="headerlink" href="#example-trace-block-dirty-buffer-description" title="Link to this heading">¶</a></h4>
-<p>Called from <a class="reference external" href="https://www.kernel.org/doc/html/latest/filesystems/api-summary.html#c.mark_buffer_dirty" title="(in The Linux Kernel v6.5.0-rc7)"><code class="xref c c-func docutils literal notranslate"><span class="pre">mark_buffer_dirty()</span></code></a>.</p>
+<p>Called from <a class="reference external" href="https://www.kernel.org/doc/html/latest/filesystems/api-summary.html#c.mark_buffer_dirty" title="(in The Linux Kernel v6.9.0-rc7)"><code class="xref c c-func docutils literal notranslate"><span class="pre">mark_buffer_dirty()</span></code></a>.</p>
 </section>
 </section>
 <section id="theory-of-operation">
@@ -434,7 +434,7 @@ Context: <code class="xref c c-func docutils literal notranslate"><span class="p
 <p>Long description. This function has two integer arguments. The first is
 <code class="docutils literal notranslate"><span class="pre">parameter_a</span></code> and the second is <code class="docutils literal notranslate"><span class="pre">parameter_b</span></code>.</p>
 <p>As long as the reST / sphinx-doc toolchain uses <a class="reference external" href="http://www.sphinx-doc.org/en/stable/ext/intersphinx.html">intersphinx</a> you can refer
-definitions <em>outside</em> like <a class="reference external" href="https://www.kernel.org/doc/html/latest/driver-api/media/mc-core.html#c.media_device" title="(in The Linux Kernel v6.5.0-rc7)"><code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">media_device</span></code></a>.  If
+definitions <em>outside</em> like <a class="reference external" href="https://www.kernel.org/doc/html/latest/driver-api/media/mc-core.html#c.media_device" title="(in The Linux Kernel v6.9.0-rc7)"><code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">media_device</span></code></a>.  If
 the description of <code class="docutils literal notranslate"><span class="pre">media_device</span></code> struct is found in any of the intersphinx
 locations, a hyperref to this target is generated a build time.</p>
 </section>
@@ -859,7 +859,7 @@ is located</p></li>
 <p>Write a value to the iosys_map considering its layout is described by a C
 struct starting at <code class="docutils literal notranslate"><span class="pre">struct_offset__</span></code>. The field offset and size is calculated
 and the <code class="docutils literal notranslate"><span class="pre">val_</span></code>_ is written. If the field access would incur in un-aligned
-access, then either <a class="reference external" href="https://www.kernel.org/doc/html/latest/driver-api/device-io.html#c.iosys_map_memcpy_to" title="(in The Linux Kernel v6.5.0-rc7)"><code class="xref c c-func docutils literal notranslate"><span class="pre">iosys_map_memcpy_to()</span></code></a> needs to be used or the
+access, then either <a class="reference external" href="https://www.kernel.org/doc/html/latest/driver-api/device-io.html#c.iosys_map_memcpy_to" title="(in The Linux Kernel v6.9.0-rc7)"><code class="xref c c-func docutils literal notranslate"><span class="pre">iosys_map_memcpy_to()</span></code></a> needs to be used or the
 architecture must support it. Refer to <code class="xref c c-func docutils literal notranslate"><span class="pre">iosys_map_rd_field()</span></code> for expected
 usage and memory layout.</p>
 </section>
@@ -1196,7 +1196,7 @@ method solves the problem of threads exiting and PIDs getting reused.</p>
 </li>
 </ul>
 
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -1204,7 +1204,7 @@ method solves the problem of threads exiting and PIDs getting reused.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
@@ -1212,8 +1212,8 @@ method solves the problem of threads exiting and PIDs getting reused.</p>
     </div>
   
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2023 Markus Heiser.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
+    &#169; Copyright 2024 Markus Heiser.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
   <script src="../_static/version_warning_offset.js"></script>
 
