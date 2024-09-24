@@ -256,7 +256,7 @@ class KernelDoc(Directive):
             opts.no_header = bool("no-header" in self.options)
             opts.use_names.append(self.options.get("doc"))
 
-        if "export" in self.options and self.options.get('export'):
+        if "export" in self.options:
             kerneldoc.Parser.gather_context(kerneldoc.readFile(opts.fname), ctx, opts)
             exp_files.extend((self.options.get('export') or "").replace(","," ").split())
             opts.error_missing = True
