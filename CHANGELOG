@@ -1,3 +1,8 @@
+2024-09-24 [20240924]
+
+	[fix] export option to kernel-doc directive
+	[fix] kernel_include.py: cope with docutils 0.21
+
 2023-10-20 [20231020]
 
 	[fix] build: don't include test folder in the distributed package
