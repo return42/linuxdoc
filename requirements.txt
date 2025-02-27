@@ -1,5 +1,0 @@
-fspath
-setuptools
-docutils
-sphinx
-

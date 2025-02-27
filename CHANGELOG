@@ -1,3 +1,7 @@
+YYYY-MM-DD [YYYYMMDD]
+
+  [mod] switch develop environment to hatch
+
 2024-09-24 [20240924]
 
 	[fix] export option to kernel-doc directive

@@ -1,0 +1,7 @@
+{
+  "enableTypeIgnoreComments": true,
+  "reportAny": false,
+  "reportExplicitAny": false,
+  "reportIgnoreCommentWithoutRule": false,
+  "reportUnusedCallResult": false,
+}
