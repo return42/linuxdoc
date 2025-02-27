@@ -1,0 +1,113 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# ==============================================================================
+[build-system]
+# ==============================================================================
+
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# ==============================================================================
+[project]
+# ==============================================================================
+
+name = "linuxdoc"
+dynamic = ["version"]
+
+description = "Sphinx-doc extensions & tools to extract documentation from C/C++ source file comments."
+readme = "README.rst"
+requires-python = ">=3.9"
+license = "AGPL-3.0-or-later"
+keywords = ["sphinx extension", "doc", "source code comments", "kernel-doc", "linux"]
+authors = [
+  { name = "Markus Heiser", email = "markus.heiser@darmarit.de" },
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Other Audience",
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Programming Language :: Python",
+  "Topic :: Software Development :: Documentation",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Text Processing",
+  "Topic :: Utilities",
+]
+dependencies = [
+  "fspath",
+  "setuptools",
+  "docutils",
+  "sphinx",
+]
+
+[project.urls]
+Documentation = "https://return42.github.io/linuxdoc"
+Issues = "https://github.com/return42/linuxdoc/issues"
+Source = "https://github.com/return42/linuxdoc"
+
+[project.scripts]
+"linuxdoc.rest" = "linuxdoc.rest:main"
+"linuxdoc.autodoc" = "linuxdoc.autodoc:main"
+"linuxdoc.lintdoc" = "linuxdoc.lint:main"
+"linuxdoc.grepdoc" = "linuxdoc.grepdoc:main"
+
+
+# ==============================================================================
+[tool.hatch]
+# ==============================================================================
+
+[tool.hatch.version]
+path = "linuxdoc/__pkginfo__.py"
+
+# hatch env: default
+# ------------------
+
+[tool.hatch.envs.default]
+python = "3.13"
+dependencies = [
+  "argparse-manpage",
+  "basedpyright==1.27.*",
+  "black==25.1.*",
+  "isort==6.0.*",
+  "pallets-sphinx-themes",
+  "pylint",
+  "pylint==3.3.*",
+  "sphinx-autobuild",
+  "sphinx-issues",
+  "sphinx-jinja",
+  "sphinx-tabs",
+  "sphinxcontrib-programoutput",
+  "tox",
+  "twine",
+]
+
+[tool.hatch.envs.default.scripts]
+
+fix = [
+  "isort {args:./linuxdoc ./tests}",
+  "black {args:./linuxdoc ./tests}",
+]
+
+isort-check = "isort --diff {args:./linuxdoc ./tests}"
+black-check = "black --check --diff {args:./linuxdoc ./tests}"
+pylint-check = "pylint --output-format=parseable {args:./linuxdoc ./tests}"
+basedpyright-check = "basedpyright {args:./linuxdoc ./tests}"
+
+check = [
+  "isort-check",
+  "black-check",
+  "pylint-check",
+  "basedpyright-check",
+]
+
+# ==============================================================================
+[tool.isort]
+# ==============================================================================
+
+profile = "black"
+atomic = true
+use_parentheses = true
+include_trailing_comma = true

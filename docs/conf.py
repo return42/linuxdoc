@@ -3,7 +3,6 @@
 # Sphinx documentation build configuration file
 
 import re
-import linuxdoc
 import linuxdoc.__pkginfo__ as PKG
 import sys, os
 
@@ -17,9 +16,9 @@ GIT_URL    = "https://github.com/return42/linuxdoc"
 GIT_BRANCH = 'master'
 
 project   = 'LinuxDoc'
-copyright = linuxdoc.__copyright__
-version   = linuxdoc.__version__
-release   = linuxdoc.__version__
+copyright = PKG.__copyright__
+version   = PKG.__version__
+release   = PKG.__version__
 author    = 'return42'
 show_authors = True
 

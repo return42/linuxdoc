@@ -12,11 +12,27 @@ Install
 =======
 
 `Install LinuxDoc <https://return42.github.io/linuxdoc/install.html>`__ using `pip
-<https://pip.pypa.io/en/stable/getting-started/>`__:
+<https://pip.pypa.io/en/stable/getting-started/>`__::
 
-.. code-block:: text
+  pip install --user -U linuxdoc
 
-   pip install --user -U linuxdoc
+
+Development
+===========
+
+This project is managed by `hatch <https://hatch.pypa.io>`_, for development
+tasks you should install ``hatch``::
+
+  $ pipx install hatch
+
+Format and *lint* your code before commit::
+
+  $ hatch run fix
+  $ hatch run check
+
+To enter the development environment use ``shell``::
+
+  $ hatch shell
 
 
 Links
@@ -26,12 +42,4 @@ Links
 - Releases:        https://pypi.org/project/linuxdoc/
 - Code:            https://github.com/return42/linuxdoc
 - Issue tracker:   https://github.com/return42/linuxdoc/issues
-
-
-============ ===============================================
-package:     linuxdoc (20240924)
-copyright:   2024 Markus Heiser
-e-mail:      markus.heiser@darmarIT.de
-license:     AGPLv3+
-============ ===============================================
-
+- License:         `AGPLv3+ <https://github.com/return42/linuxdoc/blob/master/LICENSE>`__
