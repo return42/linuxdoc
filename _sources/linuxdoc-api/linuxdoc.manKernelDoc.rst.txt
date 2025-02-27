@@ -1,0 +1,7 @@
+linuxdoc.manKernelDoc module
+============================
+
+.. automodule:: linuxdoc.manKernelDoc
+   :members:
+   :undoc-members:
+   :show-inheritance:

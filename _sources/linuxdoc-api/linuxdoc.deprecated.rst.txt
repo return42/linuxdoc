@@ -1,0 +1,7 @@
+linuxdoc.deprecated module
+==========================
+
+.. automodule:: linuxdoc.deprecated
+   :members:
+   :undoc-members:
+   :show-inheritance:

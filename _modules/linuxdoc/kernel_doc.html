@@ -1,0 +1,3783 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.1 and Furo 2024.08.06 -->
+        <title>linuxdoc.kernel_doc - LinuxDoc</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/linuxdoc.css?v=fdd445b8" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">LinuxDoc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/darmarIT_logo_128.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">LinuxDoc</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel-doc-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install LinuxDoc</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../linuxdoc-howto/index.html">LinuxDoc HowTo</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of LinuxDoc HowTo</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-syntax.html">kernel-doc syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-directive.html">kernel-doc in reST documents</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-examples.html">Examples &amp; Tests</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Examples &amp; Tests</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-tests.html">kernel-doc Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/all-in-a-tumble-src.html">source of <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/all-in-a-tumble-debug.html">kernel-doc from <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/all-in-a-tumble.html">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-modes.html">parsing modes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of parsing modes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/reST-kernel-doc-mode.html">reST kernel-doc mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/vintage-kernel-doc-mode.html">Vintage kernel-doc mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kfigure.html">Scalable figure and image handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/table-markup.html">About tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/cdomain.html">Customized sphinx c-domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/man-pages.html">man pages from kernel-doc comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kernel-include-directive.html">Use kernel-include in reST documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cmd-line.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Command line tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cmd-line/linuxdoc.rest.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmd-line/linuxdoc.lintdoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmd-line/linuxdoc.autodoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.autodoc</span></code></a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.html">linuxdoc package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of linuxdoc package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.autodoc.html">linuxdoc.autodoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.cdomain.html">linuxdoc.cdomain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.compat.html">linuxdoc.compat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.deprecated.html">linuxdoc.deprecated module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.grepdoc.html">linuxdoc.grepdoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.kernel_doc.html">linuxdoc.kernel_doc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.kernel_include.html">linuxdoc.kernel_include module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.kfigure.html">linuxdoc.kfigure module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.lint.html">linuxdoc.lint module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html">linuxdoc.manKernelDoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.rest.html">linuxdoc.rest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html">linuxdoc.rstFlatTable module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html">linuxdoc.rstKernelDoc module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for linuxdoc.kernel_doc</h1><div class="highlight"><pre>
+<span></span>#!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# pylint: disable=missing-docstring, arguments-differ, invalid-name
+# pylint: disable=too-many-arguments, too-many-locals, too-many-branches
+# pylint: disable=too-many-nested-blocks, too-many-lines
+# pylint: disable=too-many-statements, useless-object-inheritance
+
+
+&quot;&quot;&quot;
+kernel_doc
+~~~~~~~~~~
+
+Implementation of the ``kernel-doc`` parser.  The kernel-doc parser extracts
+:ref:`kernel-doc markup &lt;kernel-doc-intro&gt;` from source code comments.
+
+This module provides an API which could be used by a sphinx-doc generator
+extension and a command-line interface
+
+Compared with the Perl kernel-doc script used in the Linux kernel, this
+implementation has additional features like *parse options* for a smooth
+integration of reStructuredText (reST) markup in the source code comments.  In
+combination with the (separate) *kernel-doc* reST directive (which uses this
+module), the documentation generation becomes more clear and flexible.
+
+The architecture of the parser is simple and consists of three types of
+objects (three classes).
+
+* :py:obj:`Parser`: The parser parses the source-file and dumps extracted
+  kernel-doc data.
+
+* subclasses of class :py:obj:`TranslatorAPI`: to translate the dumped
+  kernel-doc data into output formats. There exists two implementations:
+
+  - :py:obj:`NullTranslator`: translates nothing, just parse
+
+  - :py:obj:`ReSTTranslator`: translates dumped kernel-doc data to reST markup
+
+* :py:obj:`ParseOptions`: a container full with options to control *parsing* and
+  *translation*.
+
+With the :py:obj:`NullTranslator` a source file is parsed only once while
+different output could be generated (multiple times) just by changing the
+Translator (e.g. with the :py:obj:`ReSTTranslator`) and the option
+container. With parsing the source files only once, the building time is reduced
+n-times.
+
+&quot;&quot;&quot;
+
+
+import codecs
+import collections
+import copy
+import os
+import re
+import sys
+import textwrap
+
+import six
+from fspath import OS_ENV
+
+from . import compat
+
+# ==============================================================================
+# common globals
+# ==============================================================================
+
+# The version numbering follows numbering of the specification
+# (Documentation/books/kernel-doc-HOWTO).
+__version__ = &quot;1.0&quot;
+
+# ==============================================================================
+# regular expresssions and helper used by the parser and the translator
+# ==============================================================================
+
+
+<div class="viewcode-block" id="RE">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE">[docs]</a>
+class RE(object):
+    &quot;&quot;&quot;regular expression that stores last match (like Perl&#39;s ``=~`` operator)&quot;&quot;&quot;
+
+    def __init__(self, *args, **kwargs):
+        self.re = re.compile(*args, **kwargs)
+        self.last_match = None
+
+<div class="viewcode-block" id="RE.match">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE.match">[docs]</a>
+    def match(self, *args, **kwargs):
+        self.last_match = self.re.match(*args, **kwargs)
+        return self.last_match</div>
+
+
+<div class="viewcode-block" id="RE.search">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE.search">[docs]</a>
+    def search(self, *args, **kwargs):
+        self.last_match = self.re.search(*args, **kwargs)
+        return self.last_match</div>
+
+
+    def __getattr__(self, attr):
+        return getattr(self.re, attr)
+
+    def __getitem__(self, group):
+        if group &lt; 0 or group &gt; self.groups - 1:
+            raise IndexError(&quot;group index out of range (max %s groups)&quot; % self.groups)
+        if self.last_match is None:
+            raise IndexError(&quot;nothing has matched / no groups&quot;)
+        return self.last_match.group(group + 1)</div>
+
+
+
+# these regular expresions has been *stolen* from the kernel-doc perl script.
+
+doc_start = RE(r&quot;^/\*\*\s*$&quot;)  # Allow whitespace at end of comment start.
+doc_end = RE(r&quot;\s*\*+/&quot;)
+doc_com = RE(r&quot;\s*\*\s*&quot;)
+doc_com_section = RE(
+    r&quot;\s*\*\s{1,8}&quot;
+)  # more than 8 spaces (one tab) as prefix is not a new section comment
+doc_com_body = RE(r&quot;\s*\* ?&quot;)
+doc_decl = RE(doc_com.pattern + r&quot;(\w+)&quot;)
+# doc_decl_ident   = RE(r&quot;\s*([\w\s]+?)\s*[\(\)]\s*[-:]&quot;)
+doc_decl_ident = RE(
+    doc_com.pattern + r&quot;(struct|union|enum|typedef|function|macro)\b\s*(\w+)(\(\))?&quot;
+)
+doc_decl_purpose = RE(r&quot;[-:](.*)$&quot;)
+
+# except pattern like &quot;http://&quot;, a whitespace is required after the colon
+doc_sect_except = RE(doc_com.pattern + r&quot;[^\s@](.*)?:[^\s]&quot;)
+
+# doc_sect = RE(doc_com.pattern + r&quot;([&quot; + doc_special.pattern + r&quot;]?[\w\s]+):(.*)&quot;)
+# &quot;section header:&quot; names must be unique per function (or struct,union, typedef,
+# enum). Additional condition: the header name should have 3 characters at least!
+doc_sect = RE(
+    doc_com_section.pattern
+    + r&quot;(&quot;
+    + r&quot;@\w[^:]*&quot;  # &quot;@foo: lorem&quot; or
+    + r&quot;|&quot;
+    + r&quot;@\w[.\w]+[^:]*&quot;  # &quot;@foo.bar: lorem&quot; or
+    + r&quot;|&quot;
+    + r&quot;\@\.\.\.&quot;  # ellipsis &quot;@...: lorem&quot; or
+    + r&quot;|&quot;
+    + r&quot;\w[\w\s]+\w&quot;  # e.g. &quot;Return: lorem&quot;
+    + r&quot;)&quot;
+    + r&quot;:(.*?)\s*$&quot;
+)  # this matches also strings like &quot;http://...&quot; (doc_sect_except)
+
+doc_sect_reST = RE(
+    doc_com_section.pattern
+    + r&quot;(&quot;
+    + r&quot;@\w[^:]*&quot;  # &quot;@foo: lorem&quot; or
+    + r&quot;|&quot;
+    + r&quot;@\w[.\w]+[^:]*&quot;  # &quot;@foo.bar: lorem&quot; or
+    + r&quot;|&quot;
+    + r&quot;\@\.\.\.&quot;  # ellipsis &quot;@...: lorem&quot; or
+    # a tribute to vintage markups, when in reST mode ...
+    + r&quot;|description|context|returns?|notes?|examples?|introduction|intro&quot;
+    + r&quot;)&quot;
+    + r&quot;:(.*?)\s*$&quot;,  # this matches also strings like &quot;http://...&quot; (doc_sect_except)
+    flags=re.IGNORECASE,
+)
+
+reST_sect = RE(doc_com_section.pattern + r&quot;(&quot; r&quot;\w[\w\s]+\w&quot; + r&quot;)&quot; + r&quot;:\s*$&quot;)
+
+doc_content = RE(doc_com_body.pattern + r&quot;(.*)&quot;)
+doc_block = RE(doc_com.pattern + r&quot;DOC:\s*(.*)?&quot;)
+
+# state: 5 - gathering documentation outside main block
+doc_state5_start = RE(r&quot;^\s*/\*\*\s*$&quot;)
+doc_state5_sect = RE(r&quot;\s*\*\s*(@\s*[\w][\w\.]*\s*):(.*)&quot;)
+
+doc_state5_end = RE(r&quot;^\s*\*/\s*$&quot;)
+doc_state5_oneline = RE(r&quot;^\s*/\*\*\s*(@[\w\s]+):\s*(.*)\s*\*/\s*$&quot;)
+
+# match expressions used to find embedded type information
+type_enum_full = RE(r&quot;(?&lt;=\s)\&amp;(enum)\s*([_\w]+)&quot;)
+type_struct_full = RE(r&quot;(?&lt;=\s)\&amp;(struct)\s*([_\w]+)&quot;)
+type_typedef_full = RE(r&quot;(?&lt;=\s)\&amp;(typedef)\s*([_\w]+)&quot;)
+type_union_full = RE(r&quot;(?&lt;=\s)\&amp;(union)\s*([_\w]+)&quot;)
+type_member = RE(r&quot;(?&lt;=\s)\&amp;([_\w]+)((\.|-&gt;)[_\w]+)&quot;)
+type_member_func = RE(type_member.pattern + r&quot;\(\)&quot;)
+type_func = RE(r&quot;(?&lt;=\s)(\w+)(?&lt;!\\)\(\)&quot;)
+type_constant = RE(r&quot;(?&lt;=\s)\%([-_\w]+)&quot;)
+type_param = RE(r&quot;(?&lt;=\s)\@(\w*((\.\w+)|(-&gt;\w+))*(\.\.\.)?)&quot;)
+type_env = RE(r&quot;(?&lt;=\s)(\$\w+)&quot;)
+type_struct = RE(r&quot;(?&lt;=\s)\&amp;((struct\s*)*[_\w]+)&quot;)
+
+esc_type_prefix = RE(r&quot;\\([\@\%\&amp;\$\(])&quot;)
+
+CR_NL = RE(r&quot;[\r\n]&quot;)
+C99_comments = RE(r&quot;//.*$&quot;)
+C89_comments = RE(r&quot;/\*.*?\*/&quot;)
+
+C_STRUCT = RE(r&quot;struct\s+(\w+)\s*{(.*)}&quot;)
+C_UNION = RE(r&quot;union\s+(\w+)\s*{(.*)}&quot;)
+C_STRUCT_UNION = RE(r&quot;(struct|union)\s+(\w+)\s*{(.*)}&quot;)
+C_ENUM = RE(r&quot;enum\s+(\w+)\s*{(.*)}&quot;)
+C_TYPEDEF = RE(r&quot;typedef.*\s+(\w+)\s*;&quot;)
+
+# typedef of a function pointer
+_typedef_type = r&quot;((?:\s+[\w\*]+\b){1,8})\s*&quot;
+_typedef_ident = r&quot;\*?\s*(\w\S+)\s*&quot;
+_typedef_args = r&quot;\s*\((.*)\);&quot;
+C_FUNC_TYPEDEF = RE(
+    r&quot;typedef&quot; + _typedef_type + r&quot;\(&quot; + _typedef_ident + r&quot;\)&quot; + _typedef_args
+)
+C_FUNC_TYPEDEF_2 = RE(r&quot;typedef&quot; + _typedef_type + _typedef_ident + _typedef_args)
+
+MACRO = RE(r&quot;^#&quot;)
+MACRO_define = RE(r&quot;^#\s*define\s+&quot;)
+
+SYSCALL_DEFINE = RE(r&quot;^\s*SYSCALL_DEFINE.*\(&quot;)
+SYSCALL_DEFINE0 = RE(r&quot;^\s*SYSCALL_DEFINE0&quot;)
+
+TP_PROTO = RE(r&quot;TP_PROTO\((.*?)\)&quot;)
+TRACE_EVENT = RE(r&quot;TRACE_EVENT&quot;)
+TRACE_EVENT_name = RE(r&quot;TRACE_EVENT\((.*?),&quot;)
+DEFINE_EVENT = RE(r&quot;DEFINE_EVENT&quot;)
+DEFINE_EVENT_name = RE(r&quot;DEFINE_EVENT\((.*?),(.*?),&quot;)
+DEFINE_SINGLE_EVENT = RE(r&quot;DEFINE_SINGLE_EVENT&quot;)
+DEFINE_SINGLE_EVENT_name = RE(r&quot;DEFINE_SINGLE_EVENT\((.*?),&quot;)
+
+FUNC_PROTOTYPES = [
+    # RE(r&quot;^(\w+)\s+\(\*([a-zA-Z0-9_]+)\)\s*\(([^\(]*)\)&quot;) # match: void (*foo) (int bar);
+    RE(r&quot;^()([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)&quot;),
+    RE(r&quot;^(\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)&quot;),
+    RE(r&quot;^(\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)&quot;),
+    RE(r&quot;^()([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+    RE(r&quot;^(\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+    RE(r&quot;^(\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+\s+\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+\s+\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+    RE(r&quot;^(\w+\s+\w+\s*\*\s*\w+\s*\*+\s*)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)&quot;),
+]
+
+# MODULE_AUTHOR(&quot;...&quot;); /  MODULE_DESCRIPTION(&quot;...&quot;); / MODULE_LICENSE(&quot;...&quot;);
+#
+MODULE_INFO = RE(
+    r&#39;^\s*(MODULE_)(AUTHOR|DESCRIPTION|LICENSE)\s*\(\s*&quot;([^&quot;]+)&quot;&#39;, flags=re.M
+)
+
+WHITESPACE = RE(r&quot;\s+&quot;, flags=re.UNICODE)
+
+
+<div class="viewcode-block" id="normalize_ws">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_ws">[docs]</a>
+def normalize_ws(string):
+    &quot;&quot;&quot;strip needles whitespaces.
+
+    Substitute consecutive whitespaces with one single space and strip
+    trailing/leading whitespaces&quot;&quot;&quot;
+
+    string = WHITESPACE.sub(&quot; &quot;, string)
+    return string.strip()</div>
+
+
+
+ID_CHARS = RE(r&quot;[^A-Za-z0-9\._]&quot;)
+
+
+<div class="viewcode-block" id="normalize_id">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_id">[docs]</a>
+def normalize_id(ID):
+    &quot;&quot;&quot;substitude invalid chars of the ID with ``-`` and mak it lowercase&quot;&quot;&quot;
+    return ID_CHARS.sub(&quot;-&quot;, ID).lower()</div>
+
+
+
+RST_DIRECTIVE_PATTERN = r&quot;&quot;&quot;
+  \.\.[ ]+          # explicit markup start
+  (%s)              # directive name
+  [ ]?              # optional space
+  ::                # directive delimiter
+  ([ ]+|$)          # whitespace or end of line
+  &quot;&quot;&quot;
+
+RST_CODE_BLOCK = RE(RST_DIRECTIVE_PATTERN % &quot;code-block&quot;, re.VERBOSE | re.UNICODE)
+RST_LITERAL_BLOCK = RE(r&quot;(?&lt;!\\)(\\\\)*::$&quot;)
+RST_INDENT = RE(r&quot;^(\s*)[^\s]&quot;)
+
+
+<div class="viewcode-block" id="map_row">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.map_row">[docs]</a>
+def map_row(row, map_table):
+    for regexpr, substitute in map_table:
+        if substitute is not None:
+            # python has only fixed width lookbehind: add temporarily leading space
+            row = regexpr.sub(substitute, &quot; &quot; + row)[1:]
+    return row</div>
+
+
+
+<div class="viewcode-block" id="highlight_parser">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.highlight_parser">[docs]</a>
+def highlight_parser(text, map_table):
+    block_indent = 0
+    row_indent = 0
+    state = &quot;highlight&quot;  # [highlight|literal]
+    out = []
+    in_rows = text.splitlines()
+
+    while in_rows:
+        row = in_rows.pop(0)
+
+        if not row.strip():  # pass-through empty lines &amp; continue
+            out.append(row)
+            continue
+
+        RST_INDENT.search(row)
+        indent = len(RST_INDENT[0].expandtabs())
+
+        if state == &quot;highlight&quot;:
+            out.append(map_row(row, map_table))
+            # prepare next state
+            if RST_LITERAL_BLOCK.search(row) or RST_CODE_BLOCK.search(row):
+                state = &quot;literal&quot;
+                block_indent = row_indent + 1
+            continue
+
+        if state == &quot;literal&quot;:
+            if indent &lt; block_indent:
+                # this is a new block, push row back onto the stack and repeat
+                # the loop
+                state = &quot;highlight&quot;
+                block_indent = indent
+                in_rows.insert(0, row)
+                continue
+
+            out.append(row)
+
+    return &quot;\n&quot;.join(out)</div>
+
+
+
+# ==============================================================================
+# helper
+# ==============================================================================
+
+
+<div class="viewcode-block" id="openTextFile">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.openTextFile">[docs]</a>
+def openTextFile(fname, mode=&quot;r&quot;, encoding=&quot;utf-8&quot;, errors=&quot;strict&quot;):
+    return codecs.open(fname, mode=mode, encoding=encoding, errors=errors)</div>
+
+
+
+<div class="viewcode-block" id="readFile">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.readFile">[docs]</a>
+def readFile(fname, encoding=&quot;utf-8&quot;, errors=&quot;strict&quot;):
+    with openTextFile(fname, encoding=encoding, errors=errors) as f:
+        return f.read()</div>
+
+
+
+<div class="viewcode-block" id="Container">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Container">[docs]</a>
+class Container(dict):
+    @property
+    def __dict__(self):
+        return self
+
+    def __getattr__(self, attr):
+        return self[attr]
+
+    def __setattr__(self, attr, val):
+        self[attr] = val</div>
+
+
+
+class DevNull(object):  # pylint: disable=too-few-public-methods
+    &quot;&quot;&quot;A dev/null file descriptor.&quot;&quot;&quot;
+
+    def write(self, *args, **kwargs):
+        pass
+
+
+DevNull = DevNull()
+
+SRCTREE = OS_ENV.get(&quot;srctree&quot;, os.getcwd())
+DEFAULT_EXP_METHOD = &quot;macro&quot;
+&quot;&quot;&quot;Default value of ``:exp-method:``&quot;&quot;&quot;
+
+DEFAULT_EXP_IDS = [&quot;EXPORT_SYMBOL&quot;, &quot;EXPORT_SYMBOL_GPL&quot;, &quot;EXPORT_SYMBOL_GPL_FUTURE&quot;]
+&quot;&quot;&quot;Default value of ``:exp-ids:``&quot;&quot;&quot;
+
+# ==============================================================================
+# Logging stuff
+# ==============================================================================
+
+STREAM = Container(
+    # pipes used by the application &amp; logger
+    appl_out=sys.__stdout__,
+    log_out=sys.__stderr__,
+)
+
+VERBOSE = False
+DEBUG = False
+INSPECT = False
+
+
+<div class="viewcode-block" id="SimpleLog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog">[docs]</a>
+class SimpleLog(object):
+
+    LOG_FORMAT = &quot;%(logclass)s: %(message)s\n&quot;
+
+<div class="viewcode-block" id="SimpleLog.error">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.error">[docs]</a>
+    def error(self, message, **replace):
+        message = message % replace
+        replace.update(dict(message=message, logclass=&quot;ERROR&quot;))
+        STREAM.log_out.write(self.LOG_FORMAT % replace)</div>
+
+
+<div class="viewcode-block" id="SimpleLog.warn">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.warn">[docs]</a>
+    def warn(self, message, **replace):
+        message = message % replace
+        replace.update(dict(message=message, logclass=&quot;WARN&quot;))
+        STREAM.log_out.write(self.LOG_FORMAT % replace)</div>
+
+
+<div class="viewcode-block" id="SimpleLog.info">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.info">[docs]</a>
+    def info(self, message, **replace):
+        if not VERBOSE:
+            return
+        message = message % replace
+        replace.update(dict(message=message, logclass=&quot;INFO&quot;))
+        STREAM.log_out.write(self.LOG_FORMAT % replace)</div>
+
+
+<div class="viewcode-block" id="SimpleLog.debug">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.debug">[docs]</a>
+    def debug(self, message, **replace):
+        if not DEBUG:
+            return
+        message = message % replace
+        replace.update(dict(message=message, logclass=&quot;DEBUG&quot;))
+        STREAM.log_out.write(self.LOG_FORMAT % replace)</div>
+</div>
+
+
+
+LOG = SimpleLog()
+
+
+<div class="viewcode-block" id="TranslatorAPI">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI">[docs]</a>
+class TranslatorAPI(object):
+    &quot;&quot;&quot;
+    Abstract kernel-doc translator.
+
+    :cvar list cls.HIGHLIGHT_MAP:  highlight mapping
+    :cvar tuple cls.LINE_COMMENT:  tuple with start-/end- comment tags
+    &quot;&quot;&quot;
+
+    HIGHLIGHT_MAP = [
+        (type_constant, None),
+        (type_func, None),
+        (type_param, None),
+        (type_struct_full, None),
+        (type_struct, None),
+        (type_enum_full, None),
+        (type_env, None),
+        (type_member_func, None),
+        (type_member, None),
+    ]
+
+    LINE_COMMENT = (&quot;# &quot;, &quot;&quot;)
+
+    def __init__(self):
+        self.options = None
+        self.parser = None
+        self.dumped_names = []
+        self.translated_names = set()
+
+<div class="viewcode-block" id="TranslatorAPI.setParser">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.setParser">[docs]</a>
+    def setParser(self, parser):
+        self.parser = parser
+        self.dumped_names = []</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.setOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.setOptions">[docs]</a>
+    def setOptions(self, options):
+        self.options = options</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.highlight">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.highlight">[docs]</a>
+    def highlight(self, text):
+        &quot;&quot;&quot;returns *highlighted* text&quot;&quot;&quot;
+        if self.options.highlight:
+            return highlight_parser(text, self.HIGHLIGHT_MAP)
+        return text</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.get_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.get_preamble">[docs]</a>
+    def get_preamble(self):
+        retVal = &quot;&quot;
+        if self.options.preamble == &quot;&quot;:
+            retVal = self.comment(
+                &quot;src-file: %s&quot; % (self.options.rel_fname or self.options.fname)
+            )
+        elif self.options.preamble:
+            retVal = self.options.preamble % self
+        return retVal</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.get_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.get_epilog">[docs]</a>
+    def get_epilog(self):
+        retVal = &quot;&quot;
+        if self.options.epilog == &quot;&quot;:
+            retVal = self.comment(&quot;\nThis file was automatic generated / don&#39;t edit.&quot;)
+        elif self.options.epilog:
+            retVal = self.options.epilog % self
+        return retVal</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.comment">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.comment">[docs]</a>
+    @classmethod
+    def comment(cls, cont):
+        &quot;&quot;&quot;returns *commented* text&quot;&quot;&quot;
+
+        start, end = cls.LINE_COMMENT
+        if not start and not end:
+            return cont
+
+        retVal = []
+        for line in cont.split(&quot;\n&quot;):
+            if line.strip():
+                retVal.append(start + line + end)
+            else:
+                retVal.append(&quot;&quot;)
+        return &quot;\n&quot;.join(retVal)</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.write">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.write">[docs]</a>
+    def write(self, *objects):
+        &quot;&quot;&quot;Write *objects* to stream.
+
+        Write Unicode-values of the *objects* to :py:attr:``self.options.out``.
+
+        :param objects: The positional arguments are the objects with the
+            content to write.
+        &quot;&quot;&quot;
+        for obj in objects:
+            cont = six.text_type(obj)
+            self.options.out.write(cont)</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.write_comment">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.write_comment">[docs]</a>
+    def write_comment(self, *objects):
+        &quot;&quot;&quot;Write *objects* as comments to stream.&quot;&quot;&quot;
+        for obj in objects:
+            cont = six.text_type(obj)
+            self.write(self.comment(cont))</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.eof">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.eof">[docs]</a>
+    def eof(self):
+        if self.options.eof_newline:
+            self.write(&quot;\n&quot;)</div>
+
+
+    # API
+    # ---
+
+<div class="viewcode-block" id="TranslatorAPI.output_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_preamble">[docs]</a>
+    def output_preamble(self):
+        raise NotImplementedError</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.output_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_epilog">[docs]</a>
+    def output_epilog(self):
+        raise NotImplementedError</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.output_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_prefix">[docs]</a>
+    def output_prefix(self):
+        raise NotImplementedError</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.output_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_suffix">[docs]</a>
+    def output_suffix(self):
+        raise NotImplementedError</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.output_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_DOC">[docs]</a>
+    def output_DOC(
+        self,
+        sections=None,  # ctx.sections
+    ):
+        raise NotImplementedError</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.output_function_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_function_decl">[docs]</a>
+    def output_function_decl(
+        self,
+        function=None,  # ctx.decl_name
+        return_type=None,  # ctx.return_type
+        parameterlist=None,  # ctx.parameterlist
+        parameterdescs=None,  # ctx.parameterdescs
+        parametertypes=None,  # ctx.parametertypes
+        sections=None,  # ctx.sections
+        purpose=None,  # ctx.decl_purpose
+        decl_type=None,  # ctx.decl_type
+    ):
+        raise NotImplementedError</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.output_struct_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_struct_decl">[docs]</a>
+    def output_struct_decl(
+        self,
+        decl_name=None,  # ctx.decl_name
+        decl_type=None,  # ctx.decl_type
+        parameterlist=None,  # ctx.parameterlist
+        parameterdescs=None,  # ctx.parameterdescs
+        parametertypes=None,  # ctx.parametertypes
+        sections=None,  # ctx.sections
+        purpose=None,  # ctx.decl_purpose
+        definition=None,  # ctx.definition
+    ):
+        raise NotImplementedError</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.output_union_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_union_decl">[docs]</a>
+    def output_union_decl(self, *args, **kwargs):
+        self.output_struct_decl(*args, **kwargs)</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.output_enum_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_enum_decl">[docs]</a>
+    def output_enum_decl(
+        self,
+        enum=None,  # ctx.decl_name
+        parameterlist=None,  # ctx.parameterlist
+        parameterdescs=None,  # ctx.parameterdescs
+        sections=None,  # ctx.sections
+        purpose=None,  # ctx.decl_purpose
+    ):
+        raise NotImplementedError</div>
+
+
+<div class="viewcode-block" id="TranslatorAPI.output_typedef_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_typedef_decl">[docs]</a>
+    def output_typedef_decl(
+        self,
+        typedef=None,  # ctx.decl_name
+        sections=None,  # ctx.sections
+        purpose=None,  # ctx.decl_purpose
+    ):
+        raise NotImplementedError</div>
+</div>
+
+
+
+<div class="viewcode-block" id="NullTranslator">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator">[docs]</a>
+class NullTranslator(TranslatorAPI):
+    &quot;&quot;&quot;
+    Null translator, translates nothing, just parse.
+    &quot;&quot;&quot;
+
+    HIGHLIGHT_MAP = []
+    LINE_COMMENT = (&quot;&quot;, &quot;&quot;)
+
+    # pylint: disable=signature-differs
+<div class="viewcode-block" id="NullTranslator.output_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_preamble">[docs]</a>
+    def output_preamble(self, *args, **kwargs):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.output_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_epilog">[docs]</a>
+    def output_epilog(self, *args, **kwargs):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.output_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_prefix">[docs]</a>
+    def output_prefix(self):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.output_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_suffix">[docs]</a>
+    def output_suffix(self):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.output_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_DOC">[docs]</a>
+    def output_DOC(self, *args, **kwargs):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.output_function_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_function_decl">[docs]</a>
+    def output_function_decl(self, *args, **kwargs):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.output_struct_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_struct_decl">[docs]</a>
+    def output_struct_decl(self, *args, **kwargs):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.output_union_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_union_decl">[docs]</a>
+    def output_union_decl(self, *args, **kwargs):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.output_enum_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_enum_decl">[docs]</a>
+    def output_enum_decl(self, *args, **kwargs):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.output_typedef_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_typedef_decl">[docs]</a>
+    def output_typedef_decl(self, *args, **kwargs):
+        pass</div>
+
+
+<div class="viewcode-block" id="NullTranslator.eof">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.eof">[docs]</a>
+    def eof(self):
+        pass</div>
+</div>
+
+
+
+<div class="viewcode-block" id="ListTranslator">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator">[docs]</a>
+class ListTranslator(TranslatorAPI):
+    &quot;&quot;&quot;
+    Generates a list of kernel-doc symbols.
+    &quot;&quot;&quot;
+
+    def __init__(self, list_exported, list_internal_types, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.list_exported = list_exported
+        self.list_internal_types = list_internal_types
+
+        self.names = dict()
+        for t in Parser.DOC_TYPES:
+            self.names[t] = []
+
+<div class="viewcode-block" id="ListTranslator.get_type">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.get_type">[docs]</a>
+    def get_type(self, name):
+        for t, l in self.names.items():
+            if name in l:
+                return t
+        return None</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_preamble">[docs]</a>
+    def output_preamble(self):
+        pass</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_epilog">[docs]</a>
+    def output_epilog(self):
+        pass</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_prefix">[docs]</a>
+    def output_prefix(self):
+        pass</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_suffix">[docs]</a>
+    def output_suffix(self):
+        pass</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_DOC">[docs]</a>
+    def output_DOC(self, sections=None):
+        for header in sections.keys():
+            self.names[&quot;DOC&quot;].append(header)</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_function_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_function_decl">[docs]</a>
+    def output_function_decl(self, **kwargs):
+        if kwargs[&quot;decl_type&quot;] == &quot;macro&quot;:
+            self.names[&quot;macro&quot;].append(kwargs[&quot;function&quot;])
+        elif kwargs[&quot;decl_type&quot;] == &quot;typedef&quot;:
+            self.names[&quot;typedef&quot;].append(kwargs[&quot;function&quot;])
+        else:
+            self.names[&quot;function&quot;].append(kwargs[&quot;function&quot;])</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_struct_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_struct_decl">[docs]</a>
+    def output_struct_decl(self, **kwargs):
+        self.names[&quot;struct&quot;].append(kwargs[&quot;decl_name&quot;])</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_union_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_union_decl">[docs]</a>
+    def output_union_decl(self, **kwargs):
+        self.names[&quot;union&quot;].append(kwargs[&quot;decl_name&quot;])</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_enum_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_enum_decl">[docs]</a>
+    def output_enum_decl(self, **kwargs):
+        self.names[&quot;enum&quot;].append(kwargs[&quot;enum&quot;])</div>
+
+
+<div class="viewcode-block" id="ListTranslator.output_typedef_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_typedef_decl">[docs]</a>
+    def output_typedef_decl(self, **kwargs):
+        self.names[&quot;typedef&quot;].append(kwargs[&quot;typedef&quot;])</div>
+
+
+<div class="viewcode-block" id="ListTranslator.eof">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.eof">[docs]</a>
+    def eof(self):
+
+        if self.list_exported:
+            self.parser.info(&quot;list exported symbols&quot;)
+            for name in self.parser.ctx.exported_symbols:
+                t = self.get_type(name)
+                if t is None:
+                    self.parser.warn(
+                        &quot;exported symbol &#39;%(name)s&#39; is undocumented&quot;, name=name
+                    )
+                    t = &quot;undocumented&quot;
+                self.write(&quot;[exported %-14s] %s \n&quot; % (t, name))
+
+        if self.list_internal_types:
+            self.parser.info(&quot;list internal names&quot;)
+            for t, l in self.names.items():
+                if not (
+                    &quot;all&quot; in self.list_internal_types or t in self.list_internal_types
+                ):
+                    continue
+                for name in l:
+                    if name not in self.parser.ctx.exported_symbols:
+                        self.write(&quot;[internal %-10s] %s \n&quot; % (t, name))</div>
+</div>
+
+
+
+<div class="viewcode-block" id="ReSTTranslator">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator">[docs]</a>
+class ReSTTranslator(TranslatorAPI):
+    &quot;&quot;&quot;
+    Translate kernel-doc to reST markup.
+
+    :cvar list HIGHLIGHT_map: Escape common reST (in-line) markups.  Classic
+        kernel-doc comments contain characters and strings like ``*`` or
+        trailing ``_``, which are in-line markups in reST. These special strings
+        has to be masked in reST.
+
+    &quot;&quot;&quot;
+
+    INDENT = &quot;    &quot;
+    LINE_COMMENT = (&quot;.. &quot;, &quot;&quot;)
+
+    HIGHLIGHT_MAP = [
+        # the regexpr are partial *overlapping*, mind the order!
+        (type_enum_full, r&quot;\ :c:type:`\1 \2 &lt;\2&gt;`\ &quot;),
+        (type_struct_full, r&quot;\ :c:type:`\1 \2 &lt;\2&gt;`\ &quot;),
+        (type_typedef_full, r&quot;\ :c:type:`\1 \2 &lt;\2&gt;`\ &quot;),
+        (type_union_full, r&quot;\ :c:type:`\1 \2 &lt;\2&gt;`\ &quot;),
+        (type_member_func, r&quot;\ :c:type:`\1\2() &lt;\1&gt;`\ &quot;),
+        (type_member, r&quot;\ :c:type:`\1\2 &lt;\1&gt;`\ &quot;),
+        (type_func, r&quot;\ :c:func:`\1`\ &quot;),
+        (type_constant, r&quot;\ ``\1``\ &quot;),
+        (type_param, r&quot;\ ``\1``\ &quot;),
+        (type_env, r&quot;\ ``\1``\ &quot;),
+        (type_struct, r&quot;\ :c:type:`struct \1 &lt;\1&gt;`\ &quot;)
+        # at least replace escaped %, &amp; and $
+        ,
+        (esc_type_prefix, r&quot;\1&quot;),
+    ]
+
+    MASK_REST_INLINES = [
+        (RE(r&quot;(\w)_([\s\*])&quot;), r&quot;\1\\_\2&quot;),  # trailing underline
+        (RE(r&quot;([\s\*])_(\w)&quot;), r&quot;\1\\_\2&quot;),  # leading underline
+        (RE(r&quot;(\*)&quot;), r&quot;\\\1&quot;),  # emphasis
+        (RE(r&quot;(`)&quot;), r&quot;\\\1&quot;),  # interpreted text &amp; inline literals
+        (RE(r&quot;(\|)&quot;), r&quot;\\\1&quot;),  # substitution references
+    ]
+
+    FUNC_PTR = RE(r&quot;([^\(]*\(\*)\s*\)\s*\(([^\)]*)\)&quot;)
+    BITFIELD = RE(r&quot;^(.*?)\s*(:.*)&quot;)
+
+<div class="viewcode-block" id="ReSTTranslator.highlight">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.highlight">[docs]</a>
+    def highlight(self, text):
+        if self.options.markup == &quot;kernel-doc&quot;:
+            text = highlight_parser(text, self.MASK_REST_INLINES + self.HIGHLIGHT_MAP)
+        elif self.options.markup == &quot;reST&quot;:
+            text = highlight_parser(text, self.HIGHLIGHT_MAP)
+        return text</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.format_block">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.format_block">[docs]</a>
+    def format_block(self, content):
+        &quot;&quot;&quot;format the content (string)&quot;&quot;&quot;
+        lines = []
+        if self.options.markup == &quot;kernel-doc&quot;:
+            lines = [l.strip() for l in content.split(&quot;\n&quot;)]
+        elif self.options.markup == &quot;reST&quot;:
+            lines = [l.rstrip() for l in content.split(&quot;\n&quot;)]
+        return &quot;\n&quot;.join(lines)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.write_anchor">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_anchor">[docs]</a>
+    def write_anchor(self, refname):
+        ID = refname
+        if self.options.id_prefix:
+            ID = self.options.id_prefix + &quot;.&quot; + ID
+        ID = normalize_id(ID)
+        self.write(&quot;\n.. _`%s`:\n&quot; % ID)</div>
+
+
+    HEADER_TAGS = (
+        &quot;#&quot;  # level 0 / part with overline
+        &quot;=&quot;  # level 1 / chapter with overline
+        &quot;=&quot;  # level 2 / sec
+        &quot;-&quot;  # level 3 / subsec
+        &quot;-&quot;  # level 4 / subsubsec
+        &#39;&quot;&#39;
+    )  # level 5 / para
+
+<div class="viewcode-block" id="ReSTTranslator.write_header">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_header">[docs]</a>
+    def write_header(self, header, sec_level=2):
+        header = self.highlight(header)
+        sectag = self.HEADER_TAGS[sec_level]
+        if sec_level &lt; 2:
+            self.write(&quot;\n&quot;, (sectag * len(header)))
+        self.write(&quot;\n%s&quot; % header)
+        self.write(&quot;\n&quot;, (sectag * len(header)), &quot;\n&quot;)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.write_section">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_section">[docs]</a>
+    def write_section(self, header, content, sec_level=2, ID=None):
+        if not self.options.no_header:
+            if ID:
+                self.write_anchor(ID)
+            self.write_header(header, sec_level=sec_level)
+        if header.lower() == &quot;example&quot;:
+            self.write(&quot;\n.. code-block:: c\n\n&quot;)
+            for l in textwrap.dedent(content).split(&quot;\n&quot;):
+                if not l.strip():
+                    self.write(&quot;\n&quot;)
+                else:
+                    self.write(self.INDENT, l, &quot;\n&quot;)
+        else:
+            content = self.format_block(content)
+            content = self.highlight(content)
+            self.write(&quot;\n&quot; + content)
+
+        self.write(&quot;\n&quot;)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.write_definition">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_definition">[docs]</a>
+    def write_definition(self, term, definition, prefix=&quot;&quot;):
+        term = normalize_ws(term)  # term has to be a &quot;one-liner&quot;
+        term = self.highlight(term)
+        if definition != Parser.undescribed:
+            definition = self.format_block(definition)
+            definition = self.highlight(definition)
+        self.write(&quot;\n&quot;, prefix, term)
+        for l in textwrap.dedent(definition).split(&quot;\n&quot;):
+            self.write(&quot;\n&quot;, prefix)
+            if l.strip():
+                self.write(self.INDENT, l)
+        self.write(&quot;\n&quot;)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.write_func_param">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_func_param">[docs]</a>
+    def write_func_param(self, param, param_type, descr):
+        param = param.replace(&quot;*&quot;, r&quot;\*&quot;)
+        self.write(&quot;\n&quot;, self.INDENT, param)
+
+        if descr != Parser.undescribed:
+            descr = self.format_block(descr)
+            descr = self.highlight(descr)
+        for l in textwrap.dedent(descr).split(&quot;\n&quot;):
+            self.write(&quot;\n&quot;)
+            if l.strip():
+                self.write(self.INDENT * 2, l)
+
+        if param_type:
+            param_type = param_type.replace(&quot;*&quot;, r&quot;\*&quot;)
+            self.write(&quot;\n&quot;, self.INDENT, param_type)
+
+        self.write(&quot;\n&quot;)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.output_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_preamble">[docs]</a>
+    def output_preamble(self):
+        self.parser.ctx.offset = 0
+        if self.options.mode_line:
+            self.write_comment(
+                &quot;-*- coding: %s; mode: rst -*-\n&quot;
+                % (getattr(self.options.out, &quot;encoding&quot;, &quot;utf-8&quot;) or &quot;utf-8&quot;).lower()
+            )
+
+        preamble = self.get_preamble()
+        if preamble:
+            self.write(preamble, &quot;\n&quot;)
+
+        if self.options.top_title:
+            self.write_anchor(self.options.top_title)
+            self.write_header(self.options.top_title, 0)
+            if self.options.top_link:
+                self.write(&quot;\n&quot;, self.options.top_link % self.options, &quot;\n&quot;)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.output_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_epilog">[docs]</a>
+    def output_epilog(self):
+        self.parser.ctx.offset = 0
+        epilog = self.get_epilog()
+        if epilog:
+            self.write(epilog, &quot;\n&quot;)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.output_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_prefix">[docs]</a>
+    def output_prefix(self):
+        if compat.sphinx_has_c_namespace() and self.options.id_prefix:
+            self.write(&quot;.. c:namespace-push:: %s&quot; % self.options.id_prefix, &quot;\n&quot;)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.output_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_suffix">[docs]</a>
+    def output_suffix(self):
+        if compat.sphinx_has_c_namespace() and self.options.id_prefix:
+            self.write(&quot;\n&quot;, &quot;.. c:namespace-pop::&quot;, &quot;\n&quot;)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.output_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_DOC">[docs]</a>
+    def output_DOC(self, sections=None):
+        self.parser.ctx.offset = self.parser.ctx.decl_offset
+        for header, content in sections.items():
+            self.write_section(header, content, sec_level=2, ID=header)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.output_function_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_function_decl">[docs]</a>
+    def output_function_decl(
+        self,
+        function=None,  # ctx.decl_name
+        return_type=None,  # ctx.return_type
+        parameterlist=None,  # ctx.parameterlist
+        parameterdescs=None,  # ctx.parameterdescs
+        parametertypes=None,  # ctx.parametertypes
+        sections=None,  # ctx.sections
+        purpose=None,  # ctx.decl_purpose
+        decl_type=None,  # ctx.decl_type
+    ):
+        self.parser.ctx.offset = self.parser.ctx.decl_offset
+
+        _c_type = decl_type
+        if _c_type == &quot;typedef&quot;:
+            # a function typedef is rendered as function
+            _c_type = &quot;function&quot;
+
+        self.write_anchor(function)
+
+        _header_prefix = &quot;&quot;
+        if decl_type in (&quot;macro&quot;, &quot;typedef&quot;):
+            _header_prefix = &quot;%s &quot; % decl_type
+        self.write_header(_header_prefix + function, sec_level=2)
+
+        if self.options.man_sect:
+            self.write(
+                &quot;\n.. kernel-doc-man:: %s.%s\n&quot; % (function, self.options.man_sect)
+            )
+
+        self.write(&quot;\n.. c:%s:: &quot; % _c_type)
+        if return_type and re.search(r&quot;\s\*+$&quot;, return_type):
+            self.write(return_type, function, &quot;(&quot;)
+        else:
+            self.write(return_type, &quot; &quot;, function, &quot;(&quot;)
+
+        p_list = []
+
+        for p_name in parameterlist:
+            p_type = parametertypes[p_name]
+
+            if self.FUNC_PTR.search(p_type):
+                # pointer to function
+                p_list.append(
+                    &quot;%s%s)(%s)&quot; % (self.FUNC_PTR[0], p_name, self.FUNC_PTR[1])
+                )
+            elif re.search(r&quot;\s\*+$&quot;, p_type):
+                # pointer
+                p_list.append(&quot;%s%s&quot; % (p_type, p_name))
+            else:
+                p_list.append(&quot;%s %s&quot; % (p_type, p_name))
+
+        p_line = &quot;, &quot;.join(p_list)
+        self.write(p_line, &quot;)\n&quot;)
+
+        # purpose
+
+        if purpose:
+            self.write(&quot;\n&quot;, self.INDENT, self.highlight(purpose), &quot;\n&quot;)
+
+        # parameter descriptions
+
+        for p_name in parameterlist:
+
+            p_type = parametertypes[p_name]
+            p_name = re.sub(r&quot;\[.*&quot;, &quot;&quot;, p_name)
+
+            if p_name != &quot;...&quot; and &quot;.&quot; in p_name:
+                # @foo.bar sub-descriptions are printed below, ignore them here
+                continue
+
+            p_desc = parameterdescs[p_name]
+
+            param = &quot;&quot;
+            param_type = None
+            if p_name == &quot;...&quot;:
+                param = &quot;:param ellipsis ellipsis:&quot;
+            else:
+                param = &quot;:param %s:&quot; % (p_name.replace(&quot;_&quot;, r&quot;\_&quot;))
+                if p_type:
+                    param_type = &quot;:type %s: %s&quot; % (
+                        p_name.replace(&quot;_&quot;, r&quot;\_&quot;),
+                        p_type.replace(&quot;_&quot;, r&quot;\_&quot;),
+                    )
+
+            self.parser.ctx.offset = parameterdescs.offsets.get(
+                p_name, self.parser.ctx.offset
+            )
+
+            self.write_func_param(param, param_type, p_desc)
+
+            # print all the @foo.bar sub-descriptions
+            sub_descr = [x for x in parameterdescs.keys() if x.startswith(p_name + &quot;.&quot;)]
+            for _p_name in sub_descr:
+                p_desc = parameterdescs.get(_p_name, None)
+                # do not print undescribed sub-descriptions
+                if p_desc == self.parser.undescribed:
+                    continue
+                self.parser.ctx.offset = parameterdescs.offsets.get(
+                    _p_name, self.parser.ctx.offset
+                )
+                self.write_definition(_p_name, p_desc)
+
+        # sections
+
+        for header, content in sections.items():
+            self.parser.ctx.offset = sections.offsets[header]
+            self.write_section(header, content, sec_level=3, ID=function + &quot;.&quot; + header)</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.output_struct_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_struct_decl">[docs]</a>
+    def output_struct_decl(
+        self,
+        decl_name=None,  # ctx.decl_name
+        decl_type=None,  # ctx.decl_type
+        parameterlist=None,  # ctx.parameterlist
+        parameterdescs=None,  # ctx.parameterdescs
+        parametertypes=None,  # ctx.parametertypes
+        sections=None,  # ctx.sections
+        purpose=None,  # ctx.decl_purpose
+        definition=None,  # ctx.definition
+    ):
+        self.parser.ctx.offset = self.parser.ctx.decl_offset
+        self.write_anchor(decl_name)
+        self.write_header(&quot;%s %s&quot; % (decl_type, decl_name), sec_level=2)
+
+        if self.options.man_sect:
+            self.write(
+                &quot;\n.. kernel-doc-man:: %s.%s\n&quot; % (decl_name, self.options.man_sect)
+            )
+
+        # write struct definition
+        # see https://github.com/sphinx-doc/sphinx/issues/2713
+        if compat.sphinx_has_c_types():
+            self.write(&quot;\n.. c:%s:: %s\n\n&quot; % (decl_type, decl_name))
+        else:
+            self.write(&quot;\n.. c:type:: %s %s\n\n&quot; % (decl_type, decl_name))
+        # purpose
+
+        if purpose:
+            self.write(self.INDENT, self.highlight(purpose), &quot;\n&quot;)
+
+        # definition
+
+        self.write_anchor(decl_name + &quot;.&quot; + Parser.section_def)
+        self.write_header(Parser.section_def, sec_level=3)
+        self.write(&quot;\n.. code-block:: c\n\n&quot;)
+        self.write(self.INDENT, decl_type, &quot; &quot;, decl_name, &quot; {\n&quot;)
+
+        definition = re.sub(r&quot;(([{;]))&quot;, r&quot;\1\n&quot;, definition)
+        level = 2
+        enum = False
+        for clause in definition.split(&quot;\n&quot;):
+            clause = normalize_ws(clause)
+            if not clause:
+                continue
+            if clause[0] == &quot;}&quot; and level &gt; 2:
+                level -= 1
+            if MACRO.match(clause):
+                self.write(self.INDENT, clause[:-1].strip(), &quot;\n&quot;)
+            elif enum:
+                for l in clause.split(&quot;,&quot;):
+                    l = normalize_ws(l)
+                    if l[0] == &quot;}&quot; and level &gt; 2:
+                        level -= 1
+                        self.write(self.INDENT * level, l, &quot;\n&quot;)
+                    else:
+                        self.write(self.INDENT * level, l, &quot;,\n&quot;)
+            else:
+                self.write(self.INDENT * level, clause, &quot;\n&quot;)
+            if clause[-1] == &quot;{&quot;:
+                level += 1
+                enum = clause.startswith(&quot;enum&quot;)
+
+        self.write(self.INDENT, &quot;}\n&quot;)
+
+        # member description
+
+        self.write_anchor(decl_name + &quot;.&quot; + Parser.section_members)
+        self.write_header(Parser.section_members, sec_level=3)
+
+        for p_name in parameterlist:
+            if MACRO.match(p_name):
+                continue
+            p_name = re.sub(r&quot;\[.*&quot;, &quot;&quot;, p_name)
+            if &quot;.&quot; in p_name:
+                # @foo.bar sub-descriptions are printed below, ignore them here
+                continue
+
+            p_desc = parameterdescs.get(p_name, None)
+
+            if p_desc is not None:
+                self.parser.ctx.offset = parameterdescs.offsets.get(
+                    p_name, self.parser.ctx.offset
+                )
+                self.write_definition(p_name, p_desc)
+
+            # print all the @foo.bar sub-descriptions
+            sub_descr = [x for x in parameterdescs.keys() if x.startswith(p_name + &quot;.&quot;)]
+            for _p_name in sub_descr:
+                p_desc = parameterdescs.get(_p_name, None)
+                # do not print undescribed sub-descriptions
+                if p_desc == self.parser.undescribed:
+                    continue
+                self.parser.ctx.offset = parameterdescs.offsets.get(
+                    _p_name, self.parser.ctx.offset
+                )
+                self.write_definition(_p_name, p_desc)
+
+        # sections
+
+        for header, content in sections.items():
+            self.parser.ctx.offset = sections.offsets[header]
+            self.write_section(
+                header, content, sec_level=3, ID=decl_name + &quot;.&quot; + header
+            )</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.output_enum_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_enum_decl">[docs]</a>
+    def output_enum_decl(
+        self,
+        enum=None,  # ctx.decl_name
+        parameterlist=None,  # ctx.parameterlist
+        parameterdescs=None,  # ctx.parameterdescs
+        sections=None,  # ctx.sections
+        purpose=None,  # ctx.decl_purpose
+    ):
+        self.parser.ctx.offset = self.parser.ctx.decl_offset
+        self.write_anchor(enum)
+        self.write_header(&quot;enum %s&quot; % enum, sec_level=2)
+
+        if self.options.man_sect:
+            self.write(&quot;\n.. kernel-doc-man:: %s.%s\n&quot; % (enum, self.options.man_sect))
+
+        # write union definition
+        # see https://github.com/sphinx-doc/sphinx/issues/2713
+        if compat.sphinx_has_c_types():
+            self.write(&quot;\n.. c:enum:: %s\n\n&quot; % enum)
+        else:
+            self.write(&quot;\n.. c:type:: enum %s\n\n&quot; % enum)
+
+        # purpose
+
+        if purpose:
+            self.write(self.INDENT, self.highlight(purpose), &quot;\n&quot;)
+
+        # definition
+
+        self.write_anchor(enum + &quot;.&quot; + Parser.section_def)
+        self.write_header(Parser.section_def, sec_level=3)
+        self.write(&quot;\n.. code-block:: c\n\n&quot;)
+        self.write(self.INDENT, &quot;enum &quot;, enum, &quot; {&quot;)
+
+        e_list = parameterlist[:]
+        while e_list:
+            e = e_list.pop(0)
+            if MACRO.match(e):
+                self.write(&quot;\n&quot;, self.INDENT, e)
+            else:
+                self.write(&quot;\n&quot;, self.INDENT * 2, e)
+            if e_list:
+                self.write(&quot;,&quot;)
+        self.write(&quot;\n&quot;, self.INDENT, &quot;};\n&quot;)
+
+        # constants description
+
+        self.write_anchor(enum + &quot;.&quot; + Parser.section_constants)
+        self.write_header(Parser.section_constants, sec_level=3)
+
+        for p_name in parameterlist:
+            p_desc = parameterdescs.get(p_name, None)
+            self.parser.ctx.offset = parameterdescs.offsets.get(
+                p_name, self.parser.ctx.offset
+            )
+            if p_desc is None:
+                continue
+            self.write_definition(p_name, p_desc)
+
+        # sections
+
+        for header, content in sections.items():
+            self.parser.ctx.offset = sections.offsets[header]
+            self.write_section(
+                header, content or &quot;???&quot;, sec_level=3, ID=enum + &quot;.&quot; + header
+            )</div>
+
+
+<div class="viewcode-block" id="ReSTTranslator.output_typedef_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_typedef_decl">[docs]</a>
+    def output_typedef_decl(
+        self,
+        typedef=None,  # ctx.decl_name
+        sections=None,  # ctx.sections
+        purpose=None,  # ctx.decl_purpose
+    ):
+        self.parser.ctx.offset = self.parser.ctx.decl_offset
+        self.write_anchor(typedef)
+        self.write_header(&quot;typedef %s&quot; % typedef, sec_level=2)
+
+        if self.options.man_sect:
+            self.write(
+                &quot;\n.. kernel-doc-man:: %s.%s\n&quot; % (typedef, self.options.man_sect)
+            )
+
+        # write typdef definition
+        # see https://github.com/sphinx-doc/sphinx/issues/2713
+        if compat.sphinx_has_c_types():
+            self.write(&quot;\n.. c:type:: %s\n\n&quot; % typedef)
+        else:
+            self.write(&quot;\n.. c:type:: typedef %s\n\n&quot; % typedef)
+        if purpose:
+            self.write(self.INDENT, self.highlight(purpose), &quot;\n&quot;)
+
+        for header, content in sections.items():
+            self.parser.ctx.offset = sections.offsets[header]
+            self.write_section(
+                header, content or &quot;???&quot;, sec_level=3, ID=typedef + &quot;.&quot; + header
+            )</div>
+</div>
+
+
+
+<div class="viewcode-block" id="ParseOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions">[docs]</a>
+class ParseOptions(Container):
+
+    # pylint: disable=too-many-instance-attributes
+    # pylint: disable=global-statement
+
+    PARSE_OPTION_RE = r&quot;^/\*+\s*parse-%s:\s*([a-zA-Z0-9_-]*?)\s*\*/+\s*$&quot;
+    PARSE_OPTIONS = [
+        (&quot;highlight&quot;, [&quot;on&quot;, &quot;off&quot;], &quot;setOnOff&quot;),
+        (&quot;INSPECT&quot;, [&quot;on&quot;, &quot;off&quot;], &quot;setINSPECT&quot;),
+        (&quot;markup&quot;, [&quot;reST&quot;, &quot;kernel-doc&quot;], &quot;setVal&quot;),
+        (&quot;SNIP&quot;, [], &quot;setVal&quot;),
+        (&quot;SNAP&quot;, [], &quot;snap&quot;),
+    ]
+
+<div class="viewcode-block" id="ParseOptions.dumpOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.dumpOptions">[docs]</a>
+    def dumpOptions(self):
+        # dumps options which are variable from parsing source-code
+        return dict(highlight=self.highlight, markup=self.markup)</div>
+
+
+    def __init__(self, *args, **kwargs):
+
+        self.id_prefix = None  # A prefix for generated IDs.
+        self.out = None  # File descriptor for output.
+        self.eof_newline = True  # write newline on end of file
+
+        self.src_tree = SRCTREE  # root folder of sources (defaults to CWD)
+        self.rel_fname = &quot;&quot;  # pathname relative to src_tree
+        self.fname = &quot;&quot;  # absolute pathname
+
+        # self.encoding: the input encoding (encoding of the parsed source
+        # file), the output encoding could be seek from the file-descriptor at
+        # self.out.
+
+        self.encoding = &quot;utf-8&quot;
+        self.tab_width = 8  # tab-stops every n chars
+
+        # control which content to print
+
+        self.use_names = (
+            []
+        )  # positive list of names to print / empty list means &quot;print all&quot;
+        self.skip_names = []  # negative list of names (not to print)
+        self.use_all_docs = False  # True/False print all &quot;DOC:&quot; sections
+        self.no_header = False  # skip section header
+        self.error_missing = True  # report missing names as errors / else warning
+        self.verbose_warn = True  # more warn messages
+
+        # self.gather_context: [True/False] Scan additional context from the
+        # parsed source. E.g.: The list of exported symbols is a part of the
+        # parser&#39;s context. If the context of exported symbols is needed, we
+        # have to parse twice. First to find exported symbols, store them in the
+        # context and a second once for *normal* parsing within this modified
+        # *context*.
+
+        self.gather_context = False
+        self.exp_method = None
+        self.exp_ids = []
+        self.known_attrs = []
+
+        # epilog / preamble
+
+        self.skip_preamble = False
+        self.skip_epilog = False
+        self.mode_line = True  # write mode-line in the very first line
+        self.top_title = &quot;&quot;  # write a title on top of the preamble
+        self.top_link = &quot;&quot;  # if top_title, add link to the *top* of the preamble
+        self.preamble = &quot;&quot;  # additional text placed into the preamble
+        self.epilog = &quot;&quot;  # text placed into the epilog
+
+        # default&#39;s of filtered PARSE_OPTIONS
+
+        self.opt_filters = dict()
+        self.markup = &quot;reST&quot;
+        self.highlight = True  # switch highlighting on/off
+        self.man_sect = (
+            None  # insert &quot;.. kernel-doc-man:&quot; directive, section no self.man_sect
+        )
+        self.add_filters(self.PARSE_OPTIONS)
+
+        # SNIP / SNAP
+        self.SNIP = None
+
+        # init options with arguments from caller
+        super().__init__(self, *args, **kwargs)
+
+        # absolute and relativ filename
+
+        if not self.fname:
+            LOG.error(&quot;no source file given!&quot;)
+
+        self.rel_fname = self.fname
+        if self.fname[0] == &quot;/&quot;:
+            if not self.src_tree:
+                LOG.error(&quot;missing SRCTREE&quot;)
+            self.rel_fname = self.fname[1:]
+
+        self.fname = os.path.abspath(str(self.src_tree) + &quot;/&quot; + str(self.rel_fname))
+
+<div class="viewcode-block" id="ParseOptions.set_defaults">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.set_defaults">[docs]</a>
+    def set_defaults(self):
+
+        # default way to identify exported symbol
+
+        if not self.exp_method:
+            self.exp_method = DEFAULT_EXP_METHOD
+
+        if not self.exp_ids:
+            self.exp_ids = DEFAULT_EXP_IDS
+
+        # default top title and top link
+
+        if self.fname and self.top_title == &quot;&quot;:
+            self.top_title = os.path.basename(self.fname)
+        if self.top_title:
+            self.top_title = self.top_title % self
+
+        if self.top_link:
+            self.top_link = self.top_link % self</div>
+
+
+<div class="viewcode-block" id="ParseOptions.add_filters">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.add_filters">[docs]</a>
+    def add_filters(self, parse_options):
+
+        def setINSPECT(name, val):  # pylint: disable=unused-argument
+            global INSPECT
+            INSPECT = bool(val == &quot;on&quot;)
+
+        _actions = dict(
+            setOnOff=lambda name, val: (name, bool(val == &quot;on&quot;)),
+            setVal=lambda name, val: (name, val),
+            snap=lambda name, val: (&quot;SNIP&quot;, &quot;&quot;),
+            setINSPECT=setINSPECT,
+        )
+
+        for option, val_list, action in parse_options:
+            self.opt_filters[option] = (
+                RE(self.PARSE_OPTION_RE % option),
+                val_list,
+                _actions[action],
+            )</div>
+
+
+<div class="viewcode-block" id="ParseOptions.filter_opt">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.filter_opt">[docs]</a>
+    def filter_opt(self, line, parser):
+
+        for name, (regexpr, val_list, action) in self.opt_filters.items():
+            if regexpr.match(line):
+                line = None
+                value = regexpr[0]
+                if val_list and value not in val_list:
+                    parser.error(
+                        &quot;unknown parse-%(name)s value: &#39;%(value)s&#39;&quot;,
+                        name=name,
+                        value=value,
+                    )
+                else:
+                    opt_val = action(name, value)
+                    if opt_val is not None:
+                        name, value = opt_val
+                        self[name] = value
+                    parser.info(
+                        &quot;set parse-option: %(name)s = &#39;%(value)s&#39;&quot;,
+                        name=name,
+                        value=value,
+                    )
+                break
+        return line</div>
+
+
+<div class="viewcode-block" id="ParseOptions.get_exported_symbols_re">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.get_exported_symbols_re">[docs]</a>
+    def get_exported_symbols_re(self):
+        if self.exp_method == &quot;macro&quot;:
+            proto_pattern = r&quot;^\s*(?:%s)\s*\(\s*(\w*)\s*\)\s*&quot;
+        elif self.exp_method == &quot;attribute&quot;:
+            proto_pattern = r&quot;(?:%s)(?:\s+\**\w+\**)*?\s+\**(\w+)\s*[(;]+&quot;
+        else:
+            msg = &quot;Unknown exported symbol method: %s&quot; % self.exp_method
+            LOG.error(msg)
+            raise ValueError(msg)
+
+        id_pattern = &quot;|&quot;.join([&quot;(?:&quot; + name + &quot;)&quot; for name in self.exp_ids])
+        return RE(proto_pattern % id_pattern, flags=re.M)</div>
+</div>
+
+
+
+<div class="viewcode-block" id="ParserContext">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext">[docs]</a>
+class ParserContext(Container):
+
+    # pylint: disable=too-many-instance-attributes
+
+<div class="viewcode-block" id="ParserContext.dumpCtx">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext.dumpCtx">[docs]</a>
+    def dumpCtx(self):
+        # dumps options which are variable from parsing source-code
+        return dict(decl_offset=self.decl_offset)</div>
+
+
+    def __init__(self, *args, **kwargs):
+        self.line_no = 0
+        self.contents = &quot;&quot;
+        self.section = Parser.section_default
+
+        # self.sections: ordered dictionary (list) of sections as they appear in
+        # the source. The sections are set by Parser.dump_section
+        self.sections = collections.OrderedDict()
+        self.sectcheck = []
+
+        self.prototype = &quot;&quot;
+        self.last_identifier = &quot;&quot;
+
+        # self.parameterlist: ordered list of the parameters as they appear in
+        # the source. The parameter-list is set by Parser.push_parameter and
+        # Parser.dump_enum
+        self.parameterlist = []
+
+        # self.parametertypes: dictionary of &lt;parameter-name&gt;:&lt;type&gt;
+        # key/values of the parameters. Set by Parser.push_parameter
+        self.parametertypes = dict()
+
+        # self.parameterdescs: dictionary of &lt;&#39;@parameter&#39;&gt;:&lt;description&gt;
+        # key/values of the parameters. Set by Parser.dump_section
+        self.parameterdescs = collections.OrderedDict()
+
+        # self.constants: dictionary of &lt;&#39;%CONST&#39;&gt;:&lt;description&gt;
+        # key/values. Set by Parser.dump_section
+        self.constants = dict()
+
+        self.decl_name = &quot;&quot;
+        self.decl_type = &quot;&quot;  # [struct|union|enum|typedef|function|macro]
+        self.decl_purpose = &quot;&quot;
+        self.definition = &quot;&quot;  # defintion of the struct|union|enum
+        self.return_type = &quot;&quot;  # function&#39;s return type definition)
+
+        # self.struct_actual     = &quot;&quot;
+
+        # Additional context from the parsed source
+
+        # self.exported: list of exported symbols
+        self.exported_symbols = []
+
+        # self.mod_xxx: Module informations
+        self.mod_authors = []
+        self.mod_descr = &quot;&quot;
+        self.mod_license = &quot;&quot;
+
+        # SNIP / SNAP
+        self.snippets = collections.OrderedDict()
+
+        # the place, where type dumps are stored
+        self.dump_storage = []
+
+        # memo line numbers
+        self.offset = 0
+        self.last_offset = 0
+        self.decl_offset = 0
+        self.sections.offsets = dict()
+        self.parameterdescs.offsets = dict()
+
+        super().__init__(self, *args, **kwargs)
+
+<div class="viewcode-block" id="ParserContext.new">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext.new">[docs]</a>
+    def new(self):
+        return self.__class__(
+            line_no=self.line_no,
+            exported_symbols=self.exported_symbols,
+            snippets=self.snippets,
+            dump_storage=self.dump_storage,
+        )</div>
+</div>
+
+
+
+<div class="viewcode-block" id="ParserBuggy">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserBuggy">[docs]</a>
+class ParserBuggy(RuntimeError):
+    &quot;&quot;&quot;Exception raised when the parser implementation seems buggy.
+
+    The parser implementation perform some integrity tests at runtime.  This
+    exception type mainly exists to improve the regular expressions which are
+    used to parse and analyze the kernels source code.
+
+    In the exception message the last position the parser parsed is stored, this
+    position may, but does not need to be related with the exception (it is only
+    an additional information which might help).
+
+    Under normal circumstances, exceptions of this type should never arise,
+    unless the implementation of the parser is buggy.&quot;&quot;&quot;
+
+    def __init__(self, parserObj, message):
+
+        message = (
+            &quot;last parse position %s:%s\n&quot;
+            % (parserObj.ctx.line_no, parserObj.options.fname)
+            + message
+        )
+        super().__init__(message)
+        self.parserObj = parserObj</div>
+
+
+
+<div class="viewcode-block" id="Parser">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser">[docs]</a>
+class Parser(SimpleLog):
+
+    # pylint: disable=too-many-public-methods
+
+    &quot;&quot;&quot;
+    kernel-doc comments parser
+
+    States:
+
+    * 0 - normal code
+    * 1 - looking for function name
+    * 2 - scanning field start.
+    * 3 - scanning prototype.
+    * 4 - documentation block
+    * 5 - gathering documentation outside main block (see Split Doc State)
+
+    Split Doc States:
+
+    * 0 - Invalid (Before start or after finish)
+    * 1 - Is started (the /\\*\\* was found inside a struct)
+    * 2 - The @parameter header was found, start accepting multi paragraph text.
+    * 3 - Finished (the \\*/ was found)
+    * 4 - Error: Comment without header was found. Spit a error as it&#39;s not
+          proper kernel-doc and ignore the rest.
+    &quot;&quot;&quot;
+
+    LOG_FORMAT = &quot;%(fname)s:%(line_no)s: :%(logclass)s: %(message)s\n&quot;
+
+    # DOC_TYPES: types of documentation gathered by the parser
+    DOC_TYPES = [&quot;DOC&quot;, &quot;function&quot;, &quot;struct&quot;, &quot;union&quot;, &quot;enum&quot;, &quot;typedef&quot;, &quot;macro&quot;]
+
+    undescribed = &quot;*undescribed*&quot;
+
+    section_descr = &quot;Description&quot;
+    section_def = &quot;Definition&quot;
+    section_members = &quot;Members&quot;
+    section_constants = &quot;Constants&quot;
+    section_intro = &quot;Introduction&quot;
+    section_context = &quot;Context&quot;
+    section_return = &quot;Return&quot;
+    section_default = section_descr
+
+    special_sections = [
+        section_descr,
+        section_def,
+        section_members,
+        section_constants,
+        section_context,
+        section_return,
+    ]
+
+    def __init__(self, options, translator):
+        super().__init__()
+
+        # raw data akku
+        self.rawdata = &quot;&quot;
+
+        # flags:
+        self.state = 0
+        self.split_doc_state = 0
+        self.in_doc_sect = False
+        self.in_purpose = False
+        self.brcount = 0
+        self.warnings = 0
+        self.errors = 0
+        self.anon_struct_union = False
+
+        self.options = None
+        self.translator = None
+        self.ctx = ParserContext()
+
+        self.setTranslator(translator)
+        self.setOptions(options)
+
+<div class="viewcode-block" id="Parser.setTranslator">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.setTranslator">[docs]</a>
+    def setTranslator(self, translator):
+        self.translator = translator
+        self.translator.setParser(self)
+        self.translator.setOptions(self.options)</div>
+
+
+<div class="viewcode-block" id="Parser.setOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.setOptions">[docs]</a>
+    def setOptions(self, options):
+        self.options = options
+        self.translator.setOptions(options)</div>
+
+
+<div class="viewcode-block" id="Parser.reset_state">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.reset_state">[docs]</a>
+    def reset_state(self):
+        self.ctx = self.ctx.new()
+        self.state = 0
+        self.split_doc_state = 0
+        self.in_doc_sect = False
+        self.in_purpose = False
+        self.brcount = 0
+        self.anon_struct_union = False</div>
+
+
+    # Log
+
+<div class="viewcode-block" id="Parser.error">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.error">[docs]</a>
+    def error(self, message, _line_no=None, **replace):
+        replace[&quot;fname&quot;] = self.options.fname
+        replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
+        self.errors += 1
+        super().error(message, **replace)</div>
+
+
+<div class="viewcode-block" id="Parser.warn">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.warn">[docs]</a>
+    def warn(self, message, _line_no=None, **replace):
+        replace[&quot;fname&quot;] = self.options.fname
+        replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
+        self.warnings += 1
+        super().warn(message, **replace)</div>
+
+
+<div class="viewcode-block" id="Parser.info">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.info">[docs]</a>
+    def info(self, message, _line_no=None, **replace):
+        replace[&quot;fname&quot;] = self.options.fname
+        replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
+        super().info(message, **replace)</div>
+
+
+<div class="viewcode-block" id="Parser.debug">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.debug">[docs]</a>
+    def debug(self, message, _line_no=None, **replace):
+        replace[&quot;fname&quot;] = self.options.fname
+        replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
+        super().debug(message, **replace)</div>
+
+
+    # state parser
+
+<div class="viewcode-block" id="Parser.gather_context">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.gather_context">[docs]</a>
+    @classmethod
+    def gather_context(cls, src, ctx, opts):
+        &quot;&quot;&quot;Scan source about context informations.
+
+        Scans *whole* source (e.g. :py:attr:`Parser.rawdata`) about data relevant
+        for the context (e.g. exported symbols).
+
+        Names of exported symbols gathered in :py:attr:`ParserContext.exported`.
+        The list contains names (symbols) which are exported using the
+        pattern specified in opts.
+
+        .. hint::
+
+          A exported symbol does not necessarily have a corresponding source code
+          comment with a documentation.
+
+        Module information comes from the ``MODULE_xxx`` macros.  Module
+        informations are gathered in ``ParserContext.module_xxx``:
+
+        * ``MODULE_AUTHOR(&quot;...&quot;)``: Author entries are collected in a list in
+          :py:attr:`ParserContext.mod_authors`
+
+        * ``MODULE_DESCRIPTION(&quot;...&quot;)``: A concatenated string in
+          :py:attr:`ParserContext.mod_descr`
+
+        * ``MODULE_LICENSE(&quot;...&quot;)``: String with comma separated licenses in
+          :py:attr:`ParserContext.mod_license`.
+
+        .. hint::
+
+           While parsing header files, about kernel-doc, you will not find the
+           ``MODULE_xxx`` macros, because they are commonly used in the &quot;.c&quot;
+           files.
+        &quot;&quot;&quot;
+
+        expsym_re = opts.get_exported_symbols_re()
+        LOG.debug(&quot;gather_context() regExp: %(pattern)s&quot;, pattern=expsym_re.pattern)
+        for name in expsym_re.findall(src):
+            LOG.info(&quot;exported symbol: %(name)s&quot;, name=name)
+            ctx.exported_symbols.append(name)
+
+        LOG.debug(&quot;gather_context() regExp: %(pattern)s&quot;, pattern=MODULE_INFO.pattern)
+
+        for match in MODULE_INFO.findall(src):
+            info_type = match[1]
+            content = match[2]
+            if info_type == &quot;AUTHOR&quot;:
+                ctx.mod_authors.append(content)
+            elif info_type == &quot;DESCRIPTION&quot;:
+                ctx.mod_descr += content + &quot; &quot;
+            elif info_type == &quot;LICENSE&quot;:
+                ctx.mod_license += content + &quot;, &quot;
+
+        LOG.info(&quot;mod_authors: %(x)s&quot;, x=ctx.mod_authors)
+        LOG.info(&quot;mod_descr: %(x)s&quot;, x=ctx.mod_descr)
+        LOG.info(&quot;mod_license : %(x)s&quot;, x=ctx.mod_license)</div>
+
+
+<div class="viewcode-block" id="Parser.parse">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.parse">[docs]</a>
+    def parse(self, src=None):  # start parsing
+        self.dump_preamble()
+        self.dump_prefix()
+        if src is not None:
+            for line in src:
+                self.feed(line)
+        else:
+            with openTextFile(
+                self.options.fname, encoding=self.options.encoding
+            ) as srcFile:
+                for line in srcFile:
+                    self.feed(line)
+        self.dump_suffix()
+        self.dump_epilog()
+        self.translator.eof()</div>
+
+
+<div class="viewcode-block" id="Parser.parse_dump_storage">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.parse_dump_storage">[docs]</a>
+    def parse_dump_storage(self, translator=None, options=None):
+        if options is not None:
+            self.setOptions(options)
+        if translator is not None:
+            self.setTranslator(translator)
+        self.dump_preamble()
+        self.dump_prefix()
+        for name, out_type, opts, ctx, kwargs in self.ctx.dump_storage:
+            self.options.update(opts)
+            self.ctx.update(ctx)
+            self.output_decl(name, out_type, **kwargs)
+        self.dump_suffix()
+        self.dump_epilog()
+        self.translator.eof()</div>
+
+
+<div class="viewcode-block" id="Parser.close">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.close">[docs]</a>
+    def close(self):  # end parsing
+        self.feed(&quot;&quot;, eof=True)
+        # log requested but missed documentation
+        log_missed = self.error
+        if not self.options.error_missing:
+            log_missed = self.warn
+
+        if isinstance(self.translator, NullTranslator):
+            # the NullTranslator does not translate / translated_names is
+            # empty
+            pass
+        elif isinstance(self.translator, ListTranslator):
+            self.parse_dump_storage()
+        else:
+            for name in self.options.use_names:
+                if name not in self.translator.translated_names:
+                    log_missed(&quot;no documentation for &#39;%(name)s&#39; found&quot;, name=name)
+
+        if self.errors or self.warnings:
+            self.warn(
+                &quot;total errors: %(errors)s / total warnings: %(warnings)s&quot;,
+                errors=self.errors,
+                warnings=self.warnings,
+            )
+            self.warnings -= 1
+        global INSPECT  # pylint: disable=global-statement
+        INSPECT = False</div>
+
+
+<div class="viewcode-block" id="Parser.feed">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.feed">[docs]</a>
+    def feed(self, data, eof=False):
+        self.rawdata = self.rawdata + data
+
+        if self.options.gather_context:
+            # Scan additional context from the parsed source. For this, collect
+            # all lines in self.rawdata until EOF. On EOF, scan rawdata about
+            # (e.g.) exported symbols and after this, continue with the *normal*
+            # parsing.
+            if not eof:  # pylint: disable=no-else-return
+                return
+            else:
+                self.gather_context(self.rawdata, self.ctx, self.options)
+
+        lines = self.rawdata.split(&quot;\n&quot;)
+
+        if not eof:
+            # keep last line, until EOF
+            self.rawdata = lines[-1]
+            lines = lines[:-1]
+
+        for l in lines:
+            l = l.expandtabs(self.options.tab_width)
+            self.ctx.line_no += 1
+            l = self.options.filter_opt(l, self)
+            if l is None:
+                continue
+
+            if self.options.SNIP:
+                # record snippet
+                val = self.ctx.snippets.get(self.options.SNIP, &quot;&quot;)
+                if val or l:
+                    self.ctx.snippets[self.options.SNIP] = val + l + &quot;\n&quot;
+
+            state = getattr(self, &quot;state_%s&quot; % self.state)
+            try:
+                state(l)
+            except Exception as _exc:
+                self.warn(
+                    &quot;total errors: %(errors)s / warnings: %(warnings)s&quot;,
+                    errors=self.errors,
+                    warnings=self.warnings,
+                )
+                self.warnings -= 1
+                self.error(&quot;unhandled exception in line: %(l)s&quot;, l=l)
+                raise</div>
+
+
+<div class="viewcode-block" id="Parser.output_decl">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.output_decl">[docs]</a>
+    def output_decl(self, name, out_type, **kwargs):
+        self.ctx.offset = self.ctx.decl_offset
+
+        if name in self.translator.dumped_names:
+            self.error(&quot;name &#39;%s&#39; used several times&quot; % name)
+        self.translator.dumped_names.append(name)
+
+        if isinstance(self.translator, NullTranslator):
+            self.ctx.dump_storage.append(
+                (
+                    name,
+                    out_type,
+                    self.options.dumpOptions(),
+                    self.ctx.dumpCtx(),
+                    copy.deepcopy(kwargs),
+                )
+            )
+            return
+
+        do_translate = False
+        if name in self.options.skip_names:
+            do_translate = False
+        elif name in self.options.use_names:
+            do_translate = True
+        elif out_type != &quot;DOC&quot; and not self.options.use_names:
+            do_translate = True
+        elif out_type == &quot;DOC&quot; and self.options.use_all_docs:
+            do_translate = True
+        if do_translate:
+            self.translator.translated_names.add(name)
+            out_func = getattr(self.translator, &quot;output_%s&quot; % out_type)
+            out_func(**kwargs)
+        else:
+            self.debug(&quot;skip translation of %(t)s: &#39;%(n)s&#39;&quot;, t=out_type, n=name)</div>
+
+
+<div class="viewcode-block" id="Parser.state_0">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_0">[docs]</a>
+    def state_0(self, line):
+        &quot;&quot;&quot;state: 0 - normal code&quot;&quot;&quot;
+
+        if doc_start.match(line):
+            self.debug(&quot;START: kernel-doc comment / switch state 0 --&gt; 1&quot;)
+            self.ctx.decl_offset = self.ctx.line_no + 1
+            self.state = 1
+            self.in_doc_sect = False</div>
+
+
+<div class="viewcode-block" id="Parser.state_1">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_1">[docs]</a>
+    def state_1(self, line):
+        &quot;&quot;&quot;state: 1 - looking for function name&quot;&quot;&quot;
+
+        if doc_block.match(line):
+            self.debug(&quot;START: DOC block / switch state 1 --&gt; 4&quot;)
+            self.ctx.last_offset = self.ctx.line_no + 1
+            self.state = 4
+            self.ctx.contents = &quot;&quot;
+            self.ctx.section = self.section_intro
+            if doc_block[0].strip():
+                self.ctx.section = self.sect_title(doc_block[0])
+            self.info(&quot;DOC: %(sect)s&quot;, sect=self.ctx.section)
+
+        elif doc_decl.match(line):
+            self.debug(&quot;START: declaration / switch state 1 --&gt; 2&quot;)
+            self.ctx.last_offset = self.ctx.line_no + 1
+            self.state = 2
+
+            identifier = doc_decl[0].strip()
+            self.ctx.decl_type = &quot;function&quot;
+            if doc_decl_ident.match(line):
+                identifier = doc_decl_ident[1]
+                self.ctx.decl_type = doc_decl_ident[0]
+            self.ctx.last_identifier = identifier.strip()
+
+            self.debug(&quot;FLAG: in_purpose=True&quot;)
+            self.in_purpose = True
+            self.info(
+                &quot;scanning doc for: %(t)s &#39;%(i)s&#39;&quot;, t=self.ctx.decl_type, i=identifier
+            )
+
+            self.ctx.decl_purpose = &quot;&quot;
+            if doc_decl_purpose.search(line):
+                self.ctx.decl_purpose = doc_decl_purpose[0].strip()
+
+            if not self.ctx.decl_purpose:
+                self.warn(
+                    &quot;missing initial short description of &#39;%(i)s&#39;&quot;,
+                    i=self.ctx.last_identifier,
+                )
+
+        else:
+            self.warn(
+                f&quot;can&#39;t understand: --&gt;|{line}|&lt;--&quot; &quot; - I thought it was a doc line&quot;,
+            )
+            self.state = 0</div>
+
+
+<div class="viewcode-block" id="Parser.sect_title">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.sect_title">[docs]</a>
+    def sect_title(self, title):
+        &quot;&quot;&quot;Normalize common section titles&quot;&quot;&quot;
+        # fix varius notations for the &quot;Return:&quot; section
+
+        retVal = title
+
+        if title.lower() in [
+            &quot;description&quot;,
+        ]:
+            retVal = self.section_descr
+
+        elif title.lower() in [&quot;introduction&quot;, &quot;intro&quot;]:
+            retVal = self.section_intro
+
+        elif title.lower() in [
+            &quot;context&quot;,
+        ]:
+            retVal = self.section_context
+
+        elif title.lower() in [&quot;return&quot;, &quot;returns&quot;]:
+            retVal = self.section_return
+
+        return retVal</div>
+
+
+<div class="viewcode-block" id="Parser.state_2">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_2">[docs]</a>
+    def state_2(self, line):
+        &quot;&quot;&quot;state: 2 - scanning field start.&quot;&quot;&quot;
+
+        new_sect = &quot;&quot;
+        new_cont = &quot;&quot;
+
+        if not doc_sect_except.match(line):
+
+            # probe different sect start pattern ...
+
+            if self.options.markup == &quot;reST&quot;:
+                if doc_sect_reST.match(line):
+                    # this is a line with a parameter definition or vintage
+                    # section &quot;Context: lorem&quot;, &quot;Return: lorem&quot; etc.
+                    new_sect = self.sect_title(doc_sect_reST[0].strip())
+                    new_cont = doc_sect_reST[1].strip()
+                elif reST_sect.match(line):
+                    # this is a line with a section definition &quot;Section name:\n&quot;
+                    new_sect = self.sect_title(reST_sect[0].strip())
+                    new_cont = &quot;&quot;
+
+                # Sub-sections in parameter descriptions are not provided,
+                # with the exception of special_sections names. To allow
+                # comments like:
+                #   * @arg: lorem
+                #   * Return: foo
+                if (
+                    new_sect
+                    and self.ctx.section.startswith(&quot;@&quot;)
+                    and not new_sect.startswith(&quot;@&quot;)
+                    and not new_sect in self.special_sections
+                ):
+                    new_sect = &quot;&quot;
+                    new_cont = &quot;&quot;
+
+            else:  # kernel-doc vintage mode
+                if doc_sect.match(line):
+                    # this is a line with a parameter or section definition
+                    new_sect = self.sect_title(doc_sect[0].strip())
+                    new_cont = doc_sect[1].strip()
+
+        if new_sect:
+
+            # a new section starts *here*
+
+            self.debug(&quot;found new section --&gt; %(sect)s&quot;, sect=new_sect)
+
+            if self.ctx.contents.strip():
+                if not self.in_doc_sect:
+                    self.warn(
+                        &quot;contents before sections &#39;%(c)s&#39;&quot;, c=self.ctx.contents.strip()
+                    )
+                self.dump_section(self.ctx.section, self.ctx.contents)
+                self.ctx.section = self.section_default
+                self.ctx.contents = &quot;&quot;
+
+            self.debug(
+                &quot;new_sect: &#39;%(sec)s&#39; / desc: &#39;%(desc)s&#39;&quot;, sec=new_sect, desc=new_cont
+            )
+            self.ctx.last_offset = self.ctx.line_no
+
+            self.in_doc_sect = True
+            self.in_purpose = False
+            self.debug(
+                &quot;FLAGs: in_doc_sect=%(s)s / in_purpose=%(p)s&quot;,
+                s=self.in_doc_sect,
+                p=self.in_purpose,
+            )
+
+            self.ctx.section = new_sect
+            if new_cont:
+                self.ctx.contents = new_cont + &quot;\n&quot;
+            self.info(&quot;section: %(sec)s&quot;, sec=self.ctx.section)
+
+        elif doc_end.search(line):
+
+            # end of the comment-block
+
+            if self.ctx.contents:
+                self.dump_section(self.ctx.section, self.ctx.contents)
+                self.ctx.section = self.section_default
+                self.ctx.contents = &quot;&quot;
+
+            # look for doc_com + &lt;text&gt; + doc_end:
+            if RE(doc_com.pattern + r&quot;[a-zA-Z_0-9:\.]+&quot; + doc_end.pattern).match(line):
+                self.warn(&quot;suspicious ending line&quot;)
+
+            self.ctx.prototype = &quot;&quot;
+            self.debug(&quot;END doc block / switch state 2 --&gt; 3&quot;)
+            self.debug(&quot;end of doc comment, looking for prototype&quot;)
+            self.state = 3
+            self.brcount = 0
+
+        elif doc_content.match(line):
+
+            # a comment line with *content* of a section or a *purpose*
+
+            cont_line = doc_content[0]
+
+            if not cont_line.strip():
+                # it&#39;s a empty line
+
+                if self.in_purpose:
+
+                    # empty line after short description (*purpose*) introduce the
+                    # &quot;Description&quot; section
+
+                    self.debug(
+                        &quot;found empty line in *purpose* --&gt; start &#39;Description&#39; section&quot;
+                    )
+                    if self.ctx.contents.strip():
+                        if not self.in_doc_sect:
+                            self.warn(
+                                &quot;contents before sections &#39;%(c)s&#39;&quot;,
+                                c=self.ctx.contents.strip(),
+                            )
+                        self.dump_section(self.ctx.section, self.ctx.contents)
+
+                    self.ctx.section = self.section_descr
+                    self.ctx.contents = &quot;&quot;
+                    self.in_doc_sect = True
+                    self.in_purpose = False
+                    self.debug(
+                        &quot;FLAGs: in_doc_sect=%(s)s / in_purpose=%(p)s&quot;,
+                        s=self.in_doc_sect,
+                        p=self.in_purpose,
+                    )
+
+                elif (
+                    self.ctx.section.startswith(&quot;@&quot;)
+                    or self.ctx.section == self.section_context
+                ):
+
+                    # miguel-style comment kludge, look for blank lines after @parameter
+                    # line to signify start of description
+
+                    self.debug(
+                        &quot;blank lines after @parameter --&gt; start &#39;Description&#39; section&quot;
+                    )
+                    self.dump_section(self.ctx.section, self.ctx.contents)
+                    self.ctx.last_offset = self.ctx.line_no
+                    self.ctx.section = self.section_descr
+                    self.ctx.contents = &quot;&quot;
+                    self.in_doc_sect = True
+                    self.debug(
+                        &quot;FLAGs: in_doc_sect=%(s)s / in_purpose=%(p)s&quot;,
+                        s=self.in_doc_sect,
+                        p=self.in_purpose,
+                    )
+
+                else:
+                    self.ctx.contents += &quot;\n&quot;
+
+            elif self.in_purpose:
+                # Continued declaration purpose, dismiss leading whitespace
+                if self.ctx.decl_purpose:
+                    self.ctx.decl_purpose += &quot; &quot; + cont_line.strip()
+                else:
+                    self.ctx.decl_purpose = cont_line.strip()
+            else:
+                if self.options.markup == &quot;reST&quot; and self.ctx.section.startswith(&quot;@&quot;):
+                    # I doubt if it is a good idea to strip leading whitespaces
+                    # in parameter description, but *over all* we get better
+                    # reST output.
+                    cont_line = cont_line.strip()
+                    # Sub-sections in parameter descriptions are not provided,
+                    # but if this is a &quot;lorem:\n&quot; line create a new paragraph.
+                    if reST_sect.match(line) and not doc_sect_except.match(line):
+                        cont_line = &quot;\n&quot; + cont_line + &quot;\n&quot;
+
+                self.ctx.contents += cont_line + &quot;\n&quot;
+
+        else:
+            # i dont know - bad line?  ignore.
+            self.warn(&quot;bad line: &#39;%(line)s&#39;&quot;, line=line.strip())</div>
+
+
+<div class="viewcode-block" id="Parser.state_3">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_3">[docs]</a>
+    def state_3(self, line):
+        &quot;&quot;&quot;state: 3 - scanning prototype.&quot;&quot;&quot;
+
+        if line.startswith(&quot;typedef&quot;):
+            if not self.ctx.decl_type == &quot;typedef&quot;:
+                self.warn(
+                    &quot;typedef of function pointer not marked&quot;
+                    &quot; as typdef, use: &#39;typedef %s&#39; in the comment.&quot;
+                    % (self.ctx.last_identifier),
+                    line_no=self.ctx.decl_offset,
+                )
+            self.ctx.decl_type = &quot;typedef&quot;
+
+        if doc_state5_oneline.match(line):
+            sect = doc_state5_oneline[0].strip()
+            cont = doc_state5_oneline[1].strip()
+            if cont and sect:
+                self.ctx.section = self.sect_title(sect)
+                self.ctx.contents = cont
+                self.dump_section(self.ctx.section, self.ctx.contents)
+                self.ctx.section = self.section_default
+                self.ctx.contents = &quot;&quot;
+
+        elif doc_state5_start.match(line):
+            self.debug(&quot;FLAG: split_doc_state=1 / switch state 3 --&gt; 5&quot;)
+            self.state = 5
+            self.split_doc_state = 1
+            if self.ctx.decl_type in (&quot;function&quot;, &quot;macro&quot;):
+                self.error(
+                    &quot;odd construct, gathering documentation of a function&quot;
+                    &quot; outside of the main block?!?&quot;
+                )
+
+        elif self.ctx.decl_type in (&quot;function&quot;, &quot;macro&quot;):
+            self.process_state3_function(line)
+        else:
+            self.process_state3_type(line)</div>
+
+
+<div class="viewcode-block" id="Parser.state_4">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_4">[docs]</a>
+    def state_4(self, line):
+        &quot;&quot;&quot;state: 4 - documentation block&quot;&quot;&quot;
+
+        if doc_block.match(line):
+            # a new DOC block arrived, dump the last section and pass the new
+            # DOC block to state 1.
+            self.dump_DOC(self.ctx.section, self.ctx.contents)
+            self.ctx = self.ctx.new()
+            self.debug(&quot;END &amp; START: DOC block / switch state 4 --&gt; 1&quot;)
+            self.state = 1
+            self.state_1(line)
+
+        elif doc_end.match(line):
+            # the DOC block ends here, dump it and reset to state 0
+            self.debug(&quot;END: DOC block / dump doc section / switch state 4 --&gt; 0&quot;)
+            self.dump_DOC(self.ctx.section, self.ctx.contents)
+            self.ctx = self.ctx.new()
+            self.state = 0
+
+        elif doc_content.match(line):
+            cont = doc_content[0]
+            if not cont.strip() and not self.ctx.contents:  # dismiss leading newlines
+                pass
+            else:
+                self.ctx.contents += doc_content[0] + &quot;\n&quot;</div>
+
+
+<div class="viewcode-block" id="Parser.state_5">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_5">[docs]</a>
+    def state_5(self, line):
+        &quot;&quot;&quot;state: 5 - gathering documentation outside main block&quot;&quot;&quot;
+
+        if self.split_doc_state == 1 and doc_state5_sect.match(line):
+
+            # First line (split_doc_state 1) needs to be a @parameter
+            self.ctx.section = self.sect_title(doc_state5_sect[0].strip())
+            self.ctx.contents = doc_state5_sect[1].strip() + &quot;\n&quot;
+            self.split_doc_state = 2
+            self.debug(
+                &quot;SPLIT-DOC-START: &#39;%(param)s&#39; / split-state 1 --&gt; 2&quot;,
+                param=self.ctx.section,
+            )
+            self.ctx.last_offset = self.ctx.line_no
+            self.info(&quot;section: %(sec)s&quot;, sec=self.ctx.section)
+
+        elif doc_state5_end.match(line):
+            # Documentation block end
+            self.debug(&quot;SPLIT-DOC-END: ...&quot;)
+
+            if not self.ctx.contents.strip():
+                self.debug(&quot;SPLIT-DOC-END: ... no description to dump&quot;)
+
+            else:
+                self.dump_section(self.ctx.section, self.ctx.contents)
+                self.ctx.section = self.section_default
+                self.ctx.contents = &quot;&quot;
+
+            self.debug(&quot;SPLIT-DOC-END: ... split-state --&gt; 0  / state = 3&quot;)
+            self.state = 3
+            self.split_doc_state = 0
+
+        elif doc_content.match(line):
+            # Regular text
+            if self.split_doc_state == 2:
+                self.ctx.contents += doc_content[0] + &quot;\n&quot;
+
+            elif self.split_doc_state == 1:
+                self.split_doc_state = 4
+                self.error(&quot;Comment without header was found split-state --&gt; 4&quot;)
+                self.warn(&quot;Incorrect use of kernel-doc format: %(line)s&quot;, line=line)</div>
+
+
+    # helper to parse special objects
+
+<div class="viewcode-block" id="Parser.process_state3_function">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.process_state3_function">[docs]</a>
+    def process_state3_function(self, line):
+
+        self.debug(&quot;PROCESS-FUNCTION: %(line)s&quot;, line=line)
+        line = C99_comments.sub(&quot;&quot;, line)  # strip C99-style comments to end of line
+        line = line.strip()
+
+        if MACRO_define.search(line) and self.ctx.decl_type != &quot;macro&quot;:
+            # fix declaration type to &#39;macro&#39; whenever decalartion type &#39;macro&#39;
+            # is missed in the DOC string.
+            self.ctx.decl_type = &quot;macro&quot;
+
+        stripProto = RE(r&quot;([^\{]*)&quot;)
+
+        if line.startswith(&quot;#&quot;) and self.ctx.decl_type != &quot;macro&quot;:
+            # do nothing
+            pass
+        elif stripProto.match(line):
+            self.ctx.prototype += &quot; &quot; + stripProto[0]
+
+        if MACRO_define.search(line) or &quot;{&quot; in line or &quot;;&quot; in line:
+
+            # strip cr&amp;nl, strip C89 comments, strip leading whitespaces
+            self.ctx.prototype = C89_comments.sub(
+                &quot;&quot;, CR_NL.sub(&quot; &quot;, self.ctx.prototype)
+            ).lstrip()
+
+            if SYSCALL_DEFINE.search(self.ctx.prototype):
+                self.ctx.prototype = self.syscall_munge(self.ctx.prototype)
+
+            if (
+                TRACE_EVENT.search(self.ctx.prototype)
+                or DEFINE_EVENT.search(self.ctx.prototype)
+                or DEFINE_SINGLE_EVENT.search(self.ctx.prototype)
+            ):
+                self.ctx.prototype = self.tracepoint_munge(self.ctx.prototype)
+
+            self.ctx.prototype = self.ctx.prototype.strip()
+            self.info(&quot;prototype --&gt; &#39;%(proto)s&#39;&quot;, proto=self.ctx.prototype)
+            self.dump_function(self.ctx.prototype)
+            self.reset_state()</div>
+
+
+<div class="viewcode-block" id="Parser.syscall_munge">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.syscall_munge">[docs]</a>
+    def syscall_munge(self, prototype):
+        self.debug(&quot;syscall munge: &#39;%(prototype)s&#39;&quot;, prototype=prototype)
+        void = False
+
+        # strip needles whitespaces
+        prototype = normalize_ws(prototype)
+
+        if SYSCALL_DEFINE0.search(prototype):
+            void = True
+        prototype = SYSCALL_DEFINE.sub(&quot;long sys_&quot;, prototype)
+        if not self.ctx.last_identifier.startswith(&quot;sys_&quot;):
+            self.ctx.last_identifier = &quot;sys_%s&quot; % self.ctx.last_identifier
+
+        if re.search(r&quot;long (sys_.*?),&quot;, prototype):
+            prototype = prototype.replace(&quot;,&quot;, &quot;(&quot;, 1)
+        elif void:
+            prototype = prototype.replace(&quot;)&quot;, &quot;(void)&quot;, 1)
+
+        # now delete all of the odd-number commas in $prototype
+        # so that arg types &amp; arg names don&#39;t have a comma between them
+
+        retVal = prototype
+        if not void:
+            x = prototype.split(&quot;,&quot;)
+            y = []
+            while x:
+                y.append(x.pop(0) + x.pop(0))
+            retVal = &quot;,&quot;.join(y)
+        self.debug(&quot;syscall munge: retVal &#39;%(retVal)s&#39;&quot;, retVal=retVal)
+        return retVal</div>
+
+
+<div class="viewcode-block" id="Parser.tracepoint_munge">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.tracepoint_munge">[docs]</a>
+    def tracepoint_munge(self, prototype):
+        self.debug(&quot;tracepoint munge: %(prototype)s&quot;, prototype=prototype)
+
+        retVal = prototype
+        tp_name = &quot;&quot;
+        tp_args = &quot;&quot;
+
+        if TRACE_EVENT_name.match(prototype):
+            tp_name = TRACE_EVENT_name[0]
+
+        elif DEFINE_SINGLE_EVENT_name.match(prototype):
+            tp_name = DEFINE_SINGLE_EVENT_name[0]
+
+        elif DEFINE_EVENT_name.match(prototype):
+            tp_name = DEFINE_EVENT_name[1]
+
+        tp_name = tp_name.lstrip()
+
+        if TP_PROTO.search(prototype):
+            tp_args = TP_PROTO[0]
+
+        if not tp_name.strip() or not tp_args.strip():
+            self.warn(
+                &quot;Unrecognized tracepoint format: %(prototype)s&quot;, prototype=prototype
+            )
+        else:
+            if not self.ctx.last_identifier.startswith(&quot;trace_&quot;):
+                self.ctx.last_identifier = &quot;trace_%s&quot; % self.ctx.last_identifier
+            retVal = &quot;static inline void trace_%s(%s)&quot; % (tp_name, tp_args)
+        return retVal</div>
+
+
+<div class="viewcode-block" id="Parser.process_state3_type">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.process_state3_type">[docs]</a>
+    def process_state3_type(self, line):
+        self.debug(&quot;PROCESS-TYPE: %(line)s&quot;, line=line)
+
+        # strip cr&amp;nl, strip C99 comments, strip leading&amp;trailing whitespaces
+        line = C99_comments.sub(&quot;&quot;, CR_NL.sub(&quot; &quot;, line)).strip()
+
+        if MACRO.match(line):
+            # To distinguish preprocessor directive from regular declaration
+            # later (drop-semicolon).
+            line += &quot;;&quot;
+
+        m = RE(r&quot;([^{};]*)([{};])(.*)&quot;)
+
+        while True:
+            if m.search(line):
+                if self.ctx.prototype:
+                    self.ctx.prototype += &quot; &quot;
+                self.ctx.prototype += m[0] + m[1]
+                if m[1] == &quot;{&quot;:
+                    self.brcount += 1
+                if m[1] == &quot;}&quot;:
+                    self.brcount -= 1
+                if m[1] == &quot;;&quot; and self.brcount == 0:
+                    self.info(&quot;prototype --&gt; &#39;%(proto)s&#39;&quot;, proto=self.ctx.prototype)
+                    self.debug(&quot;decl_type: %(decl_type)s&quot;, decl_type=self.ctx.decl_type)
+                    if self.ctx.decl_type == &quot;union&quot;:
+                        self.dump_union(self.ctx.prototype)
+                    elif self.ctx.decl_type == &quot;struct&quot;:
+                        self.dump_struct(self.ctx.prototype)
+                    elif self.ctx.decl_type == &quot;enum&quot;:
+                        self.dump_enum(self.ctx.prototype)
+                    elif self.ctx.decl_type == &quot;typedef&quot;:
+                        self.dump_typedef(self.ctx.prototype)
+                    else:
+                        raise ParserBuggy(
+                            self, &quot;unknown decl_type: %s&quot; % self.ctx.decl_type
+                        )
+
+                    self.reset_state()
+                    break
+                line = m[2]
+            else:
+                self.ctx.prototype += line
+                break</div>
+
+
+    # dump objects
+
+<div class="viewcode-block" id="Parser.dump_preamble">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_preamble">[docs]</a>
+    def dump_preamble(self):
+        if not self.options.skip_preamble:
+            self.translator.output_preamble()</div>
+
+
+<div class="viewcode-block" id="Parser.dump_epilog">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_epilog">[docs]</a>
+    def dump_epilog(self):
+        if not self.options.skip_epilog:
+            self.translator.output_epilog()</div>
+
+
+<div class="viewcode-block" id="Parser.dump_prefix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_prefix">[docs]</a>
+    def dump_prefix(self):
+        self.translator.output_prefix()</div>
+
+
+<div class="viewcode-block" id="Parser.dump_suffix">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_suffix">[docs]</a>
+    def dump_suffix(self):
+        self.translator.output_suffix()</div>
+
+
+<div class="viewcode-block" id="Parser.dump_section">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_section">[docs]</a>
+    def dump_section(self, name, cont):
+        &quot;&quot;&quot;Store section&#39;s *content* under it&#39;s name.
+
+        :param str name: name of the section
+        :param str cont: content of the section
+
+        Stores the *content* under section&#39;s *name* in one of the *container*. A
+        container is a hash object, the section name is the *key* and the
+        content is the *value*.
+
+        Container:
+
+        * self.ctx.constants:       holds constant&#39;s descriptions
+        * self.ctx.parameterdescs:  holds parameter&#39;s descriptions
+        * self.ctx.sections:        holds common sections like &quot;Return:&quot;
+
+        There are the following contai
+        &quot;&quot;&quot;
+        self.debug(&quot;dump_section(): %(name)s&quot;, name=name)
+        name = name.strip()
+        cont = cont.rstrip()  # dismiss trailing whitespace
+
+        _type_param = RE(r&quot;\@(\w[.\w]*)&quot;)  # match @foo and @foo.bar
+        if _type_param.match(name):  # &#39;@parameter&#39; - name of a parameter
+            name = _type_param[0]
+            self.debug(&quot;parameter definition &#39;%(name)s&#39;&quot;, name=name)
+            if self.ctx.parameterdescs.get(name, None):
+                self.error(
+                    &quot;duplicate parameter definition &#39;%(name)s&#39;&quot;,
+                    name=name,
+                    line_no=self.ctx.last_offset,
+                )
+            self.ctx.parameterdescs[name] = cont
+            self.ctx.parameterdescs.offsets[name] = self.ctx.last_offset
+            self.ctx.sectcheck.append(name)
+
+        elif name == &quot;@...&quot;:
+            self.debug(&quot;parameter definiton &#39;...&#39;&quot;)
+            name = &quot;...&quot;
+            if self.ctx.parameterdescs.get(name, None):
+                self.error(&quot;parameter definiton &#39;...&#39;&quot;, line_no=self.ctx.last_offset)
+            self.ctx.parameterdescs[name] = cont
+            self.ctx.parameterdescs.offsets[name] = self.ctx.last_offset
+            self.ctx.sectcheck.append(name)
+        else:
+            self.debug(&quot;other section &#39;%(name)s&#39;&quot;, name=name)
+            if self.ctx.sections.get(name, None):
+                self.warn(
+                    &quot;duplicate section name &#39;%(name)s&#39;&quot;,
+                    name=name,
+                    line_no=self.ctx.last_offset,
+                )
+                self.ctx.sections[name] += &quot;\n\n&quot; + cont
+            else:
+                self.ctx.sections[name] = cont
+            self.ctx.sections.offsets[name] = self.ctx.last_offset</div>
+
+
+<div class="viewcode-block" id="Parser.dump_function">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_function">[docs]</a>
+    def dump_function(self, proto):
+        self.debug(&quot;dump_function(): (1) &#39;%(proto)s&#39;&quot;, proto=proto)
+        hasRetVal = True
+        proto = re.sub(r&quot;^static +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;^extern +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;^asmlinkage +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;^inline +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;^__inline__ +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;^__inline +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;^__always_inline +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;^noinline +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;__init +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;__init_or_module +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;__meminit +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;__must_check +&quot;, &quot;&quot;, proto)
+        proto = re.sub(r&quot;__weak +&quot;, &quot;&quot;, proto)
+
+        # Remove known attributes from function prototype
+        known_attrs = self.options.known_attrs.copy()
+        if self.options.exp_method == &quot;attribute&quot;:
+            known_attrs.extend(self.options.exp_ids)
+        for attr in known_attrs:
+            proto = re.sub(r&quot;%s +&quot; % attr, &quot;&quot;, proto)
+
+        define = bool(MACRO_define.match(proto))
+        proto = MACRO_define.sub(&quot;&quot;, proto)
+
+        proto = re.sub(
+            r&quot;__attribute__\s*\(\(&quot;
+            r&quot;(?:&quot;
+            r&quot;[\w\s]+&quot;  # attribute name
+            r&quot;(?:\([^)]*\))?&quot;  # attribute arguments
+            r&quot;\s*,?&quot;  # optional comma at the end
+            r&quot;)+&quot;
+            r&quot;\)\)\s+&quot;,
+            &quot;&quot;,
+            proto,
+        )
+
+        # Yes, this truly is vile.  We are looking for:
+        # 1. Return type (may be nothing if we&#39;re looking at a macro)
+        # 2. Function name
+        # 3. Function parameters.
+        #
+        # All the while we have to watch out for function pointer parameters
+        # (which IIRC is what the two sections are for), C types (these
+        # regexps don&#39;t even start to express all the possibilities), and
+        # so on.
+        #
+        # If you mess with these regexps, it&#39;s a good idea to check that
+        # the following functions&#39; documentation still comes out right:
+        # - parport_register_device (function pointer parameters)
+        # - atomic_set (macro)
+        # - pci_match_device, __copy_to_user (long return type)
+
+        self.debug(&quot;dump_function(): (2) &#39;%(proto)s&#39;&quot;, proto=proto)
+
+        x = RE(r&quot;^()([a-zA-Z0-9_~:]+)\s+&quot;)
+
+        if define and x.match(proto):
+            # This is an object-like macro, it has no return type and no
+            # parameter list.  Function-like macros are not allowed to have
+            # spaces between decl_name and opening parenthesis (notice
+            # the \s+).
+            self.ctx.return_type = x[0]
+            self.ctx.decl_name = x[1]
+            hasRetVal = False
+            self.debug(&quot;dump_function(): (hasRetVal = False) &#39;%(proto)s&#39;&quot;, proto=proto)
+        else:
+            matchExpr = None
+            for regexp in FUNC_PROTOTYPES:
+                if regexp.match(proto):
+                    matchExpr = regexp
+                    self.debug(
+                        &quot;dump_function(): matchExpr = &#39;%(pattern)s&#39; // &#39;%(proto)s&#39;&quot;,
+                        pattern=matchExpr.pattern,
+                        proto=proto,
+                    )
+                    break
+
+            if matchExpr is not None:
+                self.debug(&quot;dump_function(): return_type=&#39;%(x)s&#39;&quot;, x=matchExpr[0])
+                self.ctx.return_type = matchExpr[0]
+                self.debug(&quot;dump_function(): decl_name=&#39;%(x)s&#39;&quot;, x=matchExpr[1])
+                self.ctx.decl_name = matchExpr[1]
+                self.create_parameterlist(matchExpr[2], &quot;,&quot;)
+            else:
+                self.warn(
+                    &quot;can&#39;t understand function proto: &#39;%(prototype)s&#39;&quot;,
+                    prototype=self.ctx.prototype,
+                    line_no=self.ctx.decl_offset,
+                )
+                return
+
+            if self.ctx.last_identifier != self.ctx.decl_name:
+                self.warn(
+                    &quot;function name from comment differs:  %s &lt;--&gt; %s&quot;
+                    % (self.ctx.last_identifier, self.ctx.decl_name),
+                    line_no=self.ctx.decl_offset,
+                )
+
+        self.check_sections(
+            self.ctx.decl_name,
+            self.ctx.decl_type,
+            self.ctx.sectcheck,
+            self.ctx.parameterlist,
+        )
+        if hasRetVal:
+            self.check_return_section(self.ctx.decl_name, self.ctx.return_type)
+
+        self.output_decl(
+            self.ctx.decl_name,
+            &quot;function_decl&quot;,
+            function=self.ctx.decl_name,
+            return_type=self.ctx.return_type,
+            parameterlist=self.ctx.parameterlist,
+            parameterdescs=self.ctx.parameterdescs,
+            parametertypes=self.ctx.parametertypes,
+            sections=self.ctx.sections,
+            purpose=self.ctx.decl_purpose,
+            decl_type=self.ctx.decl_type,
+        )</div>
+
+
+<div class="viewcode-block" id="Parser.dump_DOC">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_DOC">[docs]</a>
+    def dump_DOC(self, name, cont):
+        self.dump_section(name, cont)
+        self.output_decl(name, &quot;DOC&quot;, sections=self.ctx.sections)</div>
+
+
+<div class="viewcode-block" id="Parser.dump_union">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_union">[docs]</a>
+    def dump_union(self, proto):
+
+        if not self.prepare_struct_union(proto):
+            self.error(&quot;can&#39;t parse union!&quot;)
+            return
+
+        if self.ctx.last_identifier != self.ctx.decl_name:
+            self.warn(
+                &quot;struct name from comment differs:  %s &lt;--&gt; %s&quot;
+                % (self.ctx.last_identifier, self.ctx.decl_name),
+                line_no=self.ctx.decl_offset,
+            )
+
+        self.output_decl(
+            self.ctx.decl_name,
+            &quot;union_decl&quot;,
+            decl_name=self.ctx.decl_name,
+            decl_type=self.ctx.decl_type,
+            parameterlist=self.ctx.parameterlist,
+            parameterdescs=self.ctx.parameterdescs,
+            parametertypes=self.ctx.parametertypes,
+            sections=self.ctx.sections,
+            purpose=self.ctx.decl_purpose,
+            definition=self.ctx.definition,
+        )</div>
+
+
+<div class="viewcode-block" id="Parser.dump_struct">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_struct">[docs]</a>
+    def dump_struct(self, proto):
+
+        if not self.prepare_struct_union(proto):
+            self.error(&quot;can&#39;t parse struct!&quot;)
+            return
+
+        if self.ctx.last_identifier != self.ctx.decl_name:
+            self.warn(
+                &quot;struct name from comment differs:  %s &lt;--&gt; %s&quot;
+                % (self.ctx.last_identifier, self.ctx.decl_name),
+                line_no=self.ctx.decl_offset,
+            )
+
+        self.output_decl(
+            self.ctx.decl_name,
+            &quot;struct_decl&quot;,
+            decl_name=self.ctx.decl_name,
+            decl_type=self.ctx.decl_type,
+            parameterlist=self.ctx.parameterlist,
+            parameterdescs=self.ctx.parameterdescs,
+            parametertypes=self.ctx.parametertypes,
+            sections=self.ctx.sections,
+            purpose=self.ctx.decl_purpose,
+            definition=self.ctx.definition,
+        )</div>
+
+
+<div class="viewcode-block" id="Parser.prepare_struct_union">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.prepare_struct_union">[docs]</a>
+    def prepare_struct_union(self, proto):
+        self.debug(&quot;prepare_struct_union(): &#39;%(proto)s&#39;&quot;, proto=proto)
+
+        retVal = False
+        members = &quot;&quot;
+
+        # ignore members marked private:
+        proto = re.sub(r&quot;/\*\s*private:.*?\/\*\s*public:.*?\*\/&quot;, &quot;&quot;, proto, flags=re.I)
+        proto = re.sub(r&quot;/\*\s*private:.*$&quot;, &quot;};&quot;, proto, flags=re.I)
+
+        if C_STRUCT_UNION.match(proto):
+
+            if C_STRUCT_UNION[0] != self.ctx.decl_type:
+                self.error(
+                    &quot;determine of decl_type is inconsistent: &#39;%s&#39; &lt;--&gt; &#39;%s&#39;&quot;
+                    &quot;\nprototype: %s&quot; % (C_STRUCT_UNION[0], self.ctx.decl_type, proto)
+                )
+                return False
+
+            self.ctx.decl_name = C_STRUCT_UNION[1]
+            self.ctx.definition = members = C89_comments.sub(&quot;&quot;, C_STRUCT_UNION[2])
+
+            # strip kmemcheck_bitfield_{begin,end}.*;
+            members = re.sub(r&quot;kmemcheck_bitfield_.*?;&quot;, &quot;&quot;, members)
+
+            # strip attributes
+            members = re.sub(
+                r&quot;__attribute__\s*\(\([a-z,_\*\s\(\)]*\)\)&quot;, &quot;&quot;, members, flags=re.I
+            )
+            members = re.sub(r&quot;__aligned\s*\([^;]*\)&quot;, &quot;&quot;, members)
+            members = re.sub(r&quot;\s*CRYPTO_MINALIGN_ATTR&quot;, &quot;&quot;, members)
+
+            # replace DECLARE_BITMAP
+            members = re.sub(
+                r&quot;DECLARE_BITMAP\s*\(([^,)]+),\s*([^,)]+)\)&quot;,
+                r&quot;unsigned long \1[BITS_TO_LONGS(\2)]&quot;,
+                members,
+            )
+
+            # replace DECLARE_HASHTABLE
+            members = re.sub(
+                r&quot;DECLARE_HASHTABLE\s*\(([^,)]+),\s*([^,)]+)\)&quot;,
+                r&quot;unsigned long \1[1 &lt;&lt; ((\2) - 1)]&quot;,
+                members,
+            )
+
+            # replace DECLARE_KFIFO
+            members = re.sub(
+                r&quot;DECLARE_KFIFO\s*\(([^,)]+),\s*([^,)]+),\s*([^,)]+)\)&quot;,
+                r&quot;\2 \1&quot;,
+                members,
+            )
+
+            # replace DECLARE_KFIFO_PTR
+            members = re.sub(
+                r&quot;DECLARE_KFIFO_PTR\s*\(([^,)]+),\s*([^,)]+)\)&quot;, r&quot;\2 \1&quot;, members
+            )
+
+            # Split nested struct/union elements as newer ones
+            NESTED = RE(r&quot;(struct|union)([^{};]+){([^{}]*)}([^{}\;]*)\;&quot;)
+            while NESTED.search(members):
+                n_content = NESTED[2].strip()
+                n_type = NESTED[0].strip()
+                n_ids = NESTED[3].strip()
+                n_new = &quot;&quot;
+                # union car {int foo;} bar1, bar2, *bbar3;
+                for n_id in n_ids.split(&quot;,&quot;):
+                    n_id = re.sub(r&quot;[:\[].*&quot;, &quot;&quot;, n_id).strip()
+                    n_id = n_id.strip().replace(&quot;*&quot;, &quot;&quot;)
+                    n_new += &quot;%s %s;&quot; % (NESTED[0].strip(), n_id)
+                    for arg in n_content.split(&quot;;&quot;):
+                        arg = normalize_ws(arg)
+                        if not arg:
+                            continue
+                        # Handle arrays
+                        arg = re.sub(r&quot;\[\s*\S.*\]&quot;, &quot;&quot;, arg)
+
+                        PTR_TO_FUNC = RE(r&quot;^([^\(]+\(\*?\s*)([\w\.]*)(\s*\).*)&quot;)
+                        if PTR_TO_FUNC.search(arg):
+                            n_type = PTR_TO_FUNC[0].strip()
+                            n_name = PTR_TO_FUNC[1].strip()
+                            n_extra = PTR_TO_FUNC[2].strip()
+                            if not n_name:
+                                continue
+                            if not n_id:
+                                n_new += &quot;%s%s%s; &quot; % (n_type, n_name, n_extra)
+                            else:
+                                n_new += &quot;%s%s.%s%s; &quot; % (n_type, n_id, n_name, n_extra)
+
+                        else:
+                            # suppport bit types e.g. &#39;__u8 arg1 : 1&#39; --&gt; &#39;__u8 arg1&#39;
+                            arg = re.sub(r&quot;\s*:\s*[0-9]+&quot;, &quot;&quot;, arg)
+                            n_type = arg.split(&quot; &quot;)[0]
+                            n_name = arg.split(&quot; &quot;)[-1].replace(&quot;*&quot;, &quot;&quot;)
+                            if n_name == n_type:
+                                # anonymous struct/union
+                                n_new += &quot;%s;&quot; % (n_type)
+                            elif not n_id:
+                                n_new += &quot;%s %s;&quot; % (n_type, n_name)
+                            else:
+                                n_new += &quot;%s %s.%s;&quot; % (n_type, n_id, n_name)
+                members = NESTED.sub(n_new, members, count=1)
+
+            # ignore other nested elements, like enums
+            members = re.sub(r&quot;({[^\{\}]*})&quot;, &quot;&quot;, members)
+            self.create_parameterlist(members, &quot;;&quot;)
+            self.check_sections(
+                self.ctx.decl_name,
+                self.ctx.decl_type,
+                self.ctx.sectcheck,
+                self.ctx.parameterlist,  # self.ctx.struct_actual.split(&quot; &quot;)
+            )
+            retVal = True
+
+        else:
+            retVal = False
+
+        return retVal</div>
+
+
+<div class="viewcode-block" id="Parser.dump_enum">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_enum">[docs]</a>
+    def dump_enum(self, proto):
+        self.debug(&quot;dump_enum(): &#39;%(proto)s&#39;&quot;, proto=proto)
+
+        proto = C89_comments.sub(&quot;&quot;, proto)
+        # strip #define macros inside enums
+        proto = re.sub(r&quot;#\s*((define|ifdef)\s+|endif)[^;]*;&quot;, &quot;&quot;, proto)
+
+        splitchar = &quot;,&quot;
+        RE_NAME = RE(r&quot;^\s*(\w+).*&quot;)
+
+        if C_ENUM.search(proto):
+            self.ctx.decl_name = C_ENUM[0]
+            members = normalize_ws(C_ENUM[1])
+
+            # drop trailing splitchar, if extists
+            if members.endswith(splitchar):
+                members = members[:-1]
+
+            for member in members.split(splitchar):
+                name = RE_NAME.sub(r&quot;\1&quot;, member)
+                self.ctx.parameterlist.append(name)
+                if not self.ctx.parameterdescs.get(name, None):
+                    self.warn(
+                        &quot;Enum value &#39;%(name)s&#39; not described&quot;
+                        &quot; in enum &#39;%(decl_name)s&#39;&quot;,
+                        name=name,
+                        decl_name=self.ctx.decl_name,
+                    )
+                    self.ctx.parameterdescs[name] = Parser.undescribed
+
+            if self.ctx.last_identifier != self.ctx.decl_name:
+                self.warn(
+                    &quot;enum name from comment differs:  %s &lt;--&gt; %s&quot;
+                    % (self.ctx.last_identifier, self.ctx.decl_name),
+                    line_no=self.ctx.decl_offset,
+                )
+
+            self.check_sections(
+                self.ctx.decl_name,
+                self.ctx.decl_type,
+                self.ctx.sectcheck,
+                self.ctx.parameterlist,
+            )
+
+            self.output_decl(
+                self.ctx.decl_name,
+                &quot;enum_decl&quot;,
+                enum=self.ctx.decl_name,
+                parameterlist=self.ctx.parameterlist,
+                parameterdescs=self.ctx.parameterdescs,
+                sections=self.ctx.sections,
+                purpose=self.ctx.decl_purpose,
+            )
+
+        else:
+            self.error(&quot;can&#39;t parse enum!&quot;)</div>
+
+
+<div class="viewcode-block" id="Parser.dump_typedef">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_typedef">[docs]</a>
+    def dump_typedef(self, proto):
+        self.debug(&quot;dump_typedef(): &#39;%(proto)s&#39;&quot;, proto=proto)
+
+        proto = C89_comments.sub(&quot;&quot;, proto)
+
+        matchExpr = None
+        if C_FUNC_TYPEDEF.search(proto):
+            matchExpr = C_FUNC_TYPEDEF
+        elif C_FUNC_TYPEDEF_2.search(proto):
+            self.warn(
+                &quot;typedef of function pointer used uncommon code style: &#39;%s&#39;&quot; % proto
+            )
+            matchExpr = C_FUNC_TYPEDEF_2
+
+        if matchExpr:
+            # Parse function prototypes
+
+            self.ctx.return_type = matchExpr[0].lstrip()
+            self.ctx.decl_name = matchExpr[1]
+            self.check_return_section(self.ctx.decl_name, self.ctx.return_type)
+
+            f_args = matchExpr[2]
+            self.create_parameterlist(f_args, &quot;,&quot;)
+
+            if self.ctx.last_identifier != self.ctx.decl_name:
+                self.warn(
+                    &quot;function name from comment differs:  %s &lt;--&gt; %s&quot;
+                    % (self.ctx.last_identifier, self.ctx.decl_name),
+                    line_no=self.ctx.decl_offset,
+                )
+
+            self.check_sections(
+                self.ctx.decl_name,
+                self.ctx.decl_type,
+                self.ctx.sectcheck,
+                self.ctx.parameterlist,
+            )
+            self.output_decl(
+                self.ctx.decl_name,
+                &quot;function_decl&quot;,
+                function=self.ctx.decl_name,
+                return_type=self.ctx.return_type,
+                parameterlist=self.ctx.parameterlist,
+                parameterdescs=self.ctx.parameterdescs,
+                parametertypes=self.ctx.parametertypes,
+                sections=self.ctx.sections,
+                purpose=self.ctx.decl_purpose,
+                decl_type=self.ctx.decl_type,
+            )
+
+        else:
+            self.debug(&quot;dump_typedef(): &#39;%(proto)s&#39;&quot;, proto=proto)
+            x1 = RE(r&quot;\(*.\)\s*;$&quot;)
+            x2 = RE(r&quot;\[*.\]\s*;$&quot;)
+
+            while x1.search(proto) or x2.search(proto):
+                proto = x1.sub(&quot;;&quot;, proto)
+                proto = x2.sub(&quot;;&quot;, proto)
+
+            self.debug(&quot;dump_typedef(): &#39;%(proto)s&#39;&quot;, proto=proto)
+
+            if C_TYPEDEF.match(proto):
+                self.ctx.decl_name = C_TYPEDEF[0]
+                if self.ctx.last_identifier != self.ctx.decl_name:
+                    self.warn(
+                        &quot;typedef name from comment differs:  %s &lt;--&gt; %s&quot;
+                        % (self.ctx.last_identifier, self.ctx.decl_name),
+                        line_no=self.ctx.decl_offset,
+                    )
+
+                self.check_sections(
+                    self.ctx.decl_name,
+                    self.ctx.decl_type,
+                    self.ctx.sectcheck,
+                    self.ctx.parameterlist,
+                )
+                self.output_decl(
+                    self.ctx.decl_name,
+                    &quot;typedef_decl&quot;,
+                    typedef=self.ctx.decl_name,
+                    sections=self.ctx.sections,
+                    purpose=self.ctx.decl_purpose,
+                )
+            else:
+                self.error(&quot;can&#39;t parse typedef!&quot;)</div>
+
+
+<div class="viewcode-block" id="Parser.create_parameterlist">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.create_parameterlist">[docs]</a>
+    def create_parameterlist(self, parameter, splitchar):
+        self.debug(
+            &quot;create_parameterlist(): splitchar=&#39;%(x)s&#39; params=&#39;%(y)s&#39;&quot;,
+            x=splitchar,
+            y=parameter,
+        )
+        parameter = normalize_ws(parameter)
+        pointer_to_func = RE(r&quot;\(.+\)\s*\(&quot;)
+
+        # temporarily replace commas inside function pointer definition
+        m = RE(r&quot;(\([^\),]+),&quot;)
+
+        while m.search(parameter):
+            parameter = m.sub(r&quot;\1#&quot;, parameter)
+        # drop trailing splitchar, if extists
+        if parameter.endswith(splitchar):
+            parameter = parameter[:-1]
+
+        self.debug(&quot;create_parameterlist(): params=&#39;%(y)s&#39;&quot;, y=parameter)
+        for c, p in enumerate(parameter.split(splitchar)):
+            p = C99_comments.sub(&quot;&quot;, p)
+            p = p.strip()
+
+            self.debug(&quot;  parameter#%(c)s: %(p)s&quot;, c=c, p=p)
+            p_type = None
+            p_name = None
+
+            if MACRO.match(p):
+
+                # Treat preprocessor directive as a typeless variable just to
+                # fill corresponding data structures &quot;correctly&quot;. Catch it later
+                # in output_* subs.
+                self.debug(&quot;  parameter#%(c)s: (MACRO) %(p)s=&#39;&#39;&quot;, c=c, p=p)
+                self.push_parameter(p, &quot;&quot;)
+
+            elif pointer_to_func.search(p):
+
+                # pointer-to-function
+                p = p.replace(&quot;#&quot;, &quot;,&quot;)  # reinsert temporarily removed commas
+                self.debug(&quot;  parameter#%(c)s: (pointer to function) %(p)s&quot;, c=c, p=p)
+                m = RE(r&quot;[^\(]+\(\*?\s*([\w\.]*)\s*\)&quot;)
+                m.match(p)
+                p_name = m[0]
+                p_type = p
+                p_type = re.sub(r&quot;([^\(]+\(\*?)\s*&quot; + p_name, r&quot;\1&quot;, p_type)
+                # self.save_struct_actual(p_name)
+                self.push_parameter(p_name, p_type)
+
+            else:
+                p = re.sub(r&quot;\s*:\s*&quot;, &quot;:&quot;, p)
+                p = re.sub(r&quot;\s*\[&quot;, &quot;[&quot;, p)
+                self.debug(&quot;  parameter#%(c)s: (common) %(p)s&quot;, c=c, p=p)
+
+                p_args = re.split(r&quot;\s*,\s*&quot;, p)
+                if re.match(r&quot;\s*,\s*&quot;, p_args[0]):
+                    p_args[0] = re.sub(r&quot;(\*+)\s*&quot;, r&quot; \1&quot;, p_args[0])
+
+                self.debug(
+                    &quot;  parameter#%(c)s : (1) p_args = %(p_args)s&quot;,
+                    c=c,
+                    p_args=repr(p_args),
+                )
+
+                first_arg = []
+                m = RE(r&quot;^(.*\s+)(.*?\[.*\].*)$&quot;)
+                if m.match(p_args[0]):
+                    p_args.pop(0)
+                    first_arg.extend(re.split(r&quot;\s+&quot;, m[0]))
+                    first_arg.append(m[1])
+                else:
+                    first_arg.extend(re.split(r&quot;\s+&quot;, p_args.pop(0)))
+
+                p_args = [first_arg.pop()] + p_args
+                self.debug(
+                    &quot;  parameter#%(c)s : (2) p_args=%(p_args)s&quot;,
+                    c=c,
+                    p_args=repr(p_args),
+                )
+                p_type = &quot; &quot;.join(first_arg)
+
+                ma = RE(r&quot;^(\*+)\s*(.*)&quot;)
+                mb = RE(r&quot;(.*?):(\d+)&quot;)
+
+                for p_name in p_args:
+                    self.debug(
+                        &quot;  parameter#%(c)s : (3) p_name=&#39;%(p_name)s&#39;&quot;,
+                        c=c,
+                        p_name=p_name,
+                    )
+
+                    if ma.match(p_name):
+                        p_type = &quot;%s %s&quot; % (p_type, ma[0])
+                        p_name = ma[1]
+
+                    elif mb.match(p_name):
+                        if p_type:
+                            p_name = mb[0]
+                            p_type = &quot;%s:%s&quot; % (p_type, mb[1])
+                        else:
+                            # skip unnamed bit-fields
+                            continue
+
+                    self.debug(
+                        &quot;  parameter#%(c)s : (4) p_name=&#39;%(p_name)s&#39; / p_type=&#39;%(p_type)s&#39;&quot;,
+                        c=c,
+                        p_name=p_name,
+                        p_type=p_type,
+                    )
+                    # self.save_struct_actual(p_name)
+                    self.push_parameter(p_name, p_type)</div>
+
+
+<div class="viewcode-block" id="Parser.push_parameter">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.push_parameter">[docs]</a>
+    def push_parameter(self, p_name, p_type):
+        self.debug(
+            &quot;push_parameter(): p_name=&#39;%(p_name)s&#39; / p_type=&#39;%(p_type)s&#39;&quot;,
+            p_name=p_name,
+            p_type=p_type,
+        )
+        p_name = p_name.strip()
+        p_type = p_type.strip()
+
+        if self.anon_struct_union and not p_type and p_name == &quot;}&quot;:
+            # ignore the ending }; from anon. struct/union
+            return
+
+        self.anon_struct_union = False
+
+        self.debug(
+            &quot;push_parameter(): (1) p_name=&#39;%(p_name)s&#39; / p_type=&#39;%(p_type)s&#39;&quot;,
+            p_name=p_name,
+            p_type=p_type,
+        )
+
+        if not p_type and re.search(r&quot;\.\.\.$&quot;, p_name):
+            if not self.ctx.parameterdescs.get(p_name, None):
+                self.ctx.parameterdescs[p_name] = &quot;variable arguments&quot;
+
+        elif not p_type and (not p_name or p_name == &quot;void&quot;):
+            p_name = &quot;void&quot;
+            self.ctx.parameterdescs[p_name] = &quot;no arguments&quot;
+
+        elif not p_type and (p_name in (&quot;struct&quot;, &quot;union&quot;)):
+            # handle unnamed (anonymous) union or struct:
+            p_type = p_name
+            p_name = &quot;{unnamed_&quot; + p_name + &quot;}&quot;
+            self.ctx.parameterdescs[p_name] = &quot;anonymous&quot;
+            self.anon_struct_union = True
+
+        self.debug(
+            &quot;push_parameter(): (2) p_name=&#39;%(p_name)s&#39; / p_type=&#39;%(p_type)s&#39;&quot;,
+            p_name=p_name,
+            p_type=p_type,
+        )
+
+        if not p_name.startswith(&quot;#&quot;):
+            # strip array from paramater name / e.g. p_name is &quot;modes[]&quot; from a
+            # parmeter defined by: &quot;const char * const modes[]&quot;
+
+            p_name = re.sub(r&quot;\[.*&quot;, &quot;&quot;, p_name)
+
+            # strip parentheses and pointers, e.g.: (*foo) --&gt; foo
+
+            p_name = re.sub(r&quot;[\*\(\)]&quot;, &quot;&quot;, p_name)
+
+        self.debug(
+            &quot;push_parameter(): (3) p_name=&#39;%(p_name)s&#39; / p_type=&#39;%(p_type)s&#39;&quot;,
+            p_name=p_name,
+            p_type=p_type,
+        )
+
+        # warn if parameter has no description (but ignore ones starting with
+        # &#39;#&#39; as these are not parameters but inline preprocessor statements);
+        # also ignore unnamed structs/unions;
+
+        if not self.anon_struct_union:
+            if not self.ctx.parameterdescs.get(p_name, None) and not p_name.startswith(
+                &quot;#&quot;
+            ):
+                if p_type in (&quot;function&quot;, &quot;enum&quot;):
+                    self.warn(
+                        &quot;Function parameter or member &#39;%(p_name)s&#39; not &quot;
+                        &quot;described in &#39;%(decl_name)s&#39;.&quot;,
+                        p_name=p_name,
+                        decl_name=self.ctx.decl_name,
+                        line_no=self.ctx.last_offset,
+                    )
+                else:
+                    self.warn(
+                        &quot;no description found for parameter &#39;%(p_name)s&#39;&quot;,
+                        p_name=p_name,
+                        line_no=self.ctx.decl_offset,
+                    )
+                self.ctx.parameterdescs[p_name] = Parser.undescribed
+
+        self.ctx.parameterlist.append(p_name)
+        self.ctx.parametertypes[p_name] = p_type.strip()</div>
+
+
+    # def save_struct_actual(self, actual):
+    #     # strip all spaces from the actual param so that it looks like one
+    #     # string item
+    #     self.debug(&quot;save_struct_actual(): actual=&#39;%(a)s&#39;&quot;, a=actual)
+    #     actual = WHITESPACE.sub(&quot;&quot;, actual)
+    #     self.ctx.struct_actual += actual + &quot; &quot;
+    #     self.debug(&quot;save_struct_actual: &#39;%(a)s&#39;&quot;, a=self.ctx.struct_actual)
+
+<div class="viewcode-block" id="Parser.check_sections">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.check_sections">[docs]</a>
+    def check_sections(self, decl_name, decl_type, sectcheck, parameterlist):
+        self.debug(
+            &quot;check_sections(): decl_name=&#39;%(n)s&#39; / decl_type=&#39;%(t)s&#39; /&quot;
+            &quot; sectcheck=%(sc)s / parameterlist=%(pl)s&quot;,
+            n=decl_name,
+            t=decl_type,
+            sc=sectcheck,
+            pl=parameterlist,
+        )
+
+        for sect in sectcheck:
+            err = True
+            for para in parameterlist:
+                para = re.sub(r&quot;\[.*\]&quot;, &quot;&quot;, para)
+                # para = re.sub(r&quot;/__attribute__\s*\(\([A-Za-z,_\*\s\(\)]*\)\)/&quot;, &quot;&quot;, para)
+                if para == sect:
+                    err = False
+                    break
+            if err:
+                if decl_type in (&quot;function&quot;, &quot;macro&quot;):
+                    self.warn(
+                        &quot;excess function parameter &#39;%(sect)s&#39; description in &#39;%(decl_name)s&#39;&quot;,
+                        sect=sect,
+                        decl_name=decl_name,
+                        line_no=self.ctx.decl_offset,
+                    )
+                else:
+                    self.warn(
+                        &quot;excess %(decl_type)s member &#39;%(sect)s&#39; description in &#39;%(decl_name)s&#39;&quot;,
+                        decl_type=decl_type,
+                        decl_name=decl_name,
+                        sect=sect,
+                        line_no=self.ctx.decl_offset,
+                    )
+            else:
+                self.debug(
+                    &quot;check_sections(): parameter &#39;%(sect)s&#39;: description exists / OK&quot;,
+                    sect=sect,
+                )</div>
+
+
+<div class="viewcode-block" id="Parser.check_return_section">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.check_return_section">[docs]</a>
+    def check_return_section(self, decl_name, return_type):
+        self.debug(
+            &quot;check_return_section(): decl_name=&#39;%(n)s&#39;, return_type=&#39;%(t)s&quot;,
+            n=decl_name,
+            t=return_type,
+        )
+        # Ignore an empty return type (It&#39;s a macro) and ignore functions with a
+        # &quot;void&quot; return type. (But don&#39;t ignore &quot;void *&quot;)
+
+        if not return_type or re.match(r&quot;void\s*\w*\s*$&quot;, return_type):
+            self.debug(&quot;check_return_section(): ignore void&quot;)
+            return
+
+        if self.options.verbose_warn and not self.ctx.sections.get(
+            self.section_return, None
+        ):
+            self.warn(
+                &quot;no description found for return-value of function &#39;%(func)s()&#39;&quot;,
+                func=decl_name,
+                line_no=self.ctx.decl_offset,
+            )
+        else:
+            self.debug(
+                &quot;check_return_section(): return-value of %(func)s() OK&quot;, func=decl_name
+            )</div>
+</div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Markus Heiser
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=346fd13c"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

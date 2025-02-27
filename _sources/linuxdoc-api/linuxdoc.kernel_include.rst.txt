@@ -1,0 +1,7 @@
+linuxdoc.kernel\_include module
+===============================
+
+.. automodule:: linuxdoc.kernel_include
+   :members:
+   :undoc-members:
+   :show-inheritance:

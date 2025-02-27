@@ -1,0 +1,756 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="linuxdoc.autodoc module" href="linuxdoc.autodoc.html" /><link rel="prev" title="linuxdoc.autodoc" href="../cmd-line/linuxdoc.autodoc.html" />
+
+    <!-- Generated with Sphinx 8.2.1 and Furo 2024.08.06 -->
+        <title>linuxdoc package - LinuxDoc</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/linuxdoc.css?v=fdd445b8" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">LinuxDoc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/darmarIT_logo_128.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">LinuxDoc</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kernel-doc-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install LinuxDoc</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linuxdoc-howto/index.html">LinuxDoc HowTo</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of LinuxDoc HowTo</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-syntax.html">kernel-doc syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-directive.html">kernel-doc in reST documents</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-examples.html">Examples &amp; Tests</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Examples &amp; Tests</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-tests.html">kernel-doc Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/all-in-a-tumble-src.html">source of <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/all-in-a-tumble-debug.html">kernel-doc from <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/all-in-a-tumble.html">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-modes.html">parsing modes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of parsing modes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/reST-kernel-doc-mode.html">reST kernel-doc mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/vintage-kernel-doc-mode.html">Vintage kernel-doc mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/kfigure.html">Scalable figure and image handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/table-markup.html">About tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/cdomain.html">Customized sphinx c-domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/man-pages.html">man pages from kernel-doc comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/kernel-include-directive.html">Use kernel-include in reST documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cmd-line.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Command line tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.rest.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.lintdoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.autodoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.autodoc</span></code></a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">linuxdoc package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of linuxdoc package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html">linuxdoc.autodoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.cdomain.html">linuxdoc.cdomain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.compat.html">linuxdoc.compat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.deprecated.html">linuxdoc.deprecated module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html">linuxdoc.grepdoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html">linuxdoc.kernel_doc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_include.html">linuxdoc.kernel_include module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html">linuxdoc.kfigure module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html">linuxdoc.lint module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html">linuxdoc.manKernelDoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rest.html">linuxdoc.rest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html">linuxdoc.rstFlatTable module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html">linuxdoc.rstKernelDoc module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/linuxdoc-api/linuxdoc.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="linuxdoc-package">
+<h1>linuxdoc package<a class="headerlink" href="#linuxdoc-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.autodoc.html">linuxdoc.autodoc module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#autodoc">autodoc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.ERR"><code class="docutils literal notranslate"><span class="pre">ERR()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.FATAL"><code class="docutils literal notranslate"><span class="pre">FATAL()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.MSG"><code class="docutils literal notranslate"><span class="pre">MSG()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.autodoc_file"><code class="docutils literal notranslate"><span class="pre">autodoc_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.gather_filenames"><code class="docutils literal notranslate"><span class="pre">gather_filenames()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.insert_index_files"><code class="docutils literal notranslate"><span class="pre">insert_index_files()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html#linuxdoc.autodoc.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.cdomain.html">linuxdoc.cdomain module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.cdomain.html#cdomain">cdomain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.cdomain.html#linuxdoc.cdomain.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.compat.html">linuxdoc.compat module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.compat.html#compat">compat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.compat.html#linuxdoc.compat.sphinx_has_c_namespace"><code class="docutils literal notranslate"><span class="pre">sphinx_has_c_namespace()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.compat.html#linuxdoc.compat.sphinx_has_c_types"><code class="docutils literal notranslate"><span class="pre">sphinx_has_c_types()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.deprecated.html">linuxdoc.deprecated module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.deprecated.html#deprecated">deprecated</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.grepdoc.html">linuxdoc.grepdoc module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#grep-doc">grep_doc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#linuxdoc.grepdoc.ERR"><code class="docutils literal notranslate"><span class="pre">ERR()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#linuxdoc.grepdoc.PRINT"><code class="docutils literal notranslate"><span class="pre">PRINT()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#linuxdoc.grepdoc.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html#linuxdoc.grepdoc.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.kernel_doc.html">linuxdoc.kernel_doc module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#kernel-doc">kernel_doc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Container"><code class="docutils literal notranslate"><span class="pre">Container</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.DEFAULT_EXP_IDS"><code class="docutils literal notranslate"><span class="pre">DEFAULT_EXP_IDS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.DEFAULT_EXP_METHOD"><code class="docutils literal notranslate"><span class="pre">DEFAULT_EXP_METHOD</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator"><code class="docutils literal notranslate"><span class="pre">ListTranslator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.eof"><code class="docutils literal notranslate"><span class="pre">ListTranslator.eof()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.get_type"><code class="docutils literal notranslate"><span class="pre">ListTranslator.get_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_DOC"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_DOC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_enum_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_enum_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_epilog"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_epilog()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_function_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_function_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_preamble"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_preamble()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_prefix"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_prefix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_struct_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_struct_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_suffix"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_suffix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_typedef_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_typedef_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ListTranslator.output_union_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_union_decl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator"><code class="docutils literal notranslate"><span class="pre">NullTranslator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.HIGHLIGHT_MAP"><code class="docutils literal notranslate"><span class="pre">NullTranslator.HIGHLIGHT_MAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.LINE_COMMENT"><code class="docutils literal notranslate"><span class="pre">NullTranslator.LINE_COMMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.eof"><code class="docutils literal notranslate"><span class="pre">NullTranslator.eof()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_DOC"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_DOC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_enum_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_enum_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_epilog"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_epilog()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_function_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_function_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_preamble"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_preamble()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_prefix"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_prefix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_struct_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_struct_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_suffix"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_suffix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_typedef_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_typedef_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.NullTranslator.output_union_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_union_decl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions"><code class="docutils literal notranslate"><span class="pre">ParseOptions</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.PARSE_OPTIONS"><code class="docutils literal notranslate"><span class="pre">ParseOptions.PARSE_OPTIONS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.PARSE_OPTION_RE"><code class="docutils literal notranslate"><span class="pre">ParseOptions.PARSE_OPTION_RE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.add_filters"><code class="docutils literal notranslate"><span class="pre">ParseOptions.add_filters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.dumpOptions"><code class="docutils literal notranslate"><span class="pre">ParseOptions.dumpOptions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.filter_opt"><code class="docutils literal notranslate"><span class="pre">ParseOptions.filter_opt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.get_exported_symbols_re"><code class="docutils literal notranslate"><span class="pre">ParseOptions.get_exported_symbols_re()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParseOptions.set_defaults"><code class="docutils literal notranslate"><span class="pre">ParseOptions.set_defaults()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser"><code class="docutils literal notranslate"><span class="pre">Parser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.DOC_TYPES"><code class="docutils literal notranslate"><span class="pre">Parser.DOC_TYPES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.LOG_FORMAT"><code class="docutils literal notranslate"><span class="pre">Parser.LOG_FORMAT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.check_return_section"><code class="docutils literal notranslate"><span class="pre">Parser.check_return_section()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.check_sections"><code class="docutils literal notranslate"><span class="pre">Parser.check_sections()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.close"><code class="docutils literal notranslate"><span class="pre">Parser.close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.create_parameterlist"><code class="docutils literal notranslate"><span class="pre">Parser.create_parameterlist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.debug"><code class="docutils literal notranslate"><span class="pre">Parser.debug()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_DOC"><code class="docutils literal notranslate"><span class="pre">Parser.dump_DOC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_enum"><code class="docutils literal notranslate"><span class="pre">Parser.dump_enum()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_epilog"><code class="docutils literal notranslate"><span class="pre">Parser.dump_epilog()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_function"><code class="docutils literal notranslate"><span class="pre">Parser.dump_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_preamble"><code class="docutils literal notranslate"><span class="pre">Parser.dump_preamble()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_prefix"><code class="docutils literal notranslate"><span class="pre">Parser.dump_prefix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_section"><code class="docutils literal notranslate"><span class="pre">Parser.dump_section()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_struct"><code class="docutils literal notranslate"><span class="pre">Parser.dump_struct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_suffix"><code class="docutils literal notranslate"><span class="pre">Parser.dump_suffix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_typedef"><code class="docutils literal notranslate"><span class="pre">Parser.dump_typedef()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.dump_union"><code class="docutils literal notranslate"><span class="pre">Parser.dump_union()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.error"><code class="docutils literal notranslate"><span class="pre">Parser.error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.feed"><code class="docutils literal notranslate"><span class="pre">Parser.feed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.gather_context"><code class="docutils literal notranslate"><span class="pre">Parser.gather_context()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.info"><code class="docutils literal notranslate"><span class="pre">Parser.info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.output_decl"><code class="docutils literal notranslate"><span class="pre">Parser.output_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.parse"><code class="docutils literal notranslate"><span class="pre">Parser.parse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.parse_dump_storage"><code class="docutils literal notranslate"><span class="pre">Parser.parse_dump_storage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.prepare_struct_union"><code class="docutils literal notranslate"><span class="pre">Parser.prepare_struct_union()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.process_state3_function"><code class="docutils literal notranslate"><span class="pre">Parser.process_state3_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.process_state3_type"><code class="docutils literal notranslate"><span class="pre">Parser.process_state3_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.push_parameter"><code class="docutils literal notranslate"><span class="pre">Parser.push_parameter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.reset_state"><code class="docutils literal notranslate"><span class="pre">Parser.reset_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.sect_title"><code class="docutils literal notranslate"><span class="pre">Parser.sect_title()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.section_constants"><code class="docutils literal notranslate"><span class="pre">Parser.section_constants</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.section_context"><code class="docutils literal notranslate"><span class="pre">Parser.section_context</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.section_def"><code class="docutils literal notranslate"><span class="pre">Parser.section_def</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.section_default"><code class="docutils literal notranslate"><span class="pre">Parser.section_default</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.section_descr"><code class="docutils literal notranslate"><span class="pre">Parser.section_descr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.section_intro"><code class="docutils literal notranslate"><span class="pre">Parser.section_intro</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.section_members"><code class="docutils literal notranslate"><span class="pre">Parser.section_members</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.section_return"><code class="docutils literal notranslate"><span class="pre">Parser.section_return</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.setOptions"><code class="docutils literal notranslate"><span class="pre">Parser.setOptions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.setTranslator"><code class="docutils literal notranslate"><span class="pre">Parser.setTranslator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.special_sections"><code class="docutils literal notranslate"><span class="pre">Parser.special_sections</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_0"><code class="docutils literal notranslate"><span class="pre">Parser.state_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_1"><code class="docutils literal notranslate"><span class="pre">Parser.state_1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_2"><code class="docutils literal notranslate"><span class="pre">Parser.state_2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_3"><code class="docutils literal notranslate"><span class="pre">Parser.state_3()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_4"><code class="docutils literal notranslate"><span class="pre">Parser.state_4()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.state_5"><code class="docutils literal notranslate"><span class="pre">Parser.state_5()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.syscall_munge"><code class="docutils literal notranslate"><span class="pre">Parser.syscall_munge()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.tracepoint_munge"><code class="docutils literal notranslate"><span class="pre">Parser.tracepoint_munge()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.undescribed"><code class="docutils literal notranslate"><span class="pre">Parser.undescribed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.Parser.warn"><code class="docutils literal notranslate"><span class="pre">Parser.warn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserBuggy"><code class="docutils literal notranslate"><span class="pre">ParserBuggy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext"><code class="docutils literal notranslate"><span class="pre">ParserContext</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext.dumpCtx"><code class="docutils literal notranslate"><span class="pre">ParserContext.dumpCtx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ParserContext.new"><code class="docutils literal notranslate"><span class="pre">ParserContext.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE"><code class="docutils literal notranslate"><span class="pre">RE</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE.match"><code class="docutils literal notranslate"><span class="pre">RE.match()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.RE.search"><code class="docutils literal notranslate"><span class="pre">RE.search()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.BITFIELD"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.BITFIELD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.FUNC_PTR"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.FUNC_PTR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.HEADER_TAGS"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.HEADER_TAGS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.HIGHLIGHT_MAP"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.HIGHLIGHT_MAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.INDENT"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.INDENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.LINE_COMMENT"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.LINE_COMMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.MASK_REST_INLINES"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.MASK_REST_INLINES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.format_block"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.format_block()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.highlight"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.highlight()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_DOC"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_DOC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_enum_decl"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_enum_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_epilog"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_epilog()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_function_decl"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_function_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_preamble"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_preamble()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_prefix"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_prefix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_struct_decl"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_struct_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_suffix"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_suffix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.output_typedef_decl"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_typedef_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_anchor"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_anchor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_definition"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_definition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_func_param"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_func_param()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_header"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_header()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.ReSTTranslator.write_section"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_section()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog"><code class="docutils literal notranslate"><span class="pre">SimpleLog</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.LOG_FORMAT"><code class="docutils literal notranslate"><span class="pre">SimpleLog.LOG_FORMAT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.debug"><code class="docutils literal notranslate"><span class="pre">SimpleLog.debug()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.error"><code class="docutils literal notranslate"><span class="pre">SimpleLog.error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.info"><code class="docutils literal notranslate"><span class="pre">SimpleLog.info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.SimpleLog.warn"><code class="docutils literal notranslate"><span class="pre">SimpleLog.warn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.HIGHLIGHT_MAP"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.HIGHLIGHT_MAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.LINE_COMMENT"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.LINE_COMMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.comment"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.comment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.eof"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.eof()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.get_epilog"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.get_epilog()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.get_preamble"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.get_preamble()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.highlight"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.highlight()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_DOC"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_DOC()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_enum_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_enum_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_epilog"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_epilog()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_function_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_function_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_preamble"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_preamble()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_prefix"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_prefix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_struct_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_struct_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_suffix"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_suffix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_typedef_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_typedef_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.output_union_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_union_decl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.setOptions"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.setOptions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.setParser"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.setParser()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.write"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.write()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.TranslatorAPI.write_comment"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.write_comment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.highlight_parser"><code class="docutils literal notranslate"><span class="pre">highlight_parser()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.map_row"><code class="docutils literal notranslate"><span class="pre">map_row()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_id"><code class="docutils literal notranslate"><span class="pre">normalize_id()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.normalize_ws"><code class="docutils literal notranslate"><span class="pre">normalize_ws()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.openTextFile"><code class="docutils literal notranslate"><span class="pre">openTextFile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_doc.html#linuxdoc.kernel_doc.readFile"><code class="docutils literal notranslate"><span class="pre">readFile()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.kernel_include.html">linuxdoc.kernel_include module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_include.html#kernel-include">kernel-include</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_include.html#linuxdoc.kernel_include.KernelInclude"><code class="docutils literal notranslate"><span class="pre">KernelInclude</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kernel_include.html#linuxdoc.kernel_include.KernelInclude.run"><code class="docutils literal notranslate"><span class="pre">KernelInclude.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_include.html#linuxdoc.kernel_include.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.kfigure.html">linuxdoc.kfigure module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#scalable-figure-and-image-handling">scalable figure and image handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelFigure"><code class="docutils literal notranslate"><span class="pre">KernelFigure</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelFigure.run"><code class="docutils literal notranslate"><span class="pre">KernelFigure.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelImage"><code class="docutils literal notranslate"><span class="pre">KernelImage</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelImage.run"><code class="docutils literal notranslate"><span class="pre">KernelImage.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender"><code class="docutils literal notranslate"><span class="pre">KernelRender</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender.build_node"><code class="docutils literal notranslate"><span class="pre">KernelRender.build_node()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender.final_argument_whitespace"><code class="docutils literal notranslate"><span class="pre">KernelRender.final_argument_whitespace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender.has_content"><code class="docutils literal notranslate"><span class="pre">KernelRender.has_content</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender.option_spec"><code class="docutils literal notranslate"><span class="pre">KernelRender.option_spec</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender.optional_arguments"><code class="docutils literal notranslate"><span class="pre">KernelRender.optional_arguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender.required_arguments"><code class="docutils literal notranslate"><span class="pre">KernelRender.required_arguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender.run"><code class="docutils literal notranslate"><span class="pre">KernelRender.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.add_kernel_figure_to_std_domain"><code class="docutils literal notranslate"><span class="pre">add_kernel_figure_to_std_domain()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.convert_image"><code class="docutils literal notranslate"><span class="pre">convert_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.dot2format"><code class="docutils literal notranslate"><span class="pre">dot2format()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.file2literal"><code class="docutils literal notranslate"><span class="pre">file2literal()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.isNewer"><code class="docutils literal notranslate"><span class="pre">isNewer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.kernel_figure"><code class="docutils literal notranslate"><span class="pre">kernel_figure</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.kernel_image"><code class="docutils literal notranslate"><span class="pre">kernel_image</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.kernel_render"><code class="docutils literal notranslate"><span class="pre">kernel_render</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.mkdir"><code class="docutils literal notranslate"><span class="pre">mkdir()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.pass_handle"><code class="docutils literal notranslate"><span class="pre">pass_handle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.setupTools"><code class="docutils literal notranslate"><span class="pre">setupTools()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.svg2pdf"><code class="docutils literal notranslate"><span class="pre">svg2pdf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.visit_kernel_figure"><code class="docutils literal notranslate"><span class="pre">visit_kernel_figure()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.visit_kernel_image"><code class="docutils literal notranslate"><span class="pre">visit_kernel_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.visit_kernel_render"><code class="docutils literal notranslate"><span class="pre">visit_kernel_render()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html#linuxdoc.kfigure.which"><code class="docutils literal notranslate"><span class="pre">which()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.lint.html">linuxdoc.lint module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#lint">lint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.ERR"><code class="docutils literal notranslate"><span class="pre">ERR()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.FATAL"><code class="docutils literal notranslate"><span class="pre">FATAL()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.MSG"><code class="docutils literal notranslate"><span class="pre">MSG()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.lintdoc_file"><code class="docutils literal notranslate"><span class="pre">lintdoc_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html#linuxdoc.lint.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.manKernelDoc.html">linuxdoc.manKernelDoc module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#kernel-doc-man">kernel-doc-man</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocMan"><code class="docutils literal notranslate"><span class="pre">KernelDocMan</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocMan.optional_arguments"><code class="docutils literal notranslate"><span class="pre">KernelDocMan.optional_arguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocMan.required_arguments"><code class="docutils literal notranslate"><span class="pre">KernelDocMan.required_arguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocMan.run"><code class="docutils literal notranslate"><span class="pre">KernelDocMan.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.finish"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.finish()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.format"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.format</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.get_partial_document"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.get_partial_document()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.init"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.is_manpage"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.is_manpage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.name"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.prepare_writing"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.prepare_writing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.supported_image_types"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.supported_image_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.write"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.write()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.KernelDocManBuilder.write_doc"><code class="docutils literal notranslate"><span class="pre">KernelDocManBuilder.write_doc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage"><code class="docutils literal notranslate"><span class="pre">Section2Manpage</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.apply"><code class="docutils literal notranslate"><span class="pre">Section2Manpage.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.isolate_sections"><code class="docutils literal notranslate"><span class="pre">Section2Manpage.isolate_sections()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.isolate_synopsis"><code class="docutils literal notranslate"><span class="pre">Section2Manpage.isolate_synopsis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.manTitleOrder"><code class="docutils literal notranslate"><span class="pre">Section2Manpage.manTitleOrder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.manTitles"><code class="docutils literal notranslate"><span class="pre">Section2Manpage.manTitles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.sec2man_get_first_child"><code class="docutils literal notranslate"><span class="pre">Section2Manpage.sec2man_get_first_child()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.Section2Manpage.strip_man_info"><code class="docutils literal notranslate"><span class="pre">Section2Manpage.strip_man_info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.kernel_doc_man"><code class="docutils literal notranslate"><span class="pre">kernel_doc_man</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html#linuxdoc.manKernelDoc.skip_kernel_doc_man"><code class="docutils literal notranslate"><span class="pre">skip_kernel_doc_man()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.rest.html">linuxdoc.rest module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rest.html#rest">rest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rest.html#linuxdoc.rest.get_cli"><code class="docutils literal notranslate"><span class="pre">get_cli()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rest.html#linuxdoc.rest.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.rstFlatTable.html">linuxdoc.rstFlatTable module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html#flat-table">flat-table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.FlatTable"><code class="docutils literal notranslate"><span class="pre">FlatTable</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.FlatTable.option_spec"><code class="docutils literal notranslate"><span class="pre">FlatTable.option_spec</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.FlatTable.run"><code class="docutils literal notranslate"><span class="pre">FlatTable.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.buildTableNode"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.buildTableNode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.buildTableRowNode"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.buildTableRowNode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.parseCellItem()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseFlatTableNode"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.parseFlatTableNode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseRowItem"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.parseRowItem()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.pprint"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.pprint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.raiseError"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.raiseError()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.roundOffTableDefinition"><code class="docutils literal notranslate"><span class="pre">ListTableBuilder.roundOffTableDefinition()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.c_span"><code class="docutils literal notranslate"><span class="pre">c_span()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.colSpan"><code class="docutils literal notranslate"><span class="pre">colSpan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.r_span"><code class="docutils literal notranslate"><span class="pre">r_span()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.rowSpan"><code class="docutils literal notranslate"><span class="pre">rowSpan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxdoc.rstKernelDoc.html">linuxdoc.rstKernelDoc module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#rstkerneldoc">rstKernelDoc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.FaultyOption"><code class="docutils literal notranslate"><span class="pre">FaultyOption</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc"><code class="docutils literal notranslate"><span class="pre">KernelDoc</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.errMsg"><code class="docutils literal notranslate"><span class="pre">KernelDoc.errMsg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.final_argument_whitespace"><code class="docutils literal notranslate"><span class="pre">KernelDoc.final_argument_whitespace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.getNodes"><code class="docutils literal notranslate"><span class="pre">KernelDoc.getNodes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.getParserOptions"><code class="docutils literal notranslate"><span class="pre">KernelDoc.getParserOptions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.option_spec"><code class="docutils literal notranslate"><span class="pre">KernelDoc.option_spec</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.optional_arguments"><code class="docutils literal notranslate"><span class="pre">KernelDoc.optional_arguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.parseSource"><code class="docutils literal notranslate"><span class="pre">KernelDoc.parseSource()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.required_arguments"><code class="docutils literal notranslate"><span class="pre">KernelDoc.required_arguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.run"><code class="docutils literal notranslate"><span class="pre">KernelDoc.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser"><code class="docutils literal notranslate"><span class="pre">KernelDocParser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.debug"><code class="docutils literal notranslate"><span class="pre">KernelDocParser.debug()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.error"><code class="docutils literal notranslate"><span class="pre">KernelDocParser.error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.info"><code class="docutils literal notranslate"><span class="pre">KernelDocParser.info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.warn"><code class="docutils literal notranslate"><span class="pre">KernelDocParser.warn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.PARSER_CACHE"><code class="docutils literal notranslate"><span class="pre">PARSER_CACHE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache"><code class="docutils literal notranslate"><span class="pre">ParserCache</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get"><code class="docutils literal notranslate"><span class="pre">ParserCache.get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get_id"><code class="docutils literal notranslate"><span class="pre">ParserCache.get_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.set"><code class="docutils literal notranslate"><span class="pre">ParserCache.set()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList"><code class="docutils literal notranslate"><span class="pre">WriterList</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList.flush"><code class="docutils literal notranslate"><span class="pre">WriterList.flush()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList.write"><code class="docutils literal notranslate"><span class="pre">WriterList.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-linuxdoc">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-linuxdoc" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="linuxdoc.autodoc.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">linuxdoc.autodoc module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../cmd-line/linuxdoc.autodoc.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><code class="docutils literal notranslate"><span class="pre">linuxdoc.autodoc</span></code></div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Markus Heiser
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">linuxdoc package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-linuxdoc">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=346fd13c"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

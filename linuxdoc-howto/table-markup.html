@@ -1,0 +1,946 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Customized sphinx c-domain" href="cdomain.html" /><link rel="prev" title="Scalable figure and image handling" href="kfigure.html" />
+
+    <!-- Generated with Sphinx 8.2.1 and Furo 2024.08.06 -->
+        <title>About tables - LinuxDoc</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/linuxdoc.css?v=fdd445b8" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">LinuxDoc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/darmarIT_logo_128.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">LinuxDoc</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../kernel-doc-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install LinuxDoc</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">LinuxDoc HowTo</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of LinuxDoc HowTo</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="kernel-doc-syntax.html">kernel-doc syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel-doc-directive.html">kernel-doc in reST documents</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="kernel-doc-examples.html">Examples &amp; Tests</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Examples &amp; Tests</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="kernel-doc-tests.html">kernel-doc Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble-src.html">source of <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble-debug.html">kernel-doc from <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble.html">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="kernel-doc-modes.html">parsing modes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of parsing modes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reST-kernel-doc-mode.html">reST kernel-doc mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vintage-kernel-doc-mode.html">Vintage kernel-doc mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kfigure.html">Scalable figure and image handling</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">About tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cdomain.html">Customized sphinx c-domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="man-pages.html">man pages from kernel-doc comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel-include-directive.html">Use kernel-include in reST documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cmd-line.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Command line tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.rest.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.lintdoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.autodoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.autodoc</span></code></a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linuxdoc-api/linuxdoc.html">linuxdoc package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of linuxdoc package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.autodoc.html">linuxdoc.autodoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.cdomain.html">linuxdoc.cdomain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.compat.html">linuxdoc.compat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.deprecated.html">linuxdoc.deprecated module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.grepdoc.html">linuxdoc.grepdoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.kernel_doc.html">linuxdoc.kernel_doc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.kernel_include.html">linuxdoc.kernel_include module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.kfigure.html">linuxdoc.kfigure module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.lint.html">linuxdoc.lint module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.manKernelDoc.html">linuxdoc.manKernelDoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.rest.html">linuxdoc.rest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.rstFlatTable.html">linuxdoc.rstFlatTable module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.rstKernelDoc.html">linuxdoc.rstKernelDoc module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/linuxdoc-howto/table-markup.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="about-tables">
+<span id="xref-table-concerns"></span><h1>About tables<a class="headerlink" href="#about-tables" title="Link to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="#rest-flat-table"><span class="std std-ref">flat-table</span></a> directive is the most <strong>diff friendly</strong> table
+markup, it is preferred in the Linux kernel tree.</p>
+</div>
+<section id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Link to this heading">¶</a></h2>
+<p>Internally, the docutils uses a representation according to the <a class="reference external" href="https://www.oasis-open.org/specs/tm9901.html">OASIS XML
+Exchange Table Model</a> (same as DocBook). The <em>OASIS Table Model</em> gives a huge
+bandwidth of possibilities to form tables. This often seduce authors to force a
+specific layout. The misuse of tables in this manner is not recommended, it
+breaks the separation of <em>presentation from content</em> which most often ends in
+various problems in the range of output formats. Tables (and pre-formated text
+like source code listings) should be used advisedly. In a HTML viewer, the
+horizontal and vertical expansion is handled by a scrollbar. On print medias
+(paper / pdf) there is no scrollbar and automatically page-breaking a table or
+line-breaking a pre-formated text in the layout process ends mostly in unwanted
+results.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Tables and pre-formated text in itself violate the separation of <em>presentation
+from content</em>, but we will never be able to entirely renounce them. Use them
+with care, if your content should be rendered well, in the wide variation of
+output formats.</p>
+</div>
+</section>
+<section id="ascii-art-tables">
+<h2>ASCII-art tables<a class="headerlink" href="#ascii-art-tables" title="Link to this heading">¶</a></h2>
+<p>ASCII-art tables might be comfortable for readers of the text-files, but they
+have huge disadvantages in the creation and modifying. First, they are hard to
+edit. Think about adding a row or a column to a ASCII-art table or adding a
+paragraph in a cell, it is a nightmare on big tables. Second the diff of
+modifying ASCII-art tables is not meaningful, e.g. widening a cell generates a
+diff in which also changes are included, which are only ascribable to the
+ASCII-art (see also <a class="reference internal" href="#list-table-directives"><span class="std std-ref">List table directives</span></a>).</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.emacswiki.org/emacs/TableMode">Emacs Table Mode</a></p></li>
+<li><p><a class="reference external" href="http://www.tablesgenerator.com/text_tables">Online Tables Generator</a></p></li>
+</ul>
+<section id="simple-tables">
+<h3>Simple tables<a class="headerlink" href="#simple-tables" title="Link to this heading">¶</a></h3>
+<p>simple tables allow <em>colspan</em> but not <em>rowspan</em>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>====== ====== ======
+    Inputs    Output
+------------- ------
+A      B      A or B
+====== ====== ======
+False
+--------------------
+True
+--------------------
+True   False  True
+------ ------ ------
+False  True
+====== =============
+</pre></div>
+</div>
+<p>Rendered as:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"><p>Inputs</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>A or B</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td colspan="3"><p>False</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>True</p></td>
+</tr>
+<tr class="row-odd"><td><p>True</p></td>
+<td><p>False</p></td>
+<td><p>True</p></td>
+</tr>
+<tr class="row-even"><td><p>False</p></td>
+<td colspan="2"><p>True</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="grid-tables">
+<h3>Grid tables<a class="headerlink" href="#grid-tables" title="Link to this heading">¶</a></h3>
+<p>grid tables allow colspan <em>colspan</em> and <em>rowspan</em>:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span>+------------+------------+-----------+
+<span class="o">|</span> Header 1   | Header 2   | Header 3  |
++============+============+===========+
+<span class="o">|</span> body row 1 | column 2   | column 3  |
++------------+------------+-----------+
+<span class="o">|</span> body row 2 | Cells may span columns.|
++------------+------------+-----------+
+<span class="o">|</span> body row 3 | Cells may  | - Cells   |
++------------+ span rows. | - contain |
+<span class="o">|</span> body row 4 |            | - blocks. |
++------------+------------+-----------+
+</pre></div>
+</div>
+<p>Rendered as:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Header 1</p></th>
+<th class="head"><p>Header 2</p></th>
+<th class="head"><p>Header 3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>body row 1</p></td>
+<td><p>column 2</p></td>
+<td><p>column 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>body row 2</p></td>
+<td colspan="2"><p>Cells may span columns.</p></td>
+</tr>
+<tr class="row-even"><td><p>body row 3</p></td>
+<td rowspan="2"><p>Cells may
+span rows.</p></td>
+<td rowspan="2"><ul class="simple">
+<li><p>Cells</p></li>
+<li><p>contain</p></li>
+<li><p>blocks.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>body row 4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="list-table-directives">
+<span id="id1"></span><h2>List table directives<a class="headerlink" href="#list-table-directives" title="Link to this heading">¶</a></h2>
+<p>The <em>list table</em> formats are double stage list, compared to the ASCII-art they
+might not be as comfortable for readers of the text-files. Their advantage is,
+that they are easy to create/modify and that the diff of a modification is much
+more meaningful, because it is limited to the modified content.</p>
+<section id="list-table">
+<span id="rest-list-table"></span><h3>list-table<a class="headerlink" href="#list-table" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">list-tables</span></code> has no ability to <em>colspan</em> nor <em>rowspan</em>:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">list-table</span><span class="p">::</span> list-table example
+   <span class="nc">:header-rows:</span> 1
+   <span class="nc">:stub-columns:</span> 1
+   <span class="nc">:class:</span> my-class
+   <span class="nc">:name:</span> my-list-table
+
+   <span class="m">*</span> - ..
+     <span class="m">-</span> head col 1
+     <span class="m">-</span> head col 2
+
+   <span class="m">*</span> - stub col row 1
+     <span class="m">-</span> column
+     <span class="m">-</span> column
+
+   <span class="m">*</span> - stub col row 2
+     <span class="m">-</span> column
+     <span class="m">-</span> column
+
+   <span class="m">*</span> - stub col row 3
+     <span class="m">-</span> column
+     <span class="m">-</span> column
+</pre></div>
+</div>
+<p>Rendered in <a class="reference internal" href="#my-list-table"><span class="std std-ref">list-table example</span></a>:</p>
+<div class="table-wrapper my-class docutils container" id="my-list-table">
+<table class="my-class docutils align-default" id="my-list-table">
+<caption><span class="caption-text">list-table example</span><a class="headerlink" href="#my-list-table" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head stub"></th>
+<th class="head"><p>head col 1</p></th>
+<th class="head"><p>head col 2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>stub col row 1</p></th>
+<td><p>column</p></td>
+<td><p>column</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>stub col row 2</p></th>
+<td><p>column</p></td>
+<td><p>column</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>stub col row 3</p></th>
+<td><p>column</p></td>
+<td><p>column</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="flat-table">
+<span id="rest-flat-table"></span><h3>flat-table<a class="headerlink" href="#flat-table" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">flat-table</span></code> (<code class="xref py py-class docutils literal notranslate"><span class="pre">FlatTable</span></code>) is a double-stage list similar
+to the <code class="docutils literal notranslate"><span class="pre">list-table</span></code> with some additional features:</p>
+<ul class="simple">
+<li><p><em>column-span</em>: with the role <code class="docutils literal notranslate"><span class="pre">cspan</span></code> a cell can be extended through
+additional columns</p></li>
+<li><p><em>row-span</em>: with the role <code class="docutils literal notranslate"><span class="pre">rspan</span></code> a cell can be extended through
+additional rows</p></li>
+<li><p><em>auto-span</em> rightmost cell of a table row over the missing cells on the right
+side of that table-row.  With Option <code class="docutils literal notranslate"><span class="pre">:fill-cells:</span></code> this behavior can
+changed from <em>auto span</em> to <em>auto fill</em>, which automatically inserts (empty)
+cells instead of spanning the last cell.</p></li>
+</ul>
+<dl>
+<dt>options:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">header-rows<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[int] count of header rows</p>
+</dd>
+<dt class="field-even">stub-columns<span class="colon">:</span></dt>
+<dd class="field-even"><p>[int] count of stub columns</p>
+</dd>
+<dt class="field-odd">widths<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[[int] [int] … ] widths of columns</p>
+</dd>
+<dt class="field-even">fill-cells<span class="colon">:</span></dt>
+<dd class="field-even"><p>instead of auto-span missing cells, insert missing cells</p>
+</dd>
+</dl>
+</dd>
+<dt>roles:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">cspan<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[int] additional columns (<em>morecols</em>)</p>
+</dd>
+<dt class="field-even">rspan<span class="colon">:</span></dt>
+<dd class="field-even"><p>[int] additional rows (<em>morerows</em>)</p>
+</dd>
+</dl>
+<p>The <code class="docutils literal notranslate"><span class="pre">:rspan:</span></code> and <code class="docutils literal notranslate"><span class="pre">:cspan:</span></code> are <em>special</em> <a class="reference external" href="https://docutils.sourceforge.io/docs/ref/rst/roles.html">reST-roles</a>.  These directives
+are used in the <a class="reference internal" href="../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder" title="linuxdoc.rstFlatTable.ListTableBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linuxdoc.rstFlatTable.ListTableBuilder</span></code></a> and
+<a class="reference internal" href="../linuxdoc-api/linuxdoc.rstFlatTable.html#linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem" title="linuxdoc.rstFlatTable.ListTableBuilder.parseCellItem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removed</span></code></a> while
+the table is parsed.  These reST-roles must not be in the translation:</p>
+<div class="highlight-po notranslate"><div class="highlight"><pre><span></span><span class="kd">#: ../index.rst:21</span>
+<span class="nv">msgid</span> <span class="s">&quot;:rspan:`1` :cspan:`1` field 2.2 - 3.3&quot;</span>
+<span class="nv">msgstr</span> <span class="s">&quot;test (fr) field 2.2 - 3.3&quot;</span>
+</pre></div>
+</div>
+<p>Most other <a class="reference external" href="https://docutils.sourceforge.io/docs/ref/rst/roles.html">reST-roles</a> should be translated <em>as-is</em>:</p>
+<div class="highlight-po notranslate"><div class="highlight"><pre><span></span><span class="kd">#: ../index.rst:48</span>
+<span class="nv">msgid</span> <span class="s">&quot;:math:`a^2 + b^2 = c^2`&quot;</span>
+<span class="nv">msgstr</span> <span class="s">&quot;test (fr) :math:`a^2 + b^2 = c^2`&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>The example below shows how to use this markup.  The first level of the staged
+list is the <em>table-row</em>. In the <em>table-row</em> there is only one markup allowed,
+the list of the cells in this <em>table-row</em>. Exception are <em>comments</em> ( <code class="docutils literal notranslate"><span class="pre">..</span></code> )
+and <em>targets</em> (e.g. a ref to <a class="reference internal" href="#row-body-2"><span class="std std-ref">row 2 of table’s body</span></a>).</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">flat-table</span><span class="p">::</span> flat-table example
+   <span class="nc">:header-rows:</span> 2
+   <span class="nc">:stub-columns:</span> 1
+   <span class="nc">:widths:</span> 1 1 1 1 2
+   <span class="nc">:class:</span> my-class
+   <span class="nc">:name:</span> my-flat-table
+
+   <span class="m">*</span> - <span class="na">:rspan:</span><span class="nv">`1`</span> head / stub
+     <span class="m">-</span> <span class="na">:cspan:</span><span class="nv">`3`</span> head 1.1-4
+
+   <span class="m">*</span> - head 2.1
+     <span class="m">-</span> head 2.2
+     <span class="m">-</span> head 2.3
+     <span class="m">-</span> head 2.4
+
+   <span class="m">*</span> .. row body 1 / this is a comment
+
+     <span class="m">-</span> row 1
+     <span class="m">-</span> <span class="na">:rspan:</span><span class="nv">`2`</span> cell 1-3.1
+     <span class="m">-</span> cell 1.2
+     <span class="m">-</span> cell 1.3
+     <span class="m">-</span> cell 1.4
+
+   <span class="m">*</span> .. Comments and targets are allowed on <span class="ge">*table-row*</span> stage.
+<span class="p">     ..</span> <span class="nt">_`row body 2`:</span>
+
+     <span class="m">-</span> row 2
+     <span class="m">-</span> cell 2.2
+     <span class="m">-</span> <span class="na">:rspan:</span><span class="nv">`1`</span> <span class="na">:cspan:</span><span class="nv">`1`</span>
+       cell 2.3 with a span over
+
+       <span class="m">*</span> col 3-4 &amp;
+       <span class="m">*</span> row 2-3
+
+   <span class="m">*</span> - row 3
+     <span class="m">-</span> cell 3.2
+
+   <span class="m">*</span> - row 4
+     <span class="m">-</span> cell 4.1
+     <span class="m">-</span> cell 4.2
+     <span class="m">-</span> cell 4.3
+     <span class="m">-</span> cell 4.4
+
+   <span class="m">*</span> - row 5
+     <span class="m">-</span> cell 5.1 with automatic span to rigth end
+
+   <span class="m">*</span> - row 6
+     <span class="m">-</span> cell 6.1
+     <span class="m">-</span> ..
+</pre></div>
+</div>
+<p>Rendered in <a class="reference internal" href="#my-flat-table"><span class="std std-ref">flat-table example</span></a>:</p>
+<blockquote>
+<div><div class="table-wrapper colwidths-given my-class docutils container" id="my-flat-table">
+<table class="my-class docutils align-default" id="my-flat-table">
+<caption><span class="caption-text">flat-table example</span><a class="headerlink" href="#my-flat-table" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head stub" rowspan="2"><p> head / stub</p></th>
+<th class="head" colspan="4"><p> head 1.1-4</p></th>
+</tr>
+<tr class="row-even"><th class="head stub"><p>head 2.1</p></th>
+<th class="head"><p>head 2.2</p></th>
+<th class="head"><p>head 2.3</p></th>
+<th class="head"><p>head 2.4</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>row 1</p></th>
+<td rowspan="3"><p> cell 1-3.1</p></td>
+<td><p>cell 1.2</p></td>
+<td><p>cell 1.3</p></td>
+<td><p>cell 1.4</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>row 2</p>
+</th>
+<td><p>cell 2.2</p>
+</td>
+<td colspan="2" rowspan="2"><p id="row-body-2"> 
+cell 2.3 with a span over</p>
+<ul class="simple">
+<li><p>col 3-4 &amp;</p></li>
+<li><p>row 2-3</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>row 3</p></th>
+<td><p>cell 3.2</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>row 4</p></th>
+<td><p>cell 4.1</p></td>
+<td><p>cell 4.2</p></td>
+<td><p>cell 4.3</p></td>
+<td><p>cell 4.4</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>row 5</p></th>
+<td colspan="4"><p>cell 5.1 with automatic span to rigth end</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>row 6</p></th>
+<td><p>cell 6.1</p></td>
+<td colspan="3"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="csv-table">
+<h2>CSV table<a class="headerlink" href="#csv-table" title="Link to this heading">¶</a></h2>
+<p>CSV table might be the choice if you want to include CSV-data from a outstanding
+(build) process into your documentation.</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">csv-table</span><span class="p">::</span> csv-table example
+   <span class="nc">:header:</span> , Header1, Header2
+   <span class="nc">:widths:</span> 15, 10, 30
+   <span class="nc">:stub-columns:</span> 1
+   <span class="nc">:file:</span> csv_table.txt
+   <span class="nc">:class:</span> my-class
+   <span class="nc">:name:</span> my-csv-table
+</pre></div>
+</div>
+<p>Content of file <code class="docutils literal notranslate"><span class="pre">csv_table.txt</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>stub col row 1, column, &quot;loremLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua.&quot;
+stub col row 1, &quot;At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&quot;, column
+stub col row 1, column, column
+</pre></div>
+</div>
+<p>Rendered in <a class="reference internal" href="#my-csv-table"><span class="std std-ref">csv-table example</span></a>:</p>
+<div class="table-wrapper colwidths-given my-class docutils container" id="my-csv-table">
+<table class="my-class docutils align-default" id="my-csv-table">
+<caption><span class="caption-text">csv-table example</span><a class="headerlink" href="#my-csv-table" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 27.3%" />
+<col style="width: 18.2%" />
+<col style="width: 54.5%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head stub"></th>
+<th class="head"><p>Header1</p></th>
+<th class="head"><p>Header2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>stub col row 1</p></th>
+<td><p>column</p></td>
+<td><p>loremLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua.</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>stub col row 1</p></th>
+<td><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
+kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></td>
+<td><p>column</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>stub col row 1</p></th>
+<td><p>column</p></td>
+<td><p>column</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="nested-tables">
+<h2>Nested Tables<a class="headerlink" href="#nested-tables" title="Link to this heading">¶</a></h2>
+<p>Nested tables are ugly, don’t use them! This part here is only to show what you
+should never do. They are ugly because they cause huge problems in many output
+formats and there is always no need for nested tables.</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span>+-----------+----------------------------------------------------+
+<span class="o">|</span> W/NW cell | N/NE cell                                          |
+<span class="o">|</span>           +-------------+--------------------------+-----------+
+<span class="o">|</span>           | W/NW center | N/NE center              | E/SE cell |
+<span class="o">|</span>           |             +------------+-------------+           |
+<span class="o">|</span>           |             | +--------+ | E/SE center |           |
+<span class="o">|</span>           |             | | nested | |             |           |
+<span class="o">|</span>           |             | +--------+ |             |           |
+<span class="o">|</span>           |             | | table  | |             |           |
+<span class="o">|</span>           |             | +--------+ |             |           |
+<span class="o">|</span>           +-------------+------------+             |           |
+<span class="o">|</span>           | S/SE center              |             |           |
++-----------+--------------------------+-------------+           |
+<span class="o">|</span> S/SW cell                                          |           |
++----------------------------------------------------+-----------+
+</pre></div>
+</div>
+<p>Rendered as: Not supported by all sphinx-builders, don’t use nested tables!!!</p>
+</section>
+<section id="raw-html-tables">
+<h2>raw HTML tables<a class="headerlink" href="#raw-html-tables" title="Link to this heading">¶</a></h2>
+<p>If HTML is the only format you want to render, you could use a raw-import of a
+HTML table markup. But be aware, this breaks the separation of <em>presentation from
+content</em>. HTML-Tables are only rendered within a HTML output.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wy-table-responsive&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;docutils&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;font-weight: bold;&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Owner Module/Drivers<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Group<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Property Name<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Type<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Property Values<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Object attached<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Description/Restrictions<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span> <span class="na">rowspan</span><span class="o">=</span><span class="s">&quot;4&quot;</span><span class="p">&gt;</span>DRM<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Generic<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>&quot;rotation&quot;<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>BITMASK<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{ 0, &quot;rotate-0&quot; }, { 1, &quot;rotate-90&quot; }, { 2, &quot;rotate-180&quot; }, { 3,
+        &quot;rotate-270&quot; }, { 4, &quot;reflect-x&quot; }, { 5, &quot;reflect-y&quot; }<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>CRTC, Plane<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>rotate-(degrees) rotates the image by the specified amount in
+       degrees in counter clockwise direction. reflect-x and reflect-y
+       reflects the image along the specified axis prior to rotation<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span> <span class="na">rowspan</span><span class="o">=</span><span class="s">&quot;3&quot;</span><span class="p">&gt;</span>Connector<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>&quot;EDID&quot;<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>BLOB | IMMUTABLE<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>0<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Connector<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Contains id of edid blob ptr object.<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>&quot;DPMS&quot;<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>ENUM<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{ &quot;On&quot;, &quot;Standby&quot;, &quot;Suspend&quot;, &quot;Off&quot; }<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Connector<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Contains DPMS operation mode value.<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>&quot;PATH&quot;<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>BLOB | IMMUTABLE<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>0<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Connector<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Contains topology path to a connector.<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<div class="wy-table-responsive">
+<table class="docutils">
+  <thead>
+    <tr style="font-weight: bold;">
+      <td>Owner Module/Drivers</td>
+      <td>Group</td>
+      <td>Property Name</td>
+      <td>Type</td>
+      <td>Property Values</td>
+      <td>Object attached</td>
+      <td>Description/Restrictions</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="4">DRM</td>
+      <td>Generic</td>
+      <td>"rotation"</td>
+      <td>BITMASK</td>
+      <td>{ 0, "rotate-0" }, { 1, "rotate-90" }, { 2, "rotate-180" }, { 3,
+        "rotate-270" }, { 4, "reflect-x" }, { 5, "reflect-y" }</td>
+      <td>CRTC, Plane</td>
+      <td>rotate-(degrees) rotates the image by the specified amount in
+       degrees in counter clockwise direction. reflect-x and reflect-y
+       reflects the image along the specified axis prior to rotation</td>
+    </tr>
+
+    <tr>
+      <td rowspan="3">Connector</td>
+      <td>"EDID"</td>
+      <td>BLOB | IMMUTABLE</td>
+      <td>0</td>
+      <td>Connector</td>
+      <td>Contains id of edid blob ptr object.</td>
+    </tr>
+
+    <tr>
+      <td>"DPMS"</td>
+      <td>ENUM</td>
+      <td>{ "On", "Standby", "Suspend", "Off" }</td>
+      <td>Connector</td>
+      <td>Contains DPMS operation mode value.</td>
+    </tr>
+
+    <tr>
+      <td>"PATH"</td>
+      <td>BLOB | IMMUTABLE</td>
+      <td>0</td>
+      <td>Connector</td>
+      <td>Contains topology path to a connector.</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="cdomain.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Customized sphinx c-domain</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="kfigure.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Scalable figure and image handling</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Markus Heiser
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">About tables</a><ul>
+<li><a class="reference internal" href="#intro">Intro</a></li>
+<li><a class="reference internal" href="#ascii-art-tables">ASCII-art tables</a><ul>
+<li><a class="reference internal" href="#simple-tables">Simple tables</a></li>
+<li><a class="reference internal" href="#grid-tables">Grid tables</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#list-table-directives">List table directives</a><ul>
+<li><a class="reference internal" href="#list-table">list-table</a></li>
+<li><a class="reference internal" href="#flat-table">flat-table</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#csv-table">CSV table</a></li>
+<li><a class="reference internal" href="#nested-tables">Nested Tables</a></li>
+<li><a class="reference internal" href="#raw-html-tables">raw HTML tables</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=346fd13c"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

@@ -1,0 +1,928 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.1 and Furo 2024.08.06 -->
+        <title>linuxdoc.kfigure - LinuxDoc</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/linuxdoc.css?v=fdd445b8" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">LinuxDoc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/darmarIT_logo_128.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">LinuxDoc</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel-doc-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install LinuxDoc</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../linuxdoc-howto/index.html">LinuxDoc HowTo</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of LinuxDoc HowTo</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-syntax.html">kernel-doc syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-directive.html">kernel-doc in reST documents</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-examples.html">Examples &amp; Tests</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Examples &amp; Tests</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-tests.html">kernel-doc Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/all-in-a-tumble-src.html">source of <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/all-in-a-tumble-debug.html">kernel-doc from <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/all-in-a-tumble.html">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-modes.html">parsing modes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of parsing modes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/reST-kernel-doc-mode.html">reST kernel-doc mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/vintage-kernel-doc-mode.html">Vintage kernel-doc mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kfigure.html">Scalable figure and image handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/table-markup.html">About tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/cdomain.html">Customized sphinx c-domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/man-pages.html">man pages from kernel-doc comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kernel-include-directive.html">Use kernel-include in reST documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cmd-line.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Command line tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cmd-line/linuxdoc.rest.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmd-line/linuxdoc.lintdoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmd-line/linuxdoc.autodoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.autodoc</span></code></a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.html">linuxdoc package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of linuxdoc package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.autodoc.html">linuxdoc.autodoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.cdomain.html">linuxdoc.cdomain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.compat.html">linuxdoc.compat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.deprecated.html">linuxdoc.deprecated module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.grepdoc.html">linuxdoc.grepdoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.kernel_doc.html">linuxdoc.kernel_doc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.kernel_include.html">linuxdoc.kernel_include module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.kfigure.html">linuxdoc.kfigure module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.lint.html">linuxdoc.lint module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html">linuxdoc.manKernelDoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.rest.html">linuxdoc.rest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html">linuxdoc.rstFlatTable module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html">linuxdoc.rstKernelDoc module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for linuxdoc.kfigure</h1><div class="highlight"><pre>
+<span></span># -*- coding: utf-8; mode: python -*-
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# pylint: disable=invalid-name, missing-docstring, too-many-branches
+# pylint: disable=unnecessary-pass
+&quot;&quot;&quot;\
+scalable figure and image handling
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sphinx extension which implements scalable image handling.
+User documentation see :ref:`kfigure`
+&quot;&quot;&quot;
+
+import logging
+import os
+import pathlib
+import subprocess
+from hashlib import sha1
+from os import path
+
+from docutils import nodes
+from docutils.parsers.rst import directives
+from docutils.parsers.rst.directives import images
+from docutils.statemachine import ViewList
+from six import iteritems
+from sphinx.util.nodes import clean_astext
+
+__version__ = &quot;3.0&quot;
+
+app_log = logging.getLogger(&quot;kfigure&quot;)
+
+# simple helper
+# -------------
+
+
+<div class="viewcode-block" id="which">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.which">[docs]</a>
+def which(cmd):  # pylint: disable=inconsistent-return-statements
+    &quot;&quot;&quot;Searches the ``cmd`` in the ``PATH`` environment.
+
+    This *which* searches the PATH for executable ``cmd`` . First match is
+    returned, if nothing is found, ``None`` is returned.
+    &quot;&quot;&quot;
+    envpath = os.environ.get(&quot;PATH&quot;, None) or os.defpath
+    for folder in envpath.split(os.pathsep):
+        fname = folder + os.sep + cmd
+        if path.isfile(fname):
+            return fname</div>
+
+
+
+<div class="viewcode-block" id="mkdir">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.mkdir">[docs]</a>
+def mkdir(folder, mode=0o775):
+    if not path.isdir(folder):
+        os.makedirs(folder, mode)</div>
+
+
+
+<div class="viewcode-block" id="file2literal">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.file2literal">[docs]</a>
+def file2literal(fname):
+    with open(fname, &quot;r&quot;, encoding=&quot;utf-8&quot;) as src:
+        data = src.read()
+        node = nodes.literal_block(data, data)
+    return node</div>
+
+
+
+<div class="viewcode-block" id="isNewer">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.isNewer">[docs]</a>
+def isNewer(path1, path2):
+    &quot;&quot;&quot;Returns True if ``path1`` is newer than ``path2``
+
+    If ``path1`` exists and is newer than ``path2`` the function returns
+    ``True`` is returned otherwise ``False``
+    &quot;&quot;&quot;
+    return path.exists(path1) and os.stat(path1).st_ctime &gt; os.stat(path2).st_ctime</div>
+
+
+
+<div class="viewcode-block" id="pass_handle">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.pass_handle">[docs]</a>
+def pass_handle(self, node):  # pylint: disable=unused-argument
+    pass</div>
+
+
+
+# setup conversion tools and sphinx extension
+# -------------------------------------------
+
+# Graphviz&#39;s dot(1) support
+dot_cmd = None
+
+# ImageMagick&#39; convert(1) support
+convert_cmd = None
+
+
+<div class="viewcode-block" id="setup">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.setup">[docs]</a>
+def setup(app):
+    # check toolchain first
+    app.connect(&quot;builder-inited&quot;, setupTools)
+
+    # image handling
+    app.add_directive(&quot;kernel-image&quot;, KernelImage)
+    app.add_node(
+        kernel_image,
+        html=(visit_kernel_image, pass_handle),
+        latex=(visit_kernel_image, pass_handle),
+        texinfo=(visit_kernel_image, pass_handle),
+        text=(visit_kernel_image, pass_handle),
+        man=(visit_kernel_image, pass_handle),
+    )
+
+    # figure handling
+    app.add_directive(&quot;kernel-figure&quot;, KernelFigure)
+    app.add_node(
+        kernel_figure,
+        html=(visit_kernel_figure, pass_handle),
+        latex=(visit_kernel_figure, pass_handle),
+        texinfo=(visit_kernel_figure, pass_handle),
+        text=(visit_kernel_figure, pass_handle),
+        man=(visit_kernel_figure, pass_handle),
+    )
+
+    # render handling
+    app.add_directive(&quot;kernel-render&quot;, KernelRender)
+    app.add_node(
+        kernel_render,
+        html=(visit_kernel_render, pass_handle),
+        latex=(visit_kernel_render, pass_handle),
+        texinfo=(visit_kernel_render, pass_handle),
+        text=(visit_kernel_render, pass_handle),
+        man=(visit_kernel_render, pass_handle),
+    )
+
+    app.connect(&quot;doctree-read&quot;, add_kernel_figure_to_std_domain)
+
+    return dict(version=__version__, parallel_read_safe=True, parallel_write_safe=True)</div>
+
+
+
+<div class="viewcode-block" id="setupTools">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.setupTools">[docs]</a>
+def setupTools(app):  # pylint: disable=unused-argument
+    &quot;&quot;&quot;
+    Check available build tools and log some *verbose* messages.
+
+    This function is called once, when the builder is initiated.
+    &quot;&quot;&quot;
+    global dot_cmd, convert_cmd  # pylint: disable=global-statement
+
+    # pylint: disable=deprecated-method
+    app_log.info(&quot;kfigure: check installed tools ...&quot;)
+
+    dot_cmd = which(&quot;dot&quot;)
+    convert_cmd = which(&quot;convert&quot;)
+
+    if dot_cmd:
+        app_log.info(f&quot;use dot(1) from: {dot_cmd}&quot;)
+    else:
+        app_log.warning(
+            &quot;dot(1) not found, for better output quality install &quot;
+            &quot;graphviz from http://www.graphviz.org&quot;
+        )
+    if convert_cmd:
+        app_log.info(f&quot;use convert(1) from: {convert_cmd}&quot;)
+    else:
+        app_log.warning(
+            &quot;convert(1) not found, for SVG to PDF conversion install &quot;
+            &quot;ImageMagick (https://www.imagemagick.org)&quot;
+        )</div>
+
+
+
+# integrate conversion tools
+# --------------------------
+
+RENDER_MARKUP_EXT = {
+    # The &#39;.ext&#39; must be handled by convert_image(..) function&#39;s *in_ext* input.
+    # &lt;name&gt; : &lt;.ext&gt;
+    &quot;DOT&quot;: &quot;.dot&quot;,
+    &quot;SVG&quot;: &quot;.svg&quot;,
+}
+
+
+<div class="viewcode-block" id="convert_image">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.convert_image">[docs]</a>
+def convert_image(img_node, translator, src_fname=None):
+    &quot;&quot;&quot;Convert a image node for the builder.
+
+    Different builder prefer different image formats, e.g. *latex* builder
+    prefer PDF while *html* builder prefer SVG format for images.
+
+    This function handles output image formats in dependence of source the
+    format (of the image) and the translator&#39;s output format.
+    &quot;&quot;&quot;
+    app = translator.builder.app
+
+    fname, in_ext = path.splitext(path.basename(img_node[&quot;uri&quot;]))
+    if src_fname is None:
+        src_fname = path.join(translator.builder.srcdir, img_node[&quot;uri&quot;])
+        if not path.exists(src_fname):
+            src_fname = path.join(translator.builder.outdir, img_node[&quot;uri&quot;])
+
+    dst_fname = None
+
+    # in kernel builds, use &#39;make SPHINXOPTS=-v&#39; to see verbose messages
+
+    app_log.info(f&quot;assert best format for: {img_node[&#39;uri&#39;]}&quot;)
+
+    if in_ext == &quot;.dot&quot;:
+
+        if not dot_cmd:
+            app_log.info(&quot;dot from graphviz not available / include DOT raw.&quot;)
+            img_node.replace_self(file2literal(src_fname))
+
+        elif translator.builder.format == &quot;latex&quot;:
+            dst_fname = path.join(translator.builder.outdir, fname + &quot;.pdf&quot;)
+            img_node[&quot;uri&quot;] = fname + &quot;.pdf&quot;
+            img_node[&quot;candidates&quot;] = {&quot;*&quot;: fname + &quot;.pdf&quot;}
+
+        elif translator.builder.format == &quot;html&quot;:
+            dst_fname = path.join(
+                translator.builder.outdir, translator.builder.imagedir, fname + &quot;.svg&quot;
+            )
+            img_node[&quot;uri&quot;] = path.join(translator.builder.imgpath, fname + &quot;.svg&quot;)
+            img_node[&quot;candidates&quot;] = {
+                &quot;*&quot;: path.join(translator.builder.imgpath, fname + &quot;.svg&quot;)
+            }
+
+        else:
+            # all other builder formats will include DOT as raw
+            img_node.replace_self(file2literal(src_fname))
+
+    elif in_ext == &quot;.svg&quot;:
+
+        if translator.builder.format == &quot;latex&quot;:
+            if convert_cmd is None:
+                app_log.info(&quot;no SVG to PDF conversion available / include SVG raw.&quot;)
+                img_node.replace_self(file2literal(src_fname))
+            else:
+                dst_fname = path.join(translator.builder.outdir, fname + &quot;.pdf&quot;)
+                img_node[&quot;uri&quot;] = fname + &quot;.pdf&quot;
+                img_node[&quot;candidates&quot;] = {&quot;*&quot;: fname + &quot;.pdf&quot;}
+
+    if dst_fname:
+        # the builder needs not to copy one more time, so pop it if exists.
+        translator.builder.images.pop(img_node[&quot;uri&quot;], None)
+        _name = pathlib.Path(dst_fname).relative_to(translator.builder.outdir)
+
+        if isNewer(dst_fname, src_fname):
+            app_log.info(&quot;convert: {out}/%s already exists and is newer&quot;, _name)
+
+        else:
+            ok = False
+            mkdir(path.dirname(dst_fname))
+
+            if in_ext == &quot;.dot&quot;:
+                app_log.info(&quot;convert DOT to: {out}/%s&quot;, _name)
+                ok = dot2format(app, src_fname, dst_fname)
+
+            elif in_ext == &quot;.svg&quot;:
+                app_log.info(&quot;convert SVG to: {out}/%s&quot;, _name)
+                ok = svg2pdf(app, src_fname, dst_fname)
+
+            if not ok:
+                img_node.replace_self(file2literal(src_fname))</div>
+
+
+
+<div class="viewcode-block" id="dot2format">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.dot2format">[docs]</a>
+def dot2format(app, dot_fname, out_fname):  # pylint: disable=unused-argument
+    &quot;&quot;&quot;Converts DOT file to ``out_fname`` using ``dot(1)``.
+
+    * ``dot_fname`` pathname of the input DOT file, including extension ``.dot``
+    * ``out_fname`` pathname of the output file, including format extension
+
+    The *format extension* depends on the ``dot`` command (see ``man dot``
+    option ``-Txxx``). Normally you will use one of the following extensions:
+
+    - ``.ps`` for PostScript,
+    - ``.svg`` or ``svgz`` for Structured Vector Graphics,
+    - ``.fig`` for XFIG graphics and
+    - ``.png`` or ``gif`` for common bitmap graphics.
+
+    &quot;&quot;&quot;
+    out_format = path.splitext(out_fname)[1][1:]
+    cmd = [dot_cmd, &quot;-T%s&quot; % out_format, dot_fname]
+    exit_code = 42
+
+    with open(out_fname, &quot;w&quot;, encoding=&quot;utf-8&quot;) as out:
+        exit_code = subprocess.call(cmd, stdout=out)
+        if exit_code != 0:
+            # pylint: disable=deprecated-method
+            app_log.warning(f&quot;Error #{exit_code} when calling: {&#39; &#39;.join(cmd)}&quot;)
+    return bool(exit_code == 0)</div>
+
+
+
+<div class="viewcode-block" id="svg2pdf">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.svg2pdf">[docs]</a>
+def svg2pdf(app, svg_fname, pdf_fname):  # pylint: disable=unused-argument
+    &quot;&quot;&quot;Converts SVG to PDF with ``convert(1)`` command.
+
+    Uses ``convert(1)`` from ImageMagick (https://www.imagemagick.org) for
+    conversion.  Returns ``True`` on success and ``False`` if an error occurred.
+
+    * ``svg_fname`` pathname of the input SVG file with extension (``.svg``)
+    * ``pdf_name``  pathname of the output PDF file with extension (``.pdf``)
+
+    &quot;&quot;&quot;
+    cmd = [convert_cmd, svg_fname, pdf_fname]
+    # use stdout and stderr from parent
+    exit_code = subprocess.call(cmd)
+    if exit_code != 0:
+        app_log.warning(f&quot;Error #{exit_code} when calling: {&#39; &#39;.join(cmd)}&quot;)
+    return bool(exit_code == 0)</div>
+
+
+
+# image handling
+# ---------------------
+
+
+<div class="viewcode-block" id="visit_kernel_image">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.visit_kernel_image">[docs]</a>
+def visit_kernel_image(self, node):
+    &quot;&quot;&quot;Visitor of the ``kernel_image`` Node.
+
+    Handles the ``image`` child-node with the ``convert_image(...)``.
+    &quot;&quot;&quot;
+    img_node = node[0]
+    convert_image(img_node, self)</div>
+
+
+
+<div class="viewcode-block" id="kernel_image">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.kernel_image">[docs]</a>
+class kernel_image(nodes.image):
+    &quot;&quot;&quot;Node for ``kernel-image`` directive.&quot;&quot;&quot;
+
+    pass</div>
+
+
+
+<div class="viewcode-block" id="KernelImage">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.KernelImage">[docs]</a>
+class KernelImage(images.Image):
+    &quot;&quot;&quot;KernelImage directive
+
+    Earns everything from ``.. image::`` directive, except *remote URI* and
+    *glob* pattern. The KernelImage wraps a image node into a
+    kernel_image node. See ``visit_kernel_image``.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="KernelImage.run">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.KernelImage.run">[docs]</a>
+    def run(self):
+        uri = self.arguments[0]
+        if uri.endswith(&quot;.*&quot;) or uri.find(&quot;://&quot;) != -1:
+            raise self.severe(
+                &#39;Error in &quot;%s: %s&quot;: glob pattern and remote images are not allowed&#39;
+                % (self.name, uri)
+            )
+        result = images.Image.run(self)
+        if len(result) == 2 or isinstance(result[0], nodes.system_message):
+            return result
+        (image_node,) = result
+        # wrap image node into a kernel_image node / see visitors
+        node = kernel_image(&quot;&quot;, image_node)
+        return [node]</div>
+</div>
+
+
+
+# figure handling
+# ---------------------
+
+
+<div class="viewcode-block" id="visit_kernel_figure">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.visit_kernel_figure">[docs]</a>
+def visit_kernel_figure(self, node):
+    &quot;&quot;&quot;Visitor of the ``kernel_figure`` Node.
+
+    Handles the ``image`` child-node with the ``convert_image(...)``.
+    &quot;&quot;&quot;
+    img_node = node[0][0]
+    convert_image(img_node, self)</div>
+
+
+
+<div class="viewcode-block" id="kernel_figure">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.kernel_figure">[docs]</a>
+class kernel_figure(nodes.figure):
+    &quot;&quot;&quot;Node for ``kernel-figure`` directive.&quot;&quot;&quot;</div>
+
+
+
+<div class="viewcode-block" id="KernelFigure">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.KernelFigure">[docs]</a>
+class KernelFigure(images.Figure):
+    &quot;&quot;&quot;KernelImage directive
+
+    Earns everything from ``.. figure::`` directive, except *remote URI* and
+    *glob* pattern.  The KernelFigure wraps a figure node into a kernel_figure
+    node. See ``visit_kernel_figure``.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="KernelFigure.run">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.KernelFigure.run">[docs]</a>
+    def run(self):
+        uri = self.arguments[0]
+        if uri.endswith(&quot;.*&quot;) or uri.find(&quot;://&quot;) != -1:
+            raise self.severe(
+                &#39;Error in &quot;%s: %s&quot;:&#39;
+                &quot; glob pattern and remote images are not allowed&quot; % (self.name, uri)
+            )
+        result = images.Figure.run(self)
+        if len(result) == 2 or isinstance(result[0], nodes.system_message):
+            return result
+        (figure_node,) = result
+        # wrap figure node into a kernel_figure node / see visitors
+        node = kernel_figure(&quot;&quot;, figure_node)
+        return [node]</div>
+</div>
+
+
+
+# render handling
+# ---------------------
+
+
+<div class="viewcode-block" id="visit_kernel_render">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.visit_kernel_render">[docs]</a>
+def visit_kernel_render(self, node):
+    &quot;&quot;&quot;Visitor of the ``kernel_render`` Node.
+
+    If rendering tools available, save the markup of the ``literal_block`` child
+    node into a file and replace the ``literal_block`` node with a new created
+    ``image`` node, pointing to the saved markup file. Afterwards, handle the
+    image child-node with the ``convert_image(...)``.
+    &quot;&quot;&quot;
+    srclang = node.get(&quot;srclang&quot;)
+
+    app_log.info(f&quot;visit kernel-render node lang: &#39;{srclang}&#39;&quot;)
+
+    tmp_ext = RENDER_MARKUP_EXT.get(srclang, None)
+    if tmp_ext is None:
+        app_log.warning(f&quot;kernel-render: &#39;{srclang}&#39; unknown / include raw&quot;)
+        return
+
+    if not dot_cmd and tmp_ext == &quot;.dot&quot;:
+        app_log.info(&quot;dot from graphviz not available / include raw.&quot;)
+        return
+
+    literal_block = node[0]
+
+    code = literal_block.astext()
+    hashobj = code.encode(&quot;utf-8&quot;)  #  str(node.attributes)
+    fname = path.join(&quot;%s-%s&quot; % (srclang, sha1(hashobj).hexdigest()))
+
+    tmp_fname = path.join(self.builder.outdir, self.builder.imagedir, fname + tmp_ext)
+
+    if not path.isfile(tmp_fname):
+        mkdir(path.dirname(tmp_fname))
+        with open(tmp_fname, &quot;w&quot;, encoding=&quot;utf-8&quot;) as out:
+            out.write(code)
+
+    img_node = nodes.image(node.rawsource, **node.attributes)
+    img_node[&quot;uri&quot;] = path.join(self.builder.imgpath, fname + tmp_ext)
+    img_node[&quot;candidates&quot;] = {&quot;*&quot;: path.join(self.builder.imgpath, fname + tmp_ext)}
+
+    literal_block.replace_self(img_node)
+    convert_image(img_node, self, tmp_fname)</div>
+
+
+
+<div class="viewcode-block" id="kernel_render">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.kernel_render">[docs]</a>
+class kernel_render(nodes.General, nodes.Inline, nodes.Element):
+    &quot;&quot;&quot;Node for ``kernel-render`` directive.&quot;&quot;&quot;
+
+    pass</div>
+
+
+
+<div class="viewcode-block" id="KernelRender">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender">[docs]</a>
+class KernelRender(images.Figure):
+    &quot;&quot;&quot;KernelRender directive
+
+    Render content by external tool.  Has all the options known from the
+    *figure*  directive, plus option ``caption``.  If ``caption`` has a
+    value, a figure node with the *caption* is inserted. If not, a image node is
+    inserted.
+
+    The KernelRender directive wraps the text of the directive into a
+    literal_block node and wraps it into a kernel_render node. See
+    ``visit_kernel_render``.
+    &quot;&quot;&quot;
+
+    has_content = True
+    required_arguments = 1
+    optional_arguments = 0
+    final_argument_whitespace = False
+
+    # earn options from &#39;figure&#39;
+    option_spec = images.Figure.option_spec.copy()
+    option_spec[&quot;caption&quot;] = directives.unchanged
+
+<div class="viewcode-block" id="KernelRender.run">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender.run">[docs]</a>
+    def run(self):
+        return [self.build_node()]</div>
+
+
+<div class="viewcode-block" id="KernelRender.build_node">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.KernelRender.build_node">[docs]</a>
+    def build_node(self):
+
+        srclang = self.arguments[0].strip()
+        # pylint: disable=consider-iterating-dictionary
+        if srclang not in RENDER_MARKUP_EXT.keys():
+            return [
+                self.state_machine.reporter.warning(
+                    &#39;Unknown source language &quot;%s&quot;, use one of: %s.&#39;
+                    % (srclang, &quot;,&quot;.join(RENDER_MARKUP_EXT.keys())),
+                    line=self.lineno,
+                )
+            ]
+
+        code = &quot;\n&quot;.join(self.content)
+        if not code.strip():
+            return [
+                self.state_machine.reporter.warning(
+                    &#39;Ignoring &quot;%s&quot; directive without content.&#39; % (self.name),
+                    line=self.lineno,
+                )
+            ]
+
+        node = kernel_render()
+        node[&quot;alt&quot;] = self.options.get(&quot;alt&quot;, &quot;&quot;)
+        node[&quot;srclang&quot;] = srclang
+        literal_node = nodes.literal_block(code, code)
+        node += literal_node
+
+        caption = self.options.get(&quot;caption&quot;)
+        if caption:
+            # parse caption&#39;s content
+            parsed = nodes.Element()
+            self.state.nested_parse(
+                ViewList([caption], source=&quot;&quot;), self.content_offset, parsed
+            )
+            caption_node = nodes.caption(parsed[0].rawsource, &quot;&quot;, *parsed[0].children)
+            caption_node.source = parsed[0].source
+            caption_node.line = parsed[0].line
+
+            figure_node = nodes.figure(&quot;&quot;, node)
+            for k, v in self.options.items():
+                figure_node[k] = v
+            figure_node += caption_node
+
+            node = figure_node
+
+        return node</div>
+</div>
+
+
+
+<div class="viewcode-block" id="add_kernel_figure_to_std_domain">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.kfigure.html#linuxdoc.kfigure.add_kernel_figure_to_std_domain">[docs]</a>
+def add_kernel_figure_to_std_domain(app, doctree):
+    &quot;&quot;&quot;Add kernel-figure anchors to &#39;std&#39; domain.
+
+    The ``StandardDomain.process_doc(..)`` method does not know how to resolve
+    the caption (label) of ``kernel-figure`` directive (it only knows about
+    standard nodes, e.g. table, figure etc.). Without any additional handling
+    this will result in a &#39;undefined label&#39; for kernel-figures.
+
+    This handle adds labels of kernel-figure to the &#39;std&#39; domain labels.
+    &quot;&quot;&quot;
+
+    std = app.env.domains[&quot;std&quot;]
+    docname = app.env.docname
+    labels = std.data[&quot;labels&quot;]
+
+    for name, explicit in iteritems(doctree.nametypes):
+        if not explicit:
+            continue
+        labelid = doctree.nameids[name]
+        if labelid is None:
+            continue
+        node = doctree.ids[labelid]
+
+        if node.tagname == &quot;kernel_figure&quot;:
+            for n in node.next_node():
+                if n.tagname == &quot;caption&quot;:
+                    sectname = clean_astext(n)
+                    # add label to std domain
+                    labels[name] = docname, labelid, sectname
+                    break</div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Markus Heiser
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=346fd13c"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

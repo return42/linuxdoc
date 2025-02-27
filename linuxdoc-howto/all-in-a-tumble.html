@@ -1,0 +1,1428 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="parsing modes" href="kernel-doc-modes.html" /><link rel="prev" title="kernel-doc from all-in-a-tumble.[ch]" href="all-in-a-tumble-debug.html" />
+
+    <!-- Generated with Sphinx 8.2.1 and Furo 2024.08.06 -->
+        <title>rendered all-in-a-tumble.[ch] - LinuxDoc</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/linuxdoc.css?v=fdd445b8" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">LinuxDoc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/darmarIT_logo_128.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">LinuxDoc</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../kernel-doc-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install LinuxDoc</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">LinuxDoc HowTo</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of LinuxDoc HowTo</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="kernel-doc-syntax.html">kernel-doc syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel-doc-directive.html">kernel-doc in reST documents</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="kernel-doc-examples.html">Examples &amp; Tests</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Examples &amp; Tests</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="kernel-doc-tests.html">kernel-doc Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble-src.html">source of <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="all-in-a-tumble-debug.html">kernel-doc from <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="kernel-doc-modes.html">parsing modes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of parsing modes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reST-kernel-doc-mode.html">reST kernel-doc mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vintage-kernel-doc-mode.html">Vintage kernel-doc mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kfigure.html">Scalable figure and image handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table-markup.html">About tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cdomain.html">Customized sphinx c-domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="man-pages.html">man pages from kernel-doc comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel-include-directive.html">Use kernel-include in reST documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cmd-line.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Command line tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.rest.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.lintdoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.autodoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.autodoc</span></code></a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linuxdoc-api/linuxdoc.html">linuxdoc package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of linuxdoc package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.autodoc.html">linuxdoc.autodoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.cdomain.html">linuxdoc.cdomain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.compat.html">linuxdoc.compat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.deprecated.html">linuxdoc.deprecated module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.grepdoc.html">linuxdoc.grepdoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.kernel_doc.html">linuxdoc.kernel_doc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.kernel_include.html">linuxdoc.kernel_include module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.kfigure.html">linuxdoc.kfigure module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.lint.html">linuxdoc.lint module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.manKernelDoc.html">linuxdoc.manKernelDoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.rest.html">linuxdoc.rest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.rstFlatTable.html">linuxdoc.rstFlatTable module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-api/linuxdoc.rstKernelDoc.html">linuxdoc.rstKernelDoc module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/linuxdoc-howto/all-in-a-tumble.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="rendered-all-in-a-tumble-ch">
+<span id="all-in-a-tumble"></span><h1>rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code><a class="headerlink" href="#rendered-all-in-a-tumble-ch" title="Link to this heading">¶</a></h1>
+<p>Below you find the rendered <a class="reference external" href="http://www.sphinx-doc.org/en/stable/rest.html">reST</a> markup, generated from kernel-doc comments of
+the example files <a class="reference internal" href="#all-in-a-tumble-h"><span class="std std-ref">all-in-a-tumble.h</span></a> and <a class="reference internal" href="#all-in-a-tumble-c"><span class="std std-ref">all-in-a-tumble.c</span></a>.  This
+content will be produced by the kernel-doc parser and inserted in the document by
+using the following directives:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">kernel-doc</span><span class="p">::</span>  ./all-in-a-tumble.c
+   <span class="nc">:module:</span> example
+
+<span class="p">..</span> <span class="ow">kernel-doc</span><span class="p">::</span>  ./all-in-a-tumble.h
+   <span class="nc">:module:</span> example
+</pre></div>
+</div>
+<p>The option <code class="docutils literal notranslate"><span class="pre">:module:</span></code> is optional, to find out why we use this option <em>here</em>,
+see <a class="reference internal" href="kernel-doc-directive.html#kernel-doc-options"><span class="std std-ref">kernel-doc options</span></a>.</p>
+<hr class="docutils" />
+<section id="all-in-a-tumble-h">
+<span id="id1"></span><h2>all-in-a-tumble.h<a class="headerlink" href="#all-in-a-tumble-h" title="Link to this heading">¶</a></h2>
+<section id="about-examples">
+<span id="example-about-examples"></span><h3>About Examples<a class="headerlink" href="#about-examples" title="Link to this heading">¶</a></h3>
+<p>The files <a class="reference internal" href="all-in-a-tumble-src.html#all-in-a-tumble-c-src"><span class="std std-ref">source all-in-a-tumble.c</span></a> and <a class="reference internal" href="all-in-a-tumble-src.html#all-in-a-tumble-h-src"><span class="std std-ref">source all-in-a-tumble.h</span></a> are
+including all examples of the <a class="reference internal" href="index.html#linuxdoc-howto"><span class="std std-ref">LinuxDoc HowTo</span></a> documentation.  These
+files are also used as a test of the kernel-doc parser, to see how kernel-doc
+content will be rendered and where the parser might fail.</p>
+<p>And … The content itself is nonsense / don’t look to close ;-)</p>
+</section>
+<section id="callback">
+<span id="example-callback"></span><h3>callback<a class="headerlink" href="#callback" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.callback">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">callback</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fct_ptr</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.callback" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Callback function with a function pointer argument</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fct_ptr</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="p">*</span><span class="p">)</span><span class="p">(</span><span class="kt">void</span><span class="p">*</span><span class="p">)</span></span></span>) – Function to call.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="trace-block-touch-buffer">
+<span id="example-trace-block-touch-buffer"></span><h3>trace_block_touch_buffer<a class="headerlink" href="#trace-block-touch-buffer" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.trace_block_touch_buffer">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">trace_block_touch_buffer</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">buffer_head</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">bh</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.trace_block_touch_buffer" title="Link to this definition">¶</a><br /></dt>
+<dd><p>mark a buffer accessed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bh</strong> (<span><span class="c-expr sig sig-inline c"><span class="k">struct</span><span class="w"> </span><span class="n">buffer_head</span><span class="p">*</span></span></span>) – buffer_head being touched</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="description">
+<span id="example-trace-block-touch-buffer-description"></span><h4>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h4>
+<p>Called from <code class="xref c c-func docutils literal notranslate"><span class="pre">touch_buffer()</span></code>.</p>
+</section>
+</section>
+<section id="trace-block-dirty-buffer">
+<span id="example-trace-block-dirty-buffer"></span><h3>trace_block_dirty_buffer<a class="headerlink" href="#trace-block-dirty-buffer" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.trace_block_dirty_buffer">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">trace_block_dirty_buffer</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">buffer_head</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">bh</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.trace_block_dirty_buffer" title="Link to this definition">¶</a><br /></dt>
+<dd><p>mark a buffer dirty</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bh</strong> (<span><span class="c-expr sig sig-inline c"><span class="k">struct</span><span class="w"> </span><span class="n">buffer_head</span><span class="p">*</span></span></span>) – buffer_head being dirtied</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example-trace-block-dirty-buffer-description">
+<span id="id2"></span><h4>Description<a class="headerlink" href="#example-trace-block-dirty-buffer-description" title="Link to this heading">¶</a></h4>
+<p>Called from <a class="reference external" href="https://www.kernel.org/doc/html/latest/filesystems/buffer.html#c.mark_buffer_dirty" title="(in The Linux Kernel v6.14.0-rc4)"><code class="xref c c-func docutils literal notranslate"><span class="pre">mark_buffer_dirty()</span></code></a>.</p>
+</section>
+</section>
+<section id="theory-of-operation">
+<span id="example-theory-of-operation"></span><h3>Theory of Operation<a class="headerlink" href="#theory-of-operation" title="Link to this heading">¶</a></h3>
+<p>The whizbang foobar is a dilly of a gizmo.  It can do whatever you
+want it to do, at any time.  It reads your mind.  Here’s how it works.</p>
+<section id="foo-bar-splat">
+<h4>foo bar splat<a class="headerlink" href="#foo-bar-splat" title="Link to this heading">¶</a></h4>
+<p>The only drawback to this gizmo is that it can sometimes damage hardware,
+software, or its subject(s).</p>
+</section>
+</section>
+<section id="multiple-doc-sections">
+<span id="example-multiple-doc-sections"></span><h3>multiple DOC sections<a class="headerlink" href="#multiple-doc-sections" title="Link to this heading">¶</a></h3>
+<p>It’s not recommended to place more than one “DOC:” section in the same
+comment block. To insert a new “DOC:” section, create a new comment block and
+to create a sub-section use the reST markup for headings, see documentation
+of function <a class="reference internal" href="#c.example.rst_mode" title="rst_mode"><code class="xref c c-func docutils literal notranslate"><span class="pre">rst_mode()</span></code></a></p>
+</section>
+<section id="lorem-ipsum">
+<span id="example-lorem-ipsum"></span><h3>lorem ipsum<a class="headerlink" href="#lorem-ipsum" title="Link to this heading">¶</a></h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor
+incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi
+consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore
+eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident,
+sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</section>
+<section id="struct-my-struct">
+<span id="example-my-struct"></span><h3>struct my_struct<a class="headerlink" href="#struct-my-struct" title="Link to this heading">¶</a></h3>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.example.my_struct">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">my_struct</span></span></span><a class="headerlink" href="#c.example.my_struct" title="Link to this definition">¶</a><br /></dt>
+<dd><p>a struct with nested unions and structs</p>
+</dd></dl>
+
+<section id="definition">
+<span id="example-my-struct-definition"></span><h4>Definition<a class="headerlink" href="#definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">my_struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">union</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">char</span><span class="w"> </span><span class="n">arg1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">char</span><span class="w"> </span><span class="n">arg2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">arg1b</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">arg2b</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg3</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">arg4</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">f1</span><span class="p">)(</span><span class="kt">char</span><span class="w"> </span><span class="n">foo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bar</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="k">union</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">arg1</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">arg2</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="n">st1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg1</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">arg2</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">f2</span><span class="p">)(</span><span class="kt">char</span><span class="w"> </span><span class="n">foo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bar</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="n">st2</span><span class="p">,</span><span class="w"> </span><span class="n">st3</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">f3</span><span class="p">)(</span><span class="kt">char</span><span class="w"> </span><span class="n">foo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bar</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">bar</span><span class="p">;</span>
+<span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">FOO</span><span class="p">,</span>
+<span class="w">        </span><span class="n">BAR</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">undoc_public</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="members">
+<span id="example-my-struct-members"></span><h4>Members<a class="headerlink" href="#members" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>{unnamed_union}</dt><dd><p>anonymous</p>
+</dd>
+<dt>{unnamed_struct}</dt><dd><p>anonymous</p>
+</dd>
+<dt>arg1</dt><dd><p>first argument of anonymous union/anonymous struct
+lorem ipsum …</p>
+</dd>
+<dt>arg2</dt><dd><p>second argument of anonymous union/anonymous struct</p>
+</dd>
+<dt>{unnamed_struct}</dt><dd><p>anonymous</p>
+</dd>
+<dt>arg1b</dt><dd><p>first argument of anonymous union/anonymous struct</p>
+</dd>
+<dt>arg2b</dt><dd><p>second argument of anonymous union/anonymous struct</p>
+</dd>
+<dt>{unnamed_struct}</dt><dd><p>anonymous</p>
+</dd>
+<dt>arg3</dt><dd><p>third argument of anonymous union/anonymous struct</p>
+</dd>
+<dt>arg4</dt><dd><p>fourth argument of anonymous union/anonymous struct</p>
+</dd>
+<dt>f1</dt><dd><p>nested function on anonimous union/struct</p>
+</dd>
+<dt>bar</dt><dd><p>non-anonymous union</p>
+</dd>
+<dt>bar.st1</dt><dd><p>struct st1 inside <code class="docutils literal notranslate"><span class="pre">bar</span></code></p>
+</dd>
+<dt>bar.st1.arg1</dt><dd><p>first argument of struct st1 on union bar</p>
+</dd>
+<dt>bar.st1.arg2</dt><dd><p>second argument of struct st1 on union bar</p>
+</dd>
+<dt>bar.st2</dt><dd><p>struct st2 inside <code class="docutils literal notranslate"><span class="pre">bar</span></code></p>
+</dd>
+<dt>bar.st2.arg1</dt><dd><p>first argument of struct st2 on union bar</p>
+</dd>
+<dt>bar.st2.arg2</dt><dd><p>second argument of struct st2 on union bar</p>
+</dd>
+<dt>bar.st3</dt><dd><p>struct st3 inside <code class="docutils literal notranslate"><span class="pre">bar</span></code></p>
+</dd>
+<dt>bar.st3.arg2</dt><dd><p>second argument of struct st3 on union bar</p>
+</dd>
+<dt>bar.st2.f2</dt><dd><p>nested function on named union/struct</p>
+</dd>
+<dt>undoc_public</dt><dd><p><em>undescribed</em></p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="struct-my-long-struct">
+<span id="example-my-long-struct"></span><h3>struct my_long_struct<a class="headerlink" href="#struct-my-long-struct" title="Link to this heading">¶</a></h3>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.example.my_long_struct">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">my_long_struct</span></span></span><a class="headerlink" href="#c.example.my_long_struct" title="Link to this definition">¶</a><br /></dt>
+<dd><p>short description with <a class="reference internal" href="#c.example.my_struct" title="my_struct"><code class="xref c c-type docutils literal notranslate"><span class="pre">my_struct-&gt;a</span></code></a> and <a class="reference internal" href="#c.example.my_struct" title="my_struct"><code class="xref c c-type docutils literal notranslate"><span class="pre">my_struct-&gt;b</span></code></a></p>
+</dd></dl>
+
+<section id="example-my-long-struct-definition">
+<span id="id3"></span><h4>Definition<a class="headerlink" href="#example-my-long-struct-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">my_long_struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">foo</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bar</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">baz</span><span class="p">;</span>
+<span class="w">    </span><span class="k">union</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">foobar</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">barbar</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">bar2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-my-long-struct-members">
+<span id="id4"></span><h4>Members<a class="headerlink" href="#example-my-long-struct-members" title="Link to this heading">¶</a></h4>
+<dl>
+<dt>foo</dt><dd><p>The Foo member.</p>
+</dd>
+<dt>bar</dt><dd><p>The Bar member,
+lorem ipsum ..</p>
+</dd>
+<dt>baz</dt><dd><p>The Baz member,
+lorem ipsum ..</p>
+<p>Here, the member description may contain several paragraphs.</p>
+</dd>
+<dt>{unnamed_union}</dt><dd><p>anonymous</p>
+</dd>
+<dt>foobar</dt><dd><p>Single line description.</p>
+</dd>
+<dt>bar2</dt><dd><p>Description for struct <code class="docutils literal notranslate"><span class="pre">bar2</span></code> inside <code class="docutils literal notranslate"><span class="pre">my_long_struct</span></code></p>
+</dd>
+<dt>bar2.barbar</dt><dd><p>Description for <code class="docutils literal notranslate"><span class="pre">barbar</span></code> inside <code class="docutils literal notranslate"><span class="pre">my_long_struct.bar2</span></code></p>
+</dd>
+</dl>
+</section>
+<section id="example-my-long-struct-description">
+<span id="id5"></span><h4>Description<a class="headerlink" href="#example-my-long-struct-description" title="Link to this heading">¶</a></h4>
+<p>Longer description</p>
+</section>
+</section>
+<section id="union-my-union">
+<span id="example-my-union"></span><h3>union my_union<a class="headerlink" href="#union-my-union" title="Link to this heading">¶</a></h3>
+<dl class="c union">
+<dt class="sig sig-object c" id="c.example.my_union">
+<span class="k"><span class="pre">union</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">my_union</span></span></span><a class="headerlink" href="#c.example.my_union" title="Link to this definition">¶</a><br /></dt>
+<dd><p>short description</p>
+</dd></dl>
+
+<section id="example-my-union-definition">
+<span id="id6"></span><h4>Definition<a class="headerlink" href="#example-my-union-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">union</span><span class="w"> </span><span class="nc">my_union</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-my-union-members">
+<span id="id7"></span><h4>Members<a class="headerlink" href="#example-my-union-members" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>a</dt><dd><p>first member</p>
+</dd>
+<dt>b</dt><dd><p>second member</p>
+</dd>
+</dl>
+</section>
+<section id="example-my-union-description">
+<span id="id8"></span><h4>Description<a class="headerlink" href="#example-my-union-description" title="Link to this heading">¶</a></h4>
+<p>Longer description</p>
+</section>
+</section>
+<section id="enum-my-enum">
+<span id="example-my-enum"></span><h3>enum my_enum<a class="headerlink" href="#enum-my-enum" title="Link to this heading">¶</a></h3>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.example.my_enum">
+<span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">my_enum</span></span></span><a class="headerlink" href="#c.example.my_enum" title="Link to this definition">¶</a><br /></dt>
+<dd><p>log level</p>
+</dd></dl>
+
+<section id="example-my-enum-definition">
+<span id="id9"></span><h4>Definition<a class="headerlink" href="#example-my-enum-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="n">my_enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">QUIET</span><span class="p">,</span>
+<span class="w">    </span><span class="n">INFO</span><span class="p">,</span>
+<span class="w">    </span><span class="n">WARN</span><span class="p">,</span>
+<span class="w">    </span><span class="n">DEBUG</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="constants">
+<span id="example-my-enum-constants"></span><h4>Constants<a class="headerlink" href="#constants" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>QUIET</dt><dd><p>logs nothing</p>
+</dd>
+<dt>INFO</dt><dd><p>logs info messages</p>
+</dd>
+<dt>WARN</dt><dd><p>logs warn and info messages</p>
+</dd>
+<dt>DEBUG</dt><dd><p>logs debug, warn and info messages</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="typedef-my-typedef">
+<span id="example-my-typedef"></span><h3>typedef my_typedef<a class="headerlink" href="#typedef-my-typedef" title="Link to this heading">¶</a></h3>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.example.my_typedef">
+<span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">my_typedef</span></span></span><a class="headerlink" href="#c.example.my_typedef" title="Link to this definition">¶</a><br /></dt>
+<dd><p>useless typdef of int</p>
+</dd></dl>
+
+</section>
+<section id="rst-mode">
+<span id="example-rst-mode"></span><h3>rst_mode<a class="headerlink" href="#rst-mode" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.rst_mode">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rst_mode</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">a</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.rst_mode" title="Link to this definition">¶</a><br /></dt>
+<dd><p>dummy to demonstrate reST &amp; kernel-doc markup in comments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">int</span></span></span>) – first argument</p></li>
+<li><p><strong>b</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">char</span><span class="p">*</span></span></span>) – second argument
+Context: <code class="xref c c-func docutils literal notranslate"><span class="pre">in_gizmo_mode()</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example-rst-mode-description">
+<span id="id10"></span><h4>Description<a class="headerlink" href="#example-rst-mode-description" title="Link to this heading">¶</a></h4>
+<p>Long description. This function has two integer arguments. The first is
+<code class="docutils literal notranslate"><span class="pre">parameter_a</span></code> and the second is <code class="docutils literal notranslate"><span class="pre">parameter_b</span></code>.</p>
+<p>As long as the reST / sphinx-doc toolchain uses <a class="reference external" href="http://www.sphinx-doc.org/en/stable/ext/intersphinx.html">intersphinx</a> you can refer
+definitions <em>outside</em> like <a class="reference external" href="https://www.kernel.org/doc/html/latest/driver-api/media/mc-core.html#c.media_device" title="(in The Linux Kernel v6.14.0-rc4)"><code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">media_device</span></code></a>.  If
+the description of <code class="docutils literal notranslate"><span class="pre">media_device</span></code> struct is found in any of the intersphinx
+locations, a hyperref to this target is generated a build time.</p>
+</section>
+<section id="example">
+<span id="example-rst-mode-example"></span><h4>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="return">
+<span id="example-rst-mode-return"></span><h4>Return<a class="headerlink" href="#return" title="Link to this heading">¶</a></h4>
+<p>Sum of <code class="docutils literal notranslate"><span class="pre">parameter_a</span></code> and the second is <code class="docutils literal notranslate"><span class="pre">parameter_b</span></code>.</p>
+</section>
+<section id="highlighting">
+<span id="example-rst-mode-highlighting"></span><h4>highlighting<a class="headerlink" href="#highlighting" title="Link to this heading">¶</a></h4>
+<p>The highlight pattern, are non regular reST markups. They are only available
+within kernel-doc comments, helping C developers to write short and compact
+documentation.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.example.user_function" title="user_function"><code class="xref c c-func docutils literal notranslate"><span class="pre">user_function()</span></code></a> : function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> : name of a parameter</p></li>
+<li><p><a class="reference internal" href="#c.example.my_struct" title="my_struct"><code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">my_struct</span></code></a> : name of a structure (including the word struct)</p></li>
+<li><p><a class="reference internal" href="#c.example.my_union" title="my_union"><code class="xref c c-type docutils literal notranslate"><span class="pre">union</span> <span class="pre">my_union</span></code></a> : name of a union</p></li>
+<li><p><a class="reference internal" href="#c.example.my_struct" title="my_struct"><code class="xref c c-type docutils literal notranslate"><span class="pre">my_struct-&gt;a</span></code></a> or <a class="reference internal" href="#c.example.my_struct" title="my_struct"><code class="xref c c-type docutils literal notranslate"><span class="pre">my_struct.b</span></code></a> -  member of a struct or union.</p></li>
+<li><p><a class="reference internal" href="#c.example.my_enum" title="my_enum"><code class="xref c c-type docutils literal notranslate"><span class="pre">enum</span> <span class="pre">my_enum</span></code></a> : name of a enum</p></li>
+<li><p><a class="reference internal" href="#c.example.my_typedef" title="my_typedef"><code class="xref c c-type docutils literal notranslate"><span class="pre">typedef</span> <span class="pre">my_typedef</span></code></a> : name of a typedef</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONST</span></code> : name of a constant.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$ENVVAR</span></code> : environmental variable</p></li>
+</ul>
+<p>The kernel-doc parser translates the pattern above to the corresponding reST
+markups. You don’t have to use the <em>highlight</em> pattern, if you prefer <em>pure</em>
+reST, use the reST markup.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.example.user_function" title="user_function"><code class="xref c c-func docutils literal notranslate"><span class="pre">user_function()</span></code></a> : function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> : name of a parameter</p></li>
+<li><p><a class="reference internal" href="#c.example.my_struct" title="my_struct"><code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">my_struct</span></code></a> : name of a structure (including the word struct)</p></li>
+<li><p><a class="reference internal" href="#c.example.my_union" title="my_union"><code class="xref c c-type docutils literal notranslate"><span class="pre">union</span> <span class="pre">my_union</span></code></a> : name of a union</p></li>
+<li><p><a class="reference internal" href="#c.example.my_struct" title="my_struct"><code class="xref c c-type docutils literal notranslate"><span class="pre">my_struct-&gt;a</span></code></a> or <a class="reference internal" href="#c.example.my_struct" title="my_struct"><code class="xref c c-type docutils literal notranslate"><span class="pre">my_struct.b</span></code></a> -  member of a struct or union.</p></li>
+<li><p><a class="reference internal" href="#c.example.my_enum" title="my_enum"><code class="xref c c-type docutils literal notranslate"><span class="pre">enum</span> <span class="pre">my_enum</span></code></a> : name of a enum</p></li>
+<li><p><a class="reference internal" href="#c.example.my_typedef" title="my_typedef"><code class="xref c c-type docutils literal notranslate"><span class="pre">typedef</span> <span class="pre">my_typedef</span></code></a> : name of a typedef</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONST</span></code> : name of a constant.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$ENVVAR</span></code> : environmental variable</p></li>
+</ul>
+<p>Since the prefixes <code class="docutils literal notranslate"><span class="pre">$...</span></code>, <code class="docutils literal notranslate"><span class="pre">&amp;...</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;...</span></code> are used to markup the
+highlight pattern, you have to escape them in other uses: $lorem, &amp;lorem,
+%lorem and &#64;lorem. To esacpe from function highlighting, use lorem().</p>
+</section>
+<section id="parser-mode">
+<span id="example-rst-mode-parser-mode"></span><h4>Parser Mode<a class="headerlink" href="#parser-mode" title="Link to this heading">¶</a></h4>
+<p>This is an example with activated reST additions, in this section you will
+find some common inline markups.</p>
+<p>Within the <em>reST mode</em> the kernel-doc parser pass through all markups to the
+reST toolchain, except the <em>vintage highlighting</em> but including any
+whitespace. With this, the full reST markup is available in the comments.</p>
+<p>This is a link to the <a class="reference external" href="https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/">Linux kernel source tree</a>.</p>
+<p>This description is only to show some reST inline markups like <em>emphasise</em>
+and <strong>emphasis strong</strong>. The following is a demo of a reST list markup:</p>
+</section>
+<section id="definition-list">
+<span id="example-rst-mode-definition-list"></span><h4>Definition list<a class="headerlink" href="#definition-list" title="Link to this heading">¶</a></h4>
+<dl class="field-list simple">
+<dt class="field-odd">def1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>lorem</p>
+</dd>
+<dt class="field-even">def2<span class="colon">:</span></dt>
+<dd class="field-even"><p>ipsum</p>
+</dd>
+</dl>
+</section>
+<section id="ordered-list">
+<span id="example-rst-mode-ordered-list"></span><h4>Ordered List<a class="headerlink" href="#ordered-list" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>item one</p></li>
+<li><p>item two</p></li>
+<li><p>item three with
+a linebreak</p></li>
+</ul>
+</section>
+<section id="literal-blocks">
+<span id="example-rst-mode-literal-blocks"></span><h4>Literal blocks<a class="headerlink" href="#literal-blocks" title="Link to this heading">¶</a></h4>
+<p>The next example shows a literal block:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+------+          +------+
+|\     |\        /|     /|
+| +----+-+      +-+----+ |
+| |    | |      | |    | |
++-+----+ |      | +----+-+
+ \|     \|      |/     |/
+  +------+      +------+
+   foo()         bar()
+</pre></div>
+</div>
+</section>
+<section id="highlighted-code-blocks">
+<span id="example-rst-mode-highlighted-code-blocks"></span><h4>Highlighted code blocks<a class="headerlink" href="#highlighted-code-blocks" title="Link to this heading">¶</a></h4>
+<p>The next example shows a code block, with highlighting C syntax in the
+output.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Hello World program</span>
+<span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="rest-sectioning">
+<span id="example-rst-mode-rest-sectioning"></span><h4>reST sectioning<a class="headerlink" href="#rest-sectioning" title="Link to this heading">¶</a></h4>
+<p>colon markup: sectioning by colon markup in reST mode is less ugly. ;-)</p>
+<p>A kernel-doc section like <em>this</em> section is translated into a reST
+<em>subsection</em>. This means, you can only use the following <em>sub-levels</em> within a
+kernel-doc section.</p>
+<section id="a-subsubsection">
+<h5>a subsubsection<a class="headerlink" href="#a-subsubsection" title="Link to this heading">¶</a></h5>
+<p>lorem ipsum</p>
+<section id="a-paragraph">
+<h6>a paragraph<a class="headerlink" href="#a-paragraph" title="Link to this heading">¶</a></h6>
+<p>lorem ipsum</p>
+</section>
+</section>
+</section>
+</section>
+<section id="vintage">
+<span id="example-vintage"></span><h3>vintage<a class="headerlink" href="#vintage" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.vintage">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vintage</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">parameter_a</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">parameter_b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.vintage" title="Link to this definition">¶</a><br /></dt>
+<dd><p>short description of this function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter_a</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">int</span></span></span>) – first argument</p></li>
+<li><p><strong>parameter_b</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">char</span></span></span>) – second argument</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="context">
+<span id="example-vintage-context"></span><h4>Context<a class="headerlink" href="#context" title="Link to this heading">¶</a></h4>
+<p><code class="xref c c-func docutils literal notranslate"><span class="pre">in_gizmo_mode()</span></code>.</p>
+</section>
+<section id="example-vintage-description">
+<span id="id11"></span><h4>Description<a class="headerlink" href="#example-vintage-description" title="Link to this heading">¶</a></h4>
+<p>This is a test of a typical markup from *vintage* kernel-doc.  Don’t look to
+close here, it is only for testing some kernel-doc parser stuff.</p>
+<p>Long description. This function has two integer arguments. The first is
+<code class="docutils literal notranslate"><span class="pre">parameter_a</span></code> and the second is <code class="docutils literal notranslate"><span class="pre">parameter_b</span></code>.</p>
+</section>
+<section id="example-vintage-example">
+<span id="id12"></span><h4>Example<a class="headerlink" href="#example-vintage-example" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">user_function</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="example-vintage-return">
+<span id="id13"></span><h4>Return<a class="headerlink" href="#example-vintage-return" title="Link to this heading">¶</a></h4>
+<p>Sum of <code class="docutils literal notranslate"><span class="pre">parameter_a</span></code> and <code class="docutils literal notranslate"><span class="pre">parameter_b</span></code>.</p>
+</section>
+<section id="example-vintage-highlighting">
+<span id="id14"></span><h4>highlighting<a class="headerlink" href="#example-vintage-highlighting" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><a class="reference internal" href="#c.example.vintage" title="vintage"><code class="xref c c-func docutils literal notranslate"><span class="pre">vintage()</span></code></a>    : function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameter_a</span></code> : name of a parameter</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$ENVVAR</span></code>      : environmental variable</p></li>
+<li><p><a class="reference internal" href="#c.example.my_struct" title="my_struct"><code class="xref c c-type docutils literal notranslate"><span class="pre">struct</span> <span class="pre">my_struct</span></code></a>   : name of a structure (up to two words including ``struct``)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONST</span></code>       : name of a constant.</p></li>
+</ul>
+</section>
+<section id="example-vintage-parser-mode">
+<span id="id15"></span><h4>Parser Mode<a class="headerlink" href="#example-vintage-parser-mode" title="Link to this heading">¶</a></h4>
+<p>*vintage* kernel-doc mode</p>
+<p>Within the *vintage kernel-doc mode* ignores any whitespace or inline
+markup.</p>
+<ul class="simple">
+<li><p>Inline markup like *emphasis* or **emphasis strong**</p></li>
+<li><p>Literals and/or block indent:</p></li>
+</ul>
+<p>a + b</p>
+<p>In kernel-doc *vintage* mode, there are no special block or inline markups
+available. Markups like the one above result in ambiguous reST markup which
+could produce error messages in the subsequently sphinx-build
+process. Unexpected outputs are mostly the result.</p>
+<p>This is a link <a class="reference external" href="https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/">https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/</a>
+to the Linux kernel source tree</p>
+</section>
+<section id="colon-markup">
+<span id="example-vintage-colon-markup"></span><h4>colon markup<a class="headerlink" href="#colon-markup" title="Link to this heading">¶</a></h4>
+<p>sectioning by colon markup in vintage mode is partial ugly. ;-)</p>
+</section>
+</section>
+<section id="struct-nfp-flower-priv">
+<span id="example-nfp-flower-priv"></span><h3>struct nfp_flower_priv<a class="headerlink" href="#struct-nfp-flower-priv" title="Link to this heading">¶</a></h3>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.example.nfp_flower_priv">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nfp_flower_priv</span></span></span><a class="headerlink" href="#c.example.nfp_flower_priv" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Flower APP per-vNIC priv data</p>
+</dd></dl>
+
+<section id="example-nfp-flower-priv-definition">
+<span id="id16"></span><h4>Definition<a class="headerlink" href="#example-nfp-flower-priv-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">nfp_flower_priv</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfp_net</span><span class="w"> </span><span class="o">*</span><span class="n">nn</span><span class="p">;</span>
+<span class="w">    </span><span class="n">u32</span><span class="w"> </span><span class="n">mask_id_seed</span><span class="p">;</span>
+<span class="w">    </span><span class="n">u64</span><span class="w"> </span><span class="n">flower_version</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">nfp_fl_mask_id</span><span class="w"> </span><span class="n">mask_ids</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DECLARE_HASHTABLE</span><span class="p">(</span><span class="n">mask_table</span><span class="p">,</span><span class="w"> </span><span class="n">NFP_FLOWER_MASK_HASH_BITS</span><span class="p">);</span>
+<span class="w">    </span><span class="n">DECLARE_HASHTABLE</span><span class="p">(</span><span class="n">flow_table</span><span class="p">,</span><span class="w"> </span><span class="n">NFP_FLOWER_HASH_BITS</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-nfp-flower-priv-members">
+<span id="id17"></span><h4>Members<a class="headerlink" href="#example-nfp-flower-priv-members" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>nn</dt><dd><p>Pointer to vNIC</p>
+</dd>
+<dt>mask_id_seed</dt><dd><p>Seed used for mask hash table</p>
+</dd>
+<dt>flower_version</dt><dd><p>HW version of flower</p>
+</dd>
+<dt>mask_ids</dt><dd><p>List of free mask ids</p>
+</dd>
+<dt>mask_table</dt><dd><p>Hash table used to store masks</p>
+</dd>
+<dt>flow_table</dt><dd><p>Hash table used to store flower rules</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="enum-foo">
+<span id="example-foo"></span><h3>enum foo<a class="headerlink" href="#enum-foo" title="Link to this heading">¶</a></h3>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.example.foo">
+<span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">foo</span></span></span><a class="headerlink" href="#c.example.foo" title="Link to this definition">¶</a><br /></dt>
+<dd><p>foo</p>
+</dd></dl>
+
+<section id="example-foo-definition">
+<span id="id18"></span><h4>Definition<a class="headerlink" href="#example-foo-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">F1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">F2</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="example-foo-constants">
+<span id="id19"></span><h4>Constants<a class="headerlink" href="#example-foo-constants" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>F1</dt><dd><p>f1</p>
+</dd>
+<dt>F2</dt><dd><p>f2</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="struct-something">
+<span id="example-something"></span><h3>struct something<a class="headerlink" href="#struct-something" title="Link to this heading">¶</a></h3>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.example.something">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">something</span></span></span><a class="headerlink" href="#c.example.something" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Lorem ipsum dolor sit amet.</p>
+</dd></dl>
+
+<section id="example-something-definition">
+<span id="id20"></span><h4>Definition<a class="headerlink" href="#example-something-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">something</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">foo</span><span class="w"> </span><span class="n">foofoo</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">bar</span><span class="w"> </span><span class="n">barbar</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-something-members">
+<span id="id21"></span><h4>Members<a class="headerlink" href="#example-something-members" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>foofoo</dt><dd><p>lorem</p>
+</dd>
+<dt>barbar</dt><dd><p>ipsum</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="struct-lineevent-state">
+<span id="example-lineevent-state"></span><h3>struct lineevent_state<a class="headerlink" href="#struct-lineevent-state" title="Link to this heading">¶</a></h3>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.example.lineevent_state">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lineevent_state</span></span></span><a class="headerlink" href="#c.example.lineevent_state" title="Link to this definition">¶</a><br /></dt>
+<dd><p>contains the state of a userspace event</p>
+</dd></dl>
+
+<section id="example-lineevent-state-definition">
+<span id="id22"></span><h4>Definition<a class="headerlink" href="#example-lineevent-state-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">lineevent_state</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">gpio_device</span><span class="w"> </span><span class="o">*</span><span class="n">gdev</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">label</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">gpio_desc</span><span class="w"> </span><span class="o">*</span><span class="n">desc</span><span class="p">;</span>
+<span class="w">    </span><span class="n">u32</span><span class="w"> </span><span class="n">eflags</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">irq</span><span class="p">;</span>
+<span class="w">    </span><span class="n">wait_queue_head_t</span><span class="w"> </span><span class="n">wait</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DECLARE_KFIFO</span><span class="p">(</span><span class="n">events</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">gpioevent_data</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span>
+<span class="w">    </span><span class="n">DECLARE_KFIFO_PTR</span><span class="p">(</span><span class="n">foobar</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">lirc_scancode</span><span class="p">);</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">mutex</span><span class="w"> </span><span class="n">read_lock</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-lineevent-state-members">
+<span id="id23"></span><h4>Members<a class="headerlink" href="#example-lineevent-state-members" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>gdev</dt><dd><p>the GPIO device the event pertains to</p>
+</dd>
+<dt>label</dt><dd><p>consumer label used to tag descriptors</p>
+</dd>
+<dt>desc</dt><dd><p>the GPIO descriptor held by this event</p>
+</dd>
+<dt>eflags</dt><dd><p>the event flags this line was requested with</p>
+</dd>
+<dt>irq</dt><dd><p>the interrupt that trigger in response to events on this GPIO</p>
+</dd>
+<dt>wait</dt><dd><p>wait queue that handles blocking reads of events</p>
+</dd>
+<dt>events</dt><dd><p>KFIFO for the GPIO events (testing DECLARE_KFIFO)</p>
+</dd>
+<dt>foobar</dt><dd><p>testing DECLARE_KFIFO_PTR</p>
+</dd>
+<dt>read_lock</dt><dd><p>mutex lock to protect reads from colliding with adding
+new events to the FIFO</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="typedef-genpool-algo-t">
+<span id="example-genpool-algo-t"></span><h3>typedef genpool_algo_t<a class="headerlink" href="#typedef-genpool-algo-t" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.genpool_algo_t">
+<span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">genpool_algo_t</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">map</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n"><span class="pre">start</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">nr</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">gen_pool</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">pool</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n"><span class="pre">start_addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.genpool_algo_t" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Allocation callback function type definition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>map</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="p">*</span></span></span>) – Pointer to bitmap</p></li>
+<li><p><strong>size</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span></span></span>) – The bitmap size in bits</p></li>
+<li><p><strong>start</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span></span></span>) – The bitnumber to start searching at</p></li>
+<li><p><strong>nr</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span></span></span>) – The number of zeroed bits we’re looking for</p></li>
+<li><p><strong>data</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">void</span><span class="p">*</span></span></span>) – optional additional data used by the callback</p></li>
+<li><p><strong>pool</strong> (<span><span class="c-expr sig sig-inline c"><span class="k">struct</span><span class="w"> </span><span class="n">gen_pool</span><span class="p">*</span></span></span>) – the pool being allocated from</p></li>
+<li><p><strong>start_addr</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span></span></span>) – <em>undescribed</em></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="typedef-v4l2-check-dv-timings-fnc">
+<span id="example-v4l2-check-dv-timings-fnc"></span><h3>typedef v4l2_check_dv_timings_fnc<a class="headerlink" href="#typedef-v4l2-check-dv-timings-fnc" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.v4l2_check_dv_timings_fnc">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">v4l2_check_dv_timings_fnc</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">v4l2_dv_timings</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">t</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.v4l2_check_dv_timings_fnc" title="Link to this definition">¶</a><br /></dt>
+<dd><p>timings check callback</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<span><span class="c-expr sig sig-inline c"><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="n">v4l2_dv_timings</span><span class="p">*</span></span></span>) – the v4l2_dv_timings struct.</p></li>
+<li><p><strong>handle</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">void</span><span class="p">*</span></span></span>) – a handle from the driver.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example-v4l2-check-dv-timings-fnc-description">
+<span id="id24"></span><h4>Description<a class="headerlink" href="#example-v4l2-check-dv-timings-fnc-description" title="Link to this heading">¶</a></h4>
+<p>Returns true if the given timings are valid.</p>
+</section>
+</section>
+<section id="macro-add">
+<span id="example-add"></span><h3>macro ADD<a class="headerlink" href="#macro-add" title="Link to this heading">¶</a></h3>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.example.ADD">
+<span class="sig-name descname"><span class="n"><span class="pre">ADD</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">first</span></span>, <span class="n"><span class="pre">second</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.ADD" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Function like macro to add two values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first</strong> – first value</p></li>
+<li><p><strong>second</strong> – second value</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example-add-description">
+<span id="id25"></span><h4>Description<a class="headerlink" href="#example-add-description" title="Link to this heading">¶</a></h4>
+<p>Is replaced by a addition of <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">second</span></code>.</p>
+</section>
+</section>
+<section id="macro-iosys-map-wr-field">
+<span id="example-iosys-map-wr-field"></span><h3>macro iosys_map_wr_field<a class="headerlink" href="#macro-iosys-map-wr-field" title="Link to this heading">¶</a></h3>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.example.iosys_map_wr_field">
+<span class="sig-name descname"><span class="n"><span class="pre">iosys_map_wr_field</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">map__</span></span>, <span class="n"><span class="pre">struct_offset__</span></span>, <span class="n"><span class="pre">struct_type__</span></span>, <span class="n"><span class="pre">field__</span></span>, <span class="n"><span class="pre">val__</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.iosys_map_wr_field" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Write to a member of a struct in the iosys_map</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>map__</strong> – The iosys_map structure</p></li>
+<li><p><strong>struct_offset__</strong> – Offset from the beggining of the map, where the struct
+is located</p></li>
+<li><p><strong>struct_type__</strong> – The struct describing the layout of the mapping</p></li>
+<li><p><strong>field__</strong> – Member of the struct to read</p></li>
+<li><p><strong>val__</strong> – Value to write</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example-iosys-map-wr-field-description">
+<span id="id26"></span><h4>Description<a class="headerlink" href="#example-iosys-map-wr-field-description" title="Link to this heading">¶</a></h4>
+<p>Write a value to the iosys_map considering its layout is described by a C
+struct starting at <code class="docutils literal notranslate"><span class="pre">struct_offset__</span></code>. The field offset and size is calculated
+and the <code class="docutils literal notranslate"><span class="pre">val_</span></code>_ is written. If the field access would incur in un-aligned
+access, then either <a class="reference external" href="https://www.kernel.org/doc/html/latest/driver-api/device-io.html#c.iosys_map_memcpy_to" title="(in The Linux Kernel v6.14.0-rc4)"><code class="xref c c-func docutils literal notranslate"><span class="pre">iosys_map_memcpy_to()</span></code></a> needs to be used or the
+architecture must support it. Refer to <code class="xref c c-func docutils literal notranslate"><span class="pre">iosys_map_rd_field()</span></code> for expected
+usage and memory layout.</p>
+</section>
+</section>
+<hr class="docutils" />
+</section>
+<section id="all-in-a-tumble-c">
+<span id="id27"></span><h2>all-in-a-tumble.c<a class="headerlink" href="#all-in-a-tumble-c" title="Link to this heading">¶</a></h2>
+<section id="user-function">
+<span id="example-user-function"></span><h3>user_function<a class="headerlink" href="#user-function" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.user_function">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_function</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">a</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.user_function" title="Link to this definition">¶</a><br /></dt>
+<dd><p>function that can only be called in user context</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">int</span></span></span>) – some argument</p></li>
+<li><p><strong>ellipsis</strong> (<span><span class="c-expr sig sig-inline c"><span class="n">ellipsis</span></span></span>) – ellipsis operator</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example-user-function-description">
+<span id="id28"></span><h4>Description<a class="headerlink" href="#example-user-function-description" title="Link to this heading">¶</a></h4>
+<p>This function makes no sense, it’s only a kernel-doc demonstration.</p>
+</section>
+<section id="example-user-function-example">
+<span id="id29"></span><h4>Example<a class="headerlink" href="#example-user-function-example" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_function</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="example-user-function-return">
+<span id="id30"></span><h4>Return<a class="headerlink" href="#example-user-function-return" title="Link to this heading">¶</a></h4>
+<p>Returns first argument</p>
+</section>
+</section>
+<section id="user-sum">
+<span id="example-user-sum"></span><h3>user_sum<a class="headerlink" href="#user-sum" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.user_sum">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_sum</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">a</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.user_sum" title="Link to this definition">¶</a><br /></dt>
+<dd><p>another function that can only be called in user context</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">int</span></span></span>) – first argument</p></li>
+<li><p><strong>b</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">int</span></span></span>) – second argument</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example-user-sum-description">
+<span id="id31"></span><h4>Description<a class="headerlink" href="#example-user-sum-description" title="Link to this heading">¶</a></h4>
+<p>This function makes no sense, it’s only a kernel-doc demonstration.</p>
+</section>
+<section id="example-user-sum-example">
+<span id="id32"></span><h4>Example<a class="headerlink" href="#example-user-sum-example" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="example-user-sum-return">
+<span id="id33"></span><h4>Return<a class="headerlink" href="#example-user-sum-return" title="Link to this heading">¶</a></h4>
+<p>Returns the sum of the <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code></p>
+</section>
+</section>
+<section id="sys-tgkill">
+<span id="example-sys-tgkill"></span><h3>sys_tgkill<a class="headerlink" href="#sys-tgkill" title="Link to this heading">¶</a></h3>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.example.sys_tgkill">
+<span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sys_tgkill</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">pid_t</span></span><span class="w"> </span><span class="n"><span class="pre">tgid</span></span>, <span class="n"><span class="pre">pid_t</span></span><span class="w"> </span><span class="n"><span class="pre">pid</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">sig</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.example.sys_tgkill" title="Link to this definition">¶</a><br /></dt>
+<dd><p>send signal to one specific thread</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tgid</strong> (<span><span class="c-expr sig sig-inline c"><span class="n">pid_t</span></span></span>) – the thread group ID of the thread</p></li>
+<li><p><strong>pid</strong> (<span><span class="c-expr sig sig-inline c"><span class="n">pid_t</span></span></span>) – the PID of the thread</p></li>
+<li><p><strong>sig</strong> (<span><span class="c-expr sig sig-inline c"><span class="kt">int</span></span></span>) – signal to be sent</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example-sys-tgkill-description">
+<span id="id34"></span><h4>Description<a class="headerlink" href="#example-sys-tgkill-description" title="Link to this heading">¶</a></h4>
+<blockquote>
+<div><p>This syscall also checks the <code class="docutils literal notranslate"><span class="pre">tgid</span></code> and returns -ESRCH even if the PID
+exists but it’s not belonging to the target process anymore. This
+method solves the problem of threads exiting and PIDs getting reused.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="enum-rarely-enum">
+<span id="example-rarely-enum"></span><h3>enum rarely_enum<a class="headerlink" href="#enum-rarely-enum" title="Link to this heading">¶</a></h3>
+<dl class="c enum">
+<dt class="sig sig-object c" id="c.example.rarely_enum">
+<span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rarely_enum</span></span></span><a class="headerlink" href="#c.example.rarely_enum" title="Link to this definition">¶</a><br /></dt>
+<dd><p>enum to test parsing rarely code styles</p>
+</dd></dl>
+
+<section id="example-rarely-enum-definition">
+<span id="id35"></span><h4>Definition<a class="headerlink" href="#example-rarely-enum-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="n">rarely_enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">F1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">F2</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="example-rarely-enum-constants">
+<span id="id36"></span><h4>Constants<a class="headerlink" href="#example-rarely-enum-constants" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>F1</dt><dd><p>f1</p>
+</dd>
+<dt>F2</dt><dd><p>f2</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="struct-rarely-struct">
+<span id="example-rarely-struct"></span><h3>struct rarely_struct<a class="headerlink" href="#struct-rarely-struct" title="Link to this heading">¶</a></h3>
+<dl class="c struct">
+<dt class="sig sig-object c" id="c.example.rarely_struct">
+<span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rarely_struct</span></span></span><a class="headerlink" href="#c.example.rarely_struct" title="Link to this definition">¶</a><br /></dt>
+<dd><p>struct to test parsing rarely code styles</p>
+</dd></dl>
+
+<section id="example-rarely-struct-definition">
+<span id="id37"></span><h4>Definition<a class="headerlink" href="#example-rarely-struct-definition" title="Link to this heading">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">rarely_struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">foo</span><span class="w"> </span><span class="n">foofoo</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">bar</span><span class="w"> </span><span class="n">barbar</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-rarely-struct-members">
+<span id="id38"></span><h4>Members<a class="headerlink" href="#example-rarely-struct-members" title="Link to this heading">¶</a></h4>
+<dl class="simple">
+<dt>foofoo</dt><dd><p>lorem</p>
+</dd>
+<dt>barbar</dt><dd><p>ipsum</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="kernel-doc-modes.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">parsing modes</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="all-in-a-tumble-debug.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">kernel-doc from <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Markus Heiser
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a><ul>
+<li><a class="reference internal" href="#all-in-a-tumble-h">all-in-a-tumble.h</a><ul>
+<li><a class="reference internal" href="#about-examples">About Examples</a></li>
+<li><a class="reference internal" href="#callback">callback</a></li>
+<li><a class="reference internal" href="#trace-block-touch-buffer">trace_block_touch_buffer</a><ul>
+<li><a class="reference internal" href="#description">Description</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#trace-block-dirty-buffer">trace_block_dirty_buffer</a><ul>
+<li><a class="reference internal" href="#example-trace-block-dirty-buffer-description">Description</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#theory-of-operation">Theory of Operation</a><ul>
+<li><a class="reference internal" href="#foo-bar-splat">foo bar splat</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multiple-doc-sections">multiple DOC sections</a></li>
+<li><a class="reference internal" href="#lorem-ipsum">lorem ipsum</a></li>
+<li><a class="reference internal" href="#struct-my-struct">struct my_struct</a><ul>
+<li><a class="reference internal" href="#definition">Definition</a></li>
+<li><a class="reference internal" href="#members">Members</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#struct-my-long-struct">struct my_long_struct</a><ul>
+<li><a class="reference internal" href="#example-my-long-struct-definition">Definition</a></li>
+<li><a class="reference internal" href="#example-my-long-struct-members">Members</a></li>
+<li><a class="reference internal" href="#example-my-long-struct-description">Description</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#union-my-union">union my_union</a><ul>
+<li><a class="reference internal" href="#example-my-union-definition">Definition</a></li>
+<li><a class="reference internal" href="#example-my-union-members">Members</a></li>
+<li><a class="reference internal" href="#example-my-union-description">Description</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#enum-my-enum">enum my_enum</a><ul>
+<li><a class="reference internal" href="#example-my-enum-definition">Definition</a></li>
+<li><a class="reference internal" href="#constants">Constants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#typedef-my-typedef">typedef my_typedef</a></li>
+<li><a class="reference internal" href="#rst-mode">rst_mode</a><ul>
+<li><a class="reference internal" href="#example-rst-mode-description">Description</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#return">Return</a></li>
+<li><a class="reference internal" href="#highlighting">highlighting</a></li>
+<li><a class="reference internal" href="#parser-mode">Parser Mode</a></li>
+<li><a class="reference internal" href="#definition-list">Definition list</a></li>
+<li><a class="reference internal" href="#ordered-list">Ordered List</a></li>
+<li><a class="reference internal" href="#literal-blocks">Literal blocks</a></li>
+<li><a class="reference internal" href="#highlighted-code-blocks">Highlighted code blocks</a></li>
+<li><a class="reference internal" href="#rest-sectioning">reST sectioning</a><ul>
+<li><a class="reference internal" href="#a-subsubsection">a subsubsection</a><ul>
+<li><a class="reference internal" href="#a-paragraph">a paragraph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vintage">vintage</a><ul>
+<li><a class="reference internal" href="#context">Context</a></li>
+<li><a class="reference internal" href="#example-vintage-description">Description</a></li>
+<li><a class="reference internal" href="#example-vintage-example">Example</a></li>
+<li><a class="reference internal" href="#example-vintage-return">Return</a></li>
+<li><a class="reference internal" href="#example-vintage-highlighting">highlighting</a></li>
+<li><a class="reference internal" href="#example-vintage-parser-mode">Parser Mode</a></li>
+<li><a class="reference internal" href="#colon-markup">colon markup</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#struct-nfp-flower-priv">struct nfp_flower_priv</a><ul>
+<li><a class="reference internal" href="#example-nfp-flower-priv-definition">Definition</a></li>
+<li><a class="reference internal" href="#example-nfp-flower-priv-members">Members</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#enum-foo">enum foo</a><ul>
+<li><a class="reference internal" href="#example-foo-definition">Definition</a></li>
+<li><a class="reference internal" href="#example-foo-constants">Constants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#struct-something">struct something</a><ul>
+<li><a class="reference internal" href="#example-something-definition">Definition</a></li>
+<li><a class="reference internal" href="#example-something-members">Members</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#struct-lineevent-state">struct lineevent_state</a><ul>
+<li><a class="reference internal" href="#example-lineevent-state-definition">Definition</a></li>
+<li><a class="reference internal" href="#example-lineevent-state-members">Members</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#typedef-genpool-algo-t">typedef genpool_algo_t</a></li>
+<li><a class="reference internal" href="#typedef-v4l2-check-dv-timings-fnc">typedef v4l2_check_dv_timings_fnc</a><ul>
+<li><a class="reference internal" href="#example-v4l2-check-dv-timings-fnc-description">Description</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#macro-add">macro ADD</a><ul>
+<li><a class="reference internal" href="#example-add-description">Description</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#macro-iosys-map-wr-field">macro iosys_map_wr_field</a><ul>
+<li><a class="reference internal" href="#example-iosys-map-wr-field-description">Description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#all-in-a-tumble-c">all-in-a-tumble.c</a><ul>
+<li><a class="reference internal" href="#user-function">user_function</a><ul>
+<li><a class="reference internal" href="#example-user-function-description">Description</a></li>
+<li><a class="reference internal" href="#example-user-function-example">Example</a></li>
+<li><a class="reference internal" href="#example-user-function-return">Return</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#user-sum">user_sum</a><ul>
+<li><a class="reference internal" href="#example-user-sum-description">Description</a></li>
+<li><a class="reference internal" href="#example-user-sum-example">Example</a></li>
+<li><a class="reference internal" href="#example-user-sum-return">Return</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sys-tgkill">sys_tgkill</a><ul>
+<li><a class="reference internal" href="#example-sys-tgkill-description">Description</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#enum-rarely-enum">enum rarely_enum</a><ul>
+<li><a class="reference internal" href="#example-rarely-enum-definition">Definition</a></li>
+<li><a class="reference internal" href="#example-rarely-enum-constants">Constants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#struct-rarely-struct">struct rarely_struct</a><ul>
+<li><a class="reference internal" href="#example-rarely-struct-definition">Definition</a></li>
+<li><a class="reference internal" href="#example-rarely-struct-members">Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=346fd13c"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

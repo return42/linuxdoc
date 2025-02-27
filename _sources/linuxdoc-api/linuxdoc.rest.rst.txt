@@ -1,0 +1,7 @@
+linuxdoc.rest module
+====================
+
+.. automodule:: linuxdoc.rest
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+linuxdoc.compat module
+======================
+
+.. automodule:: linuxdoc.compat
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,882 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 8.2.1 and Furo 2024.08.06 -->
+        <title>linuxdoc.rstKernelDoc - LinuxDoc</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/linuxdoc.css?v=fdd445b8" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">LinuxDoc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/darmarIT_logo_128.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">LinuxDoc</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kernel-doc-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install LinuxDoc</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../linuxdoc-howto/index.html">LinuxDoc HowTo</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of LinuxDoc HowTo</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-syntax.html">kernel-doc syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-directive.html">kernel-doc in reST documents</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-examples.html">Examples &amp; Tests</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Examples &amp; Tests</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-tests.html">kernel-doc Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/all-in-a-tumble-src.html">source of <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/all-in-a-tumble-debug.html">kernel-doc from <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/all-in-a-tumble.html">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../linuxdoc-howto/kernel-doc-modes.html">parsing modes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of parsing modes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/reST-kernel-doc-mode.html">reST kernel-doc mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../linuxdoc-howto/vintage-kernel-doc-mode.html">Vintage kernel-doc mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kfigure.html">Scalable figure and image handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/table-markup.html">About tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/cdomain.html">Customized sphinx c-domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/man-pages.html">man pages from kernel-doc comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-howto/kernel-include-directive.html">Use kernel-include in reST documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cmd-line.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Command line tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cmd-line/linuxdoc.rest.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmd-line/linuxdoc.lintdoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cmd-line/linuxdoc.autodoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.autodoc</span></code></a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.html">linuxdoc package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of linuxdoc package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.autodoc.html">linuxdoc.autodoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.cdomain.html">linuxdoc.cdomain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.compat.html">linuxdoc.compat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.deprecated.html">linuxdoc.deprecated module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.grepdoc.html">linuxdoc.grepdoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.kernel_doc.html">linuxdoc.kernel_doc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.kernel_include.html">linuxdoc.kernel_include module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.kfigure.html">linuxdoc.kfigure module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.lint.html">linuxdoc.lint module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.manKernelDoc.html">linuxdoc.manKernelDoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.rest.html">linuxdoc.rest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.rstFlatTable.html">linuxdoc.rstFlatTable module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html">linuxdoc.rstKernelDoc module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for linuxdoc.rstKernelDoc</h1><div class="highlight"><pre>
+<span></span># SPDX-License-Identifier: AGPL-3.0-or-later
+# pylint: disable=missing-docstring, invalid-name
+&quot;&quot;&quot;\
+rstKernelDoc
+~~~~~~~~~~~~
+
+Implementation of the ``kernel-doc`` reST-directive.
+
+The ``kernel-doc`` (:py:class:`KernelDoc`) directive includes contend from
+linux kernel source code comments.
+
+&quot;&quot;&quot;
+
+# ==============================================================================
+# imports
+# ==============================================================================
+
+import glob
+import logging
+from io import StringIO
+from os import path
+
+import six
+from docutils import nodes
+from docutils.parsers.rst import Directive, directives
+from docutils.statemachine import ViewList
+from docutils.utils import SystemMessage
+from fspath import OS_ENV
+from sphinx.util.docutils import switch_source_input
+
+from . import kernel_doc as kerneldoc
+
+# ==============================================================================
+# common globals
+# ==============================================================================
+
+__version__ = &quot;3.0&quot;
+
+
+<div class="viewcode-block" id="ParserCache">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache">[docs]</a>
+class ParserCache:
+    &quot;&quot;&quot;A simple (in process) cache for :py:obj:`KernelDocParser` objects (read
+    :py:obj:`PARSER_CACHE`)
+
+    &quot;&quot;&quot;
+
+    def __init__(self):
+        self._cache = {}
+
+<div class="viewcode-block" id="ParserCache.get_id">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get_id">[docs]</a>
+    def get_id(self, opts):
+        &quot;&quot;&quot;Generate a cache ID from the options of the kernel-doc directive.  Some of
+        the options control the parsing rules and thus in the end the parsing
+        result.
+
+        &quot;&quot;&quot;
+        return (
+            opts.fname,
+            opts.exp_method,
+            tuple(opts.exp_ids),
+            tuple(opts.known_attrs),
+        )</div>
+
+
+<div class="viewcode-block" id="ParserCache.get">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.get">[docs]</a>
+    def get(self, opts):
+        x = self.get_id(opts)
+        return self._cache.get(x)</div>
+
+
+<div class="viewcode-block" id="ParserCache.set">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.ParserCache.set">[docs]</a>
+    def set(self, opts, parser):
+        self._cache[self.get_id(opts)] = parser</div>
+</div>
+
+
+
+PARSER_CACHE = ParserCache()
+&quot;&quot;&quot;ToDo: this type of cache (in process) does not (fully) support sphinx&#39;s
+paralell build (job option -j N) where builds are spanned over processes.
+Sphinx-build creates a new job (process) not for each kernel-doc directive but
+for each rest-file (that contains at least one kernel-doc directive).
+
+&quot;&quot;&quot;
+
+app_log = logging.getLogger(&quot;application&quot;)
+
+
+<div class="viewcode-block" id="setup">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.setup">[docs]</a>
+def setup(app):
+
+    app.add_config_value(&quot;kernel_doc_raise_error&quot;, False, &quot;env&quot;)
+    app.add_config_value(&quot;kernel_doc_verbose_warn&quot;, True, &quot;env&quot;)
+    app.add_config_value(&quot;kernel_doc_mode&quot;, &quot;reST&quot;, &quot;env&quot;)
+    app.add_config_value(&quot;kernel_doc_mansect&quot;, None, &quot;env&quot;)
+    app.add_config_value(&quot;kernel_doc_exp_method&quot;, None, &quot;env&quot;)
+    app.add_config_value(&quot;kernel_doc_exp_ids&quot;, None, &quot;env&quot;)
+    app.add_config_value(&quot;kernel_doc_known_attrs&quot;, None, &quot;env&quot;)
+    app.add_config_value(&quot;kernel_doc_srctree&quot;, kerneldoc.SRCTREE, &quot;env&quot;)
+    app.add_directive(&quot;kernel-doc&quot;, KernelDoc)
+
+    return dict(version=__version__, parallel_read_safe=True, parallel_write_safe=True)</div>
+
+
+
+<div class="viewcode-block" id="KernelDocParser">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser">[docs]</a>
+class KernelDocParser(kerneldoc.Parser):
+
+    # pylint: disable=deprecated-method
+
+    def __init__(self, app, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.app = app
+
+    # -------------------------------------------------
+    # bind the parser logging to the sphinx application
+    # -------------------------------------------------
+
+    # pylint: disable=arguments-differ
+
+<div class="viewcode-block" id="KernelDocParser.error">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.error">[docs]</a>
+    def error(self, message, **replace):
+        replace[&quot;fname&quot;] = self.options.fname
+        replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
+        self.errors += 1
+        message = (&quot;%(fname)s:%(line_no)s: [kernel-doc ERROR] : &quot; + message) % replace
+        app_log.warn(message)</div>
+
+
+<div class="viewcode-block" id="KernelDocParser.warn">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.warn">[docs]</a>
+    def warn(self, message, **replace):
+        replace[&quot;fname&quot;] = self.options.fname
+        replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
+        self.warnings += 1
+        message = (&quot;%(fname)s:%(line_no)s: [kernel-doc WARN] : &quot; + message) % replace
+        app_log.warn(message)</div>
+
+
+<div class="viewcode-block" id="KernelDocParser.info">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.info">[docs]</a>
+    def info(self, message, **replace):
+        replace[&quot;fname&quot;] = self.options.fname
+        replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
+        message = (&quot;%(fname)s:%(line_no)s: [kernel-doc INFO] : &quot; + message) % replace
+        app_log.info(message)</div>
+
+
+<div class="viewcode-block" id="KernelDocParser.debug">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDocParser.debug">[docs]</a>
+    def debug(self, message, **replace):
+        if self.app.verbosity &lt; 2:
+            return
+        replace[&quot;fname&quot;] = self.options.fname
+        replace[&quot;line_no&quot;] = replace.get(&quot;line_no&quot;, self.ctx.line_no)
+        message = (&quot;%(fname)s:%(line_no)s: [kernel-doc DEBUG] : &quot; + message) % replace
+        app_log.debug(message)</div>
+</div>
+
+
+
+<div class="viewcode-block" id="FaultyOption">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.FaultyOption">[docs]</a>
+class FaultyOption(Exception):
+    pass</div>
+
+
+
+<div class="viewcode-block" id="KernelDoc">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc">[docs]</a>
+class KernelDoc(Directive):
+    &quot;&quot;&quot;KernelDoc (``kernel-doc``) directive&quot;&quot;&quot;
+
+    required_arguments = 1
+    optional_arguments = 0
+    final_argument_whitespace = True
+
+    option_spec = {
+        # see https://github.com/PyCQA/pylint/issues/289
+        &quot;doc&quot;: directives.unchanged_required,  # aka lines containing !P
+        &quot;no-header&quot;: directives.flag,
+        &quot;export&quot;: directives.unchanged,  # aka lines containing !E
+        &quot;internal&quot;: directives.unchanged,  # aka lines containing !I
+        &quot;functions&quot;: directives.unchanged_required,  # aka lines containing !F
+        &quot;symbols&quot;: directives.unchanged_required,
+        &quot;exp-method&quot;: directives.unchanged_required,
+        &quot;exp-ids&quot;: directives.unchanged_required,
+        &quot;known-attrs&quot;: directives.unchanged_required,
+        &quot;debug&quot;: directives.flag,  # insert generated reST as code-block
+        &quot;snippets&quot;: directives.unchanged_required,
+        &quot;language&quot;: directives.unchanged_required,
+        &quot;linenos&quot;: directives.flag
+        # module name / used as id-prefix
+        ,
+        &quot;module&quot;: directives.unchanged_required,
+        &quot;man-sect&quot;: directives.nonnegative_int
+        # The encoding of the source file with the kernel-doc comments. The
+        # default is the config.source_encoding from sphinx configuration and
+        # this default is utf-8-sig
+        ,
+        &quot;encoding&quot;: directives.encoding,
+    }
+
+<div class="viewcode-block" id="KernelDoc.getParserOptions">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.getParserOptions">[docs]</a>
+    def getParserOptions(
+        self,
+    ):  # pylint: disable=too-many-branches, too-many-statements
+
+        fname = self.arguments[0]
+        src_tree = path.dirname(path.normpath(self.doc.current_source))
+        exp_files = []  # file pattern to search for EXPORT_SYMBOL
+        exp_method = self.options.get(
+            &quot;exp-method&quot;, self.env.config.kernel_doc_exp_method
+        )
+        exp_ids = self.options.get(&quot;exp-ids&quot;, self.env.config.kernel_doc_exp_ids)
+        known_attrs = self.options.get(
+            &quot;known-attrs&quot;, self.env.config.kernel_doc_known_attrs
+        )
+
+        if self.arguments[0].startswith(&quot;/&quot;):
+            # Absolute path names are relative to srctree, which is taken from
+            # environment, configuration or current directory (in this order).
+            fname = self.arguments[0][1:]
+            src_tree = OS_ENV.get(&quot;srctree&quot;, self.env.config.kernel_doc_srctree)
+
+        if &quot;internal&quot; in self.options and &quot;export&quot; in self.options:
+            raise FaultyOption(
+                &quot;Options &#39;export&#39; and &#39;internal&#39; are orthogonal,&quot;
+                &quot; can&#39;t use them togehter&quot;
+            )
+
+        if &quot;snippets&quot; in self.options:
+            rest = set(self.options.keys()) - set(
+                [&quot;snippets&quot;, &quot;linenos&quot;, &quot;language&quot;, &quot;debug&quot;]
+            )
+            if rest:
+                raise FaultyOption(
+                    &quot;kernel-doc &#39;snippets&#39; has non of these options: %s&quot;
+                    % &quot;,&quot;.join(rest)
+                )
+
+        if self.env.config.kernel_doc_mode not in [&quot;reST&quot;, &quot;kernel-doc&quot;]:
+            raise FaultyOption(
+                &quot;unknow kernel-doc mode: %s&quot; % self.env.config.kernel_doc_mode
+            )
+
+        # set parse adjustments
+
+        ctx = kerneldoc.ParserContext()
+        opts = kerneldoc.ParseOptions(
+            fname=fname,
+            src_tree=src_tree,
+            id_prefix=self.options.get(&quot;module&quot;, &quot;&quot;).strip(),
+            encoding=self.options.get(&quot;encoding&quot;, self.env.config.source_encoding),
+            verbose_warn=self.env.config.kernel_doc_verbose_warn,
+            markup=self.env.config.kernel_doc_mode,
+            man_sect=self.options.get(&quot;man-sect&quot;, None),
+            exp_method=exp_method,
+            exp_ids=(exp_ids or &quot;&quot;).replace(&quot;,&quot;, &quot; &quot;).split(),
+            known_attrs=(known_attrs or &quot;&quot;).replace(&quot;,&quot;, &quot; &quot;).split(),
+        )
+
+        if &quot;doc&quot; not in self.options and opts.man_sect is None:
+            opts.man_sect = self.env.config.kernel_doc_mansect
+
+        opts.set_defaults()
+
+        if not path.exists(opts.fname):
+            raise FaultyOption(
+                &quot;kernel-doc refers to nonexisting document %s&quot; % opts.fname
+            )
+
+        # always skip preamble and epilog in kernel-doc directives
+        opts.skip_preamble = True
+        opts.skip_epilog = True
+
+        if (
+            &quot;doc&quot; not in self.options
+            and &quot;export&quot; not in self.options
+            and &quot;internal&quot; not in self.options
+            and &quot;functions&quot; not in self.options
+            and &quot;snippets&quot; not in self.options
+        ):
+            # if no explicit content is selected, then print all, including all
+            # DOC sections
+            opts.use_all_docs = True
+
+        if &quot;doc&quot; in self.options:
+            opts.no_header = bool(&quot;no-header&quot; in self.options)
+            opts.use_names.append(self.options.get(&quot;doc&quot;))
+
+        if &quot;export&quot; in self.options:
+            kerneldoc.Parser.gather_context(kerneldoc.readFile(opts.fname), ctx, opts)
+            exp_files.extend(
+                (self.options.get(&quot;export&quot;) or &quot;&quot;).replace(&quot;,&quot;, &quot; &quot;).split()
+            )
+            opts.error_missing = True
+
+        elif &quot;internal&quot; in self.options:
+            # gather exported symbols and add them to the ignore-list of names
+            kerneldoc.Parser.gather_context(kerneldoc.readFile(opts.fname), ctx, opts)
+            exp_files.extend(
+                (self.options.get(&quot;internal&quot;) or &quot;&quot;).replace(&quot;,&quot;, &quot; &quot;).split()
+            )
+
+        if &quot;functions&quot; in self.options:
+            opts.error_missing = True
+            opts.use_names.extend(self.options[&quot;functions&quot;].replace(&quot;,&quot;, &quot; &quot;).split())
+
+        for pattern in exp_files:
+
+            if pattern[0] == &quot;/&quot;:
+                pattern = pattern[1:]
+            pattern = path.join(opts.src_tree, pattern)
+
+            if not glob.has_magic(pattern) and not path.lexists(pattern):
+                # if pattern is a filename (is not a glob pattern) and this file
+                # does not exists, an error is raised.
+                raise FaultyOption(&quot;file (pattern) not found: %s&quot; % pattern)
+
+            for fname in glob.glob(pattern):
+                self.env.note_dependency(path.abspath(fname))
+                kerneldoc.Parser.gather_context(kerneldoc.readFile(fname), ctx, opts)
+
+        if &quot;export&quot; in self.options:
+            if not ctx.exported_symbols:
+                raise FaultyOption(
+                    &quot;using option :export: but there are no exported symbols&quot;
+                )
+            opts.use_names.extend(ctx.exported_symbols)
+
+        if &quot;internal&quot; in self.options:
+            opts.skip_names.extend(ctx.exported_symbols)
+
+        return opts</div>
+
+
+<div class="viewcode-block" id="KernelDoc.errMsg">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.errMsg">[docs]</a>
+    def errMsg(self, msg):
+        msg = six.text_type(msg)
+        error = self.state_machine.reporter.error(
+            msg, nodes.literal_block(self.block_text, self.block_text), line=self.lineno
+        )
+
+        # raise exception on error?
+        if self.env.config.kernel_doc_raise_error:
+            raise SystemMessage(error, 4)
+
+        # insert oops/todo admonition, this is the replacement of the escape
+        # sequences &quot;!C&lt;filename&gt; &quot; formerly used in the DocBook-SGML template
+        # files.
+        todo = (
+            &quot;\n\n.. todo::&quot;
+            &quot;\n\n    Oops: Document generation inconsistency.&quot;
+            &quot;\n\n    The template for this document tried to insert&quot;
+            &quot; structured comment at this point, but an error occoured.&quot;
+            &quot; This dummy section is inserted to allow generation to continue.::&quot;
+            &quot;\n\n&quot;
+        )
+
+        for l in error.astext().split(&quot;\n&quot;):
+            todo += &quot;        &quot; + l + &quot;\n&quot;
+        todo += &quot;\n\n&quot;
+        self.state_machine.insert_input(todo.split(&quot;\n&quot;), self.arguments[0])</div>
+
+
+<div class="viewcode-block" id="KernelDoc.parseSource">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.parseSource">[docs]</a>
+    def parseSource(self, opts):
+        parser = PARSER_CACHE.get(opts)
+
+        if parser is None:
+            self.env.note_dependency(opts.fname)  # ??
+            # app_log.info(&quot;parse kernel-doc comments from: %s&quot; % opts.fname)
+            parser = KernelDocParser(self.env.app, opts, kerneldoc.NullTranslator())
+            parser.parse()
+            PARSER_CACHE.set(opts, parser)
+        else:
+            parser.setOptions(opts)
+
+        return parser</div>
+
+
+<div class="viewcode-block" id="KernelDoc.run">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.run">[docs]</a>
+    def run(self):
+
+        # ToDo: think about again; these members has been added for convenience
+        self.parser = None  # pylint: disable=attribute-defined-outside-init
+        self.doc = self.state.document  # pylint: disable=attribute-defined-outside-init
+        self.env = (  # pylint: disable=attribute-defined-outside-init
+            self.doc.settings.env
+        )
+        self.nodes = []  # pylint: disable=attribute-defined-outside-init
+
+        if &quot;symbols&quot; in self.options and &quot;functions&quot; in self.options:
+            error = self.state_machine.reporter.error(
+                (
+                    &#39;Error in &quot;%s&quot; directive: used option :symbols:&#39;
+                    &quot; and its alias :functions:&quot; % self.name
+                ),
+                nodes.literal_block(self.block_text, self.block_text),
+                line=self.lineno,
+            )
+            raise SystemMessage(error, 4)
+
+        if &quot;symbols&quot; in self.options:
+            self.options[&quot;functions&quot;] = self.options[&quot;symbols&quot;]
+
+        try:
+            if not self.doc.settings.file_insertion_enabled:
+                raise FaultyOption(&quot;docutils: file insertion disabled&quot;)
+            opts = self.getParserOptions()
+            # ToDo: think about again; these members has been added for convenience
+            # pylint: disable=attribute-defined-outside-init
+            self.parser = self.parseSource(opts)
+            self.nodes.extend(self.getNodes())
+
+        except FaultyOption as exc:
+            self.errMsg(exc)
+
+        return self.nodes</div>
+
+
+<div class="viewcode-block" id="KernelDoc.getNodes">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.KernelDoc.getNodes">[docs]</a>
+    def getNodes(
+        self,
+    ):  # pylint: disable=too-many-branches, too-many-statements, too-many-locals
+
+        translator = kerneldoc.ReSTTranslator()
+        lines = &quot;&quot;
+        content = WriterList(self.parser)
+
+        # translate
+
+        if &quot;debug&quot; in self.options:
+            rstout = StringIO()
+            self.parser.options.out = rstout
+            self.parser.parse_dump_storage(translator=translator)
+            code_block = &quot;\n\n.. code-block:: rst\n    :linenos:\n&quot;
+            for l in rstout.getvalue().split(&quot;\n&quot;):
+                code_block += &quot;\n    &quot; + l
+            lines = code_block + &quot;\n\n&quot;
+
+        elif &quot;snippets&quot; in self.options:
+            selected = self.options[&quot;snippets&quot;].replace(&quot;,&quot;, &quot; &quot;).split()
+            names = self.parser.ctx.snippets.keys()
+            not_found = [s for s in selected if s not in names]
+            found = [s for s in selected if s in names]
+            if not_found:
+                self.errMsg(
+                    &quot;selected snippets(s) not found:\n    %s&quot;
+                    % &quot;\n    ,&quot;.join(not_found)
+                )
+
+            if found:
+                code_block = &quot;\n\n.. code-block:: %s\n&quot; % self.options.get(
+                    &quot;language&quot;, &quot;c&quot;
+                )
+                if &quot;linenos&quot; in self.options:
+                    code_block += &quot;    :linenos:\n&quot;
+                snipsnap = &quot;&quot;
+                while found:
+                    snipsnap += self.parser.ctx.snippets[found.pop(0)] + &quot;\n\n&quot;
+                for l in snipsnap.split(&quot;\n&quot;):
+                    code_block += &quot;\n    &quot; + l
+                lines = code_block + &quot;\n\n&quot;
+
+        else:
+            self.parser.options.out = content
+            self.parser.parse_dump_storage(translator=translator)
+
+        # check translation
+
+        if &quot;functions&quot; in self.options:
+            selected = self.options[&quot;functions&quot;].replace(&quot;,&quot;, &quot; &quot;).split()
+            names = translator.translated_names
+            not_found = [s for s in selected if s not in names]
+            if not_found:
+                self.errMsg(
+                    &quot;selected section(s) not found:\n    %s&quot; % &quot;\n    ,&quot;.join(not_found)
+                )
+
+        if &quot;export&quot; in self.options:
+            selected = self.parser.options.use_names
+            names = translator.translated_names
+            not_found = [s for s in selected if s not in names]
+            if not_found:
+                self.errMsg(
+                    &quot;exported definitions not found:\n    %s&quot;
+                    % &quot;\n    ,&quot;.join(not_found)
+                )
+
+        # add lines to content list
+        reSTfname = self.state.document.current_source
+
+        content.flush()
+        if lines:
+            for l in lines.split(&quot;\n&quot;):
+                content.append(l, reSTfname, self.lineno)
+
+        node = nodes.section()
+        # necessary so that the child nodes get the right source/line set
+        node.document = self.state.document
+        with switch_source_input(self.state, content):
+            # hack around title style bookkeeping
+            buf = self.state.memo.title_styles, self.state.memo.section_level
+            self.state.memo.title_styles, self.state.memo.section_level = [], 0
+            try:
+                self.state.nested_parse(content, 0, node, match_titles=1)
+            finally:
+                self.state.memo.title_styles, self.state.memo.section_level = buf
+        return node.children</div>
+</div>
+
+
+
+<div class="viewcode-block" id="WriterList">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList">[docs]</a>
+class WriterList(ViewList):
+    &quot;&quot;&quot;docutils ViewList with write method.&quot;&quot;&quot;
+
+    def __init__(self, parser, *args, **kwargs):
+        ViewList.__init__(self, *args, **kwargs)
+        self.parser = parser
+
+        self.last_offset = -1
+        self.line_buffer = &quot;&quot;
+
+<div class="viewcode-block" id="WriterList.write">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList.write">[docs]</a>
+    def write(self, cont):
+        if self.last_offset != self.parser.ctx.offset:
+            self.flush()
+            self.line_buffer = &quot;&quot;
+            self.last_offset = self.parser.ctx.offset
+
+        self.line_buffer += cont</div>
+
+
+<div class="viewcode-block" id="WriterList.flush">
+<a class="viewcode-back" href="../../linuxdoc-api/linuxdoc.rstKernelDoc.html#linuxdoc.rstKernelDoc.WriterList.flush">[docs]</a>
+    def flush(self):
+        for _i, l in enumerate(self.line_buffer.split(&quot;\n&quot;)):
+            self.append(l, self.parser.options.fname, self.last_offset)
+        self.line_buffer = &quot;&quot;</div>
+</div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Markus Heiser
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=346fd13c"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

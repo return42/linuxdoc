@@ -1,0 +1,1491 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="linuxdoc.kernel_include module" href="linuxdoc.kernel_include.html" /><link rel="prev" title="linuxdoc.grepdoc module" href="linuxdoc.grepdoc.html" />
+
+    <!-- Generated with Sphinx 8.2.1 and Furo 2024.08.06 -->
+        <title>linuxdoc.kernel_doc module - LinuxDoc</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/linuxdoc.css?v=fdd445b8" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">LinuxDoc</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/darmarIT_logo_128.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">LinuxDoc</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../kernel-doc-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install LinuxDoc</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linuxdoc-howto/index.html">LinuxDoc HowTo</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of LinuxDoc HowTo</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-syntax.html">kernel-doc syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-directive.html">kernel-doc in reST documents</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-examples.html">Examples &amp; Tests</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Examples &amp; Tests</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-tests.html">kernel-doc Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/all-in-a-tumble-src.html">source of <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/all-in-a-tumble-debug.html">kernel-doc from <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/all-in-a-tumble.html">rendered <code class="docutils literal notranslate"><span class="pre">all-in-a-tumble.[ch]</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../linuxdoc-howto/kernel-doc-modes.html">parsing modes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of parsing modes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/reST-kernel-doc-mode.html">reST kernel-doc mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linuxdoc-howto/vintage-kernel-doc-mode.html">Vintage kernel-doc mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/kfigure.html">Scalable figure and image handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/table-markup.html">About tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/cdomain.html">Customized sphinx c-domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/man-pages.html">man pages from kernel-doc comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linuxdoc-howto/kernel-include-directive.html">Use kernel-include in reST documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cmd-line.html">Command line tools</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Command line tools</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.rest.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.rest</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.lintdoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.lintdoc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmd-line/linuxdoc.autodoc.html"><code class="docutils literal notranslate"><span class="pre">linuxdoc.autodoc</span></code></a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="linuxdoc.html">linuxdoc package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of linuxdoc package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.autodoc.html">linuxdoc.autodoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.cdomain.html">linuxdoc.cdomain module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.compat.html">linuxdoc.compat module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.deprecated.html">linuxdoc.deprecated module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.grepdoc.html">linuxdoc.grepdoc module</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">linuxdoc.kernel_doc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kernel_include.html">linuxdoc.kernel_include module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.kfigure.html">linuxdoc.kfigure module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.lint.html">linuxdoc.lint module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.manKernelDoc.html">linuxdoc.manKernelDoc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rest.html">linuxdoc.rest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstFlatTable.html">linuxdoc.rstFlatTable module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxdoc.rstKernelDoc.html">linuxdoc.rstKernelDoc module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/linuxdoc-api/linuxdoc.kernel_doc.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-linuxdoc.kernel_doc">
+<span id="linuxdoc-kernel-doc-module"></span><h1>linuxdoc.kernel_doc module<a class="headerlink" href="#module-linuxdoc.kernel_doc" title="Link to this heading">¶</a></h1>
+<section id="kernel-doc">
+<h2>kernel_doc<a class="headerlink" href="#kernel-doc" title="Link to this heading">¶</a></h2>
+<p>Implementation of the <code class="docutils literal notranslate"><span class="pre">kernel-doc</span></code> parser.  The kernel-doc parser extracts
+<a class="reference internal" href="../kernel-doc-intro.html#kernel-doc-intro"><span class="std std-ref">kernel-doc markup</span></a> from source code comments.</p>
+<p>This module provides an API which could be used by a sphinx-doc generator
+extension and a command-line interface</p>
+<p>Compared with the Perl kernel-doc script used in the Linux kernel, this
+implementation has additional features like <em>parse options</em> for a smooth
+integration of reStructuredText (reST) markup in the source code comments.  In
+combination with the (separate) <em>kernel-doc</em> reST directive (which uses this
+module), the documentation generation becomes more clear and flexible.</p>
+<p>The architecture of the parser is simple and consists of three types of
+objects (three classes).</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#linuxdoc.kernel_doc.Parser" title="linuxdoc.kernel_doc.Parser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Parser</span></code></a>: The parser parses the source-file and dumps extracted
+kernel-doc data.</p></li>
+<li><p>subclasses of class <a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI" title="linuxdoc.kernel_doc.TranslatorAPI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TranslatorAPI</span></code></a>: to translate the dumped
+kernel-doc data into output formats. There exists two implementations:</p>
+<ul>
+<li><p><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator" title="linuxdoc.kernel_doc.NullTranslator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NullTranslator</span></code></a>: translates nothing, just parse</p></li>
+<li><p><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator" title="linuxdoc.kernel_doc.ReSTTranslator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReSTTranslator</span></code></a>: translates dumped kernel-doc data to reST markup</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#linuxdoc.kernel_doc.ParseOptions" title="linuxdoc.kernel_doc.ParseOptions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParseOptions</span></code></a>: a container full with options to control <em>parsing</em> and
+<em>translation</em>.</p></li>
+</ul>
+<p>With the <a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator" title="linuxdoc.kernel_doc.NullTranslator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NullTranslator</span></code></a> a source file is parsed only once while
+different output could be generated (multiple times) just by changing the
+Translator (e.g. with the <a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator" title="linuxdoc.kernel_doc.ReSTTranslator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReSTTranslator</span></code></a>) and the option
+container. With parsing the source files only once, the building time is reduced
+n-times.</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Container">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">Container</span></span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Container"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Container" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.DEFAULT_EXP_IDS">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_EXP_IDS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['EXPORT_SYMBOL',</span> <span class="pre">'EXPORT_SYMBOL_GPL',</span> <span class="pre">'EXPORT_SYMBOL_GPL_FUTURE']</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.DEFAULT_EXP_IDS" title="Link to this definition">¶</a></dt>
+<dd><p>Default value of <code class="docutils literal notranslate"><span class="pre">:exp-ids:</span></code></p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.DEFAULT_EXP_METHOD">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_EXP_METHOD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'macro'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.DEFAULT_EXP_METHOD" title="Link to this definition">¶</a></dt>
+<dd><p>Default value of <code class="docutils literal notranslate"><span class="pre">:exp-method:</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">ListTranslator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_exported</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_internal_types</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI" title="linuxdoc.kernel_doc.TranslatorAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">TranslatorAPI</span></code></a></p>
+<p>Generates a list of kernel-doc symbols.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.eof">
+<span class="sig-name descname"><span class="pre">eof</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.eof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.eof" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.get_type">
+<span class="sig-name descname"><span class="pre">get_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.get_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.get_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_DOC">
+<span class="sig-name descname"><span class="pre">output_DOC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_DOC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_DOC" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_enum_decl">
+<span class="sig-name descname"><span class="pre">output_enum_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_enum_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_enum_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_epilog">
+<span class="sig-name descname"><span class="pre">output_epilog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_epilog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_epilog" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_function_decl">
+<span class="sig-name descname"><span class="pre">output_function_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_function_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_function_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_preamble">
+<span class="sig-name descname"><span class="pre">output_preamble</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_preamble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_preamble" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_prefix">
+<span class="sig-name descname"><span class="pre">output_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_prefix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_struct_decl">
+<span class="sig-name descname"><span class="pre">output_struct_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_struct_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_struct_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_suffix">
+<span class="sig-name descname"><span class="pre">output_suffix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_suffix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_suffix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_typedef_decl">
+<span class="sig-name descname"><span class="pre">output_typedef_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_typedef_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_typedef_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ListTranslator.output_union_decl">
+<span class="sig-name descname"><span class="pre">output_union_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ListTranslator.output_union_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ListTranslator.output_union_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">NullTranslator</span></span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI" title="linuxdoc.kernel_doc.TranslatorAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">TranslatorAPI</span></code></a></p>
+<p>Null translator, translates nothing, just parse.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.HIGHLIGHT_MAP">
+<span class="sig-name descname"><span class="pre">HIGHLIGHT_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.HIGHLIGHT_MAP" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.LINE_COMMENT">
+<span class="sig-name descname"><span class="pre">LINE_COMMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('',</span> <span class="pre">'')</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.LINE_COMMENT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.eof">
+<span class="sig-name descname"><span class="pre">eof</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.eof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.eof" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_DOC">
+<span class="sig-name descname"><span class="pre">output_DOC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_DOC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_DOC" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_enum_decl">
+<span class="sig-name descname"><span class="pre">output_enum_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_enum_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_enum_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_epilog">
+<span class="sig-name descname"><span class="pre">output_epilog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_epilog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_epilog" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_function_decl">
+<span class="sig-name descname"><span class="pre">output_function_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_function_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_function_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_preamble">
+<span class="sig-name descname"><span class="pre">output_preamble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_preamble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_preamble" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_prefix">
+<span class="sig-name descname"><span class="pre">output_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_prefix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_struct_decl">
+<span class="sig-name descname"><span class="pre">output_struct_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_struct_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_struct_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_suffix">
+<span class="sig-name descname"><span class="pre">output_suffix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_suffix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_suffix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_typedef_decl">
+<span class="sig-name descname"><span class="pre">output_typedef_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_typedef_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_typedef_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.NullTranslator.output_union_decl">
+<span class="sig-name descname"><span class="pre">output_union_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#NullTranslator.output_union_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.NullTranslator.output_union_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParseOptions">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">ParseOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParseOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParseOptions" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#linuxdoc.kernel_doc.Container" title="linuxdoc.kernel_doc.Container"><code class="xref py py-class docutils literal notranslate"><span class="pre">Container</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParseOptions.PARSE_OPTIONS">
+<span class="sig-name descname"><span class="pre">PARSE_OPTIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('highlight',</span> <span class="pre">['on',</span> <span class="pre">'off'],</span> <span class="pre">'setOnOff'),</span> <span class="pre">('INSPECT',</span> <span class="pre">['on',</span> <span class="pre">'off'],</span> <span class="pre">'setINSPECT'),</span> <span class="pre">('markup',</span> <span class="pre">['reST',</span> <span class="pre">'kernel-doc'],</span> <span class="pre">'setVal'),</span> <span class="pre">('SNIP',</span> <span class="pre">[],</span> <span class="pre">'setVal'),</span> <span class="pre">('SNAP',</span> <span class="pre">[],</span> <span class="pre">'snap')]</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.ParseOptions.PARSE_OPTIONS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParseOptions.PARSE_OPTION_RE">
+<span class="sig-name descname"><span class="pre">PARSE_OPTION_RE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'^/\\*+\\s*parse-%s:\\s*([a-zA-Z0-9_-]*?)\\s*\\*/+\\s*$'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.ParseOptions.PARSE_OPTION_RE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParseOptions.add_filters">
+<span class="sig-name descname"><span class="pre">add_filters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parse_options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParseOptions.add_filters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParseOptions.add_filters" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParseOptions.dumpOptions">
+<span class="sig-name descname"><span class="pre">dumpOptions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParseOptions.dumpOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParseOptions.dumpOptions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParseOptions.filter_opt">
+<span class="sig-name descname"><span class="pre">filter_opt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParseOptions.filter_opt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParseOptions.filter_opt" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParseOptions.get_exported_symbols_re">
+<span class="sig-name descname"><span class="pre">get_exported_symbols_re</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParseOptions.get_exported_symbols_re"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParseOptions.get_exported_symbols_re" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParseOptions.set_defaults">
+<span class="sig-name descname"><span class="pre">set_defaults</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParseOptions.set_defaults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParseOptions.set_defaults" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">Parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#linuxdoc.kernel_doc.SimpleLog" title="linuxdoc.kernel_doc.SimpleLog"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleLog</span></code></a></p>
+<p>kernel-doc comments parser</p>
+<p>States:</p>
+<ul class="simple">
+<li><p>0 - normal code</p></li>
+<li><p>1 - looking for function name</p></li>
+<li><p>2 - scanning field start.</p></li>
+<li><p>3 - scanning prototype.</p></li>
+<li><p>4 - documentation block</p></li>
+<li><p>5 - gathering documentation outside main block (see Split Doc State)</p></li>
+</ul>
+<p>Split Doc States:</p>
+<ul class="simple">
+<li><p>0 - Invalid (Before start or after finish)</p></li>
+<li><p>1 - Is started (the /** was found inside a struct)</p></li>
+<li><p>2 - The &#64;parameter header was found, start accepting multi paragraph text.</p></li>
+<li><p>3 - Finished (the */ was found)</p></li>
+<li><dl class="simple">
+<dt>4 - Error: Comment without header was found. Spit a error as it’s not</dt><dd><p>proper kernel-doc and ignore the rest.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.DOC_TYPES">
+<span class="sig-name descname"><span class="pre">DOC_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['DOC',</span> <span class="pre">'function',</span> <span class="pre">'struct',</span> <span class="pre">'union',</span> <span class="pre">'enum',</span> <span class="pre">'typedef',</span> <span class="pre">'macro']</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.DOC_TYPES" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.LOG_FORMAT">
+<span class="sig-name descname"><span class="pre">LOG_FORMAT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%(fname)s:%(line_no)s:</span> <span class="pre">:%(logclass)s:</span> <span class="pre">%(message)s\n'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.LOG_FORMAT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.check_return_section">
+<span class="sig-name descname"><span class="pre">check_return_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decl_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.check_return_section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.check_return_section" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.check_sections">
+<span class="sig-name descname"><span class="pre">check_sections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decl_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decl_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sectcheck</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterlist</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.check_sections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.check_sections" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.close" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.create_parameterlist">
+<span class="sig-name descname"><span class="pre">create_parameterlist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splitchar</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.create_parameterlist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.create_parameterlist" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_line_no</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.debug" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_DOC">
+<span class="sig-name descname"><span class="pre">dump_DOC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_DOC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_DOC" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_enum">
+<span class="sig-name descname"><span class="pre">dump_enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_enum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_enum" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_epilog">
+<span class="sig-name descname"><span class="pre">dump_epilog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_epilog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_epilog" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_function">
+<span class="sig-name descname"><span class="pre">dump_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_function" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_preamble">
+<span class="sig-name descname"><span class="pre">dump_preamble</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_preamble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_preamble" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_prefix">
+<span class="sig-name descname"><span class="pre">dump_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_prefix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_section">
+<span class="sig-name descname"><span class="pre">dump_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_section" title="Link to this definition">¶</a></dt>
+<dd><p>Store section’s <em>content</em> under it’s name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – name of the section</p></li>
+<li><p><strong>cont</strong> (<em>str</em>) – content of the section</p></li>
+</ul>
+</dd>
+</dl>
+<p>Stores the <em>content</em> under section’s <em>name</em> in one of the <em>container</em>. A
+container is a hash object, the section name is the <em>key</em> and the
+content is the <em>value</em>.</p>
+<p>Container:</p>
+<ul class="simple">
+<li><p>self.ctx.constants:       holds constant’s descriptions</p></li>
+<li><p>self.ctx.parameterdescs:  holds parameter’s descriptions</p></li>
+<li><p>self.ctx.sections:        holds common sections like “Return:”</p></li>
+</ul>
+<p>There are the following contai</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_struct">
+<span class="sig-name descname"><span class="pre">dump_struct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_struct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_struct" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_suffix">
+<span class="sig-name descname"><span class="pre">dump_suffix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_suffix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_suffix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_typedef">
+<span class="sig-name descname"><span class="pre">dump_typedef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_typedef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_typedef" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.dump_union">
+<span class="sig-name descname"><span class="pre">dump_union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.dump_union"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.dump_union" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.error">
+<span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_line_no</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.error" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.feed">
+<span class="sig-name descname"><span class="pre">feed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eof</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.feed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.feed" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.gather_context">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gather_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.gather_context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.gather_context" title="Link to this definition">¶</a></dt>
+<dd><p>Scan source about context informations.</p>
+<p>Scans <em>whole</em> source (e.g. <code class="xref py py-attr docutils literal notranslate"><span class="pre">Parser.rawdata</span></code>) about data relevant
+for the context (e.g. exported symbols).</p>
+<p>Names of exported symbols gathered in <code class="xref py py-attr docutils literal notranslate"><span class="pre">ParserContext.exported</span></code>.
+The list contains names (symbols) which are exported using the
+pattern specified in opts.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>A exported symbol does not necessarily have a corresponding source code
+comment with a documentation.</p>
+</div>
+<p>Module information comes from the <code class="docutils literal notranslate"><span class="pre">MODULE_xxx</span></code> macros.  Module
+informations are gathered in <code class="docutils literal notranslate"><span class="pre">ParserContext.module_xxx</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MODULE_AUTHOR(&quot;...&quot;)</span></code>: Author entries are collected in a list in
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">ParserContext.mod_authors</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MODULE_DESCRIPTION(&quot;...&quot;)</span></code>: A concatenated string in
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">ParserContext.mod_descr</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MODULE_LICENSE(&quot;...&quot;)</span></code>: String with comma separated licenses in
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">ParserContext.mod_license</span></code>.</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>While parsing header files, about kernel-doc, you will not find the
+<code class="docutils literal notranslate"><span class="pre">MODULE_xxx</span></code> macros, because they are commonly used in the “.c”
+files.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_line_no</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.info" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.output_decl">
+<span class="sig-name descname"><span class="pre">output_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_type</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.output_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.output_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.parse" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.parse_dump_storage">
+<span class="sig-name descname"><span class="pre">parse_dump_storage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.parse_dump_storage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.parse_dump_storage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.prepare_struct_union">
+<span class="sig-name descname"><span class="pre">prepare_struct_union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.prepare_struct_union"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.prepare_struct_union" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.process_state3_function">
+<span class="sig-name descname"><span class="pre">process_state3_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.process_state3_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.process_state3_function" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.process_state3_type">
+<span class="sig-name descname"><span class="pre">process_state3_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.process_state3_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.process_state3_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.push_parameter">
+<span class="sig-name descname"><span class="pre">push_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.push_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.push_parameter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.reset_state">
+<span class="sig-name descname"><span class="pre">reset_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.reset_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.reset_state" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.sect_title">
+<span class="sig-name descname"><span class="pre">sect_title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.sect_title"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.sect_title" title="Link to this definition">¶</a></dt>
+<dd><p>Normalize common section titles</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.section_constants">
+<span class="sig-name descname"><span class="pre">section_constants</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Constants'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.section_constants" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.section_context">
+<span class="sig-name descname"><span class="pre">section_context</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Context'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.section_context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.section_def">
+<span class="sig-name descname"><span class="pre">section_def</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Definition'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.section_def" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.section_default">
+<span class="sig-name descname"><span class="pre">section_default</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Description'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.section_default" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.section_descr">
+<span class="sig-name descname"><span class="pre">section_descr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Description'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.section_descr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.section_intro">
+<span class="sig-name descname"><span class="pre">section_intro</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Introduction'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.section_intro" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.section_members">
+<span class="sig-name descname"><span class="pre">section_members</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Members'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.section_members" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.section_return">
+<span class="sig-name descname"><span class="pre">section_return</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Return'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.section_return" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.setOptions">
+<span class="sig-name descname"><span class="pre">setOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.setOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.setOptions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.setTranslator">
+<span class="sig-name descname"><span class="pre">setTranslator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.setTranslator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.setTranslator" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.special_sections">
+<span class="sig-name descname"><span class="pre">special_sections</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Description',</span> <span class="pre">'Definition',</span> <span class="pre">'Members',</span> <span class="pre">'Constants',</span> <span class="pre">'Context',</span> <span class="pre">'Return']</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.special_sections" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.state_0">
+<span class="sig-name descname"><span class="pre">state_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.state_0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.state_0" title="Link to this definition">¶</a></dt>
+<dd><p>state: 0 - normal code</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.state_1">
+<span class="sig-name descname"><span class="pre">state_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.state_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.state_1" title="Link to this definition">¶</a></dt>
+<dd><p>state: 1 - looking for function name</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.state_2">
+<span class="sig-name descname"><span class="pre">state_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.state_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.state_2" title="Link to this definition">¶</a></dt>
+<dd><p>state: 2 - scanning field start.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.state_3">
+<span class="sig-name descname"><span class="pre">state_3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.state_3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.state_3" title="Link to this definition">¶</a></dt>
+<dd><p>state: 3 - scanning prototype.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.state_4">
+<span class="sig-name descname"><span class="pre">state_4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.state_4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.state_4" title="Link to this definition">¶</a></dt>
+<dd><p>state: 4 - documentation block</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.state_5">
+<span class="sig-name descname"><span class="pre">state_5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.state_5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.state_5" title="Link to this definition">¶</a></dt>
+<dd><p>state: 5 - gathering documentation outside main block</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.syscall_munge">
+<span class="sig-name descname"><span class="pre">syscall_munge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prototype</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.syscall_munge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.syscall_munge" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.tracepoint_munge">
+<span class="sig-name descname"><span class="pre">tracepoint_munge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prototype</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.tracepoint_munge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.tracepoint_munge" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.undescribed">
+<span class="sig-name descname"><span class="pre">undescribed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'*undescribed*'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.undescribed" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.Parser.warn">
+<span class="sig-name descname"><span class="pre">warn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_line_no</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#Parser.warn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.Parser.warn" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParserBuggy">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">ParserBuggy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parserObj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParserBuggy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParserBuggy" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Exception raised when the parser implementation seems buggy.</p>
+<p>The parser implementation perform some integrity tests at runtime.  This
+exception type mainly exists to improve the regular expressions which are
+used to parse and analyze the kernels source code.</p>
+<p>In the exception message the last position the parser parsed is stored, this
+position may, but does not need to be related with the exception (it is only
+an additional information which might help).</p>
+<p>Under normal circumstances, exceptions of this type should never arise,
+unless the implementation of the parser is buggy.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParserContext">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">ParserContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParserContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParserContext" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#linuxdoc.kernel_doc.Container" title="linuxdoc.kernel_doc.Container"><code class="xref py py-class docutils literal notranslate"><span class="pre">Container</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParserContext.dumpCtx">
+<span class="sig-name descname"><span class="pre">dumpCtx</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParserContext.dumpCtx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParserContext.dumpCtx" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ParserContext.new">
+<span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ParserContext.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ParserContext.new" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.RE">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">RE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#RE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.RE" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>regular expression that stores last match (like Perl’s <code class="docutils literal notranslate"><span class="pre">=~</span></code> operator)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.RE.match">
+<span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#RE.match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.RE.match" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.RE.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#RE.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.RE.search" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">ReSTTranslator</span></span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI" title="linuxdoc.kernel_doc.TranslatorAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">TranslatorAPI</span></code></a></p>
+<p>Translate kernel-doc to reST markup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>HIGHLIGHT_map</strong> (<em>list</em>) – Escape common reST (in-line) markups.  Classic
+kernel-doc comments contain characters and strings like <code class="docutils literal notranslate"><span class="pre">*</span></code> or
+trailing <code class="docutils literal notranslate"><span class="pre">_</span></code>, which are in-line markups in reST. These special strings
+has to be masked in reST.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.BITFIELD">
+<span class="sig-name descname"><span class="pre">BITFIELD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.BITFIELD" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.FUNC_PTR">
+<span class="sig-name descname"><span class="pre">FUNC_PTR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.FUNC_PTR" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.HEADER_TAGS">
+<span class="sig-name descname"><span class="pre">HEADER_TAGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#==--&quot;'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.HEADER_TAGS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.HIGHLIGHT_MAP">
+<span class="sig-name descname"><span class="pre">HIGHLIGHT_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">:c:type:`\\1</span> <span class="pre">\\2</span> <span class="pre">&lt;\\2&gt;`\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">:c:type:`\\1</span> <span class="pre">\\2</span> <span class="pre">&lt;\\2&gt;`\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">:c:type:`\\1</span> <span class="pre">\\2</span> <span class="pre">&lt;\\2&gt;`\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">:c:type:`\\1</span> <span class="pre">\\2</span> <span class="pre">&lt;\\2&gt;`\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">:c:type:`\\1\\2()</span> <span class="pre">&lt;\\1&gt;`\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">:c:type:`\\1\\2</span> <span class="pre">&lt;\\1&gt;`\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">:c:func:`\\1`\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">``\\1``\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">``\\1``\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">``\\1``\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\</span> <span class="pre">:c:type:`struct</span> <span class="pre">\\1</span> <span class="pre">&lt;\\1&gt;`\\</span> <span class="pre">'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\1')]</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.HIGHLIGHT_MAP" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.INDENT">
+<span class="sig-name descname"><span class="pre">INDENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'</span>&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.INDENT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.LINE_COMMENT">
+<span class="sig-name descname"><span class="pre">LINE_COMMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('..</span> <span class="pre">',</span> <span class="pre">'')</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.LINE_COMMENT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.MASK_REST_INLINES">
+<span class="sig-name descname"><span class="pre">MASK_REST_INLINES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\1\\\\_\\2'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\1\\\\_\\2'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\\\\\1'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\\\\\1'),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">'\\\\\\1')]</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.MASK_REST_INLINES" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.format_block">
+<span class="sig-name descname"><span class="pre">format_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.format_block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.format_block" title="Link to this definition">¶</a></dt>
+<dd><p>format the content (string)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.highlight">
+<span class="sig-name descname"><span class="pre">highlight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.highlight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.highlight" title="Link to this definition">¶</a></dt>
+<dd><p>returns <em>highlighted</em> text</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.output_DOC">
+<span class="sig-name descname"><span class="pre">output_DOC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.output_DOC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.output_DOC" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.output_enum_decl">
+<span class="sig-name descname"><span class="pre">output_enum_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterdescs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.output_enum_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.output_enum_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.output_epilog">
+<span class="sig-name descname"><span class="pre">output_epilog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.output_epilog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.output_epilog" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.output_function_decl">
+<span class="sig-name descname"><span class="pre">output_function_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterdescs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parametertypes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decl_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.output_function_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.output_function_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.output_preamble">
+<span class="sig-name descname"><span class="pre">output_preamble</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.output_preamble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.output_preamble" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.output_prefix">
+<span class="sig-name descname"><span class="pre">output_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.output_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.output_prefix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.output_struct_decl">
+<span class="sig-name descname"><span class="pre">output_struct_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decl_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decl_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterdescs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parametertypes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">definition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.output_struct_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.output_struct_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.output_suffix">
+<span class="sig-name descname"><span class="pre">output_suffix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.output_suffix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.output_suffix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.output_typedef_decl">
+<span class="sig-name descname"><span class="pre">output_typedef_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typedef</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.output_typedef_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.output_typedef_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.write_anchor">
+<span class="sig-name descname"><span class="pre">write_anchor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.write_anchor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.write_anchor" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.write_definition">
+<span class="sig-name descname"><span class="pre">write_definition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">definition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.write_definition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.write_definition" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.write_func_param">
+<span class="sig-name descname"><span class="pre">write_func_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.write_func_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.write_func_param" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.write_header">
+<span class="sig-name descname"><span class="pre">write_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sec_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.write_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.write_header" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.ReSTTranslator.write_section">
+<span class="sig-name descname"><span class="pre">write_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sec_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#ReSTTranslator.write_section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.ReSTTranslator.write_section" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.SimpleLog">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">SimpleLog</span></span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#SimpleLog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.SimpleLog" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.SimpleLog.LOG_FORMAT">
+<span class="sig-name descname"><span class="pre">LOG_FORMAT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%(logclass)s:</span> <span class="pre">%(message)s\n'</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.SimpleLog.LOG_FORMAT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.SimpleLog.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#SimpleLog.debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.SimpleLog.debug" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.SimpleLog.error">
+<span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#SimpleLog.error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.SimpleLog.error" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.SimpleLog.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#SimpleLog.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.SimpleLog.info" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.SimpleLog.warn">
+<span class="sig-name descname"><span class="pre">warn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">replace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#SimpleLog.warn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.SimpleLog.warn" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">TranslatorAPI</span></span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract kernel-doc translator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cls.HIGHLIGHT_MAP</strong> (<em>list</em>) – highlight mapping</p></li>
+<li><p><strong>cls.LINE_COMMENT</strong> (<em>tuple</em>) – tuple with start-/end- comment tags</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.HIGHLIGHT_MAP">
+<span class="sig-name descname"><span class="pre">HIGHLIGHT_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">None),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">None),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">None),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">None),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">None),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">None),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">None),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">None),</span> <span class="pre">(&lt;linuxdoc.kernel_doc.RE</span> <span class="pre">object&gt;,</span> <span class="pre">None)]</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.HIGHLIGHT_MAP" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.LINE_COMMENT">
+<span class="sig-name descname"><span class="pre">LINE_COMMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('#</span> <span class="pre">',</span> <span class="pre">'')</span></em><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.LINE_COMMENT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.comment">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cont</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.comment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.comment" title="Link to this definition">¶</a></dt>
+<dd><p>returns <em>commented</em> text</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.eof">
+<span class="sig-name descname"><span class="pre">eof</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.eof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.eof" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.get_epilog">
+<span class="sig-name descname"><span class="pre">get_epilog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.get_epilog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.get_epilog" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.get_preamble">
+<span class="sig-name descname"><span class="pre">get_preamble</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.get_preamble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.get_preamble" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.highlight">
+<span class="sig-name descname"><span class="pre">highlight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.highlight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.highlight" title="Link to this definition">¶</a></dt>
+<dd><p>returns <em>highlighted</em> text</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_DOC">
+<span class="sig-name descname"><span class="pre">output_DOC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_DOC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_DOC" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_enum_decl">
+<span class="sig-name descname"><span class="pre">output_enum_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterdescs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_enum_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_enum_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_epilog">
+<span class="sig-name descname"><span class="pre">output_epilog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_epilog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_epilog" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_function_decl">
+<span class="sig-name descname"><span class="pre">output_function_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterdescs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parametertypes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decl_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_function_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_function_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_preamble">
+<span class="sig-name descname"><span class="pre">output_preamble</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_preamble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_preamble" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_prefix">
+<span class="sig-name descname"><span class="pre">output_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_prefix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_struct_decl">
+<span class="sig-name descname"><span class="pre">output_struct_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decl_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decl_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameterdescs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parametertypes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">definition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_struct_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_struct_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_suffix">
+<span class="sig-name descname"><span class="pre">output_suffix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_suffix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_suffix" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_typedef_decl">
+<span class="sig-name descname"><span class="pre">output_typedef_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typedef</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_typedef_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_typedef_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.output_union_decl">
+<span class="sig-name descname"><span class="pre">output_union_decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.output_union_decl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.output_union_decl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.setOptions">
+<span class="sig-name descname"><span class="pre">setOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.setOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.setOptions" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.setParser">
+<span class="sig-name descname"><span class="pre">setParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.setParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.setParser" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">objects</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.write" title="Link to this definition">¶</a></dt>
+<dd><p>Write <em>objects</em> to stream.</p>
+<p>Write Unicode-values of the <em>objects</em> to :py:attr:<code class="docutils literal notranslate"><span class="pre">self.options.out</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>objects</strong> – The positional arguments are the objects with the
+content to write.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.TranslatorAPI.write_comment">
+<span class="sig-name descname"><span class="pre">write_comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">objects</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#TranslatorAPI.write_comment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.TranslatorAPI.write_comment" title="Link to this definition">¶</a></dt>
+<dd><p>Write <em>objects</em> as comments to stream.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.highlight_parser">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">highlight_parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#highlight_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.highlight_parser" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.map_row">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">map_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#map_row"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.map_row" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.normalize_id">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">normalize_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#normalize_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.normalize_id" title="Link to this definition">¶</a></dt>
+<dd><p>substitude invalid chars of the ID with <code class="docutils literal notranslate"><span class="pre">-</span></code> and mak it lowercase</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.normalize_ws">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">normalize_ws</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#normalize_ws"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.normalize_ws" title="Link to this definition">¶</a></dt>
+<dd><p>strip needles whitespaces.</p>
+<p>Substitute consecutive whitespaces with one single space and strip
+trailing/leading whitespaces</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.openTextFile">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">openTextFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strict'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#openTextFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.openTextFile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="linuxdoc.kernel_doc.readFile">
+<span class="sig-prename descclassname"><span class="pre">linuxdoc.kernel_doc.</span></span><span class="sig-name descname"><span class="pre">readFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strict'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linuxdoc/kernel_doc.html#readFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linuxdoc.kernel_doc.readFile" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="linuxdoc.kernel_include.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">linuxdoc.kernel_include module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="linuxdoc.grepdoc.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">linuxdoc.grepdoc module</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Markus Heiser
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">linuxdoc.kernel_doc module</a><ul>
+<li><a class="reference internal" href="#kernel-doc">kernel_doc</a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Container"><code class="docutils literal notranslate"><span class="pre">Container</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.DEFAULT_EXP_IDS"><code class="docutils literal notranslate"><span class="pre">DEFAULT_EXP_IDS</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.DEFAULT_EXP_METHOD"><code class="docutils literal notranslate"><span class="pre">DEFAULT_EXP_METHOD</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator"><code class="docutils literal notranslate"><span class="pre">ListTranslator</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.eof"><code class="docutils literal notranslate"><span class="pre">ListTranslator.eof()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.get_type"><code class="docutils literal notranslate"><span class="pre">ListTranslator.get_type()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_DOC"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_DOC()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_enum_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_enum_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_epilog"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_epilog()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_function_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_function_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_preamble"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_preamble()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_prefix"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_prefix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_struct_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_struct_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_suffix"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_suffix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_typedef_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_typedef_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ListTranslator.output_union_decl"><code class="docutils literal notranslate"><span class="pre">ListTranslator.output_union_decl()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator"><code class="docutils literal notranslate"><span class="pre">NullTranslator</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.HIGHLIGHT_MAP"><code class="docutils literal notranslate"><span class="pre">NullTranslator.HIGHLIGHT_MAP</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.LINE_COMMENT"><code class="docutils literal notranslate"><span class="pre">NullTranslator.LINE_COMMENT</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.eof"><code class="docutils literal notranslate"><span class="pre">NullTranslator.eof()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_DOC"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_DOC()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_enum_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_enum_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_epilog"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_epilog()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_function_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_function_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_preamble"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_preamble()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_prefix"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_prefix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_struct_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_struct_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_suffix"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_suffix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_typedef_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_typedef_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.NullTranslator.output_union_decl"><code class="docutils literal notranslate"><span class="pre">NullTranslator.output_union_decl()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParseOptions"><code class="docutils literal notranslate"><span class="pre">ParseOptions</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParseOptions.PARSE_OPTIONS"><code class="docutils literal notranslate"><span class="pre">ParseOptions.PARSE_OPTIONS</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParseOptions.PARSE_OPTION_RE"><code class="docutils literal notranslate"><span class="pre">ParseOptions.PARSE_OPTION_RE</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParseOptions.add_filters"><code class="docutils literal notranslate"><span class="pre">ParseOptions.add_filters()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParseOptions.dumpOptions"><code class="docutils literal notranslate"><span class="pre">ParseOptions.dumpOptions()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParseOptions.filter_opt"><code class="docutils literal notranslate"><span class="pre">ParseOptions.filter_opt()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParseOptions.get_exported_symbols_re"><code class="docutils literal notranslate"><span class="pre">ParseOptions.get_exported_symbols_re()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParseOptions.set_defaults"><code class="docutils literal notranslate"><span class="pre">ParseOptions.set_defaults()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser"><code class="docutils literal notranslate"><span class="pre">Parser</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.DOC_TYPES"><code class="docutils literal notranslate"><span class="pre">Parser.DOC_TYPES</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.LOG_FORMAT"><code class="docutils literal notranslate"><span class="pre">Parser.LOG_FORMAT</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.check_return_section"><code class="docutils literal notranslate"><span class="pre">Parser.check_return_section()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.check_sections"><code class="docutils literal notranslate"><span class="pre">Parser.check_sections()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.close"><code class="docutils literal notranslate"><span class="pre">Parser.close()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.create_parameterlist"><code class="docutils literal notranslate"><span class="pre">Parser.create_parameterlist()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.debug"><code class="docutils literal notranslate"><span class="pre">Parser.debug()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_DOC"><code class="docutils literal notranslate"><span class="pre">Parser.dump_DOC()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_enum"><code class="docutils literal notranslate"><span class="pre">Parser.dump_enum()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_epilog"><code class="docutils literal notranslate"><span class="pre">Parser.dump_epilog()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_function"><code class="docutils literal notranslate"><span class="pre">Parser.dump_function()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_preamble"><code class="docutils literal notranslate"><span class="pre">Parser.dump_preamble()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_prefix"><code class="docutils literal notranslate"><span class="pre">Parser.dump_prefix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_section"><code class="docutils literal notranslate"><span class="pre">Parser.dump_section()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_struct"><code class="docutils literal notranslate"><span class="pre">Parser.dump_struct()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_suffix"><code class="docutils literal notranslate"><span class="pre">Parser.dump_suffix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_typedef"><code class="docutils literal notranslate"><span class="pre">Parser.dump_typedef()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.dump_union"><code class="docutils literal notranslate"><span class="pre">Parser.dump_union()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.error"><code class="docutils literal notranslate"><span class="pre">Parser.error()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.feed"><code class="docutils literal notranslate"><span class="pre">Parser.feed()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.gather_context"><code class="docutils literal notranslate"><span class="pre">Parser.gather_context()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.info"><code class="docutils literal notranslate"><span class="pre">Parser.info()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.output_decl"><code class="docutils literal notranslate"><span class="pre">Parser.output_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.parse"><code class="docutils literal notranslate"><span class="pre">Parser.parse()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.parse_dump_storage"><code class="docutils literal notranslate"><span class="pre">Parser.parse_dump_storage()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.prepare_struct_union"><code class="docutils literal notranslate"><span class="pre">Parser.prepare_struct_union()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.process_state3_function"><code class="docutils literal notranslate"><span class="pre">Parser.process_state3_function()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.process_state3_type"><code class="docutils literal notranslate"><span class="pre">Parser.process_state3_type()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.push_parameter"><code class="docutils literal notranslate"><span class="pre">Parser.push_parameter()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.reset_state"><code class="docutils literal notranslate"><span class="pre">Parser.reset_state()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.sect_title"><code class="docutils literal notranslate"><span class="pre">Parser.sect_title()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.section_constants"><code class="docutils literal notranslate"><span class="pre">Parser.section_constants</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.section_context"><code class="docutils literal notranslate"><span class="pre">Parser.section_context</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.section_def"><code class="docutils literal notranslate"><span class="pre">Parser.section_def</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.section_default"><code class="docutils literal notranslate"><span class="pre">Parser.section_default</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.section_descr"><code class="docutils literal notranslate"><span class="pre">Parser.section_descr</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.section_intro"><code class="docutils literal notranslate"><span class="pre">Parser.section_intro</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.section_members"><code class="docutils literal notranslate"><span class="pre">Parser.section_members</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.section_return"><code class="docutils literal notranslate"><span class="pre">Parser.section_return</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.setOptions"><code class="docutils literal notranslate"><span class="pre">Parser.setOptions()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.setTranslator"><code class="docutils literal notranslate"><span class="pre">Parser.setTranslator()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.special_sections"><code class="docutils literal notranslate"><span class="pre">Parser.special_sections</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.state_0"><code class="docutils literal notranslate"><span class="pre">Parser.state_0()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.state_1"><code class="docutils literal notranslate"><span class="pre">Parser.state_1()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.state_2"><code class="docutils literal notranslate"><span class="pre">Parser.state_2()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.state_3"><code class="docutils literal notranslate"><span class="pre">Parser.state_3()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.state_4"><code class="docutils literal notranslate"><span class="pre">Parser.state_4()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.state_5"><code class="docutils literal notranslate"><span class="pre">Parser.state_5()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.syscall_munge"><code class="docutils literal notranslate"><span class="pre">Parser.syscall_munge()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.tracepoint_munge"><code class="docutils literal notranslate"><span class="pre">Parser.tracepoint_munge()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.undescribed"><code class="docutils literal notranslate"><span class="pre">Parser.undescribed</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.Parser.warn"><code class="docutils literal notranslate"><span class="pre">Parser.warn()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParserBuggy"><code class="docutils literal notranslate"><span class="pre">ParserBuggy</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParserContext"><code class="docutils literal notranslate"><span class="pre">ParserContext</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParserContext.dumpCtx"><code class="docutils literal notranslate"><span class="pre">ParserContext.dumpCtx()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ParserContext.new"><code class="docutils literal notranslate"><span class="pre">ParserContext.new()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.RE"><code class="docutils literal notranslate"><span class="pre">RE</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.RE.match"><code class="docutils literal notranslate"><span class="pre">RE.match()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.RE.search"><code class="docutils literal notranslate"><span class="pre">RE.search()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.BITFIELD"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.BITFIELD</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.FUNC_PTR"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.FUNC_PTR</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.HEADER_TAGS"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.HEADER_TAGS</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.HIGHLIGHT_MAP"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.HIGHLIGHT_MAP</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.INDENT"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.INDENT</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.LINE_COMMENT"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.LINE_COMMENT</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.MASK_REST_INLINES"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.MASK_REST_INLINES</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.format_block"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.format_block()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.highlight"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.highlight()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.output_DOC"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_DOC()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.output_enum_decl"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_enum_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.output_epilog"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_epilog()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.output_function_decl"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_function_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.output_preamble"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_preamble()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.output_prefix"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_prefix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.output_struct_decl"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_struct_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.output_suffix"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_suffix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.output_typedef_decl"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.output_typedef_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.write_anchor"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_anchor()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.write_definition"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_definition()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.write_func_param"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_func_param()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.write_header"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_header()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.ReSTTranslator.write_section"><code class="docutils literal notranslate"><span class="pre">ReSTTranslator.write_section()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.SimpleLog"><code class="docutils literal notranslate"><span class="pre">SimpleLog</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.SimpleLog.LOG_FORMAT"><code class="docutils literal notranslate"><span class="pre">SimpleLog.LOG_FORMAT</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.SimpleLog.debug"><code class="docutils literal notranslate"><span class="pre">SimpleLog.debug()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.SimpleLog.error"><code class="docutils literal notranslate"><span class="pre">SimpleLog.error()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.SimpleLog.info"><code class="docutils literal notranslate"><span class="pre">SimpleLog.info()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.SimpleLog.warn"><code class="docutils literal notranslate"><span class="pre">SimpleLog.warn()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI</span></code></a><ul>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.HIGHLIGHT_MAP"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.HIGHLIGHT_MAP</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.LINE_COMMENT"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.LINE_COMMENT</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.comment"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.comment()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.eof"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.eof()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.get_epilog"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.get_epilog()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.get_preamble"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.get_preamble()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.highlight"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.highlight()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_DOC"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_DOC()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_enum_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_enum_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_epilog"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_epilog()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_function_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_function_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_preamble"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_preamble()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_prefix"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_prefix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_struct_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_struct_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_suffix"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_suffix()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_typedef_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_typedef_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.output_union_decl"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.output_union_decl()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.setOptions"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.setOptions()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.setParser"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.setParser()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.write"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.write()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.TranslatorAPI.write_comment"><code class="docutils literal notranslate"><span class="pre">TranslatorAPI.write_comment()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.highlight_parser"><code class="docutils literal notranslate"><span class="pre">highlight_parser()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.map_row"><code class="docutils literal notranslate"><span class="pre">map_row()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.normalize_id"><code class="docutils literal notranslate"><span class="pre">normalize_id()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.normalize_ws"><code class="docutils literal notranslate"><span class="pre">normalize_ws()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.openTextFile"><code class="docutils literal notranslate"><span class="pre">openTextFile()</span></code></a></li>
+<li><a class="reference internal" href="#linuxdoc.kernel_doc.readFile"><code class="docutils literal notranslate"><span class="pre">readFile()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=346fd13c"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>
