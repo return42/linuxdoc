@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# -*- mode: sh; sh-shell: bash -*-
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+PRJ_ROOT="$(dirname "${BASH_SOURCE[0]}")"
+PRJ_ROOT="$(cd "${PRJ_ROOT}" && pwd -P)"
+
+DOC_SRC="./docs"
+
+# shellcheck source=../scripts/main.sh
+source "${PRJ_ROOT}/scripts/main.sh"
+
+sh.lib.import doc-sphinx
+
+MAIN_CMD_LIST=(
+    "doc: doc.html doc.live doc.clean doc.gh-pages"
+)
+
+main "$@"

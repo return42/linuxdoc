@@ -86,6 +86,8 @@ dependencies = [
 
 [tool.hatch.envs.default.scripts]
 
+prj = "./prj {args:--help}"
+
 fix = [
   "isort {args:./linuxdoc ./tests}",
   "black {args:./linuxdoc ./tests}",
