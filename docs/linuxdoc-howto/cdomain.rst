@@ -7,6 +7,16 @@
 Customized sphinx c-domain
 ==========================
 
+.. sidebar::  WIP :py:mod:`linuxdoc.cdomain`
+
+   Sphinx v3.0 and above includes a `C, initial rewrite`_ which is not downward
+   compatible and the Sphinx C-Domain is still *WIP* (`Sphinx-doc PR-8313`_).
+   Therefore not all the features of :ref:`customized-c-domain` has been
+   migrated right now (some are obsolete since V3.1).
+
+.. _C, initial rewrite:   https://github.com/sphinx-doc/sphinx/commit/0f49e30c51b5cc5055cda5b4b294c2dd9d1df573#r38750737
+.. _Sphinx-doc PR-8313: https://github.com/sphinx-doc/sphinx/pull/8313
+
 LinuxDoc brings a customized `Sphinx's C Domain`_ extension.  Here is a list of
 customizations of the :py:class:`CObject <linuxdoc.cdomain.CObject>`:
 

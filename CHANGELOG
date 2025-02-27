@@ -1,5 +1,6 @@
 YYYY-MM-DD [YYYYMMDD]
 
+  [doc] remove obsolete articles
   [doc] implement worklfow to build & deploy documentation
   [mod] fix issues reported by: hatch run pylint-check
   [mod] hatch run fix - code formatting using black & isort
