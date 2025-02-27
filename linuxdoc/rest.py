@@ -43,7 +43,7 @@ def main():
     if CMD.quiet:
         kernel_doc.STREAM.log_out = kernel_doc.DevNull
 
-    retVal = 0
+    ret_val = 0
 
     src_tree = FSPath.getCWD()
     for fname in CMD.files:
@@ -93,9 +93,9 @@ def main():
         parser.parse()
         parser.close()
         if parser.errors:
-            retVal = 1
+            ret_val = 1
 
-    return retVal
+    return ret_val
 
 
 def get_cli():

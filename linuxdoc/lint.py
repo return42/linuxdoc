@@ -109,4 +109,3 @@ def lintdoc_file(fname):
         parser.parse()
     except Exception:  # pylint: disable=broad-except
         FATAL("kernel-doc comments markup of %s seems buggy / can't parse" % opts.fname)
-        return

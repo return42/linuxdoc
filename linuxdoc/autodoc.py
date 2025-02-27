@@ -145,8 +145,7 @@ def get_cli():
 def gather_filenames(cmd):
     "yield .c & .h filenames"
 
-    for fname in cmd.srctree.reMatchFind(r"^.*\.[ch]$"):
-        yield fname
+    yield from cmd.srctree.reMatchFind(r"^.*\.[ch]$")
 
 
 def autodoc_file(fname):

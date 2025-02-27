@@ -6,6 +6,7 @@
 # pylint: disable=too-many-nested-blocks, too-many-lines
 # pylint: disable=too-many-statements, useless-object-inheritance
 
+
 """
 kernel_doc
 ~~~~~~~~~~
@@ -1349,7 +1350,9 @@ class ParseOptions(Container):
         elif self.exp_method == "attribute":
             proto_pattern = r"(?:%s)(?:\s+\**\w+\**)*?\s+\**(\w+)\s*[(;]+"
         else:
-            LOG.error("Unknown exported symbol method: %s" % self.exp_method)
+            msg = "Unknown exported symbol method: %s" % self.exp_method
+            LOG.error(msg)
+            raise ValueError(msg)
 
         id_pattern = "|".join(["(?:" + name + ")" for name in self.exp_ids])
         return RE(proto_pattern % id_pattern, flags=re.M)
@@ -1827,8 +1830,7 @@ class Parser(SimpleLog):
 
         else:
             self.warn(
-                "can't understand: -->|%(line)s|<--" " - I thought it was a doc line",
-                line=line,
+                f"can't understand: -->|{line}|<--" " - I thought it was a doc line",
             )
             self.state = 0
 

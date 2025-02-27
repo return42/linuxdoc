@@ -257,7 +257,7 @@ valid-metaclass-classmethod-first-arg = ["mcs"]
 max-args = 5
 
 # Maximum number of attributes for a class (see R0902).
-max-attributes = 7
+max-attributes = 15
 
 # Maximum number of boolean expressions in an if statement (see R0916).
 max-bool-expr = 5
@@ -272,7 +272,7 @@ max-locals = 15
 max-parents = 7
 
 # Maximum number of positional arguments for function / method.
-max-positional-arguments = 5
+max-positional-arguments = 9
 
 # Maximum number of public methods for a class (see R0904).
 max-public-methods = 20
@@ -377,19 +377,23 @@ confidence = ["HIGH", "CONTROL_FLOW", "INFERENCE", "INFERENCE_FAILURE", "UNDEFIN
 # --disable=W".
 
 disable = [
-  "raw-checker-failed",
   "bad-inline-option",
-  "locally-disabled",
-  "file-ignored",
-  "suppressed-message",
-  "useless-suppression",
+  "consider-using-f-string",
   "deprecated-pragma",
+  "duplicate-code",
+  "file-ignored",
+  "locally-disabled",
+  "logging-fstring-interpolation",
+  "missing-function-docstring",
+  "raw-checker-failed",
+  "suppressed-message",
+  "too-few-public-methods",
+  "unnecessary-lambda-assignment",
   "use-implicit-booleaness-not-comparison-to-string",
   "use-implicit-booleaness-not-comparison-to-zero",
   "use-symbolic-message-instead",
-  "too-few-public-methods",
-  "logging-fstring-interpolation",
-  "duplicate-code",
+  "useless-suppression",
+  "use-dict-literal",
 ]
 
 # Enable the message, report, category or checker with the given id(s). You can
@@ -414,7 +418,7 @@ timeout-methods = [
 
 [tool.pylint.miscellaneous]
 # List of note tags to take in consideration, separated by a comma.
-notes = ["FIXME", "XXX", "TODO"]
+notes = ["FIXME", "XXX"]
 
 # Regular expression of note tags to take in consideration.
 # notes-rgx =

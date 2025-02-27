@@ -351,9 +351,9 @@ class KernelDoc(Directive):
         # ToDo: think about again; these members has been added for convenience
         self.parser = None  # pylint: disable=attribute-defined-outside-init
         self.doc = self.state.document  # pylint: disable=attribute-defined-outside-init
-        self.env = (
+        self.env = (  # pylint: disable=attribute-defined-outside-init
             self.doc.settings.env
-        )  # pylint: disable=attribute-defined-outside-init
+        )
         self.nodes = []  # pylint: disable=attribute-defined-outside-init
 
         if "symbols" in self.options and "functions" in self.options:
@@ -375,9 +375,8 @@ class KernelDoc(Directive):
                 raise FaultyOption("docutils: file insertion disabled")
             opts = self.getParserOptions()
             # ToDo: think about again; these members has been added for convenience
-            self.parser = self.parseSource(
-                opts
-            )  # pylint: disable=attribute-defined-outside-init
+            # pylint: disable=attribute-defined-outside-init
+            self.parser = self.parseSource(opts)
             self.nodes.extend(self.getNodes())
 
         except FaultyOption as exc:

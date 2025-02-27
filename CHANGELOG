@@ -1,5 +1,6 @@
 YYYY-MM-DD [YYYYMMDD]
 
+  [mod] fix issues reported by: hatch run pylint-check
   [mod] hatch run fix - code formatting using black & isort
   [mod] switch develop environment to hatch
 
