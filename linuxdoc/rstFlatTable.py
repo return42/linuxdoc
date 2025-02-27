@@ -135,7 +135,7 @@ class ListTableBuilder(object):
 
         for colwidth in colwidths:
             colspec = nodes.colspec(colwidth=colwidth)
-            # FIXME: It seems, that the stub method only works well in the
+            # ToDo: It seems, that the stub method only works well in the
             # absence of rowspan (observed by the html buidler, the docutils-xml
             # build seems OK).  This is not extraordinary, because there exists
             # no table directive (except *this* flat-table) which allows to
@@ -245,7 +245,7 @@ class ListTableBuilder(object):
         # re-calculate the max columns.
 
         for row in self.rows:
-            if self.max_cols < len(row):
+            if self.max_cols < len(row):  # pylint: disable=consider-using-max-builtin
                 self.max_cols = len(row)
 
         # fill with empty cells or cellspan?

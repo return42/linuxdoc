@@ -201,9 +201,7 @@ class Section2Manpage(Transform):
         desc_content = self.sec2man_get_first_child(
             section, addnodes.desc, addnodes.desc_content
         )
-        if not desc_content or not len(
-            desc_content
-        ):  # pylint: disable=len-as-condition
+        if not desc_content or not desc_content:
             # missing initial short description in kernel-doc comment
             man_info.subtitle = ""
         else:
@@ -320,7 +318,7 @@ class KernelDocManBuilder(ManualPageBuilder):
         doc_tree += children
         return doc_tree
 
-    def write(self, *ignored):
+    def write(self, *ignored):  # pylint: disable=overridden-final-method
         if self.config.man_pages:
             # build manpages from config.man_pages as usual
             ManualPageBuilder.write(self, *ignored)

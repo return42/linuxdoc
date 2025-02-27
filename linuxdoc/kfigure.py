@@ -26,7 +26,7 @@ from sphinx.util.nodes import clean_astext
 
 __version__ = "3.0"
 
-app_log = logging.getLogger("application")
+app_log = logging.getLogger("kfigure")
 
 # simple helper
 # -------------
@@ -137,16 +137,16 @@ def setupTools(app):  # pylint: disable=unused-argument
     convert_cmd = which("convert")
 
     if dot_cmd:
-        app_log.info("use dot(1) from: %s", dot_cmd)
+        app_log.info(f"use dot(1) from: {dot_cmd}")
     else:
-        app_log.warn(
+        app_log.warning(
             "dot(1) not found, for better output quality install "
             "graphviz from http://www.graphviz.org"
         )
     if convert_cmd:
-        app_log.info("use convert(1) from: %s", convert_cmd)
+        app_log.info(f"use convert(1) from: {convert_cmd}")
     else:
-        app_log.warn(
+        app_log.warning(
             "convert(1) not found, for SVG to PDF conversion install "
             "ImageMagick (https://www.imagemagick.org)"
         )
@@ -184,7 +184,7 @@ def convert_image(img_node, translator, src_fname=None):
 
     # in kernel builds, use 'make SPHINXOPTS=-v' to see verbose messages
 
-    app_log.info("assert best format for: %s", img_node["uri"])
+    app_log.info(f"assert best format for: {img_node['uri']}")
 
     if in_ext == ".dot":
 
@@ -268,7 +268,7 @@ def dot2format(app, dot_fname, out_fname):  # pylint: disable=unused-argument
         exit_code = subprocess.call(cmd, stdout=out)
         if exit_code != 0:
             # pylint: disable=deprecated-method
-            app_log.warn("Error #%d when calling: %s", exit_code, " ".join(cmd))
+            app_log.warning(f"Error #{exit_code} when calling: {' '.join(cmd)}")
     return bool(exit_code == 0)
 
 
@@ -286,8 +286,7 @@ def svg2pdf(app, svg_fname, pdf_fname):  # pylint: disable=unused-argument
     # use stdout and stderr from parent
     exit_code = subprocess.call(cmd)
     if exit_code != 0:
-        # pylint: disable=deprecated-method
-        app_log.warn("Error #%d when calling: %s", exit_code, " ".join(cmd))
+        app_log.warning(f"Error #{exit_code} when calling: {' '.join(cmd)}")
     return bool(exit_code == 0)
 
 
@@ -389,11 +388,11 @@ def visit_kernel_render(self, node):
     """
     srclang = node.get("srclang")
 
-    app_log.info('visit kernel-render node lang: "%s"', srclang)
+    app_log.info(f"visit kernel-render node lang: '{srclang}'")
 
     tmp_ext = RENDER_MARKUP_EXT.get(srclang, None)
     if tmp_ext is None:
-        app_log.warning('kernel-render: "%s" unknown / include raw', srclang)
+        app_log.warning(f"kernel-render: '{srclang}' unknown / include raw")
         return
 
     if not dot_cmd and tmp_ext == ".dot":
@@ -455,6 +454,7 @@ class KernelRender(images.Figure):
     def build_node(self):
 
         srclang = self.arguments[0].strip()
+        # pylint: disable=consider-iterating-dictionary
         if srclang not in RENDER_MARKUP_EXT.keys():
             return [
                 self.state_machine.reporter.warning(
