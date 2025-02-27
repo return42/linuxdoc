@@ -23,10 +23,6 @@ using the following directives:
 The option ``:module:`` is optional, to find out why we use this option *here*,
 see :ref:`kernel-doc-options`.
 
-.. contents::
-   :depth: 2
-   :local:
-
 ------
 
 .. _all-in-a-tumble.h:

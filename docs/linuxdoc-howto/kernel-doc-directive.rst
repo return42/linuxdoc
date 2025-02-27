@@ -29,11 +29,6 @@ the ``src/mylib.h`` will be inserted direct under the chapter "My Lib".  The
 order they appear in the source file.  Mostly you want to select more fine
 grained, read on to see how.
 
-.. contents:: Contents
-   :depth: 2
-   :local:
-   :backlinks: entry
-
 .. _kernel-doc-options:
 
 kernel-doc options
@@ -444,4 +439,3 @@ kernel_doc_raise_error: ``True``
 kernel_doc_srctree: ``None``
   Set the pathname used as a base for absolute pathnames in kernel-doc
   directive.  It can be overridden by the ``srctree`` environment variable.
-
