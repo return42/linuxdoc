@@ -24,10 +24,10 @@ from fspath import FSPath
 
 CMD = None
 
-PRINT  = lambda msg: sys.__stdout__.write("%s\n" % msg)
-ERR    = lambda msg: sys.__stderr__.write("ERROR: %s\n" % msg)
+PRINT = lambda msg: sys.__stdout__.write("%s\n" % msg)
+ERR = lambda msg: sys.__stderr__.write("ERROR: %s\n" % msg)
 
-KERNEL_DOC_RE = re.compile(r'^\s*..\s+kernel-doc::\s+([a-zA-Z0-9_\-\.\/]+)')
+KERNEL_DOC_RE = re.compile(r"^\s*..\s+kernel-doc::\s+([a-zA-Z0-9_\-\.\/]+)")
 
 DESCRIPTION = """The linuxdoc.grepdoc command searches '*.rst' files and filters
 all
@@ -38,9 +38,7 @@ directives.  The names of the <source files> used in these kernel-doc directives
 are printed out line by line."""
 
 
-# ------------------------------------------------------------------------------
 def main():
-# ------------------------------------------------------------------------------
 
     global CMD  # pylint: disable=global-statement
 
@@ -67,16 +65,12 @@ def main():
     rst_sources.sort()
     PRINT("\n".join(rst_sources))
 
+
 def get_cli():
 
     cli = argparse.ArgumentParser(
-        description = DESCRIPTION
-        , formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        description=DESCRIPTION, formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
-    cli.add_argument(
-        "srctree"
-        , help    = "source tree"
-        , type    = lambda x: FSPath(x).ABSPATH
-    )
+    cli.add_argument("srctree", help="source tree", type=lambda x: FSPath(x).ABSPATH)
 
     return cli

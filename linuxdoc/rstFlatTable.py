@@ -26,70 +26,60 @@ from docutils.utils import SystemMessagePropagation
 # common globals
 # ==============================================================================
 
-__version__  = '3.0'
+__version__ = "3.0"
 
-# ==============================================================================
+
 def setup(app):
-# ==============================================================================
 
     app.add_directive("flat-table", FlatTable)
-    roles.register_local_role('cspan', c_span)
-    roles.register_local_role('rspan', r_span)
+    roles.register_local_role("cspan", c_span)
+    roles.register_local_role("rspan", r_span)
 
-    return dict(
-        version = __version__,
-        parallel_read_safe = True,
-        parallel_write_safe = True
-    )
+    return dict(version=__version__, parallel_read_safe=True, parallel_write_safe=True)
 
-# ==============================================================================
+
 def c_span(  # pylint: disable=unused-argument
-        name, rawtext, text, lineno, inliner, options=None, content=None):
-# ==============================================================================
+    name, rawtext, text, lineno, inliner, options=None, content=None
+):
 
-    options  = options if options is not None else {}
-    content  = content if content is not None else []
+    options = options if options is not None else {}
+    content = content if content is not None else []
     nodelist = [colSpan(span=int(text))]
-    msglist  = []
+    msglist = []
     return nodelist, msglist
 
-# ==============================================================================
+
 def r_span(  # pylint: disable=unused-argument
-        name, rawtext, text, lineno, inliner, options=None, content=None):
-# ==============================================================================
+    name, rawtext, text, lineno, inliner, options=None, content=None
+):
 
-    options  = options if options is not None else {}
-    content  = content if content is not None else []
+    options = options if options is not None else {}
+    content = content if content is not None else []
     nodelist = [rowSpan(span=int(text))]
-    msglist  = []
+    msglist = []
     return nodelist, msglist
 
-# ==============================================================================
+
 class rowSpan(nodes.General, nodes.Element):
-# ==============================================================================
     pass
 
-# ==============================================================================
+
 class colSpan(nodes.General, nodes.Element):
-# ==============================================================================
     pass
 
-# ==============================================================================
-class FlatTable(Table):
-# ==============================================================================
 
-    u"""FlatTable (``flat-table``) directive"""
+class FlatTable(Table):
+    """FlatTable (``flat-table``) directive"""
 
     option_spec = {
-
-        'name': directives.unchanged
-        , 'class': directives.class_option
-        , 'header-rows': directives.nonnegative_int
-        , 'stub-columns': directives.nonnegative_int
-        , 'width': directives.length_or_percentage_or_unitless
-        , 'widths': directives.value_or(('auto', 'grid'), directives.positive_int_list)
-        , 'fill-cells': directives.flag
-        , 'align': align
+        "name": directives.unchanged,
+        "class": directives.class_option,
+        "header-rows": directives.nonnegative_int,
+        "stub-columns": directives.nonnegative_int,
+        "width": directives.length_or_percentage_or_unitless,
+        "widths": directives.value_or(("auto", "grid"), directives.positive_int_list),
+        "fill-cells": directives.flag,
+        "align": align,
     }
 
     def run(self):
@@ -98,21 +88,22 @@ class FlatTable(Table):
             error = self.state_machine.reporter.error(
                 'The "%s" directive is empty; content required.' % self.name,
                 nodes.literal_block(self.block_text, self.block_text),
-                line=self.lineno)
+                line=self.lineno,
+            )
             return [error]
 
         title, messages = self.make_title()
-        node = nodes.Element()          # anonymous container for parsing
+        node = nodes.Element()  # anonymous container for parsing
         self.state.nested_parse(self.content, self.content_offset, node)
 
         tableBuilder = ListTableBuilder(self)
         tableBuilder.parseFlatTableNode(node)
         tableNode = tableBuilder.buildTableNode()
         self.add_name(tableNode)
-        tableNode['classes'] += self.options.get('class', [])
+        tableNode["classes"] += self.options.get("class", [])
         self.set_table_width(tableNode)
-        if 'align' in self.options:
-            tableNode['align'] = self.options.get('align')
+        if "align" in self.options:
+            tableNode["align"] = self.options.get("align")
 
         # debug --> tableNode.asdom().toprettyxml()
         if title:
@@ -120,28 +111,25 @@ class FlatTable(Table):
         return [tableNode] + messages
 
 
-# ==============================================================================
 class ListTableBuilder(object):
-# ==============================================================================
-
-    u"""Builds a table from a double-stage list"""
+    """Builds a table from a double-stage list"""
 
     def __init__(self, directive):
         self.directive = directive
-        self.rows      = []
-        self.max_cols  = 0
+        self.rows = []
+        self.max_cols = 0
 
     def buildTableNode(self):
 
-        colwidths    = self.directive.get_column_widths(self.max_cols)
-        stub_columns = self.directive.options.get('stub-columns', 0)
-        header_rows  = self.directive.options.get('header-rows', 0)
+        colwidths = self.directive.get_column_widths(self.max_cols)
+        stub_columns = self.directive.options.get("stub-columns", 0)
+        header_rows = self.directive.options.get("header-rows", 0)
 
         table = nodes.table()
-        if self.directive.widths == 'auto':
-            table['classes'] += ['colwidths-auto']
+        if self.directive.widths == "auto":
+            table["classes"] += ["colwidths-auto"]
         elif self.directive.widths:  # explicitly set column widths
-            table['classes'] += ['colwidths-given']
+            table["classes"] += ["colwidths-given"]
         tgroup = nodes.tgroup(cols=len(colwidths))
         table += tgroup
 
@@ -154,7 +142,7 @@ class ListTableBuilder(object):
             # define coexistent of rowspan and stubs (there was no use-case
             # before flat-table). This should be reviewed (later).
             if stub_columns:
-                colspec.attributes['stub'] = 1
+                colspec.attributes["stub"] = 1
                 stub_columns -= 1
             tgroup += colspec
 
@@ -179,31 +167,32 @@ class ListTableBuilder(object):
                 continue
             cspan, rspan, cellElements = cell
 
-            attributes = {"classes" : classes}
+            attributes = {"classes": classes}
             if rspan:
-                attributes['morerows'] = rspan
+                attributes["morerows"] = rspan
             if cspan:
-                attributes['morecols'] = cspan
+                attributes["morecols"] = cspan
             entry = nodes.entry(**attributes)
             entry.extend(cellElements)
             row += entry
         return row
 
     def raiseError(self, msg):
-        error =  self.directive.state_machine.reporter.error(
-            msg
-            , nodes.literal_block(self.directive.block_text
-                                  , self.directive.block_text)
-            , line = self.directive.lineno )
+        error = self.directive.state_machine.reporter.error(
+            msg,
+            nodes.literal_block(self.directive.block_text, self.directive.block_text),
+            line=self.directive.lineno,
+        )
         raise SystemMessagePropagation(error)
 
     def parseFlatTableNode(self, node):
-        u"""parses the node from a :py:class:`FlatTable` directive's body"""
+        """parses the node from a :py:class:`FlatTable` directive's body"""
 
         if len(node) != 1 or not isinstance(node[0], nodes.bullet_list):
             self.raiseError(
                 'Error parsing content block for the "%s" directive: '
-                'exactly one bullet list expected.' % self.directive.name )
+                "exactly one bullet list expected." % self.directive.name
+            )
 
         for rowNum, rowItem in enumerate(node[0]):
             row = self.parseRowItem(rowItem, rowNum)
@@ -211,7 +200,7 @@ class ListTableBuilder(object):
         self.roundOffTableDefinition()
 
     def roundOffTableDefinition(self):
-        u"""Round off the table definition.
+        """Round off the table definition.
 
         This method rounds off the table definition in :py:attr:`rows`.
 
@@ -237,7 +226,7 @@ class ListTableBuilder(object):
                 # handle colspan in current row
                 for c in range(cspan):
                     try:
-                        self.rows[y].insert(x+c+1, None)
+                        self.rows[y].insert(x + c + 1, None)
                     except Exception:  # pylint: disable=broad-except
                         # the user sets ambiguous rowspans
                         pass
@@ -245,7 +234,7 @@ class ListTableBuilder(object):
                 for r in range(rspan):
                     for c in range(cspan + 1):
                         try:
-                            self.rows[y+r+1].insert(x+c, None)
+                            self.rows[y + r + 1].insert(x + c, None)
                         except Exception:  # pylint: disable=broad-except
                             # the user sets ambiguous rowspans
                             pass
@@ -262,20 +251,20 @@ class ListTableBuilder(object):
         # fill with empty cells or cellspan?
 
         fill_cells = False
-        if 'fill-cells' in self.directive.options:
+        if "fill-cells" in self.directive.options:
             fill_cells = True
 
         for row in self.rows:
-            x =  self.max_cols - len(row)
+            x = self.max_cols - len(row)
             if x and not fill_cells:
                 if row[-1] is None:
-                    row.append( ( x - 1, 0, []) )
+                    row.append((x - 1, 0, []))
                 else:
                     cspan, rspan, content = row[-1]
                     row[-1] = (cspan + x, rspan, content)
             elif x and fill_cells:
                 for _i in range(x):
-                    row.append( (0, 0, nodes.comment()) )
+                    row.append((0, 0, nodes.comment()))
 
     def pprint(self):
         # for debugging
@@ -284,14 +273,13 @@ class ListTableBuilder(object):
             retVal += "[ "
             for col in row:
                 if col is None:
-                    retVal += ('%r' % col)
+                    retVal += "%r" % col
                     retVal += "\n    , "
                 else:
                     content = col[2][0].astext()
-                    if len (content) > 30:
+                    if len(content) > 30:
                         content = content[:30] + "..."
-                    retVal += ('(cspan=%s, rspan=%s, %r)'
-                               % (col[0], col[1], content))
+                    retVal += "(cspan=%s, rspan=%s, %r)" % (col[0], col[1], content)
                     retVal += "]\n    , "
             retVal = retVal[:-2]
             retVal += "]\n  , "
@@ -301,14 +289,14 @@ class ListTableBuilder(object):
     def parseRowItem(self, rowItem, rowNum):
         row = []
         childNo = 0
-        error   = False
-        cell    = None
-        target  = None
+        error = False
+        cell = None
+        target = None
 
         for child in rowItem:
             if isinstance(child, (nodes.comment, nodes.system_message)):
                 pass
-            elif isinstance(child , nodes.target):
+            elif isinstance(child, nodes.target):
                 target = child
             elif isinstance(child, nodes.bullet_list):
                 childNo += 1
@@ -320,22 +308,23 @@ class ListTableBuilder(object):
         if childNo != 1 or error:
             self.raiseError(
                 'Error parsing content block for the "%s" directive: '
-                'two-level bullet list expected, but row %s does not '
-                'contain a second-level bullet list.'
-                % (self.directive.name, rowNum + 1))
+                "two-level bullet list expected, but row %s does not "
+                "contain a second-level bullet list."
+                % (self.directive.name, rowNum + 1)
+            )
 
         for cellItem in cell:
             cspan, rspan, cellElements = self.parseCellItem(cellItem)
             if target is not None:
                 cellElements.insert(0, target)
-            row.append( (cspan, rspan, cellElements) )
+            row.append((cspan, rspan, cellElements))
         return row
 
     def parseCellItem(self, cellItem):
         # search and remove cspan, rspan colspec from the first element in
         # this listItem (field).
         cspan = rspan = 0
-        if not len(cellItem): # pylint: disable=len-as-condition
+        if not len(cellItem):  # pylint: disable=len-as-condition
             return cspan, rspan, []
         for elem in cellItem[0]:
             if isinstance(elem, colSpan):

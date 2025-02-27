@@ -25,22 +25,23 @@ More details see Sphinx-doc’s `CHANGELOG
 
 import docutils
 import sphinx
-
 from pkg_resources import parse_version
 
 sphinx_version = parse_version(sphinx.__version__)
 docutils_version = parse_version(docutils.__version__)
+
 
 def sphinx_has_c_namespace():
     """Checks wether Sphinx version supports `.. c:namespace::
     <https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#namespacing>`__
 
     """
-    return sphinx_version >= parse_version('3.1')
+    return sphinx_version >= parse_version("3.1")
+
 
 def sphinx_has_c_types():
     """Checks wether Sphinx version supports `.. c:struct::, c:union and other C types
     <https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#the-c-domain>`__
 
     """
-    return sphinx_version >= parse_version('3.1')
+    return sphinx_version >= parse_version("3.1")
