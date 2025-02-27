@@ -1,5 +1,6 @@
 YYYY-MM-DD [YYYYMMDD]
 
+  [mod] hatch run fix - code formatting using black & isort
   [mod] switch develop environment to hatch
 
 2024-09-24 [20240924]
