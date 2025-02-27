@@ -12,9 +12,6 @@ Wtihin this section you will find some :ref:`linuxdoc-howto` tests and examples
 for common use cases.  The kernel-doc comments are taken from the source files
 :ref:`all-in-a-tumble.c-src` and :ref:`all-in-a-tumble.h-src`.
 
-.. contents::
-   :local:
-
 .. _doc_sections:
 
 DOC sections

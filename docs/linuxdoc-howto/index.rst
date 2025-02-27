@@ -9,7 +9,10 @@ LinuxDoc HowTo
 
 As you might already noticed, the LinuxDoc project has a focus on kernel-doc.
 Most of the documentation you will find here deal with this markup, its syntax,
-use-cases and tools. But that's not all ..
+use-cases and tools. But that's not all, read on to find out more about the
+tools that are also available.
+
+.. admonition:: About "LinuxDoc"
 
   The LinuxDoc project was founded at the time where the linux Kernel migrates
   its documentation from XML-DocBook to the plain text format reST_ (OT: if
@@ -20,6 +23,7 @@ use-cases and tools. But that's not all ..
   aspects of documenting software developments* and are incorporated into the
   LinuxDoc project.
 
+----
 
 kernel-doc
 ==========
@@ -32,6 +36,7 @@ kernel-doc
    kernel-doc-examples
    kernel-doc-modes
 
+----
 
 other topics
 ============
@@ -44,6 +49,8 @@ other topics
    cdomain
    man-pages
    kernel-include-directive
+
+----
 
 At least some handy links about reST_  and the `Sphinx markup constructs`_:
 

@@ -11,11 +11,6 @@
 About tables
 ============
 
-.. contents:: Contents
-   :depth: 2
-   :local:
-   :backlinks: entry
-
 .. note::
 
    The :ref:`rest-flat-table` directive is the most **diff friendly** table

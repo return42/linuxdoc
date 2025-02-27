@@ -71,8 +71,8 @@ dependencies = [
   "argparse-manpage",
   "basedpyright==1.27.*",
   "black==25.1.*",
+  "furo",
   "isort==6.0.*",
-  "pallets-sphinx-themes",
   "pylint",
   "pylint==3.3.*",
   "sphinx-autobuild",
@@ -89,8 +89,8 @@ dependencies = [
 prj = "./prj {args:--help}"
 
 fix = [
-  "isort {args:./linuxdoc ./tests}",
-  "black {args:./linuxdoc ./tests}",
+  "isort {args:./linuxdoc ./docs/conf.py ./tests}",
+  "black {args:./linuxdoc ./docs/conf.py ./tests}",
 ]
 
 isort-check = "isort --diff {args:./linuxdoc ./tests}"

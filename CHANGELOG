@@ -1,5 +1,6 @@
 YYYY-MM-DD [YYYYMMDD]
 
+  [doc] switch sphinx theme from Pallets to Furo
   [doc] remove obsolete articles
   [doc] implement worklfow to build & deploy documentation
   [mod] fix issues reported by: hatch run pylint-check
