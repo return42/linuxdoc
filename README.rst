@@ -34,6 +34,14 @@ To enter the development environment use ``shell``::
 
   $ hatch shell
 
+For project tasks & maintenance use::
+
+  $ hatch run prj
+
+For example, to get a *live* build of documentation::
+
+  $ hatch run prj doc.live
+
 
 Links
 =====

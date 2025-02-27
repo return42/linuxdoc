@@ -95,10 +95,10 @@ html_context = {
 
 if GIT_URL:
     html_context["project_links"].append(ProjectLink("Source", GIT_URL))
-if PKG.issues:
-    html_context["project_links"].append(ProjectLink("Issue Tracker", PKG.issues))
-if PKG.author_email:
-    html_context["project_links"].append(ProjectLink("Contact", 'mailto:' + PKG.author_email))
+if getattr(PKG, "__issues__", False):
+    html_context["project_links"].append(ProjectLink("Issue Tracker", PKG.__issues__))
+if getattr(PKG, "__author_email__", False):
+    html_context["project_links"].append(ProjectLink("Contact", 'mailto:' + PKG.__author_email__))
 
 html_sidebars = {
     "**": ["project.html", "relations.html", "localtoc.html", "searchbox.html"],
