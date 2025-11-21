@@ -22,7 +22,6 @@ from docutils import io, nodes, statemachine
 from docutils.parsers.rst import directives
 from docutils.parsers.rst.directives.body import CodeBlock, NumberLines
 from docutils.parsers.rst.directives.misc import Include
-from docutils.utils.error_reporting import ErrorString, SafeString
 
 __version__ = "1.0"
 
@@ -91,12 +90,12 @@ class KernelInclude(Include):
             raise self.severe(
                 'Problems with "%s" directive path:\n'
                 'Cannot encode input file path "%s" '
-                "(wrong locale?)." % (self.name, SafeString(path))
+                "(wrong locale?)." % (self.name, str(path))
             )
         except IOError as error:
             raise self.severe(
                 'Problems with "%s" directive path:\n%s.'
-                % (self.name, ErrorString(error))
+                % (self.name, io.error_string(error))
             )
         startline = self.options.get("start-line", None)
         endline = self.options.get("end-line", None)
@@ -109,7 +108,7 @@ class KernelInclude(Include):
                 rawtext = include_file.read()
         except UnicodeError as error:
             raise self.severe(
-                'Problem with "%s" directive:\n%s' % (self.name, ErrorString(error))
+                'Problem with "%s" directive:\n%s' % (self.name, io.error_string(error))
             )
         # start-after/end-before: no restrictions on newlines in match-text,
         # and no restrictions on matching inside lines vs. line boundaries
