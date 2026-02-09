@@ -25,10 +25,10 @@ More details see Sphinx-doc’s `CHANGELOG
 
 import docutils
 import sphinx
-from pkg_resources import parse_version
+from packaging.version import parse
 
-sphinx_version = parse_version(sphinx.__version__)
-docutils_version = parse_version(docutils.__version__)
+sphinx_version = parse(sphinx.__version__)
+docutils_version = parse(docutils.__version__)
 
 
 def sphinx_has_c_namespace():
@@ -36,7 +36,7 @@ def sphinx_has_c_namespace():
     <https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#namespacing>`__
 
     """
-    return sphinx_version >= parse_version("3.1")
+    return sphinx_version >= parse("3.1")
 
 
 def sphinx_has_c_types():
@@ -44,4 +44,4 @@ def sphinx_has_c_types():
     <https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#the-c-domain>`__
 
     """
-    return sphinx_version >= parse_version("3.1")
+    return sphinx_version >= parse("3.1")

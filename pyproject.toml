@@ -103,6 +103,7 @@ check = [
   "black-check",
   "pylint-check",
   "basedpyright-check",
+  "packaging",
 ]
 
 # ==============================================================================
