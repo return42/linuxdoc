@@ -1,5 +1,6 @@
 YYYY-MM-DD [YYYYMMDD]
 
+  [mod] replace deprecated warn methods (#38)
   [mod] add mise.toml and a local develop environment in ./venv
   [fix] Replace parse_version() with parse() (#42)
   [fix] compatibility with docutils 0.22+ (#40)

@@ -112,14 +112,14 @@ class KernelDocParser(kerneldoc.Parser):
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
         self.errors += 1
         message = ("%(fname)s:%(line_no)s: [kernel-doc ERROR] : " + message) % replace
-        app_log.warn(message)
+        app_log.error(message)
 
     def warn(self, message, **replace):
         replace["fname"] = self.options.fname
         replace["line_no"] = replace.get("line_no", self.ctx.line_no)
         self.warnings += 1
         message = ("%(fname)s:%(line_no)s: [kernel-doc WARN] : " + message) % replace
-        app_log.warn(message)
+        app_log.warning(message)
 
     def info(self, message, **replace):
         replace["fname"] = self.options.fname
