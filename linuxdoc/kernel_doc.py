@@ -59,8 +59,6 @@ import textwrap
 import six
 from fspath import OS_ENV
 
-from . import compat
-
 # ==============================================================================
 # common globals
 # ==============================================================================
@@ -857,11 +855,11 @@ class ReSTTranslator(TranslatorAPI):
             self.write(epilog, "\n")
 
     def output_prefix(self):
-        if compat.sphinx_has_c_namespace() and self.options.id_prefix:
+        if self.options.id_prefix:
             self.write(".. c:namespace-push:: %s" % self.options.id_prefix, "\n")
 
     def output_suffix(self):
-        if compat.sphinx_has_c_namespace() and self.options.id_prefix:
+        if self.options.id_prefix:
             self.write("\n", ".. c:namespace-pop::", "\n")
 
     def output_DOC(self, sections=None):
@@ -1000,10 +998,8 @@ class ReSTTranslator(TranslatorAPI):
 
         # write struct definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
-        if compat.sphinx_has_c_types():
-            self.write("\n.. c:%s:: %s\n\n" % (decl_type, decl_name))
-        else:
-            self.write("\n.. c:type:: %s %s\n\n" % (decl_type, decl_name))
+        self.write("\n.. c:%s:: %s\n\n" % (decl_type, decl_name))
+
         # purpose
 
         if purpose:
@@ -1101,10 +1097,7 @@ class ReSTTranslator(TranslatorAPI):
 
         # write union definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
-        if compat.sphinx_has_c_types():
-            self.write("\n.. c:enum:: %s\n\n" % enum)
-        else:
-            self.write("\n.. c:type:: enum %s\n\n" % enum)
+        self.write("\n.. c:enum:: %s\n\n" % enum)
 
         # purpose
 
@@ -1168,10 +1161,8 @@ class ReSTTranslator(TranslatorAPI):
 
         # write typdef definition
         # see https://github.com/sphinx-doc/sphinx/issues/2713
-        if compat.sphinx_has_c_types():
-            self.write("\n.. c:type:: %s\n\n" % typedef)
-        else:
-            self.write("\n.. c:type:: typedef %s\n\n" % typedef)
+        self.write("\n.. c:type:: %s\n\n" % typedef)
+
         if purpose:
             self.write(self.INDENT, self.highlight(purpose), "\n")
 
