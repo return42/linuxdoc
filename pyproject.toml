@@ -16,12 +16,17 @@ dynamic = ["version"]
 
 description = "Sphinx-doc extensions & tools to extract documentation from C/C++ source file comments."
 readme = "README.rst"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = "AGPL-3.0-or-later"
+license-files = ["LICENSE"]
 keywords = ["sphinx extension", "doc", "source code comments", "kernel-doc", "linux"]
 authors = [
   { name = "Markus Heiser", email = "markus.heiser@darmarit.de" },
 ]
+maintainers = [
+  {name = "Markus Heiser", email = "markus.heiser@darmarit.de" }
+]
+
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
@@ -74,7 +79,6 @@ dependencies = [
   "furo",
   "isort==6.0.*",
   "pylint",
-  "pylint==3.3.*",
   "sphinx-autobuild",
   "sphinx-issues",
   "sphinx-jinja",
@@ -106,9 +110,27 @@ check = [
   "packaging",
 ]
 
+# ===================
+[tool.hatch.envs.dev]
+# ===================
+
+description = """Create a project-specific (local) develop environment.
+IDE & LSP preferably use a project-local virtual env in the ./.venv folder.
+
+The environment in ./.venv is identical to the 'default' environment, \
+but limited to the minimum Python version that the Python project still \
+supports, see [project].requires-python (3.10)."""
+
+path = ".venv"
+python = "3.10"  # minimal py version, see [project].requires-python
+
+
 # ==============================================================================
 [tool.isort]
 # ==============================================================================
+
+skip_gitignore = true
+skip = [".venv"]
 
 profile = "black"
 atomic = true

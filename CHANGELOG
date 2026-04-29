@@ -1,5 +1,8 @@
 YYYY-MM-DD [YYYYMMDD]
 
+  [mod] add mise.toml and a local develop environment in ./venv
+  [fix] Replace parse_version() with parse() (#42)
+  [fix] compatibility with docutils 0.22+ (#40)
   [doc] switch sphinx theme from Pallets to Furo
   [doc] remove obsolete articles
   [doc] implement worklfow to build & deploy documentation
@@ -22,7 +25,7 @@ YYYY-MM-DD [YYYYMMDD]
 
 2023-05-06 [20230506]
 
-        rename kernel-* commands into linuxdoc.* commands & add man pages
+  rename kernel-* commands into linuxdoc.* commands & add man pages
 
 	* Deprecated: The maintenance of the ``kernel-*`` command ends in
 	version 20230321.  The ``kernel-*`` commands will be removed in a future
@@ -30,8 +33,8 @@ YYYY-MM-DD [YYYYMMDD]
 
 	- kernel-doc     --> linuxdoc.rest
 	- kernel-autodoc --> linuxdoc.autodoc
-        - kernel-lintdoc --> linuxdoc.lintdoc
-        - kernel-grepdoc --> linuxdoc.grepdoc
+  - kernel-lintdoc --> linuxdoc.lintdoc
+  - kernel-grepdoc --> linuxdoc.grepdoc
 
 2023-03-21 [20230321] LICENSE AGPLv3+
 
