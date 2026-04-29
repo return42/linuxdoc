@@ -71,7 +71,7 @@ path = "linuxdoc/__pkginfo__.py"
 # ------------------
 
 [tool.hatch.envs.default]
-python = "3.13"
+
 dependencies = [
   "argparse-manpage",
   "basedpyright==1.27.*",
@@ -123,6 +123,57 @@ supports, see [project].requires-python (3.10)."""
 
 path = ".venv"
 python = "3.10"  # minimal py version, see [project].requires-python
+
+# ===================
+[tool.hatch.envs.doc]
+# ===================
+template = "doc"
+python = "3.14"
+
+description = """Build & deploy project's documentation."""
+
+dependencies = [
+  # doc ..
+  "furo",
+  "sphinx",
+  "sphinx-autobuild",
+  # "sphinx-issues",
+  # "sphinx-jinja",
+  "sphinx-tabs",
+  "sphinxcontrib-programoutput",
+  "sphinx-notfound-page",
+  "sphinx-copybutton",
+]
+
+[tool.hatch.envs.doc.scripts]
+
+live = [
+  """
+    sphinx-autobuild \
+    --watch docs/ --watch linuxdoc \
+    --open-browser --delay 2 \
+    -b html --fresh-env \
+    docs build/docs/live \
+    """,
+]
+
+html = [
+  """
+    sphinx-build \
+    -W -b html --write-all --fresh-env \
+    --doctree-dir build/docs/html/.doctrees \
+    docs dist/docs/html \
+    """,
+]
+coverage = [
+  """
+    sphinx-build \
+    -b coverage --fresh-env  \
+    --doctree-dir build/doc/html/.doctrees \
+    docs build/docs/html
+    cat build/docs/html/python.txt
+    """,
+]
 
 
 # ==============================================================================

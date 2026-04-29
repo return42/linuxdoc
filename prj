@@ -13,7 +13,7 @@ source "${PRJ_ROOT}/scripts/main.sh"
 sh.lib.import doc-sphinx
 
 MAIN_CMD_LIST=(
-    "doc: doc.html doc.live doc.clean doc.gh-pages"
+    "doc: doc.clean doc.gh-pages"
 )
 
 main "$@"

@@ -7,6 +7,8 @@ extract documentation from C/C++ source file comments.  Even if this project
 started in context of the Linux-Kernel documentation, you can use these
 extensions in common Sphinx-doc projects.
 
+``linuxdoc`` is distributed under the terms of the `AGPL-3.0-or-later`_ license.
+
 
 Install
 =======
@@ -40,26 +42,58 @@ Format and *lint* your code before commit:
 
 .. code:: sh
 
-  hatch run fix
-  hatch run check
+   hatch run fix
+   hatch run check
 
 To enter the development environment use ``shell dev``:
 
 .. code:: sh
 
-  hatch shell dev
+   hatch shell dev
+
+To get a *live* build of documentation:
+
+.. code:: sh
+
+   hatch run doc:live
 
 For project tasks & maintenance use:
 
 .. code:: sh
 
-  hatch run prj
+   hatch run prj
+   # (.venv)$ mt4os --help
 
 For example, to get a *live* build of documentation:
 
 .. code:: sh
 
-  hatch run prj doc.live
+   hatch run prj doc.live
+
+Mise En Place
+-------------
+
+For the developer environment, `mise en place`_ is recommended:
+
+.. code:: sh
+
+   $ curl https://mise.run | sh
+
+   # to install shell completions .. and mises's backends dependencies
+   $ mise use -g usage
+
+To activate ``mise`` in the current bash session see ``mise activate --help``.
+For a more streamlined setup, you can configure activation in your shell's
+configuration file.
+
+For the Bash_ shell, the following lines can be added to the ``~/.bashrc``
+file:
+
+.. code:: bash
+
+   if [ -f "${HOME}/.local/bin/mise" ]; then
+       eval "$("${HOME}/.local/bin/mise" activate bash --shims)"
+   fi
 
 
 Links
@@ -81,3 +115,4 @@ Links
 .. _mise.toml: https://codeberg.org/return42/mt4os/src/branch/main/mise.toml
 .. _shellcheck: https://github.com/koalaman/shellcheck/wiki/Checks
 .. _Bash: https://www.gnu.org/software/bash/
+.. _AGPL-3.0-or-later: https://spdx.org/licenses/AGPL-3.0-or-later.html

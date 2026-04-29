@@ -38,32 +38,6 @@ doc.html() {
     sh.prompt-err $?
 }
 
-doc.live.help() {
-    cat <<EOF
-autobuild HTML documentation while editing
-
-  source:  ${DOC_SRC}
-  build:   ${DOC_BUILD}
-  dest:    ${DOC_DIST}
-
-usage:
-  ${MAIN} ${MAIN_CMD}
-EOF
-}
-
-doc.live() {
-    msg.build SPHINX "autobuild ${DOC_SRC} --> file://$(readlink -e "$(pwd)/${DOC_DIST}")"
-    (   set -e
-    doc.prebuild
-    # shellcheck disable=SC2086
-    sphinx-autobuild \
-        ${SPHINX_VERBOSE} ${SPHINX_OPTS} \
-        --open-browser --host 0.0.0.0 \
-        -b html -c "${DOC_SRC}" -d "${DOC_BUILD}/.doctrees" "${DOC_SRC}" "${DOC_DIST}"
-    )
-    sh.prompt-err $?
-}
-
 doc.clean.help() {
     $FMT <<EOF
 clean documentation build

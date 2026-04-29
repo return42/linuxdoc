@@ -54,7 +54,6 @@ The LinuxDoc library contains:
    sphinx-doc_ projects.  If this is unclear to you, take a look at our
    :ref:`Introduction <kernel-doc-intro>`.
 
----------
 
 Table of Contents
 =================
@@ -69,7 +68,6 @@ Table of Contents
 
 LinuxDoc is hosted at github: https://github.com/return42/linuxdoc
 
----------
 
 Source Code
 ===========
@@ -77,14 +75,11 @@ Source Code
 .. toctree::
    :maxdepth: 2
 
-   linuxdoc-api/linuxdoc
+   src/index
 
----------
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
-
----------
