@@ -34,6 +34,7 @@ def setup(app):
     app.add_directive("flat-table", FlatTable)
     roles.register_local_role("cspan", c_span)
     roles.register_local_role("rspan", r_span)
+    app.connect("doctree-resolved", FlatTableProcessor)
 
     return dict(version=__version__, parallel_read_safe=True, parallel_write_safe=True)
 
@@ -336,3 +337,19 @@ class ListTableBuilder(object):
                 elem.parent.remove(elem)
                 continue
         return cspan, rspan, cellItem[:]
+
+
+class FlatTableProcessor:
+    """Remove colSpan and rowSpan from the document after the doctree-resolved
+    phase."""
+
+    # pylint: disable=unused-argument
+
+    def __init__(self, app, doctree: nodes.document, docname: str) -> None:
+        self.process(doctree)
+
+    def process(self, doctree: nodes.document) -> None:
+        for node in list(
+            doctree.findall(lambda item: isinstance(item, (colSpan, rowSpan)))
+        ):
+            node.parent.remove(node)

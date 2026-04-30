@@ -1,5 +1,6 @@
 YYYY-MM-DD [YYYYMMDD]
 
+  [mod] remove further unnecessary colSpan and rowSpan (#35, #11)
   [mod] replace deprecated warn methods (#38)
   [mod] add mise.toml and a local develop environment in ./venv
   [fix] Replace parse_version() with parse() (#42)
