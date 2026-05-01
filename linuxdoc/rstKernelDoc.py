@@ -16,7 +16,7 @@ linux kernel source code comments.
 # ==============================================================================
 
 import glob
-import logging
+from sphinx.util import logging
 from io import StringIO
 from os import path
 
