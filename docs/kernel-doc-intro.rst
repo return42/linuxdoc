@@ -1,4 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
 .. include:: linuxdoc-howto/refs.txt
 
 .. _kernel-doc-intro:

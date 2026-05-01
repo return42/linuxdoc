@@ -1,5 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
-
 .. _conf.py: http://www.sphinx-doc.org/en/stable/config.html
 
 .. _kernel-doc-tests:

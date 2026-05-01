@@ -1,4 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
 .. include:: refs.txt
 
 .. _linuxdoc-howto:
@@ -23,7 +22,6 @@ tools that are also available.
   aspects of documenting software developments* and are incorporated into the
   LinuxDoc project.
 
-----
 
 kernel-doc
 ==========
@@ -36,7 +34,6 @@ kernel-doc
    kernel-doc-examples
    kernel-doc-modes
 
-----
 
 other topics
 ============

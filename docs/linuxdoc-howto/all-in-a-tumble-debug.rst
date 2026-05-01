@@ -1,4 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
 .. include:: refs.txt
 
 .. _all-in-a-tumble-debug:
@@ -43,4 +42,3 @@ kernel-doc from  ``all-in-a-tumble.c``
 .. kernel-doc::  ./all-in-a-tumble.c
     :debug:
     :module: foo
-

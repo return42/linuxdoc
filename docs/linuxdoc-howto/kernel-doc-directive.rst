@@ -1,4 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
 .. include:: refs.txt
 
 .. _conf.py: http://www.sphinx-doc.org/en/stable/config.html

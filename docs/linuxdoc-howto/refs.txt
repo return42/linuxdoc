@@ -1,5 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
-..
 ..  common hyperlink targets
 
 .. _`reST (spec)`: http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html

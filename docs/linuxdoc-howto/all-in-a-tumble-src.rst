@@ -1,4 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
 .. include:: refs.txt
 
 .. _all-in-a-tumble-src:
@@ -19,7 +18,6 @@ Within these source files *here* you see some::
 aka :ref:`kernel-doc-syntax-snippets`, which we will use in section:
 :ref:`kernel-doc-tests`.
 
-----
 
 .. _all-in-a-tumble.h-src:
 
@@ -31,7 +29,6 @@ source ``all-in-a-tumble.h``
    :linenos:
    :tab-width: 8
 
-----
 
 .. _all-in-a-tumble.c-src:
 

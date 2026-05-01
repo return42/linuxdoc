@@ -1,4 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
 .. include:: refs.txt
 
 .. _all-in-a-tumble:
@@ -23,8 +22,6 @@ using the following directives:
 The option ``:module:`` is optional, to find out why we use this option *here*,
 see :ref:`kernel-doc-options`.
 
-------
-
 .. _all-in-a-tumble.h:
 
 all-in-a-tumble.h
@@ -32,8 +29,6 @@ all-in-a-tumble.h
 
 .. kernel-doc::  ./all-in-a-tumble.h
     :module: example
-
-------
 
 .. _all-in-a-tumble.c:
 

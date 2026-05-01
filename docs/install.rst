@@ -1,4 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
 .. include:: refs.txt
 
 .. _install_linuxdoc:
@@ -7,21 +6,14 @@
 Install LinuxDoc
 ================
 
-Install bleeding edge.::
+Install / update from `pypi.org <https://pypi.org/project/linuxdoc/>`_::
 
-  pip install [--user] git+http://github.com/return42/linuxdoc.git
+  python -m pip install -U linuxdoc
 
-As the LinuxDoc lib evolving constantly, an update should be carried out
-regularly.::
+Alternative method: install bleeding edge into `user site-packages
+<https://docs.python.org/3/library/sysconfig.html#sysconfig-user-scheme>`_::
 
-  pip install --upgrade git+http://github.com/return42/linuxdoc.git
-
-If you are a developer and like to contribute to the LinuxDoc lib, fork on
-github or clone and make a developer install::
-
-  git clone https://github.com/return42/linuxdoc
-  cd linuxdoc
-  make install
+  python -m pip install -U --user git+http://github.com/return42/linuxdoc.git
 
 Below you see how to integrate the LinuxDoc sphinx extensions into your sphinx
 build process. In the ``conf.py`` (`sphinx config`_) add the LinuxDoc
@@ -29,11 +21,11 @@ extensions:
 
 .. code-block:: python
 
-    extensions = [
-      "linuxdoc.rstFlatTable",    # Implementation of the "flat-table" reST-directive.
-      "linuxdoc.rstKernelDoc",    # Implementation of the "kernel-doc" reST-directive.
-      "linuxdoc.kernel_include",  # Implementation of the "kernel-include" reST-directive.
-      "linuxdoc.manKernelDoc",    # Implementation of the "kernel-doc-man" builder
-      "linuxdoc.cdomain",         # Replacement for the sphinx c-domain.
-      "linuxdoc.kfigure",         # Sphinx extension which implements scalable image handling.
-      ]
+   extensions = [
+     "linuxdoc.rstFlatTable",    # Implementation of the "flat-table" reST-directive.
+     "linuxdoc.rstKernelDoc",    # Implementation of the "kernel-doc" reST-directive.
+     "linuxdoc.kernel_include",  # Implementation of the "kernel-include" reST-directive.
+     "linuxdoc.manKernelDoc",    # Implementation of the "kernel-doc-man" builder
+     "linuxdoc.cdomain",         # Replacement for the sphinx c-domain.
+     "linuxdoc.kfigure",         # Sphinx extension which implements scalable image handling.
+     ]

@@ -13,17 +13,16 @@ extensions in common Sphinx-doc projects.
 Install
 =======
 
-`Install LinuxDoc <https://return42.github.io/linuxdoc/install.html>`__ using `pip
-<https://pip.pypa.io/en/stable/getting-started/>`__::
+`Install LinuxDoc`_ release from pypi_ using pip_::
 
-  pip install --user -U linuxdoc
+  python -m pip install --user -U linuxdoc
 
 
 Development
 ===========
 
-This project is managed by `hatch <https://hatch.pypa.io>`_, for development
-tasks you should install ``hatch``:
+This project is managed by hatch_, for development tasks you should install
+``hatch``:
 
 .. code:: sh
 
@@ -34,7 +33,7 @@ The tools required for the developer environment are provided in the
 
 .. code:: sh
 
-   git clone https://codeberg.org/return42/linuxdoc.git
+   git clone https://github.com/return42/linuxdoc.git
    cd linuxdoc
    mise install
 
@@ -62,7 +61,6 @@ For project tasks & maintenance use:
 .. code:: sh
 
    hatch run prj
-   # (.venv)$ mt4os --help
 
 For example, to get a *live* build of documentation:
 
@@ -96,23 +94,26 @@ file:
    fi
 
 
-Links
-=====
+References
+==========
 
 - Documentation:   https://return42.github.io/linuxdoc
 - Releases:        https://pypi.org/project/linuxdoc/
 - Code:            https://github.com/return42/linuxdoc
 - Issue tracker:   https://github.com/return42/linuxdoc/issues
-- License:         `AGPLv3+ <https://github.com/return42/linuxdoc/blob/master/LICENSE>`__
-
-- Python_
+- License file:    `AGPLv3+ <https://github.com/return42/linuxdoc/blob/master/LICENSE>`__
 - `mise en place`_: mise.toml_
-- shellcheck_
+- Python_
 - Bash_
+- shellcheck_
 
-.. _Python: https://www.python.org/
-.. _mise en place: https://mise.jdx.dev/getting-started.html
-.. _mise.toml: https://codeberg.org/return42/mt4os/src/branch/main/mise.toml
-.. _shellcheck: https://github.com/koalaman/shellcheck/wiki/Checks
-.. _Bash: https://www.gnu.org/software/bash/
 .. _AGPL-3.0-or-later: https://spdx.org/licenses/AGPL-3.0-or-later.html
+.. _Bash: https://www.gnu.org/software/bash/
+.. _Install LinuxDoc: https://return42.github.io/linuxdoc/install.html
+.. _Python: https://www.python.org/
+.. _hatch: https://hatch.pypa.io
+.. _mise en place: https://mise.jdx.dev/getting-started.html
+.. _mise.toml: https://github.com/return42/linuxdoc/blob/master/mise.toml
+.. _pip: https://pip.pypa.io/en/stable/getting-started/
+.. _pypi: https://pypi.org/project/linuxdoc/
+.. _shellcheck: https://github.com/koalaman/shellcheck/wiki/Checks

@@ -1,4 +1,3 @@
-.. -*- coding: utf-8; mode: rst -*-
 .. include:: refs.txt
 
 .. _`Emacs Table Mode`: https://www.emacswiki.org/emacs/TableMode
