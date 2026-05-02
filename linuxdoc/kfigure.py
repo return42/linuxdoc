@@ -10,7 +10,7 @@ Sphinx extension which implements scalable image handling.
 User documentation see :ref:`kfigure`
 """
 
-import logging
+from sphinx.util import logging
 import os
 import pathlib
 import subprocess
