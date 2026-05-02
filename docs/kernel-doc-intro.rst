@@ -116,14 +116,14 @@ in reST_ format:
 
     .. c:function:: int foobar(int arg1, int arg2)
 
-	short function description of foobar
+       short function description of foobar
 
-	:param int arg1:
-	    Describe the first argument to foobar.
+       :param int arg1:
+           Describe the first argument to foobar.
 
-	:param int arg2:
-	    Describe the second argument to foobar.  One can provide multiple line
-	    descriptions for arguments.
+       :param int arg2:
+           Describe the second argument to foobar.  One can provide multiple line
+           descriptions for arguments.
 
     .. _`foobar.description`:
 
@@ -150,7 +150,7 @@ in reST_ format:
     - item two
     - literal block::
 
-	 a + b --> x
+        a + b --> x
 
     .. _`foobar.return`:
 

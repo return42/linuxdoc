@@ -262,24 +262,24 @@ only the *not exported* definitions are used in the reST output.
       From :``test_internals.h``:
 
       .. kernel-doc::  ./test_internals.h
-	 :snippets: EXP_SYMB
+         :snippets: EXP_SYMB
 
       From ``test_internals.c``:
 
       .. kernel-doc::  ./test_internals.c
-	 :snippets: EXP_SYMB
+         :snippets: EXP_SYMB
 
    .. group-tab:: exp-method is ``attribute``
 
       From ``test_internals.c``:
 
       .. kernel-doc::  ./test_internals.c
-	 :snippets: API_EXP
+         :snippets: API_EXP
 
       From ``test_internals.h``:
 
       .. kernel-doc::  ./test_internals.h
-	 :snippets: API_EXP
+         :snippets: API_EXP
 
 .. tabs::
 
@@ -287,12 +287,12 @@ only the *not exported* definitions are used in the reST output.
 
       .. code-block:: rst
 
-	 .. kernel-doc::  ./test_internals.c
-	    :internal:  ./test_internals.h
-	    :module: test_internals_A
-	    :exp-method: macro
-	    :exp-ids: EXP_SYMB
-	    :known-attrs: API_EXP
+         .. kernel-doc::  ./test_internals.c
+            :internal:  ./test_internals.h
+            :module: test_internals_A
+            :exp-method: macro
+            :exp-ids: EXP_SYMB
+            :known-attrs: API_EXP
 
       Its not good to mix ``exp-method``, the ``know-attrs`` here is needed to
       avoid the Sphinx warning::
@@ -300,36 +300,36 @@ only the *not exported* definitions are used in the reST output.
         ./test_internals.c:24: WARNING: Error in declarator or parameters
         Invalid C declaration: Expected identifier in nested name, got keyword: int [error at 11]
           API_EXP int bar(int a,  ...)
-	-----------^
+        -----------^
 
       .. admonition:: internal symbols (when exp-method is ``macro``)
-	 :class: rst-example
+         :class: rst-example
 
-	 .. kernel-doc::  ./test_internals.c
-	    :internal:  ./test_internals.h
-	    :module: test_internals_A
-	    :exp-method: macro
-	    :exp-ids: EXP_SYMB
-	    :known-attrs: API_EXP
+         .. kernel-doc::  ./test_internals.c
+            :internal:  ./test_internals.h
+            :module: test_internals_A
+            :exp-method: macro
+            :exp-ids: EXP_SYMB
+            :known-attrs: API_EXP
 
    .. group-tab:: exp-method is ``attribute``
 
       .. code-block:: rst
 
-	 .. kernel-doc::  ./test_internals.c
-	    :internal:  ./test_internals.h
-	    :module: test_internals_B
-	    :exp-method: attribute
-	    :exp-ids: API_EXP
+         .. kernel-doc::  ./test_internals.c
+            :internal:  ./test_internals.h
+            :module: test_internals_B
+            :exp-method: attribute
+            :exp-ids: API_EXP
 
       .. admonition:: internal symbols (when exp-method is ``attribute``)
-	 :class: rst-example
+         :class: rst-example
 
-	 .. kernel-doc::  ./test_internals.c
-	    :internal:  ./test_internals.h
-	    :module: test_internals_B
-	    :exp-method: attribute
-	    :exp-ids: API_EXP
+         .. kernel-doc::  ./test_internals.c
+            :internal:  ./test_internals.h
+            :module: test_internals_B
+            :exp-method: attribute
+            :exp-ids: API_EXP
 
 
 Missing exports
