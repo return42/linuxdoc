@@ -54,19 +54,28 @@ To get a *live* build of documentation:
 
 .. code:: sh
 
+   hatch run doc:man
    hatch run doc:live
+
+.. hint::
+
+   Don't forget to `build manual pages`_, otherwise you will see a message::
+
+     WARNING: download file not readable: dist/docs/man/user_function.2.gz [download.not_readable]
 
 For project tasks & maintenance use:
 
 .. code:: sh
 
-   hatch run prj
+   hatch run prj --help
 
-For example, to get a *live* build of documentation:
+For example, to force push online doc to the ``gh-pages`` branch:
 
 .. code:: sh
 
-   hatch run prj doc.live
+   hatch run doc:man
+   hatch run ./prj doc.gh-pages
+
 
 Mise En Place
 -------------
@@ -111,6 +120,7 @@ References
 .. _Bash: https://www.gnu.org/software/bash/
 .. _Install LinuxDoc: https://return42.github.io/linuxdoc/install.html
 .. _Python: https://www.python.org/
+.. _build manual pages: https://return42.github.io/linuxdoc/linuxdoc-howto/man-pages.html#kernel-doc-man-builder
 .. _hatch: https://hatch.pypa.io
 .. _mise en place: https://mise.jdx.dev/getting-started.html
 .. _mise.toml: https://github.com/return42/linuxdoc/blob/master/mise.toml

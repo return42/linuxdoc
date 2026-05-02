@@ -147,9 +147,25 @@ dependencies = [
 
 [tool.hatch.envs.doc.scripts]
 
+# HINT:
+#
+#   The leading minus sign `-` in the scripts for generating the online
+#   documentation deliberately ignores the errors that are forced in the
+#   documentation, for example, for the symbol `no_longer_exists`
+#   (docs/linuxdoc-howto/kernel-doc-directive.rst), in order to demonstrate an
+#   error case.
+#
+#   In the online documentation, there is also an example for Linux man pages
+#   (user_function.2); the man file dist/docs/man/user_function.2.gz must be
+#   created for it before the online documentation is generated::
+#
+#        hatch run doc:man
+#        hatch run doc:live
+
+
 live = [
   """
-    sphinx-autobuild \
+    - sphinx-autobuild \
     --watch docs/ --watch linuxdoc \
     --open-browser --delay 2 \
     -b html --fresh-env \
@@ -159,12 +175,23 @@ live = [
 
 html = [
   """
-    sphinx-build \
+    - sphinx-build \
     -W -b html --write-all --fresh-env \
     --doctree-dir build/docs/html/.doctrees \
     docs dist/docs/html \
     """,
 ]
+
+man = [
+  """
+    - sphinx-build \
+    -W -b kernel-doc-man --write-all --fresh-env \
+    --doctree-dir build/docs/man/.doctrees \
+    docs dist/docs/man \
+    """,
+    """find dist/docs/man -name '*.[0-9]' -exec gzip -nf {{}} +""",
+]
+
 coverage = [
   """
     sphinx-build \
