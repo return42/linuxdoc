@@ -27,7 +27,7 @@
 .. _`docutils`: http://docutils.sourceforge.net/docs/index.html
 .. _`docutils FAQ`: http://docutils.sourceforge.net/FAQ.html
 
-.. _`Kernel's Source code documentation`: https://h2626237.stratoserver.net/kernel/linux_src_doc/index.html
+.. _`Kernel's Source code documentation`: https://github.com/return42/sphkerneldoc/tree/master/linux_src_doc
 .. _`nitpick_ignore`: http://www.sphinx-doc.org/en/stable/config.html#confval-nitpick_ignore
 .. _`nitpicky`: http://www.sphinx-doc.org/en/stable/config.html#confval-nitpicky
 
