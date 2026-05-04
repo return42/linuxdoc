@@ -1,4 +1,4 @@
-YYYY-MM-DD [YYYYMMDD]
+2026-05-03 [20260504]
 
   [mod] remove further unnecessary colSpan and rowSpan (#35, #11)
   [mod] replace deprecated warn methods (#38)
