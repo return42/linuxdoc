@@ -85,7 +85,6 @@ dependencies = [
   "sphinx-tabs",
   "sphinxcontrib-programoutput",
   "tox",
-  "twine",
 ]
 
 [tool.hatch.envs.default.scripts]
@@ -156,7 +155,7 @@ dependencies = [
 #   error case.
 #
 #   In the online documentation, there is also an example for Linux man pages
-#   (user_function.2); the man file dist/docs/man/user_function.2.gz must be
+#   (user_function.2); the man file dist/doc/man/user_function.2.gz must be
 #   created for it before the online documentation is generated::
 #
 #        hatch run doc:man
@@ -169,7 +168,7 @@ live = [
     --watch docs/ --watch linuxdoc \
     --open-browser --delay 2 \
     -b html --fresh-env \
-    docs build/docs/live \
+    docs build/doc/live \
     """,
 ]
 
@@ -177,8 +176,8 @@ html = [
   """
     - sphinx-build \
     -W -b html --write-all --fresh-env \
-    --doctree-dir build/docs/html/.doctrees \
-    docs dist/docs/html \
+    --doctree-dir build/doc/html/.doctrees \
+    docs dist/doc/html \
     """,
 ]
 
@@ -186,10 +185,10 @@ man = [
   """
     - sphinx-build \
     -W -b kernel-doc-man --write-all --fresh-env \
-    --doctree-dir build/docs/man/.doctrees \
-    docs dist/docs/man \
+    --doctree-dir build/doc/man/.doctrees \
+    docs dist/doc/man \
     """,
-    """find dist/docs/man -name '*.[0-9]' -exec gzip -nf {{}} +""",
+    """find dist/doc/man -name '*.[0-9]' -exec gzip -nf {{}} +""",
 ]
 
 coverage = [
@@ -197,8 +196,8 @@ coverage = [
     sphinx-build \
     -b coverage --fresh-env  \
     --doctree-dir build/doc/html/.doctrees \
-    docs build/docs/html
-    cat build/docs/html/python.txt
+    docs build/doc/html
+    cat build/doc/html/python.txt
     """,
 ]
 

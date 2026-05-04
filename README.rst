@@ -49,6 +49,8 @@ To enter the development environment use ``shell dev``:
 .. code:: sh
 
    hatch shell dev
+   # source "/share/linuxdoc/.venv/bin/activate"
+   # (.venv) $
 
 To get a *live* build of documentation:
 
@@ -61,7 +63,7 @@ To get a *live* build of documentation:
 
    Don't forget to `build manual pages`_, otherwise you will see a message::
 
-     WARNING: download file not readable: dist/docs/man/user_function.2.gz [download.not_readable]
+     WARNING: download file not readable: dist/doc/man/user_function.2.gz [download.not_readable]
 
 For project tasks & maintenance use:
 
@@ -69,12 +71,36 @@ For project tasks & maintenance use:
 
    hatch run prj --help
 
-For example, to force push online doc to the ``gh-pages`` branch:
+
+Build & Deploy
+--------------
+
+To force push online doc to the ``gh-pages`` branch:
 
 .. code:: sh
 
    hatch run doc:man
    hatch run ./prj doc.gh-pages
+
+Use `hatch build`_ command to build sdist_ an wheel_:
+
+.. code:: sh
+
+   hatch build -c
+
+and `hatch publish`_ command to deploy on pypi_ (or ``test.pypi.org``):
+
+.. code:: sh
+
+   hatch publish -r https://test.pypi.org/legacy/ ./dist/linuxdoc-YYYYMMDD*
+   hatch publish ./dist/linuxdoc-YYYYMMDD*
+
+
+.. _hatch build: https://hatch.pypa.io/1.7/build/#building
+.. _hatch publish: https://hatch.pypa.io/1.7/publish/
+.. _twine: https://twine.readthedocs.io/en/stable/
+.. _sdist: https://hatch.pypa.io/1.7/plugins/builder/sdist/)
+.. _wheel: https://hatch.pypa.io/1.7/plugins/builder/wheel/
 
 
 Mise En Place

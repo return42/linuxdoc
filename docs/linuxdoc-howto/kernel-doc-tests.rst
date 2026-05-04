@@ -141,12 +141,12 @@ To place and gzip the manuals in ``dist/docs/man`` Folder see
 
    .. code-block:: rst
 
-      :download:`user_function.2.gz   <../../dist/docs/man/user_function.2.gz>`
+      :download:`user_function.2.gz   <../../dist/doc/man/user_function.2.gz>`
 
    .. admonition:: download directive
       :class: rst-example
 
-      :download:`user_function.2.gz   <../../dist/docs/man/user_function.2.gz>`
+      :download:`user_function.2.gz   <../../dist/doc/man/user_function.2.gz>`
 
    Or just set a link to the man page file (relative HTML URL is needed)
 

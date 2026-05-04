@@ -6,6 +6,7 @@ PRJ_ROOT="$(dirname "${BASH_SOURCE[0]}")"
 PRJ_ROOT="$(cd "${PRJ_ROOT}" && pwd -P)"
 
 DOC_SRC="./docs"
+DOC_DIST="./dist/doc/html"
 
 # shellcheck source=../scripts/main.sh
 source "${PRJ_ROOT}/scripts/main.sh"
