@@ -172,7 +172,6 @@ def convert_image(img_node, translator, src_fname=None):
     This function handles output image formats in dependence of source the
     format (of the image) and the translator's output format.
     """
-    app = translator.builder.app
 
     fname, in_ext = path.splitext(path.basename(img_node["uri"]))
     if src_fname is None:
@@ -235,17 +234,17 @@ def convert_image(img_node, translator, src_fname=None):
 
             if in_ext == ".dot":
                 app_log.info("convert DOT to: {out}/%s", _name)
-                ok = dot2format(app, src_fname, dst_fname)
+                ok = dot2format(src_fname, dst_fname)
 
             elif in_ext == ".svg":
                 app_log.info("convert SVG to: {out}/%s", _name)
-                ok = svg2pdf(app, src_fname, dst_fname)
+                ok = svg2pdf(src_fname, dst_fname)
 
             if not ok:
                 img_node.replace_self(file2literal(src_fname))
 
 
-def dot2format(app, dot_fname, out_fname):  # pylint: disable=unused-argument
+def dot2format(dot_fname: str, out_fname: str) -> bool:
     """Converts DOT file to ``out_fname`` using ``dot(1)``.
 
     * ``dot_fname`` pathname of the input DOT file, including extension ``.dot``
@@ -260,6 +259,9 @@ def dot2format(app, dot_fname, out_fname):  # pylint: disable=unused-argument
     - ``.png`` or ``gif`` for common bitmap graphics.
 
     """
+    if not dot_cmd:
+        return False
+
     out_format = path.splitext(out_fname)[1][1:]
     cmd = [dot_cmd, "-T%s" % out_format, dot_fname]
     exit_code = 42
@@ -272,7 +274,7 @@ def dot2format(app, dot_fname, out_fname):  # pylint: disable=unused-argument
     return bool(exit_code == 0)
 
 
-def svg2pdf(app, svg_fname, pdf_fname):  # pylint: disable=unused-argument
+def svg2pdf(svg_fname: str, pdf_fname: str) -> bool:
     """Converts SVG to PDF with ``convert(1)`` command.
 
     Uses ``convert(1)`` from ImageMagick (https://www.imagemagick.org) for
@@ -282,7 +284,10 @@ def svg2pdf(app, svg_fname, pdf_fname):  # pylint: disable=unused-argument
     * ``pdf_name``  pathname of the output PDF file with extension (``.pdf``)
 
     """
-    cmd = [convert_cmd, svg_fname, pdf_fname]
+    if not convert_cmd:
+        return False
+
+    cmd: list[str] = [convert_cmd, svg_fname, pdf_fname]
     # use stdout and stderr from parent
     exit_code = subprocess.call(cmd)
     if exit_code != 0:
