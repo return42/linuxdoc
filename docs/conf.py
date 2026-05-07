@@ -68,6 +68,27 @@ imgmath_font_size = 14
 html_title = "LinuxDoc"
 html_theme = "furo"
 
+html_theme_options = {
+    "source_repository": GIT_URL,
+    "source_branch": "master",
+    "source_directory": "docs/",
+
+    # show link to repository & bug tracker in the footer
+    "footer_icons": [
+        {
+            "name": "Git Repository",
+            "url": GIT_URL,
+            "html": "&#x1F310;",
+        },
+        {
+            "name": "Bug Tracker",
+            "url": "https://github.com/return42/linuxdoc/issues",
+            "html": "&#x1F41B;",
+        },
+    ],
+}
+
+
 html_sidebars = {
     "**": [
         "sidebar/scroll-start.html",
