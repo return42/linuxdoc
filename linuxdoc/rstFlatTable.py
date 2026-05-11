@@ -328,14 +328,32 @@ class ListTableBuilder(object):
         if not len(cellItem):  # pylint: disable=len-as-condition
             return cspan, rspan, []
         for elem in cellItem[0][:]:
-            if isinstance(elem, colSpan):
-                cspan = elem.get("span")
-                elem.parent.remove(elem)
+            if isinstance(elem, colSpan) or isinstance(elem, rowSpan):
+                if isinstance(elem, colSpan):
+                    cspan = elem.get("span")
+                if isinstance(elem, rowSpan):
+                    rspan = elem.get("span")
+
+                # Trim leading whitespace in the following element
+                parent = elem.parent
+                if parent.index(elem) == 0 and len(parent) > 1:
+                    sibling = parent[1]
+                    if isinstance(sibling, nodes.Text):
+                        new_text = sibling.lstrip()
+                        if len(new_text) != 0:
+                            parent.replace(sibling, nodes.Text(new_text))
+                        else:
+                            parent.remove(sibling)
+
+                # Finally remove target element from parent
+                parent.remove(elem)
+
+                # And if the parent paragraph is now empty, remove it
+                if len(parent) == 0:
+                    parent.replace_self([])
+
                 continue
-            if isinstance(elem, rowSpan):
-                rspan = elem.get("span")
-                elem.parent.remove(elem)
-                continue
+
         return cspan, rspan, cellItem[:]
 
 
