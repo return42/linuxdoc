@@ -327,7 +327,7 @@ class ListTableBuilder(object):
         cspan = rspan = 0
         if not len(cellItem):  # pylint: disable=len-as-condition
             return cspan, rspan, []
-        for elem in cellItem[0]:
+        for elem in cellItem[0][:]:
             if isinstance(elem, colSpan):
                 cspan = elem.get("span")
                 elem.parent.remove(elem)
