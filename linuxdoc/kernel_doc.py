@@ -534,6 +534,7 @@ class TranslatorAPI(object):
         sections=None,  # ctx.sections
         purpose=None,  # ctx.decl_purpose
         decl_type=None,  # ctx.decl_type
+        is_object_macro=False,
     ):
         raise NotImplementedError
 
@@ -877,6 +878,7 @@ class ReSTTranslator(TranslatorAPI):
         sections=None,  # ctx.sections
         purpose=None,  # ctx.decl_purpose
         decl_type=None,  # ctx.decl_type
+        is_object_macro=False,
     ):
         self.parser.ctx.offset = self.parser.ctx.decl_offset
 
@@ -898,7 +900,9 @@ class ReSTTranslator(TranslatorAPI):
             )
 
         self.write("\n.. c:%s:: " % _c_type)
-        if return_type and re.search(r"\s\*+$", return_type):
+        if is_object_macro:
+            self.write(function)
+        elif return_type and re.search(r"\s\*+$", return_type):
             self.write(return_type, function, "(")
         else:
             self.write(return_type, " ", function, "(")
@@ -920,7 +924,9 @@ class ReSTTranslator(TranslatorAPI):
                 p_list.append("%s %s" % (p_type, p_name))
 
         p_line = ", ".join(p_list)
-        self.write(p_line, ")\n")
+        if not is_object_macro:
+            self.write(p_line, ")")
+        self.write("\n")
 
         # purpose
 
@@ -2356,7 +2362,7 @@ class Parser(SimpleLog):
 
     def dump_function(self, proto):
         self.debug("dump_function(): (1) '%(proto)s'", proto=proto)
-        hasRetVal = True
+        is_object_macro = False
         proto = re.sub(r"^static +", "", proto)
         proto = re.sub(r"^extern +", "", proto)
         proto = re.sub(r"^asmlinkage +", "", proto)
@@ -2420,8 +2426,10 @@ class Parser(SimpleLog):
             # the \s+).
             self.ctx.return_type = x[0]
             self.ctx.decl_name = x[1]
-            hasRetVal = False
-            self.debug("dump_function(): (hasRetVal = False) '%(proto)s'", proto=proto)
+            is_object_macro = True
+            self.debug(
+                "dump_function(): (is_object_macro = True) '%(proto)s'", proto=proto
+            )
         else:
             matchExpr = None
             for regexp in FUNC_PROTOTYPES:
@@ -2439,7 +2447,9 @@ class Parser(SimpleLog):
                 self.ctx.return_type = matchExpr[0]
                 self.debug("dump_function(): decl_name='%(x)s'", x=matchExpr[1])
                 self.ctx.decl_name = matchExpr[1]
-                self.create_parameterlist(matchExpr[2], ",")
+
+                if matchExpr[2].strip() or not define:
+                    self.create_parameterlist(matchExpr[2], ",")
             else:
                 self.warn(
                     "can't understand function proto: '%(prototype)s'",
@@ -2461,7 +2471,7 @@ class Parser(SimpleLog):
             self.ctx.sectcheck,
             self.ctx.parameterlist,
         )
-        if hasRetVal:
+        if not is_object_macro:
             self.check_return_section(self.ctx.decl_name, self.ctx.return_type)
 
         self.output_decl(
@@ -2475,6 +2485,7 @@ class Parser(SimpleLog):
             sections=self.ctx.sections,
             purpose=self.ctx.decl_purpose,
             decl_type=self.ctx.decl_type,
+            is_object_macro=is_object_macro,
         )
 
     def dump_DOC(self, name, cont):
