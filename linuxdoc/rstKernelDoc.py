@@ -16,7 +16,6 @@ linux kernel source code comments.
 # ==============================================================================
 
 import glob
-from sphinx.util import logging
 from io import StringIO
 from os import path
 
@@ -26,6 +25,7 @@ from docutils.parsers.rst import Directive, directives
 from docutils.statemachine import ViewList
 from docutils.utils import SystemMessage
 from fspath import OS_ENV
+from sphinx.util import logging
 from sphinx.util.docutils import switch_source_input
 
 from . import kernel_doc as kerneldoc
